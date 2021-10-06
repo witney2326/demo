@@ -33,22 +33,28 @@
             }
             $result_set->close();
         }
+
         if(isset($_POST['Submit']))
-        {    
-        $year = $_POST['year'];
-        $month = $_POST['month'];
-        $amount = $_POST['amount'];
-
-        $sql = "INSERT INTO tblgroupsavings (GroupID,DistrictID,Yr,Month,Amount)
-        VALUES ('$id','$DistrictID','$year','$month','$amount')";
-
-        if (mysqli_query($link, $sql)) {
-            echo "New Group Savings Record has been added successfully !";
-        } else {
-            echo "Error: " . $sql . ":-" . mysqli_error($link);
-        }
-    }
-     mysqli_close($link);
+            {    
+            $groupID = $_POST['group_id'];
+            $DistrictID = $_POST['district'];
+            $year = $_POST['year'];
+            $month = $_POST['month'];
+            $amount = $_POST['amount'];
+            
+            
+                $sql = "INSERT INTO tblgroupsavings (GroupID,DistrictID,Yr,Month,Amount)
+                VALUES ('$groupID','$DistrictID','$year','$month','$amount')";
+            if (mysqli_query($link, $sql)) {
+                echo '<script type="text/javascript">'; 
+                echo 'alert("SLG Savings Record has been added successfully !");'; 
+                echo 'window.location.href = "basic_livelihood_slg_mgt2.php";';
+                echo '</script>';
+            } else {
+                echo "Error: " . $sql . ":-" . mysqli_error($link);
+            }
+            mysqli_close($link);
+            }
                
     ?>
 
@@ -72,52 +78,52 @@
                                 </div>
                                 <div class="card-body">
                                     
-                                    <form>
+                                    <form method="POST" action="">
                                         <div class="row mb-4">
                                             <label for="group_id" class="col-sm-3 col-form-label">Group ID</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="group_id" name = "group_id" value="<?php echo $id ; ?>" style="max-width:30%;" disabled ="True">
+                                                <input type="text" class="form-control" id="group_id" name = "group_id" value="<?php echo $id ; ?>" style="max-width:30%;" readonly >
                                             </div>
                                         </div>
                                         <div class="row mb-4">
                                             <label for="group_name" class="col-sm-3 col-form-label">SL Group Name</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="group_name" name ="group_name" value = "<?php echo $groupname ; ?>" style="max-width:30%;" disabled ="True">
+                                                <input type="text" class="form-control" id="group_name" name ="group_name" value = "<?php echo $groupname ; ?>" style="max-width:30%;" readonly >
                                             </div>
                                         </div>
                                         
                                         <div class="row mb-4">
                                             <label for="region" class="col-sm-3 col-form-label">Region</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="region" name="region" value ="<?php echo $regionID ; ?>" style="max-width:30%;" disabled ="True">
+                                                <input type="text" class="form-control" id="region" name="region" value ="<?php echo $regionID ; ?>" style="max-width:30%;" readonly >
                                             </div>
                                         </div>
                                         <div class="row mb-4">
                                             <label for="district" class="col-sm-3 col-form-label">District</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="district" name="district" value ="<?php echo $DistrictID ; ?>" style="max-width:30%;" disabled ="True">
+                                                <input type="text" class="form-control" id="district" name="district" value ="<?php echo $DistrictID ; ?>" style="max-width:30%;" readonly >
                                             </div>
                                         </div>
                                         <div class="row mb-4">
                                             <label for="ta" class="col-sm-3 col-form-label">Traditional Authority</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="ta" name="ta" value ="<?php echo $TAID ; ?>" style="max-width:30%;" disabled ="True">
+                                                <input type="text" class="form-control" id="ta" name="ta" value ="<?php echo $TAID ; ?>" style="max-width:30%;" readonly >
                                             </div>
                                         </div>
                                         <div class="row mb-4">
                                             <label for="gvh" class="col-sm-3 col-form-label">Group Village Head</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="gvh" name="gvh" value ="<?php echo $gvhID ; ?>" style="max-width:40%;" disabled ="True">
+                                                <input type="text" class="form-control" id="gvh" name="gvh" value ="<?php echo $gvhID ; ?>" style="max-width:40%;" readonly >
                                             </div>
                                         </div>
                                         
                                         <div class="row mb-4">
                                             <label for="cohort" class="col-sm-3 col-form-label">Cohort</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="cohort" name="cohort" value =" <?php echo $cohort ; ?>" style="max-width:30%;" disabled ="True">
+                                                <input type="text" class="form-control" id="cohort" name="cohort" value ="<?php echo $cohort ; ?> " style="max-width:30%;" readonly >
                                             </div>
                                         </div>
-savings for the group
+
                                         <div class="row mb-4">
                                             <label for="year" class="col-sm-3 col-form-label">Select Year</label>
                                             <select class="form-select" name="year" id="year" style="max-width:20%;" required>
