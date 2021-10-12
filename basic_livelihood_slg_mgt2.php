@@ -17,11 +17,11 @@
 <?php include 'layouts/body.php'; ?>
 
 <?php 
-    if(isset($_POST['Submit']))
+    if(isset($_GET['Submit']))
     {    
-        $region = $_POST['region'];
-        $district = $_POST['district'];
-        $ta = $_POST['ta'];
+        $region = $_GET['region'];
+        $district = $_GET['district'];
+        $ta = $_GET['ta'];
     }
       
 ?>
@@ -109,7 +109,7 @@
                                                 </div>
                                                 <div class="card-body">
                                                     <h5 class="card-title mt-0"></h5>
-                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="">
+                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="<?php $_PHP_SELF ?>" method ="GET">
                                                         <div class="col-12">
                                                             <label for="region" class="form-label">Region</label>
                                                             <div>
@@ -140,15 +140,15 @@
 
                                                         <div class="col-12">
                                                             <label for="district" class="form-label">District</label>
-                                                            <select class="form-select" name="district" id="district" required>
+                                                            <select class="form-select" name="district" id="district" value ="$district" required>
                                                                 <option selected value="$district" ></option>
                                                                     <?php                                                           
-                                                                        $dis_fetch_query = "SELECT DistrictName FROM tbldistrict";                                                  
+                                                                        $dis_fetch_query = "SELECT DistrictID,DistrictName FROM tbldistrict";                                                  
                                                                         $result_dis_fetch = mysqli_query($link, $dis_fetch_query);                                                                       
                                                                         $i=0;
                                                                             while($DB_ROW_Dis = mysqli_fetch_array($result_dis_fetch)) {
                                                                         ?>
-                                                                        <option>
+                                                                        <option value="<?php echo $DB_ROW_Dis["DistrictID"]; ?>">
                                                                             <?php echo $DB_ROW_Dis["DistrictName"]; ?></option><?php
                                                                             $i++;
                                                                                 }
@@ -182,7 +182,7 @@
 
                                                         
                                                         <div class="col-12">
-                                                            <button type="submit" class="btn btn-primary w-md" name="FormSubmit" value="Submit">Submit</button>
+                                                            <button type="submit" class="btn btn-primary w-md" name="Submit" value="Submit">Submit</button>
                                                         </div>
                                                     </form>                                             
                                                     <!-- End Here -->
@@ -193,7 +193,7 @@
                                                 <div class="col-12">
                                                     <div class="card border border-primary">
                                                     <div class="card-header bg-transparent border-primary">
-                                                        <h5 class="my-0 text-primary"><i class="mdi mdi-bullseye-arrow me-3"></i>Savings and Loan Groups</h5>
+                                                        <h5 class="my-0 text-primary"><i class="mdi mdi-bullseye-arrow me-3"></i>Savings and Loan Groups for:<?php $_GET['region'] ?></h5>
                                                     </div>
                                                     <div class="card-body">
                                                     <h5 class="card-title mt-0"></h5>
@@ -218,9 +218,11 @@
 
                                                                 <tbody>
                                                                     <?Php
+                                                                        if (isset($district))
+                                                                        {
+                                                                            $query="select * from tblgroup where DistrictID = '$district'";
+                                                                        }
                                                                         
-                                                                        $query="select * from tblgroup";
-
                                                                         //Variable $link is declared inside config.php file & used here
                                                                         
                                                                         if ($result_set = $link->query($query)) {

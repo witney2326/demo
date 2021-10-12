@@ -39,15 +39,16 @@
             $groupID = $_POST['group_id'];
             $DistrictID = $_POST['district'];
             $year = $_POST['year'];
+            $iga = $_POST['iga'];
             $month = $_POST['month'];
             $amount = $_POST['amount'];
             
             
-                $sql = "INSERT INTO tblslg_member_loans (districtID,hh_code,groupID,year,month,amount)
-                VALUES ('$districtID','$id','$groupID','$year','$month','$amount')";
+                $sql = "INSERT INTO tblslg_member_iga (districtID,hh_code,groupID,igaID,year,month,amount)
+                VALUES ('$districtID','$id','$groupID','$iga','$year','$month','$amount')";
             if (mysqli_query($link, $sql)) {
                 echo '<script type="text/javascript">'; 
-                echo 'alert("SLG Loan Record has been added successfully !");'; 
+                echo 'alert("Member IGA Record has been added successfully !");'; 
                 echo 'window.location.href = "basic_livelihood_member_mgt.php";';
                 echo '</script>';
             } else {
@@ -164,7 +165,7 @@
                                                     $i=0;
                                                         while($DB_ROW_Dis = mysqli_fetch_array($result_dis_fetch)) {
                                                     ?>
-                                                    <option>
+                                                    <option value =<?php echo $DB_ROW_Dis["ID"]; ?>>
                                                         <?php echo $DB_ROW_Dis["name"]; ?></option><?php
                                                         $i++;
                                                             }
