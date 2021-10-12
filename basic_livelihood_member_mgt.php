@@ -62,7 +62,7 @@
                                     <li class="nav-item waves-effect waves-light">
                                         <a class="nav-link active" data-bs-toggle="tab" href="#home-1" role="tab">
                                             <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
-                                            <span class="d-none d-sm-block">Savings and Loan Groups</span>
+                                            <span class="d-none d-sm-block">SLG Members</span>
                                         </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">
@@ -95,7 +95,7 @@
                                             <!--start here -->
                                             <div class="card border border-primary">
                                                 <div class="card-header bg-transparent border-primary">
-                                                    <h5 class="my-0 text-primary"><i class="mdi mdi-bullseye-arrow me-3"></i>SLG Search Filter</h5>
+                                                    <h5 class="my-0 text-primary"><i class="mdi mdi-bullseye-arrow me-3"></i>SLG Member Filter</h5>
                                                 </div>
                                                 <div class="card-body">
                                                     <h5 class="card-title mt-0"></h5>
@@ -183,7 +183,7 @@
                                                 <div class="col-12">
                                                     <div class="card border border-primary">
                                                     <div class="card-header bg-transparent border-primary">
-                                                        <h5 class="my-0 text-primary"><i class="mdi mdi-bullseye-arrow me-3"></i>Savings and Loan Groups</h5>
+                                                        <h5 class="my-0 text-primary"><i class="mdi mdi-bullseye-arrow me-3"></i>SLG- Members</h5>
                                                     </div>
                                                     <div class="card-body">
                                                     <h5 class="card-title mt-0"></h5>
@@ -194,13 +194,11 @@
                                                                     <tr>
                                                                         
                                                                         
-                                                                        <th>Groupcode</th>
-                                                                        <th>Group Name</th>
+                                                                        <th>Household Code</th>
+                                                                        <th>Member Name</th>
                                                                         <th>cohort</th>
                                                                         <th>GVH</th>
-                                                                        <th>Cluster Name</th>
-                                                                        <th>No.Male</th>
-                                                                        <th>No.Female</th>
+                                                                        <th>Group Name</th>
                                                                         <th>Action</th>
                                                                     </tr>
                                                                 </thead>
@@ -209,7 +207,7 @@
                                                                 <tbody>
                                                                     <?Php
                                                                         
-                                                                        $query="select * from tblgroup";
+                                                                        $query="select * from tblbasic_beneficiary";
 
                                                                         //Variable $link is declared inside config.php file & used here
                                                                         
@@ -219,21 +217,20 @@
                                                                         echo "<tr>\n";
                                                                             
                                                                         
-                                                                            echo "<td>".$row["groupID"]."</td>\n";
-                                                                            echo "<td>".$row["groupname"]."</td>\n";
+                                                                            echo "<td>".$row["hhcode"]."</td>\n";
+                                                                            echo "<td>".$row["hhname"]."</td>\n";
                                                                             echo "<td>".$row["cohort"]."</td>\n";
                                                                             echo "<td>".$row["gvhID"]."</td>\n";
-                                                                            echo "<td>".$row["clusterID"]."</td>\n";
-                                                                            echo "<td>".$row["MembersM"]."</td>\n";
-                                                                            echo "<td>".$row["MembersF"]."</td>\n";
+                                                                            echo "<td>".$row["groupID"]."</td>\n";
+                                                                            
                                                                             
                                                                             echo "<td>
-                                                                            <a href=\"basicSLGview.php?id=".$row['groupID']."\">view</a>   
-                                                                            <a href=\"basicSLGedit.php?id=".$row['groupID']."\">edit</a> 
-                                                                            <a href=\"basicSLGsavings.php?id=".$row['groupID']."\">sav</a>
-                                                                            <a href=\"basicSLGloans.php?id=".$row['groupID']."\">lns</a> 
-                                                                            <a href=\"basicSLGiga.php?id=".$row['groupID']."\">iga</a> 
-                                                                            <a href=\"basicSLGdelete.php?id=".$row['groupID']."\">del</a>    
+                                                                            <a href=\"basicSLGMemberview.php?id=".$row['hhcode']."\">view</a>   
+                                                                            <a href=\"basicSLGMemberedit.php?id=".$row['hhcode']."\">edit</a> 
+                                                                            <a href=\"basicSLGMembersavings.php?id=".$row['hhcode']."\">sav</a>
+                                                                            <a href=\"basicSLGMemberloans.php?id=".$row['hhcode']."\">lns</a> 
+                                                                            <a href=\"basicSLGMemberiga.php?id=".$row['hhcode']."\">iga</a> 
+                                                                            <a href=\"basicSLGMemberdelete.php?id=".$row['hhcode']."\">del</a>    
                                                                             </td>\n";
 
                                                                         echo "</tr>\n";

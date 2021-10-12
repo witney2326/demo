@@ -15,29 +15,164 @@
     <link href="assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
     
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script> <!-- for pie chart -->
+
+    <script type="text/javascript">
+        // Load google charts
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+
+        // Draw the chart and set the chart values
+        function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+        ['Disaster', 'Probability'],
+        ['Floods', 10],
+        ['Drought', 12],
+        ['Earthquake', 2],
+        ['Strong winds', 1],
+        ['Heatwave', 15],
+        
+        ]);
+
+        // Optional; add a title and set the width and height of the chart
+        var options = {'title':'', 'width':370, 'height':250};
+
+        // Display the chart inside the <div> element with id="piechart"
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+        chart.draw(data, options);
+        }
+    </script> 
+
+    <script type="text/javascript">
+        // Load google charts
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+
+        // Draw the chart and set the chart values
+        function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+        ['Month', 'Amount'],
+        ['Jan', 500000],
+        ['Feb', 12000],
+        ['Mar', 20000],
+        ['Apr', 100000],
+        ['May', 1500000],
+        ['Jun', 14],
+        ['Jul', 10],
+        ['Aug', 1200000],
+        ['Sep', 2],
+        ['Oct', 1],
+        ['Nov', 15],
+        ['Dec', 14],
+        ]);
+
+        // Optional; add a title and set the width and height of the chart
+        var options = {'title':'', 'width':370, 'height':250};
+
+        // Display the chart inside the <div> element with id="barchart"
+        var chart = new google.visualization.ColumnChart(document.getElementById('barchart'));
+        chart.draw(data, options);
+        }
+    </script> 
+
+
     <style>
-        .accordion {
-        background-color: #eee;
-        color: #444;
-        cursor: pointer;
-        padding: 18px;
-        width: 100%;
-        border: none;
-        text-align: left;
-        outline: none;
-        font-size: 15px;
-        transition: 0.4s;
+
+        .flip-card {
+        background-color: transparent;
+        width: 300px;
+        height: 300px;
+        perspective: 500px;
         }
 
-        .active, .accordion:hover {
-        background-color: #ccc; 
+        .flip-card-inner {
+        position: relative;
+        width: 70%;
+        height: 70%;
+        text-align: center;
+        transition: transform 0.6s;
+        transform-style: preserve-3d;
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
         }
 
-        .panel {
-        padding: 0 18px;
-        display: none;
-        background-color: white;
-        overflow: hidden;
+        .flip-card:hover .flip-card-inner {
+        transform: rotateY(180deg);
+        }
+
+        .flip-card-front, .flip-card-back {
+        position: absolute;
+        width: 70%;
+        height: 70%;
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+        }
+
+        .flip-card-front {
+        background-color: #FFFFFF;
+        color: black;
+        }
+
+        .flip-card-back {
+        background-color: #FFFFFF;
+        color: black;
+        transform: rotateY(180deg);
+        }
+
+        *{
+        box-sizing: border-box;
+        }
+
+        body {
+        font-family: Arial, Helvetica, sans-serif;
+        }
+
+        /* Float four columns side by side */
+        .column {
+        float: left;
+        width: 25%;
+        padding: 0 10px;
+        }
+
+        /* Remove extra left and right margins, due to padding in columns */
+        .row {margin: 0 -5px;}
+
+        /* Clear floats after the columns */
+        .row:after {
+        content: "";
+        display: table;
+        clear: both;
+        }
+
+        /* Style the counter cards */
+        .card {
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
+        padding: 16px;
+        text-align: center;
+        background-color: #f1f1f1;
+        }
+
+        /* Responsive columns - one column layout (vertical) on small screens */
+        @media screen and (max-width: 600px) {
+        .column {
+            width: 100%;
+            display: block;
+            margin-bottom: 20px;
+        }
+        }
+
+        .numberCircle {
+            border-radius: 100%;
+            width: 72px;
+            height: 72px;
+            padding: 18px;
+
+            background: #fff;
+            border: 2px solid #00FF00;
+            color: #666;
+            text-align: center;
+
+            font: 10px Arial, sans-serif;
         }
     </style>
 </head>
@@ -80,21 +215,6 @@
 
                 }
                 
-
-                //$hhname =  $_POST['hhname'];
-                //$progcode = $_POST['progcode'];
-                //$progname =  $_POST['progname'];
-                //$hhcode = $_POST['hhcode'];
-                //$nationalID = $_POST['nationalID'];
-                //$hhdob =  $_POST['hhdob'];
-                //$region = $_POST['region'];
-                //$district =  $_POST['district'];
-                //$ta = $_POST['ta'];
-                //$gvh = $_POST['gvh'];
-                //$village =  $_POST['village'];
-                //$sex = $_POST['sex'];
-                //$cluster =  $_POST['cluster'];
-               //$group = $_POST['group'];
                     
                    
                // $result=mysqli_query($link,"insert into tblbasic_beneficiary(hhcode,sppcode,hhname,nationalID,hhdob, regionID, districtID, taID, gvhID, village, sppname, sex, clusterID, groupID ) 
@@ -108,7 +228,7 @@
             }
              	
         ?>
-            
+    
 
 <!-- Begin page -->
 <div id="layout-wrapper">
@@ -217,8 +337,94 @@
                                             <div class="card border border-primary">
                                                 <div class="card-header bg-transparent border-primary">
                                                     <h5 class="my-0 text-primary"><i class="mdi mdi-bullseye-arrow me-3"></i>Basic Livelihood</h5>
-                                                    </div>                                   
+                                                </div>                                   
                                             </div>
+                                            <!-- start here -->
+                                            <div class="row">
+                                                <div class="card border border-success">
+                                                    <div class="card-header bg-transparent border-primary">
+                                                        <div class="card-group">
+                                                            <div class="card">
+                                                                <img src="..." class="card-img-top" alt="...">
+                                                                <div class="card-body">
+                                                                <h5 class="card-title">Enrolled HHs</h5>
+                                                                    <p class="card-text">
+                                                                        <?php
+                                                                            $result = mysqli_query($link, 'SELECT COUNT(hhcode) AS value_sum FROM tblbasic_beneficiary'); 
+                                                                            $row = mysqli_fetch_assoc($result); 
+                                                                            $sum = $row['value_sum'];
+                                                                        ?>
+                                                                            <div class="container">
+                                                                                <h6><div class="numberCircle"><?php echo "" . $sum;?></div></h6>
+                                                                            </div>      
+                                                                    </p>
+                                                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="card">
+                                                                <img src="..." class="card-img-top" alt="...">
+                                                                <div class="card-body">
+                                                                <h5 class="card-title">SLGs Formed</h5>
+                                                                    <p class="card-text">
+                                                                        <?php
+                                                                            $result = mysqli_query($link, 'SELECT COUNT(groupID) AS value_sum FROM tblgroup'); 
+                                                                            $row = mysqli_fetch_assoc($result); 
+                                                                            $sum = $row['value_sum'];
+                                                                        ?>
+                                                                            <div class="container">
+                                                                                <h6><div class="numberCircle"><?php echo "" . $sum;?></div></h6>
+                                                                            </div>         
+                                                                    </p>
+                                                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="card">
+                                                                <img src="..." class="card-img-top" alt="...">
+                                                                <div class="card-body">
+                                                                <h5 class="card-title">HH Trained in MC</h5>
+                                                                    <p class="card-text">
+                                                                        <h6><div class="numberCircle">0</div></h6>
+                                                                    </p>
+                                                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="card">
+                                                                <img src="..." class="card-img-top" alt="...">
+                                                                <div class="card-body">
+                                                                <h5 class="card-title">Animators Trained</h5>
+                                                                    <p class="card-text">
+                                                                    <h6><div class="numberCircle">0</div></h6>
+                                                                    </p>
+                                                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div> 
+                                            <!-- end here row1 -->
+
+                                            <!-- pie chart -->
+                                            <div class = "row">
+                                                
+                                                <div class = "col-lg-6">
+                                                    <div class="card border border-success">
+                                                        <div class="card-header bg-transparent border-primary">
+                                                            <h5 class="my-0 text-primary">Disaster Severity</h5>
+                                                        </div>
+                                                        <div id="piechart"></div> 
+                                                    </div>
+                                                </div>
+                                                <div class = "col-lg-6">
+                                                    <div class="card border border-success">
+                                                        <div class="card-header bg-transparent border-primary">
+                                                            <h5 class="my-0 text-primary">Savings Mobilisation</h5>
+                                                        </div>
+                                                        <div id="barchart"></div> 
+                                                    </div>
+                                                </div>   
+                                            </div>                                 
+                                                                                   
                                         </p>
                                     </div>
                                     
@@ -441,19 +647,22 @@
                                                 </div>
                                                 <div class="card-body">
                                                     <h5 class="card-title mt-0"></h5>
-                                                    <a href="basic_livelihood_slg_mgt2.php">click to go to the page</a>
+                                                    <a href="basic_livelihood_slg_mgt2.php">SLG Management</a>
                                                 </div>
                                             </div>
                                         </p>
                                     </div>
-                                    <div class="tab-pane" id="settings-1" role="tabpanel">
+                                    <div class="tab-pane" id="member-Management" role="tabpanel">
                                         <p class="mb-0">
-                                            Trust fund seitan letterpress, keytar raw denim keffiyeh etsy
-                                            art party before they sold out master cleanse gluten-free squid
-                                            scenester freegan cosby sweater. Fanny pack portland seitan DIY,
-                                            art party locavore wolf cliche high life echo park Austin. Cred
-                                            vinyl keffiyeh DIY salvia PBR, banh mi before they sold out
-                                            farm-to-table.
+                                            <div class="card border border-primary">
+                                                <div class="card-header bg-transparent border-primary">
+                                                    <h5 class="my-0 text-primary">Savings and Loan Groups-Members</h5>
+                                                </div>
+                                                <div class="card-body">
+                                                    <h5 class="card-title mt-0"></h5>
+                                                    <a href="basic_livelihood_member_mgt.php">Member Management</a>
+                                                </div>
+                                            </div>
                                         </p>
                                     </div>
                                 </div>

@@ -68,7 +68,7 @@ if (isset($_POST['submit'])) {
 <?php include 'layouts/head-main.php'; ?>
 
 <head>
-    <title>Recover Password | Skote - Admin & Dashboard Template</title>
+    <title>Recover Password | Comsip Intergrated MIS</title>
     <?php include 'layouts/head.php'; ?>
     <?php include 'layouts/head-style.php'; ?>
 </head>
@@ -84,7 +84,7 @@ if (isset($_POST['submit'])) {
                                 <div class="col-7">
                                     <div class="text-primary p-4">
                                         <h5 class="text-primary"> Reset Password</h5>
-                                        <p>Re-Password with Skote.</p>
+                                        
                                     </div>
                                 </div>
                                 <div class="col-5 align-self-end">
@@ -130,7 +130,7 @@ if (isset($_POST['submit'])) {
                         <p>Remember It ? <a href="auth-login.php" class="fw-medium text-primary"> Sign In here</a> </p>
                         <p>© <script>
                                 document.write(new Date().getFullYear())
-                            </script> Skote. Crafted with <i class="mdi mdi-heart text-danger"></i> by Themesbrand</p>
+                            </script> CIMIS. Crafted with <i class="mdi mdi-heart text-danger"></i> by Comsip Union</p>
                     </div>
 
                 </div>

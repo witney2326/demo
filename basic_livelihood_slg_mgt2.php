@@ -16,6 +16,16 @@
 
 <?php include 'layouts/body.php'; ?>
 
+<?php 
+    if(isset($_POST['Submit']))
+    {    
+        $region = $_POST['region'];
+        $district = $_POST['district'];
+        $ta = $_POST['ta'];
+    }
+      
+?>
+
 <!-- Begin page -->
 <div id="layout-wrapper">
 
