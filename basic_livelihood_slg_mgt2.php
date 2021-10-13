@@ -22,8 +22,22 @@
         $region = $_GET['region'];
         $district = $_GET['district'];
         $ta = $_GET['ta'];
+     
     }
-      
+    
+    function get_rname($link, $rcode)
+        {
+        $rg_query = mysqli_query($link,"select name from tblregion where regionID='$rcode'"); // select query
+        $rg = mysqli_fetch_array($rg_query);// fetch data
+        return $rg['name'];
+        }
+    
+        function dis_name($link, $disID)
+        {
+        $dis_query = mysqli_query($link,"select DistrictName from tbldistrict where DistrictID='$disID'"); // select query
+        $dis = mysqli_fetch_array($dis_query);// fetch data
+        return $dis['DistrictName'];
+        }
 ?>
 
 <!-- Begin page -->
@@ -109,19 +123,20 @@
                                                 </div>
                                                 <div class="card-body">
                                                     <h5 class="card-title mt-0"></h5>
-                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="<?php $_PHP_SELF ?>" method ="GET">
+                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="<?php $_PHP_SELF ?>" method ="GET" >
                                                         <div class="col-12">
                                                             <label for="region" class="form-label">Region</label>
                                                             <div>
-                                                                <select class="form-select" name="region" id="region" required>
+                                                                <select class="form-select" name="region" id="region" value ="<?php if(isset($_GET['region'])) {echo $_GET['region'];} ?>" required>
                                                                     <option selected value = "$region"></option>
                                                                     <?php                                                           
-                                                                            $dis_fetch_query = "SELECT name FROM tblregion";                                                  
+                                                                            $dis_fetch_query = "SELECT regionID, name FROM tblregion";                                                  
                                                                             $result_dis_fetch = mysqli_query($link, $dis_fetch_query);                                                                       
                                                                             $i=0;
                                                                                 while($DB_ROW_reg = mysqli_fetch_array($result_dis_fetch)) {
                                                                             ?>
-                                                                            <option>
+                                                                            <option value ="<?php
+                                                                                    echo $DB_ROW_reg["regionID"];?>">
                                                                                 <?php
                                                                                     echo $DB_ROW_reg["name"];
                                                                                 ?>
@@ -193,10 +208,10 @@
                                                 <div class="col-12">
                                                     <div class="card border border-primary">
                                                     <div class="card-header bg-transparent border-primary">
-                                                        <h5 class="my-0 text-primary"><i class="mdi mdi-bullseye-arrow me-3"></i>Savings and Loan Groups for:<?php $_GET['region'] ?></h5>
+                                                        <h5 class="my-0 text-primary"><i class="mdi mdi-bullseye-arrow me-3"></i>Savings and Loan Groups</h5>
                                                     </div>
                                                     <div class="card-body">
-                                                    <h5 class="card-title mt-0"></h5>
+                                                    <h7 class="card-title mt-0">Results for: <?php if(isset($_GET['region'])) echo get_rname($link,$_GET['region']); echo "   Region In:"; echo " "; if(isset($_GET['district'])) echo dis_name($link,$_GET['district']) ; ?></h7>
                                                         
                                                             <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
                                                             
@@ -218,10 +233,10 @@
 
                                                                 <tbody>
                                                                     <?Php
-                                                                        if (isset($district))
+                                                                        if (isset($district) && isset($region))
                                                                         {
-                                                                            $query="select * from tblgroup where DistrictID = '$district'";
-                                                                        }
+                                                                            $query="select * from tblgroup where (DistrictID = '$district' AND regionID = '$region')" ;
+                                                                        
                                                                         
                                                                         //Variable $link is declared inside config.php file & used here
                                                                         
@@ -251,7 +266,8 @@
                                                                         echo "</tr>\n";
                                                                         }
                                                                         $result_set->close();
-                                                                        }                          
+                                                                        }  
+                                                                    }                        
                                                                     ?>
                                                                 </tbody>
                                                             </table>
