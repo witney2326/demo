@@ -222,8 +222,8 @@
                                                                         <th>Groupcode</th>
                                                                         <th>Group Name</th>
                                                                         <th>cohort</th>
-                                                                        <th>GVH</th>
-                                                                        <th>Cluster Name</th>
+                                                                        
+                                                                        
                                                                         <th>No.Male</th>
                                                                         <th>No.Female</th>
                                                                         <th>Action</th>
@@ -249,8 +249,8 @@
                                                                             echo "<td>".$row["groupID"]."</td>\n";
                                                                             echo "<td>".$row["groupname"]."</td>\n";
                                                                             echo "<td>".$row["cohort"]."</td>\n";
-                                                                            echo "<td>".$row["gvhID"]."</td>\n";
-                                                                            echo "<td>".$row["clusterID"]."</td>\n";
+                                                                            
+                                                                            
                                                                             echo "<td>".$row["MembersM"]."</td>\n";
                                                                             echo "<td>".$row["MembersF"]."</td>\n";
                                                                             
@@ -437,7 +437,7 @@
                                                         </div>
 
                                                         
-                                                        <input type="submit" class="btn btn-success" name="submit" value="Compute ClusterID">
+                                                        
                                                         <input type="submit" class="btn btn-primary" name="submit" value="Submit New SLG Cluster">
                                                     </form>
                                                 </div>
@@ -582,6 +582,28 @@
                                                                     </div>                                                                                                             
                                                                 </div>
                                                             </div>
+                                                            <div class="col-md-2">
+                                                                <div class="mb-2">
+                                                                    <label for="spp" class="form-label">SP Program</label>
+                                                                    <select class="form-select" name="spp" id="spp" required>
+                                                                        <option >Choose...</option>
+                                                                        <?php                                                           
+                                                                                $spp_fetch_query = "SELECT pID,pName FROM tblprogram";                                                  
+                                                                                $result_spp_fetch = mysqli_query($link, $spp_fetch_query);                                                                       
+                                                                                $i=0;
+                                                                                    while($DB_ROW_spp = mysqli_fetch_array($result_spp_fetch)) {
+                                                                                ?>
+                                                                                <option value="<?php echo $DB_ROW_spp["pID"]; ?>">
+                                                                                    <?php echo $DB_ROW_spp["pName"]; ?></option><?php
+                                                                                    $i++;
+                                                                                        }
+                                                                            ?>
+                                                                    </select>
+                                                                    <div class="invalid-feedback">
+                                                                        Please select a valid Program.
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-md-2">
@@ -600,25 +622,43 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
+                                                            <div class="col-md-2">
+                                                                <div class="mb-2">
+                                                                    <label for="Cohort" class="form-label">Cohort</label>
+                                                                    <select class="form-select" name="Cohort" id="Cohort" required>
+                                                                        <option value ="1">1</option>
+                                                                        <option value ="2">2</option>
+                                                                        <option value ="3">3</option>
+                                                                        <option value ="4">4</option>                                                                    
+                                                                    </select>
+                                                                    <div class="invalid-feedback">
+                                                                        Please select a valid Cohort.
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-2">
+                                                                <div class="mb-2">
+                                                                    <label for="cw" class="form-label">Case Worker</label>
+                                                                    <select class="form-select" name="cw" id="cw" required>
+                                                                        
+                                                                        <?php                                                           
+                                                                                $cw_fetch_query = "SELECT cwID,cwName FROM tblcw";                                                  
+                                                                                $result_cw_fetch = mysqli_query($link, $cw_fetch_query);                                                                       
+                                                                                $i=0;
+                                                                                    while($DB_ROW_cw = mysqli_fetch_array($result_cw_fetch)) {
+                                                                                ?>
+                                                                                <option value="<?php echo $DB_ROW_cw["cwID"]; ?>">
+                                                                                    <?php echo $DB_ROW_cw["cwName"]; ?></option><?php
+                                                                                    $i++;
+                                                                                        }
+                                                                            ?>
+                                                                    </select>
+                                                                    <div class="invalid-feedback">
+                                                                        Please select a valid Case Worker.
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                         </div>
-
-                                                        <!-- <div class="form-group">
-                                                            <label>TA </label>
-                                                            <input type="text" name="TAID" class="form-control">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label>GVH</label>
-                                                            <input type="text" name="GVHID" class="form-control">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label>No Males</label>
-                                                            <input type="text" name="membersM" class="form-control">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label>No Females</label>
-                                                            <input type="text" name="membersF" class="form-control">
-                                                        </div> -->
-                                                        <input type="submit" class="btn btn-success" name="submit" value="Compute GroupID">
                                                         <input type="submit" class="btn btn-primary" name="submit" value="Submit New SLG">
                                                     </form>
                                                 </div>

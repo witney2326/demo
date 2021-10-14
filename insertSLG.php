@@ -2,13 +2,28 @@
 include_once 'layouts/config.php';
 if(isset($_POST['submit']))
 {    
-     $groupID = $_POST['groupID'];
+     
      $groupname = $_POST['groupname'];
      $DateEstablished = $_POST['DateEstablished'];
      $clusterID = $_POST['clusterID'];
      $GVHID = $_POST['GVHID'];
      $membersM = $_POST['membersM'];
      $membersF = $_POST['membersF'];
+     $cohort = $_POST['Cohort'];
+     $spp = $_POST['spp'];
+     $cw = $_POST['cw'];
+     
+     function get_grp_count($link)
+     {
+        $sql = "SELECT * FROM tblgroup";
+ 
+        $mysqliStatus = $link->query($sql);
+         
+        $rows_count_value = mysqli_num_rows($mysqliStatus);
+         
+        return $rows_count_value; 
+        
+     }
      
      function dis_code($link, $disname)
         {
@@ -31,13 +46,21 @@ if(isset($_POST['submit']))
         return $rg['regionID'];
         }
 
+        $dbgrpcount= sprintf("%06d", get_grp_count($link)+1);
+
+        $x=date("Y");		
+        $x.="/SLG/";				
+        $x.=$dbgrpcount;
+
+        $groupID = $x;
+
         $DistrictID = dis_code($link,$_POST['district']); 
         $TAID = ta_code($link,$_POST['ta']);
         $regionID = region_code($link,$_POST['region']);
 
 
-     $sql = "INSERT INTO tblgroup (groupid,groupname,DateEstablished,clusterID,DistrictID,TAID,gvhID,MembersM,MembersF,regionID)
-     VALUES ('$groupID','$groupname','$DateEstablished','$clusterID','$DistrictID','$TAID','$GVHID','$membersM','$membersF','$regionID')";
+     $sql = "INSERT INTO tblgroup (groupid,groupname,DateEstablished,clusterID,DistrictID,TAID,gvhID,MembersM,MembersF,regionID,cohort,programID,cwID,deleted)
+     VALUES ('$groupID','$groupname','$DateEstablished','$clusterID','$DistrictID','$TAID','$GVHID','$membersM','$membersF','$regionID','$cohort','$spp','$cw','0')";
      if (mysqli_query($link, $sql)) {
         echo "New SLG has been added successfully !";
      } else {
