@@ -119,7 +119,7 @@
                                             <!--start here -->
                                             <div class="card border border-primary">
                                                 <div class="card-header bg-transparent border-primary">
-                                                    <h5 class="my-0 text-primary"><i class="mdi mdi-bullseye-arrow me-3"></i>SLG Search Filter</h5>
+                                                    <h5 class="my-0 text-primary"></i>SLG Search Filter</h5>
                                                 </div>
                                                 <div class="card-body">
                                                     <h5 class="card-title mt-0"></h5>
@@ -149,10 +149,9 @@
                                                                 <div class="invalid-feedback">
                                                                     Please select a valid Malawi region.
                                                                 </div>
-
                                                             </div>
                                                         </div>
-
+                                                        
                                                         <div class="col-12">
                                                             <label for="district" class="form-label">District</label>
                                                             <select class="form-select" name="district" id="district" value ="$district" required>
@@ -211,7 +210,7 @@
                                                         <h5 class="my-0 text-primary"><i class="mdi mdi-bullseye-arrow me-3"></i>Savings and Loan Groups</h5>
                                                     </div>
                                                     <div class="card-body">
-                                                    <h7 class="card-title mt-0">Results for: <?php if(isset($_GET['region'])) echo get_rname($link,$_GET['region']); echo "   Region In:"; echo " "; if(isset($_GET['district'])) echo dis_name($link,$_GET['district']) ; ?></h7>
+                                                    <h7 class="card-title mt-0">Results for:..<?php if(isset($_GET['region'])) echo "Region"; echo" "; echo get_rname($link,$_GET['region']); echo "; "; echo " District: "; if(isset($_GET['district'])) echo dis_name($link,$_GET['district']); echo";"; ?></h7>
                                                         
                                                             <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
                                                             
@@ -235,7 +234,7 @@
                                                                     <?Php
                                                                         if (isset($district) && isset($region))
                                                                         {
-                                                                            $query="select * from tblgroup where (DistrictID = '$district' AND regionID = '$region')" ;
+                                                                            $query="select * from tblgroup where ((DistrictID = '$district' AND regionID = '$region') OR (DistrictID = '$district') OR (regionID = '$region')) " ;
                                                                         
                                                                         
                                                                         //Variable $link is declared inside config.php file & used here

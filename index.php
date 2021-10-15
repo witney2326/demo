@@ -5,9 +5,69 @@
     <title>CIMIS - Comsip Intergrated MIS</title>
     <?php include 'layouts/head.php'; ?>
     <?php include 'layouts/head-style.php'; ?>
+    <?php include 'layouts/config.php'; ?>
 </head>
 
 <?php include 'layouts/body.php'; ?>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script> <!-- for pie chart -->
+<script type="text/javascript">
+        // Load google charts
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+
+        // Draw the chart and set the chart values
+        function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+        ['Disaster', 'Probability'],
+        ['Floods', 10],
+        ['Drought', 12],
+        ['Earthquake', 2],
+        ['Strong winds', 1],
+        ['Heatwave', 15],
+        
+        ]);
+
+        // Optional; add a title and set the width and height of the chart
+        var options = {'title':'', 'width':370, 'height':250};
+
+        // Display the chart inside the <div> element with id="piechart"
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+        chart.draw(data, options);
+        }
+    </script> 
+
+    <script type="text/javascript">
+        // Load google charts
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+
+        // Draw the chart and set the chart values
+        function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+        ['Month', 'Amount'],
+        ['Jan', 500000],
+        ['Feb', 12000],
+        ['Mar', 20000],
+        ['Apr', 100000],
+        ['May', 1500000],
+        ['Jun', 14],
+        ['Jul', 10],
+        ['Aug', 1200000],
+        ['Sep', 2],
+        ['Oct', 1],
+        ['Nov', 15],
+        ['Dec', 14],
+        ]);
+
+        // Optional; add a title and set the width and height of the chart
+        var options = {'title':'', 'width':370, 'height':250};
+
+        // Display the chart inside the <div> element with id="barchart"
+        var chart = new google.visualization.ColumnChart(document.getElementById('barchart'));
+        chart.draw(data, options);
+        }
+    </script> 
+
 
 <!-- Begin page -->
 <div id="layout-wrapper">
@@ -42,83 +102,154 @@
                 <!-- end page title -->
 
                 
-                <div class="row">
-                    
-                    <div class="col-xl-3">
-                        <div class="card overflow-hidden">
-                            <div class="card-body pt-0">
-                                    <div class="col-sm-6">
-                                        <div class="pt-4">
-                                            <div class="row">
-                                                <h5 class="font-size-15">125</h5>
-                                                <p class="text-muted mb-0">Projects</p>
-                                            </div>                      
+               
+                    <div class="row">
+                        <div class="card">
+                            <div class="card-header bg-transparent border-primary">
+                                <div class="card-group">
+                                    <div class="card border">
+                                        <img src="..." class="card-img-top" alt="">
+                                        <div class="card-body">
+                                            <div class="card mini-stats-wid">
+                                                    <div class="card-body">
+                                                        <div class="d-flex">
+                                                            <div class="flex-grow-1">
+                                                                <p class="text-muted fw-medium">Basic Enrolment</p>
+                                                                <?php
+                                                                            $result = mysqli_query($link, 'SELECT COUNT(hhcode) AS value_sum FROM tblbasic_beneficiary'); 
+                                                                            $row = mysqli_fetch_assoc($result); 
+                                                                            $sum = $row['value_sum'];
+                                                                        ?>
+                                                                        <h4 class="mb-0">
+                                                                            <div class="container">
+                                                                                <div class="numberCircle"><?php echo "" . $sum;?></div>
+                                                                            </div> 
+                                                                        </h4>
+                                                            </div>
+                                                            <div class="mini-stat-icon avatar-sm rounded-circle bg-primary align-self-center">
+                                                                <span class="avatar-title">
+                                                                    <i class="bx bx-copy-alt font-size-24"></i>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                            </div>  
+                                        <!-- -->
                                         </div>
                                     </div>
-                            </div>
-                        </div>
-                        
-                    </div>
-                    <div class="col-xl-8">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="card mini-stats-wid">
-                                    <div class="card-body">
-                                        <div class="d-flex">
-                                            <div class="flex-grow-1">
-                                                <p class="text-muted fw-medium">Orders</p>
-                                                <h4 class="mb-0">1,235</h4>
-                                            </div>
-                                            <div class="mini-stat-icon avatar-sm rounded-circle bg-primary align-self-center">
-                                                <span class="avatar-title">
-                                                    <i class="bx bx-copy-alt font-size-24"></i>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="col-md-4">
-                                <div class="card mini-stats-wid">
-                                    <div class="card-body">
-                                        <div class="d-flex">
-                                            <div class="flex-grow-1">
-                                                <p class="text-muted fw-medium">Revenue</p>
-                                                <h4 class="mb-0">$35, 723</h4>
-                                            </div>
-                                            <div class="avatar-sm rounded-circle bg-primary align-self-center mini-stat-icon">
-                                                <span class="avatar-title rounded-circle bg-primary">
-                                                    <i class="bx bx-archive-in font-size-24"></i>
-                                                </span>
+                                    <div class="card border">
+                                        <img src="..." class="card-img-top" alt="">
+                                        <div class="card-body">
+                                        
+                                            <div class="card mini-stats-wid">
+                                                <div class="card-body">
+                                                    <div class="d-flex">
+                                                        <div class="flex-grow-1">
+                                                            <p class="text-muted fw-medium">Joint Skill Grps</p>
+                                                            <h4 class="mb-0">0</h4>
+                                                        </div>
+                                                        <div class="mini-stat-icon avatar-sm rounded-circle bg-primary align-self-center">
+                                                            <span class="avatar-title">
+                                                                <i class="bx bx-copy-alt font-size-24"></i>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="card mini-stats-wid">
-                                    <div class="card-body">
-                                        <div class="d-flex">
-                                            <div class="flex-grow-1">
-                                                <p class="text-muted fw-medium">Average Price</p>
-                                                <h4 class="mb-0">$16.2</h4>
-                                            </div>
-                                            <div class="avatar-sm rounded-circle bg-primary align-self-center mini-stat-icon">
-                                                <span class="avatar-title rounded-circle bg-primary">
-                                                    <i class="bx bx-purchase-tag-alt font-size-24"></i>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- end row -->
 
-                        
+                                    </div>
+                                    <div class="card border">
+                                        <img src="..." class="card-img-top" alt="">
+                                        <div class="card-body">
+
+                                            <div class="card mini-stats-wid">
+                                                <div class="card-body">
+                                                    <div class="d-flex">
+                                                        <div class="flex-grow-1">
+                                                            <p class="text-muted fw-medium">Youth Challenge</p>
+                                                            <h4 class="mb-0">0</h4>
+                                                        </div>
+                                                        <div class="mini-stat-icon avatar-sm rounded-circle bg-primary align-self-center">
+                                                            <span class="avatar-title">
+                                                                <i class="bx bx-copy-alt font-size-24"></i>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="card border">
+                                        <img src="..." class="card-img-top" alt="">
+                                        <div class="card-body">
+                                        
+                                            <div class="card mini-stats-wid">
+                                                <div class="card-body">
+                                                    <div class="d-flex">
+                                                        <div class="flex-grow-1">
+                                                            <p class="text-muted fw-medium">Value Chains</p>
+                                                            <h4 class="mb-0">0</h4>
+                                                        </div>
+                                                        <div class="mini-stat-icon avatar-sm rounded-circle bg-primary align-self-center">
+                                                            <span class="avatar-title">
+                                                                <i class="bx bx-copy-alt font-size-24"></i>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> 
+                    <!-- end here row1 -->
+                    <div class = "row">
+                                                
+                        <div class = "col-lg-6">
+                            <div class="card border border-success">
+                                <div class="card-header bg-transparent border-primary">
+                                    <h5 class="my-0 text-primary">Beneficiary Enrolment BL</h5>
+                                </div>
+                                <div id="piechart"></div> 
+                            </div>
+                        </div>
+                        <div class = "col-lg-6">
+                            <div class="card border border-success">
+                                <div class="card-header bg-transparent border-primary">
+                                    <h5 class="my-0 text-primary">Joint Skills</h5>
+                                </div>
+                                <div id="barchart"></div> 
+                            </div>
+                        </div>   
                     </div>
-                </div>
+                    
+                    <div class = "row">
+                                                
+                        <div class = "col-lg-6">
+                            <div class="card border border-success">
+                                <div class="card-header bg-transparent border-primary">
+                                    <h5 class="my-0 text-primary">Youth Challenge Support</h5>
+                                </div>
+                                <div id="piechart"></div> 
+                            </div>
+                        </div>
+                        <div class = "col-lg-6">
+                            <div class="card border border-success">
+                                <div class="card-header bg-transparent border-primary">
+                                    <h5 class="my-0 text-primary">Savings Mobilisation</h5>
+                                </div>
+                                <div id="barchart"></div> 
+                            </div>
+                        </div>   
+                    </div>        
+
+                    
                 <!-- end row -->
 
                 
