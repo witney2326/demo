@@ -545,13 +545,17 @@
                                                                     <label for="sectorID" class="form-label">Sector</label>
                                                                     <select class="form-select" name="sectorID" id="sectorID" required>
                                                                         <option></option>
-                                                                        <option value="01">DEC</option>
-                                                                        <option value="02">CSSC</option>
-                                                                        <option value="03">ADC</option>
-                                                                        <option value="04">TWG</option>
-                                                                        <option value="05">DSSC</option>
-                                                                        <option value="06">Extension Workers</option>
-                                                                        <option value="07">Beneficiaries</option>
+                                                                        <?php                                                           
+                                                                                $sector_fetch_query = "SELECT id, name FROM tblsector";                                                  
+                                                                                $result_sector_fetch = mysqli_query($link, $sector_fetch_query);                                                                       
+                                                                                $i=0;
+                                                                                    while($DB_ROW_sector = mysqli_fetch_array($result_sector_fetch)) {
+                                                                                ?>
+                                                                                <option value="<?php echo $DB_ROW_sector["id"]; ?>">
+                                                                                    <?php echo $DB_ROW_sector["name"]; ?></option><?php
+                                                                                    $i++;
+                                                                                        }
+                                                                            ?>
                                                                     </select>
                                                                     <div class="invalid-feedback">
                                                                         Please select a valid Sector.
@@ -585,6 +589,27 @@
                                                                     </div>
                                                                 </div>
                                                                 
+                                                                <div class="col-12">
+                                                                    <label for="purpose" class="form-label">Meeting Purpose</label>
+                                                                    <select class="form-select" name="purpose" id="purpose" required>
+                                                                        <option></option>
+                                                                        <?php                                                           
+                                                                            $meetpurpose_fetch_query = "SELECT id, purpose FROM tblmeetingpurpose";                                                  
+                                                                            $result_meetpurpose_fetch = mysqli_query($link, $meetpurpose_fetch_query);                                                                       
+                                                                            $i=0;
+                                                                                while($DB_ROW_meetpurpose = mysqli_fetch_array($result_meetpurpose_fetch)) {
+                                                                            ?>
+                                                                            <option value="<?php echo $DB_ROW_meetpurpose["id"]; ?>">
+                                                                                <?php echo $DB_ROW_meetpurpose["purpose"]; ?></option><?php
+                                                                                $i++;
+                                                                                    }
+                                                                        ?>
+                                                                    </select>
+                                                                    <div class="invalid-feedback">
+                                                                        Please select a valid Sector.
+                                                                    </div>
+                                                                </div>
+
                                                                 <div class="col-12">
                                                                     <button type="submit" class="btn btn-primary w-md" name="submit" value="submit">Submit Meeting Details</button>
                                                                 </div>
@@ -704,6 +729,19 @@
                                             <div class="card border border-primary">
                                                 <div class="card-header bg-transparent border-primary">
                                                     <h5 class="my-0 text-primary"><a href="basic_livelihood_training.php">Group and Member Training</a></h5>
+                                                </div>
+                                                <div class="card-body">
+                                                    <h5 class="card-title mt-0"></h5>
+                                                    
+                                                </div>
+                                            </div>
+                                        </p>
+                                    </div>
+                                    <div class="tab-pane" id="cbdra" role="tabpanel">
+                                        <p class="mb-0">
+                                            <div class="card border border-primary">
+                                                <div class="card-header bg-transparent border-primary">
+                                                    <h5 class="my-0 text-primary"><a href="basic_livelihood_cbdra.php">Community Based Disaster Risk Awareness</a></h5>
                                                 </div>
                                                 <div class="card-body">
                                                     <h5 class="card-title mt-0"></h5>

@@ -2,7 +2,7 @@
 <?php include 'layouts/head-main.php'; ?>
 
 <head>
-    <title>Training Management</title>
+    <title>CBDRA</title>
     <?php include 'layouts/head.php'; ?>
     <?php include 'layouts/head-style.php'; ?>
     <?php include 'layouts/config.php'; ?>
@@ -57,12 +57,12 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                            <h4 class="mb-sm-0 font-size-18">Training Management</h4>
+                            <h4 class="mb-sm-0 font-size-18">Community Based Disaster Risk Awareness</h4>
 
                             <div class="page-title-right">
                                 <ol class="breadcrumb m-0">
                                     <li class="breadcrumb-item"><a href="basic_livelihood.php">Basic Livelihood</a></li>
-                                    <li class="breadcrumb-item active">Training Management</li>
+                                    <li class="breadcrumb-item active">CBDRA</li>
                                 </ol>
                             </div>
 
@@ -83,24 +83,43 @@
                                 
                                 <!-- Nav tabs -->
                                 <ul class="nav nav-pills nav-justified" role="tablist">
-                                    <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link active" data-bs-toggle="tab" href="#home-1" role="tab">
-                                            <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
-                                            <span class="d-none d-sm-block">Savings and Loan Groups</span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link" data-bs-toggle="tab" href="#trainedgroups" role="tab">
-                                            <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
-                                            <span class="d-none d-sm-block">Trained Groups</span>
-                                        </a>
-                                    </li>
                                     
+                                    <li class="nav-item waves-effect waves-light">
+                                        <a class="nav-link active" data-bs-toggle="tab" href="#hotspots" role="tab">
+                                            <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
+                                            <span class="d-none d-sm-block">Disaster Hotspots</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item waves-effect waves-light">
+                                        <a class="nav-link" data-bs-toggle="tab" href="#sensitization" role="tab">
+                                            <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
+                                            <span class="d-none d-sm-block">Trainer Of Trainers</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item waves-effect waves-light">
+                                        <a class="nav-link" data-bs-toggle="tab" href="#clinics" role="tab">
+                                            <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
+                                            <span class="d-none d-sm-block">Pysochosocial Clinics</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item waves-effect waves-light">
+                                        <a class="nav-link" data-bs-toggle="tab" href="#adoptplace" role="tab">
+                                            <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
+                                            <span class="d-none d-sm-block">Adopt a Place</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item waves-effect waves-light">
+                                        <a class="nav-link" data-bs-toggle="tab" href="#treeplanting" role="tab">
+                                            <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
+                                            <span class="d-none d-sm-block">National Tree Planting</span>
+                                        </a>
+                                    </li>
+                                                                      
                                     
                                     <li class="nav-item waves-effect waves-light">
                                         <a class="nav-link" data-bs-toggle="tab" href="#messages-1" role="tab">
                                             <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
-                                            <span class="d-none d-sm-block">Training Reports</span>
+                                            <span class="d-none d-sm-block">CBDRA Reports</span>
                                         </a>
                                     </li>
                                     
@@ -108,177 +127,32 @@
 
                                 <!-- Tab panes -->
                                 <div class="tab-content p-3 text-muted">
-                                    <div class="tab-pane active" id="home-1" role="tabpanel">
-                                        <p class="mb-0">
-                                            <!--start here -->
-                                            <div class="card border border-primary">
-                                                <div class="card-header bg-transparent border-primary">
-                                                    <h5 class="my-0 text-primary"></i>SLG Search Filter</h5>
-                                                </div>
-                                                <div class="card-body">
-                                                    <h5 class="card-title mt-0"></h5>
-                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="basic_livelihood_slg_mgt_filter_results.php" method ="GET" >
-                                                        <div class="col-12">
-                                                            <label for="region" class="form-label">Region</label>
-                                                            <div>
-                                                                <select class="form-select" name="region" id="region" value ="<?php if(isset($_GET['region'])) {echo $_GET['region'];} ?>" required>
-                                                                    <option selected value = "$region"></option>
-                                                                    <?php                                                           
-                                                                            $dis_fetch_query = "SELECT regionID, name FROM tblregion";                                                  
-                                                                            $result_dis_fetch = mysqli_query($link, $dis_fetch_query);                                                                       
-                                                                            $i=0;
-                                                                                while($DB_ROW_reg = mysqli_fetch_array($result_dis_fetch)) {
-                                                                            ?>
-                                                                            <option value ="<?php
-                                                                                    echo $DB_ROW_reg["regionID"];?>">
-                                                                                <?php
-                                                                                    echo $DB_ROW_reg["name"];
-                                                                                ?>
-                                                                            </option>
-                                                                            <?php
-                                                                                $i++;
-                                                                                    }
-                                                                        ?>
-                                                                </select>
-                                                                <div class="invalid-feedback">
-                                                                    Please select a valid Malawi region.
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        
-                                                        <div class="col-12">
-                                                            <label for="district" class="form-label">District</label>
-                                                            <select class="form-select" name="district" id="district" value ="$district" required>
-                                                                <option selected value="$district" ></option>
-                                                                    <?php                                                           
-                                                                        $dis_fetch_query = "SELECT DistrictID,DistrictName FROM tbldistrict";                                                  
-                                                                        $result_dis_fetch = mysqli_query($link, $dis_fetch_query);                                                                       
-                                                                        $i=0;
-                                                                            while($DB_ROW_Dis = mysqli_fetch_array($result_dis_fetch)) {
-                                                                        ?>
-                                                                        <option value="<?php echo $DB_ROW_Dis["DistrictID"]; ?>">
-                                                                            <?php echo $DB_ROW_Dis["DistrictName"]; ?></option><?php
-                                                                            $i++;
-                                                                                }
-                                                                    ?>
-                                                            </select>
-                                                            <div class="invalid-feedback">
-                                                                Please select a valid Malawi district.
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="col-12">
-                                                            <label for="ta" class="form-label">Traditional Authority</label>
-                                                            <select class="form-select" name="ta" id="ta" required>
-                                                                <option selected  value="$ta"></option>
-                                                                <?php                                                           
-                                                                        $ta_fetch_query = "SELECT TAName FROM tblta";                                                  
-                                                                        $result_ta_fetch = mysqli_query($link, $ta_fetch_query);                                                                       
-                                                                        $i=0;
-                                                                            while($DB_ROW_ta = mysqli_fetch_array($result_ta_fetch)) {
-                                                                        ?>
-                                                                        <option>
-                                                                            <?php echo $DB_ROW_ta["TAName"]; ?></option><?php
-                                                                            $i++;
-                                                                                }
-                                                                    ?>
-                                                            </select>
-                                                            <div class="invalid-feedback">
-                                                                Please select a valid TA.
-                                                            </div>
-                                                        </div>
-
-                                                        
-                                                        <div class="col-12">
-                                                            <button type="submit" class="btn btn-primary w-md" name="Submit" value="Submit">Submit</button>
-                                                        </div>
-                                                    </form>                                             
-                                                    <!-- End Here -->
-                                                </div>
-                                            </div>
-
-                                            <div class="row">
-                                                <div class="col-12">
-                                                    <div class="card border border-primary">
-                                                    <div class="card-header bg-transparent border-primary">
-                                                        <h5 class="my-0 text-primary">SLGs</h5>
-                                                    </div>
-                                                    <div class="card-body">
-                                                    <h7 class="card-title mt-0"></h7>
-                                                        
-                                                            <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
-                                                            
-                                                                <thead>
-                                                                    <tr>
-                                                                        
-                                                                        
-                                                                        <th>Groupcode</th>
-                                                                        <th>Group Name</th>
-                                                                        
-                                                                        <th>Group Training Status</th>
-                                                                        <th>Record Group Training</th>
-                                                                    </tr>
-                                                                </thead>
-
-
-                                                                <tbody>
-                                                                    <?Php
-                                                                        $query="select * from tblgroup";
- 
-                                                                        //Variable $link is declared inside config.php file & used here
-                                                                        
-                                                                        if ($result_set = $link->query($query)) {
-                                                                        while($row = $result_set->fetch_array(MYSQLI_ASSOC))
-                                                                        { 
-                                                                        echo "<tr>\n";
-                                                                            
-                                                                        
-                                                                            echo "<td>".$row["groupID"]."</td>\n";
-                                                                            echo "<td>".$row["groupname"]."</td>\n";
-                                                                            echo "<td><a href=\"basicTrainingView.php?id=".$row['groupID']."\">View</a></td>\n";
-                                                                            
-                                                                            echo "<td>                                                                            
-                                                                                <a href=\"basicTrainingGD.php?id=".$row['groupID']."\" >GDynmics</a>   
-                                                                                <a href=\"basicTrainingFLT.php?id=".$row['groupID']."\">FLT</a> 
-                                                                                <a href=\"basicTrainingBMT.php?id=".$row['groupID']."\">BMT</a>
-                                                                                <a href=\"basicTrainingRK.php?id=".$row['groupID']."\">RKeeping</a> 
-                                                                                <a href=\"basicTrainingBK.php?id=".$row['groupID']."\">BKeeping</a> 
-                                                                                <a href=\"basicTrainingSG.php?id=".$row['groupID']."\">Safeguards</a>
-                                                                                <a href=\"basicTrainingGN.php?id=".$row['groupID']."\">Gender</a>
-                                                                                <a href=\"basicTrainingDRA.php?id=".$row['groupID']."\">DRA</a>      
-                                                                            </td>\n";
-                                                                        echo "</tr>\n";
-                                                                        }
-                                                                        $result_set->close();
-                                                                        }  
-                                                                                           
-                                                                    ?>
-                                                                </tbody>
-                                                            </table>
-                                                            </p>
-                                                        </div>
-                                                    </div>     
-                                                </div>            
-                                            </div>  
-                                        </p>
-                                    </div>
+                                    
                                     <!-- Here -->
                                     
                                     <!-- end here -->
                                     
-                                    <div class="tab-pane" id="trainedgroups" role="tabpanel">
+                                    
+                                    <div class="tab-pane" id="settings-1" role="tabpanel">
+                                        <p class="mb-0">
+                                            
+                                        
+                                        </p>
+                                    </div>
+
+                                    <div class="tab-pane active" id="hotspots" role="tabpanel">
                                         <p class="mb-0">
                                             <div class="card border border-primary">
                                                 <div class="card-header bg-transparent border-primary">
-                                                    <h5 class="my-0 text-primary"></i>Search Filter</h5>
+                                                    <h5 class="my-0 text-primary"></i>Hotspots</h5>
                                                 </div>
                                                 <div class="card-body">
                                                     <h5 class="card-title mt-0"></h5>
-                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="basic_livelihood_group_training_filter_results.php" method ="GET" >
+                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="basic_livelihood_cbdra_add_hotspot.php" method ="POST" >
                                                         <div class="col-12">
                                                             <label for="region" class="form-label">Region</label>
                                                             <div>
-                                                                <select class="form-select" name="region" id="region" value ="<?php if(isset($_GET['region'])) {echo $_GET['region'];} ?>" onChange="update()" required>
+                                                                <select class="form-select" name="region" id="region" value ="<?php if(isset($_POST['region'])) {echo $_POST['region'];} ?>" onChange="update()" required>
                                                                     <option></option>
                                                                     <?php                                                           
                                                                             $dis_fetch_query = "SELECT regionID, name FROM tblregion";                                                  
@@ -325,30 +199,51 @@
                                                                 Please select a valid Malawi district.
                                                             </div>
                                                         </div>
+                                                        <div class="col-12">
+                                                            <label for="hotspot" class="form-label">Hotspot</label>
+                                                            <input class="text" name="hotspot" id="hotspot" required>
+                                                                
+                                                            <div class="invalid-feedback">
+                                                                Enter Valid Hotspot.
+                                                            </div>
+                                                        </div>
 
                                                         <div class="col-12">
-                                                            <label for="ta" class="form-label">Traditional Authority</label>
-                                                            <select class="form-select" name="ta" id="ta" required>
-                                                                <option selected  value="$ta"></option>
+                                                            <label for="issue" class="form-label">Issue/Problem</label>
+                                                            <select class="form-select" name="issue" id="issue" required>
+                                                                
                                                                 <?php                                                           
-                                                                        $ta_fetch_query = "SELECT TAName FROM tblta";                                                  
-                                                                        $result_ta_fetch = mysqli_query($link, $ta_fetch_query);                                                                       
+                                                                        $issue_fetch_query = "SELECT id, name FROM tblissues";                                                  
+                                                                        $result_issue_fetch = mysqli_query($link, $issue_fetch_query);                                                                       
                                                                         $i=0;
-                                                                            while($DB_ROW_ta = mysqli_fetch_array($result_ta_fetch)) {
+                                                                            while($DB_ROW_issue = mysqli_fetch_array($result_issue_fetch)) {
                                                                         ?>
-                                                                        <option>
-                                                                            <?php echo $DB_ROW_ta["TAName"]; ?></option><?php
+                                                                        <option value="<?php echo $DB_ROW_issue["id"]; ?>">
+                                                                            <?php echo $DB_ROW_issue["name"]; ?></option><?php
                                                                             $i++;
                                                                                 }
                                                                     ?>
                                                             </select>
                                                             <div class="invalid-feedback">
-                                                                Please select a valid TA.
+                                                                Please select a valid Issue.
                                                             </div>
                                                         </div>
 
-                                                        
-                                                        
+                                                        <div class="col-12">
+                                                            <label for="chance" class="form-label">Occurance Chance(Probability)</label>
+                                                            <select class="form-select" name="chance" id="chance" required>
+                                                                <option value="0">0%</option>
+                                                                <option value="10">10%</option>
+                                                                <option value="30">30%</option>
+                                                                <option value="50">50%</option>
+                                                                <option value="70">70%</option>
+                                                                <option value="100">100%</option>
+                                                            </select>
+                                                            <div class="invalid-feedback">
+                                                                Please select a valid Occurance.
+                                                            </div>
+                                                        </div>
+
                                                         <div class="col-12">
                                                             <button type="submit" class="btn btn-primary w-md" name="Submit" value="Submit">Submit</button>
                                                         </div>
@@ -356,15 +251,63 @@
                                                     <!-- End Here -->
                                                 </div>
                                             </div>
-                                              
+
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <div class="card border border-primary">
+                                                    <div class="card-header bg-transparent border-primary">
+                                                        <h5 class="my-0 text-primary">Hotspots</h5>
+                                                    </div>
+                                                    <div class="card-body">
+                                                    <h7 class="card-title mt-0"></h7>
+                                                        
+                                                            <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
+                                                            
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>S/N</th>
+                                                                        <th>District</th>
+                                                                        <th>Hotspot</th>
+                                                                        <th>Issue</th>
+                                                                        <th>Occurence Probability</th>
+                                                                    </tr>
+                                                                </thead>
+
+
+                                                                <tbody>
+                                                                    <?Php
+                                                                        $query="select * from tblhotspot";
+ 
+                                                                        //Variable $link is declared inside config.php file & used here
+                                                                        
+                                                                        if ($result_set = $link->query($query)) {
+                                                                        while($row = $result_set->fetch_array(MYSQLI_ASSOC))
+                                                                        { 
+                                                                        echo "<tr>\n";
+                                                                            
+                                                                        
+                                                                            echo "<td>".$row["id"]."</td>\n";
+                                                                            echo "<td>".$row["districtID"]."</td>\n";
+                                                                            echo "<td>".$row["place"]."</td>\n";
+                                                                            echo "<td>".$row["issue"]."</td>\n";
+                                                                            echo "<td>".$row["probability"]."</td>\n";
+                                                                            
+                                                                        echo "</tr>\n";
+                                                                        }
+                                                                        $result_set->close();
+                                                                        }  
+                                                                                           
+                                                                    ?>
+                                                                </tbody>
+                                                            </table>
+                                                            </p>
+                                                        </div>
+                                                    </div>     
+                                                </div>            
+                                            </div>    
                                         </p>
                                     </div>
-                                    <div class="tab-pane" id="settings-1" role="tabpanel">
-                                        <p class="mb-0">
-                                            
-                                        
-                                        </p>
-                                    </div>
+
                                 </div>
 
                             </div>
