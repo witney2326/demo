@@ -44,6 +44,7 @@
         }
     </script> 
 
+
     <script type="text/javascript">
         // Load google charts
         google.charts.load('current', {'packages':['corechart']});
@@ -53,19 +54,17 @@
         function drawChart() {
         var data = google.visualization.arrayToDataTable([
         ['Month', 'Amount'],
-        ['Jan', 500000],
-        ['Feb', 12000],
-        ['Mar', 20000],
-        ['Apr', 100000],
-        ['May', 1500000],
-        ['Jun', 14],
-        ['Jul', 10],
-        ['Aug', 1200000],
-        ['Sep', 2],
-        ['Oct', 1],
-        ['Nov', 15],
-        ['Dec', 14],
+        <?php 
+            $select_query = "SELECT SUM(Amount) AS value_sum, Month FROM tblgroupsavings  ORDER BY month";
+            $query_result = mysqli_query($link,$select_query);
+            while($row_val = mysqli_fetch_array($query_result)){
+            echo "['".$row_val['Month']."',".$row_val['value_sum']."],";
+            }
+        ?>
+        
         ]);
+
+        
 
         // Optional; add a title and set the width and height of the chart
         var options = {'title':'', 'width':370, 'height':250};
@@ -305,7 +304,7 @@
                                         </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link" data-bs-toggle="tab" href="#mindset-trainings" role="tab">
+                                        <a class="nav-link" data-bs-toggle="tab" href="#Training" role="tab">
                                             <span class="d-block d-sm-none"><i class="fas fa-cog"></i></span>
                                             <span class="d-none d-sm-block">Trainings</span>
                                         </a>
@@ -331,77 +330,116 @@
                                 </ul>
 
                                 <!-- Tab panes -->
+                                
+                                <!-- end -->
                                 <div class="tab-content p-3 text-muted">
                                     <div class="tab-pane active" id="home" role="tabpanel">
                                         <p class="mb-0">
-                                            <div class="card border border-primary">
-                                                <div class="card-header bg-transparent border-primary">
-                                                    <h5 class="my-0 text-primary"><i class="mdi mdi-bullseye-arrow me-3"></i>Basic Livelihood</h5>
-                                                </div>                                   
-                                            </div>
+                                            
                                             <!-- start here -->
                                             <div class="row">
-                                                <div class="card border border-success">
-                                                    <div class="card-header bg-transparent border-primary">
-                                                        <div class="card-group">
-                                                            <div class="card">
-                                                                <img src="..." class="card-img-top" alt="...">
+                        
+                                                <div class="card-header bg-transparent border-primary">
+                                                    <div class="card-group">
+                                                        <div class="card border">
+                                                            <img src="..." class="card-img-top" alt="">
+                                                            <div class="card-body">
+                                                                
+                                                                        <div class="card-body">
+                                                                            <div class="d-flex">
+                                                                                <div class="flex-grow-1">
+                                                                                    <p class="text-muted fw-medium">Enrolled HHs</p>
+                                                                                    <?php
+                                                                                        $result = mysqli_query($link, 'SELECT COUNT(hhcode) AS value_sum FROM tblbasic_beneficiary'); 
+                                                                                        $row = mysqli_fetch_assoc($result); 
+                                                                                        $sum = $row['value_sum'];
+                                                                                    ?>
+                                                                                        <h4 class="mb-0">
+                                                                                            <div class="container">
+                                                                                                <div class="mb-0"><?php echo "" . $sum;?></div>
+                                                                                            </div> 
+                                                                                        </h4>
+                                                                                </div>
+                                                                                <div class="mini-stat-icon avatar-sm rounded-circle bg-primary align-self-center">
+                                                                                    <span class="avatar-title">
+                                                                                        <i class="bx bx-copy-alt font-size-24"></i>
+                                                                                    </span>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                
+                                                            <!-- -->
+                                                            </div>
+                                                        </div>
+                                                        <div class="card border">
+                                                            <img src="..." class="card-img-top" alt="">
+                                                            <div class="card-body">
                                                                 <div class="card-body">
-                                                                <h5 class="card-title">Enrolled HHs</h5>
-                                                                    <p class="card-text">
-                                                                        <?php
-                                                                            $result = mysqli_query($link, 'SELECT COUNT(hhcode) AS value_sum FROM tblbasic_beneficiary'); 
-                                                                            $row = mysqli_fetch_assoc($result); 
-                                                                            $sum = $row['value_sum'];
-                                                                        ?>
-                                                                            <div class="container">
-                                                                                <h6><div class="numberCircle"><?php echo "" . $sum;?></div></h6>
-                                                                            </div>      
-                                                                    </p>
-                                                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                                                    <div class="d-flex">
+                                                                        <div class="flex-grow-1">
+                                                                            <p class="text-muted fw-medium">SLGs Formed</p>
+                                                                            <?php
+                                                                                        $result = mysqli_query($link, 'SELECT COUNT(groupID) AS value_sum FROM tblgroup'); 
+                                                                                        $row = mysqli_fetch_assoc($result); 
+                                                                                        $sum = $row['value_sum'];
+                                                                                    ?>
+                                                                                        <div class="container">
+                                                                                            <h4><div class="mb-0"><?php echo "" . $sum;?></div></h4>
+                                                                                        </div>
+                                                                            
+                                                                        </div>
+                                                                        <div class="mini-stat-icon avatar-sm rounded-circle bg-primary align-self-center">
+                                                                            <span class="avatar-title">
+                                                                                <i class="bx bx-copy-alt font-size-24"></i>
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                            <div class="card">
-                                                                <img src="..." class="card-img-top" alt="...">
+
+                                                        </div>
+                                                        <div class="card border">
+                                                            <img src="..." class="card-img-top" alt="">
+                                                            <div class="card-body">
                                                                 <div class="card-body">
-                                                                <h5 class="card-title">SLGs Formed</h5>
-                                                                    <p class="card-text">
-                                                                        <?php
-                                                                            $result = mysqli_query($link, 'SELECT COUNT(groupID) AS value_sum FROM tblgroup'); 
-                                                                            $row = mysqli_fetch_assoc($result); 
-                                                                            $sum = $row['value_sum'];
-                                                                        ?>
-                                                                            <div class="container">
-                                                                                <h6><div class="numberCircle"><?php echo "" . $sum;?></div></h6>
-                                                                            </div>         
-                                                                    </p>
-                                                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                                                    <div class="d-flex">
+                                                                        <div class="flex-grow-1">
+                                                                            <p class="text-muted fw-medium">HH Trained in MC</p>
+                                                                            <h4 class="mb-0">0</h4>
+                                                                        </div>
+                                                                        <div class="mini-stat-icon avatar-sm rounded-circle bg-primary align-self-center">
+                                                                            <span class="avatar-title">
+                                                                                <i class="bx bx-copy-alt font-size-24"></i>
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                            <div class="card">
-                                                                <img src="..." class="card-img-top" alt="...">
+                                                        </div>
+
+                                                        <div class="card border">
+                                                            <img src="..." class="card-img-top" alt="">
+                                                            <div class="card-body">
                                                                 <div class="card-body">
-                                                                <h5 class="card-title">HH Trained in MC</h5>
-                                                                    <p class="card-text">
-                                                                        <h6><div class="numberCircle">0</div></h6>
-                                                                    </p>
-                                                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="card">
-                                                                <img src="..." class="card-img-top" alt="...">
-                                                                <div class="card-body">
-                                                                <h5 class="card-title">Animators Trained</h5>
-                                                                    <p class="card-text">
-                                                                    <h6><div class="numberCircle">0</div></h6>
-                                                                    </p>
-                                                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                                                    <div class="d-flex">
+                                                                        <div class="flex-grow-1">
+                                                                            <p class="text-muted fw-medium">Animators Trained</p>
+                                                                            <h4 class="mb-0">0</h4>
+                                                                        </div>
+                                                                        <div class="mini-stat-icon avatar-sm rounded-circle bg-primary align-self-center">
+                                                                            <span class="avatar-title">
+                                                                                <i class="bx bx-copy-alt font-size-24"></i>
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div> 
+                                            <!-- end here -->
+                                             
                                             <!-- end here row1 -->
 
                                             <!-- pie chart -->
@@ -445,16 +483,12 @@
                                         <p class="mb-0">
                                             <div class="card border border-primary">
                                                 <div class="card-header bg-transparent border-primary">
-                                                    <h5 class="my-0 text-primary"><i class="mdi mdi-bullseye-arrow me-3"></i>Sensitization and Awareness Meetings</h5>
+                                                    <h5 class="my-0 text-primary">Sensitization and Awareness Meetings</h5>
                                                     </div>
-                                                    <div class="card-body">
-                                                        
-                                                    </div>
+                                                    
                                                     <!-- start -->
                                                     <div class="card border border-primary">
-                                                        <div class="card-header bg-transparent border-primary">
-                                                            <h6 class="my-0 text-primary"><i class="mdi mdi-bullseye-arrow me-3">New Meeting</i></h6>
-                                                        </div>
+                                                        
                                                         <div class="card-body">
                                                             <h5 class="card-title mt-0"></h5>
                                                             <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="insertBasicAwarenessMeeting.php" method="post">
@@ -552,7 +586,7 @@
                                                                 </div>
                                                                 
                                                                 <div class="col-12">
-                                                                    <button type="submit" class="btn btn-primary w-md" name="submit" value="submit">Submit</button>
+                                                                    <button type="submit" class="btn btn-primary w-md" name="submit" value="submit">Submit Meeting Details</button>
                                                                 </div>
                                                             </form>                                             
                                                             
@@ -562,7 +596,7 @@
                                             <!-- start here -->
                                             <div class="card border border-primary">
                                                 <div class="card-header bg-transparent border-primary">
-                                                    <h6 class="my-0 text-primary"><i class="mdi mdi-bullseye-arrow me-3">Meetings conducted</i></h6>
+                                                    <h6 class="my-0 text-primary">Meetings Conducted</i></h6>
                                                 </div>
                                                 <h5 class="card-title mt-0"></h5>
                                                             
@@ -643,11 +677,11 @@
                                         <p class="mb-0">
                                             <div class="card border border-primary">
                                                 <div class="card-header bg-transparent border-primary">
-                                                    <h5 class="my-0 text-primary"><i class="mdi mdi-bullseye-arrow me-3"></i>Savings and Loan Groups Management</h5>
+                                                    <h5 class="my-0 text-primary"><a href="basic_livelihood_slg_mgt2.php">Savings and Loan Groups Management</a></h5>
                                                 </div>
                                                 <div class="card-body">
                                                     <h5 class="card-title mt-0"></h5>
-                                                    <a href="basic_livelihood_slg_mgt2.php">SLG Management</a>
+                                                    
                                                 </div>
                                             </div>
                                         </p>
@@ -656,11 +690,24 @@
                                         <p class="mb-0">
                                             <div class="card border border-primary">
                                                 <div class="card-header bg-transparent border-primary">
-                                                    <h5 class="my-0 text-primary">Savings and Loan Groups-Members</h5>
+                                                    <h5 class="my-0 text-primary"><a href="basic_livelihood_member_mgt.php">Savings and Loan Groups-Members</a></h5>
                                                 </div>
                                                 <div class="card-body">
                                                     <h5 class="card-title mt-0"></h5>
-                                                    <a href="basic_livelihood_member_mgt.php">Member Management</a>
+                                                    
+                                                </div>
+                                            </div>
+                                        </p>
+                                    </div>
+                                    <div class="tab-pane" id="Training" role="tabpanel">
+                                        <p class="mb-0">
+                                            <div class="card border border-primary">
+                                                <div class="card-header bg-transparent border-primary">
+                                                    <h5 class="my-0 text-primary"><a href="basic_livelihood_training.php">Group and Member Training</a></h5>
+                                                </div>
+                                                <div class="card-body">
+                                                    <h5 class="card-title mt-0"></h5>
+                                                    
                                                 </div>
                                             </div>
                                         </p>

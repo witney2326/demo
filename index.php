@@ -36,7 +36,7 @@
         }
     </script> 
 
-    <script type="text/javascript">
+<script type="text/javascript">
         // Load google charts
         google.charts.load('current', {'packages':['corechart']});
         google.charts.setOnLoadCallback(drawChart);
@@ -45,19 +45,17 @@
         function drawChart() {
         var data = google.visualization.arrayToDataTable([
         ['Month', 'Amount'],
-        ['Jan', 500000],
-        ['Feb', 12000],
-        ['Mar', 20000],
-        ['Apr', 100000],
-        ['May', 1500000],
-        ['Jun', 14],
-        ['Jul', 10],
-        ['Aug', 1200000],
-        ['Sep', 2],
-        ['Oct', 1],
-        ['Nov', 15],
-        ['Dec', 14],
+        <?php 
+            $select_query = "SELECT SUM(Amount) AS value_sum, Month FROM tblgroupsavings  ORDER BY month";
+            $query_result = mysqli_query($link,$select_query);
+            while($row_val = mysqli_fetch_array($query_result)){
+            echo "['".$row_val['Month']."',".$row_val['value_sum']."],";
+            }
+        ?>
+        
         ]);
+
+        
 
         // Optional; add a title and set the width and height of the chart
         var options = {'title':'', 'width':370, 'height':250};
@@ -224,7 +222,7 @@
                                 <div class="card-header bg-transparent border-primary">
                                     <h5 class="my-0 text-primary">Joint Skills</h5>
                                 </div>
-                                <div id="barchart"></div> 
+                                
                             </div>
                         </div>   
                     </div>

@@ -18,7 +18,7 @@
 
 <?php 
     if(isset($_GET['Submit']))
-    {    
+    {   
         $region = $_GET['region'];
         $district = $_GET['district'];
         $ta = $_GET['ta'];
@@ -90,6 +90,12 @@
                                         </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">
+                                        <a class="nav-link" data-bs-toggle="tab" href="#clusters" role="tab">
+                                            <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
+                                            <span class="d-none d-sm-block">Clusters</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item waves-effect waves-light">
                                         <a class="nav-link" data-bs-toggle="tab" href="#messages-2" role="tab">
                                             <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
                                             <span class="d-none d-sm-block">New SLG Cluster</span>
@@ -114,8 +120,6 @@
                                 <div class="tab-content p-3 text-muted">
                                     <div class="tab-pane active" id="home-1" role="tabpanel">
                                         <p class="mb-0">
-                                            
-
                                             <!--start here -->
                                             <div class="card border border-primary">
                                                 <div class="card-header bg-transparent border-primary">
@@ -123,7 +127,7 @@
                                                 </div>
                                                 <div class="card-body">
                                                     <h5 class="card-title mt-0"></h5>
-                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="<?php $_PHP_SELF ?>" method ="GET" >
+                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="basic_livelihood_slg_mgt_filter_results.php" method ="GET" >
                                                         <div class="col-12">
                                                             <label for="region" class="form-label">Region</label>
                                                             <div>
@@ -210,7 +214,7 @@
                                                         <h5 class="my-0 text-primary"><i class="mdi mdi-bullseye-arrow me-3"></i>Savings and Loan Groups</h5>
                                                     </div>
                                                     <div class="card-body">
-                                                    <h7 class="card-title mt-0">Results for:..<?php if(isset($_GET['region'])) echo "Region"; echo" "; echo get_rname($link,$_GET['region']); echo "; "; echo " District: "; if(isset($_GET['district'])) echo dis_name($link,$_GET['district']); echo";"; ?></h7>
+                                                    <h7 class="card-title mt-0"></h7>
                                                         
                                                             <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
                                                             
@@ -232,11 +236,8 @@
 
                                                                 <tbody>
                                                                     <?Php
-                                                                        if (isset($district) && isset($region))
-                                                                        {
-                                                                            $query="select * from tblgroup where ((DistrictID = '$district' AND regionID = '$region') OR (DistrictID = '$district') OR (regionID = '$region')) " ;
-                                                                        
-                                                                        
+                                                                        $query="select * from tblgroup";
+ 
                                                                         //Variable $link is declared inside config.php file & used here
                                                                         
                                                                         if ($result_set = $link->query($query)) {
@@ -266,7 +267,7 @@
                                                                         }
                                                                         $result_set->close();
                                                                         }  
-                                                                    }                        
+                                                                                           
                                                                     ?>
                                                                 </tbody>
                                                             </table>
@@ -664,25 +665,163 @@
                                             </div>
                                         </p>
                                     </div>
-                                    <div class="tab-pane" id="messages-1" role="tabpanel">
+                                    <div class="tab-pane" id="clusters" role="tabpanel">
                                         <p class="mb-0">
-                                            Etsy mixtape wayfarers, ethical wes anderson tofu before they
-                                            sold out mcsweeney's organic lomo retro fanny pack lo-fi
-                                            farm-to-table readymade. Messenger bag gentrify pitchfork
-                                            tattooed craft beer, iphone skateboard locavore carles etsy
-                                            salvia banksy hoodie helvetica. DIY synth PBR banksy irony.
-                                            Leggings gentrify squid 8-bit cred pitchfork. Williamsburg banh
-                                            mi whatever gluten-free.
+                                            <div class="card border border-primary">
+                                                <div class="card-header bg-transparent border-primary">
+                                                    <h5 class="my-0 text-primary"></i>Cluster Search Filter</h5>
+                                                </div>
+                                                <div class="card-body">
+                                                    <h5 class="card-title mt-0"></h5>
+                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="basic_livelihood_cluster_mgt_filter_results.php" method ="GET" >
+                                                        <div class="col-12">
+                                                            <label for="region" class="form-label">Region</label>
+                                                            <div>
+                                                                <select class="form-select" name="region" id="region" value ="<?php if(isset($_GET['region'])) {echo $_GET['region'];} ?>" onChange="update()" required>
+                                                                    <option></option>
+                                                                    <?php                                                           
+                                                                            $dis_fetch_query = "SELECT regionID, name FROM tblregion";                                                  
+                                                                            $result_dis_fetch = mysqli_query($link, $dis_fetch_query);                                                                       
+                                                                            $i=0;
+                                                                                while($DB_ROW_reg = mysqli_fetch_array($result_dis_fetch)) {
+                                                                            ?>
+                                                                            <option value ="<?php
+                                                                                    echo $DB_ROW_reg["regionID"];?>">
+                                                                                <?php
+                                                                                    echo $DB_ROW_reg["name"];
+                                                                                ?>
+                                                                            </option>
+                                                                            <?php
+                                                                                $i++;
+                                                                                    }
+                                                                        ?>
+                                                                        
+                                                                </select>
+                                                                <div class="invalid-feedback">
+                                                                    Please select a valid Malawi region.
+                                                                </div>
+                                                                
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <div class="col-12">
+                                                            <label for="district" class="form-label">District</label>
+                                                            <select class="form-select" name="district" id="district" value ="$district" required>
+                                                                <option selected value="$district" ></option>
+                                                                    <?php                                                           
+                                                                        $dis_fetch_query = "SELECT DistrictID,DistrictName FROM tbldistrict where regionID ='$regionCode'";                                                  
+                                                                        $result_dis_fetch = mysqli_query($link, $dis_fetch_query);                                                                       
+                                                                        $i=0;
+                                                                            while($DB_ROW_Dis = mysqli_fetch_array($result_dis_fetch)) {
+                                                                        ?>
+                                                                        <option value="<?php echo $DB_ROW_Dis["DistrictID"]; ?>">
+                                                                            <?php echo $DB_ROW_Dis["DistrictName"]; ?></option><?php
+                                                                            $i++;
+                                                                                }
+                                                                    ?>
+                                                            </select>
+                                                            <div class="invalid-feedback">
+                                                                Please select a valid Malawi district.
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-12">
+                                                            <label for="ta" class="form-label">Traditional Authority</label>
+                                                            <select class="form-select" name="ta" id="ta" required>
+                                                                <option selected  value="$ta"></option>
+                                                                <?php                                                           
+                                                                        $ta_fetch_query = "SELECT TAName FROM tblta";                                                  
+                                                                        $result_ta_fetch = mysqli_query($link, $ta_fetch_query);                                                                       
+                                                                        $i=0;
+                                                                            while($DB_ROW_ta = mysqli_fetch_array($result_ta_fetch)) {
+                                                                        ?>
+                                                                        <option>
+                                                                            <?php echo $DB_ROW_ta["TAName"]; ?></option><?php
+                                                                            $i++;
+                                                                                }
+                                                                    ?>
+                                                            </select>
+                                                            <div class="invalid-feedback">
+                                                                Please select a valid TA.
+                                                            </div>
+                                                        </div>
+
+                                                        <select id="language" onChange="update()">
+                                                        <?php                                                           
+                                                            $dis_fetch_query = "SELECT regionID, name FROM tblregion";                                                  
+                                                            $result_dis_fetch = mysqli_query($link, $dis_fetch_query);                                                                       
+                                                            $i=0;
+                                                                while($DB_ROW_reg = mysqli_fetch_array($result_dis_fetch)) {
+                                                            ?>
+                                                            <option value ="<?php
+                                                                    echo $DB_ROW_reg["regionID"];?>">
+                                                                <?php
+                                                                    echo $DB_ROW_reg["name"];
+                                                                ?>
+                                                            </option>
+                                                            <?php
+                                                                $i++;
+                                                                    }
+                                                        ?>
+                                                        </select>
+
+                                                        <input type="text" id="value">
+                                                        <input type="text" id="text">
+                                                        
+                                                            <label for="district" class="form-label">District</label>
+                                                            <select  name="district" id="district"  required>
+                                                                <option></option>
+                                                                    <?php                                                           
+                                                                        $dis_fetch_query = "SELECT DistrictID,DistrictName FROM tbldistrict where regionID =option.value";                                                  
+                                                                        $result_dis_fetch = mysqli_query($link, $dis_fetch_query);                                                                       
+                                                                        $i=0;
+                                                                            while($DB_ROW_Dis = mysqli_fetch_array($result_dis_fetch)) {
+                                                                        ?>
+                                                                        <option value="<?php echo $DB_ROW_Dis["DistrictID"]; ?>">
+                                                                            <?php echo $DB_ROW_Dis["DistrictName"]; ?></option><?php
+                                                                            $i++;
+                                                                                }
+                                                                    ?>
+                                                            </select>
+                                                            <div class="invalid-feedback">
+                                                                Please select a valid Malawi district.
+                                                            </div>
+                                                        
+
+                                                        <script type="text/javascript">
+                                                            function update() {
+                                                                
+                                                                var select = document.getElementById('district');
+                                                                var option = select.options[select.selectedIndex];
+
+                                                                document.getElementById('district').value = option.value;
+                                                                document.getElementById('text').value = option.text;
+                                                                $regionCode = option.value
+                                                                <script>
+<?php
+                                                              
+                                                                ?>
+                                                                
+                                                            }
+
+                                                            update();
+                                                        </script>
+
+                                                        
+                                                        <div class="col-12">
+                                                            <button type="submit" class="btn btn-primary w-md" name="Submit" value="Submit">Submit</button>
+                                                        </div>
+                                                    </form>                                             
+                                                    <!-- End Here -->
+                                                </div>
+                                            </div>
+                                              
                                         </p>
                                     </div>
                                     <div class="tab-pane" id="settings-1" role="tabpanel">
                                         <p class="mb-0">
-                                            Trust fund seitan letterpress, keytar raw denim keffiyeh etsy
-                                            art party before they sold out master cleanse gluten-free squid
-                                            scenester freegan cosby sweater. Fanny pack portland seitan DIY,
-                                            art party locavore wolf cliche high life echo park Austin. Cred
-                                            vinyl keffiyeh DIY salvia PBR, banh mi before they sold out
-                                            farm-to-table.
+                                            
+                                        
                                         </p>
                                     </div>
                                 </div>
