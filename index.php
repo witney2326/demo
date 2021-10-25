@@ -10,20 +10,92 @@
 
 <?php include 'layouts/body.php'; ?>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script> <!-- for pie chart -->
+
+<?php
+    function month_name($month)
+    {
+        if($month == 1){
+            $mname ='Jan';
+        }
+        if($month == 2){
+            $mname ='Feb';
+        }
+        if($month == 3){
+            $mname ='Mar';
+        }
+        if($month == 4){
+            $mname ='Apr';
+        }
+        if($month == 5){
+            $mname ='May';
+        }
+        if($month == 6){
+            $mname ='Jun';
+        }
+        if($month == 7){
+            $mname ='Jul';
+        }
+        if($month == 8){
+            $mname ='Aug';
+        }
+        if($month == 9){
+            $mname ='Sep';
+        }
+        if($month == 10){
+            $mname ='Oct';
+        }
+        if($month == 11){
+            $mname ='Nov';
+        }
+        if($month == 12){
+            $mname ='Dec';
+        }
+        return $mname;
+    }
+?>
+
+<?php 
+    $query="SELECT tbldistrict.DistrictName,COUNT(tblgroup.groupname) as grps, sum(tblgroup.MembersM) as smales, sum(MembersF) as sfemales, SUM(tblgroupsavings.Amount) as sAmount
+    FROM cimis_sql.tblgroup 
+    INNER JOIN cimis_sql.tblcw on cimis_sql.tblcw.cwID = cimis_sql.tblgroup.cwID 
+    inner join cimis_sql.tblgroupsavings on cimis_sql.tblgroup.groupID = cimis_sql.tblgroupsavings.GroupID
+    inner join cimis_sql.tbldistrict on cimis_sql.tblgroupsavings.DistrictID = cimis_sql.tbldistrict.DistrictID
+    GROUP BY tbldistrict.DistrictName";
+
+    
+    if ($result_set = $link->query($query)) {
+    while($row = $result_set->fetch_array(MYSQLI_ASSOC))
+    { 
+        echo "<script>
+            var my_2d = ".json_encode($row)."
+        </script>";
+    }
+    $result_set->close();
+    }  
+$test = 85;
+?>
+
 <script type="text/javascript">
         // Load google charts
         google.charts.load('current', {'packages':['corechart']});
         google.charts.setOnLoadCallback(drawChart);
-
+        
         // Draw the chart and set the chart values
         function drawChart() {
         var data = google.visualization.arrayToDataTable([
-        ['Disaster', 'Probability'],
-        ['Floods', 10],
-        ['Drought', 12],
-        ['Earthquake', 2],
-        ['Strong winds', 1],
-        ['Heatwave', 15],
+        
+        ['District', 'Groups'],
+        <?php 
+            $select_query = "SELECT tbldistrict.DistrictName,COUNT(tblgroup.groupname) as grps
+            FROM cimis_sql.tblgroup 
+            inner join cimis_sql.tbldistrict on cimis_sql.tblgroup.DistrictID = cimis_sql.tbldistrict.DistrictID
+            GROUP BY tbldistrict.DistrictName";
+            $query_result = mysqli_query($link,$select_query);
+            while($row_val = mysqli_fetch_array($query_result)){
+                
+            echo "['".$row_val['DistrictName']."',".$row_val['grps']."],";
+            }
+        ?>
         
         ]);
 
@@ -49,7 +121,8 @@
             $select_query = "SELECT SUM(Amount) AS value_sum, Month FROM tblgroupsavings  ORDER BY month";
             $query_result = mysqli_query($link,$select_query);
             while($row_val = mysqli_fetch_array($query_result)){
-            echo "['".$row_val['Month']."',".$row_val['value_sum']."],";
+                $mon = month_name($row_val['Month']);
+            echo "['".$mon."',".$row_val['value_sum']."],";
             }
         ?>
         
@@ -62,6 +135,37 @@
 
         // Display the chart inside the <div> element with id="barchart"
         var chart = new google.visualization.ColumnChart(document.getElementById('barchart'));
+        chart.draw(data, options);
+        }
+    </script> 
+
+<script type="text/javascript">
+        // Load google charts
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+
+        // Draw the chart and set the chart values
+        function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+        ['District', 'TotalSavings'],
+        <?php 
+            $select_query = "SELECT tbldistrict.DistrictName as District, SUM(tblgroupsavings.Amount) as TotalSavings
+            FROM cimis_sql.tblgroupsavings 
+            INNER JOIN cimis_sql.tbldistrict on cimis_sql.tbldistrict.DistrictID = cimis_sql.tblgroupsavings.DistrictID 
+            GROUP BY tbldistrict.DistrictName";
+            $query_result = mysqli_query($link,$select_query);
+            while($row_val = mysqli_fetch_array($query_result)){
+            echo "['".$row_val['District']."',".$row_val['TotalSavings']."],";
+            }
+        ?>
+        
+        ]);
+
+        // Optional; add a title and set the width and height of the chart
+        var options = {'title':'', 'width':370, 'height':250};
+
+        // Display the chart inside the <div> element with id="barchart"
+        var chart = new google.visualization.BarChart(document.getElementById('barchart2'));
         chart.draw(data, options);
         }
     </script> 
@@ -212,7 +316,13 @@
                         <div class = "col-lg-6">
                             <div class="card border border-success">
                                 <div class="card-header bg-transparent border-primary">
-                                    <h5 class="my-0 text-primary">Beneficiary Enrolment BL</h5>
+                                    <?php 
+                                        $select_query = "SELECT COUNT(groupID) as TotalGroups FROM cimis_sql.tblgroup";
+                                        $query_result = mysqli_query($link,$select_query);
+                                        $row_val = mysqli_fetch_array($query_result);
+                                         $CurGroups =  $row_val['TotalGroups'];
+                                    ?>
+                                    <h6 class="my-0 text-primary">SLGs Formed Per District; Total: <?php echo number_format("$CurGroups")."<br>"  ?> </h6>
                                 </div>
                                 <div id="piechart"></div> 
                             </div>
@@ -220,9 +330,15 @@
                         <div class = "col-lg-6">
                             <div class="card border border-success">
                                 <div class="card-header bg-transparent border-primary">
-                                    <h5 class="my-0 text-primary">Joint Skills</h5>
+                                    <?php 
+                                        $select_query = "SELECT SUM(tblgroupsavings.Amount) as TotalSavings FROM cimis_sql.tblgroupsavings";
+                                        $query_result = mysqli_query($link,$select_query);
+                                        $row_val = mysqli_fetch_array($query_result);
+                                         $CurSavings =  $row_val['TotalSavings'];
+                                    ?>
+                                    <h6 class="my-0 text-primary">Savings Mobilisation Per District; Total: MK<?php echo number_format("$CurSavings",2)."<br>"  ?></h6>
                                 </div>
-                                
+                                <div id="barchart2"></div>
                             </div>
                         </div>   
                     </div>

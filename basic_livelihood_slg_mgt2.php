@@ -108,7 +108,7 @@
                                         </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link" data-bs-toggle="tab" href="#messages-1" role="tab">
+                                        <a class="nav-link" data-bs-toggle="tab" href="#slg-reports" role="tab">
                                             <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
                                             <span class="d-none d-sm-block">SLG Reports</span>
                                         </a>
@@ -818,9 +818,15 @@
                                               
                                         </p>
                                     </div>
-                                    <div class="tab-pane" id="settings-1" role="tabpanel">
+                                    <div class="tab-pane" id="slg-reports" role="tabpanel">
                                         <p class="mb-0">
-                                            
+                                            <div class="card border border-primary">
+                                                <div class="card-header bg-transparent border-primary">
+                                                    <h5 class="my-0 text-primary"><a href="basic_livelihood_SLG_reports.php">SLG Reports</a></h5>
+                                                </div>
+                                                <div class="card-body">
+                                                </div>
+                                            </div>
                                         
                                         </p>
                                     </div>
