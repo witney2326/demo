@@ -201,7 +201,7 @@
                                                 <div class="col-12">
                                                     <div class="card border border-primary">
                                                     <div class="card-header bg-transparent border-primary">
-                                                        <h5 class="my-0 text-primary">SLGs</h5>
+                                                        <h5 class="my-0 text-primary"><i class="mdi mdi-book-clock"></i><i class="fas fa-spinner fa-spin"></i>Savings and Loan Groups</h5>
                                                     </div>
                                                     <div class="card-body">
                                                     <h7 class="card-title mt-0"></h7>
@@ -216,7 +216,8 @@
                                                                         <th>Group Name</th>
                                                                         
                                                                         <th>Group Training Status</th>
-                                                                        <th>Record Group Training</th>
+                                                                        <th><i class="mdi mdi-book-clock"></i>Record Group Training</th>
+                                                                        <th>Group Training Report</th>
                                                                     </tr>
                                                                 </thead>
 
@@ -226,7 +227,7 @@
                                                                         $query="select * from tblgroup";
  
                                                                         //Variable $link is declared inside config.php file & used here
-                                                                        
+                                                                         
                                                                         if ($result_set = $link->query($query)) {
                                                                         while($row = $result_set->fetch_array(MYSQLI_ASSOC))
                                                                         { 
@@ -235,17 +236,15 @@
                                                                         
                                                                             echo "<td>".$row["groupID"]."</td>\n";
                                                                             echo "<td>".$row["groupname"]."</td>\n";
-                                                                            echo "<td><a href=\"basicTrainingView.php?id=".$row['groupID']."\">View</a></td>\n";
+                                                                            echo "<td><a href=\"basicSLGTraining_view.php?id=".$row['groupID']."\">View</a></td>\n";
                                                                             
                                                                             echo "<td>                                                                            
-                                                                                <a href=\"basicTrainingGD.php?id=".$row['groupID']."\" >GDynmics</a>   
-                                                                                <a href=\"basicTrainingFLT.php?id=".$row['groupID']."\">FLT</a> 
-                                                                                <a href=\"basicTrainingBMT.php?id=".$row['groupID']."\">BMT</a>
-                                                                                <a href=\"basicTrainingRK.php?id=".$row['groupID']."\">RKeeping</a> 
-                                                                                <a href=\"basicTrainingBK.php?id=".$row['groupID']."\">BKeeping</a> 
-                                                                                <a href=\"basicTrainingSG.php?id=".$row['groupID']."\">Safeguards</a>
-                                                                                <a href=\"basicTrainingGN.php?id=".$row['groupID']."\">Gender</a>
-                                                                                <a href=\"basicTrainingDRA.php?id=".$row['groupID']."\">DRA</a>      
+                                                                                <a href=\"add_basicTrainingGD.php?id=".$row['groupID']."\" >Group Training</a>   
+                                                                                 
+                                                                            </td>\n";
+                                                                            echo "<td>                                                                            
+                                                                                <a href=\"basicSLGTrainingReport.php?id=".$row['groupID']."\" >Training Report</a>   
+                                                                                 
                                                                             </td>\n";
                                                                         echo "</tr>\n";
                                                                         }
