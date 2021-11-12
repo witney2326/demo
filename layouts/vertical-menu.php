@@ -311,7 +311,7 @@
                     </a>
                     <ul class="sub-menu" aria-expanded="true">
                         <li>
-                            <a href="cimis-page-coming-soon.php" class="has-arrow" key="t-vertical">Case Register</a>
+                            <a href="case-register.php" class="has-arrow" key="t-vertical">Case Register</a>
                             <ul class="sub-menu" aria-expanded="true">
                             </ul>
                         </li>

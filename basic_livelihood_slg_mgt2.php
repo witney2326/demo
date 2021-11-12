@@ -108,7 +108,7 @@
                                         </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link" data-bs-toggle="tab" href="#slg-reports" role="tab">
+                                        <a class="link" href="basic_livelihood_SLG_reports.php" role="link">
                                             <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
                                             <span class="d-none d-sm-block">SLG Reports</span>
                                         </a>
@@ -259,7 +259,8 @@
                                                                             <a href=\"basicSLGedit.php?id=".$row['groupID']."\">edit</a> 
                                                                             <a href=\"basicSLGsavings.php?id=".$row['groupID']."\">sav</a>
                                                                             <a href=\"basicSLGloans.php?id=".$row['groupID']."\">lns</a> 
-                                                                            <a href=\"basicSLGiga.php?id=".$row['groupID']."\">iga</a> 
+                                                                            <a href=\"basicSLGiga.php?id=".$row['groupID']."\">iga</a>
+                                                                            <a href=\"basicSLGAddMember.php?id=".$row['groupID']."\">New_Member</a>
                                                                             <a href=\"basicSLGdelete.php?id=".$row['groupID']."\">del</a>    
                                                                             </td>\n";
 
@@ -797,8 +798,9 @@
                                                                 document.getElementById('district').value = option.value;
                                                                 document.getElementById('text').value = option.text;
                                                                 $regionCode = option.value
+                                                                
                                                                 <script>
-<?php
+                                                                <?php
                                                               
                                                                 ?>
                                                                 

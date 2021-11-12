@@ -67,7 +67,7 @@
                                     </li>
                                    
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link" data-bs-toggle="tab" href="#messages-1" role="tab">
+                                        <a class="link"  href="basic_livelihood_member_reports.php" role="link">
                                             <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
                                             <span class="d-none d-sm-block">Member Reports</span>
                                         </a>
@@ -240,27 +240,7 @@
                                     
                                     <!-- end here -->
                                     
-                                    <div class="tab-pane" id="messages-1" role="tabpanel">
-                                        <p class="mb-0">
-                                        <div class="card border border-primary">
-                                                <div class="card-header bg-transparent border-primary">
-                                                    <h5 class="my-0 text-primary">Member Reports</h5>
-                                                </div>
-                                                <div class="card-body">
-                                                </div>
-                                        </div>
-                                        </p>
-                                    </div>
-                                    <div class="tab-pane" id="settings-1" role="tabpanel">
-                                        <p class="mb-0">
-                                            Trust fund seitan letterpress, keytar raw denim keffiyeh etsy
-                                            art party before they sold out master cleanse gluten-free squid
-                                            scenester freegan cosby sweater. Fanny pack portland seitan DIY,
-                                            art party locavore wolf cliche high life echo park Austin. Cred
-                                            vinyl keffiyeh DIY salvia PBR, banh mi before they sold out
-                                            farm-to-table.
-                                        </p>
-                                    </div>
+                                    
                                 </div>
 
                             </div>

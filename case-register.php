@@ -2,7 +2,7 @@
 <?php include 'layouts/head-main.php'; ?>
 
 <head>
-    <title>Household Management</title>
+    <title>CIMIS | Case Register</title>
     <?php include 'layouts/head.php'; ?>
     <?php include 'layouts/head-style.php'; ?>
     <?php include 'layouts/config.php'; ?>
@@ -45,12 +45,12 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                            <h4 class="mb-sm-0 font-size-18">Household Management</h4>
+                            <h4 class="mb-sm-0 font-size-18">Complaint Management</h4>
 
                             <div class="page-title-right">
                                 <ol class="breadcrumb m-0">
-                                    <li class="breadcrumb-item"><a href="basic_livelihood.php">Basic Livelihood</a></li>
-                                    <li class="breadcrumb-item active">Household Management</li>
+                                    <li class="breadcrumb-item"><a href="index.php">Dashboard</a></li>
+                                    <li class="breadcrumb-item active">Complaint Register</li>
                                 </ol>
                             </div>
 
@@ -78,20 +78,19 @@
                                             <span class="d-none d-sm-block">Households</span>
                                         </a>
                                     </li>
-
-                                    
+                                    <li class="nav-item waves-effect waves-light">
+                                        <a class="nav-link" data-bs-toggle="tab" href="#messages-2" role="tab">
+                                            <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
+                                            <span class="d-none d-sm-block">Register Complaint</span>
+                                        </a>
+                                    </li>
                                     <li class="nav-item waves-effect waves-light">
                                         <a class="nav-link" data-bs-toggle="tab" href="#slg-1" role="tab">
                                             <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
-                                            <span class="d-none d-sm-block">Approved Households</span>
+                                            <span class="d-none d-sm-block">Received Complaints</span>
                                         </a>
                                     </li>
-                                    <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link" data-bs-toggle="tab" href="#hhreports" role="tab">
-                                            <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
-                                            <span class="d-none d-sm-block">Household Reports</span>
-                                        </a>
-                                    </li>
+                                   
                                     
                                 </ul>
 
@@ -218,12 +217,12 @@
                                                                 <thead>
                                                                     <tr>                    
                                                                         <th>hhcode</th>
-                                                                        <th>Programme</th>
-                                                                        <th>Region</th>
-                                                                        <th>District</th>
-                                                                        <th>Group</th> 
-                                                                        <th>Cohort</th>
-                                                                        <th>HH Status</th>                                           
+                                                                        <th>GVH</th>
+                                                                        <th>Village</th>
+                                                                        <th>HH Name</th>
+                                                                        <th>SPP</th> 
+                                                                        <th>Cluster</th>
+                                                                        <th>Group</th>
                                                                         <th>Action</th>
                                                                     </tr>
                                                                 </thead>
@@ -232,7 +231,7 @@
                                                                 <tbody>
                                                                     <?Php
                                                                         
-                                                                        $query="select * from tblbeneficiaries";
+                                                                        $query="select * from tblbasic_beneficiary";
 
                                                                     //Variable $link is declared inside config.php file & used here
                                                                     
@@ -240,20 +239,15 @@
                                                                     while($row = $result_set->fetch_array(MYSQLI_ASSOC))
                                                                     { 
                                                                     echo "<tr>\n";
-                                                                        echo "<td>".$row["sppCode"]."</td>\n";
-                                                                        echo "<td>".$row["spProg"]."</td>\n";
-                                                                        echo "<td>".$row["regionID"]."</td>\n";
-                                                                        echo "<td>".$row["districtID"]."</td>\n";
+                                                                        echo "<td>".$row["hhcode"]."</td>\n";
+                                                                        echo "<td>".$row["gvhID"]."</td>\n";
+                                                                        echo "<td>".$row["village"]."</td>\n";
+                                                                        echo "<td>".$row["hhname"]."</td>\n";
+                                                                        echo "<td>".$row["sppname"]."</td>\n";
+                                                                        echo "<td>".$row["clusterID"]."</td>\n";
                                                                         echo "<td>".$row["groupID"]."</td>\n";
-                                                                        echo "<td>".$row["cohort"]."</td>\n";
-                                                                        echo "<td>\n";
                                                                         
-                                                                        echo "</td>\n";
-                                                                        
-                                                                        
-                                                                        echo "<td> <a href=\"basicmemberEdit.php?id=".$row['sppCode']."\">View/Edit</a>\n";
-                                                                        echo "";
-                                                                        echo "<a href=\"basicmemberApprove.php?id=".$row['sppCode']."\">Approve</a> </td>\n";
+                                                                        echo "<td> <a href=\"basicmemberEdit.php?id=".$row['hhcode']."\">View/Edit</a> </td>\n";
                                                                     echo "</tr>\n";
                                                                     }
                                                                     $result_set->close();
@@ -269,11 +263,261 @@
                                         </p>
                                     </div>
                                     <!-- Here -->
-                                    
+                                    <div class="tab-pane" id="messages-2" role="tabpanel">
+                                        <p class="mb-0">
+                                            <div class="card border border-primary">
+                                                <div class="card-header bg-transparent border-primary">
+                                                    <h7 class="my-0 text-primary"></i>Person raising complaint</h7>
+                                                </div>
+                                                <div class="card-body">
+                                                    <h5 class="card-title mt-0"></h5>
+                                                    
+                                                    <form action="insertBasicBeneficiary.php" method="post">
+                                                        <!-- start here -->
+                                                        
+                                                        <!-- End here -->
+                                                        <div class="row">
+                                                            <div class="col-md-2">
+                                                                <div class="mb-2">
+                                                                    <div class="form-group">
+                                                                        <label for="hhcode" class="form-label">Household Code</label>
+                                                                        <input type="text" name="hhcode" class="form-control" disabled = "True">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-2">
+                                                                <div class="mb-2">
+                                                                    <div class="form-group">
+                                                                        <label>National ID</label>
+                                                                        <input type="text" name="nationalID" class="form-control">
+                                                                    </div>                                                                                                             
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-2">
+                                                                <div class="mb-2">
+                                                                    <div class="form-group">
+                                                                        <label for="sppcode" class="form-label">SPP Code</label>
+                                                                        <input type="text" name="sppcode" class="form-control">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-2">
+                                                                <div class="mb-2">
+                                                                    <div class="form-group">
+                                                                        <label for="sppname" class="form-label">SPP Name</label>
+                                                                        <select class="form-select" name="sppname" id="sppname" required>
+                                                                            <option></option>
+                                                                            <option value="SCT">SCT</option>
+                                                                            <option value ="pwp">CSPWP</option>
+                                                                            <option vale = "masaf4">Masaf 4</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-2">
+                                                                <div class="mb-2">
+                                                                    <div class="form-group">
+                                                                        <label for="hhname" class="form-label">Household Name</label>
+                                                                        <input type="text" name="hhname" class="form-control">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            
+                                                            
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-2">
+                                                                <div class="mb-2">
+                                                                    <div class="form-group">
+                                                                        <label>Date Of Birth</label>
+                                                                        <input type="date" name="hhdob" class="form-control">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-2">
+                                                                <div class="mb-2">
+                                                                    
+                                                                    <div class="form-group">
+                                                                        <label for="ta" class="form-label">Sex</label>
+                                                                        <select class="form-select" name="sex" id="sex" required>
+                                                                            <option></option>
+                                                                            <option value="M">Male</option>
+                                                                            <option value="F">Female</option>
+                                                                            
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-2">
+                                                                <div class="mb-2">
+                                                                    <div class="form-group">
+                                                                    <label>Cluster</label>
+                                                                        <input type="text" name="clusterID" class="form-control">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-2">
+                                                                <div class="mb-2">
+                                                                    <div class="form-group">
+                                                                    <label>Group Name</label>
+                                                                        <input type="text" name="groupID" class="form-control">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="card border border-primary">
+                                                <div class="card-header bg-transparent border-primary">
+                                                    <h7 class="my-0 text-primary"></i>Address or Contact Information</h7>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="card border border-primary">
+                                                <div class="card-header bg-transparent border-primary">
+                                                    <h7 class="my-0 text-primary"></i>Location for the complaint/grievance</h7>
+                                                </div>
+                                                <!-- start here -->
+                                                <div class="row">
+                                                    <div class="col-md-2">
+                                                        <div class="mb-2">
+                                                            <label for="region" class="form-label">Region</label>
+                                                            <select class="form-select" name="region" id="region" required>
+                                                                
+                                                                <?php                                                           
+                                                                        $dis_fetch_query = "SELECT name FROM tblregion";                                                  
+                                                                        $result_dis_fetch = mysqli_query($link, $dis_fetch_query);                                                                       
+                                                                        $i=0;
+                                                                            while($DB_ROW_reg = mysqli_fetch_array($result_dis_fetch)) {
+                                                                        ?>
+                                                                        <option>
+                                                                            <?php
+                                                                                echo $DB_ROW_reg["name"];
+                                                                            ?>
+                                                                        </option>
+                                                                        <?php
+                                                                            $i++;
+                                                                                }
+                                                                    ?>
+                                                            </select>
+                                                            <div class="invalid-feedback">
+                                                                Please select a valid Malawi region.
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <div class="mb-2">
+                                                            <label for="district" class="form-label">District</label>
+                                                            <select class="form-select" name="district" id="district" required>
+                                                                    <option></option>            
+                                                                    <?php
+                                                                                                                            
+                                                                        $dis_fetch_query = "SELECT DistrictName FROM tbldistrict";                                                  
+                                                                        $result_dis_fetch = mysqli_query($link, $dis_fetch_query);                                                                       
+                                                                        $i=0;
+                                                                            while($DB_ROW_Dis = mysqli_fetch_array($result_dis_fetch)) {
+                                                                        ?>
+                                                                        <option>
+                                                                            <?php echo $DB_ROW_Dis["DistrictName"]; ?></option><?php
+                                                                            $i++;
+                                                                                }
+                                                                    ?>
+                                                            </select>
+                                                            <div class="invalid-feedback">
+                                                                Please select a valid Malawi district.
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <div class="mb-2">
+                                                            <label for="ta" class="form-label">TA</label>
+                                                            <select class="form-select" name="ta" id="ta" required>
+                                                                <option></option>
+                                                                <?php                                                           
+                                                                        $ta_fetch_query = "SELECT TAName FROM tblta";                                                  
+                                                                        $result_ta_fetch = mysqli_query($link, $ta_fetch_query);                                                                       
+                                                                        $i=0;
+                                                                            while($DB_ROW_ta = mysqli_fetch_array($result_ta_fetch)) {
+                                                                        ?>
+                                                                        <option>
+                                                                            <?php echo $DB_ROW_ta["TAName"]; ?></option><?php
+                                                                            $i++;
+                                                                                }
+                                                                    ?>
+                                                            </select>
+                                                            <div class="invalid-feedback">
+                                                                Please select a valid TA.
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <div class="mb-2">
+                                                            <label for="gvh" class="form-label">GVH</label>
+                                                            <input type="text" name="GVHID" class="form-control" required>              
+                                                            <div class="invalid-feedback">
+                                                                Please select a valid Group Village Head.
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <div class="mb-3">
+                                                            <label for="village" class="form-label">Village</label>
+                                                            <input type="text" name="village" class="form-control" required>                                                  
+                                                            <div class="invalid-feedback">
+                                                                Please select a valid Village in Malawi.
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-2">
+                                                        <div class="mb-3">
+                                                            <label for="group" class="form-label">Cluster/Group</label>
+                                                            <input type="text" name="group" class="form-control" required>                                                  
+                                                            <div class="invalid-feedback">
+                                                                Please select a valid Group/Cluster.
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                </div>
+                                                <!-- end here -->
+                                            </div>
+
+                                            <div class="card border border-primary">
+                                                <div class="card-header bg-transparent border-primary">
+                                                    <h7 class="my-0 text-primary"></i>Complaint/grievance category</h7>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="col-md-2">
+                                                        <div class="mb-3">
+                                                            <label for="cat1" class="form-label">Environmental</label>
+                                                            <input type="checkbox" name="cat1" class="form-control" >                                                  
+                                                            <div class="invalid-feedback">
+                                                                Please select a valid Group/Cluster.
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                            <div class="card border border-primary">
+                                                <div class="card-header bg-transparent border-primary">
+                                                    <h7 class="my-0 text-primary"></i>Description of the complaint/grievance</h7>
+                                                </div>
+                                            </div>
+
+                                                        
+                                                        <input type="submit" class="btn btn-success" name="compute_hhcode" value="Compute Household Code">
+                                                        <input type="submit" class="btn btn-primary" name="submit" value="submit New Household">
+                                                    </form>
+                                              
+                                        </p>
+                                    </div>
                                     <!-- end here -->
-                                    <!-- start new --> 
-                                    
-                                    <!-- end new -->
                                     <div class="tab-pane" id="slg-1" role="tabpanel">
                                         <p class="mb-0">
                                             <div class="card border border-primary">
@@ -454,61 +698,7 @@
                                             </div>
                                         </p>
                                     </div>
-                                    <div class="tab-pane" id="hhreports" role="tabpanel">
-                                        <p class="mb-0">
-                                            <div class="card border border-primary">
-                                                <div class="card-header bg-transparent border-primary">
-                                                    <h5 class="my-0 text-primary"><i class="mdi mdi-bullseye-arrow me-3"></i>Household Reports</h5>
-                                                </div>
-                                                <div class="card-body">
-                                                    <h5 class="card-title mt-0"></h5>
-                                                </div>
-                                                
-                                                <script>
-                                                    function getState() {
-                                                            var str='';
-                                                            var val=document.getElementById('country-list');
-                                                            for (i=0;i< val.length;i++) { 
-                                                                if(val[i].selected){
-                                                                    str += val[i].value + ','; 
-                                                                }
-                                                            }         
-                                                            var str=str.slice(0,str.length -1);
-                                                            
-                                                        $.ajax({          
-                                                                type: "GET",
-                                                                url: "get_state.php",
-                                                                data:'country_id='+str,
-                                                                success: function(data){
-                                                                    $("#state-list").html(data);
-                                                                }
-                                                        });
-                                                    }
-                                                </script>
-                                                <div class="frmDronpDown">
-                                                
-                                                    <label>Country:</label><br /> <select name="district[]"
-                                                        id="country-list" class="demoInputBox"
-                                                        onChange="getState();" multiple size=4>
-                                                        <option value="">Select Country</option>
-                                                            <?php
-                                                            foreach ($countryResult as $country) {
-                                                                ?>
-                                                            <option value="<?php echo $country["id"]; ?>"><?php echo $country["country_name"]; ?></option>
-                                                            <?php
-                                                            }
-                                                            ?>
-                                                        </select>
-                                                </div>
-                                                
-                                                    <label>State:</label><br /> <select name="state[]"
-                                                        id="state-list" class="demoInputBox" multiple size=5>
-                                                        <option value="">Select State</option>
-                                                    </select>
-                                                
-                                            </div>
-                                        </p>
-                                    </div>
+                                    
                                     <div class="tab-pane" id="settings-1" role="tabpanel">
                                         <p class="mb-0">
                                             

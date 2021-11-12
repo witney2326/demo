@@ -351,15 +351,15 @@
                                                                                 <div class="flex-grow-1">
                                                                                     <p class="text-muted fw-medium">Enrolled HHs</p>
                                                                                     <?php
-                                                                                        $result = mysqli_query($link, 'SELECT COUNT(hhcode) AS value_sum FROM tblbasic_beneficiary'); 
+                                                                                        $result = mysqli_query($link, 'SELECT COUNT(sppCode) AS value_sum FROM tblbeneficiaries'); 
                                                                                         $row = mysqli_fetch_assoc($result); 
                                                                                         $sum = $row['value_sum'];
                                                                                     ?>
-                                                                                        <h4 class="mb-0">
+                                                                                        <h5 class="mb-0">
                                                                                             <div class="container">
                                                                                                 <div class="mb-0"><?php echo "" . $sum;?></div>
                                                                                             </div> 
-                                                                                        </h4>
+                                                                                        </h5>
                                                                                 </div>
                                                                                 <div class="mini-stat-icon avatar-sm rounded-circle bg-primary align-self-center">
                                                                                     <span class="avatar-title">
