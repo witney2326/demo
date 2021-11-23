@@ -79,15 +79,8 @@
                                         </a>
                                     </li>
 
-                                    
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link" data-bs-toggle="tab" href="#slg-1" role="tab">
-                                            <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
-                                            <span class="d-none d-sm-block">Approved Households</span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link" data-bs-toggle="tab" href="#hhreports" role="tab">
+                                        <a class="link"  href="basic_livelihood_HH_reports.php" role="link">
                                             <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
                                             <span class="d-none d-sm-block">Household Reports</span>
                                         </a>
@@ -99,18 +92,7 @@
                                 <div class="tab-content p-3 text-muted">
 
                                     
-                                    <div class="tab-pane" id="slg-1" role="tabpanel">
-                                        <p class="mb-0">
-                                            <div class="card border border-primary">
-                                                <div class="card-header bg-transparent border-primary">
-                                                    <h5 class="my-0 text-primary"><i class="mdi mdi-bullseye-arrow me-3"></i>Approved Households</h5>
-                                                </div>
-                                                <div class="card-body">
-                                                    <h5 class="card-title mt-0"></h5>
-                                                </div>
-                                            </div>
-                                        </p>
-                                    </div>
+                                    
 
 
 
@@ -223,7 +205,7 @@
                                                                         <th>District</th>
                                                                         <th>Group</th> 
                                                                         <th>Cohort</th>
-                                                                        <th>HH Status</th>                                           
+                                                                        <th>Approval Status</th>                                           
                                                                         <th>Action</th>
                                                                     </tr>
                                                                 </thead>
@@ -246,8 +228,8 @@
                                                                         echo "<td>".$row["districtID"]."</td>\n";
                                                                         echo "<td>".$row["groupID"]."</td>\n";
                                                                         echo "<td>".$row["cohort"]."</td>\n";
-                                                                        echo "<td>\n";
-                                                                        
+                                                                        echo "<td style='text-align: center; vertical-align: middle;' >\n";
+                                                                            echo "<input type='checkbox' disabled />";
                                                                         echo "</td>\n";
                                                                         
                                                                         

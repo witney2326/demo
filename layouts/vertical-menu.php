@@ -65,15 +65,12 @@
             <div class="dropdown d-inline-block">
                 <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <img class="rounded-circle header-profile-user" src="assets/images/users/avatar-1.jpg" alt="Header Avatar">
-                    <span class="d-none d-xl-inline-block ms-1" key="t-henry"><?php echo ucfirst($_SESSION["username"]); ?></span>
+                    <span class="d-none d-xl-inline-block ms-1"><?php echo $_SESSION["username"]; ?></span>
                     <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
                 </button>
                 <div class="dropdown-menu dropdown-menu-end">
                     <!-- item-->
-                    <a class="dropdown-item" href="#"><i class="bx bx-user font-size-16 align-middle me-1"></i> <span key="t-profile"><?php echo $language["Profile"]; ?></span></a>
-                    <a class="dropdown-item" href="#"><i class="bx bx-wallet font-size-16 align-middle me-1"></i> <span key="t-my-wallet"><?php echo $language["My_Wallet"]; ?></span></a>
-                    <a class="dropdown-item d-block" href="#"><span class="badge bg-success float-end">11</span><i class="bx bx-wrench font-size-16 align-middle me-1"></i> <span key="t-settings"><?php echo $language["Settings"]; ?></span></a>
-                    <a class="dropdown-item" href="#"><i class="bx bx-lock-open font-size-16 align-middle me-1"></i> <span key="t-lock-screen"><?php echo $language["Lock_screen"]; ?></span></a>
+                    <a class="dropdown-item" href="cimis-user-profile.php"><i class="bx bx-user font-size-16 align-middle me-1"></i> <span key="t-profile"><?php echo $language["Profile"]; ?></span></a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item text-danger" href="logout.php"><i class="bx bx-power-off font-size-16 align-middle me-1 text-danger"></i> <span key="t-logout"><?php echo $language["Logout"]; ?></span></a>
                 </div>
@@ -381,107 +378,6 @@
                         <li><a href="auth-two-step-verification-2.php" key="t-two-step-verification-2"><?php echo $language["Two_step_verification"]; ?> 2</a></li>
                     </ul>
                 </li>
-
-               
-
-                <li class="menu-title" key="t-components"><?php echo $language["Components"]; ?></li>
-
-                <li>
-                    <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="bx bx-tone"></i>
-                        <span key="t-ui-elements"><?php echo $language["UI_Elements"]; ?></span>
-                    </a>
-                    <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="ui-alerts.php" key="t-alerts"><?php echo $language["Alerts"]; ?></a></li>
-                        <li><a href="ui-buttons.php" key="t-buttons"><?php echo $language["Buttons"]; ?></a></li>
-                        <li><a href="ui-cards.php" key="t-cards"><?php echo $language["Cards"]; ?></a></li>
-                        <li><a href="ui-carousel.php" key="t-carousel"><?php echo $language["Carousel"]; ?></a></li>
-                        <li><a href="ui-dropdowns.php" key="t-dropdowns"><?php echo $language["Dropdowns"]; ?></a></li>
-                        <li><a href="ui-grid.php" key="t-grid"><?php echo $language["Grid"]; ?></a></li>
-                        <li><a href="ui-images.php" key="t-images"><?php echo $language["Images"]; ?></a></li>
-                        <li><a href="ui-lightbox.php" key="t-lightbox"><?php echo $language["Lightbox"]; ?></a></li>
-                        <li><a href="ui-modals.php" key="t-modals"><?php echo $language["Modals"]; ?></a></li>
-                        <li><a href="ui-offcanvas.php" key="t-offcanvas"><?php echo $language["Off_canvas"]; ?></a></li>
-                        <li><a href="ui-rangeslider.php" key="t-range-slider"><?php echo $language["Range_Slider"]; ?></a></li>
-                        <li><a href="ui-session-timeout.php" key="t-session-timeout"><?php echo $language["Session_Timeout"]; ?></a></li>
-                        <li><a href="ui-progressbars.php" key="t-progress-bars"><?php echo $language["Progress_Bars"]; ?></a></li>
-                        <li><a href="ui-sweet-alert.php" key="t-sweet-alert"><?php echo $language["Sweet_Alert"]; ?></a></li>
-                        <li><a href="ui-tabs-accordions.php" key="t-tabs-accordions"><?php echo $language["Tabs_&_Accordions"]; ?></a></li>
-                        <li><a href="ui-typography.php" key="t-typography"><?php echo $language["Typography"]; ?></a></li>
-                        <li><a href="ui-video.php" key="t-video"><?php echo $language["Video"]; ?></a></li>
-                        <li><a href="ui-general.php" key="t-general"><?php echo $language["General"]; ?></a></li>
-                        <li><a href="ui-colors.php" key="t-colors"><?php echo $language["Colors"]; ?></a></li>
-                        <li><a href="ui-rating.php" key="t-rating"><?php echo $language["Rating"]; ?></a></li>
-                        <li><a href="ui-notifications.php" key="t-notifications"><?php echo $language["Notifications"]; ?></a></li>
-                    </ul>
-                </li>
-
-                <li>
-                    <a href="javascript: void(0);" class="waves-effect">
-                        <i class="bx bxs-eraser"></i>
-                        <span class="badge rounded-pill bg-danger float-end">10</span>
-                        <span key="t-forms"><?php echo $language["Forms"]; ?></span>
-                    </a>
-                    <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="form-elements.php" key="t-form-elements"><?php echo $language["Form_Elements"]; ?></a></li>
-                        <li><a href="form-layouts.php" key="t-form-layouts"><?php echo $language["Form_Layouts"]; ?></a></li>
-                        <li><a href="form-validation.php" key="t-form-validation"><?php echo $language["Form_Validation"]; ?></a></li>
-                        <li><a href="form-advanced.php" key="t-form-advanced"><?php echo $language["Form_Advanced"]; ?></a></li>
-                        <li><a href="form-editors.php" key="t-form-editors"><?php echo $language["Form_Editors"]; ?></a></li>
-                        <li><a href="form-uploads.php" key="t-form-upload"><?php echo $language["Form_File_Upload"]; ?></a></li>
-                        <li><a href="form-xeditable.php" key="t-form-xeditable"><?php echo $language["Form_Xeditable"]; ?></a></li>
-                        <li><a href="form-repeater.php" key="t-form-repeater"><?php echo $language["Form_Repeater"]; ?></a></li>
-                        <li><a href="form-wizard.php" key="t-form-wizard"><?php echo $language["Form_Wizard"]; ?></a></li>
-                        <li><a href="form-mask.php" key="t-form-mask"><?php echo $language["Form_Mask"]; ?></a></li>
-                    </ul>
-                </li>
-
-                <li>
-                    <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="bx bx-list-ul"></i>
-                        <span key="t-tables">Tables</span>
-                    </a>
-                    <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="tables-basic.php" key="t-basic-tables"><?php echo $language["Basic_Tables"]; ?></a></li>
-                        <li><a href="tables-datatable.php" key="t-data-tables"><?php echo $language["Data_Tables"]; ?></a></li>
-                        <li><a href="tables-responsive.php" key="t-responsive-table"><?php echo $language["Responsive_Table"]; ?></a></li>
-                        <li><a href="tables-editable.php" key="t-editable-table"><?php echo $language["Editable_Table"]; ?></a></li>
-                    </ul>
-                </li>
-
-                <li>
-                    <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="bx bxs-bar-chart-alt-2"></i>
-                        <span key="t-charts"><?php echo $language["Charts"]; ?></span>
-                    </a>
-                    <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="charts-apex.php" key="t-apex-charts"><?php echo $language["Apex_Charts"]; ?></a></li>
-                        <li><a href="charts-echart.php" key="t-e-charts"><?php echo $language["E_Charts"]; ?></a></li>
-                        <li><a href="charts-chartjs.php" key="t-chartjs-charts"><?php echo $language["Chartjs_Charts"]; ?></a></li>
-                        <li><a href="charts-flot.php" key="t-flot-charts"><?php echo $language["Flot_Charts"]; ?></a></li>
-                        <li><a href="charts-tui.php" key="t-ui-charts"><?php echo $language["Toast_UI_Charts"]; ?></a></li>
-                        <li><a href="charts-knob.php" key="t-knob-charts"><?php echo $language["Jquery_Knob_Charts"]; ?></a></li>
-                        <li><a href="charts-sparkline.php" key="t-sparkline-charts"><?php echo $language["Sparkline_Charts"]; ?></a></li>
-                    </ul>
-                </li>
-
-                <li>
-                    <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="bx bx-aperture"></i>
-                        <span key="t-icons"><?php echo $language["Icons"]; ?></span>
-                    </a>
-                    <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="icons-boxicons.php" key="t-boxicons">Boxicons</a></li>
-                        <li><a href="icons-materialdesign.php" key="t-material-design">Material Design</a></li>
-                        <li><a href="icons-dripicons.php" key="t-dripicons">Dripicons</a></li>
-                        <li><a href="icons-fontawesome.php" key="t-font-awesome">Font awesome</a></li>
-                    </ul>
-                </li>
-
-                
-
-               
-
             </ul>
         </div>
         <!-- Sidebar -->

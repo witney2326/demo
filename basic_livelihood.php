@@ -286,16 +286,11 @@
                                             <span class="d-none d-sm-block">Awareness</span>
                                         </a>
                                     </li>
-                                    <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link" data-bs-toggle="tab" href="#mobilisation" role="tab">
-                                            <span class="d-block d-sm-none"><i class="fas fa-cog"></i></span>
-                                            <span class="d-none d-sm-block">SLG Mobn</span>
-                                        </a>
-                                    </li>
+                                    
                                     <li class="nav-item waves-effect waves-light">
                                         <a class="nav-link" href="basic_livelihood_slg_mgt2.php" role="link">
                                             <span class="d-block d-sm-none"><i class="fas fa-cog"></i></span>
-                                            <span class="d-none d-sm-block">Groups</span>
+                                            <span class="d-none d-sm-block">SL Groups</span>
                                         </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">

@@ -11,7 +11,40 @@
     <link href="assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
     <!-- Responsive datatable examples -->
     <link href="assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+<!-- Change password -->
+    <script>
+    function validatePassword() {
+    var currentPassword,newPassword,confirmPassword,output = true;
 
+    currentPassword = document.frmChange.currentPassword;
+    newPassword = document.frmChange.newPassword;
+    confirmPassword = document.frmChange.confirmPassword;
+
+    if(!currentPassword.value) {
+        currentPassword.focus();
+        document.getElementById("currentPassword").innerHTML = "required";
+        output = false;
+    }
+    else if(!newPassword.value) {
+        newPassword.focus();
+        document.getElementById("newPassword").innerHTML = "required";
+        output = false;
+    }
+    else if(!confirmPassword.value) {
+        confirmPassword.focus();
+        document.getElementById("confirmPassword").innerHTML = "required";
+        output = false;
+    }
+    if(newPassword.value != confirmPassword.value) {
+        newPassword.value="";
+        confirmPassword.value="";
+        newPassword.focus();
+        document.getElementById("confirmPassword").innerHTML = "not same";
+        output = false;
+    } 	
+    return output;
+    }
+</script>
 </head>
 
 <?php include 'layouts/body.php'; ?>
@@ -20,6 +53,18 @@
 <div id="layout-wrapper">
 
     <?php include 'layouts/menu.php'; ?>
+
+    <?php
+    if (count($_POST) > 0) {
+        $result = mysqli_query($conn, "SELECT *from users WHERE userId='" . $_SESSION["userId"] . "'");
+        $row = mysqli_fetch_array($result);
+        if ($_POST["currentPassword"] == $row["password"]) {
+            mysqli_query($conn, "UPDATE users set password='" . $_POST["newPassword"] . "' WHERE userId='" . $_SESSION["userId"] . "'");
+            $message = "Password Changed";
+        } else
+            $message = "Current Password is not correct";
+    }
+    ?>
 
     <!-- ============================================================== -->
     <!-- Start right Content here -->
@@ -85,162 +130,52 @@
                                 <!-- Tab panes -->
                                 <div class="tab-content p-3 text-muted">
                                     <div class="tab-pane active" id="home-1" role="tabpanel">
-                                        <p class="mb-0">
-                                            
-
+                                        <p class="mb-0">                                           
                                             <!--start here -->
-                                            <div class="card border border-primary">
-                                                <div class="card-header bg-transparent border-primary">
-                                                    <h5 class="my-0 text-primary"><i class="mdi mdi-bullseye-arrow me-3"></i>SLG Member Filter</h5>
-                                                </div>
-                                                <div class="card-body">
-                                                    <h5 class="card-title mt-0"></h5>
-                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="">
-                                                        <div class="col-12">
-                                                            <label for="region" class="form-label">Region</label>
-                                                            <div>
-                                                                <select class="form-select" name="region" id="region" required>
-                                                                    <option selected value = "$region"></option>
-                                                                    <?php                                                           
-                                                                            $dis_fetch_query = "SELECT name FROM tblregion";                                                  
-                                                                            $result_dis_fetch = mysqli_query($link, $dis_fetch_query);                                                                       
-                                                                            $i=0;
-                                                                                while($DB_ROW_reg = mysqli_fetch_array($result_dis_fetch)) {
-                                                                            ?>
-                                                                            <option>
-                                                                                <?php
-                                                                                    echo $DB_ROW_reg["name"];
-                                                                                ?>
-                                                                            </option>
-                                                                            <?php
-                                                                                $i++;
-                                                                                    }
-                                                                        ?>
-                                                                </select>
-                                                                <div class="invalid-feedback">
-                                                                    Please select a valid Malawi region.
+                                            
+                                                <div class="container">
+                                                    <div class="row justify-content-left">
+                                                        <div class="col-md-8 col-lg-6 col-xl-5">
+                                                            <div class="card overflow-hidden">
+                                                                
+                                                                <div class="card-body pt-0">
+                                                                    
+                                                                    <div class="p-2">
+                                                                        <form class="needs-validation" action="index.php">
+
+                                                                            <div class="mb-3">
+                                                                                <label for="useremail" class="form-label">User Email</label>
+                                                                                <input type="email" class="form-control" id="useremail" name="useremail" placeholder="Enter email">
+                                                                            </div>
+
+                                                                            <div class="mb-3">
+                                                                                <label for="username" class="form-label">Username</label>
+                                                                                <input type="text" class="form-control" id="username" name="username" placeholder="Enter username">
+                                                                            </div>
+
+                                                                            <div class="mb-3">
+                                                                                <label for="userpassword" class="form-label">Initial Password</label>
+                                                                                <input type="password" class="form-control" id="userpassword" name="password" placeholder="Enter password">
+                                                                            </div>
+
+                                                                            <div class="mt-4 d-grid">
+                                                                                <button class="btn btn-primary waves-effect waves-light" type="submit">Register</button>
+                                                                            </div>
+
+                                                                            
+                                                                            
+                                                                        </form>
+                                                                    </div>
+
                                                                 </div>
-
                                                             </div>
-                                                        </div>
-
-                                                        <div class="col-12">
-                                                            <label for="district" class="form-label">District</label>
-                                                            <select class="form-select" name="district" id="district" required>
-                                                                <option selected value="$district" ></option>
-                                                                    <?php                                                           
-                                                                        $dis_fetch_query = "SELECT DistrictName FROM tbldistrict";                                                  
-                                                                        $result_dis_fetch = mysqli_query($link, $dis_fetch_query);                                                                       
-                                                                        $i=0;
-                                                                            while($DB_ROW_Dis = mysqli_fetch_array($result_dis_fetch)) {
-                                                                        ?>
-                                                                        <option>
-                                                                            <?php echo $DB_ROW_Dis["DistrictName"]; ?></option><?php
-                                                                            $i++;
-                                                                                }
-                                                                    ?>
-                                                            </select>
-                                                            <div class="invalid-feedback">
-                                                                Please select a valid Malawi district.
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="col-12">
-                                                            <label for="ta" class="form-label">Traditional Authority</label>
-                                                            <select class="form-select" name="ta" id="ta" required>
-                                                                <option selected  value="$ta"></option>
-                                                                <?php                                                           
-                                                                        $ta_fetch_query = "SELECT TAName FROM tblta";                                                  
-                                                                        $result_ta_fetch = mysqli_query($link, $ta_fetch_query);                                                                       
-                                                                        $i=0;
-                                                                            while($DB_ROW_ta = mysqli_fetch_array($result_ta_fetch)) {
-                                                                        ?>
-                                                                        <option>
-                                                                            <?php echo $DB_ROW_ta["TAName"]; ?></option><?php
-                                                                            $i++;
-                                                                                }
-                                                                    ?>
-                                                            </select>
-                                                            <div class="invalid-feedback">
-                                                                Please select a valid TA.
-                                                            </div>
-                                                        </div>
-
-                                                        
-                                                        <div class="col-12">
-                                                            <button type="submit" class="btn btn-primary w-md" name="FormSubmit" value="Submit">Submit</button>
-                                                        </div>
-                                                    </form>                                             
-                                                    <!-- End Here -->
-                                                </div>
-                                            </div>
-
-                                            <div class="row">
-                                                <div class="col-12">
-                                                    <div class="card border border-primary">
-                                                    <div class="card-header bg-transparent border-primary">
-                                                        <h5 class="my-0 text-primary"><i class="mdi mdi-bullseye-arrow me-3"></i>SLG- Members</h5>
-                                                    </div>
-                                                    <div class="card-body">
-                                                    <h5 class="card-title mt-0"></h5>
-                                                        
-                                                            <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
                                                             
-                                                                <thead>
-                                                                    <tr>
-                                                                        
-                                                                        
-                                                                        <th>Household Code</th>
-                                                                        <th>Member Name</th>
-                                                                        <th>cohort</th>
-                                                                        <th>GVH</th>
-                                                                        <th>Group Name</th>
-                                                                        <th>Action</th>
-                                                                    </tr>
-                                                                </thead>
 
-
-                                                                <tbody>
-                                                                    <?Php
-                                                                        
-                                                                        $query="select * from tblbasic_beneficiary";
-
-                                                                        //Variable $link is declared inside config.php file & used here
-                                                                        
-                                                                        if ($result_set = $link->query($query)) {
-                                                                        while($row = $result_set->fetch_array(MYSQLI_ASSOC))
-                                                                        { 
-                                                                        echo "<tr>\n";
-                                                                            
-                                                                        
-                                                                            echo "<td>".$row["hhcode"]."</td>\n";
-                                                                            echo "<td>".$row["hhname"]."</td>\n";
-                                                                            echo "<td>".$row["cohort"]."</td>\n";
-                                                                            echo "<td>".$row["gvhID"]."</td>\n";
-                                                                            echo "<td>".$row["groupID"]."</td>\n";
-                                                                            
-                                                                            
-                                                                            echo "<td>
-                                                                            <a href=\"basicSLGMemberview.php?id=".$row['hhcode']."\">view</a>   
-                                                                            <a href=\"basicSLGMemberedit.php?id=".$row['hhcode']."\">edit</a> 
-                                                                            <a href=\"basicSLGMembersavings.php?id=".$row['hhcode']."\">sav</a>
-                                                                            <a href=\"basicSLGMemberloans.php?id=".$row['hhcode']."\">lns</a> 
-                                                                            <a href=\"basicSLGMemberiga.php?id=".$row['hhcode']."\">iga</a> 
-                                                                            <a href=\"basicSLGMemberdelete.php?id=".$row['hhcode']."\">del</a>    
-                                                                            </td>\n";
-
-                                                                        echo "</tr>\n";
-                                                                        }
-                                                                        $result_set->close();
-                                                                        }                          
-                                                                    ?>
-                                                                </tbody>
-                                                            </table>
-                                                            </p>
                                                         </div>
-                                                    </div>     
-                                                </div>            
-                                            </div>  
+                                                    </div>
+                                                </div>
+                                            
+                                            <!-- End Here --> 
                                         </p>
                                     </div>
                                     <!-- Here -->
@@ -258,14 +193,41 @@
                                         </div>
                                         </p>
                                     </div>
-                                    <div class="tab-pane" id="settings-1" role="tabpanel">
+                                    <div class="tab-pane" id="messages-2" role="tabpanel">
                                         <p class="mb-0">
-                                            Trust fund seitan letterpress, keytar raw denim keffiyeh etsy
-                                            art party before they sold out master cleanse gluten-free squid
-                                            scenester freegan cosby sweater. Fanny pack portland seitan DIY,
-                                            art party locavore wolf cliche high life echo park Austin. Cred
-                                            vinyl keffiyeh DIY salvia PBR, banh mi before they sold out
-                                            farm-to-table.
+                                            <form name="frmChange" method="post" action=""
+                                                onSubmit="return validatePassword()">
+                                                <div style="width: 500px;">
+                                                    <div class="message"><?php if(isset($message)) { echo $message; } ?></div>
+                                                    <table border="0" cellpadding="10" cellspacing="0"
+                                                        width="500" align="center" class="tblSaveForm">
+                                                        <tr class="tableheader">
+                                                            <td colspan="2">Change Password</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td width="40%"><label>Current Password</label></td>
+                                                            <td width="60%"><input type="password"
+                                                                name="currentPassword" class="txtField" /><span
+                                                                id="currentPassword" class="required"></span></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><label>New Password</label></td>
+                                                            <td><input type="password" name="newPassword"
+                                                                class="txtField" /><span id="newPassword"
+                                                                class="required"></span></td>
+                                                        </tr>
+                                                        <td><label>Confirm Password</label></td>
+                                                        <td><input type="password" name="confirmPassword"
+                                                            class="txtField" /><span id="confirmPassword"
+                                                            class="required"></span></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="2"><input type="submit" name="submit"
+                                                                value="Submit" class="btnSubmit"></td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                            </form>
                                         </p>
                                     </div>
                                 </div>

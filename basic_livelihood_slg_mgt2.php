@@ -227,9 +227,15 @@
                                                                         <th>cohort</th>
                                                                         
                                                                         
-                                                                        <th>No.Male</th>
-                                                                        <th>No.Female</th>
-                                                                        <th>Action</th>
+                                                                        <th>M</th>
+                                                                        <th>F</th>
+                                                                        <th>Act</th>
+                                                                        <th>Act</th>
+                                                                        <th>Act</th>
+                                                                        <th>Act</th>
+                                                                        <th>Act</th>
+                                                                        <th>Act</th>
+                                                                        <th>Act</th>
                                                                     </tr>
                                                                 </thead>
 
@@ -255,12 +261,18 @@
                                                                             echo "<td>".$row["MembersF"]."</td>\n";
                                                                             
                                                                             echo "<td>
-                                                                            <a href=\"basicSLGview.php?id=".$row['groupID']."\">view</a>   
-                                                                            <a href=\"basicSLGedit.php?id=".$row['groupID']."\">edit</a> 
-                                                                            <a href=\"basicSLGsavings.php?id=".$row['groupID']."\">sav</a>
-                                                                            <a href=\"basicSLGloans.php?id=".$row['groupID']."\">lns</a> 
-                                                                            <a href=\"basicSLGiga.php?id=".$row['groupID']."\">iga</a>
-                                                                            <a href=\"basicSLGAddMember.php?id=".$row['groupID']."\">New_Member</a>
+                                                                            <a href=\"basicSLGview.php?id=".$row['groupID']."\">view</a> </td>\n";
+                                                                            echo "<td>
+                                                                                <a href=\"basicSLGedit.php?id=".$row['groupID']."\">edit</a> </td>\n";
+                                                                            echo "<td>
+                                                                            <a href=\"basicSLGsavings.php?id=".$row['groupID']."\">sav</a> </td>\n";
+                                                                            echo "<td>
+                                                                            <a href=\"basicSLGloans.php?id=".$row['groupID']."\">lns</a> </td>\n";
+                                                                            echo "<td>
+                                                                            <a href=\"basicSLGiga.php?id=".$row['groupID']."\">iga</a> </td>\n";
+                                                                            echo "<td>
+                                                                            <a href=\"basicSLGAddMember.php?id=".$row['groupID']."\">Add_Ben</a> </td>\n";
+                                                                            echo "<td>
                                                                             <a href=\"basicSLGdelete.php?id=".$row['groupID']."\">del</a>    
                                                                             </td>\n";
 
