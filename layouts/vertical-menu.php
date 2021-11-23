@@ -355,29 +355,7 @@
 
                
 
-                <li>
-                    <a href="javascript: void(0);" class="waves-effect">
-                        <span class="badge rounded-pill bg-success float-end" key="t-new"><?php echo $language["New"]; ?></span>
-                        <i class="bx bx-user-circle"></i>
-                        <span key="t-authentication"><?php echo $language["Authentication"]; ?></span>
-                    </a>
-                    <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="auth-login-1.php" key="t-login"><?php echo $language["Login"]; ?></a></li>
-                        <li><a href="auth-login-2.php" key="t-login-2"><?php echo $language["Login"]; ?> 2</a></li>
-                        <li><a href="auth-register-1.php" key="t-register"><?php echo $language["Register"]; ?></a></li>
-                        <li><a href="auth-register-2.php" key="t-register-2"><?php echo $language["Register"]; ?> 2</a></li>
-                        <li><a href="auth-recoverpw-1.php" key="t-recover-password"><?php echo $language["Recover_Password"]; ?></a></li>
-                        <li><a href="auth-recoverpw-2.php" key="t-recover-password-2"><?php echo $language["Recover_Password"]; ?> 2</a></li>
-                        <li><a href="auth-lock-screen.php" key="t-lock-screen"><?php echo $language["Lock_screen"]; ?></a></li>
-                        <li><a href="auth-lock-screen-2.php" key="t-lock-screen-2"><?php echo $language["Lock_screen"]; ?> 2</a></li>
-                        <li><a href="auth-confirm-mail.php" key="t-confirm-mail"><?php echo $language["Confirm_Mail"]; ?></a></li>
-                        <li><a href="auth-confirm-mail-2.php" key="t-confirm-mail-2"><?php echo $language["Confirm_Mail"]; ?> 2</a></li>
-                        <li><a href="auth-email-verification.php" key="t-email-verification"><?php echo $language["Email_verification"]; ?></a></li>
-                        <li><a href="auth-email-verification-2.php" key="t-email-verification-2"><?php echo $language["Email_verification"]; ?> 2</a></li>
-                        <li><a href="auth-two-step-verification.php" key="t-two-step-verification"><?php echo $language["Two_step_verification"]; ?></a></li>
-                        <li><a href="auth-two-step-verification-2.php" key="t-two-step-verification-2"><?php echo $language["Two_step_verification"]; ?> 2</a></li>
-                    </ul>
-                </li>
+                
             </ul>
         </div>
         <!-- Sidebar -->
