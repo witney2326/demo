@@ -28,7 +28,12 @@ if(isset($_POST['submit']))
      $sql = "INSERT INTO tblawareness_meetings (regionID,DistrictID,sectorID,femalesNo,malesNo,orientationDate)
      VALUES ('$regionID','$DistrictID','$sectorID','$NoOrientedF','$NoOrientedM','$orientationDate')";
      if (mysqli_query($link, $sql)) {
-        echo "New Awareness and Orientation Meeting has been added successfully !";
+        
+        echo '<script type="text/javascript">'; 
+        echo 'alert("New Awareness and Orientation Meeting has been added successfully !");'; 
+        echo 'window.location.href = "basic_livelihood_meetings.php";';
+        echo '</script>';
+        
      } else {
         echo "Error: " . $sql . ":-" . mysqli_error($link);
      }

@@ -281,7 +281,7 @@
                                     </li>
                                                                         
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link" data-bs-toggle="tab" href="#awareness" role="tab">
+                                        <a class="link"  href="basic_livelihood_meetings.php" role="link">
                                             <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
                                             <span class="d-none d-sm-block">Awareness</span>
                                         </a>
@@ -317,12 +317,7 @@
                                             <span class="d-none d-sm-block">Nutrition</span>
                                         </a>
                                     </li>
-                                    <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link" data-bs-toggle="tab" href="#reports" role="tab">
-                                            <span class="d-block d-sm-none"><i class="fas fa-cog"></i></span>
-                                            <span class="d-none d-sm-block">Reports</span>
-                                        </a>
-                                    </li>
+                                    
                                 </ul>
 
                                 <!-- Tab panes -->
