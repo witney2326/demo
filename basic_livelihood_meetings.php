@@ -203,7 +203,8 @@ function dis_name($link, $disname)
                                                                         echo "<td>".$row["femalesNo"]."</td>\n";
                                                                         echo "<td>".$row["malesNo"]."</td>\n";
                                                                         echo "<td>
-                                                                        <a href=\"basicAwarenessMeetingview.php?id=".$row['meetingID']."\">view</a>   
+                                                                        <a href=\"basicAwarenessMeetingview.php?id=".$row['meetingID']."\">view</a>
+                                                                        <a href=\"basicAwarenessMeetingDelete.php?id=".$row['meetingID']."\">delete</a>    
                                                                             
                                                                         </td>\n";
                                                                     echo "</tr>\n";
@@ -226,7 +227,7 @@ function dis_name($link, $disname)
                                         <p class="mb-0">
                                         <div class="card border border-primary">
                                             <div class="card-header bg-transparent border-primary">
-                                                <h5 class="my-0 text-primary">Sensitization and Awareness Meetings</h5>
+                                                <h5 class="my-0 text-primary">New Sensitization and Awareness Meeting</h5>
                                             </div>
                                             <!-- start -->
                                             <div class="card border border-primary">
