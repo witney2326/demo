@@ -19,32 +19,32 @@
         include "layouts/config.php"; // Using database connection file here
         
         $id = $_GET['id']; // get id through query string
-       $query="select * from tblbasic_beneficiary where hhcode='$id'";
+       $query="select * from tblbeneficiaries where sppCode='$id'";
         
         if ($result_set = $link->query($query)) {
             while($row = $result_set->fetch_array(MYSQLI_ASSOC))
             { 
-                $hhname= $row["hhname"];
+                
                 $regionID = $row["regionID"];
                 $districtID= $row["districtID"];
-                $taID= $row["taID"];
-                $gvhID= $row["gvhID"];
                 $cohort = $row["cohort"];
+                $groupID = $row["groupID"];
             }
             $result_set->close();
         }
 
         if(isset($_POST['Submit']))
             {    
-            $groupID = $_POST['group_id'];
-            $DistrictID = $_POST['district'];
+            $hh_ID = $_POST["hh_id"];
+            $districtID = $_POST['district'];
             $year = $_POST['year'];
             $month = $_POST['month'];
             $amount = $_POST['amount'];
+            $groupID = $_POST["group_code"];
             
             
                 $sql = "INSERT INTO tblslg_member_savings (districtID,hh_code,groupID,year,month,amount)
-                VALUES ('$districtID','$id','$groupID','$year','$month','$amount')";
+                VALUES ('$districtID','$hh_ID','$groupID','$year','$month','$amount')";
             if (mysqli_query($link, $sql)) {
                 echo '<script type="text/javascript">'; 
                 echo 'alert("SLG Savings Record has been added successfully !");'; 
@@ -74,56 +74,33 @@
                         <div class="col-lg-9">
                             <div class="card border border-success">
                                 <div class="card-header bg-transparent border-success">
-                                    <h5 class="my-0 text-success">Household Update Savings Record for -- <?php echo $hhname ; ?></h5>
+                                    <h5 class="my-0 text-success">Household Update Savings Record for -- <?php echo $id ; ?></h5>
                                 </div>
                                 <div class="card-body">
                                     
-                                    <form method="POST" action="">
+                                    <form method="POST" action="<?=$_SERVER['PHP_SELF'];?>">
                                         <div class="row mb-4">
                                             <label for="hh_id" class="col-sm-3 col-form-label">Household Code</label>
                                             <div class="col-sm-9">
                                                 <input type="text" class="form-control" id="hh_id" name = "hh_id" value="<?php echo $id ; ?>" style="max-width:30%;" readonly >
                                             </div>
                                         </div>
+
                                         <div class="row mb-4">
-                                            <label for="hh_name" class="col-sm-3 col-form-label">Household Name</label>
+                                            <label for="group_code" class="col-sm-3 col-form-label">Group Code</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="hh_name" name ="hh_name" value = "<?php echo $hhname ; ?>" style="max-width:30%;" readonly >
+                                                <input type="text" class="form-control" id="group_code" name = "group_code" value="<?php echo $groupID ; ?>" style="max-width:30%;" readonly >
                                             </div>
                                         </div>
                                         
-                                        <div class="row mb-4">
-                                            <label for="region" class="col-sm-3 col-form-label">Region</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="region" name="region" value ="<?php echo $regionID ; ?>" style="max-width:30%;" readonly >
-                                            </div>
-                                        </div>
                                         <div class="row mb-4">
                                             <label for="district" class="col-sm-3 col-form-label">District</label>
                                             <div class="col-sm-9">
                                                 <input type="text" class="form-control" id="district" name="district" value ="<?php echo $districtID ; ?>" style="max-width:30%;" readonly >
                                             </div>
                                         </div>
-                                        <div class="row mb-4">
-                                            <label for="ta" class="col-sm-3 col-form-label">Traditional Authority</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="ta" name="ta" value ="<?php echo $taID ; ?>" style="max-width:30%;" readonly >
-                                            </div>
-                                        </div>
-                                        <div class="row mb-4">
-                                            <label for="gvh" class="col-sm-3 col-form-label">Group Village Head</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="gvh" name="gvh" value ="<?php echo $gvhID ; ?>" style="max-width:40%;" readonly >
-                                            </div>
-                                        </div>
                                         
-                                        <div class="row mb-4">
-                                            <label for="cohort" class="col-sm-3 col-form-label">Cohort</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="cohort" name="cohort" value ="<?php echo $cohort ; ?> " style="max-width:30%;" readonly >
-                                            </div>
-                                        </div>
-
+                                                                               
                                         <div class="row mb-4">
                                             <label for="year" class="col-sm-3 col-form-label">Select Year</label>
                                             <select class="form-select" name="year" id="year" style="max-width:20%;" required>

@@ -2,7 +2,7 @@
 <?php include 'layouts/head-main.php'; ?>
 
 <head>
-    <title>Member Management</title>
+    <title>SLG Member Management</title>
     <?php include 'layouts/head.php'; ?>
     <?php include 'layouts/head-style.php'; ?>
     <?php include 'layouts/config.php'; ?>
@@ -33,12 +33,12 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                            <h4 class="mb-sm-0 font-size-18">Beneficiary Member Management</h4>
+                            <h4 class="mb-sm-0 font-size-18">Household Management</h4>
 
                             <div class="page-title-right">
                                 <ol class="breadcrumb m-0">
                                     <li class="breadcrumb-item"><a href="basic_livelihood.php">Basic Livelihood</a></li>
-                                    <li class="breadcrumb-item active">Member Management</li>
+                                    <li class="breadcrumb-item active">Household Management</li>
                                 </ol>
                             </div>
 
@@ -184,9 +184,9 @@
                                                                         
                                                                         
                                                                         <th>Household Code</th>
-                                                                        <th>Member Name</th>
+                                                                        
                                                                         <th>cohort</th>
-                                                                        <th>GVH</th>
+                                                                        <th>District</th>
                                                                         <th>Group Name</th>
                                                                         <th>Action</th>
                                                                     </tr>
@@ -196,7 +196,7 @@
                                                                 <tbody>
                                                                     <?Php
                                                                         
-                                                                        $query="select * from tblbasic_beneficiary";
+                                                                        $query="select cimis_sql.tblbeneficiaries.sppCode,cimis_sql.tblbeneficiaries.cohort,cimis_sql.tbldistrict.DistrictName,cimis_sql.tblgroup.groupname from cimis_sql.tblbeneficiaries inner join cimis_sql.tbldistrict on cimis_sql.tblbeneficiaries.districtID = cimis_sql.tbldistrict.DistrictID inner join cimis_sql.tblgroup on cimis_sql.tblbeneficiaries.groupID = cimis_sql.tblgroup.groupID;";
 
                                                                         //Variable $link is declared inside config.php file & used here
                                                                         
@@ -206,20 +206,20 @@
                                                                         echo "<tr>\n";
                                                                             
                                                                         
-                                                                            echo "<td>".$row["hhcode"]."</td>\n";
-                                                                            echo "<td>".$row["hhname"]."</td>\n";
+                                                                            echo "<td>".$row["sppCode"]."</td>\n";
+                                                                            
                                                                             echo "<td>".$row["cohort"]."</td>\n";
-                                                                            echo "<td>".$row["gvhID"]."</td>\n";
-                                                                            echo "<td>".$row["groupID"]."</td>\n";
+                                                                            echo "<td>".$row["DistrictName"]."</td>\n";
+                                                                            echo "<td>".$row["groupname"]."</td>\n";
                                                                             
                                                                             
                                                                             echo "<td>
-                                                                            <a href=\"basicSLGMemberview.php?id=".$row['hhcode']."\">view</a>   
-                                                                            <a href=\"basicSLGMemberedit.php?id=".$row['hhcode']."\">edit</a> 
-                                                                            <a href=\"basicSLGMembersavings.php?id=".$row['hhcode']."\">sav</a>
-                                                                            <a href=\"basicSLGMemberloans.php?id=".$row['hhcode']."\">lns</a> 
-                                                                            <a href=\"basicSLGMemberiga.php?id=".$row['hhcode']."\">iga</a> 
-                                                                            <a href=\"basicSLGMemberdelete.php?id=".$row['hhcode']."\">del</a>    
+                                                                            <a href=\"basicSLGMemberview.php?id=".$row['sppCode']."\">view</a>   
+                                                                            <a href=\"basicSLGMemberedit.php?id=".$row['sppCode']."\">edit</a> 
+                                                                            <a href=\"basicSLGMembersavings.php?id=".$row['sppCode']."\">sav</a>
+                                                                            <a href=\"basicSLGMemberloans.php?id=".$row['sppCode']."\">lns</a> 
+                                                                            <a href=\"basicSLGMemberiga.php?id=".$row['sppCode']."\">iga</a> 
+                                                                            <a href=\"basicSLGMemberdelete.php?id=".$row['sppCode']."\">del</a>    
                                                                             </td>\n";
 
                                                                         echo "</tr>\n";

@@ -2,7 +2,7 @@
 <?php include 'layouts/head-main.php'; ?>
 
 <head>
-    <title>SLG Reports</title>
+    <title>Member Reports</title>
     <?php include 'layouts/head.php'; ?>
     <?php include 'layouts/head-style.php'; ?>
     <?php include 'layouts/config.php'; ?>
@@ -57,12 +57,12 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                            <h4 class="mb-sm-0 font-size-18">SLG Reports</h4>
+                            <h4 class="mb-sm-0 font-size-18">SLG Member Reports</h4>
 
                             <div class="page-title-right">
                                 <ol class="breadcrumb m-0">
                                     <li class="breadcrumb-item"><a href="basic_livelihood.php">Basic Livelihood</a></li>
-                                    <li class="breadcrumb-item active">SLG Reports</li>
+                                    <li class="breadcrumb-item active">SLG Member Reports</li>
                                 </ol>
                             </div>
 
@@ -87,7 +87,7 @@
                                     <li class="nav-item waves-effect waves-light">
                                         <a class="nav-link active" data-bs-toggle="tab" href="#hotspots" role="tab">
                                             <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
-                                            <span class="d-none d-sm-block">SLGs</span>
+                                            <span class="d-none d-sm-block">Households in SLGs</span>
                                         </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">
@@ -198,7 +198,7 @@
                                                 <div class="col-12">
                                                     <div class="card border border-primary">
                                                     <div class="card-header bg-transparent border-primary">
-                                                        <h5 class="my-0 text-primary">Savings and Loan Groups Per Case Worker</h5>
+                                                        <h5 class="my-0 text-primary">Households per SLG Per Case Worker</h5>
                                                     </div>
                                                     <div class="card-body">
                                                     <h7 class="card-title mt-0"></h7>
