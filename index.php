@@ -317,7 +317,7 @@ $test = 85;
                             <div class="card border border-success">
                                 <div class="card-header bg-transparent border-primary">
                                     <?php 
-                                        $select_query = "SELECT COUNT(groupID) as TotalGroups FROM cimis_sql.tblgroup";
+                                        $select_query = "SELECT COUNT(groupID) as TotalGroups FROM tblgroup";
                                         $query_result = mysqli_query($link,$select_query);
                                         $row_val = mysqli_fetch_array($query_result);
                                          $CurGroups =  $row_val['TotalGroups'];
@@ -331,7 +331,7 @@ $test = 85;
                             <div class="card border border-success">
                                 <div class="card-header bg-transparent border-primary">
                                     <?php 
-                                        $select_query = "SELECT SUM(tblgroupsavings.Amount) as TotalSavings FROM cimis_sql.tblgroupsavings";
+                                        $select_query = "SELECT SUM(tblgroupsavings.Amount) as TotalSavings FROM tblgroupsavings";
                                         $query_result = mysqli_query($link,$select_query);
                                         $row_val = mysqli_fetch_array($query_result);
                                          $CurSavings =  $row_val['TotalSavings'];

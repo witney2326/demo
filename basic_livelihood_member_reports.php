@@ -211,9 +211,8 @@
                                                                         <th>Case Worker</th>
                                                                         <th>District</th>
                                                                         <th>Group Name</th>
-                                                                        <th>Cohort</th>
-                                                                        <th>Males</th>
-                                                                        <th>Females</th>
+                                                                        <th>SPP Code</th>
+                                                                        
                                                                         
                                                                     </tr>
                                                                 </thead>
@@ -221,9 +220,9 @@
 
                                                                 <tbody>
                                                                     <?Php
-                                                                        $query="SELECT tblcw.cwName,tblgroup.districtID,tblgroup.groupname, tblgroup.cohort, tblgroup.MembersM, tblgroup.MembersF
+                                                                        $query="SELECT tblcw.cwName,tblgroup.districtID,tblgroup.groupname, tblbeneficiaries.sppCode
                                                                         FROM cimis_sql.tblgroup 
-                                                                        INNER JOIN cimis_sql.tblcw on cimis_sql.tblcw.cwID = cimis_sql.tblgroup.cwID order by tblcw.cwName";
+                                                                        INNER JOIN tblcw on tblcw.cwID = tblgroup.cwID inner join tblbeneficiaries on tblgroup.groupID = tblbeneficiaries.groupID order by tblcw.cwName;";
  
                                                                         //Variable $link is declared inside config.php file & used here
                                                                         
@@ -236,9 +235,8 @@
                                                                             echo "<td>".$row["cwName"]."</td>\n";
                                                                             echo "\t\t<td>$col_value</td>\n";                                                                          
                                                                             echo "<td>".$row["groupname"]."</td>\n";
-                                                                            echo "<td>".$row["cohort"]."</td>\n";
-                                                                            echo "<td>".$row["MembersM"]."</td>\n";
-                                                                            echo "<td>".$row["MembersF"]."</td>\n";
+                                                                            echo "<td>".$row["sppCode"]."</td>\n";
+                                                                            
                                                                             
                                                                             
                                                                             

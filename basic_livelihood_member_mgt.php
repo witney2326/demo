@@ -196,7 +196,7 @@
                                                                 <tbody>
                                                                     <?Php
                                                                         
-                                                                        $query="select cimis_sql.tblbeneficiaries.sppCode,cimis_sql.tblbeneficiaries.cohort,cimis_sql.tbldistrict.DistrictName,cimis_sql.tblgroup.groupname from cimis_sql.tblbeneficiaries inner join cimis_sql.tbldistrict on cimis_sql.tblbeneficiaries.districtID = cimis_sql.tbldistrict.DistrictID inner join cimis_sql.tblgroup on cimis_sql.tblbeneficiaries.groupID = cimis_sql.tblgroup.groupID;";
+                                                                        $query="select tblbeneficiaries.sppCode,tblbeneficiaries.cohort,tbldistrict.DistrictName,tblgroup.groupname from tblbeneficiaries inner join tbldistrict on tblbeneficiaries.districtID = tbldistrict.DistrictID inner join tblgroup on tblbeneficiaries.groupID = tblgroup.groupID;";
 
                                                                         //Variable $link is declared inside config.php file & used here
                                                                         
