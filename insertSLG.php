@@ -62,7 +62,10 @@ if(isset($_POST['submit']))
      $sql = "INSERT INTO tblgroup (groupid,groupname,DateEstablished,clusterID,DistrictID,TAID,gvhID,MembersM,MembersF,regionID,cohort,programID,cwID,deleted)
      VALUES ('$groupID','$groupname','$DateEstablished','$clusterID','$DistrictID','$TAID','$GVHID','$membersM','$membersF','$regionID','$cohort','$spp','$cw','0')";
      if (mysqli_query($link, $sql)) {
-        echo "New SLG has been added successfully !";
+      echo '<script type="text/javascript">'; 
+      echo 'alert("SLG Savings Record has been added successfully !");'; 
+      echo 'window.location.href = "basic_livelihood_slg_mgt2.php";';
+      echo '</script>';
      } else {
         echo "Error: " . $sql . ":-" . mysqli_error($link);
      }

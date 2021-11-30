@@ -60,7 +60,7 @@
                             <div class="page-title-right">
                                 <ol class="breadcrumb m-0">
                                     <li class="breadcrumb-item"><a href="basic_livelihood_slg_mgt2.php">SLG Management</a></li>
-                                    <li class="breadcrumb-item active">SLG Management</li>
+                                    <li class="breadcrumb-item active">New SLG</li>
                                 </ol>
                             </div>
 
@@ -147,7 +147,7 @@
                                                     <div class="card border border-primary">
                                                     <!-- here -->
                                                     <div class="card-body">
-                                                    <h5 class="card-title mt-0"></h5>
+                                                    <h5 class="my-0 text-primary"></i> New SLG Details</h5>
                                                     
                                                     <form action="insertSLG.php" method="post">
                                                         <!-- start here -->
