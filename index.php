@@ -56,10 +56,10 @@
 
 <?php 
     $query="SELECT tbldistrict.DistrictName,COUNT(tblgroup.groupname) as grps, sum(tblgroup.MembersM) as smales, sum(MembersF) as sfemales, SUM(tblgroupsavings.Amount) as sAmount
-    FROM cimis_sql.tblgroup 
-    INNER JOIN cimis_sql.tblcw on cimis_sql.tblcw.cwID = cimis_sql.tblgroup.cwID 
-    inner join cimis_sql.tblgroupsavings on cimis_sql.tblgroup.groupID = cimis_sql.tblgroupsavings.GroupID
-    inner join cimis_sql.tbldistrict on cimis_sql.tblgroupsavings.DistrictID = cimis_sql.tbldistrict.DistrictID
+    FROM tblgroup 
+    INNER JOIN tblcw on tblcw.cwID = tblgroup.cwID 
+    inner join tblgroupsavings on tblgroup.groupID = tblgroupsavings.GroupID
+    inner join tbldistrict on tblgroupsavings.DistrictID = tbldistrict.DistrictID
     GROUP BY tbldistrict.DistrictName";
 
     
@@ -87,8 +87,8 @@ $test = 85;
         ['District', 'Groups'],
         <?php 
             $select_query = "SELECT tbldistrict.DistrictName,COUNT(tblgroup.groupname) as grps
-            FROM cimis_sql.tblgroup 
-            inner join cimis_sql.tbldistrict on cimis_sql.tblgroup.DistrictID = cimis_sql.tbldistrict.DistrictID
+            FROM tblgroup 
+            inner join tbldistrict on tblgroup.DistrictID = tbldistrict.DistrictID
             GROUP BY tbldistrict.DistrictName";
             $query_result = mysqli_query($link,$select_query);
             while($row_val = mysqli_fetch_array($query_result)){
@@ -150,8 +150,8 @@ $test = 85;
         ['District', 'TotalSavings'],
         <?php 
             $select_query = "SELECT tbldistrict.DistrictName as District, SUM(tblgroupsavings.Amount) as TotalSavings
-            FROM cimis_sql.tblgroupsavings 
-            INNER JOIN cimis_sql.tbldistrict on cimis_sql.tbldistrict.DistrictID = cimis_sql.tblgroupsavings.DistrictID 
+            FROM tblgroupsavings 
+            INNER JOIN tbldistrict on tbldistrict.DistrictID = tblgroupsavings.DistrictID 
             GROUP BY tbldistrict.DistrictName";
             $query_result = mysqli_query($link,$select_query);
             while($row_val = mysqli_fetch_array($query_result)){
@@ -218,7 +218,7 @@ $test = 85;
                                                             <div class="flex-grow-1">
                                                                 <p class="text-muted fw-medium">Basic Enrolment</p>
                                                                 <?php
-                                                                            $result = mysqli_query($link, 'SELECT COUNT(hhcode) AS value_sum FROM tblbasic_beneficiary'); 
+                                                                            $result = mysqli_query($link, 'SELECT COUNT(sppCode) AS value_sum FROM tblbeneficiaries'); 
                                                                             $row = mysqli_fetch_assoc($result); 
                                                                             $sum = $row['value_sum'];
                                                                         ?>

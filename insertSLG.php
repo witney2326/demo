@@ -54,7 +54,7 @@ if(isset($_POST['submit']))
 
         $groupID = $x;
 
-        $DistrictID = dis_code($link,$_POST['district']); 
+        $DistrictID = $_POST['district']; 
         $TAID = ta_code($link,$_POST['ta']);
         $regionID = region_code($link,$_POST['region']);
 
