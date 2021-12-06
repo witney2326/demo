@@ -112,6 +112,39 @@ $test = 85;
         // Load google charts
         google.charts.load('current', {'packages':['corechart']});
         google.charts.setOnLoadCallback(drawChart);
+        
+        // Draw the chart and set the chart values
+        function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+        
+        ['District', 'households'],
+        <?php 
+            $select_query = "SELECT tbldistrict.DistrictName as District,COUNT(tblbeneficiaries.sppCode) as households
+            FROM tblbeneficiaries 
+            inner join tbldistrict on tblbeneficiaries.DistrictID = tbldistrict.DistrictID
+            GROUP BY tbldistrict.DistrictName";
+            $query_result = mysqli_query($link,$select_query);
+            while($row_val = mysqli_fetch_array($query_result)){
+                
+            echo "['".$row_val['District']."',".$row_val['households']."],";
+            }
+        ?>
+        
+        ]);
+
+        // Optional; add a title and set the width and height of the chart
+        var options = {'title':'', 'width':370, 'height':250};
+
+        // Display the chart inside the <div> element with id="piechart"
+        var chart = new google.visualization.PieChart(document.getElementById('piechart2'));
+        chart.draw(data, options);
+        }
+    </script> 
+
+<script type="text/javascript">
+        // Load google charts
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
 
         // Draw the chart and set the chart values
         function drawChart() {
@@ -348,9 +381,9 @@ $test = 85;
                         <div class = "col-lg-6">
                             <div class="card border border-success">
                                 <div class="card-header bg-transparent border-primary">
-                                    <h5 class="my-0 text-primary">Youth Challenge Support</h5>
+                                    <h6 class="my-0 text-primary">Basic Livelihood Household Distribution: <?php echo $sum;?></h6>
                                 </div>
-                                <div id="piechart"></div> 
+                                <div id="piechart2"></div> 
                             </div>
                         </div>
                         <div class = "col-lg-6">

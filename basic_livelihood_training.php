@@ -113,11 +113,11 @@
                                             <!--start here -->
                                             <div class="card border border-primary">
                                                 <div class="card-header bg-transparent border-primary">
-                                                    <h5 class="my-0 text-primary"></i>SLG Search Filter</h5>
+                                                    <h5 class="my-0 text-primary"></i>SLG Training Search Filter</h5>
                                                 </div>
                                                 <div class="card-body">
                                                     <h5 class="card-title mt-0"></h5>
-                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="basic_livelihood_slg_mgt_filter_results.php" method ="GET" >
+                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="basic_livelihood_slg_training_filter1_results.php" method ="GET" >
                                                         <div class="col-12">
                                                             <label for="region" class="form-label">Region</label>
                                                             <div>
@@ -148,7 +148,7 @@
                                                         
                                                         <div class="col-12">
                                                             <label for="district" class="form-label">District</label>
-                                                            <select class="form-select" name="district" id="district" value ="$district" required>
+                                                            <select class="form-select" name="district" id="district" value ="$district" required disabled>
                                                                 <option selected value="$district" ></option>
                                                                     <?php                                                           
                                                                         $dis_fetch_query = "SELECT DistrictID,DistrictName FROM tbldistrict";                                                  
@@ -169,7 +169,7 @@
 
                                                         <div class="col-12">
                                                             <label for="ta" class="form-label">Traditional Authority</label>
-                                                            <select class="form-select" name="ta" id="ta" required>
+                                                            <select class="form-select" name="ta" id="ta" required disabled>
                                                                 <option selected  value="$ta"></option>
                                                                 <?php                                                           
                                                                         $ta_fetch_query = "SELECT TAName FROM tblta";                                                  
@@ -214,10 +214,10 @@
                                                                         
                                                                         <th>Groupcode</th>
                                                                         <th>Group Name</th>
-                                                                        
-                                                                        <th>Group Training Status</th>
-                                                                        <th><i class="mdi mdi-book-clock"></i>Record Group Training</th>
-                                                                        <th>Group Training Report</th>
+                                                                        <th>District</th>
+                                                                        <th>Training Status</th>
+                                                                        <th><i class="mdi mdi-book-clock"></i>Record Training</th>
+                                                                        <th>Training Report</th>
                                                                     </tr>
                                                                 </thead>
 
@@ -231,19 +231,21 @@
                                                                         if ($result_set = $link->query($query)) {
                                                                         while($row = $result_set->fetch_array(MYSQLI_ASSOC))
                                                                         { 
+                                                                          $dis = dis_name($link,$row["DistrictID"]);  
                                                                         echo "<tr>\n";
                                                                             
                                                                         
                                                                             echo "<td>".$row["groupID"]."</td>\n";
                                                                             echo "<td>".$row["groupname"]."</td>\n";
+                                                                            echo "\t\t<td>$dis</td>\n";
                                                                             echo "<td><a href=\"basicSLGTraining_view.php?id=".$row['groupID']."\">View</a></td>\n";
                                                                             
                                                                             echo "<td>                                                                            
-                                                                                <a href=\"add_basicTrainingGD.php?id=".$row['groupID']."\" >Group Training</a>   
+                                                                                <a href=\"add_basicTrainingGD.php?id=".$row['groupID']."\" >Record</a>   
                                                                                  
                                                                             </td>\n";
                                                                             echo "<td>                                                                            
-                                                                                <a href=\"basicSLGTrainingReport.php?id=".$row['groupID']."\" >Training Report</a>   
+                                                                                <a href=\"basicSLGTrainingReport.php?id=".$row['groupID']."\" >View</a>   
                                                                                  
                                                                             </td>\n";
                                                                         echo "</tr>\n";

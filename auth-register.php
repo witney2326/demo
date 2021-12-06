@@ -142,53 +142,39 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 <form class="needs-validation" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
 
                                     <div class="mb-3 <?php echo (!empty($useremail_err)) ? 'has-error' : ''; ?>">
-                                        <label for="useremail" class="form-label">Email</label>
-                                        <input type="email" class="form-control" id="useremail" name="useremail" placeholder="Enter email" value="<?php echo $useremail; ?>">
+                                        <label for="useremail" class="form-label">email address</label>
+                                        <input type="email" class="form-control" id="useremail" name="useremail"  value="<?php echo $useremail; ?>">
                                         <span class="text-danger"><?php echo $useremail_err; ?></span>
                                     </div>
 
                                     <div class="mb-3 <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
-                                        <label for="username" class="form-label">Username</label>
-                                        <input type="text" class="form-control" id="username" name="username" placeholder="Enter username" value="<?php echo $username; ?>">
+                                        <label for="username" class="form-label">Enter Username</label>
+                                        <input type="text" class="form-control" id="username" name="username"  value="<?php echo $username; ?>">
                                         <span class="text-danger"><?php echo $username_err; ?></span>
                                     </div>
 
                                     <div class="mb-3 <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
-                                        <label for="userpassword" class="form-label">Password</label>
-                                        <input type="password" class="form-control" id="userpassword" name="password" placeholder="Enter password" value="<?php echo $password; ?>">
+                                        <label for="userpassword" class="form-label">Enter Password</label>
+                                        <input type="password" class="form-control" id="userpassword" name="password"  value="<?php echo $password; ?>">
                                         <span class="text-danger"><?php echo $password_err; ?></span>
                                     </div>
 
                                     <div class="mb-3 <?php echo (!empty($confirm_password_err)) ? 'has-error' : ''; ?>">
-                                        <label for="confirm_password" class="form-label">Confirm Password</label>
-                                        <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="Enter confirm password" value="<?php echo $confirm_password; ?>">
+                                        <label for="confirm_password" class="form-label">Confirm Your Password</label>
+                                        <input type="password" class="form-control" id="confirm_password" name="confirm_password"  value="<?php echo $confirm_password; ?>">
                                         <span class="text-danger"><?php echo $confirm_password_err; ?></span>
                                     </div>
 
                                     <div class="mt-4 d-grid">
                                         <button class="btn btn-primary waves-effect waves-light" type="submit">Register</button>
                                     </div>
-
-                                    
-
-                                    <div class="mt-4 text-center">
-                                        <p class="mb-0">By registering you agree to CIMIS <a href="#" class="text-primary">Terms of Use</a></p>
-                                    </div>
+  
                                 </form>
                             </div>
 
                         </div>
                     </div>
-                    <div class="mt-5 text-center">
-
-                        <div>
-                            <p>Already have an account ? <a href="auth-login.php" class="fw-medium text-primary"> Login</a> </p>
-                            <p>© <script>
-                                    document.write(new Date().getFullYear())
-                                </script> CIMIS. Crafted with <i class="mdi mdi-heart text-danger"></i> by Comsip Union</p>
-                        </div>
-                    </div>
-
+                    
                 </div>
             </div>
         </div>

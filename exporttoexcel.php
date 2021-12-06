@@ -20,9 +20,9 @@ header("Expires: 0");
 $sep = "\t";
 
 $sql="SELECT tblcw.cwName,tblgroup.districtID,COUNT(tblgroup.groupname), tblgroup.cohort, sum(tblgroup.MembersM), sum(MembersF), SUM(tblgroupsavings.Amount)
-FROM cimis_sql.tblgroup 
-INNER JOIN cimis_sql.tblcw on cimis_sql.tblcw.cwID = cimis_sql.tblgroup.cwID 
-inner join cimis_sql.tblgroupsavings on cimis_sql.tblgroup.groupID = cimis_sql.tblgroupsavings.GroupID
+FROM tblgroup 
+INNER JOIN tblcw on tblcw.cwID = tblgroup.cwID 
+inner join tblgroupsavings on tblgroup.groupID = tblgroupsavings.GroupID
 GROUP BY tblcw.cwName"; 
 $resultt = $link->query($sql);
 

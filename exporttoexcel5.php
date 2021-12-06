@@ -9,7 +9,7 @@ if(isset($_REQUEST['btn']))
     // you can your shell script here like: 
     // shell_exec("/var/www/html/Camera/CameraScript.sh");
     $DB_TBLName = "tblgroup"; 
-$filename = "cimis_savings";  //your_file_name
+$filename = "sensitization_meetings_per_district";  //your_file_name
 $file_ending = "xls";   //file_extention
 
 header("Content-Type: application/xls");    
@@ -19,12 +19,10 @@ header("Expires: 0");
 
 $sep = "\t";
 
-$sql="SELECT tbldistrict.DistrictName,COUNT(tblgroup.groupname) as grps, sum(tblgroup.MembersM) as smales, sum(MembersF) as sfemales, SUM(tblgroupsavings.Amount) as sAmount
-FROM tblgroup 
-INNER JOIN tblcw on cimis_sql.tblcw.cwID = tblgroup.cwID 
-inner join tblgroupsavings on tblgroup.groupID = tblgroupsavings.GroupID
-inner join tbldistrict on tblgroupsavings.DistrictID = tbldistrict.DistrictID
-GROUP BY tbldistrict.DistrictName"; 
+$sql="SELECT tbldistrict.DistrictName,COUNT(tblawareness_meetings.meetingID) as meetings, sum(malesNo) as smales, sum(femalesNo) as sfemales
+FROM tblawareness_meetings 
+INNER JOIN tbldistrict  on tblawareness_meetings.DistrictID  = tbldistrict.DistrictID 
+GROUP BY tbldistrict.DistrictName;"; 
 $resultt = $link->query($sql);
 
 while ($property = mysqli_fetch_field($resultt)) { //fetch table field name

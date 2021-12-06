@@ -16,12 +16,26 @@
 
 <?php include 'layouts/body.php'; 
 
-function dis_name($link, $disname)
+    function dis_name($link, $discode)
         {
-        $dis_query = mysqli_query($link,"select DistrictName from tbldistrict where DistrictID='$disname'"); // select query
+        $dis_query = mysqli_query($link,"select DistrictName from tbldistrict where DistrictID='$discode'"); // select query
         $dis = mysqli_fetch_array($dis_query);// fetch data
         return $dis['DistrictName'];
     }
+    function r_name($link, $rcode)
+        {
+        $region_query = mysqli_query($link,"select name from tblregion where regionID='$rcode'"); // select query
+        $dis = mysqli_fetch_array($region_query);// fetch data
+        return $dis['name'];
+    }
+
+    function s_name($link, $scode)
+        {
+        $sector_query = mysqli_query($link,"select name from tblsector where id='$scode'"); // select query
+        $dis = mysqli_fetch_array($sector_query);// fetch data
+        return $dis['name'];
+    }
+
 ?>
 <!-- Begin page -->
 <div id="layout-wrapper">
@@ -82,7 +96,7 @@ function dis_name($link, $disname)
                                     </li>
 
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link" data-bs-toggle="tab" href="#reports" role="tab">
+                                        <a class="link"  href="basic_livelihood_sensitization_reports.php" role="link">
                                             <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
                                             <span class="d-none d-sm-block">Sensitization Reports</span>
                                         </a>
@@ -95,24 +109,28 @@ function dis_name($link, $disname)
 
                                     <div class="tab-pane active" id="home-1" role="tabpanel">
                                         <p class="mb-0">
-                                            <!--start here -->
+                                            <!--start here -->   
+                                            <!-- here -->
                                             <div class="card border border-primary">
-                                                
+                                                <div class="card-header bg-transparent border-primary">
+                                                    <h5 class="my-0 text-primary"></i>Location Filter For Meeting/Sensitization</h5>
+                                                </div>
                                                 <div class="card-body">
                                                     <h5 class="card-title mt-0"></h5>
-                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="" method="GET">
+                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="basic_livelihood_meetings_filter1_results.php" method ="GET" >
                                                         <div class="col-12">
                                                             <label for="region" class="form-label">Region</label>
-                                                            <div>
-                                                                <select class="form-select" name="region" id="region" required>
+                                                            
+                                                                <select class="form-select" name="region" id="region"  required>
                                                                     <option ></option>
                                                                     <?php                                                           
-                                                                            $dis_fetch_query = "SELECT regionID,name FROM tblregion";                                                  
+                                                                            $dis_fetch_query = "SELECT regionID, name FROM tblregion";                                                  
                                                                             $result_dis_fetch = mysqli_query($link, $dis_fetch_query);                                                                       
                                                                             $i=0;
                                                                                 while($DB_ROW_reg = mysqli_fetch_array($result_dis_fetch)) {
                                                                             ?>
-                                                                            <option value=<?php echo $DB_ROW_reg["regionID"]; ?>>
+                                                                            <option value ="<?php
+                                                                                    echo $DB_ROW_reg["regionID"];?>">
                                                                                 <?php
                                                                                     echo $DB_ROW_reg["name"];
                                                                                 ?>
@@ -125,21 +143,20 @@ function dis_name($link, $disname)
                                                                 <div class="invalid-feedback">
                                                                     Please select a valid Malawi region.
                                                                 </div>
-
-                                                            </div>
+                                                            
                                                         </div>
-
+                                                        
                                                         <div class="col-12">
                                                             <label for="district" class="form-label">District</label>
-                                                            <select class="form-select" name="district" id="district" required>
-                                                                <option selected value="$district"></option>
+                                                            <select class="form-select" name="district" id="district" value ="$district" required disabled>
+                                                                <option selected value="$district" ></option>
                                                                     <?php                                                           
                                                                         $dis_fetch_query = "SELECT DistrictID,DistrictName FROM tbldistrict";                                                  
                                                                         $result_dis_fetch = mysqli_query($link, $dis_fetch_query);                                                                       
                                                                         $i=0;
                                                                             while($DB_ROW_Dis = mysqli_fetch_array($result_dis_fetch)) {
                                                                         ?>
-                                                                        <option value =<?php echo $DB_ROW_Dis["DistrictID"]; ?>>
+                                                                        <option value="<?php echo $DB_ROW_Dis["DistrictID"]; ?>">
                                                                             <?php echo $DB_ROW_Dis["DistrictName"]; ?></option><?php
                                                                             $i++;
                                                                                 }
@@ -150,242 +167,165 @@ function dis_name($link, $disname)
                                                             </div>
                                                         </div>
 
+                                                                                                                
                                                         <div class="col-12">
-                                                            <button type="submit" class="btn btn-primary w-md" name="FormSubmit" value="Submit">Submit</button>
+                                                            <button type="submit" class="btn btn-primary w-md" name="Submit" value="Submit">Submit</button>
                                                         </div>
                                                     </form>                                             
                                                     <!-- End Here -->
                                                 </div>
                                             </div>
-
-                                            <div class="row">
-                                                <div class="col-12">
-                                                    <div class="card border border-primary">
-                                                    <div class="card-header bg-transparent border-primary">
-                                                        <h5 class="my-0 text-primary"><i class="mdi mdi-bullseye-arrow me-3"></i>Meetings Conducted In Selected District</h5>
-                                                    </div>
-                                                    <div class="card-body">
-                                                    <h5 class="card-title mt-0"></h5>
-                                                        
-                                                            <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
-                                                            
-                                                                <thead>
-                                                                    <tr>                    
-                                                                        <th>Meeting</th>
-                                                                        <th>Region</th>
-                                                                        <th>District</th>
-                                                                        <th>Sector</th>
-                                                                        <th>Orientation Date</th>
-                                                                        <th>No. Females</th>
-                                                                        <th>No.Males</th>
-                                                                        <th>Action</th>
-                                                                    </tr>
-                                                                </thead>
-
-
-                                                                <tbody>
-                                                                    <?Php
-                                                                       $selectedDistrict = $_GET["district"];
-                                                                        $query="select * from tblawareness_meetings where DistrictID ='$selectedDistrict'";
-
-                                                                    //Variable $link is declared inside config.php file & used here
-                                                                    
-                                                                    if ($result_set = $link->query($query)) {
-                                                                    while($row = $result_set->fetch_array(MYSQLI_ASSOC))
-                                                                    { 
-                                                                       
-                                                                    echo "<tr>\n";
-                                                                        echo "<td>".$row["meetingID"]."</td>\n";
-                                                                        echo "<td>".$row["regionID"]."</td>\n";
-                                                                        echo "<td>".$row["DistrictID"]."</td>\n";
-                                                                        echo "<td>".$row["sectorID"]."</td>\n";
-                                                                        echo "<td>".$row["orientationDate"]."</td>\n";
-                                                                        echo "<td>".$row["femalesNo"]."</td>\n";
-                                                                        echo "<td>".$row["malesNo"]."</td>\n";
-                                                                        echo "<td>
-                                                                        <a href=\"basicAwarenessMeetingview.php?id=".$row['meetingID']."\">view</a>
-                                                                        <a href=\"basicAwarenessMeetingDelete.php?id=".$row['meetingID']."\">delete</a>    
-                                                                            
-                                                                        </td>\n";
-                                                                    echo "</tr>\n";
-                                                                    }
-                                                                    $result_set->close();
-                                                                    }                          
-                                                                    ?>
-                                                                </tbody>
-                                                            </table>
-                                                            </p>
+                                                <!-- start here -->
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <div class="card border border-primary">
+                                                        <div class="card-header bg-transparent border-primary">
+                                                            <h5 class="my-0 text-primary"><i class="mdi mdi-bullseye-arrow me-3"></i>Meetings Conducted</h5>
                                                         </div>
-                                                    </div>     
-                                                </div>            
-                                            </div>  
+                                                        <div class="card-body">
+                                                        <h5 class="card-title mt-0"></h5>
+                                                            
+                                                                <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
+                                                                
+                                                                    <thead>
+                                                                        <tr>                    
+                                                                            <th>Meeting</th>
+                                                                            <th>Region</th>
+                                                                            <th>District</th>
+                                                                            <th>Sector</th>
+                                                                            <th>Orientation Date</th>
+                                                                            <th>No. Females</th>
+                                                                            <th>No.Males</th>
+                                                                            <th>Action</th>
+                                                                        </tr>
+                                                                    </thead>
+
+
+                                                                    <tbody>
+                                                                        <?Php
+                                                                        
+                                                                            $query="select * from tblawareness_meetings";
+
+                                                                        //Variable $link is declared inside config.php file & used here
+                                                                        
+                                                                        if ($result_set = $link->query($query)) {
+                                                                        while($row = $result_set->fetch_array(MYSQLI_ASSOC))
+                                                                        { 
+                                                                        $district = dis_name($link,$row["DistrictID"]);
+                                                                        $region = r_name($link,$row["regionID"]);
+                                                                        $sector = s_name($link,$row["sectorID"]);
+                                                                        echo "<tr>\n";
+                                                                            echo "<td>".$row["meetingID"]."</td>\n";
+                                                                            echo "\t\t<td>$region</td>\n";
+                                                                            echo "\t\t<td>$district</td>\n";
+                                                                            echo "\t\t<td>$sector</td>\n";
+                                                                            echo "<td>".$row["orientationDate"]."</td>\n";
+                                                                            echo "<td>".$row["femalesNo"]."</td>\n";
+                                                                            echo "<td>".$row["malesNo"]."</td>\n";
+                                                                            echo "<td>
+                                                                            <a href=\"basicAwarenessMeetingview.php?id=".$row['meetingID']."\">view</a>
+                                                                            <a href=\"basicAwarenessMeetingDelete.php?id=".$row['meetingID']."\">delete</a>    
+                                                                                
+                                                                            </td>\n";
+                                                                        echo "</tr>\n";
+                                                                        }
+                                                                        $result_set->close();
+                                                                        }                          
+                                                                        ?>
+                                                                    </tbody>
+                                                                </table>
+                                                                </p>
+                                                            </div>
+                                                        </div>     
+                                                    </div>            
+                                                </div>  
+                                                <!-- end here -->
+
+
                                         </p>
                                     </div>
                                     <!-- Here -->
                                 
                                     <div class="tab-pane" id="new-meeting" role="tabpanel">
                                         <p class="mb-0">
-                                        <div class="card border border-primary">
-                                            <div class="card-header bg-transparent border-primary">
-                                                <h5 class="my-0 text-primary">New Sensitization and Awareness Meeting</h5>
-                                            </div>
+                                        
                                             <!-- start -->
+                                            
+                                                
+                                                
+                                                <!-- here -->
                                             <div class="card border border-primary">
-                                                        
+                                                <div class="card-header bg-transparent border-primary">
+                                                    <h5 class="my-0 text-primary"></i>Location Filter For New Meeting/Sensitization</h5>
+                                                </div>
                                                 <div class="card-body">
                                                     <h5 class="card-title mt-0"></h5>
-                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="insertBasicAwarenessMeeting.php" method="post">
+                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="basic_livelihood_new_meeting_filter1_results.php" method ="GET" >
+                                                        <div class="col-12">
+                                                            <label for="region" class="form-label">Region</label>
                                                             
-                                                        <div class="row">
-
-                                                            <div class="col-md-3">
-                                                                <div class="mb-3">
-                                                                    <label for="region" class="form-label">Region</label>
-                                                                
-                                                                    <select class="form-select" name="region" id="region" required>
-                                                                        <option selected value = ""></option>
-                                                                        <?php                                                           
-                                                                                $dis_fetch_query = "SELECT name FROM tblregion";                                                  
-                                                                                $result_dis_fetch = mysqli_query($link, $dis_fetch_query);                                                                       
-                                                                                $i=0;
-                                                                                    while($DB_ROW_reg = mysqli_fetch_array($result_dis_fetch)) {
-                                                                                ?>
-                                                                                <option>
-                                                                                    <?php
-                                                                                        echo $DB_ROW_reg["name"];
-                                                                                    ?>
-                                                                                </option>
+                                                                <select class="form-select" name="region" id="region"  required>
+                                                                    <option ></option>
+                                                                    <?php                                                           
+                                                                            $dis_fetch_query = "SELECT regionID, name FROM tblregion";                                                  
+                                                                            $result_dis_fetch = mysqli_query($link, $dis_fetch_query);                                                                       
+                                                                            $i=0;
+                                                                                while($DB_ROW_reg = mysqli_fetch_array($result_dis_fetch)) {
+                                                                            ?>
+                                                                            <option value ="<?php
+                                                                                    echo $DB_ROW_reg["regionID"];?>">
                                                                                 <?php
-                                                                                    $i++;
-                                                                                        }
-                                                                            ?>
-                                                                    </select>
-                                                                    <div class="invalid-feedback">
-                                                                        Please select a valid Malawi region.
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="col-md-3">
-                                                                <div class="mb-3">
-                                                                    <label for="district" class="form-label">District</label>
-                                                                    <select class="form-select" name="district" id="district" required>
-                                                                        <option selected value="$district" ></option>
-                                                                            <?php                                                           
-                                                                                $dis_fetch_query = "SELECT DistrictName FROM tbldistrict";                                                  
-                                                                                $result_dis_fetch = mysqli_query($link, $dis_fetch_query);                                                                       
-                                                                                $i=0;
-                                                                                    while($DB_ROW_Dis = mysqli_fetch_array($result_dis_fetch)) {
+                                                                                    echo $DB_ROW_reg["name"];
                                                                                 ?>
-                                                                                <option>
-                                                                                    <?php echo $DB_ROW_Dis["DistrictName"]; ?></option><?php
-                                                                                    $i++;
-                                                                                        }
-                                                                            ?>
-                                                                    </select>
-                                                                    <div class="invalid-feedback">
-                                                                        Please select a valid Malawi district.
-                                                                    </div>
+                                                                            </option>
+                                                                            <?php
+                                                                                $i++;
+                                                                                    }
+                                                                        ?>
+                                                                </select>
+                                                                <div class="invalid-feedback">
+                                                                    Please select a valid Malawi region.
                                                                 </div>
+                                                            
+                                                        </div>
+                                                        
+                                                        <div class="col-12">
+                                                            <label for="district" class="form-label">District</label>
+                                                            <select class="form-select" name="district" id="district" value ="$district" required disabled>
+                                                                <option selected value="$district" ></option>
+                                                                    <?php                                                           
+                                                                        $dis_fetch_query = "SELECT DistrictID,DistrictName FROM tbldistrict";                                                  
+                                                                        $result_dis_fetch = mysqli_query($link, $dis_fetch_query);                                                                       
+                                                                        $i=0;
+                                                                            while($DB_ROW_Dis = mysqli_fetch_array($result_dis_fetch)) {
+                                                                        ?>
+                                                                        <option value="<?php echo $DB_ROW_Dis["DistrictID"]; ?>">
+                                                                            <?php echo $DB_ROW_Dis["DistrictName"]; ?></option><?php
+                                                                            $i++;
+                                                                                }
+                                                                    ?>
+                                                            </select>
+                                                            <div class="invalid-feedback">
+                                                                Please select a valid Malawi district.
                                                             </div>
-
-                                                            <div class="col-md-3">
-                                                                <div class="mb-3">
-                                                                    <label for="sectorID" class="form-label">Sector</label>
-                                                                    <select class="form-select" name="sectorID" id="sectorID" required>
-                                                                        <option></option>
-                                                                        <?php                                                           
-                                                                                $sector_fetch_query = "SELECT id, name FROM tblsector";                                                  
-                                                                                $result_sector_fetch = mysqli_query($link, $sector_fetch_query);                                                                       
-                                                                                $i=0;
-                                                                                    while($DB_ROW_sector = mysqli_fetch_array($result_sector_fetch)) {
-                                                                                ?>
-                                                                                <option value="<?php echo $DB_ROW_sector["id"]; ?>">
-                                                                                    <?php echo $DB_ROW_sector["name"]; ?></option><?php
-                                                                                    $i++;
-                                                                                        }
-                                                                            ?>
-                                                                    </select>
-                                                                    <div class="invalid-feedback">
-                                                                        Please select a valid Sector.
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="col-md-3">
-                                                                <div class="mb-3">
-                                                                    <label for="purpose" class="form-label">Meeting Purpose</label>
-                                                                        <select class="form-select" name="purpose" id="purpose" required>
-                                                                            <option></option>
-                                                                            <?php                                                           
-                                                                                $meetpurpose_fetch_query = "SELECT id, purpose FROM tblmeetingpurpose";                                                  
-                                                                                $result_meetpurpose_fetch = mysqli_query($link, $meetpurpose_fetch_query);                                                                       
-                                                                                $i=0;
-                                                                                    while($DB_ROW_meetpurpose = mysqli_fetch_array($result_meetpurpose_fetch)) {
-                                                                                ?>
-                                                                                <option value="<?php echo $DB_ROW_meetpurpose["id"]; ?>">
-                                                                                    <?php echo $DB_ROW_meetpurpose["purpose"]; ?></option><?php
-                                                                                    $i++;
-                                                                                        }
-                                                                            ?>
-                                                                        </select>
-                                                                        <div class="invalid-feedback">
-                                                                            Please select a valid Purpose.
-                                                                        </div>
-                                                                   
-                                                                </div>
-                                                            </div>
-
                                                         </div>
 
-                                                        <div class="row">
-
-                                                            <div class="col-md-3">
-                                                                <div class="mb-3">
-                                                                    <label for="orientationDate" class="form-label">Orientation Date</label>
-                                                                        <input type="date" name="orientationDate" id="orientationDate" required>
-                                                                            
-                                                                        <div class="invalid-feedback">
-                                                                            Please enter a valid date.
-                                                                        </div>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="col-md-3">
-                                                                <div class="mb-3">
-                                                                    <label for="NoOrientedF" class="form-label">No. Females Oriented</label>
-                                                                    <input class="form-text" name="NoOrientedF" id="NoOrientedF" required>
-                                                                        
-                                                                    <div class="invalid-feedback">
-                                                                        Please enter a valid number.
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="col-md-3">
-                                                                <div class="mb-3">
-                                                                <label for="NoOrientedM" class="form-label">No. Males Oriented</label>
-                                                                    <input class="form-text" name="NoOrientedM" id="NoOrientedM" required>
-                                                                        
-                                                                    <div class="invalid-feedback">
-                                                                        Please enter a valid number.
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-12">
-                                                                <button type="submit" class="btn btn-primary w-md" name="submit" value="submit">Submit Meeting Details</button>
-                                                            </div>
+                                                                                                                
+                                                        <div class="col-12">
+                                                            <button type="submit" class="btn btn-primary w-md" name="Submit" value="Submit">Submit</button>
                                                         </div>
-                                                    </form>
-                                                </div>     
-
-                                            </div>
+                                                    </form>                                             
+                                                    <!-- End Here -->
+                                                </div>
+                                            
+                                            <!-- end here -->
+                                            
                                         </p>
                                     </div>
 
                                     <div class="tab-pane" id="reports" role="tabpanel">
                                         <p class="mb-0">
-                                           Meeting Reports 
+                                           
                                         </p>
                                     </div>
                                     

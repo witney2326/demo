@@ -33,6 +33,27 @@
             }
             $result_set->close();
         }
+
+        function dis_name($link, $disID)
+        {
+        $dis_query = mysqli_query($link,"select DistrictName from tbldistrict where DistrictID='$disID'"); // select query
+        $dis = mysqli_fetch_array($dis_query);// fetch data
+        return $dis['DistrictName'];
+        }
+
+        function r_name($link, $rcode)
+        {
+        $region_query = mysqli_query($link,"select name from tblregion where regionID='$rcode'"); // select query
+        $rg = mysqli_fetch_array($region_query);// fetch data
+        return $rg['name'];
+        }
+
+        function ta_name($link, $tacode)
+        {
+        $region_query = mysqli_query($link,"select TAName from tblta where TAID='$tacode'"); // select query
+        $ta = mysqli_fetch_array($region_query);// fetch data
+        return $ta['TAName'];
+        }
                
     ?>
 
@@ -78,19 +99,19 @@
                                         <div class="row mb-4">
                                             <label for="region" class="col-sm-3 col-form-label">Region</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="region" name="region" value ="<?php echo $regionID ; ?>" disabled ="True">
+                                                <input type="text" class="form-control" id="region" name="region" value ="<?php echo r_name($link,$regionID) ; ?>" disabled ="True">
                                             </div>
                                         </div>
                                         <div class="row mb-4">
                                             <label for="district" class="col-sm-3 col-form-label">District</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="district" name="district" value ="<?php echo $DistrictID ; ?>" disabled ="True">
+                                                <input type="text" class="form-control" id="district" name="district" value ="<?php echo dis_name($link,$DistrictID) ; ?>" disabled ="True">
                                             </div>
                                         </div>
                                         <div class="row mb-4">
                                             <label for="ta" class="col-sm-3 col-form-label">Traditional Authority</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="ta" name="ta" value ="<?php echo $TAID ; ?>" disabled ="True">
+                                                <input type="text" class="form-control" id="ta" name="ta" value ="<?php echo ta_name($link,$TAID) ; ?>" disabled ="True">
                                             </div>
                                         </div>
                                         <div class="row mb-4">

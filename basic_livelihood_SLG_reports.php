@@ -72,16 +72,10 @@
                 <!-- end page title -->
 
                 <div class="row">
-                    
-                        </div>
-                    </div>
 
                     <div class="col-xl-12">
                         <div class="card">
                             <div class="card-body">
-
-                                
-                                <!-- Nav tabs -->
                                 <ul class="nav nav-pills nav-justified" role="tablist">
                                     
                                     <li class="nav-item waves-effect waves-light">
@@ -114,18 +108,6 @@
                                 <!-- Tab panes -->
                                 <div class="tab-content p-3 text-muted">
                                     
-                                    <!-- Here -->
-                                    
-                                    <!-- end here -->
-                                    
-                                    
-                                    <div class="tab-pane" id="settings-1" role="tabpanel">
-                                        <p class="mb-0">
-                                            
-                                        
-                                        </p>
-                                    </div>
-
                                     <div class="tab-pane active" id="hotspots" role="tabpanel">
                                         <p class="mb-0">
                                             <div class="card border border-primary">

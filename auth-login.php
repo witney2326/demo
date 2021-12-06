@@ -135,15 +135,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 <form class="form-horizontal" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
 
                                     <div class="mb-3 <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
-                                        <label for="username" class="form-label">Username</label>
-                                        <input type="text" class="form-control" id="username" placeholder="Enter username" name="username">
+                                        <label for="username" class="form-label">Enter Username</label>
+                                        <input type="text" class="form-control" id="username" placeholder="" name="username">
                                         <span class="text-danger"><?php echo $username_err; ?></span>
                                     </div>
 
                                     <div class="mb-3 <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
-                                        <label class="form-label">Password</label>
+                                        <label class="form-label">Enter Password</label>
                                         <div class="input-group auth-pass-inputgroup">
-                                            <input type="password" name="password" class="form-control" placeholder="Enter password" aria-label="Password" aria-describedby="password-addon">
+                                            <input type="password" name="password" class="form-control" placeholder="" aria-label="Password" aria-describedby="password-addon">
                                             <button class="btn btn-light " type="button" id="password-addon"><i class="mdi mdi-eye-outline"></i></button>
                                         </div>
                                         <span class="text-danger"><?php echo $password_err; ?></span>
@@ -165,12 +165,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     </div>
                     <div class="mt-5 text-center">
 
-                        <div>
-                            <p>Don't have an account ? <a href="auth-register.php" class="fw-medium text-primary"> Signup now </a> </p>
-                            <p>© <script>
-                                    document.write(new Date().getFullYear())
-                                </script> CIMIS. Crafted with <i class="mdi mdi-heart text-danger"></i> by Comsip Union</p>
-                        </div>
+                        
                     </div>
 
                 </div>

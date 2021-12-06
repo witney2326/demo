@@ -19,13 +19,13 @@ header("Expires: 0");
 
 $sep = "\t";
 
-$sql="SELECT cimis_sql.tblregion.name, COUNT(tbldistrict.DistrictName) as NoOfDistricts,COUNT(tblgroup.groupname) as NoGroups, sum(tblgroup.MembersM) as NoMales, sum(MembersF) as NoFemales, SUM(tblgroupsavings.Amount) as AmountSaved
-FROM cimis_sql.tblgroup 
-INNER JOIN cimis_sql.tblcw on cimis_sql.tblcw.cwID = cimis_sql.tblgroup.cwID 
-inner join cimis_sql.tblgroupsavings on cimis_sql.tblgroup.groupID = cimis_sql.tblgroupsavings.GroupID
-inner join cimis_sql.tbldistrict on cimis_sql.tblgroupsavings.DistrictID = cimis_sql.tbldistrict.DistrictID
-inner join cimis_sql.tblregion on cimis_sql.tbldistrict.regionID = cimis_sql.tblregion.regionID
-GROUP BY cimis_sql.tblregion.name"; 
+$sql="SELECT tblregion.name, COUNT(tbldistrict.DistrictName) as NoOfDistricts,COUNT(tblgroup.groupname) as NoGroups, sum(tblgroup.MembersM) as NoMales, sum(MembersF) as NoFemales, SUM(tblgroupsavings.Amount) as AmountSaved
+FROM tblgroup 
+INNER JOIN tblcw on tblcw.cwID = tblgroup.cwID 
+inner join tblgroupsavings on tblgroup.groupID = tblgroupsavings.GroupID
+inner join tbldistrict on tblgroupsavings.DistrictID = tbldistrict.DistrictID
+inner join tblregion on tbldistrict.regionID = tblregion.regionID
+GROUP BY tblregion.name"; 
 $resultt = $link->query($sql);
 
 while ($property = mysqli_fetch_field($resultt)) { //fetch table field name

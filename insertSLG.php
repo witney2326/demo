@@ -63,7 +63,7 @@ if(isset($_POST['submit']))
      VALUES ('$groupID','$groupname','$DateEstablished','$clusterID','$DistrictID','$TAID','$GVHID','$membersM','$membersF','$regionID','$cohort','$spp','$cw','0')";
      if (mysqli_query($link, $sql)) {
       echo '<script type="text/javascript">'; 
-      echo 'alert("SLG Savings Record has been added successfully !");'; 
+      echo 'alert("New SLG has been added successfully !");'; 
       echo 'window.location.href = "basic_livelihood_slg_mgt2.php";';
       echo '</script>';
      } else {
