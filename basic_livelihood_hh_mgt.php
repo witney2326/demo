@@ -26,6 +26,35 @@
     echo "hhcode:<input type='text' value='$x'/>";
     echo '<script>alert("Household code computed")</script>';			
     }
+
+    function get_rname($link, $rcode)
+        {
+        $rg_query = mysqli_query($link,"select name from tblregion where regionID='$rcode'"); // select query
+        $rg = mysqli_fetch_array($rg_query);// fetch data
+        return $rg['name'];
+        }
+    
+        function dis_name($link, $disID)
+        {
+        $dis_query = mysqli_query($link,"select DistrictName from tbldistrict where DistrictID='$disID'"); // select query
+        $dis = mysqli_fetch_array($dis_query);// fetch data
+        return $dis['DistrictName'];
+        }
+
+        function grp_name($link, $grpID)
+        {
+        $grp_query = mysqli_query($link,"select groupname from tblgroup where groupID='$grpID'"); // select query
+        $grp = mysqli_fetch_array($grp_query);// fetch data
+        return $grp['groupname'];
+        }
+
+        function prog_name($link, $progID)
+        {
+        $prog_query = mysqli_query($link,"select progName from tblspp where progID='$progID'"); // select query
+        $prog = mysqli_fetch_array($prog_query);// fetch data
+        return $prog['progName'];
+        }
+
 ?>
 
 <!-- Begin page -->
@@ -105,22 +134,20 @@
                                                 </div>
                                                 <div class="card-body">
                                                     <h5 class="card-title mt-0"></h5>
-                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="">
+                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="basic_livelihood_hh_mgt_filter1.php" method="GET">
                                                         <div class="col-12">
                                                             <label for="region" class="form-label">Region</label>
                                                             <div>
                                                                 <select class="form-select" name="region" id="region" required>
                                                                     <option selected value = "$region"></option>
                                                                     <?php                                                           
-                                                                            $dis_fetch_query = "SELECT name FROM tblregion";                                                  
+                                                                            $dis_fetch_query = "SELECT regionID, name FROM tblregion";                                                  
                                                                             $result_dis_fetch = mysqli_query($link, $dis_fetch_query);                                                                       
                                                                             $i=0;
                                                                                 while($DB_ROW_reg = mysqli_fetch_array($result_dis_fetch)) {
                                                                             ?>
-                                                                            <option>
-                                                                                <?php
-                                                                                    echo $DB_ROW_reg["name"];
-                                                                                ?>
+                                                                            <option value="<?php echo $DB_ROW_reg["regionID"];?>">
+                                                                                <?php echo $DB_ROW_reg["name"];?>
                                                                             </option>
                                                                             <?php
                                                                                 $i++;
@@ -136,7 +163,7 @@
 
                                                         <div class="col-12">
                                                             <label for="district" class="form-label">District</label>
-                                                            <select class="form-select" name="district" id="district" required>
+                                                            <select class="form-select" name="district" id="district" required disabled>
                                                                 <option selected value="$district" ></option>
                                                                     <?php                                                           
                                                                         $dis_fetch_query = "SELECT DistrictName FROM tbldistrict";                                                  
@@ -157,7 +184,7 @@
 
                                                         <div class="col-12">
                                                             <label for="ta" class="form-label">Traditional Authority</label>
-                                                            <select class="form-select" name="ta" id="ta" required>
+                                                            <select class="form-select" name="ta" id="ta" required disabled>
                                                                 <option selected  value="$ta"></option>
                                                                 <?php                                                           
                                                                         $ta_fetch_query = "SELECT TAName FROM tblta";                                                  
@@ -180,6 +207,7 @@
                                                         
                                                         <div class="col-12">
                                                             <button type="submit" class="btn btn-primary w-md" name="FormSubmit" value="Submit">Submit</button>
+                                                            <INPUT TYPE="button" VALUE="Back" onClick="history.go(-1);">
                                                         </div>
                                                     </form>                                             
                                                     <!-- End Here -->
@@ -221,12 +249,17 @@
                                                                     if ($result_set = $link->query($query)) {
                                                                     while($row = $result_set->fetch_array(MYSQLI_ASSOC))
                                                                     { 
+                                                                        $region = get_rname($link,$row["regionID"]);
+                                                                        $district = dis_name($link,$row["districtID"]);
+                                                                        $group = grp_name($link,$row["groupID"]);
+                                                                        $prog = prog_name($link, $row["spProg"]);
+
                                                                     echo "<tr>\n";
                                                                         echo "<td>".$row["sppCode"]."</td>\n";
-                                                                        echo "<td>".$row["spProg"]."</td>\n";
-                                                                        echo "<td>".$row["regionID"]."</td>\n";
-                                                                        echo "<td>".$row["districtID"]."</td>\n";
-                                                                        echo "<td>".$row["groupID"]."</td>\n";
+                                                                        echo "\t\t<td>$prog</td>\n";
+                                                                        echo "\t\t<td>$region</td>\n";
+                                                                        echo "\t\t<td>$district</td>\n";
+                                                                        echo "\t\t<td>$group</td>\n";
                                                                         echo "<td>".$row["cohort"]."</td>\n";
                                                                         echo "<td style='text-align: center; vertical-align: middle;' >\n";
                                                                             echo "<input type='checkbox' disabled />";

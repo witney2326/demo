@@ -90,7 +90,7 @@
                                         </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link" data-bs-toggle="tab" href="#clusters" role="tab">
+                                        <a class="link"  href="basic_livelihood_clusters.php" role="link">
                                             <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
                                             <span class="d-none d-sm-block">Clusters</span>
                                         </a>
@@ -158,7 +158,7 @@
                                                         
                                                         <div class="col-12">
                                                             <label for="district" class="form-label">District</label>
-                                                            <select class="form-select" name="district" id="district" value ="$district" required>
+                                                            <select class="form-select" name="district" id="district" value ="$district" required disabled>
                                                                 <option selected value="$district" ></option>
                                                                     <?php                                                           
                                                                         $dis_fetch_query = "SELECT DistrictID,DistrictName FROM tbldistrict";                                                  
@@ -179,7 +179,7 @@
 
                                                         <div class="col-12">
                                                             <label for="ta" class="form-label">Traditional Authority</label>
-                                                            <select class="form-select" name="ta" id="ta" required>
+                                                            <select class="form-select" name="ta" id="ta" required disabled>
                                                                 <option selected  value="$ta"></option>
                                                                 <?php                                                           
                                                                         $ta_fetch_query = "SELECT TAName FROM tblta";                                                  
@@ -566,8 +566,72 @@
                                                 </div>
                                             </div>
 
+                                            <!-- start here -->
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <div class="card border border-primary">
+                                                    <div class="card-header bg-transparent border-primary">
+                                                        <h5 class="my-0 text-primary"><i class="mdi mdi-bullseye-arrow me-3"></i>SLG Clusters</h5>
+                                                    </div>
+                                                    <div class="card-body">
+                                                    <h7 class="card-title mt-0"></h7>
+                                                        
+                                                            <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
+                                                            
+                                                                <thead>
+                                                                    <tr>
+                                                                        
+                                                                        
+                                                                        <th>Cluster code</th>
+                                                                        <th>Cluster Name</th>
+                                                                        <th>cohort</th>
+                                                                        <th>GVH</th>
+                                                                        <th>SP Programme</th>
+                                                                        <th>Action</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <?Php
+                                                                        $query="select * from tblcluster ";
 
-                                              
+                                                                        //Variable $link is declared inside config.php file & used here
+                                                                        
+                                                                        if ($result_set = $link->query($query)) {
+                                                                        while($row = $result_set->fetch_array(MYSQLI_ASSOC))
+                                                                        { 
+                                                                        echo "<tr>\n";
+                                                                            
+                                                                        
+                                                                            echo "<td>".$row["ClusterID"]."</td>\n";
+                                                                            echo "<td>".$row["ClusterName"]."</td>\n";
+                                                                            echo "<td>".$row["cohort"]."</td>\n";                                                                            
+                                                                            echo "<td>".$row["gvhID"]."</td>\n";
+                                                                            echo "<td>".$row["programID"]."</td>\n";
+                                                                            
+                                                                            echo "<td>
+                                                                            <a href=\"basicCLSview.php?id=".$row['ClusterID']."\">view</a>\n";
+                                                                            echo
+                                                                                "<a href=\"basicCLSedit.php?id=".$row['ClusterID']."\">edit</a>\n";
+                                                                            
+                                                                            echo 
+                                                                            "<a href=\"basicCLSdelete.php?id=".$row['ClusterID']."\">del</a>    
+                                                                            </td>\n";
+
+                                                                        echo "</tr>\n";
+                                                                        }
+                                                                        $result_set->close();
+                                                                        }  
+                                                                                            
+                                                                    ?>
+                                                                </tbody>
+                                                            </table>
+                                                            </p>
+                                                        </div>
+                                                    </div>     
+                                                </div>            
+                                            </div> 
+                                            <!-- end here -->
+ 
                                         </p>
                                     </div>
                                     <div class="tab-pane" id="slg-reports" role="tabpanel">

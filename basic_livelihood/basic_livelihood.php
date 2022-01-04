@@ -1,19 +1,16 @@
-<?php include ROOT_DIR.'/layouts/session.php'; ?>
+<?php include __DIR__."/../layouts/session.php"; ?>
+<?php include __DIR__."/../layouts/head-main.php"; ?>
 
-<?php include 'layouts/head-main.php'; ?>
 
 <head>
     <title>Basic Livelihood</title>
-    <?php include 'layouts/head.php'; ?>
-    <?php include 'layouts/head-style.php'; ?>
+    <?php include __DIR__."/../layouts/head.php"; ?>
+    <?php include __DIR__."/../layouts/head-style.php"; ?>
 </head>
 
-<?php include 'layouts/body.php'; ?>
-
+<?php include __DIR__."/../layouts/body.php"; ?>
 <!-- Begin page -->
 <div id="layout-wrapper">
-
-    <?php include 'layouts/menu.php'; ?>
 
     <!-- ============================================================== -->
     <!-- Start right Content here -->
@@ -148,7 +145,8 @@
         </div>
         <!-- End Page-content -->
 
-        <?php include 'layouts/footer.php'; ?>
+        <?php include __DIR__."/../layouts/footer.php"; ?>
+        
     </div>
     <!-- end main content-->
 
@@ -156,11 +154,11 @@
 <!-- END layout-wrapper -->
 
 <!-- Right Sidebar -->
-<?php include 'layouts/right-sidebar.php'; ?>
+<?php include __DIR__."/../layouts/right-sidebar.php"; ?>
 <!-- Right-bar -->
 
 <!-- JAVASCRIPT -->
-<?php include 'layouts/vendor-scripts.php'; ?>
+<?php include __DIR__."/../layouts/vendor-scripts.php"; ?>
 
 <!-- App js -->
 <script src="assets/js/app.js"></script>

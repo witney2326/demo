@@ -88,22 +88,20 @@
                                                 </div>
                                                 <div class="card-body">
                                                     <h5 class="card-title mt-0"></h5>
-                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="">
+                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="basic_livelihood_member_mgt_filter1.php" method="GET">
                                                         <div class="col-12">
                                                             <label for="region" class="form-label">Region</label>
                                                             <div>
                                                                 <select class="form-select" name="region" id="region" required>
                                                                     <option selected value = "$region"></option>
                                                                     <?php                                                           
-                                                                            $dis_fetch_query = "SELECT name FROM tblregion";                                                  
+                                                                            $dis_fetch_query = "SELECT regionID,name FROM tblregion";                                                  
                                                                             $result_dis_fetch = mysqli_query($link, $dis_fetch_query);                                                                       
                                                                             $i=0;
                                                                                 while($DB_ROW_reg = mysqli_fetch_array($result_dis_fetch)) {
                                                                             ?>
-                                                                            <option>
-                                                                                <?php
-                                                                                    echo $DB_ROW_reg["name"];
-                                                                                ?>
+                                                                            <option value="<?php echo $DB_ROW_reg["regionID"];?>">
+                                                                                <?php echo $DB_ROW_reg["name"];?>
                                                                             </option>
                                                                             <?php
                                                                                 $i++;
@@ -119,7 +117,7 @@
 
                                                         <div class="col-12">
                                                             <label for="district" class="form-label">District</label>
-                                                            <select class="form-select" name="district" id="district" required>
+                                                            <select class="form-select" name="district" id="district" required disabled>
                                                                 <option selected value="$district" ></option>
                                                                     <?php                                                           
                                                                         $dis_fetch_query = "SELECT DistrictName FROM tbldistrict";                                                  
@@ -139,17 +137,17 @@
                                                         </div>
 
                                                         <div class="col-12">
-                                                            <label for="ta" class="form-label">Traditional Authority</label>
-                                                            <select class="form-select" name="ta" id="ta" required>
-                                                                <option selected  value="$ta"></option>
+                                                            <label for="grp" class="form-label">SL Group</label>
+                                                            <select class="form-select" name="grp" id="grp" required disabled>
+                                                                <option selected  value="$grp"></option>
                                                                 <?php                                                           
-                                                                        $ta_fetch_query = "SELECT TAName FROM tblta";                                                  
-                                                                        $result_ta_fetch = mysqli_query($link, $ta_fetch_query);                                                                       
+                                                                        $grp_fetch_query = "SELECT groupID,groupname FROM tblgroup";                                                  
+                                                                        $result_grp_fetch = mysqli_query($link, $grp_fetch_query);                                                                       
                                                                         $i=0;
-                                                                            while($DB_ROW_ta = mysqli_fetch_array($result_ta_fetch)) {
+                                                                            while($DB_ROW_grp = mysqli_fetch_array($result_grp_fetch)) {
                                                                         ?>
-                                                                        <option>
-                                                                            <?php echo $DB_ROW_ta["TAName"]; ?></option><?php
+                                                                        <option value="<?php echo $DB_ROW_grp["groupID"]; ?>">
+                                                                            <?php echo $DB_ROW_grp["groupname"]; ?></option><?php
                                                                             $i++;
                                                                                 }
                                                                     ?>
@@ -161,7 +159,7 @@
 
                                                         
                                                         <div class="col-12">
-                                                            <button type="submit" class="btn btn-primary w-md" name="FormSubmit" value="Submit">Submit</button>
+                                                            <button type="submit" class="btn btn-primary w-md" name="Submit" value="Submit">Submit</button>
                                                         </div>
                                                     </form>                                             
                                                     <!-- End Here -->

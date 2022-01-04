@@ -20,8 +20,7 @@
     if(isset($_GET['Submit']))
     {   
         $region = $_GET['region'];
-        $district = $_GET['district'];
-        $ta = $_GET['ta'];
+        
      
     }
     
@@ -57,7 +56,7 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                            <h4 class="mb-sm-0 font-size-18"></h4>
+                            <h4 class="mb-sm-0 font-size-18">SLG Management</h4>
 
                             <div class="page-title-right">
                                 <ol class="breadcrumb m-0">
@@ -92,11 +91,11 @@
                                             <!--start here -->
                                             <div class="card border border-primary">
                                                 <div class="card-header bg-transparent border-primary">
-                                                    <h5 class="my-0 text-primary"></i>SLG Search Results For:</h5>
+                                                    <h5 class="my-0 text-primary"></i>SLG Search Results</h5>
                                                 </div>
                                                 <div class="card-body">
                                                     <h5 class="card-title mt-0"></h5>
-                                                    <form class="row row-cols-lg-auto g-3 align-items-center">
+                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="basic_livelihood_slg_mgt_filter2_results.php" method ="GET">
                                                         <div class="col-12">
                                                             <label for="region" class="form-label">Region</label>
                                                             <div>
@@ -109,14 +108,25 @@
                                                         <div class="col-12">
                                                             <label for="district" class="form-label">District</label>
                                                             <select class="form-select" name="district" id="district" value ="$district" required>
-                                                                <option selected value="$district" ><?php echo dis_name($link,$_GET['district']); ?></option>
+                                                                <option selected value="$district" ></option>
+                                                                    <?php                                                           
+                                                                        $dis_fetch_query = "SELECT DistrictID,DistrictName FROM tbldistrict where regionID ='$region'";                                                  
+                                                                        $result_dis_fetch = mysqli_query($link, $dis_fetch_query);                                                                       
+                                                                        $i=0;
+                                                                            while($DB_ROW_Dis = mysqli_fetch_array($result_dis_fetch)) {
+                                                                        ?>
+                                                                        <option value="<?php echo $DB_ROW_Dis["DistrictID"]; ?>">
+                                                                            <?php echo $DB_ROW_Dis["DistrictName"]; ?></option><?php
+                                                                            $i++;
+                                                                                }
+                                                                    ?>
                                                             </select>
                                                         </div>
 
                                                         <div class="col-12">
                                                             <label for="ta" class="form-label">Traditional Authority</label>
-                                                            <select class="form-select" name="ta" id="ta" required>
-                                                                <option selected  value="$ta"><?php echo dis_name($link,$_GET['ta']); ?></option>
+                                                            <select class="form-select" name="ta" id="ta" required disabled>
+                                                                
                                                                 
                                                             </select>
                                                             <div class="invalid-feedback">
@@ -124,6 +134,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="col-12">
+                                                            <button type="submit" class="btn btn-primary w-md" name="Submit" value="Submit">Submit</button>
                                                             <INPUT TYPE="button" VALUE="Back" onClick="history.go(-1);">
                                                         </div>
                                                     </form>                                             
@@ -134,9 +145,11 @@
                                             <div class="row">
                                                 <div class="col-12">
                                                     <div class="card border border-primary">
-                                                    
+                                                    <div class="card-header bg-transparent border-primary">
+                                                        <h5 class="my-0 text-primary"><i class="mdi mdi-bullseye-arrow me-3"></i>Savings and Loan Groups in <?php echo get_rname($link,$region);?> Region</h5>
+                                                    </div>
                                                     <div class="card-body">
-                                                    
+                                                    <h7 class="card-title mt-0"></h7>
                                                         
                                                             <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
                                                             
@@ -149,20 +162,23 @@
                                                                         <th>cohort</th>
                                                                         
                                                                         
-                                                                        <th>No.Male</th>
-                                                                        <th>No.Female</th>
-                                                                        <th>Action</th>
+                                                                        <th>M</th>
+                                                                        <th>F</th>
+                                                                        <th>Act</th>
+                                                                        <th>Act</th>
+                                                                        <th>Act</th>
+                                                                        <th>Act</th>
+                                                                        <th>Act</th>
+                                                                        <th>Act</th>
+                                                                        <th>Act</th>
                                                                     </tr>
                                                                 </thead>
 
 
                                                                 <tbody>
                                                                     <?Php
-                                                                        if (isset($district) && isset($region))
-                                                                        {
-                                                                            $query="select * from tblgroup where ((DistrictID = '$district' AND regionID = '$region') OR (DistrictID = '$district') OR (regionID = '$region')) " ;
-                                                                        
-                                                                        
+                                                                        $query="select * from tblgroup where regionID = '$region'";
+ 
                                                                         //Variable $link is declared inside config.php file & used here
                                                                         
                                                                         if ($result_set = $link->query($query)) {
@@ -180,11 +196,18 @@
                                                                             echo "<td>".$row["MembersF"]."</td>\n";
                                                                             
                                                                             echo "<td>
-                                                                            <a href=\"basicSLGview.php?id=".$row['groupID']."\">view</a>   
-                                                                            <a href=\"basicSLGedit.php?id=".$row['groupID']."\">edit</a> 
-                                                                            <a href=\"basicSLGsavings.php?id=".$row['groupID']."\">sav</a>
-                                                                            <a href=\"basicSLGloans.php?id=".$row['groupID']."\">lns</a> 
-                                                                            <a href=\"basicSLGiga.php?id=".$row['groupID']."\">iga</a> 
+                                                                            <a href=\"basicSLGview.php?id=".$row['groupID']."\">view</a> </td>\n";
+                                                                            echo "<td>
+                                                                                <a href=\"basicSLGedit.php?id=".$row['groupID']."\">edit</a> </td>\n";
+                                                                            echo "<td>
+                                                                            <a href=\"basicSLGsavings.php?id=".$row['groupID']."\">saving</a> </td>\n";
+                                                                            echo "<td>
+                                                                            <a href=\"basicSLGloans.php?id=".$row['groupID']."\">loan</a> </td>\n";
+                                                                            echo "<td>
+                                                                            <a href=\"basicSLGiga.php?id=".$row['groupID']."\">IGA</a> </td>\n";
+                                                                            echo "<td>
+                                                                            <a href=\"basicSLGAddMember.php?id=".$row['groupID']."\">Add_Ben</a> </td>\n";
+                                                                            echo "<td>
                                                                             <a href=\"basicSLGdelete.php?id=".$row['groupID']."\">del</a>    
                                                                             </td>\n";
 
@@ -192,7 +215,7 @@
                                                                         }
                                                                         $result_set->close();
                                                                         }  
-                                                                    }                        
+                                                                                           
                                                                     ?>
                                                                 </tbody>
                                                             </table>
@@ -204,413 +227,7 @@
                                         </p>
                                     </div>
                                     <!-- Here -->
-                                    <div class="tab-pane" id="messages-2" role="tabpanel">
-                                        <p class="mb-0">
-                                            <div class="card border border-primary">
-                                                <div class="card-header bg-transparent border-primary">
-                                                    <h5 class="my-0 text-primary"><i class="mdi mdi-bullseye-arrow me-3"></i>New SLG Cluster</h5>
-                                                </div>
-                                                <div class="card-body">
-                                                    <h5 class="card-title mt-0"></h5>
-                                                    
-                                                    <form action="insertSLG.php" method="post">
-                                                        <!-- start here -->
-                                                        <div class="row">
-                                                            <div class="col-md-2">
-                                                                <div class="mb-2">
-                                                                    <label for="region" class="form-label">Region</label>
-                                                                    <select class="form-select" name="region" id="region" required>
-                                                                        <option selected value = "$region">Select Region...</option>
-                                                                        <?php                                                           
-                                                                                $dis_fetch_query = "SELECT name FROM tblregion";                                                  
-                                                                                $result_dis_fetch = mysqli_query($link, $dis_fetch_query);                                                                       
-                                                                                $i=0;
-                                                                                    while($DB_ROW_reg = mysqli_fetch_array($result_dis_fetch)) {
-                                                                                ?>
-                                                                                <option>
-                                                                                    <?php
-                                                                                        echo $DB_ROW_reg["name"];
-                                                                                    ?>
-                                                                                </option>
-                                                                                <?php
-                                                                                    $i++;
-                                                                                        }
-                                                                            ?>
-                                                                    </select>
-                                                                    <div class="invalid-feedback">
-                                                                        Please select a valid Malawi region.
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-2">
-                                                                <div class="mb-2">
-                                                                    <label for="district" class="form-label">District</label>
-                                                                    <select class="form-select" name="district" id="district" required>
-                                                                        <option selected value="$district" >Select District</option>
-                                                                            <?php
-                                                                                                                                    
-                                                                                $dis_fetch_query = "SELECT DistrictName FROM tbldistrict";                                                  
-                                                                                $result_dis_fetch = mysqli_query($link, $dis_fetch_query);                                                                       
-                                                                                $i=0;
-                                                                                    while($DB_ROW_Dis = mysqli_fetch_array($result_dis_fetch)) {
-                                                                                ?>
-                                                                                <option>
-                                                                                    <?php echo $DB_ROW_Dis["DistrictName"]; ?></option><?php
-                                                                                    $i++;
-                                                                                        }
-                                                                            ?>
-                                                                    </select>
-                                                                    <div class="invalid-feedback">
-                                                                        Please select a valid Malawi district.
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-2">
-                                                                <div class="mb-2">
-                                                                    <label for="ta" class="form-label">TA</label>
-                                                                    <select class="form-select" name="ta" id="ta" required>
-                                                                        <option selected  value="$ta">Choose...</option>
-                                                                        <?php                                                           
-                                                                                $ta_fetch_query = "SELECT TAName FROM tblta";                                                  
-                                                                                $result_ta_fetch = mysqli_query($link, $ta_fetch_query);                                                                       
-                                                                                $i=0;
-                                                                                    while($DB_ROW_ta = mysqli_fetch_array($result_ta_fetch)) {
-                                                                                ?>
-                                                                                <option>
-                                                                                    <?php echo $DB_ROW_ta["TAName"]; ?></option><?php
-                                                                                    $i++;
-                                                                                        }
-                                                                            ?>
-                                                                    </select>
-                                                                    <div class="invalid-feedback">
-                                                                        Please select a valid TA.
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-2">
-                                                                <div class="mb-2">
-                                                                    <label for="gvh" class="form-label">GVH</label>
-                                                                    <input type="text" name="GVHID" class="form-control" required>              
-                                                                    <div class="invalid-feedback">
-                                                                        Please select a valid Group Village Head.
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-2">
-                                                                <div class="mb-3">
-                                                                    <label for="village" class="form-label">Village</label>
-                                                                    <input type="text" name="village" class="form-control" required>                                                  
-                                                                    <div class="invalid-feedback">
-                                                                        Please select a valid Village in Malawi.
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            
-                                                        </div>
-                                                        <!-- End here -->
-                                                        <div class="row">
-                                                            <div class="col-md-2">
-                                                                <div class="mb-2">
-                                                                    <div class="form-group">
-                                                                        <label for="groupID" class="form-label">Group ID</label>
-                                                                        <input type="text" name="groupID" class="form-control" disabled ="True">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-2">
-                                                                <div class="mb-2">
-                                                                    <div class="form-group">
-                                                                        <label for="groupname" class="form-label">Group Name</label>
-                                                                        <input type="text" name="groupname" class="form-control">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-2">
-                                                                <div class="mb-2">
-                                                                    <div class="form-group">
-                                                                        <label>Date Established</label>
-                                                                        <input type="date" name="DateEstablished" class="form-control">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-2">
-                                                                <div class="mb-2">
-                                                                    <div class="form-group">
-                                                                        <label>Cluster Name</label>
-                                                                        <input type="text" name="clusterID" class="form-control">
-                                                                    </div>                                                                                                             
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-md-2">
-                                                                <div class="mb-2">
-                                                                    <div class="form-group">
-                                                                        <label>No Males</label>
-                                                                        <input type="text" name="membersM" class="form-control">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-2">
-                                                                <div class="mb-2">
-                                                                    <div class="form-group">
-                                                                    <label>No Females</label>
-                                                                        <input type="text" name="membersF" class="form-control">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        
-                                                        
-                                                        <input type="submit" class="btn btn-primary" name="submit" value="Submit New SLG Cluster">
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </p>
-                                    </div>
-                                    <!-- end here -->
-                                    <div class="tab-pane" id="slg-1" role="tabpanel">
-                                        <p class="mb-0">
-                                            <div class="card border border-primary">
-                                                <div class="card-header bg-transparent border-primary">
-                                                    <h5 class="my-0 text-primary"><i class="mdi mdi-bullseye-arrow me-3"></i>New SLG</h5>
-                                                </div>
-                                                <div class="card-body">
-                                                    <h5 class="card-title mt-0"></h5>
-                                                    
-                                                    <form action="insertSLG.php" method="post">
-                                                        <!-- start here -->
-                                                        <div class="row">
-                                                            <div class="col-md-2">
-                                                                <div class="mb-2">
-                                                                    <label for="region" class="form-label">Region</label>
-                                                                    <select class="form-select" name="region" id="region" required>
-                                                                        <option selected value = "$region">Select Region...</option>
-                                                                        <?php                                                           
-                                                                                $dis_fetch_query = "SELECT name FROM tblregion";                                                  
-                                                                                $result_dis_fetch = mysqli_query($link, $dis_fetch_query);                                                                       
-                                                                                $i=0;
-                                                                                    while($DB_ROW_reg = mysqli_fetch_array($result_dis_fetch)) {
-                                                                                ?>
-                                                                                <option>
-                                                                                    <?php
-                                                                                        echo $DB_ROW_reg["name"];
-                                                                                    ?>
-                                                                                </option>
-                                                                                <?php
-                                                                                    $i++;
-                                                                                        }
-                                                                            ?>
-                                                                    </select>
-                                                                    <div class="invalid-feedback">
-                                                                        Please select a valid Malawi region.
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-2">
-                                                                <div class="mb-2">
-                                                                    <label for="district" class="form-label">District</label>
-                                                                    <select class="form-select" name="district" id="district" required>
-                                                                        <option selected value="$district" >Select District</option>
-                                                                            <?php
-                                                                                                                                    
-                                                                                $dis_fetch_query = "SELECT DistrictName FROM tbldistrict";                                                  
-                                                                                $result_dis_fetch = mysqli_query($link, $dis_fetch_query);                                                                       
-                                                                                $i=0;
-                                                                                    while($DB_ROW_Dis = mysqli_fetch_array($result_dis_fetch)) {
-                                                                                ?>
-                                                                                <option>
-                                                                                    <?php echo $DB_ROW_Dis["DistrictName"]; ?></option><?php
-                                                                                    $i++;
-                                                                                        }
-                                                                            ?>
-                                                                    </select>
-                                                                    <div class="invalid-feedback">
-                                                                        Please select a valid Malawi district.
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-2">
-                                                                <div class="mb-2">
-                                                                    <label for="ta" class="form-label">TA</label>
-                                                                    <select class="form-select" name="ta" id="ta" required>
-                                                                        <option selected  value="$ta">Choose...</option>
-                                                                        <?php                                                           
-                                                                                $ta_fetch_query = "SELECT TAName FROM tblta";                                                  
-                                                                                $result_ta_fetch = mysqli_query($link, $ta_fetch_query);                                                                       
-                                                                                $i=0;
-                                                                                    while($DB_ROW_ta = mysqli_fetch_array($result_ta_fetch)) {
-                                                                                ?>
-                                                                                <option>
-                                                                                    <?php echo $DB_ROW_ta["TAName"]; ?></option><?php
-                                                                                    $i++;
-                                                                                        }
-                                                                            ?>
-                                                                    </select>
-                                                                    <div class="invalid-feedback">
-                                                                        Please select a valid TA.
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-2">
-                                                                <div class="mb-2">
-                                                                    <label for="gvh" class="form-label">GVH</label>
-                                                                    <input type="text" name="GVHID" class="form-control" required>              
-                                                                    <div class="invalid-feedback">
-                                                                        Please select a valid Group Village Head.
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-2">
-                                                                <div class="mb-3">
-                                                                    <label for="village" class="form-label">Village</label>
-                                                                    <input type="text" name="village" class="form-control" required>                                                  
-                                                                    <div class="invalid-feedback">
-                                                                        Please select a valid Village in Malawi.
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            
-                                                        </div>
-                                                        <!-- End here -->
-                                                        <div class="row">
-                                                            <div class="col-md-2">
-                                                                <div class="mb-2">
-                                                                    <div class="form-group">
-                                                                        <label for="groupID" class="form-label">Group ID</label>
-                                                                        <input type="text" name="groupID" class="form-control" disabled ="True">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-2">
-                                                                <div class="mb-2">
-                                                                    <div class="form-group">
-                                                                        <label for="groupname" class="form-label">Group Name</label>
-                                                                        <input type="text" name="groupname" class="form-control">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-2">
-                                                                <div class="mb-2">
-                                                                    <div class="form-group">
-                                                                        <label>Date Established</label>
-                                                                        <input type="date" name="DateEstablished" class="form-control">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-2">
-                                                                <div class="mb-2">
-                                                                    <div class="form-group">
-                                                                        <label>Cluster Name</label>
-                                                                        <input type="text" name="clusterID" class="form-control">
-                                                                    </div>                                                                                                             
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-2">
-                                                                <div class="mb-2">
-                                                                    <label for="spp" class="form-label">SP Program</label>
-                                                                    <select class="form-select" name="spp" id="spp" required>
-                                                                        <option >Choose...</option>
-                                                                        <?php                                                           
-                                                                                $spp_fetch_query = "SELECT pID,pName FROM tblprogram";                                                  
-                                                                                $result_spp_fetch = mysqli_query($link, $spp_fetch_query);                                                                       
-                                                                                $i=0;
-                                                                                    while($DB_ROW_spp = mysqli_fetch_array($result_spp_fetch)) {
-                                                                                ?>
-                                                                                <option value="<?php echo $DB_ROW_spp["pID"]; ?>">
-                                                                                    <?php echo $DB_ROW_spp["pName"]; ?></option><?php
-                                                                                    $i++;
-                                                                                        }
-                                                                            ?>
-                                                                    </select>
-                                                                    <div class="invalid-feedback">
-                                                                        Please select a valid Program.
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-md-2">
-                                                                <div class="mb-2">
-                                                                    <div class="form-group">
-                                                                        <label>No Males</label>
-                                                                        <input type="text" name="membersM" class="form-control">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-2">
-                                                                <div class="mb-2">
-                                                                    <div class="form-group">
-                                                                    <label>No Females</label>
-                                                                        <input type="text" name="membersF" class="form-control">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-2">
-                                                                <div class="mb-2">
-                                                                    <label for="Cohort" class="form-label">Cohort</label>
-                                                                    <select class="form-select" name="Cohort" id="Cohort" required>
-                                                                        <option value ="1">1</option>
-                                                                        <option value ="2">2</option>
-                                                                        <option value ="3">3</option>
-                                                                        <option value ="4">4</option>                                                                    
-                                                                    </select>
-                                                                    <div class="invalid-feedback">
-                                                                        Please select a valid Cohort.
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-2">
-                                                                <div class="mb-2">
-                                                                    <label for="cw" class="form-label">Case Worker</label>
-                                                                    <select class="form-select" name="cw" id="cw" required>
-                                                                        
-                                                                        <?php                                                           
-                                                                                $cw_fetch_query = "SELECT cwID,cwName FROM tblcw";                                                  
-                                                                                $result_cw_fetch = mysqli_query($link, $cw_fetch_query);                                                                       
-                                                                                $i=0;
-                                                                                    while($DB_ROW_cw = mysqli_fetch_array($result_cw_fetch)) {
-                                                                                ?>
-                                                                                <option value="<?php echo $DB_ROW_cw["cwID"]; ?>">
-                                                                                    <?php echo $DB_ROW_cw["cwName"]; ?></option><?php
-                                                                                    $i++;
-                                                                                        }
-                                                                            ?>
-                                                                    </select>
-                                                                    <div class="invalid-feedback">
-                                                                        Please select a valid Case Worker.
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <input type="submit" class="btn btn-primary" name="submit" value="Submit New SLG">
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </p>
-                                    </div>
-                                    <div class="tab-pane" id="messages-1" role="tabpanel">
-                                        <p class="mb-0">
-                                            Etsy mixtape wayfarers, ethical wes anderson tofu before they
-                                            sold out mcsweeney's organic lomo retro fanny pack lo-fi
-                                            farm-to-table readymade. Messenger bag gentrify pitchfork
-                                            tattooed craft beer, iphone skateboard locavore carles etsy
-                                            salvia banksy hoodie helvetica. DIY synth PBR banksy irony.
-                                            Leggings gentrify squid 8-bit cred pitchfork. Williamsburg banh
-                                            mi whatever gluten-free.
-                                        </p>
-                                    </div>
-                                    <div class="tab-pane" id="settings-1" role="tabpanel">
-                                        <p class="mb-0">
-                                            Trust fund seitan letterpress, keytar raw denim keffiyeh etsy
-                                            art party before they sold out master cleanse gluten-free squid
-                                            scenester freegan cosby sweater. Fanny pack portland seitan DIY,
-                                            art party locavore wolf cliche high life echo park Austin. Cred
-                                            vinyl keffiyeh DIY salvia PBR, banh mi before they sold out
-                                            farm-to-table.
-                                        </p>
-                                    </div>
+        
                                 </div>
 
                             </div>

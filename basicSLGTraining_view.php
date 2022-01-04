@@ -14,6 +14,7 @@
     <?php
         include "layouts/config.php"; // Using database connection file here
         
+        
         $id = $_GET['id']; // get id through query string
        $query="select * from tblgroup where groupID='$id'";
         
@@ -40,6 +41,13 @@
         $dis = mysqli_fetch_array($dis_query);// fetch data
         return $dis['DistrictName'];
         } 
+
+        function cls_name($link, $clsID)
+        {
+        $cls_query = mysqli_query($link,"select ClusterName from tblcluster where ClusterID='$clsID'"); // select query
+        $cls = mysqli_fetch_array($cls_query);// fetch data
+        return $cls['ClusterName'];
+        }
     ?>
 
     <!-- ============================================================== -->
@@ -76,7 +84,7 @@
 
                                             <label for="cluster" class="col-sm-3 col-form-label">Cluster Name</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="cluster" name="cluster" value ="<?php echo $clusterID ; ?>" style="max-width:30%;" disabled ="True">
+                                                <input type="text" class="form-control" id="cluster" name="cluster" value ="<?php echo cls_name($link,$clusterID) ; ?>" style="max-width:30%;" disabled ="True">
                                             </div>
 
                                             <label for="cohort" class="col-sm-3 col-form-label">Cohort</label>
@@ -97,7 +105,7 @@
                                                 
                                             <div class="col-sm-2">
                                             <?php
-                                                    $query_training="select TrainingID from cimis_sql.tblgrouptrainings where ((groupID='$id') and (TrainingTypeID ='01'))";
+                                                    $query_training="select TrainingID from tblgrouptrainings where ((groupID='$id') and (TrainingTypeID ='01'))";
                                                     if ($result_set_GD = $link->query($query_training)) {
                                                         while($row_GD = $result_set_GD->fetch_array(MYSQLI_ASSOC))
                                                         { 
@@ -115,7 +123,7 @@
                                                 
                                             <div class="col-sm-2">
                                             <?php
-                                                    $query_training="select TrainingID from cimis_sql.tblgrouptrainings where ((groupID='$id') and (TrainingTypeID ='02'))";
+                                                    $query_training="select TrainingID from tblgrouptrainings where ((groupID='$id') and (TrainingTypeID ='02'))";
                                                     if ($result_set_FLT = $link->query($query_training)) {
                                                         while($row_FLT = $result_set_FLT->fetch_array(MYSQLI_ASSOC))
                                                         { 
@@ -133,7 +141,7 @@
                                                 
                                             <div class="col-sm-2">
                                             <?php
-                                                    $query_training="select TrainingID from cimis_sql.tblgrouptrainings where ((groupID='$id') and (TrainingTypeID ='03'))";
+                                                    $query_training="select TrainingID from tblgrouptrainings where ((groupID='$id') and (TrainingTypeID ='03'))";
                                                     if ($result_set_BMT = $link->query($query_training)) {
                                                         while($row_BMT = $result_set_BMT->fetch_array(MYSQLI_ASSOC))
                                                         { 
@@ -151,7 +159,7 @@
                                                 
                                                 <div class="col-sm-2">
                                                 <?php
-                                                        $query_training="select TrainingID from cimis_sql.tblgrouptrainings where ((groupID='$id') and (TrainingTypeID ='04'))";
+                                                        $query_training="select TrainingID from tblgrouptrainings where ((groupID='$id') and (TrainingTypeID ='04'))";
                                                         if ($result_set_RK = $link->query($query_training)) {
                                                             while($row_RK = $result_set_RK->fetch_array(MYSQLI_ASSOC))
                                                             { 
@@ -169,7 +177,7 @@
                                                 
                                                 <div class="col-sm-2">
                                                 <?php
-                                                        $query_training="select TrainingID from cimis_sql.tblgrouptrainings where ((groupID='$id') and (TrainingTypeID ='05'))";
+                                                        $query_training="select TrainingID from tblgrouptrainings where ((groupID='$id') and (TrainingTypeID ='05'))";
                                                         if ($result_set_BK = $link->query($query_training)) {
                                                             while($row_BK = $result_set_BK->fetch_array(MYSQLI_ASSOC))
                                                             { 
@@ -187,7 +195,7 @@
                                                 
                                                 <div class="col-sm-2">
                                                 <?php
-                                                        $query_training="select TrainingID from cimis_sql.tblgrouptrainings where ((groupID='$id') and (TrainingTypeID ='06'))";
+                                                        $query_training="select TrainingID from tblgrouptrainings where ((groupID='$id') and (TrainingTypeID ='06'))";
                                                         if ($result_set_SG = $link->query($query_training)) {
                                                             while($row_SG = $result_set_SG->fetch_array(MYSQLI_ASSOC))
                                                             { 
@@ -205,7 +213,7 @@
                                                 
                                                 <div class="col-sm-2">
                                                 <?php
-                                                        $query_training="select TrainingID from cimis_sql.tblgrouptrainings where ((groupID='$id') and (TrainingTypeID ='07'))";
+                                                        $query_training="select TrainingID from tblgrouptrainings where ((groupID='$id') and (TrainingTypeID ='07'))";
                                                         if ($result_set_GN = $link->query($query_training)) {
                                                             while($row_GN = $result_set_GN->fetch_array(MYSQLI_ASSOC))
                                                             { 
@@ -223,7 +231,7 @@
                                                 
                                                 <div class="col-sm-2">
                                                 <?php
-                                                        $query_training="select TrainingID from cimis_sql.tblgrouptrainings where ((groupID='$id') and (TrainingTypeID ='08'))";
+                                                        $query_training="select TrainingID from tblgrouptrainings where ((groupID='$id') and (TrainingTypeID ='08'))";
                                                         if ($result_set_DRA = $link->query($query_training)) {
                                                             while($row_DRA = $result_set_DRA->fetch_array(MYSQLI_ASSOC))
                                                             { 

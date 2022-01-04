@@ -94,7 +94,7 @@
                                                 </div>
                                                 <div class="card-body">
                                                     <h5 class="card-title mt-0"></h5>
-                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="basic_livelihood_slg_mgt_new_slg_filter2_results.php" method ="GET">
+                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="basic_livelihood_slg_mgt_cls_filter3_results.php" method ="GET">
                                                         <div class="col-12">
                                                             <label for="region" class="form-label">Region</label>
                                                             <div>
@@ -135,6 +135,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="col-12">
+                                                            <button type="submit" class="btn btn-primary w-md" name="Submit" value="Submit">Submit</button>
                                                             <INPUT TYPE="button" VALUE="Back" onClick="history.go(-1);">
                                                         </div>
                                                     </form>                                             

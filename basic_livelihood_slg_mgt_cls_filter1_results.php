@@ -146,9 +146,71 @@
                                             
                                         </p>
                                     </div>
-                                    <!-- Here -->
-                                
+                                    <!-- start Here -->
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="card border border-primary">
+                                            <div class="card-header bg-transparent border-primary">
+                                                <h5 class="my-0 text-primary"><i class="mdi mdi-bullseye-arrow me-3"></i>SLG Clusters in <?php echo get_rname($link,$region); ?> Region</h5>
+                                            </div>
+                                            <div class="card-body">
+                                            <h7 class="card-title mt-0"></h7>
+                                                
+                                                    <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
+                                                    
+                                                        <thead>
+                                                            <tr>
+                                                                
+                                                                
+                                                                <th>Cluster code</th>
+                                                                <th>Cluster Name</th>
+                                                                <th>cohort</th>
+                                                                <th>GVH</th>
+                                                                <th>SP Programme</th>
+                                                                <th>Action</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <?Php
+                                                                $query="select * from tblcluster where regionID = '$region'";
 
+                                                                //Variable $link is declared inside config.php file & used here
+                                                                
+                                                                if ($result_set = $link->query($query)) {
+                                                                while($row = $result_set->fetch_array(MYSQLI_ASSOC))
+                                                                { 
+                                                                echo "<tr>\n";
+                                                                    
+                                                                
+                                                                    echo "<td>".$row["ClusterID"]."</td>\n";
+                                                                    echo "<td>".$row["ClusterName"]."</td>\n";
+                                                                    echo "<td>".$row["cohort"]."</td>\n";                                                                            
+                                                                    echo "<td>".$row["gvhID"]."</td>\n";
+                                                                    echo "<td>".$row["programID"]."</td>\n";
+                                                                    
+                                                                    echo "<td>
+                                                                    <a href=\"basicCLSview.php?id=".$row['ClusterID']."\">view</a>\n";
+                                                                    echo
+                                                                        "<a href=\"basicCLSedit.php?id=".$row['ClusterID']."\">edit</a>\n";
+                                                                    
+                                                                    echo 
+                                                                    "<a href=\"basicCLSdelete.php?id=".$row['ClusterID']."\">del</a>    
+                                                                    </td>\n";
+
+                                                                echo "</tr>\n";
+                                                                }
+                                                                $result_set->close();
+                                                                }  
+                                                                                    
+                                                            ?>
+                                                        </tbody>
+                                                    </table>
+                                                    </p>
+                                                </div>
+                                            </div>     
+                                        </div>            
+                                    </div> 
+                                    <!-- start Here -->
                             </div>
                         </div>
                     </div>

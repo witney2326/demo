@@ -54,6 +54,13 @@
         $ta = mysqli_fetch_array($region_query);// fetch data
         return $ta['TAName'];
         }
+
+        function cls_name($link, $clscode)
+        {
+        $cls_query = mysqli_query($link,"select ClusterName from tblcluster where ClusterID='$clscode'"); // select query
+        $cls = mysqli_fetch_array($cls_query);// fetch data
+        return $cls['ClusterName'];
+        }
                
     ?>
 
@@ -81,67 +88,67 @@
                                         <div class="row mb-4">
                                             <label for="group_id" class="col-sm-3 col-form-label">Group ID</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="group_id" name = "group_id" value="<?php echo $id ; ?>" disabled ="True">
+                                                <input type="text" class="form-control" id="group_id" name = "group_id" value="<?php echo $id ; ?>" style="max-width:30%;" disabled ="True">
                                             </div>
                                         </div>
                                         <div class="row mb-4">
                                             <label for="group_name" class="col-sm-3 col-form-label">SL Group Name</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="group_name" name ="group_name" value = "<?php echo $groupname ; ?>" disabled ="True">
+                                                <input type="text" class="form-control" id="group_name" name ="group_name" value = "<?php echo $groupname ; ?>" style="max-width:30%;" disabled ="True">
                                             </div>
                                         </div>
                                         <div class="row mb-4">
                                             <label for="date_formed" class="col-sm-3 col-form-label">Date Formed</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="date_formed" name="date_formed" value ="<?php echo $DateEstablished ; ?>" disabled ="True">
+                                                <input type="text" class="form-control" id="date_formed" name="date_formed" value ="<?php echo $DateEstablished ; ?>" style="max-width:30%;" disabled ="True">
                                             </div>
                                         </div>
                                         <div class="row mb-4">
                                             <label for="region" class="col-sm-3 col-form-label">Region</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="region" name="region" value ="<?php echo r_name($link,$regionID) ; ?>" disabled ="True">
+                                                <input type="text" class="form-control" id="region" name="region" value ="<?php echo r_name($link,$regionID) ; ?>" style="max-width:30%;" disabled ="True">
                                             </div>
                                         </div>
                                         <div class="row mb-4">
                                             <label for="district" class="col-sm-3 col-form-label">District</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="district" name="district" value ="<?php echo dis_name($link,$DistrictID) ; ?>" disabled ="True">
+                                                <input type="text" class="form-control" id="district" name="district" value ="<?php echo dis_name($link,$DistrictID) ; ?>" style="max-width:30%;" disabled ="True">
                                             </div>
                                         </div>
                                         <div class="row mb-4">
                                             <label for="ta" class="col-sm-3 col-form-label">Traditional Authority</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="ta" name="ta" value ="<?php echo ta_name($link,$TAID) ; ?>" disabled ="True">
+                                                <input type="text" class="form-control" id="ta" name="ta" value ="<?php echo ta_name($link,$TAID) ; ?>" style="max-width:30%;" disabled ="True">
                                             </div>
                                         </div>
                                         <div class="row mb-4">
                                             <label for="gvh" class="col-sm-3 col-form-label">Group Village Head</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="gvh" name="gvh" value ="<?php echo $gvhID ; ?>" disabled ="True">
+                                                <input type="text" class="form-control" id="gvh" name="gvh" value ="<?php echo $gvhID ; ?>" disabled ="True" style="max-width:30%;" >
                                             </div>
                                         </div>
                                         <div class="row mb-4">
                                             <label for="no_males" class="col-sm-3 col-form-label">No. Of Males</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="no_males" name="no_males" value ="<?php echo $MembersM ; ?>" disabled ="True">
+                                                <input type="text" class="form-control" id="no_males" name="no_males" value ="<?php echo $MembersM ; ?>" style="max-width:30%;" disabled ="True">
                                             </div>
                                         </div>
                                         <div class="row mb-4">
                                             <label for="no_females" class="col-sm-3 col-form-label">No. Of Females</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="no_females" name="no_females" value ="<?php echo $MembersF ; ?>" disabled ="True">
+                                                <input type="text" class="form-control" id="no_females" name="no_females" value ="<?php echo $MembersF ; ?>" style="max-width:30%;" disabled ="True">
                                             </div>
                                         </div>
                                         <div class="row mb-4">
                                             <label for="cluster" class="col-sm-3 col-form-label">Cluster Name</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="cluster" name="cluster" value ="<?php echo $clusterID ; ?>" disabled ="True">
+                                                <input type="text" class="form-control" id="cluster" name="cluster" value ="<?php echo cls_name($link,$clusterID) ; ?>" style="max-width:30%;" disabled ="True">
                                             </div>
                                         </div>
                                         <div class="row mb-4">
                                             <label for="cohort" class="col-sm-3 col-form-label">Cohort</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="cohort" name="cohort" value =" <?php echo $cohort ; ?>" disabled ="True">
+                                                <input type="text" class="form-control" id="cohort" name="cohort" value =" <?php echo $cohort ; ?>" style="max-width:30%;" disabled ="True">
                                             </div>
                                         </div>
 

@@ -100,10 +100,10 @@ $test = 85;
         ]);
 
         // Optional; add a title and set the width and height of the chart
-        var options = {'title':'', 'width':370, 'height':250};
+        var options = {'title':'SL Groups Per District', 'width':370, 'height':250};
 
-        // Display the chart inside the <div> element with id="piechart"
-        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+        // 
+        var chart = new google.visualization.ColumnChart(document.getElementById('grps_per_district'));
         chart.draw(data, options);
         }
     </script> 
@@ -133,10 +133,43 @@ $test = 85;
         ]);
 
         // Optional; add a title and set the width and height of the chart
+        var options = {'title':'Actual Households', 'width':370, 'height':250};
+
+        // Display the chart inside the <div> element with id="piechart"
+        var chart = new google.visualization.PieChart(document.getElementById('actual_hhs'));
+        chart.draw(data, options);
+        }
+    </script> 
+
+<script type="text/javascript">
+        // Load google charts
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+        
+        // Draw the chart and set the chart values
+        function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+        
+        ['District', 'membership'],
+        <?php 
+            $select_query = "SELECT tbldistrict.DistrictName as District,(sum(tblgroup.MembersF)+sum(tblgroup.MembersF)) as membership
+            FROM tblgroup 
+            inner join tbldistrict on tblgroup.DistrictID = tbldistrict.DistrictID
+            GROUP BY tbldistrict.DistrictName";
+            $query_result = mysqli_query($link,$select_query);
+            while($row_val = mysqli_fetch_array($query_result)){
+                
+            echo "['".$row_val['District']."',".$row_val['membership']."],";
+            }
+        ?>
+        
+        ]);
+
+        // Optional; add a title and set the width and height of the chart
         var options = {'title':'', 'width':370, 'height':250};
 
         // Display the chart inside the <div> element with id="piechart"
-        var chart = new google.visualization.PieChart(document.getElementById('piechart2'));
+        var chart = new google.visualization.PieChart(document.getElementById('piechart3'));
         chart.draw(data, options);
         }
     </script> 
@@ -180,7 +213,39 @@ $test = 85;
         // Draw the chart and set the chart values
         function drawChart() {
         var data = google.visualization.arrayToDataTable([
+        ['district', 'member_savings'],
+        <?php 
+            $select_query = "SELECT tbldistrict.DistrictName as district ,sum(amount) as member_savings FROM tblslg_member_savings inner join tbldistrict on tbldistrict.DistrictID = tblslg_member_savings.districtID  GROUP BY tbldistrict.DistrictName;";
+            $query_result = mysqli_query($link,$select_query);
+            while($row_val = mysqli_fetch_array($query_result)){
+                $mon = $row_val['district'];
+            echo "['".$mon."',".$row_val['member_savings']."],";
+            }
+        ?>
+        
+        ]);
+
+        
+
+        // Optional; add a title and set the width and height of the chart
+        var options = {'title':'Member Savings', 'width':370, 'height':250};
+
+        // Display the chart inside the <div> element with id="barchart"
+        var chart = new google.visualization.ColumnChart(document.getElementById('MemberSavings'));
+        chart.draw(data, options);
+        }
+    </script> 
+
+<script type="text/javascript">
+        // Load google charts
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+
+        // Draw the chart and set the chart values
+        function drawChart() {
+        var data = google.visualization.arrayToDataTable([
         ['District', 'TotalSavings'],
+        
         <?php 
             $select_query = "SELECT tbldistrict.DistrictName as District, SUM(tblgroupsavings.Amount) as TotalSavings
             FROM tblgroupsavings 
@@ -195,10 +260,10 @@ $test = 85;
         ]);
 
         // Optional; add a title and set the width and height of the chart
-        var options = {'title':'', 'width':370, 'height':250};
+        var options = {'title':'Savings per District', 'width':370, 'height':250};
 
         // Display the chart inside the <div> element with id="barchart"
-        var chart = new google.visualization.BarChart(document.getElementById('barchart2'));
+        var chart = new google.visualization.ColumnChart(document.getElementById('savings_per_district'));
         chart.draw(data, options);
         }
     </script> 
@@ -261,16 +326,19 @@ $test = 85;
                                                                             </div> 
                                                                         </h4>
                                                             </div>
-                                                            <div class="mini-stat-icon avatar-sm rounded-circle bg-primary align-self-center">
-                                                                <span class="avatar-title">
+                                                            <div class="mini-stat-icon avatar-sm rounded-circle bg-primary align-self-center">  
+                                                            <span class="avatar-title">
                                                                     <i class="bx bx-copy-alt font-size-24"></i>
                                                                 </span>
+                                                                
                                                             </div>
                                                         </div>
                                                     </div>
+                                                   
                                             </div>  
                                         <!-- -->
                                         </div>
+                                        <a href="basic_livelihood_hh_mgt.php">more ..</a>
                                     </div>
                                     <div class="card border">
                                         <img src="..." class="card-img-top" alt="">
@@ -292,7 +360,7 @@ $test = 85;
                                                 </div>
                                             </div>
                                         </div>
-
+                                        <a href="">more ..</a>
                                     </div>
                                     <div class="card border">
                                         <img src="..." class="card-img-top" alt="">
@@ -315,6 +383,7 @@ $test = 85;
                                             </div>
 
                                         </div>
+                                        <a href="">more ..</a>
                                     </div>
 
                                     <div class="card border">
@@ -338,6 +407,7 @@ $test = 85;
                                             </div>
 
                                         </div>
+                                        <a href="">more ..</a>
                                     </div>
                                 </div>
                             </div>
@@ -355,9 +425,9 @@ $test = 85;
                                         $row_val = mysqli_fetch_array($query_result);
                                          $CurGroups =  $row_val['TotalGroups'];
                                     ?>
-                                    <h6 class="my-0 text-primary">SLGs Formed Per District; Total: <?php echo number_format("$CurGroups")."<br>"  ?> </h6>
+                                    <h6 class="my-0 text-primary">Total: <?php echo number_format("$CurGroups")."<br>"  ?> </h6>
                                 </div>
-                                <div id="piechart"></div> 
+                                <div id="grps_per_district"></div> 
                             </div>
                         </div>
                         <div class = "col-lg-6">
@@ -369,9 +439,9 @@ $test = 85;
                                         $row_val = mysqli_fetch_array($query_result);
                                          $CurSavings =  $row_val['TotalSavings'];
                                     ?>
-                                    <h6 class="my-0 text-primary">Savings Mobilisation Per District; Total: MK<?php echo number_format("$CurSavings",2)."<br>"  ?></h6>
+                                    <h6 class="my-0 text-primary">Total: MK<?php echo number_format("$CurSavings",2)."<br>"  ?></h6>
                                 </div>
-                                <div id="barchart2"></div>
+                                <div id="savings_per_district"></div>
                             </div>
                         </div>   
                     </div>
@@ -381,22 +451,48 @@ $test = 85;
                         <div class = "col-lg-6">
                             <div class="card border border-success">
                                 <div class="card-header bg-transparent border-primary">
-                                    <h6 class="my-0 text-primary">Basic Livelihood Household Distribution: <?php echo $sum;?></h6>
+                                    <h6 class="my-0 text-primary">Total: <?php echo $sum;?></h6>
                                 </div>
-                                <div id="piechart2"></div> 
+                                <div id="actual_hhs"></div> 
                             </div>
                         </div>
                         <div class = "col-lg-6">
                             <div class="card border border-success">
                                 <div class="card-header bg-transparent border-primary">
-                                    <h5 class="my-0 text-primary">Savings Mobilisation</h5>
+                                 <?php 
+                                        $select_query = "SELECT SUM((MembersF)+(MembersM)) as TotalMembers FROM tblgroup";
+                                        $query_result = mysqli_query($link,$select_query);
+                                        $row_val = mysqli_fetch_array($query_result);
+                                         $totalM =  $row_val['TotalMembers'];
+                                    ?>
+                                    <h5 class="my-0 text-primary">Expected Household Distribution (BL):<?php echo $totalM;?></h5>
                                 </div>
-                                <div id="barchart"></div> 
+                                <div id="piechart3"></div> 
                             </div>
                         </div>   
                     </div>        
 
-                    
+                    <!-- here -->
+                    <div class = "row">
+                                                
+                        <div class = "col-lg-6">
+                            <div class="card border border-success">
+                                <div class="card-header bg-transparent border-primary">
+                                    <h6 class="my-0 text-primary">Group Savings: </h6>
+                                </div>
+                                <div id="barchart"></div> 
+                            </div>
+                        </div>
+                        <div class = "col-lg-6">
+                            <div class="card border border-success">
+                                <div class="card-header bg-transparent border-primary">
+                                    
+                                    <h5 class="my-0 text-primary">Member Savings:</h5>
+                                </div>
+                                <div id="MemberSavings"></div> 
+                            </div>
+                        </div>   
+                    </div>        
                 <!-- end row -->
 
                 

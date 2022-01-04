@@ -17,17 +17,10 @@
 <?php include 'layouts/body.php'; ?>
 
 <?php 
-    if(isset($_GET['Submit']))
-    {   
-        $region = $_GET['region'];
-        $district = $_GET['district'];
-        $ta = $_GET['ta'];
-     
-    }
-    
-    function get_rname($link, $rcode)
+        
+    function issue_name($link, $icode)
         {
-        $rg_query = mysqli_query($link,"select name from tblregion where regionID='$rcode'"); // select query
+        $rg_query = mysqli_query($link,"select name from tblissues where id='$icode'"); // select query
         $rg = mysqli_fetch_array($rg_query);// fetch data
         return $rg['name'];
         }
@@ -91,13 +84,13 @@
                                         </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link" data-bs-toggle="tab" href="#sensitization" role="tab">
+                                        <a class="link"  href="basic_livelihood_cbdra_hotspots.php" role="link">
                                             <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
-                                            <span class="d-none d-sm-block">Trainer Of Trainers</span>
+                                            <span class="d-none d-sm-block">Add Hotspot</span>
                                         </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link" data-bs-toggle="tab" href="#clinics" role="tab">
+                                        <a class="link" data-bs-toggle="link" href="basic_livelihood_pyschosocial_clinics.php" role="link">
                                             <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
                                             <span class="d-none d-sm-block">Pysochosocial Clinics</span>
                                         </a>
@@ -142,116 +135,7 @@
 
                                     <div class="tab-pane active" id="hotspots" role="tabpanel">
                                         <p class="mb-0">
-                                            <div class="card border border-primary">
-                                                <div class="card-header bg-transparent border-primary">
-                                                    <h5 class="my-0 text-primary"></i>Hotspots</h5>
-                                                </div>
-                                                <div class="card-body">
-                                                    <h5 class="card-title mt-0"></h5>
-                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="basic_livelihood_cbdra_add_hotspot.php" method ="POST" >
-                                                        <div class="col-12">
-                                                            <label for="region" class="form-label">Region</label>
-                                                            <div>
-                                                                <select class="form-select" name="region" id="region" value ="<?php if(isset($_POST['region'])) {echo $_POST['region'];} ?>" onChange="update()" required>
-                                                                    <option></option>
-                                                                    <?php                                                           
-                                                                            $dis_fetch_query = "SELECT regionID, name FROM tblregion";                                                  
-                                                                            $result_dis_fetch = mysqli_query($link, $dis_fetch_query);                                                                       
-                                                                            $i=0;
-                                                                                while($DB_ROW_reg = mysqli_fetch_array($result_dis_fetch)) {
-                                                                            ?>
-                                                                            <option value ="<?php
-                                                                                    echo $DB_ROW_reg["regionID"];?>">
-                                                                                <?php
-                                                                                    echo $DB_ROW_reg["name"];
-                                                                                ?>
-                                                                            </option>
-                                                                            <?php
-                                                                                $i++;
-                                                                                    }
-                                                                        ?>
-                                                                        
-                                                                </select>
-                                                                <div class="invalid-feedback">
-                                                                    Please select a valid Malawi region.
-                                                                </div>
-                                                                
-                                                            </div>
-                                                        </div>
-                                                        
-                                                        <div class="col-12">
-                                                            <label for="district" class="form-label">District</label>
-                                                            <select class="form-select" name="district" id="district" value ="$district" required>
-                                                                <option selected value="$district" ></option>
-                                                                    <?php                                                           
-                                                                        $dis_fetch_query = "SELECT DistrictID,DistrictName FROM tbldistrict";                                                  
-                                                                        $result_dis_fetch = mysqli_query($link, $dis_fetch_query);                                                                       
-                                                                        $i=0;
-                                                                            while($DB_ROW_Dis = mysqli_fetch_array($result_dis_fetch)) {
-                                                                        ?>
-                                                                        <option value="<?php echo $DB_ROW_Dis["DistrictID"]; ?>">
-                                                                            <?php echo $DB_ROW_Dis["DistrictName"]; ?></option><?php
-                                                                            $i++;
-                                                                                }
-                                                                    ?>
-                                                            </select>
-                                                            <div class="invalid-feedback">
-                                                                Please select a valid Malawi district.
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-12">
-                                                            <label for="hotspot" class="form-label">Hotspot</label>
-                                                            <input class="text" name="hotspot" id="hotspot" required>
-                                                                
-                                                            <div class="invalid-feedback">
-                                                                Enter Valid Hotspot.
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="col-12">
-                                                            <label for="issue" class="form-label">Issue/Problem</label>
-                                                            <select class="form-select" name="issue" id="issue" required>
-                                                                
-                                                                <?php                                                           
-                                                                        $issue_fetch_query = "SELECT id, name FROM tblissues";                                                  
-                                                                        $result_issue_fetch = mysqli_query($link, $issue_fetch_query);                                                                       
-                                                                        $i=0;
-                                                                            while($DB_ROW_issue = mysqli_fetch_array($result_issue_fetch)) {
-                                                                        ?>
-                                                                        <option value="<?php echo $DB_ROW_issue["id"]; ?>">
-                                                                            <?php echo $DB_ROW_issue["name"]; ?></option><?php
-                                                                            $i++;
-                                                                                }
-                                                                    ?>
-                                                            </select>
-                                                            <div class="invalid-feedback">
-                                                                Please select a valid Issue.
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="col-12">
-                                                            <label for="chance" class="form-label">Occurance Chance(Probability)</label>
-                                                            <select class="form-select" name="chance" id="chance" required>
-                                                                <option value="0">0%</option>
-                                                                <option value="10">10%</option>
-                                                                <option value="30">30%</option>
-                                                                <option value="50">50%</option>
-                                                                <option value="70">70%</option>
-                                                                <option value="100">100%</option>
-                                                            </select>
-                                                            <div class="invalid-feedback">
-                                                                Please select a valid Occurance.
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="col-12">
-                                                            <button type="submit" class="btn btn-primary w-md" name="Submit" value="Submit">Submit</button>
-                                                        </div>
-                                                    </form>                                             
-                                                    <!-- End Here -->
-                                                </div>
-                                            </div>
-
+                                            
                                             <div class="row">
                                                 <div class="col-12">
                                                     <div class="card border border-primary">
@@ -283,13 +167,15 @@
                                                                         if ($result_set = $link->query($query)) {
                                                                         while($row = $result_set->fetch_array(MYSQLI_ASSOC))
                                                                         { 
+                                                                            $district = dis_name($link,$row["districtID"]);
+                                                                            $issue = issue_name($link,$row["issueID"]);
                                                                         echo "<tr>\n";
                                                                             
                                                                         
                                                                             echo "<td>".$row["id"]."</td>\n";
-                                                                            echo "<td>".$row["districtID"]."</td>\n";
+                                                                            echo "\t\t<td>$district</td>\n";
                                                                             echo "<td>".$row["place"]."</td>\n";
-                                                                            echo "<td>".$row["issue"]."</td>\n";
+                                                                            echo "\t\t<td>$issue</td>\n";
                                                                             echo "<td>".$row["probability"]."</td>\n";
                                                                             
                                                                         echo "</tr>\n";

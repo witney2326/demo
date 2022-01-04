@@ -17,6 +17,22 @@
 
     <?php
         include "layouts/config.php"; // Using database connection file here
+
+        function dis_name($link, $disID)
+        {
+        $dis_query = mysqli_query($link,"select DistrictName from tbldistrict where DistrictID='$disID'"); // select query
+        $dis = mysqli_fetch_array($dis_query);// fetch data
+        return $dis['DistrictName'];
+        }
+        
+        function grp_name($link, $grpID)
+        {
+        $grp_query = mysqli_query($link,"select groupname from tblgroup where groupID='$grpID'"); // select query
+        $grp = mysqli_fetch_array($grp_query);// fetch data
+        return $grp['groupname'];
+        }
+        
+
         
         $id = $_GET['id']; // get id through query string
        $query="select * from tblbeneficiaries where sppCode='$id'";
@@ -87,16 +103,16 @@
                                         </div>
 
                                         <div class="row mb-4">
-                                            <label for="group_code" class="col-sm-3 col-form-label">Group Code</label>
+                                            <label for="group_code" class="col-sm-3 col-form-label">Group Name</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="group_code" name = "group_code" value="<?php echo $groupID ; ?>" style="max-width:30%;" readonly >
+                                                <input type="text" class="form-control" id="group_code" name = "group_code" value="<?php echo grp_name($link,$groupID) ; ?>" style="max-width:30%;" readonly >
                                             </div>
                                         </div>
                                         
                                         <div class="row mb-4">
                                             <label for="district" class="col-sm-3 col-form-label">District</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="district" name="district" value ="<?php echo $districtID ; ?>" style="max-width:30%;" readonly >
+                                                <input type="text" class="form-control" id="district" name="district" value ="<?php echo dis_name($link,$districtID) ; ?>" style="max-width:30%;" readonly >
                                             </div>
                                         </div>
                                         
