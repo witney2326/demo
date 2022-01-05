@@ -96,17 +96,12 @@
                                         </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link" data-bs-toggle="tab" href="#adoptplace" role="tab">
+                                        <a class="link" data-bs-toggle="link" href="basic_livelihood_CBDRA_adoptAPlace.php" role="link">
                                             <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
                                             <span class="d-none d-sm-block">Adopt a Place</span>
                                         </a>
                                     </li>
-                                    <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link" data-bs-toggle="tab" href="#treeplanting" role="tab">
-                                            <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
-                                            <span class="d-none d-sm-block">National Tree Planting</span>
-                                        </a>
-                                    </li>
+                                    
                                                                       
                                     
                                     <li class="nav-item waves-effect waves-light">
