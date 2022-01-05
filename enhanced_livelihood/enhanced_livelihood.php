@@ -3,7 +3,7 @@
 
 
 <head>
-    <title>Basic Livelihood</title>
+    <title>Enhanced Livelihood</title>
     <?php include 'layouts/head.php'; ?>
     <?php include 'layouts/head-style.php'; ?>
 </head>
@@ -51,31 +51,37 @@
                                     <li class="nav-item waves-effect waves-light">
                                         <a class="nav-link active" data-bs-toggle="tab" href="#home" role="tab">
                                             <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
-                                            <span class="d-none d-sm-block">Home</span>
+                                            <span class="d-none d-sm-block">SLGs</span>
                                         </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">
                                         <a class="nav-link" data-bs-toggle="tab" href="#Beneficiaries" role="tab">
                                             <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
-                                            <span class="d-none d-sm-block">HHs</span>
+                                            <span class="d-none d-sm-block">Households</span>
                                         </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link" data-bs-toggle="tab" href="#jsg" role="tab">
+                                        <a class="link" data-bs-toggle="link" href="jsg.php" role="link">
                                             <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
                                             <span class="d-none d-sm-block">JSGs</span>
                                         </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link" data-bs-toggle="tab" href="#ycs" role="tab">
+                                        <a class="link" data-bs-toggle="link" href="ycs.php" role="link">
                                             <span class="d-block d-sm-none"><i class="fas fa-cog"></i></span>
-                                            <span class="d-none d-sm-block">Youth</span>
+                                            <span class="d-none d-sm-block">YCS</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item waves-effect waves-light">
+                                        <a class="link" data-bs-toggle="link" href="cmt.php" role="link">
+                                            <span class="d-block d-sm-none"><i class="fas fa-cog"></i></span>
+                                            <span class="d-none d-sm-block">CMT</span>
                                         </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">
                                         <a class="nav-link" data-bs-toggle="tab" href="#vcp" role="tab">
                                             <span class="d-block d-sm-none"><i class="fas fa-cog"></i></span>
-                                            <span class="d-none d-sm-block">VC Prod</span>
+                                            <span class="d-none d-sm-block">Coop VC</span>
                                         </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">
@@ -84,12 +90,7 @@
                                             <span class="d-none d-sm-block">LESP</span>
                                         </a>
                                     </li>
-                                    <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link" data-bs-toggle="tab" href="#cmt" role="tab">
-                                            <span class="d-block d-sm-none"><i class="fas fa-cog"></i></span>
-                                            <span class="d-none d-sm-block">Coop Dev</span>
-                                        </a>
-                                    </li>
+                                    
                                     <li class="nav-item waves-effect waves-light">
                                         <a class="nav-link" data-bs-toggle="tab" href="#esmp" role="tab">
                                             <span class="d-block d-sm-none"><i class="fas fa-cog"></i></span>
@@ -109,25 +110,25 @@
                                 <div class="tab-content p-3 text-muted">
                                     <div class="tab-pane active" id="home-1" role="tabpanel">
                                         <p class="mb-0">
-                                            Raw denim you probably haven't heard of them jean shorts Austin.
+                                            
 
                                         </p>
                                     </div>
                                     <div class="tab-pane" id="profile-1" role="tabpanel">
                                         <p class="mb-0">
-                                            Food truck fixie locavore, accusamus mcsweeney's marfa nulla
+                                            
 
                                         </p>
                                     </div>
                                     <div class="tab-pane" id="messages-1" role="tabpanel">
                                         <p class="mb-0">
-                                            Etsy mixtape wayfarers, ethical wes anderson tofu before they
+                                           
 
                                         </p>
                                     </div>
                                     <div class="tab-pane" id="settings-1" role="tabpanel">
                                         <p class="mb-0">
-                                            Trust fund seitan letterpress, keytar raw denim keffiyeh etsy
+                                           
                                             
                                         </p>
                                     </div>

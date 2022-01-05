@@ -122,7 +122,7 @@
                         </li>
 
                         <li>
-                            <a href="graduation.php" class="has-arrow" key="t-horizontal">Graduation</a>
+                            <a href="graduation/graduation.php" class="has-arrow" key="t-horizontal">Graduation</a>
                             <ul class="sub-menu" aria-expanded="true">
                             </ul>
                         </li>
