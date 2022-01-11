@@ -2,7 +2,7 @@
 <?php include 'layouts/head-main.php'; ?>
 
 <head>
-    <title>SLG Member Management</title>
+    <title>Household Management</title>
     <?php include 'layouts/head.php'; ?>
     <?php include 'layouts/head-style.php'; ?>
     <?php include 'layouts/config.php'; ?>
@@ -15,6 +15,46 @@
 </head>
 
 <?php include 'layouts/body.php'; ?>
+
+<?php		
+     if(isset($_GET['Submit']))
+     {   
+         $district = $_GET['district'];
+     }
+     
+     
+     
+         
+
+         function get_rname($link, $rcode)
+         {
+         $rg_query = mysqli_query($link,"select name from tblregion where regionID='$rcode'"); // select query
+         $rg = mysqli_fetch_array($rg_query);// fetch data
+         return $rg['name'];
+         }
+     
+         function dis_name($link, $disID)
+         {
+         $dis_query = mysqli_query($link,"select DistrictName from tbldistrict where DistrictID='$disID'"); // select query
+         $dis = mysqli_fetch_array($dis_query);// fetch data
+         return $dis['DistrictName'];
+         }
+ 
+         function grp_name($link, $grpID)
+         {
+         $grp_query = mysqli_query($link,"select groupname from tblgroup where groupID='$grpID'"); // select query
+         $grp = mysqli_fetch_array($grp_query);// fetch data
+         return $grp['groupname'];
+         }
+ 
+         function ta_name($link, $ID)
+         {
+         $ta_query = mysqli_query($link,"select TAName from tblta where TAID='$ID'"); // select query
+         $prog = mysqli_fetch_array($ta_query);// fetch data
+         return $prog['TAName'];
+         }
+
+?>
 
 <!-- Begin page -->
 <div id="layout-wrapper">
@@ -59,17 +99,18 @@
                                 
                                 <!-- Nav tabs -->
                                 <ul class="nav nav-pills nav-justified" role="tablist">
+                                    
                                     <li class="nav-item waves-effect waves-light">
                                         <a class="nav-link active" data-bs-toggle="tab" href="#home-1" role="tab">
                                             <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
-                                            <span class="d-none d-sm-block">SLG Members</span>
+                                            <span class="d-none d-sm-block">Households</span>
                                         </a>
                                     </li>
-                                   
+
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="link"  href="basic_livelihood_member_reports.php" role="link">
+                                        <a class="link"  href="basic_livelihood_HH_reports.php" role="link">
                                             <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
-                                            <span class="d-none d-sm-block">Member Reports</span>
+                                            <span class="d-none d-sm-block">Household Reports</span>
                                         </a>
                                     </li>
                                     
@@ -77,36 +118,27 @@
 
                                 <!-- Tab panes -->
                                 <div class="tab-content p-3 text-muted">
+
+                                    
+                                    
+
+
+
                                     <div class="tab-pane active" id="home-1" role="tabpanel">
                                         <p class="mb-0">
-                                            
-
                                             <!--start here -->
                                             <div class="card border border-primary">
                                                 <div class="card-header bg-transparent border-primary">
-                                                    <h5 class="my-0 text-primary"><i class="mdi mdi-bullseye-arrow me-3"></i>SLG Member Filter</h5>
+                                                    <h5 class="my-0 text-primary"><i class="mdi mdi-bullseye-arrow me-3"></i>Household Search Filter</h5>
                                                 </div>
                                                 <div class="card-body">
                                                     <h5 class="card-title mt-0"></h5>
-                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="basic_livelihood_member_mgt_filter1.php" method="GET">
+                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="basic_livelihood_hh_mgt_filter2.php" method="GET">
                                                         <div class="col-12">
                                                             <label for="region" class="form-label">Region</label>
                                                             <div>
                                                                 <select class="form-select" name="region" id="region" required>
-                                                                    <option selected value = "$region"></option>
-                                                                    <?php                                                           
-                                                                            $dis_fetch_query = "SELECT regionID,name FROM tblregion";                                                  
-                                                                            $result_dis_fetch = mysqli_query($link, $dis_fetch_query);                                                                       
-                                                                            $i=0;
-                                                                                while($DB_ROW_reg = mysqli_fetch_array($result_dis_fetch)) {
-                                                                            ?>
-                                                                            <option value="<?php echo $DB_ROW_reg["regionID"];?>">
-                                                                                <?php echo $DB_ROW_reg["name"];?>
-                                                                            </option>
-                                                                            <?php
-                                                                                $i++;
-                                                                                    }
-                                                                        ?>
+                                                                    <option selected value = "$region"><?php echo get_rname($link,$_GET['region']);?></option>
                                                                 </select>
                                                                 <div class="invalid-feedback">
                                                                     Please select a valid Malawi region.
@@ -117,19 +149,8 @@
 
                                                         <div class="col-12">
                                                             <label for="district" class="form-label">District</label>
-                                                            <select class="form-select" name="district" id="district" required disabled>
-                                                                <option selected value="$district" ></option>
-                                                                    <?php                                                           
-                                                                        $dis_fetch_query = "SELECT DistrictName FROM tbldistrict";                                                  
-                                                                        $result_dis_fetch = mysqli_query($link, $dis_fetch_query);                                                                       
-                                                                        $i=0;
-                                                                            while($DB_ROW_Dis = mysqli_fetch_array($result_dis_fetch)) {
-                                                                        ?>
-                                                                        <option>
-                                                                            <?php echo $DB_ROW_Dis["DistrictName"]; ?></option><?php
-                                                                            $i++;
-                                                                                }
-                                                                    ?>
+                                                            <select class="form-select" name="district" id="district" required>
+                                                                <option selected value = "$district"><?php echo dis_name($link,$_GET['district']);?></option>
                                                             </select>
                                                             <div class="invalid-feedback">
                                                                 Please select a valid Malawi district.
@@ -137,20 +158,9 @@
                                                         </div>
 
                                                         <div class="col-12">
-                                                            <label for="grp" class="form-label">SL Group</label>
-                                                            <select class="form-select" name="grp" id="grp" required disabled>
-                                                                <option selected  value="$grp"></option>
-                                                                <?php                                                           
-                                                                        $grp_fetch_query = "SELECT groupID,groupname FROM tblgroup";                                                  
-                                                                        $result_grp_fetch = mysqli_query($link, $grp_fetch_query);                                                                       
-                                                                        $i=0;
-                                                                            while($DB_ROW_grp = mysqli_fetch_array($result_grp_fetch)) {
-                                                                        ?>
-                                                                        <option value="<?php echo $DB_ROW_grp["groupID"]; ?>">
-                                                                            <?php echo $DB_ROW_grp["groupname"]; ?></option><?php
-                                                                            $i++;
-                                                                                }
-                                                                    ?>
+                                                            <label for="ta" class="form-label">Traditional Authority</label>
+                                                            <select class="form-select" name="ta" id="ta" required>
+                                                                <option selected value = "$ta"><?php echo ta_name($link,$_GET['ta']);?></option>
                                                             </select>
                                                             <div class="invalid-feedback">
                                                                 Please select a valid TA.
@@ -158,8 +168,10 @@
                                                         </div>
 
                                                         
+                                                        
                                                         <div class="col-12">
-                                                            <button type="submit" class="btn btn-primary w-md" name="Submit" value="Submit">Submit</button>
+                                                            <button type="submit" class="btn btn-primary w-md" name="FormSubmit" value="Submit">Submit</button>
+                                                            <INPUT TYPE="button" VALUE="Back" onClick="history.go(-1);">
                                                         </div>
                                                     </form>                                             
                                                     <!-- End Here -->
@@ -170,7 +182,7 @@
                                                 <div class="col-12">
                                                     <div class="card border border-primary">
                                                     <div class="card-header bg-transparent border-primary">
-                                                        <h5 class="my-0 text-primary"><i class="mdi mdi-bullseye-arrow me-3"></i>SLG- Members</h5>
+                                                        <h5 class="my-0 text-primary"><i class="mdi mdi-bullseye-arrow me-3"></i>Beneficiary Households in <?php echo ta_name($link,$_GET['ta']); ?> TA</h5>
                                                     </div>
                                                     <div class="card-body">
                                                     <h5 class="card-title mt-0"></h5>
@@ -178,14 +190,14 @@
                                                             <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
                                                             
                                                                 <thead>
-                                                                    <tr>
-                                                                        
-                                                                        
-                                                                        <th>Household Code</th>
-                                                                        
-                                                                        <th>cohort</th>
+                                                                    <tr>                    
+                                                                        <th>hhcode</th>
+                                                                        <th>Programme</th>
+                                                                        <th>Region</th>
                                                                         <th>District</th>
-                                                                        <th>Group Name</th>
+                                                                        <th>Group</th> 
+                                                                        <th>Cohort</th>
+                                                                        <th>Approval Status</th>                                           
                                                                         <th>Action</th>
                                                                     </tr>
                                                                 </thead>
@@ -193,37 +205,38 @@
 
                                                                 <tbody>
                                                                     <?Php
-                                                                        
-                                                                        $query="select tblbeneficiaries.sppCode,tblbeneficiaries.cohort,tbldistrict.DistrictName,tblgroup.groupname from tblbeneficiaries inner join tbldistrict on tblbeneficiaries.districtID = tbldistrict.DistrictID inner join tblgroup on tblbeneficiaries.groupID = tblgroup.groupID;";
+                                                                        $ta = $_GET["ta"];
+                                                                        $query="select * from tblbeneficiaries where TAID = $ta";
 
-                                                                        //Variable $link is declared inside config.php file & used here
-                                                                        
-                                                                        if ($result_set = $link->query($query)) {
-                                                                        while($row = $result_set->fetch_array(MYSQLI_ASSOC))
-                                                                        { 
-                                                                        echo "<tr>\n";
-                                                                            
-                                                                        
-                                                                            echo "<td>".$row["sppCode"]."</td>\n";
-                                                                            
-                                                                            echo "<td>".$row["cohort"]."</td>\n";
-                                                                            echo "<td>".$row["DistrictName"]."</td>\n";
-                                                                            echo "<td>".$row["groupname"]."</td>\n";
-                                                                            
-                                                                            
-                                                                            echo "<td>
-                                                                            <a href=\"basicSLGMemberview.php?id=".$row['sppCode']."\"><i class='fas fa-glasses' style='font-size:24px'></i></a>   
-                                                                            <a href=\"basicSLGMemberedit.php?id=".$row['sppCode']."\"><i class='far fa-edit' style='font-size:24px'></i></a> 
-                                                                            <a href=\"basicSLGMembersavings.php?id=".$row['sppCode']."\"><i class='fas fa-hand-holding-usd' style='font-size:24px'></i></a>
-                                                                            <a href=\"basicSLGMemberloans.php?id=".$row['sppCode']."\"><i class='fas fa-book' style='font-size:24px'></i></a> 
-                                                                            <a href=\"basicSLGMemberiga.php?id=".$row['sppCode']."\"><i class='fas fa-balance-scale' style='font-size:24px'></i></a> 
-                                                                            <a href=\"basicSLGMemberdelete.php?id=".$row['sppCode']."\"><i class='far fa-trash-alt' style='font-size:24px'></i></a>    
-                                                                            </td>\n";
+                                                                    //Variable $link is declared inside config.php file & used here
+                                                                    
+                                                                    if ($result_set = $link->query($query)) {
+                                                                    while($row = $result_set->fetch_array(MYSQLI_ASSOC))
+                                                                    { 
+                                                                        $region = get_rname($link,$row["regionID"]);
+                                                                        $district = dis_name($link,$row["districtID"]);
+                                                                        $group = grp_name($link,$row["groupID"]);
+                                                                        $prog = prog_name($link, $row["spProg"]);
 
-                                                                        echo "</tr>\n";
-                                                                        }
-                                                                        $result_set->close();
-                                                                        }                          
+                                                                    echo "<tr>\n";
+                                                                        echo "<td>".$row["sppCode"]."</td>\n";
+                                                                        echo "\t\t<td>$prog</td>\n";
+                                                                        echo "\t\t<td>$region</td>\n";
+                                                                        echo "\t\t<td>$district</td>\n";
+                                                                        echo "\t\t<td>$group</td>\n";
+                                                                        echo "<td>".$row["cohort"]."</td>\n";
+                                                                        echo "<td style='text-align: center; vertical-align: middle;' >\n";
+                                                                            echo "<input type='checkbox' disabled />";
+                                                                        echo "</td>\n";
+                                                                        
+                                                                        
+                                                                        echo "<td> <a href=\"basicmemberEdit.php?id=".$row['sppCode']."\">View/Edit</a>\n";
+                                                                        echo "";
+                                                                        echo "<a href=\"basicmemberApprove.php?id=".$row['sppCode']."\">Approve</a> </td>\n";
+                                                                    echo "</tr>\n";
+                                                                    }
+                                                                    $result_set->close();
+                                                                    }                          
                                                                     ?>
                                                                 </tbody>
                                                             </table>
@@ -237,7 +250,9 @@
                                     <!-- Here -->
                                     
                                     <!-- end here -->
+                                    <!-- start new --> 
                                     
+                                    <!-- end new -->
                                     
                                 </div>
 

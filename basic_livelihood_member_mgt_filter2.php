@@ -211,12 +211,12 @@
                                                                             
                                                                             
                                                                             echo "<td>
-                                                                            <a href=\"basicSLGMemberview.php?id=".$row['sppCode']."\">view</a>   
-                                                                            <a href=\"basicSLGMemberedit.php?id=".$row['sppCode']."\">edit</a> 
-                                                                            <a href=\"basicSLGMembersavings.php?id=".$row['sppCode']."\">sav</a>
-                                                                            <a href=\"basicSLGMemberloans.php?id=".$row['sppCode']."\">lns</a> 
-                                                                            <a href=\"basicSLGMemberiga.php?id=".$row['sppCode']."\">iga</a> 
-                                                                            <a href=\"basicSLGMemberdelete.php?id=".$row['sppCode']."\">del</a>    
+                                                                            <a href=\"basicSLGMemberview.php?id=".$row['sppCode']."\"><i class='fas fa-glasses' style='font-size:18px'></i></a>   
+                                                                            <a href=\"basicSLGMemberedit.php?id=".$row['sppCode']."\"><i class='far fa-edit' style='font-size:18px'></i></a> 
+                                                                            <a href=\"basicSLGMembersavings.php?id=".$row['sppCode']."\"><i class='fas fa-hand-holding-usd' style='font-size:24px'></i></a>
+                                                                            <a href=\"basicSLGMemberloans.php?id=".$row['sppCode']."\"><i class='fas fa-book' style='font-size:18px'></i></a> 
+                                                                            <a href=\"basicSLGMemberiga.php?id=".$row['sppCode']."\"><i class='fas fa-balance-scale' style='font-size:18px'></i></a> 
+                                                                            <a href=\"basicSLGMemberdelete.php?id=".$row['sppCode']."\"><i class='far fa-trash-alt' style='font-size:18px'></i></a>        
                                                                             </td>\n";
 
                                                                         echo "</tr>\n";

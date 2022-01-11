@@ -2,13 +2,12 @@
 <?php include 'layouts/head-main.php'; ?>
 
 <head>
-    <title>SLG |Household Savings</title>
+    <title>SLG |Edit Household Savings</title>
     <?php include 'layouts/head.php'; ?>
     <?php include 'layouts/head-style.php'; ?>
 
 }
     
-
 </head>
 
 <div id="layout-wrapper">
@@ -35,35 +34,37 @@
 
         
         $id = $_GET['id']; // get id through query string
-       $query="select * from tblbeneficiaries where sppCode='$id'";
+       $query="select * from tblslg_member_savings where savingID='$id'";
         
         if ($result_set = $link->query($query)) {
             while($row = $result_set->fetch_array(MYSQLI_ASSOC))
             { 
                 
-                $regionID = $row["regionID"];
+                
                 $districtID= $row["districtID"];
-                $cohort = $row["cohort"];
+                $hh_code = $row["hh_code"];
                 $groupID = $row["groupID"];
+                $year = $row["year"];
+                $month = $row["month"];
+                $amount = $row["amount"];
             }
             $result_set->close();
         }
 
         if(isset($_POST['Submit']))
             {    
-            $hh_ID = $_POST["hh_id"];
-            $districtID = $_POST['district'];
-            $year = $_POST['year'];
-            $month = $_POST['month'];
-            $amount = $_POST['amount'];
+            
+            $year1 = $_POST['year'];
+            $month1 = $_POST['month'];
+            $amount1 = $_POST['amount'];
             $groupID = $_POST["group_code"];
             
             
-                $sql = "INSERT INTO tblslg_member_savings (districtID,hh_code,groupID,year,month,amount)
-                VALUES ('$districtID','$hh_ID','$groupID','$year','$month','$amount')";
-            if (mysqli_query($link, $sql)) {
+            $sql = mysqli_query($link,"update tblslg_member_savings  SET year = '$year1', month ='$month1', amount =$amount1 where savingID = '$id'");
+                  
+            if ($sql) {
                 echo '<script type="text/javascript">'; 
-                echo 'alert("SLG Savings Record has been added successfully !");'; 
+                echo 'alert("SLG Savings Record has been EDITED successfully !");'; 
                 echo 'window.location.href = "basic_livelihood_member_mgt.php";';
                 echo '</script>';
             } else {
@@ -90,15 +91,23 @@
                         <div class="col-lg-9">
                             <div class="card border border-success">
                                 <div class="card-header bg-transparent border-success">
-                                    <h5 class="my-0 text-success">Household Update Savings Record for -- <?php echo $id ; ?></h5>
+                                    <h5 class="my-0 text-success">Household Edit Savings Record No. -- <?php echo $id ; ?></h5>
                                 </div>
                                 <div class="card-body">
                                     
-                                    <form method="POST" action="<?=$_SERVER['PHP_SELF'];?>">
+                                    <form method="POST" action="basicSLGMemberSavingsEditSav.php">
+                                        
+                                        <div class="row mb-4">
+                                            <label for="Rec_ID" class="col-sm-3 col-form-label">Savings Record</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" id="Rec_ID" name = "Rec_ID" value="<?php echo $id ; ?>" style="max-width:30%;" readonly >
+                                            </div>
+                                        </div>
+
                                         <div class="row mb-4">
                                             <label for="hh_id" class="col-sm-3 col-form-label">Household Code</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="hh_id" name = "hh_id" value="<?php echo $id ; ?>" style="max-width:30%;" readonly >
+                                                <input type="text" class="form-control" id="hh_id" name = "hh_id" value="<?php echo $hh_code ; ?>" style="max-width:30%;" readonly >
                                             </div>
                                         </div>
 
@@ -120,7 +129,7 @@
                                         <div class="row mb-4">
                                             <label for="year" class="col-sm-3 col-form-label">Select Year</label>
                                             <select class="form-select" name="year" id="year" style="max-width:20%;" required>
-                                                <option></option>
+                                                <option value="<?php echo $year;?>"><?php echo $year;?></option>
                                                 <option value="2020">2020</option>
                                                 <option value="2021">2021</option>
                                                 <option value="2022">2022</option>
@@ -131,7 +140,7 @@
                                         <div class="row mb-4">
                                             <label for="month" class="col-sm-3 col-form-label">Select Month</label>
                                             <select class="form-select" name="month" id="month" style="max-width:20%;" required>
-                                                <option></option>
+                                                <option value="<?php echo $month;?>"><?php echo $month;?></option>
                                                 <option value='01'>January</option>
                                                 <option value='02'>February</option>
                                                 <option value='03'>March</option>
@@ -150,14 +159,14 @@
                                         <div class="row mb-4">
                                             <label for="amount" class="col-sm-3 col-form-label">Amount Saved</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="amount" name="amount" value ="" style="max-width:30%;">
+                                                <input type="text" class="form-control" id="amount" name="amount" value ="<?php echo $amount;?>" style="max-width:30%;">
                                             </div>
                                         </div>
 
                                         <div class="row justify-content-end">
                                             <div class="col-sm-9">
                                                 <div>
-                                                    <button type="submit" class="btn btn-primary w-md" name="Submit" value="Submit">Save Record</button>
+                                                    <button type="submit" class="btn btn-primary w-md" name="Update" value="Update">Update Current Record</button>
                                                     <INPUT TYPE="button" VALUE="Back" onClick="history.go(-1);">
                                                 </div>
                                             </div>
@@ -170,72 +179,7 @@
                     </div>
                 </div>
 
-                <div class="row">
-                    <div class="col-12">
-                        <div class="card border border-primary">
-                        <div class="card-header bg-transparent border-primary">
-                            <h5 class="my-0 text-primary"><i class="mdi mdi-bullseye-arrow me-3"></i>Savings Record</h5>
-                        </div>
-                        <div class="card-body">
-                        <h5 class="card-title mt-0"></h5>
-                            
-                                <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
-                                
-                                    <thead>
-                                        <tr>
-                                            
-                                            
-                                            <th>Savings Code</th>
-                                            
-                                            <th>Household Code</th>
-                                            <th>SLG</th>
-                                            <th>Year</th>
-                                            <th>Month</th>
-                                            <th>Amount</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </thead>
-
-
-                                    <tbody>
-                                        <?Php
-                                                $id = $_GET['id'];
-                                            $query="select * from tblslg_member_savings where hh_code ='$id';";
-
-                                            //Variable $link is declared inside config.php file & used here
-                                            
-                                            if ($result_set = $link->query($query)) {
-                                            while($row = $result_set->fetch_array(MYSQLI_ASSOC))
-                                            { 
-                                            echo "<tr>\n";
-                                                
-                                            
-                                                echo "<td>".$row["savingID"]."</td>\n";
-                                                
-                                                echo "<td>".$row["hh_code"]."</td>\n";
-                                                echo "<td>".$row["groupID"]."</td>\n";
-                                                echo "<td>".$row["year"]."</td>\n";
-                                                echo "<td>".$row["month"]."</td>\n";
-                                                echo "<td>".$row["amount"]."</td>\n";
-                                                
-                                                echo "<td>
-                                                
-                                                <a href=\"basicSLGMemberSavingsEdit.php?id=".$row['savingID']."\"><i class='far fa-edit' style='font-size:18px'></i></a> 
-                                                <a href=\"basicSLGMemberSavingsDelete.php?id=".$row['savingID']."\"><i class='far fa-trash-alt' style='font-size:18px'></i></a>        
-                                                </td>\n";
-
-                                            echo "</tr>\n";
-                                            }
-                                            $result_set->close();
-                                            }                          
-                                        ?>
-                                    </tbody>
-                                </table>
-                                </p>
-                            </div>
-                        </div>     
-                    </div>            
-                </div> 
+                
 
             </div>
         </div>
