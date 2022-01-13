@@ -207,12 +207,11 @@
                                                                 echo "<td>".$row["programID"]."</td>\n";
                                                                 
                                                                 echo "<td>
-                                                                <a href=\"basicCLSview.php?id=".$row['ClusterID']."\">view</a>\n";
-                                                                echo
-                                                                    "<a href=\"basicCLSedit.php?id=".$row['ClusterID']."\">edit</a>\n";
-                                                                
-                                                                echo 
-                                                                "<a href=\"basicCLSdelete.php?id=".$row['ClusterID']."\">del</a>    
+                                                                    <a href=\"basicCLSview.php?id=".$row['ClusterID']."\"><i class='far fa-eye' title='View Cluster' style='font-size:18px'></i></a>\n";
+                                                                    echo
+                                                                        "<a href=\"basicCLSedit.php?id=".$row['ClusterID']."\"><i class='far fa-edit' title='Edit Cluster Details' style='font-size:18px'></i></a>\n";
+                                                                    echo 
+                                                                    "<a href=\"basicCLSdelete.php?id=".$row['ClusterID']."\"><i class='far fa-trash-alt' title='Delete Cluster' style='font-size:18px'></i></a>    
                                                                 </td>\n";
 
                                                             echo "</tr>\n";

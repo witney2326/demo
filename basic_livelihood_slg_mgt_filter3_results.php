@@ -153,20 +153,15 @@
                                                                     <tr>
                                                                         
                                                                         
-                                                                        <th>Groupcode</th>
-                                                                        <th>Group Name</th>
+                                                                        <th>SLG code</th>
+                                                                        <th>SLG Name</th>
                                                                         <th>cohort</th>
                                                                         
                                                                         
                                                                         <th>M</th>
                                                                         <th>F</th>
-                                                                        <th>Act</th>
-                                                                        <th>Act</th>
-                                                                        <th>Act</th>
-                                                                        <th>Act</th>
-                                                                        <th>Act</th>
-                                                                        <th>Act</th>
-                                                                        <th>Act</th>
+                                                                        <th>Action On SLG</th>
+                                                                        
                                                                     </tr>
                                                                 </thead>
 
@@ -192,19 +187,13 @@
                                                                             echo "<td>".$row["MembersF"]."</td>\n";
                                                                             
                                                                             echo "<td>
-                                                                            <a href=\"basicSLGview.php?id=".$row['groupID']."\">view</a> </td>\n";
-                                                                            echo "<td>
-                                                                                <a href=\"basicSLGedit.php?id=".$row['groupID']."\">edit</a> </td>\n";
-                                                                            echo "<td>
-                                                                            <a href=\"basicSLGsavings.php?id=".$row['groupID']."\">saving</a> </td>\n";
-                                                                            echo "<td>
-                                                                            <a href=\"basicSLGloans.php?id=".$row['groupID']."\">loan</a> </td>\n";
-                                                                            echo "<td>
-                                                                            <a href=\"basicSLGiga.php?id=".$row['groupID']."\">IGA</a> </td>\n";
-                                                                            echo "<td>
-                                                                            <a href=\"basicSLGAddMember.php?id=".$row['groupID']."\">Add_Ben</a> </td>\n";
-                                                                            echo "<td>
-                                                                            <a href=\"basicSLGdelete.php?id=".$row['groupID']."\">del</a>    
+                                                                                <a href=\"basicSLGview.php?id=".$row['groupID']."\"><i class='far fa-eye' title='View SLG' style='font-size:18px'></i></a>
+                                                                                <a href=\"basicSLGedit.php?id=".$row['groupID']."\"><i class='far fa-edit' title='Edit SLG Details' style='font-size:18px'></i></a>
+                                                                                <a href=\"basicSLGsavings.php?id=".$row['groupID']."\"><i class='fas fa-hand-holding-usd' title='Add SLG Savings' style='font-size:18px'></i></a>
+                                                                                <a href=\"basicSLGloans.php?id=".$row['groupID']."\"><i class='fas fa-book' title='Add SLG Loans' style='font-size:18px'></i></a> 
+                                                                                <a href=\"basicSLGiga.php?id=".$row['groupID']."\"><i class='fas fa-balance-scale' title='Add SLG IGAs' style='font-size:18px'></i></a> 
+                                                                                <a href=\"basicSLGAddMember.php?id=".$row['groupID']."\"><i class='fas fa-user-alt' title='Add Beneficiary to SLG' style='font-size:18px'></i></a> 
+                                                                                <a href=\"basicSLGdelete.php?id=".$row['groupID']."\"><i class='far fa-trash-alt' title='Delete SLG' style='font-size:18px'></i></a>    
                                                                             </td>\n";
 
                                                                         echo "</tr>\n";

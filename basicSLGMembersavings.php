@@ -31,9 +31,7 @@
         $grp = mysqli_fetch_array($grp_query);// fetch data
         return $grp['groupname'];
         }
-        
-
-        
+           
         $id = $_GET['id']; // get id through query string
        $query="select * from tblbeneficiaries where sppCode='$id'";
         
@@ -52,7 +50,7 @@
         if(isset($_POST['Submit']))
             {    
             $hh_ID = $_POST["hh_id"];
-            $districtID = $_POST['district'];
+            $district= $_POST["district"];
             $year = $_POST['year'];
             $month = $_POST['month'];
             $amount = $_POST['amount'];
@@ -60,7 +58,7 @@
             
             
                 $sql = "INSERT INTO tblslg_member_savings (districtID,hh_code,groupID,year,month,amount)
-                VALUES ('$districtID','$hh_ID','$groupID','$year','$month','$amount')";
+                VALUES ('$district','$hh_ID','$groupID','$year','$month','$amount')";
             if (mysqli_query($link, $sql)) {
                 echo '<script type="text/javascript">'; 
                 echo 'alert("SLG Savings Record has been added successfully !");'; 
@@ -90,7 +88,7 @@
                         <div class="col-lg-9">
                             <div class="card border border-success">
                                 <div class="card-header bg-transparent border-success">
-                                    <h5 class="my-0 text-success">Household Update Savings Record for -- <?php echo $id ; ?></h5>
+                                    <h5 class="my-0 text-success">Household Savings Record for -- <?php echo $id ; ?></h5>
                                 </div>
                                 <div class="card-body">
                                     
@@ -105,14 +103,14 @@
                                         <div class="row mb-4">
                                             <label for="group_code" class="col-sm-3 col-form-label">Group Name</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="group_code" name = "group_code" value="<?php echo grp_name($link,$groupID) ; ?>" style="max-width:30%;" readonly >
+                                                <input type="text" class="form-control" id="group_code" name = "group_code" value="<?php echo $groupID; ?>" style="max-width:30%;" readonly >
                                             </div>
                                         </div>
                                         
                                         <div class="row mb-4">
                                             <label for="district" class="col-sm-3 col-form-label">District</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="district" name="district" value ="<?php echo dis_name($link,$districtID) ; ?>" style="max-width:30%;" readonly >
+                                                <input type="text" class="form-control" id="district" name="district" value ="<?php echo $districtID ; ?>" style="max-width:30%;">
                                             </div>
                                         </div>
                                         
@@ -157,7 +155,7 @@
                                         <div class="row justify-content-end">
                                             <div class="col-sm-9">
                                                 <div>
-                                                    <button type="submit" class="btn btn-primary w-md" name="Submit" value="Submit">Save Record</button>
+                                                    <button type="submit" class="btn btn-primary w-md" name="Submit" value="Submit">Save New Savings Record</button>
                                                     <INPUT TYPE="button" VALUE="Back" onClick="history.go(-1);">
                                                 </div>
                                             </div>
@@ -185,13 +183,12 @@
                                         <tr>
                                             
                                             
-                                            <th>Savings Code</th>
-                                            
+                                            <th>Savings Code</th>   
                                             <th>Household Code</th>
-                                            <th>SLG</th>
+                                            <th>SLG Name</th>
                                             <th>Year</th>
                                             <th>Month</th>
-                                            <th>Amount</th>
+                                            <th>Amount Saved</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -207,23 +204,21 @@
                                             if ($result_set = $link->query($query)) {
                                             while($row = $result_set->fetch_array(MYSQLI_ASSOC))
                                             { 
-                                            echo "<tr>\n";
-                                                
-                                            
+                                                $group = grp_name($link, $row["groupID"]);
+                                                $amount = number_format($row["amount"],"2");
+                                                $monthName = date("F", mktime(0, 0, 0, $row["month"], 10));
+                                            echo "<tr>\n";                                           
                                                 echo "<td>".$row["savingID"]."</td>\n";
-                                                
-                                                echo "<td>".$row["hh_code"]."</td>\n";
-                                                echo "<td>".$row["groupID"]."</td>\n";
+                                                echo "<td>".$row["hh_code"]."</td>\n";   
+                                                echo "\t\t<td>$group</td>\n";
                                                 echo "<td>".$row["year"]."</td>\n";
-                                                echo "<td>".$row["month"]."</td>\n";
-                                                echo "<td>".$row["amount"]."</td>\n";
+                                                echo "\t\t<td>$monthName</td>\n";
+                                                echo "\t\t<td>$amount</td>\n";
                                                 
                                                 echo "<td>
-                                                
-                                                <a href=\"basicSLGMemberSavingsEdit.php?id=".$row['savingID']."\"><i class='far fa-edit' style='font-size:18px'></i></a> 
-                                                <a href=\"basicSLGMemberSavingsDelete.php?id=".$row['savingID']."\"><i class='far fa-trash-alt' style='font-size:18px'></i></a>        
+                                                    <a href=\"basicSLGMemberSavingsEdit.php?id=".$row['savingID']."\"><i class='far fa-edit' style='font-size:18px'></i></a> 
+                                                    <a onClick=\"javascript: return confirm('Are You Sure You want To DELETE This Record');\" href=\"basicSLGMemberSavingsDelete.php?id=".$row['savingID']."\"><i class='far fa-trash-alt' style='font-size:18px'></i></a>        
                                                 </td>\n";
-
                                             echo "</tr>\n";
                                             }
                                             $result_set->close();

@@ -120,12 +120,12 @@
                                                             <select class="form-select" name="district" id="district" required disabled>
                                                                 <option selected value="$district" ></option>
                                                                     <?php                                                           
-                                                                        $dis_fetch_query = "SELECT DistrictName FROM tbldistrict";                                                  
+                                                                        $dis_fetch_query = "SELECT DistrictID,DistrictName FROM tbldistrict";                                                  
                                                                         $result_dis_fetch = mysqli_query($link, $dis_fetch_query);                                                                       
                                                                         $i=0;
                                                                             while($DB_ROW_Dis = mysqli_fetch_array($result_dis_fetch)) {
                                                                         ?>
-                                                                        <option>
+                                                                        <option value="<?php echo $DB_ROW_Dis["DistrictID"]; ?>">
                                                                             <?php echo $DB_ROW_Dis["DistrictName"]; ?></option><?php
                                                                             $i++;
                                                                                 }
@@ -194,7 +194,7 @@
                                                                 <tbody>
                                                                     <?Php
                                                                         
-                                                                        $query="select tblbeneficiaries.sppCode,tblbeneficiaries.cohort,tbldistrict.DistrictName,tblgroup.groupname from tblbeneficiaries inner join tbldistrict on tblbeneficiaries.districtID = tbldistrict.DistrictID inner join tblgroup on tblbeneficiaries.groupID = tblgroup.groupID;";
+                                                                        $query="select tblbeneficiaries.sppCode,tblbeneficiaries.cohort,tbldistrict.DistrictName,tblgroup.groupname from tblbeneficiaries inner join tbldistrict on tblbeneficiaries.districtID = tbldistrict.DistrictID inner join tblgroup on tblbeneficiaries.groupID = tblgroup.groupID where tblbeneficiaries.deleted ='0';";
 
                                                                         //Variable $link is declared inside config.php file & used here
                                                                         
@@ -212,12 +212,12 @@
                                                                             
                                                                             
                                                                             echo "<td>
-                                                                            <a href=\"basicSLGMemberview.php?id=".$row['sppCode']."\"><i class='fas fa-glasses' style='font-size:24px'></i></a>   
-                                                                            <a href=\"basicSLGMemberedit.php?id=".$row['sppCode']."\"><i class='far fa-edit' style='font-size:24px'></i></a> 
-                                                                            <a href=\"basicSLGMembersavings.php?id=".$row['sppCode']."\"><i class='fas fa-hand-holding-usd' style='font-size:24px'></i></a>
-                                                                            <a href=\"basicSLGMemberloans.php?id=".$row['sppCode']."\"><i class='fas fa-book' style='font-size:24px'></i></a> 
-                                                                            <a href=\"basicSLGMemberiga.php?id=".$row['sppCode']."\"><i class='fas fa-balance-scale' style='font-size:24px'></i></a> 
-                                                                            <a href=\"basicSLGMemberdelete.php?id=".$row['sppCode']."\"><i class='far fa-trash-alt' style='font-size:24px'></i></a>    
+                                                                            <a href=\"basicSLGMemberview.php?id=".$row['sppCode']."\"><i class='far fa-eye' title='View Member' style='font-size:18px'></i></a>   
+                                                                            <a href=\"basicSLGMemberedit.php?id=".$row['sppCode']."\"><i class='far fa-edit' title='Edit Member' style='font-size:18px'></i></a> 
+                                                                            <a href=\"basicSLGMembersavings.php?id=".$row['sppCode']."\"><i class='fas fa-hand-holding-usd' title='Update Member Savings' style='font-size:18px'></i></a>
+                                                                            <a href=\"basicSLGMemberloans.php?id=".$row['sppCode']."\"><i class='fas fa-book' title='Update Member Loans' style='font-size:18px'></i></a> 
+                                                                            <a href=\"basicSLGMemberiga.php?id=".$row['sppCode']."\"><i class='fas fa-balance-scale' title='Update Member IGAs' style='font-size:18px'></i></a> 
+                                                                            <a onClick=\"javascript: return confirm('Are You Sure You want To DELETE This HOUSEHOLD');\" href=\"basicSLGMemberdelete.php?id=".$row['sppCode']."\"><i class='far fa-trash-alt' title='Delete Member' style='font-size:18px'></i></a>    
                                                                             </td>\n";
 
                                                                         echo "</tr>\n";

@@ -370,7 +370,7 @@
                                                                         <div class="flex-grow-1">
                                                                             <p class="text-muted fw-medium">SLGs Formed</p>
                                                                             <?php
-                                                                                        $result = mysqli_query($link, 'SELECT COUNT(groupID) AS value_sum FROM tblgroup'); 
+                                                                                        $result = mysqli_query($link, 'SELECT COUNT(groupID) AS value_sum FROM tblgroup WHERE deleted = 0'); 
                                                                                         $row = mysqli_fetch_assoc($result); 
                                                                                         $sum = $row['value_sum'];
                                                                                     ?>
