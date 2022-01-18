@@ -179,7 +179,7 @@
                                                 <div class="col-12">
                                                     <div class="card border border-primary">
                                                     <div class="card-header bg-transparent border-primary">
-                                                        <h5 class="my-0 text-primary"><i class="mdi mdi-book-clock"></i><i class="fas fa-spinner fa-spin"></i>Trained SLGs</h5>
+                                                        <h5 class="my-0 text-primary">Trained Savings and Loan Groups</h5>
                                                     </div>
                                                     <div class="card-body">
                                                     <h7 class="card-title mt-0"></h7>
@@ -195,7 +195,7 @@
                                                                         <th>Cohort</th>
                                                                         <th>No. Males</th>
                                                                         <th>No. Females</th>
-                                                                        <th>View Training Details</th>
+                                                                        <th>Action</th>
                                                                     </tr>
                                                                 </thead>
 
@@ -222,7 +222,7 @@
                                                                                         echo "<td>".$row["cohort"]."</td>\n";
                                                                                         echo "<td>".$row["MembersM"]."</td>\n";
                                                                                         echo "<td>".$row["MembersF"]."</td>\n";
-                                                                                        echo "<td><a href=\"basicSLGTraining_view.php?id=".$row['groupID']."\">View</a></td>\n";
+                                                                                        echo "<td><a href=\"basicSLGTraining_view.php?id=".$row['groupID']."\"><i class='far fa-eye' title='View Training Details' style='font-size:18px'></i></a></td>\n";
                                                                                     echo "</tr>\n";
                                                                                 } 
                                                                 

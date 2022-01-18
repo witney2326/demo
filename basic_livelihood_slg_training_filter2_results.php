@@ -160,9 +160,8 @@
                                                                         <th>Groupcode</th>
                                                                         <th>Group Name</th>
                                                                         <th>District</th>
-                                                                        <th> Training Status</th>
-                                                                        <th><i class="mdi mdi-book-clock"></i>Record  Training</th>
-                                                                        <th> Training Report</th>
+                                                                        <th> Action</th>
+                                                                        
                                                                     </tr>
                                                                 </thead>
 
@@ -186,15 +185,10 @@
                                                                                 echo "<td>".$row["groupID"]."</td>\n";
                                                                                 echo "<td>".$row["groupname"]."</td>\n";
                                                                                 echo "\t\t<td>$dis</td>\n";
-                                                                                echo "<td><a href=\"basicSLGTraining_view.php?id=".$row['groupID']."\">View</a></td>\n";
-                                                                                
-                                                                                echo "<td>                                                                            
-                                                                                    <a href=\"add_basicTrainingGD.php?id=".$row['groupID']."\" >Record</a>   
-                                                                                     
-                                                                                </td>\n";
-                                                                                echo "<td>                                                                            
-                                                                                    <a href=\"basicSLGTrainingReport.php?id=".$row['groupID']."\" >View</a>   
-                                                                                     
+                                                                                echo "<td>
+                                                                                    <a href=\"basicSLGTraining_view.php?id=".$row['groupID']."\"><i class='far fa-eye' title='Training Status' style='font-size:18px'></i></a>                                                                           
+                                                                                    <a href=\"add_basicTrainingGD.php?id=".$row['groupID']."\" ><i class='fas fa-pen' title='Record Training' style='font-size:18px'></i></a>                                                                            
+                                                                                    <a href=\"basicSLGTrainingReport.php?id=".$row['groupID']."\" ><i class='far fa-folder-open' title='Training Report' style='font-size:18px'></i></a>    
                                                                                 </td>\n";
                                                                             echo "</tr>\n";
                                                                             }

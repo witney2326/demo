@@ -174,7 +174,7 @@
                                                 <div class="col-12">
                                                     <div class="card border border-primary">
                                                     <div class="card-header bg-transparent border-primary">
-                                                        <h5 class="my-0 text-primary"><i class="mdi mdi-book-clock"></i><i class="fas fa-spinner fa-spin"></i>Animators</h5>
+                                                        <h5 class="my-0 text-primary">Animators</h5>
                                                     </div>
                                                     <div class="card-body">
                                                     <h7 class="card-title mt-0"></h7>
@@ -188,9 +188,8 @@
                                                                         <th>Cluster ID</th>
                                                                         <th>Cluster Name</th>
                                                                         <th>District</th>
-                                                                        <th>Training Status</th>
-                                                                        <th><i class="mdi mdi-book-clock"></i>Record Training</th>
-                                                                        <th>Training Report</th>
+                                                                        <th>Action</th>
+                                                                        
                                                                     </tr>
                                                                 </thead>
 
@@ -211,15 +210,10 @@
                                                                             echo "<td>".$row["ClusterID"]."</td>\n";
                                                                             echo "<td>".$row["ClusterName"]."</td>\n";
                                                                             echo "\t\t<td>$dis</td>\n";
-                                                                            echo "<td><a href=\"basicAnimatorTraining_view.php?id=".$row['ClusterID']."\">View</a></td>\n";
-                                                                            
-                                                                            echo "<td>                                                                            
-                                                                                <a href=\"add_basicAnimatorTraining.php?id=".$row['ClusterID']."\" >Record</a>   
-                                                                                 
-                                                                            </td>\n";
-                                                                            echo "<td>                                                                            
-                                                                                <a href=\"basicAnimatorTrainingReport.php?id=".$row['ClusterID']."\" >details</a>   
-                                                                                 
+                                                                            echo "<td>
+                                                                                <a href=\"basicAnimatorTraining_view.php?id=".$row['ClusterID']."\"><i class='far fa-eye' title='Training Status' style='font-size:18px'></i></a>                                                                   
+                                                                                <a href=\"add_basicAnimatorTraining.php?id=".$row['ClusterID']."\" ><i class='fas fa-pen' title='Record Training' style='font-size:18px'></i></a>                                                                             
+                                                                                <a href=\"basicAnimatorTrainingReport.php?id=".$row['ClusterID']."\" ><i class='far fa-folder-open' title='Training Report' style='font-size:18px'></i></a>        
                                                                             </td>\n";
                                                                         echo "</tr>\n";
                                                                         }
