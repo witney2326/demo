@@ -99,7 +99,7 @@
                         <div class="col-lg-9">
                             <div class="card border border-success">
                                 <div class="card-header bg-transparent border-success">
-                                    <h5 class="my-0 text-success"><i class="mdi mdi-check-all me-3"></i>New Member for :<?php echo $groupname; ?></h5>
+                                    <h5 class="my-0 text-success">New Member for :<?php echo $groupname; ?></h5>
                                 </div>
                                 <div class="card-body">
                                     
@@ -188,6 +188,64 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card border border-primary">
+                        <div class="card-header bg-transparent border-primary">
+                            <h5 class="my-0 text-primary">Members In <?php echo $groupname; ?></h5>
+                        </div>
+                        <div class="card-body">
+                        <h5 class="card-title mt-0"></h5>
+                            
+                                <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
+                                
+                                    <thead>
+                                        <tr>
+                                            <th>Household Code</th>
+                                            <th>District</th>
+                                            <th>Group Name</th>
+                                            <th>Cohort</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+
+
+                                    <tbody>
+                                        <?Php
+                                            $id = $_GET['id'];
+                                            $query="select * from tblbeneficiaries where groupID ='$id';";
+
+                                            //Variable $link is declared inside config.php file & used here
+                                            
+                                            if ($result_set = $link->query($query)) {
+                                            while($row = $result_set->fetch_array(MYSQLI_ASSOC))
+                                            { 
+                                                
+                                             $districtname = dis_name($link,$DistrictID);   
+                                            echo "<tr>\n";                                           
+                                                echo "<td>".$row["sppCode"]."</td>\n";
+                                                echo "\t\t<td>$districtname</td>\n";
+                                                echo "\t\t<td>$groupname</td>\n";
+                                                echo "<td>".$row["cohort"]."</td>\n";
+               
+                                                echo "<td>
+                                                    <a href=\"basicSLGMemberedit.php?id=".$row['sppCode']."\"><i class='far fa-edit' style='font-size:18px'></i></a> 
+                                                    <a onClick=\"javascript: return confirm('Are You Sure You want To DELETE This Record');\" href=\"basicSLGMemberdelete.php?id=".$row['sppCode']."\"><i class='far fa-trash-alt' style='font-size:18px'></i></a>        
+                                                </td>\n";
+                                            echo "</tr>\n";
+                                            }
+                                            $result_set->close();
+                                            }                          
+                                        ?>
+                                    </tbody>
+                                </table>
+                                </p>
+                            </div>
+                        </div>     
+                    </div>            
+                </div> 
+
             </div>
         </div>
     </div>

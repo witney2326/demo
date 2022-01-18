@@ -28,7 +28,17 @@
                 $groupID = $row["groupID"];
                 
                 $cohort = $row["cohort"];
+                $hhstatus = $row["hhstatus"];
                 
+                if ($row["hhstatus"] == 1)
+                {
+                    $hhstatus = 'Approved';
+                }
+                if ($row["hhstatus"] == 0)
+                {
+                    $hhstatus = 'Not Approved';
+                }
+
             }
             $result_set->close();
         }
@@ -79,11 +89,11 @@
                         <div class="col-lg-9">
                             <div class="card border border-success">
                                 <div class="card-header bg-transparent border-success">
-                                    <h5 class="my-0 text-success"><i class="mdi mdi-check-all me-3"></i> SLG Edit Member - <?php echo $hhname ; ?></h5>
+                                    <h5 class="my-0 text-success"> SLG Edit Member - <?php echo $hhname ; ?></h5>
                                 </div>
                                 <div class="card-body">
                                     
-                                    <form>
+                                    <form> 
                                         <div class="row mb-4">
                                             <label for="hh_id" class="col-sm-3 col-form-label">Household Code</label>
                                             <div class="col-sm-9">
@@ -110,7 +120,7 @@
                                             </div>
                                         </div>
                                        
-                                        </div>
+                                        
                                         <div class="row mb-4">
                                             <label for="group" class="col-sm-3 col-form-label">Group Name</label>
                                             <div class="col-sm-9">
@@ -129,10 +139,19 @@
                                                 <input type="text" class="form-control" id="sppname" name="sppname" value =" <?php echo prog_name($link,$sppname) ; ?>" style="max-width:30%;">
                                             </div>
                                         </div>
+                                        <div class="row mb-4">
+                                            <label for="hstatus" class="col-sm-3 col-form-label">HH Status</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" id="hstatus" name="hstatus" value ="<?php echo $hhstatus;?>" style="max-width:30%;">
+                                            </div>
+                                        </div>
+                                        
 
                                         <div class="row justify-content-end">
                                             <div class="col-sm-9">
                                                 <div>
+                                                    
+                                                    <button type="submit" class="btn btn-secondary w-md" name="Submit" value="Submit">Save Household</button>
                                                     <INPUT TYPE="button" VALUE="Back" onClick="history.go(-1);">
                                                 </div>
                                             </div>

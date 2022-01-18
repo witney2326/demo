@@ -285,6 +285,7 @@
                                                                                             <div class="card-body">
                                                                                                 <div class="d-flex">
                                                                                                     <div class="flex-grow-1">
+                                                                                                    
                                                                                                         <p class="text-muted fw-medium">Selected HHs</p>
                                                                                                         <?php
                                                                                                             $result = mysqli_query($link, 'SELECT COUNT(sppCode) AS value_sum FROM tblbeneficiaries'); 
@@ -299,7 +300,7 @@
                                                                                                     </div>
                                                                                                     <div class="mini-stat-icon avatar-sm rounded-circle bg-primary align-self-center">
                                                                                                         <span class="avatar-title">
-                                                                                                            <i class="bx bx-copy-alt font-size-24"></i>
+                                                                                                            <i class='fas fa-house-user' style='font-size:24px'></i>
                                                                                                         </span>
                                                                                                     </div>
                                                                                                 </div>
@@ -314,7 +315,7 @@
                                                                                     <div class="card-body">
                                                                                         <div class="d-flex">
                                                                                             <div class="flex-grow-1">
-                                                                                                <p class="text-muted fw-medium">HHs Provided with Assets</p>
+                                                                                                <p class="text-muted fw-medium">HHs Given Assets</p>
                                                                                                 <?php
                                                                                                             $result = mysqli_query($link, 'SELECT COUNT(groupID) AS value_sum FROM tblgroup'); 
                                                                                                             $row = mysqli_fetch_assoc($result); 
@@ -327,7 +328,7 @@
                                                                                             </div>
                                                                                             <div class="mini-stat-icon avatar-sm rounded-circle bg-primary align-self-center">
                                                                                                 <span class="avatar-title">
-                                                                                                    <i class="bx bx-copy-alt font-size-24"></i>
+                                                                                                    <i class='fas fa-house-user' style='font-size:24px'></i>
                                                                                                 </span>
                                                                                             </div>
                                                                                         </div>
@@ -346,7 +347,7 @@
                                                                                             </div>
                                                                                             <div class="mini-stat-icon avatar-sm rounded-circle bg-primary align-self-center">
                                                                                                 <span class="avatar-title">
-                                                                                                    <i class="bx bx-copy-alt font-size-24"></i>
+                                                                                                    <i class='fas fa-users' style='font-size:24px'></i>
                                                                                                 </span>
                                                                                             </div>
                                                                                         </div>
@@ -365,7 +366,7 @@
                                                                                             </div>
                                                                                             <div class="mini-stat-icon avatar-sm rounded-circle bg-primary align-self-center">
                                                                                                 <span class="avatar-title">
-                                                                                                    <i class="bx bx-copy-alt font-size-24"></i>
+                                                                                                    <i class='fas fa-users' style='font-size:24px'></i>
                                                                                                 </span>
                                                                                             </div>
                                                                                         </div>

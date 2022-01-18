@@ -225,10 +225,10 @@
                                                                         <th>SLG code</th>
                                                                         <th>SLG Name</th>
                                                                         <th>cohort</th>
+                                                                        <th>Males</th>
+                                                                        <th>Females</th>
+                                                                        <th>Total</th>
                                                                         
-                                                                        
-                                                                        <th>M</th>
-                                                                        <th>F</th>
                                                                         <th>Actions On SLG</th>
                                                                        
                                                                     </tr>
@@ -244,6 +244,7 @@
                                                                         if ($result_set = $link->query($query)) {
                                                                         while($row = $result_set->fetch_array(MYSQLI_ASSOC))
                                                                         { 
+                                                                            $totalAdult =  $row["MembersM"]+ $row["MembersF"];
                                                                         echo "<tr>\n";
                                                                             
                                                                         
@@ -254,6 +255,8 @@
                                                                             
                                                                             echo "<td>".$row["MembersM"]."</td>\n";
                                                                             echo "<td>".$row["MembersF"]."</td>\n";
+                                                                            echo "\t\t<td>$totalAdult</td>\n";
+
                                                                             
                                                                             echo "<td>
                                                                                 <a href=\"basicSLGview.php?id=".$row['groupID']."\"><i class='far fa-eye' title='View SLG' style='font-size:18px'></i></a>

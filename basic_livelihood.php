@@ -276,27 +276,27 @@
                                     <li class="nav-item waves-effect waves-light">
                                         <a class="nav-link"  href="basic_livelihood_hh_mgt.php" role="link">
                                             <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
-                                            <span class="d-none d-sm-block">HHs</span>
+                                            <span class="d-none d-sm-block">Beneficiary Households</span>
                                         </a>
                                     </li>
                                                                         
                                     <li class="nav-item waves-effect waves-light">
                                         <a class="link"  href="basic_livelihood_meetings.php" role="link">
                                             <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
-                                            <span class="d-none d-sm-block">Awareness</span>
+                                            <span class="d-none d-sm-block">Awareness Meetings</span>
                                         </a>
                                     </li>
                                     
                                     <li class="nav-item waves-effect waves-light">
                                         <a class="nav-link" href="basic_livelihood_slg_mgt2.php" role="link">
                                             <span class="d-block d-sm-none"><i class="fas fa-cog"></i></span>
-                                            <span class="d-none d-sm-block">SL Groups</span>
+                                            <span class="d-none d-sm-block">Savings and Loan Groups</span>
                                         </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">
                                         <a class="nav-link"  href="basic_livelihood_member_mgt.php" role="link">
                                             <span class="d-block d-sm-none"><i class="fas fa-cog"></i></span>
-                                            <span class="d-none d-sm-block">Members</span>
+                                            <span class="d-none d-sm-block">SLG Members</span>
                                         </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">
@@ -339,7 +339,8 @@
                                                                         <div class="card-body">
                                                                             <div class="d-flex">
                                                                                 <div class="flex-grow-1">
-                                                                                    <p class="text-muted fw-medium">Enrolled HHs</p>
+                                                                                    <i class='fas fa-house-user' style='font-size:24px'></i>
+                                                                                    <p class="text-muted fw-medium">Enrolled HouseHolds</p>
                                                                                     <?php
                                                                                         $result = mysqli_query($link, 'SELECT COUNT(sppCode) AS value_sum FROM tblbeneficiaries'); 
                                                                                         $row = mysqli_fetch_assoc($result); 
@@ -351,11 +352,7 @@
                                                                                             </div> 
                                                                                         </h5>
                                                                                 </div>
-                                                                                <div class="mini-stat-icon avatar-sm rounded-circle bg-primary align-self-center">
-                                                                                    <span class="avatar-title">
-                                                                                        <i class="bx bx-copy-alt font-size-24"></i>
-                                                                                    </span>
-                                                                                </div>
+                                                                                
                                                                             </div>
                                                                         </div>
                                                                 
@@ -368,6 +365,8 @@
                                                                 <div class="card-body">
                                                                     <div class="d-flex">
                                                                         <div class="flex-grow-1">
+                                                                            <i class='fas fa-users' style='font-size:24px'></i>
+
                                                                             <p class="text-muted fw-medium">SLGs Formed</p>
                                                                             <?php
                                                                                         $result = mysqli_query($link, 'SELECT COUNT(groupID) AS value_sum FROM tblgroup WHERE deleted = 0'); 
@@ -379,11 +378,7 @@
                                                                                         </div>
                                                                             
                                                                         </div>
-                                                                        <div class="mini-stat-icon avatar-sm rounded-circle bg-primary align-self-center">
-                                                                            <span class="avatar-title">
-                                                                                <i class="bx bx-copy-alt font-size-24"></i>
-                                                                            </span>
-                                                                        </div>
+                                                                        
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -395,14 +390,12 @@
                                                                 <div class="card-body">
                                                                     <div class="d-flex">
                                                                         <div class="flex-grow-1">
-                                                                            <p class="text-muted fw-medium">HH Trained in MC</p>
+                                                                            <i class='fas fa-user-graduate' style='font-size:24px'></i>
+
+                                                                            <p class="text-muted fw-medium">HouseHolds Trained</p>
                                                                             <h4 class="mb-0">0</h4>
                                                                         </div>
-                                                                        <div class="mini-stat-icon avatar-sm rounded-circle bg-primary align-self-center">
-                                                                            <span class="avatar-title">
-                                                                                <i class="bx bx-copy-alt font-size-24"></i>
-                                                                            </span>
-                                                                        </div>
+                                                                        
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -414,14 +407,12 @@
                                                                 <div class="card-body">
                                                                     <div class="d-flex">
                                                                         <div class="flex-grow-1">
+                                                                            <i class='fas fa-chalkboard-teacher' style='font-size:24px'></i>
+
                                                                             <p class="text-muted fw-medium">Animators Trained</p>
                                                                             <h4 class="mb-0">0</h4>
                                                                         </div>
-                                                                        <div class="mini-stat-icon avatar-sm rounded-circle bg-primary align-self-center">
-                                                                            <span class="avatar-title">
-                                                                                <i class="bx bx-copy-alt font-size-24"></i>
-                                                                            </span>
-                                                                        </div>
+                                                                        
                                                                     </div>
                                                                 </div>
                                                             </div>
