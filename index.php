@@ -314,7 +314,8 @@ $test = 85;
                                                     <div class="card-body">
                                                         <div class="d-flex">
                                                             <div class="flex-grow-1">
-                                                                <p class="text-muted fw-medium">Basic Enrolment</p>
+                                                                <i class='fas fa-house-user' style='font-size:24px'></i><i class='fas fa-house-user' style='font-size:24px'></i>
+                                                                <p class="text-muted fw-medium">Basic HH Enrolment</p>
                                                                 <?php
                                                                             $result = mysqli_query($link, 'SELECT COUNT(sppCode) AS value_sum FROM tblbeneficiaries'); 
                                                                             $row = mysqli_fetch_assoc($result); 
@@ -326,12 +327,10 @@ $test = 85;
                                                                             </div> 
                                                                         </h4>
                                                             </div>
-                                                            <div class="mini-stat-icon avatar-sm rounded-circle bg-primary align-self-center">  
-                                                            <span class="avatar-title">
-                                                                    <i class="bx bx-copy-alt font-size-24"></i>
-                                                                </span>
+                                                           
                                                                 
-                                                            </div>
+                                                                
+                                                            
                                                         </div>
                                                     </div>
                                                    
@@ -348,14 +347,11 @@ $test = 85;
                                                 <div class="card-body">
                                                     <div class="d-flex">
                                                         <div class="flex-grow-1">
-                                                            <p class="text-muted fw-medium">Joint Skill Grps</p>
+                                                        <i class='fas fa-layer-group' style='font-size:24px'></i><i class='fas fa-layer-group' style='font-size:24px'></i><i class='fas fa-layer-group' style='font-size:24px'></i>
+                                                            <p class="text-muted fw-medium">Joint Skill Groups</p>
                                                             <h4 class="mb-0">0</h4>
                                                         </div>
-                                                        <div class="mini-stat-icon avatar-sm rounded-circle bg-primary align-self-center">
-                                                            <span class="avatar-title">
-                                                                <i class="bx bx-copy-alt font-size-24"></i>
-                                                            </span>
-                                                        </div>
+                                                        
                                                     </div>
                                                 </div>
                                             </div>
@@ -370,14 +366,11 @@ $test = 85;
                                                 <div class="card-body">
                                                     <div class="d-flex">
                                                         <div class="flex-grow-1">
-                                                            <p class="text-muted fw-medium">Youth Challenge</p>
+                                                        <i class='fas fa-hiking' style='font-size:24px'></i><i class='fas fa-running' style='font-size:24px'></i>
+                                                            <p class="text-muted fw-medium">Youth Challenge Support</p>
                                                             <h4 class="mb-0">0</h4>
                                                         </div>
-                                                        <div class="mini-stat-icon avatar-sm rounded-circle bg-primary align-self-center">
-                                                            <span class="avatar-title">
-                                                                <i class="bx bx-copy-alt font-size-24"></i>
-                                                            </span>
-                                                        </div>
+                                                        
                                                     </div>
                                                 </div>
                                             </div>
@@ -394,14 +387,11 @@ $test = 85;
                                                 <div class="card-body">
                                                     <div class="d-flex">
                                                         <div class="flex-grow-1">
-                                                            <p class="text-muted fw-medium">Value Chains</p>
+                                                            <i class='fas fa-school' style='font-size:24px'></i><i class='fas fa-graduation-cap' style='font-size:24px'></i>
+                                                            <p class="text-muted fw-medium">Graduating Households</p>
                                                             <h4 class="mb-0">0</h4>
                                                         </div>
-                                                        <div class="mini-stat-icon avatar-sm rounded-circle bg-primary align-self-center">
-                                                            <span class="avatar-title">
-                                                                <i class="bx bx-copy-alt font-size-24"></i>
-                                                            </span>
-                                                        </div>
+                                                        
                                                     </div>
                                                 </div>
                                             </div>

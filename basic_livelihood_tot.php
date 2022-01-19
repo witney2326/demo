@@ -84,97 +84,13 @@
                                     <div class="tab-pane active" id="home-1" role="tabpanel">
                                         <p class="mb-0">
                                             <!--start here -->
-                                            <div class="card border border-primary">
-                                                <div class="card-header bg-transparent border-primary">
-                                                    <h5 class="my-0 text-primary"></i>TOT Search Filter</h5>
-                                                </div>
-                                                <div class="card-body">
-                                                    <h5 class="card-title mt-0"></h5>
-                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="basic_livelihood_tot_filter1.php" method ="GET" >
-                                                        <div class="col-12">
-                                                            <label for="region" class="form-label">Region</label>
-                                                            <div>
-                                                                <select class="form-select" name="region" id="region" value ="<?php if(isset($_GET['region'])) {echo $_GET['region'];} ?>" required>
-                                                                    <option selected value = "$region"></option>
-                                                                    <?php                                                           
-                                                                            $dis_fetch_query = "SELECT regionID, name FROM tblregion";                                                  
-                                                                            $result_dis_fetch = mysqli_query($link, $dis_fetch_query);                                                                       
-                                                                            $i=0;
-                                                                                while($DB_ROW_reg = mysqli_fetch_array($result_dis_fetch)) {
-                                                                            ?>
-                                                                            <option value ="<?php
-                                                                                    echo $DB_ROW_reg["regionID"];?>">
-                                                                                <?php
-                                                                                    echo $DB_ROW_reg["name"];
-                                                                                ?>
-                                                                            </option>
-                                                                            <?php
-                                                                                $i++;
-                                                                                    }
-                                                                        ?>
-                                                                </select>
-                                                                <div class="invalid-feedback">
-                                                                    Please select a valid Malawi region.
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        
-                                                        <div class="col-12">
-                                                            <label for="district" class="form-label">District</label>
-                                                            <select class="form-select" name="district" id="district" value ="$district" required disabled>
-                                                                <option selected value="$district" ></option>
-                                                                    <?php                                                           
-                                                                        $dis_fetch_query = "SELECT DistrictID,DistrictName FROM tbldistrict";                                                  
-                                                                        $result_dis_fetch = mysqli_query($link, $dis_fetch_query);                                                                       
-                                                                        $i=0;
-                                                                            while($DB_ROW_Dis = mysqli_fetch_array($result_dis_fetch)) {
-                                                                        ?>
-                                                                        <option value="<?php echo $DB_ROW_Dis["DistrictID"]; ?>">
-                                                                            <?php echo $DB_ROW_Dis["DistrictName"]; ?></option><?php
-                                                                            $i++;
-                                                                                }
-                                                                    ?>
-                                                            </select>
-                                                            <div class="invalid-feedback">
-                                                                Please select a valid Malawi district.
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="col-12">
-                                                            <label for="ta" class="form-label">Traditional Authority</label>
-                                                            <select class="form-select" name="ta" id="ta" required disabled>
-                                                                <option selected  value="$ta"></option>
-                                                                <?php                                                           
-                                                                        $ta_fetch_query = "SELECT TAName FROM tblta";                                                  
-                                                                        $result_ta_fetch = mysqli_query($link, $ta_fetch_query);                                                                       
-                                                                        $i=0;
-                                                                            while($DB_ROW_ta = mysqli_fetch_array($result_ta_fetch)) {
-                                                                        ?>
-                                                                        <option>
-                                                                            <?php echo $DB_ROW_ta["TAName"]; ?></option><?php
-                                                                            $i++;
-                                                                                }
-                                                                    ?>
-                                                            </select>
-                                                            <div class="invalid-feedback">
-                                                                Please select a valid TA.
-                                                            </div>
-                                                        </div>
-
-                                                        
-                                                        <div class="col-12">
-                                                            <button type="submit" class="btn btn-primary w-md" name="Submit" value="Submit">Submit</button>
-                                                        </div>
-                                                    </form>                                             
-                                                    <!-- End Here -->
-                                                </div>
-                                            </div>
+                                            
 
                                             <div class="row">
                                                 <div class="col-12">
                                                     <div class="card border border-primary">
                                                     <div class="card-header bg-transparent border-primary">
-                                                        <h5 class="my-0 text-primary"><i class="mdi mdi-book-clock"></i><i class="fas fa-spinner fa-spin"></i>Trainer Of Trainers</h5>
+                                                        <h5 class="my-0 text-primary">Trainer Of Trainers</h5>
                                                     </div>
                                                     <div class="card-body">
                                                     <h7 class="card-title mt-0"></h7>
@@ -188,9 +104,8 @@
                                                                         <th>District ID</th>
                                                                         <th>District</th>
                                                                         
-                                                                        <th>Training Status</th>
-                                                                        <th><i class="mdi mdi-book-clock"></i>Record Training</th>
-                                                                        <th>Training Report</th>
+                                                                        <th>Action</th>
+                                                                        
                                                                     </tr>
                                                                 </thead>
 
@@ -211,15 +126,10 @@
                                                                             echo "<td>".$row["DistrictID"]."</td>\n";
                                                                             echo "<td>".$row["DistrictName"]."</td>\n";
                                                                             
-                                                                            echo "<td><a href=\"basicTOT_view.php?id=".$row['DistrictID']."\">View</a></td>\n";
-                                                                            
-                                                                            echo "<td>                                                                            
-                                                                                <a href=\"add_basicTOT.php?id=".$row['DistrictID']."\" >Record</a>   
-                                                                                 
-                                                                            </td>\n";
-                                                                            echo "<td>                                                                            
-                                                                                <a href=\"basicTOTReport.php?id=".$row['DistrictID']."\" >details</a>   
-                                                                                 
+                                                                            echo "<td>
+                                                                                <a href=\"basicTOT_view.php?id=".$row['DistrictID']."\"><i class='far fa-eye' title ='Training Status' style='font-size:18px'></i></a>                                                                      
+                                                                                <a href=\"add_basicTOT.php?id=".$row['DistrictID']."\" ><i class='fas fa-pen' title ='Record TOT Training' style='font-size:18px'></i></a>                                                                           
+                                                                                <a href=\"basicTOTReport.php?id=".$row['DistrictID']."\" ><i class='fas fa-poll' title = 'Training Reports' style='font-size:18px'></i></a>       
                                                                             </td>\n";
                                                                         echo "</tr>\n";
                                                                         }

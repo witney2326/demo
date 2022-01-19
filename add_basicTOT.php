@@ -2,7 +2,7 @@
 <?php include 'layouts/head-main.php'; ?>
 
 <head>
-    <title>CIMIS | Animator Training</title>
+    <title>CIMIS | Trainer of Trainer Training</title>
     <?php include 'layouts/head.php'; ?>
     <?php include 'layouts/head-style.php'; ?>
 
@@ -19,40 +19,28 @@
         include "layouts/config.php"; // Using database connection file here
         
         $id = $_GET['id']; // get id through query string
-       $query="select * from tblcluster where ClusterID='$id'";
-        
-        if ($result_set = $link->query($query)) {
-            while($row = $result_set->fetch_array(MYSQLI_ASSOC))
-            { 
-                $ClusterName= $row["ClusterName"];
-                $regionID = $row["regionID"];
-                $DistrictID= $row["districtID"];
-                $TAID= $row["taID"];
-                $gvhID= $row["gvhID"];
-                $cohort = $row["cohort"];
-            }
-            $result_set->close();
-        }
+       
 
         if(isset($_POST['Submit']))
-            {
-              
-            $clusterID = $_POST['cluster_id'];
-            $DistrictID = $_POST['district'];
+            { 
             $trainingtype = $_POST['trainingtype'];
             $startdate = $_POST['startdate'];
             $finishdate = $_POST['finishdate'];
-            $animator = $_POST['animatortitle'];
+            $title = $_POST['title'];
             $trainedby = $_POST['trainedby'];
-
+            $fname = $_POST['first_name'];
+            $lname = $_POST['last_name']; 
+            $gender = $_POST['gender'];
+            $region = rcode($link,$id);
             
             
-                $sql = "INSERT INTO tblanimatortrainings (regionID,districtID,clusterID,TrainingTypeID,StartDate,FinishDate,trainedBy,animatorName)
-                VALUES ('$regionID ','$DistrictID','$id','$trainingtype','$startdate','$finishdate','$trainedby','$animator')";
+            $sql = "INSERT INTO tbltottraining (regionID,districtID,fname,lname,gender,title,TrainingTypeID,StartDate,FinishDate,trainedBy)
+            VALUES ('$region ','$id','$fname','$lname','$gender','$title','$trainingtype','$startdate','$finishdate','$trainedby')";
+            
             if (mysqli_query($link, $sql)) {
                 echo '<script type="text/javascript">'; 
                 echo 'alert("SLG Training Record has been added successfully !");'; 
-                echo 'window.location.href = "basic_livelihood_animators.php";';
+                echo 'window.location.href = "basic_livelihood_tot.php";';
                 echo '</script>';
             } else {
                 echo "Error: " . $sql . ":-" . mysqli_error($link);
@@ -68,23 +56,24 @@
             };// fetch data
             
             }
+
+            function rcode($link, $discode)
+            {
+            $rg_query = mysqli_query($link,"select regionID from tbldistrict where DistrictID='$discode'"); // select query
+            while($rg = mysqli_fetch_array($rg_query)){
+               return $rg['regionID'];
+            };
+            }
     
             function dis_name($link, $disID)
             {
             $dis_query = mysqli_query($link,"select DistrictName from tbldistrict where DistrictID='$disID'"); // select query
             while($dis = mysqli_fetch_array($dis_query)){
                return $dis['DistrictName'];
-            };// fetch data
-            
-            
+            };
             }
 
-            function ta_name($link, $taID)
-            {
-            $dis_query = mysqli_query($link,"select TAName from tblta where TAID='$taID'"); // select query
-            $tame = mysqli_fetch_array($dis_query);// fetch data
-            return $tame['TAName'];
-            }
+            
     ?>
 
     <!-- ============================================================== -->
@@ -103,35 +92,40 @@
                         <div class="col-lg-9">
                             <div class="card border border-success">
                                 <div class="card-header bg-transparent border-success">
-                                    <h6 class="my-0 text-primary">Animator Training Update :<?php echo" ". $ClusterName; ?> Cluster;  <?php echo dis_name($link,$DistrictID);  ?> District</h6>
+                                    <h6 class="my-0 text-primary">TOT Training Update ;  <?php echo dis_name($link,$id);  ?> District</h6>
                                 </div>
                                 <div class="card-body">
                                     
                                     <form method="POST" action="">
                                         <div class="row mb-4">
-                                            <label for="cluster_id" class="col-sm-3 col-form-label">Cluster ID</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="cluster_id" name = "cluster_id" value="<?php echo $id ; ?>" style="max-width:30%;" readonly >
-                                            </div>
-
-                                            <label for="cluster_name" class="col-sm-3 col-form-label">Cluster Name</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="cluster_name" name ="cluster_name" value = "<?php echo $ClusterName ; ?>" style="max-width:30%;" readonly >
-                                            </div>
 
                                             <label for="region" class="col-sm-3 col-form-label">Region</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="region" name="region" value ="<?php echo $regionID ; ?>" style="max-width:30%;" readonly >
+                                                <input type="text" class="form-control" id="region" name="region" value ="<?php echo get_rname($link,rcode($link,$id)); ?>" style="max-width:30%;" >
                                             </div>
 
                                             <label for="district" class="col-sm-3 col-form-label">District</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="district" name="district" value ="<?php echo $DistrictID; ?>" style="max-width:30%;" readonly >
+                                                <input type="text" class="form-control" id="district" name="district" value ="<?php echo dis_name($link,$id); ?>" style="max-width:30%;" >
                                             </div>
 
-                                            <label for="cohort" class="col-sm-3 col-form-label">Cohort</label>
+                                            <label for="first_name" class="col-sm-3 col-form-label">Trainer First Name</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="cohort" name="cohort" value ="<?php echo $cohort ; ?> " style="max-width:30%;" readonly >
+                                                <input type="text" class="form-control" id="first_name" name ="first_name" value = "" style="max-width:30%;" >
+                                            </div>
+
+                                            <label for="last_name" class="col-sm-3 col-form-label">Trainer Last Name</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" id="last_name" name ="last_name" value = "" style="max-width:30%;"  >
+                                            </div>
+
+                                            <label for="gender" class="col-sm-3 col-form-label">Gender</label>
+                                            <div class="col-sm-9">
+                                                
+                                                <input type="radio" id="male" name="gender" value="M">
+                                                <label for="male">Male</label><br>
+                                                <input type="radio" id="female" name="gender" value="F">
+                                                <label for="female">Female</label><br>
                                             </div>
 
                                         </div>
@@ -181,16 +175,16 @@
                                                 ?>
                                             </select>
 
-                                            <label for="animatortitle" class="col-sm-3 col-form-label">Animator Title</label>
-                                            <select class="form-select" name="animatortitle" id="animatortitle" style="max-width:20%;" required>
+                                            <label for="title" class="col-sm-3 col-form-label">Trainee Title</label>
+                                            <select class="form-select" name="title" id="title" style="max-width:20%;" required>
                                                 <option></option>
                                                 <?php                                                           
-                                                   $an_fetch_query = "SELECT animatorID, title FROM tblanimator";                                                  
+                                                   $an_fetch_query = "SELECT trainerID, title FROM tbltot";                                                  
                                                    $result_an_fetch = mysqli_query($link, $an_fetch_query);                                                                       
                                                    $i=0;
                                                       while($DB_ROW_an = mysqli_fetch_array($result_an_fetch)) {
                                                    ?>
-                                                   <option value ="<?php echo $DB_ROW_an["animatorID"];?>">
+                                                   <option value ="<?php echo $DB_ROW_an["trainerID"];?>">
                                                       <?php echo $DB_ROW_an["title"];?></option>
                                                    <?php
                                                       $i++;
@@ -199,8 +193,6 @@
                                             </select>
 
                                         </div>
-
-                                                                               
 
                                         <div class="row mb-4">
                                             <label for="startdate" class="col-sm-3 col-form-label">Start Date</label>
@@ -219,7 +211,7 @@
                                         <div class="row justify-content-end">
                                             <div class="col-sm-9">
                                                 <div>
-                                                    <button type="submit" class="btn btn-primary w-md" name="Submit" value="Submit">Save Record</button>
+                                                    <button type="submit" class="btn btn-primary w-md" name="Submit" value="Submit">Save TOT Record</button>
                                                     <INPUT TYPE="button" VALUE="Back" onClick="history.go(-1);">
                                                 </div>
                                             </div>
