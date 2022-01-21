@@ -25,7 +25,7 @@
      
     }
     
-    function get_rname($link, $rcode)
+        function get_rname($link, $rcode)
         {
         $rg_query = mysqli_query($link,"select name from tblregion where regionID='$rcode'"); // select query
         $rg = mysqli_fetch_array($rg_query);// fetch data
@@ -37,6 +37,13 @@
         $dis_query = mysqli_query($link,"select DistrictName from tbldistrict where DistrictID='$disID'"); // select query
         $dis = mysqli_fetch_array($dis_query);// fetch data
         return $dis['DistrictName'];
+        }
+
+        function issue($link, $code)
+        {
+        $rg_query = mysqli_query($link,"select name from tblissues where id='$code'"); // select query
+        $rg = mysqli_fetch_array($rg_query);// fetch data
+        return $rg['name'];
         }
 ?>
 
@@ -244,12 +251,13 @@
                                                                         while($row = $result_set->fetch_array(MYSQLI_ASSOC))
                                                                         { 
                                                                         echo "<tr>\n";
-                                                                            
+                                                                          $issue = issue($link,$row["issueID"]); 
+                                                                          $dis = dis_name($link,$row["districtID"]);
                                                                         
                                                                             echo "<td>".$row["id"]."</td>\n";
-                                                                            echo "<td>".$row["districtID"]."</td>\n";
+                                                                            echo "<td>\t\t $dis \t\t </td>\n";
                                                                             echo "<td>".$row["place"]."</td>\n";
-                                                                            echo "<td>".$row["issueID"]."</td>\n";
+                                                                            echo "<td>\t\t $issue \t\t </td>\n";
                                                                             echo "<td>".$row["probability"]."</td>\n";
                                                                             
                                                                         echo "</tr>\n";

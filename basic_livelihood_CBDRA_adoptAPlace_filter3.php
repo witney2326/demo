@@ -2,7 +2,7 @@
 <?php include 'layouts/head-main.php'; ?>
 
 <head>
-    <title>SLG Management</title>
+    <title>Clusters| Adopt a Place</title>
     <?php include 'layouts/head.php'; ?>
     <?php include 'layouts/head-style.php'; ?>
     <?php include 'layouts/config.php'; ?>
@@ -146,54 +146,40 @@
                                                         <h5 class="my-0 text-primary"><i class="mdi mdi-bullseye-arrow me-3"></i>SLG Clusters in <?php echo dis_name($link,$district); ?></h5>
                                                     </div>
                                                     <div class="card-body">
-                                                    <h7 class="card-title mt-0"></h7>
+                                                            <h7 class="card-title mt-0"></h7>
                                                         
                                                             <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
-                                                            
+                                                                    
                                                                 <thead>
-                                                                    <tr>
-                                                                        
-                                                                        
+                                                                    <tr>                                                                                                                      
                                                                         <th>Cluster code</th>
                                                                         <th>Cluster Name</th>
                                                                         <th>cohort</th>
-                                                                        <th>GVH</th>
-                                                                        <th>Adopt A Place Status</th>
-                                                                        <th>View Status</th>
-                                                                        <th>Adopt a Place</th>
+                                                                        <th>GVH</th>                                                           
+                                                                        <th>Action</th>                                                            
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
                                                                     <?Php
-                                                                        $query="select * from tblcluster where taID = '$ta'";
- 
-                                                                        //Variable $link is declared inside config.php file & used here
-                                                                        
+                                                                        $query="select * from tblcluster ";
+                                                                    
                                                                         if ($result_set = $link->query($query)) {
                                                                         while($row = $result_set->fetch_array(MYSQLI_ASSOC))
                                                                         { 
-                                                                        echo "<tr>\n";
-                                                                            
-                                                                        
+                                                                        echo "<tr>\n";                                                                                          
                                                                             echo "<td>".$row["ClusterID"]."</td>\n";
                                                                             echo "<td>".$row["ClusterName"]."</td>\n";
                                                                             echo "<td>".$row["cohort"]."</td>\n";                                                                            
                                                                             echo "<td>".$row["gvhID"]."</td>\n";
-                                                                            echo "\t\t<td><input type='checkbox' disabled></td>\n"; 
-                                                                
                                                                             echo "<td>
-                                                                            <a href=\"basicCLSAdoptAPlaceView.php?id=".$row['ClusterID']."\">view</a>\n";                       
-                                                                            echo "</td>\n";
-
-                                                                            echo "<td>
-                                                                            <a href=\"basicCLSAdoptAPlaceAdd.php?id=".$row['ClusterID']."\">Add Place</a>\n";                       
-                                                                        echo "</td>\n";
-
+                                                                                <a href=\"basicCLSAdoptAPlaceView.php?id=".$row['ClusterID']."\"><i class='far fa-eye' title ='View Status' style='font-size:18px'></i></a>                                                                            
+                                                                                <a href=\"basicCLSAdoptAPlaceAdd.php?id=".$row['ClusterID']."\"><i class='fas fa-plus' title ='Add Place' style='font-size:18px'></i></a>                       
+                                                                            </td>\n";
                                                                         echo "</tr>\n";
                                                                         }
                                                                         $result_set->close();
                                                                         }  
-                                                                                           
+                                                                                        
                                                                     ?>
                                                                 </tbody>
                                                             </table>
@@ -203,10 +189,6 @@
                                                 </div>            
                                             </div> 
                                 </div>
-                                    <!-- Here -->
-                                    
-                                    <!-- end here -->
-                                    
                                    
                                 </div>
 

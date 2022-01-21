@@ -246,8 +246,8 @@
                                                                             echo "<td>".$row["femalesNo"]."</td>\n";
                                                                             echo "<td>".$row["malesNo"]."</td>\n";
                                                                             echo "<td>
-                                                                            <a href=\"basicAwarenessMeetingview.php?id=".$row['clinicID']."\">view</a>
-                                                                            <a href=\"basicAwarenessMeetingDelete.php?id=".$row['clinicID']."\">delete</a>    
+                                                                            <a href=\"CBDRAclinicView.php?id=".$row['clinicID']."\"><i class='far fa-eye' title='View Clinic' style='font-size:18px'></i></a>
+                                                                            <a onClick=\"javascript: return confirm('Are You Sure You want To Delete This Clinic Record - You Must Be a Supervisor');\" href=\"CBDRAclinicDelete.php?id=".$row['clinicID']."\"><i class='far fa-trash-alt' title='Delete Clinic' style='font-size:18px'></i></a>    
                                                                                 
                                                                             </td>\n";
                                                                         echo "</tr>\n";
