@@ -44,11 +44,11 @@
             $purpose = $_POST['purpose'];
             
                 $sql = "INSERT INTO tbladoptplace (region,districtID,ta,cluster,place,purpose)
-                VALUES ('$region','$DistrictID','$ta','$clusterID','$amount','$place','$purpose')";
+                VALUES ('$region','$DistrictID','$ta','$clusterID','$place','$purpose')";
             if (mysqli_query($link, $sql)) {
                 echo '<script type="text/javascript">'; 
                 echo 'alert("CBDRA Adopt a place Record has been added successfully !");'; 
-                echo 'window.location.href = "basic_livelihood_slg_mgt2.php";';
+                echo 'window.location.href = "basic_livelihood_CBDRA_adoptAPlace.php";';
                 echo '</script>';
             } else {
                 echo "Error: " . $sql . ":-" . mysqli_error($link);
@@ -185,10 +185,22 @@
                                             <label for="purpose" class="col-sm-3 col-form-label">Purpose</label>
                                             <select class="form-select" name="purpose" id="purpose" style="max-width:20%;" required>
                                                 <option></option>
-                                                <option value='01'>Afforestation</option>
-                                                <option value='02'>Sanitation</option>
-                                                <option value='03'>???</option>
-                                                <option value='04'>????</option>
+                                                <?php                                                           
+                                                    $dis_fetch_query = "SELECT id, purpose FROM tbladoptplacepurpose";                                                  
+                                                    $result_dis_fetch = mysqli_query($link, $dis_fetch_query);                                                                       
+                                                    $i=0;
+                                                        while($DB_ROW_reg = mysqli_fetch_array($result_dis_fetch)) {
+                                                    ?>
+                                                    <option value ="<?php
+                                                            echo $DB_ROW_reg["id"];?>">
+                                                        <?php
+                                                            echo $DB_ROW_reg["purpose"];
+                                                        ?>
+                                                    </option>
+                                                    <?php
+                                                        $i++;
+                                                            }
+                                                ?>
                                                 
                                             </select>
                                         </div>

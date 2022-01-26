@@ -104,53 +104,56 @@
                                 <div class="card-body">
                                     
                                     <form method="POST" action="">
+
+                                        
                                         <div class="row mb-4">
-                                            <label for="group_id" class="col-sm-3 col-form-label">Group ID</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="group_id" name = "group_id" value="<?php echo $id ; ?>" style="max-width:30%;" readonly >
+                                            <label for="group_id" class="col-sm-2 col-form-label">Group ID</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" id="group_id" name = "group_id" value="<?php echo $id ; ?>" style="max-width:40%;" readonly >
                                             </div>
+                                            
                                         </div>
                                         <div class="row mb-4">
-                                            <label for="group_name" class="col-sm-3 col-form-label">SL Group Name</label>
+                                            <label for="group_name" class="col-sm-2 col-form-label">SL Group Name</label>
                                             <div class="col-sm-9">
                                                 <input type="text" class="form-control" id="group_name" name ="group_name" value = "<?php echo $groupname ; ?>" style="max-width:30%;" readonly >
                                             </div>
                                         </div>
                                         
                                         <div class="row mb-4">
-                                            <label for="region" class="col-sm-3 col-form-label">Region</label>
+                                            <label for="region" class="col-sm-2 col-form-label">Region</label>
                                             <div class="col-sm-9">
                                                 <input type="text" class="form-control" id="region" name="region" value ="<?php echo $regionID ; ?>" style="max-width:30%;" readonly >
                                             </div>
                                         </div>
                                         <div class="row mb-4">
-                                            <label for="district" class="col-sm-3 col-form-label">District</label>
+                                            <label for="district" class="col-sm-2 col-form-label">District</label>
                                             <div class="col-sm-9">
                                                 <input type="text" class="form-control" id="district" name="district" value ="<?php echo $DistrictID; ?>" style="max-width:30%;" readonly >
                                             </div>
                                         </div>
                                         <div class="row mb-4">
-                                            <label for="ta" class="col-sm-3 col-form-label">Traditional Authority</label>
+                                            <label for="ta" class="col-sm-2 col-form-label">Traditional Authority</label>
                                             <div class="col-sm-9">
                                                 <input type="text" class="form-control" id="ta" name="ta" value ="<?php echo $TAID; ?>" style="max-width:30%;" readonly >
                                             </div>
                                         </div>
                                         <div class="row mb-4">
-                                            <label for="gvh" class="col-sm-3 col-form-label">Group Village Head</label>
+                                            <label for="gvh" class="col-sm-2 col-form-label">Group Village Head</label>
                                             <div class="col-sm-9">
                                                 <input type="text" class="form-control" id="gvh" name="gvh" value ="<?php echo $gvhID ; ?>" style="max-width:30%;" readonly >
                                             </div>
                                         </div>
                                         
                                         <div class="row mb-4">
-                                            <label for="cohort" class="col-sm-3 col-form-label">Cohort</label>
+                                            <label for="cohort" class="col-sm-2 col-form-label">Cohort</label>
                                             <div class="col-sm-9">
                                                 <input type="text" class="form-control" id="cohort" name="cohort" value ="<?php echo $cohort ; ?> " style="max-width:30%;" readonly >
                                             </div>
                                         </div>
 
                                         <div class="row mb-4">
-                                            <label for="spp_programme" class="col-sm-3 col-form-label">SP Programme</label>
+                                            <label for="spp_programme" class="col-sm-2 col-form-label">SP Programme</label>
                                             <select class="form-select" name="spp_programme" id="spp_programme" style="max-width:20%;" required>
                                                 <?php                                                           
                                                     $spp_fetch_query = "SELECT progID, progName FROM tblspp";                                                  
@@ -167,7 +170,7 @@
                                         </div>
                                         
                                         <div class="row mb-4">
-                                            <label for="hhcode" class="col-sm-3 col-form-label">Household Code</label>
+                                            <label for="hhcode" class="col-sm-2 col-form-label">Household Code</label>
                                             <div class="col-sm-9">
                                                 <input type="text" class="form-control" id="hhcode" name="hhcode" value ="" style="max-width:30%;">
                                             </div>
@@ -230,8 +233,16 @@
                                                 echo "<td>".$row["cohort"]."</td>\n";
                
                                                 echo "<td>
-                                                    <a href=\"basicSLGMemberedit.php?id=".$row['sppCode']."\"><i class='far fa-edit' style='font-size:18px'></i></a> 
-                                                    <a onClick=\"javascript: return confirm('Are You Sure You want To DELETE This Record');\" href=\"basicSLGMemberdelete.php?id=".$row['sppCode']."\"><i class='far fa-trash-alt' style='font-size:18px'></i></a>        
+                                                    
+
+                                                    <a href=\"basicSLGMemberview.php?id=".$row['sppCode']."\"><i class='far fa-eye' title='View Member' style='font-size:18px'></i></a>   
+                                                    <a href=\"basicSLGMemberedit.php?id=".$row['sppCode']."\"><i class='far fa-edit' title='Edit Member' style='font-size:18px'></i></a> 
+                                                    <a href=\"basicSLGMembersavings.php?id=".$row['sppCode']."\"><i class='fas fa-hand-holding-usd' title='Update Member Savings' style='font-size:18px'></i></a>
+                                                    <a href=\"basicSLGMemberloans.php?id=".$row['sppCode']."\"><i class='fas fa-book' title='Update Member Loans' style='font-size:18px'></i></a> 
+                                                    <a href=\"basicSLGMemberiga.php?id=".$row['sppCode']."\"><i class='fas fa-balance-scale' title='Update Member IGAs' style='font-size:18px'></i></a> 
+                                                    <a onClick=\"javascript: return confirm('Are You Sure You want To DELETE This HOUSEHOLD');\" href=\"basicSLGMemberdelete.php?id=".$row['sppCode']."\"><i class='far fa-trash-alt' title='Delete Member' style='font-size:18px'></i></a>    
+
+                                                    
                                                 </td>\n";
                                             echo "</tr>\n";
                                             }

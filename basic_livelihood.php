@@ -312,19 +312,19 @@
                                         </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link" data-bs-toggle="tab" href="#nutrition" role="tab">
+                                        <a class="link"  href="basic_livelihood_nutrition_mgt.php" role="link">
                                             <span class="d-block d-sm-none"><i class="fas fa-cog"></i></span>
                                             <span class="d-none d-sm-block">Nutrition</span>
                                         </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link" data-bs-toggle="tab" href="#acsa" role="tab">
+                                        <a class="link"  href="basic_livelihood_acsa_mgt.php" role="link">
                                             <span class="d-block d-sm-none"><i class="fas fa-cog"></i></span>
                                             <span class="d-none d-sm-block">ACSA</span>
                                         </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link" data-bs-toggle="tab" href="#safeguards" role="tab">
+                                        <a class="nav-link"  href="basic_livelihood_safeguards_mgt.php" role="link">
                                             <span class="d-block d-sm-none"><i class="fas fa-cog"></i></span>
                                             <span class="d-none d-sm-block">ESS Mgt</span>
                                         </a>

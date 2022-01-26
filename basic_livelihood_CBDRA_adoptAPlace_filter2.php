@@ -19,7 +19,6 @@
 <?php 
     if(isset($_GET['Submit']))
     {   
-        $region = $_GET['region'];
         $district =$_GET['district'];
     }
     
@@ -35,6 +34,13 @@
         $dis_query = mysqli_query($link,"select DistrictName from tbldistrict where DistrictID='$disID'"); // select query
         $dis = mysqli_fetch_array($dis_query);// fetch data
         return $dis['DistrictName'];
+        }
+
+        function cls_found($link, $clsID)
+        {
+        $place_query = mysqli_query($link,"select id from tbladoptplace where cluster='$clsID'"); // select query
+        $place = mysqli_fetch_array($place_query);// fetch data
+        return $place['id'];
         }
 ?>
 
@@ -154,30 +160,39 @@
                                                         
                                                         <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
                                                             
-                                                            <thead>
-                                                                <tr>                                                                                                                      
-                                                                    <th>Cluster code</th>
-                                                                    <th>Cluster Name</th>
-                                                                    <th>cohort</th>
-                                                                    <th>GVH</th>                                                           
-                                                                    <th>Action</th>                                                            
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                <?Php
-                                                                    $query="select * from tblcluster ";
-                                                                
-                                                                    if ($result_set = $link->query($query)) {
-                                                                    while($row = $result_set->fetch_array(MYSQLI_ASSOC))
-                                                                    { 
-                                                                    echo "<tr>\n";                                                                                          
-                                                                        echo "<td>".$row["ClusterID"]."</td>\n";
-                                                                        echo "<td>".$row["ClusterName"]."</td>\n";
-                                                                        echo "<td>".$row["cohort"]."</td>\n";                                                                            
-                                                                        echo "<td>".$row["gvhID"]."</td>\n";
-                                                                        echo "<td>
-                                                                            <a href=\"basicCLSAdoptAPlaceView.php?id=".$row['ClusterID']."\"><i class='far fa-eye' title ='View Status' style='font-size:18px'></i></a>                                                                            
-                                                                            <a href=\"basicCLSAdoptAPlaceAdd.php?id=".$row['ClusterID']."\"><i class='fas fa-plus' title ='Add Place' style='font-size:18px'></i></a>                       
+                                                        <thead>
+                                                        <tr>                                                                                                                      
+                                                            <th>Cluster code</th>
+                                                            <th>Cluster Name</th>
+                                                            <th>cohort</th>
+                                                            <th>GVH</th> 
+                                                            <th>Has Adopted Place?</th>                                                         
+                                                            <th>Action</th>                                                            
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <?Php
+                                                            $query="select * from tblcluster where districtID = '$district'";
+                                                          
+                                                            if ($result_set = $link->query($query)) {
+                                                            while($row = $result_set->fetch_array(MYSQLI_ASSOC))
+                                                            { 
+                                                                $found = cls_found($link,$row["ClusterID"]);
+                                                                if ($found > 0)
+                                                                {$check = "Yes";}
+                                                                else
+                                                                {$check = "No";}
+                                                            echo "<tr>\n";                                                                                          
+                                                                echo "<td>".$row["ClusterID"]."</td>\n";
+                                                                echo "<td>".$row["ClusterName"]."</td>\n";
+                                                                echo "<td>".$row["cohort"]."</td>\n";                                                                            
+                                                                echo "<td>".$row["gvhID"]."</td>\n";
+                                                                echo "<td>\t\t$check</td>\n";
+                                                                echo "<td>
+                                                                    <a href=\"CBDRAAdoptPlaceView.php?id=".$row['ClusterID']."\"><i class='far fa-eye' title ='View Status' style='font-size:18px'></i></a>
+                                                                    <a href=\"CBDRAAdoptPlaceEdit.php?id=".$row['ClusterID']."\"><i class='far fa-edit' title ='Edit Place' style='font-size:18px'></i></a>                                                                            
+                                                                    <a href=\"basicCLSAdoptAPlaceAdd.php?id=".$row['ClusterID']."\"><i class='fas fa-plus' title ='Add Place' style='font-size:18px'></i></a>                       
+                                                                    <a href=\"CBDRAAdoptPlaceDelete.php?id=".$row['ClusterID']."\"><i class='far fa-trash-alt' title ='Delete Place' style='font-size:18px'></i></a>
                                                                         </td>\n";
                                                                     echo "</tr>\n";
                                                                     }

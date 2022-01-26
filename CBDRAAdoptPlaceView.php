@@ -2,7 +2,7 @@
 <?php include 'layouts/head-main.php'; ?>
 
 <head>
-    <title>CBDRA | View Clinic Details</title>
+    <title>CBDRA | View Adopted Place</title>
     <?php include 'layouts/head.php'; ?>
     <?php include 'layouts/head-style.php'; ?>
 </head>
@@ -15,20 +15,19 @@
         include "layouts/config.php"; // Using database connection file here
         
         $id = $_GET['id']; // get id through query string
-       $query="select * from tblclinics where clinicID='$id'";
+       $query="select * from tbladoptplace where cluster='$id'";
         
         if ($result_set = $link->query($query)) {
             while($row = $result_set->fetch_array(MYSQLI_ASSOC))
             { 
-                $hhname= $id;
-                
-                $regionID = $row["regionID"];
+               
+                $regionID = $row["region"];
                 $districtID= $row["districtID"];
                 $ta = $row["ta"];
-                $clinicname = $row["clinicname"];
-                $femalesNo = $row["femalesNo"];
-                $malesNo = $row["malesNo"];
-                $orientationDate = $row["dateformed"];
+                
+                $place = $row["place"];
+                $purpose = $row["purpose"];
+                
             }
             $result_set->close();
         }
@@ -53,6 +52,20 @@
          $rg = mysqli_fetch_array($rg_query);// fetch data
          return $rg['name'];
          }
+
+         function clsname($link, $clscode)
+         {
+         $rg_query = mysqli_query($link,"select ClusterName from tblcluster where ClusterID='$clscode'"); // select query
+         $rg = mysqli_fetch_array($rg_query);// fetch data
+         return $rg['ClusterName'];
+         }
+
+         function purpose_name($link, $purposeid)
+         {
+         $rg_query = mysqli_query($link,"select purpose from tbladoptplacepurpose where id='$purposeid'"); // select query
+         $rg = mysqli_fetch_array($rg_query);// fetch data
+         return $rg['purpose'];
+         }
                
     ?>
 
@@ -72,58 +85,53 @@
                         <div class="col-lg-9">
                             <div class="card border border-success">
                                 <div class="card-header bg-transparent border-success">
-                                    <h5 class="my-0 text-success"> CBDRA Clinic Formation in TA: <?php echo ta_name($link,$ta);?></h5>
+                                    <h5 class="my-0 text-success"> CBDRA Adopt a Place: <?php echo clsname($link,$id);?> Cluster</h5>
                                 </div>
                                 <div class="card-body">
                                     
                                     <form>
                                         <div class="row mb-4">
-                                            <label for="clinic_id" class="col-sm-3 col-form-label">Clinic No.</label>
+                                            <label for="clinic_id" class="col-sm-3 col-form-label">Cluster ID.</label>
                                             <div class="col-sm-9">
                                                 <input type="text" class="form-control" id="clinic_id" name = "clinic_id" value="<?php echo $id ; ?>" style="max-width:30%;" disabled ="True">
                                             </div>
                                         </div>
                                         
-                                        <div class="row mb-4">
-                                            <label for="clinicname" class="col-sm-3 col-form-label">Clinic Name</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="clinicname" name="clinicname" value =" <?php echo $clinicname ; ?>" style="max-width:30%;" disabled ="True">
-                                            </div>
-                                        </div>
+                                        
                                         
                                         <div class="row mb-4">
                                             <label for="region" class="col-sm-3 col-form-label">Region</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="region" name="region" value ="<?php echo get_rname($link,$regionID) ; ?>" style="max-width:30%;" disabled ="True">
+                                                <input type="text" class="form-control" id="region" name="region" value ="<?php if (isset($regionID)) {echo get_rname($link,$regionID);} else {echo "Region Not Set";} ?>" style="max-width:30%;" disabled ="True">
                                             </div>
                                         </div>
 
                                         <div class="row mb-4">
                                             <label for="district" class="col-sm-3 col-form-label">District</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="district" name="district" value ="<?php echo dis_name($link,$districtID) ; ?>" style="max-width:30%;" disabled ="True">
+                                                <input type="text" class="form-control" id="district" name="district" value ="<?php if (isset($districtID)) {echo dis_name($link,$districtID) ;} else {echo "District Not Set";} ?>" style="max-width:30%;" disabled ="True">
                                             </div>
                                         </div>
 
                                         <div class="row mb-4">
                                             <label for="ta" class="col-sm-3 col-form-label">TA</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="ta" name="ta" value ="<?php echo ta_name($link,$ta);?>" style="max-width:30%;" disabled ="True">
+                                                <input type="text" class="form-control" id="ta" name="ta" value ="<?php if (isset($ta)) {echo ta_name($link,$ta);} else {echo "TA Not Set";}?>" style="max-width:30%;" disabled ="True">
                                             </div>
                                         </div>
-                                                                                                                       
-                                        
+                                                    
+                                                                                
                                         <div class="row mb-4">
-                                            <label for="males" class="col-sm-3 col-form-label">No. Males </label>
+                                            <label for="place" class="col-sm-3 col-form-label">Adopted Place </label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="males" name="males" value =" <?php echo $malesNo ; ?>" style="max-width:30%;" disabled ="True">
+                                                <input type="text" class="form-control" id="place" name="place" value =" <?php if (isset($place)) {echo $place ;} else {echo "No Adopted Place";}?>" style="max-width:30%;" disabled ="True">
                                             </div>
                                         </div>
 
                                         <div class="row mb-4">
-                                            <label for="females" class="col-sm-3 col-form-label">No. Females </label>
+                                            <label for="purpose" class="col-sm-3 col-form-label">Purpose </label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="females" name="females" value =" <?php echo $femalesNo ; ?>" style="max-width:30%;" disabled ="True">
+                                                <input type="text" class="form-control" id="purpose" name="purpose" value =" <?php if (isset($purpose)) {echo purpose_name($link,$purpose) ;} else {echo "Purpose Not Set";} ?>" style="max-width:30%;" disabled ="True">
                                             </div>
                                         </div>
 
