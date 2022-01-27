@@ -96,7 +96,7 @@
                     <div class="col-12">
 
                         <?php include 'layouts/body.php'; ?>
-                        <div class="col-lg-9">
+                        <div class="col-lg-12">
                             <div class="card border border-success">
                                 <div class="card-header bg-transparent border-success">
                                     <h5 class="my-0 text-success">New Member for :<?php echo $groupname; ?></h5>
@@ -105,78 +105,82 @@
                                     
                                     <form method="POST" action="">
 
-                                        
-                                        <div class="row mb-4">
-                                            <label for="group_id" class="col-sm-2 col-form-label">Group ID</label>
-                                            <div class="col-sm-6">
-                                                <input type="text" class="form-control" id="group_id" name = "group_id" value="<?php echo $id ; ?>" style="max-width:40%;" readonly >
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="mb-3">
+                                                    <label for="group_id" class="form-label">Group ID</label>
+                                                    <input type="text" class="form-control" id="group_id" name = "group_id" value="<?php echo $id ; ?>"readonly>
+                                                </div>
                                             </div>
-                                            
-                                        </div>
-                                        <div class="row mb-4">
-                                            <label for="group_name" class="col-sm-2 col-form-label">SL Group Name</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="group_name" name ="group_name" value = "<?php echo $groupname ; ?>" style="max-width:30%;" readonly >
+                                            <div class="col-md-4">
+                                                <div class="mb-3">
+                                                    <label for="group_name" class="form-label">SL Group Name</label>
+                                                    <input type="text" class="form-control" id="group_name" name ="group_name" value = "<?php echo $groupname ; ?>" readonly>
+                                                </div>
                                             </div>
-                                        </div>
-                                        
-                                        <div class="row mb-4">
-                                            <label for="region" class="col-sm-2 col-form-label">Region</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="region" name="region" value ="<?php echo $regionID ; ?>" style="max-width:30%;" readonly >
-                                            </div>
-                                        </div>
-                                        <div class="row mb-4">
-                                            <label for="district" class="col-sm-2 col-form-label">District</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="district" name="district" value ="<?php echo $DistrictID; ?>" style="max-width:30%;" readonly >
-                                            </div>
-                                        </div>
-                                        <div class="row mb-4">
-                                            <label for="ta" class="col-sm-2 col-form-label">Traditional Authority</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="ta" name="ta" value ="<?php echo $TAID; ?>" style="max-width:30%;" readonly >
-                                            </div>
-                                        </div>
-                                        <div class="row mb-4">
-                                            <label for="gvh" class="col-sm-2 col-form-label">Group Village Head</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="gvh" name="gvh" value ="<?php echo $gvhID ; ?>" style="max-width:30%;" readonly >
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="row mb-4">
-                                            <label for="cohort" class="col-sm-2 col-form-label">Cohort</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="cohort" name="cohort" value ="<?php echo $cohort ; ?> " style="max-width:30%;" readonly >
+                                            <div class="col-md-4">
+                                                <div class="mb-3">
+                                                    <label for="region" class="form-label">Region</label>
+                                                    <input type="text" class="form-control" id="region" name="region" value ="<?php echo $regionID ; ?>" readonly>
+                                                </div>
                                             </div>
                                         </div>
 
-                                        <div class="row mb-4">
-                                            <label for="spp_programme" class="col-sm-2 col-form-label">SP Programme</label>
-                                            <select class="form-select" name="spp_programme" id="spp_programme" style="max-width:20%;" required>
-                                                <?php                                                           
-                                                    $spp_fetch_query = "SELECT progID, progName FROM tblspp";                                                  
-                                                    $result_spp_fetch = mysqli_query($link, $spp_fetch_query);                                                                       
-                                                    $i=0;
-                                                        while($DB_ROW_spp = mysqli_fetch_array($result_spp_fetch)) {
-                                                    ?>
-                                                    <option value ="<?php echo $DB_ROW_spp["progID"]; ?>">
-                                                        <?php echo $DB_ROW_spp["progName"]; ?></option><?php
-                                                        $i++;
-                                                            }
-                                                ?>
-                                            </select>
-                                        </div>
-                                        
-                                        <div class="row mb-4">
-                                            <label for="hhcode" class="col-sm-2 col-form-label">Household Code</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="hhcode" name="hhcode" value ="" style="max-width:30%;">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="mb-3">
+                                                    <label for="district" class="form-label">District</label>
+                                                    <input type="text" class="form-control" id="district" name = "district" value="<?php echo $DistrictID; ?>"readonly>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="mb-3">
+                                                    <label for="ta" class="form-label">Traditional Authority</label>
+                                                    <input type="text" class="form-control" id="ta" name ="ta" value = "<?php echo $TAID; ?>" readonly>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="mb-3">
+                                                    <label for="gvh" class="form-label">Group Village Head</label>
+                                                    <input type="text" class="form-control" id="gvh" name="gvh" value ="<?php echo $gvhID ; ?>" readonly>
+                                                </div>
                                             </div>
                                         </div>
-
-                                        <div class="row justify-content-end">
+                                        
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="mb-3">
+                                                    <label for="cohort" class="form-label">Cohort</label>
+                                                    <input type="text" class="form-control" id="cohort" name = "cohort" value="<?php echo $cohort ; ?>"readonly>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="mb-3">
+                                                    <label for="spp_programme" class="form-label">SP Programme</label>
+                                                    <select class="form-select" id="spp_programme" name ="spp_programme" required>
+                                                        <?php                                                           
+                                                            $spp_fetch_query = "SELECT progID, progName FROM tblspp";                                                  
+                                                            $result_spp_fetch = mysqli_query($link, $spp_fetch_query);                                                                       
+                                                            $i=0;
+                                                                while($DB_ROW_spp = mysqli_fetch_array($result_spp_fetch)) {
+                                                            ?>
+                                                            <option value ="<?php echo $DB_ROW_spp["progID"]; ?>">
+                                                                <?php echo $DB_ROW_spp["progName"]; ?></option><?php
+                                                                $i++;
+                                                                    }
+                                                        ?>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="mb-3">
+                                                    <label for="hhcode" class="form-label">Household Code</label>
+                                                    <input type="text" class="form-control" id="hhcode" name="hhcode" value ="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                  
+                                        <div class="row">
                                             <div class="col-sm-9">
                                                 <div>
                                                     <button type="submit" class="btn btn-primary w-md" name="Submit" value="Submit">Save Record</button>
@@ -196,7 +200,7 @@
                     <div class="col-12">
                         <div class="card border border-primary">
                         <div class="card-header bg-transparent border-primary">
-                            <h5 class="my-0 text-primary">Members In <?php echo $groupname; ?></h5>
+                            <h5 class="my-0 text-primary">Current Members In  <?php echo $groupname; ?></h5>
                         </div>
                         <div class="card-body">
                         <h5 class="card-title mt-0"></h5>
