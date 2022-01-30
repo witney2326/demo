@@ -26,20 +26,30 @@
         // Draw the chart and set the chart values
         function drawChart() {
         var data = google.visualization.arrayToDataTable([
-        ['Disaster', 'Probability'],
-        ['Floods', 10],
-        ['Drought', 12],
-        ['Earthquake', 2],
-        ['Strong winds', 1],
-        ['Heatwave', 15],
+        
+        ['District', 'Adopted_Places'],
+        
+        <?php 
+            $select_query = "SELECT tbldistrict.DistrictName as District, count(cluster) Adopted_Places
+            FROM tbladoptplace 
+            inner join tbldistrict on tbldistrict.DistrictID = tbladoptplace.districtID
+            GROUP BY tbldistrict.DistrictName";
+            $query_result = mysqli_query($link,$select_query);
+            while($row_val = mysqli_fetch_array($query_result)){
+                
+            echo "['".$row_val['District']."',".$row_val['Adopted_Places']."],";
+            }
+        ?>
         
         ]);
+        
+        
 
         // Optional; add a title and set the width and height of the chart
         var options = {'title':'', 'width':370, 'height':250};
 
         // Display the chart inside the <div> element with id="piechart"
-        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+        var chart = new google.visualization.BarChart(document.getElementById('AdoptedPlaces'));
         chart.draw(data, options);
         }
     </script> 
@@ -442,9 +452,9 @@
                                                 <div class = "col-lg-6">
                                                     <div class="card border border-success">
                                                         <div class="card-header bg-transparent border-primary">
-                                                            <h5 class="my-0 text-primary">Disaster Severity</h5>
+                                                            <h5 class="my-0 text-secondary">CBDRA Adopted Places Per District</h5>
                                                         </div>
-                                                        <div id="piechart"></div> 
+                                                        <div id="AdoptedPlaces"></div> 
                                                     </div>
                                                 </div>
                                                 <div class = "col-lg-6">
