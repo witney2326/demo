@@ -17,14 +17,9 @@
 <?php include 'layouts/body.php'; ?>
 
 <?php		
-     if(isset($_GET['Submit']))
-     {   
+        $region = $_GET["region"];
          $district = $_GET['district'];
-     }
-     
-     
-     
-         
+         $ta = $_GET["ta"];
 
          function get_rname($link, $rcode)
          {
@@ -138,7 +133,7 @@
                                                             <label for="region" class="form-label">Region</label>
                                                             <div>
                                                                 <select class="form-select" name="region" id="region" required>
-                                                                    <option selected value = "$region"><?php echo get_rname($link,$_GET['region']);?></option>
+                                                                    <option selected value = "<?php echo $region; ?>"><?php echo get_rname($link,$region);?></option>
                                                                 </select>
                                                                 <div class="invalid-feedback">
                                                                     Please select a valid Malawi region.
@@ -150,7 +145,7 @@
                                                         <div class="col-12">
                                                             <label for="district" class="form-label">District</label>
                                                             <select class="form-select" name="district" id="district" required>
-                                                                <option selected value = "$district"><?php echo dis_name($link,$_GET['district']);?></option>
+                                                                <option selected value = "<?php echo $district ;?>"><?php echo dis_name($link,$district);?></option>
                                                             </select>
                                                             <div class="invalid-feedback">
                                                                 Please select a valid Malawi district.
@@ -160,7 +155,7 @@
                                                         <div class="col-12">
                                                             <label for="ta" class="form-label">Traditional Authority</label>
                                                             <select class="form-select" name="ta" id="ta" required>
-                                                                <option selected value = "$ta"><?php echo ta_name($link,$_GET['ta']);?></option>
+                                                                <option selected value = "<?php $ta; ?>"><?php echo ta_name($link,$ta);?></option>
                                                             </select>
                                                             <div class="invalid-feedback">
                                                                 Please select a valid TA.
@@ -191,14 +186,15 @@
                                                             
                                                                 <thead>
                                                                     <tr>                    
-                                                                        <th>hhcode</th>
+                                                                    <th>hhcode</th>
                                                                         <th>Programme</th>
                                                                         <th>Region</th>
                                                                         <th>District</th>
                                                                         <th>Group</th> 
                                                                         <th>Cohort</th>
-                                                                        <th>Approval Status</th>                                           
-                                                                        <th>Action</th>
+                                                                        <th>Approved?</th>                                           
+                                                                        <th>View</th>
+                                                                        <th>Approve</th>
                                                                     </tr>
                                                                 </thead>
 
@@ -218,6 +214,17 @@
                                                                         $group = grp_name($link,$row["groupID"]);
                                                                         $prog = prog_name($link, $row["spProg"]);
 
+                                                                        $hhstatus = $row["hhstatus"];
+
+                                                                        if ($row["hhstatus"] == '1')
+                                                                        {
+                                                                            $hhstatus = 'Yes';}
+
+                                                                        if ($row["hhstatus"] == '0')
+                                                                        {
+                                                                            $hhstatus = 'No';}    
+                                                                        
+
                                                                     echo "<tr>\n";
                                                                         echo "<td>".$row["sppCode"]."</td>\n";
                                                                         echo "\t\t<td>$prog</td>\n";
@@ -225,14 +232,13 @@
                                                                         echo "\t\t<td>$district</td>\n";
                                                                         echo "\t\t<td>$group</td>\n";
                                                                         echo "<td>".$row["cohort"]."</td>\n";
-                                                                        echo "<td style='text-align: center; vertical-align: middle;' >\n";
-                                                                            echo "<input type='checkbox' disabled />";
-                                                                        echo "</td>\n";
+                                                                        echo "\t\t<td>$hhstatus</td>\n";
                                                                         
                                                                         
-                                                                        echo "<td> <a href=\"basicmemberEdit.php?id=".$row['sppCode']."\">View/Edit</a>\n";
+                                                                        echo "<td> <a href=\"basicSLGMemberedit.php?id=".$row['sppCode']."\"><i class='far fa-eye' title='View Household' style='font-size:18px'></i></a>\n";
                                                                         echo "";
-                                                                        echo "<a href=\"basicmemberApprove.php?id=".$row['sppCode']."\">Approve</a> </td>\n";
+                                                                        echo "<td> <a onClick=\"javascript: return confirm('Are You Sure You want To APPROVE This HOUSEHOLD - You Must Be a Supervisor');\" href=\"basicHHStatusApproval.php?id=".$row['sppCode']."\"><i class='far fa-thumbs-up' title='Approve Household' style='font-size:18px'></i></a>\n";
+                                                                       
                                                                     echo "</tr>\n";
                                                                     }
                                                                     $result_set->close();
