@@ -11,11 +11,14 @@ if(isset($_POST['Submit']))
      
         $sql = "INSERT INTO tblgroupsavings (GroupID,DistrictID,Yr,Month,Amount)
         VALUES ('$groupID','$DistrictID','$year','$month','$amount')";
-     if (mysqli_query($link, $sql)) {
-        echo "SLG Savings Record has been added successfully !";
-     } else {
-        echo "Error: " . $sql . ":-" . mysqli_error($link);
-     }
-     mysqli_close($link);
+      if (mysqli_query($link, $sql)) {
+         echo '<script type="text/javascript">'; 
+         echo 'alert("SLG Savings has been added successfully !");'; 
+         echo 'window.location.href = "basic_livelihood_slg_mgt2.php";';
+         echo '</script>';
+        } else {
+           echo "Error: " . $sql . ":-" . mysqli_error($link);
+        }
+        mysqli_close($link);
 }
 ?>

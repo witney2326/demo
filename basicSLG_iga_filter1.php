@@ -40,9 +40,19 @@ session_start();
         $iga = mysqli_fetch_array($iga_query);// fetch data
         return $iga['name'];
         }
+
+        function bus_cat_name($link, $catID)
+        {
+        $cat_query = mysqli_query($link,"select catname from tblbusines_category where categoryID='$catID'"); // select query
+        $cat = mysqli_fetch_array($cat_query);// fetch data
+        return $cat['catname'];
+        }
            
-        $id = $_GET['id']; // get id through query string
-       $query="select * from tblgroup where groupID='$id'";
+        $buscat = $_GET['buscat']; // get id through query string
+       $district = $_GET["district"];
+       $groupID = $_GET["group_code"];
+
+       $query="select * from tblgroup where groupID='$groupID'";
         
         if ($result_set = $link->query($query)) {
             while($row = $result_set->fetch_array(MYSQLI_ASSOC))
@@ -58,16 +68,15 @@ session_start();
             { 
             $groupID = $_POST["group_code"];
             $district= $_POST["district"];
+            $buscat = $_POST['buscat'];
             $iga = $_POST['iga'];
             $males = $_POST["males"];
             $females = $_POST["females"];
             $amount = $_POST['amount_invested'];
-            
-            $_SESSION['groupID'] = $groupID;
-
-            
-                $sql = "INSERT INTO tblgroup_iga (groupID,districtID,type,no_male,no_female,amount_invested)
-                VALUES ('$groupID','$district','$iga','$males','$females','$amount')";
+                      
+        
+                $sql = "INSERT INTO tblgroup_iga (groupID,districtID,bus_category,type,no_male,no_female,amount_invested)
+                VALUES ('$groupID','$district','$buscat','$iga','$males','$females','$amount')";
             if (mysqli_query($link, $sql)) {
                 echo '<script type="text/javascript">'; 
                 echo 'alert("SLG IGA Record has been added successfully !");'; 
@@ -101,23 +110,13 @@ session_start();
                             </div>
                             <div class="card-body">
                                 <h5 class="card-title mt-0"></h5>
-                                <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="basicSLG_iga_filter1.php" method ="GET" >
+                                <form class="row row-cols-lg-auto g-3 align-items-center">
                                     <div class="col-12">
                                         <label for="region" class="form-label">Business Category</label>
                                         <div>
-                                            <select class="form-select" name="buscat" id="buscat" value ="" required>
-                                                <option></option>
-                                                    <?php                                                           
-                                                        $cat_fetch_query = "SELECT categoryID,catname FROM tblbusines_category";                                                  
-                                                        $result_cat_fetch = mysqli_query($link, $cat_fetch_query);                                                                       
-                                                        $i=0;
-                                                            while($DB_ROW_cat = mysqli_fetch_array($result_cat_fetch)) {
-                                                        ?>
-                                                        <option value="<?php echo $DB_ROW_cat["categoryID"]; ?>">
-                                                            <?php echo $DB_ROW_cat["catname"]; ?></option><?php
-                                                            $i++;
-                                                                }
-                                                    ?>
+                                            <select class="form-select" name="buscat" id="buscat" value ="<?php echo $buscat?>" required>
+                                                <option selected value="<?php echo $buscat?>"><?php echo bus_cat_name($link,$buscat);?></option>
+                                                    
                                             </select>
                                             <div class="invalid-feedback">
                                                 Please select a valid Business Category.
@@ -126,11 +125,11 @@ session_start();
                                     </div>
                                     
                                     <div class="col-12">
-                                        <label for="iga" class="form-label">Select IGA Type</label>
-                                        <select class="form-select" name="iga" id="iga" value ="" required disabled>
+                                        <label for="iga" class="form-label">IGA Type</label>
+                                        <select class="form-select" name="iga" id="iga" value ="" required>
                                             <option></option>
                                             <?php                                                           
-                                                    $iga_fetch_query = "SELECT ID,name FROM tbliga_types";                                                  
+                                                    $iga_fetch_query = "SELECT ID,name FROM tbliga_types where categoryID = '$buscat'";                                                  
                                                     $result_iga_fetch = mysqli_query($link, $iga_fetch_query);                                                                       
                                                     $i=0;
                                                         while($DB_ROW_iga = mysqli_fetch_array($result_iga_fetch)) {
@@ -146,13 +145,10 @@ session_start();
                                         </div>
                                     </div>
 
-                                    <div class="col-12">
-                                            <input type="hidden" class="form-control" id="group_code" name = "group_code" value="<?php echo $id; ?>" style="max-width:60%;" readonly >    
-                                            <input type="hidden" class="form-control" id="district" name="district" value ="<?php echo $districtID ; ?>" style="max-width:30%;">
-                                    </div>
                                                                         
                                     <div class="col-12">
-                                        <button type="submit" class="btn btn-primary w-md" name="Submit" value="Submit">Submit</button>
+                                        <INPUT TYPE="button" VALUE="Back" onClick="history.go(-1);">
+                                        
                                     </div>
                                 </form>                                             
                                 <!-- End Here -->
@@ -162,16 +158,16 @@ session_start();
                         <div class="col-lg-9">
                             <div class="card border border-success">
                                 <div class="card-header bg-transparent border-success">
-                                    <h5 class="my-0 text-success">IGA Record for -SLG- <?php echo $groupname ; ?></h5>
+                                    <h5 class="my-0 text-success">IGA Record for -SLG- <?php echo grp_name($link,$groupID) ; ?></h5>
                                 </div>
                                 <div class="card-body">
                                     
-                                    <form method="POST" action="<?=$_SERVER['PHP_SELF'];?>">
+                                    <form method="POST" action="insertSLGIGA.php" method="POST">
                                        
                                         <div class="row mb-2">
                                             <label for="group_code" class="col-sm-3 col-form-label">Group Code</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="group_code" name = "group_code" value="<?php echo $id; ?>" style="max-width:30%;" readonly >
+                                                <input type="text" class="form-control" id="group_code" name = "group_code" value="<?php echo $groupID; ?>" style="max-width:30%;" readonly >
                                             </div>
                                         </div>
                                         
@@ -184,17 +180,27 @@ session_start();
                                         
                                         <div class="row mb-2">
                                             <label for="buscat" class="col-sm-3 col-form-label">Business Category</label>
-                                            <select class="form-select" name="buscat" id="buscat" value ="" style="max-width:30%;" disabled required>
-                                                <option></option>
+                                            <select class="form-select" name="buscat" id="buscat" value ="<?php echo $buscat;?>" style="max-width:30%;" required>
+                                                <option selected value="<?php echo $buscat;?>" ><?php echo $buscat;?></option>
                                                 
                                             </select>
                                         </div>
                                                                                
                                         <div class="row mb-2">
                                             <label for="iga" class="col-sm-3 col-form-label">Select IGA Type</label>
-                                            <select class="form-select" name="iga" id="iga" value ="" style="max-width:30%;" disabled required>
+                                            <select class="form-select" name="iga" id="iga" value ="" style="max-width:30%;" required>
                                                 <option></option>
-                                                
+                                                <?php                                                           
+                                                    $iga_fetch_query = "SELECT ID,name FROM tbliga_types where categoryID = '$buscat'";                                                  
+                                                    $result_iga_fetch = mysqli_query($link, $iga_fetch_query);                                                                       
+                                                    $i=0;
+                                                        while($DB_ROW_iga = mysqli_fetch_array($result_iga_fetch)) {
+                                                    ?>
+                                                    <option value="<?php echo $DB_ROW_iga["ID"]; ?>">
+                                                        <?php echo $DB_ROW_iga["name"]; ?></option><?php
+                                                        $i++;
+                                                            }
+                                                ?>
                                             </select>
                                         </div>
                                         
@@ -223,7 +229,7 @@ session_start();
                                         <div class="row justify-content-end">
                                             <div class="col-sm-9">
                                                 <div>
-                                                    <button type="submit" class="btn btn-primary w-md" name="Submit" value="Submit" disabled>Save New SLG IGA Record</button>
+                                                    <button type="submit" class="btn btn-primary w-md" name="Submit" value="Submit">Save New SLG IGA Record</button>
                                                     <INPUT TYPE="button" VALUE="Back" onClick="history.go(-1);">
                                                 </div>
                                             </div>
@@ -265,15 +271,15 @@ session_start();
 
                                     <tbody>
                                         <?Php
-                                                $id = $_GET['id'];
-                                            $query="select * from tblgroup_iga where groupID ='$id';";
+                                            $groupID = $_GET['group_code'];
+                                            $query="select * from tblgroup_iga where groupID ='$groupID';";
 
                                             //Variable $link is declared inside config.php file & used here
                                             
                                             if ($result_set = $link->query($query)) {
                                             while($row = $result_set->fetch_array(MYSQLI_ASSOC))
                                             { 
-                                                $group = grp_name($link, $id);
+                                                $group = grp_name($link, $groupID);
                                                 $amount = number_format($row["amount_invested"],"2");
 
                                                
