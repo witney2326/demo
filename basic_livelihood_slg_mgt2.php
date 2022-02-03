@@ -92,25 +92,25 @@
                                     <li class="nav-item waves-effect waves-light">
                                         <a class="link"  href="basic_livelihood_clusters.php" role="link">
                                             <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
-                                            <span class="d-none d-sm-block">Clusters</span>
+                                            <span class="d-none d-sm-block">Savings and Loan Clusters</span>
                                         </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">
                                         <a class="nav-link" data-bs-toggle="tab" href="#cls-1" role="tab">
                                             <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
-                                            <span class="d-none d-sm-block">New SLG Cluster</span>
+                                            <span class="d-none d-sm-block">New! Savings and Loan Cluster</span>
                                         </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">
                                         <a class="nav-link" data-bs-toggle="tab" href="#slg-1" role="tab">
                                             <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
-                                            <span class="d-none d-sm-block">New SLG</span>
+                                            <span class="d-none d-sm-block">New! Savings and Loan Group</span>
                                         </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">
                                         <a class="link" href="basic_livelihood_SLG_reports.php" role="link">
                                             <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
-                                            <span class="d-none d-sm-block">SLG Reports</span>
+                                            <span class="d-none d-sm-block">Savings and Loan Group Reports</span>
                                         </a>
                                     </li>
                                     
@@ -237,7 +237,7 @@
 
                                                                 <tbody>
                                                                     <?Php
-                                                                        $query="select * from tblgroup";
+                                                                        $query="select * from tblgroup where regionID ='0'";
  
                                                                         //Variable $link is declared inside config.php file & used here
                                                                         

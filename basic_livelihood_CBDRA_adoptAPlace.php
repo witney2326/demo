@@ -17,14 +17,7 @@
 <?php include 'layouts/body.php'; ?>
 
 <?php 
-    if(isset($_GET['Submit']))
-    {   
-        $region = $_GET['region'];
-        $district = $_GET['district'];
-        $ta = $_GET['ta'];
-     
-    }
-    
+
     function get_rname($link, $rcode)
         {
         $rg_query = mysqli_query($link,"select name from tblregion where regionID='$rcode'"); // select query
@@ -196,7 +189,7 @@
                                                     </thead>
                                                     <tbody>
                                                         <?Php
-                                                            $query="select * from tblcluster ";
+                                                            $query="select * from tblcluster where regionID = '0'";
                                                           
                                                             if ($result_set = $link->query($query)) {
                                                             while($row = $result_set->fetch_array(MYSQLI_ASSOC))

@@ -17,11 +17,9 @@
 <?php include 'layouts/body.php'; ?>
 
 <?php 
-    if(isset($_GET['Submit']))
-    {   
-        $region = $_GET['region'];
-        $district =$_GET['district'];
-    }
+    $region = $_GET['region'];
+    $district =$_GET['district'];
+    
     
     function get_rname($link, $rcode)
         {
@@ -104,7 +102,7 @@
                                             <!--start here -->
                                             <div class="card border border-primary">
                                                 <div class="card-header bg-transparent border-primary">
-                                                    <h5 class="my-0 text-primary"></i>Meetings/Sensitization Filter:</h5>
+                                                    <h5 class="my-0 text-primary">Sensitization Meeting Filter</h5>
                                                 </div>
                                                 <div class="card-body">
                                                     <h5 class="card-title mt-0"></h5>
@@ -113,7 +111,7 @@
                                                             <label for="region" class="form-label">Region</label>
                                                             <div>
                                                                 <select class="form-select" name="region" id="region" value ="$region" required>
-                                                                    <option selected value = "$region"><?php echo get_rname($link,$_GET['region']);?></option>
+                                                                    <option selected value = "<?php echo $region;?>"><?php echo get_rname($link,$region);?></option>
                                                                 </select>
                                                             </div>
                                                         </div>
@@ -122,7 +120,7 @@
                                                             <label for="district" class="form-label">District</label>
                                                             <div>
                                                                 <select class="form-select" name="district" id="district" value ="$district" required>
-                                                                    <option selected value = "$district"><?php echo dis_name($link,$_GET['district']);?></option>
+                                                                    <option selected value = "<?php echo $district;?>"><?php echo dis_name($link,$district);?></option>
                                                                 </select>
                                                             </div>
                                                         </div>

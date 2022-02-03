@@ -17,11 +17,8 @@
 <?php include 'layouts/body.php'; ?>
 
 <?php 
-    if(isset($_GET['Submit']))
-    {   
-        $region = $_GET['region'];
-        $district =$_GET['district'];
-    }
+    $region = $_GET['region'];
+    $district =$_GET['district'];
     
     function get_rname($link, $rcode)
         {
@@ -99,7 +96,7 @@
                                                             <label for="region" class="form-label">Region</label>
                                                             <div>
                                                                 <select class="form-select" name="region" id="region" value ="$region" required>
-                                                                    <option selected value = "$region"><?php echo get_rname($link,$_GET['region']);?></option>
+                                                                    <option selected value = "<?php echo $region;?>"><?php echo get_rname($link,$region);?></option>
                                                                 </select>
                                                             </div>
                                                         </div>
@@ -108,32 +105,12 @@
                                                             <label for="district" class="form-label">District</label>
                                                             <div>
                                                                 <select class="form-select" name="district" id="district" value ="$district" required>
-                                                                    <option selected value = "$district"><?php echo dis_name($link,$_GET['district']);?></option>
+                                                                    <option selected value = "<?php echo $district;?>"><?php echo dis_name($link,$district);?></option>
                                                                 </select>
                                                             </div>
                                                         </div>
 
-                                                        <div class="col-12">
-                                                            <label for="ta" class="form-label">Traditional Authority</label>
-                                                            <select class="form-select" name="ta" id="ta" required>
-                                                                <option selected value="$ta" ></option>
-                                                                    <?php                                                           
-                                                                        $ta_fetch_query = "SELECT TAID,TAName FROM tblta where DistrictID =$district";                                                  
-                                                                        $result_ta_fetch = mysqli_query($link, $ta_fetch_query);                                                                       
-                                                                        $i=0;
-                                                                            while($DB_ROW_ta = mysqli_fetch_array($result_ta_fetch)) {
-                                                                        ?>
-                                                                        <option value="<?php echo $DB_ROW_ta["TAID"]; ?>">
-                                                                            <?php echo $DB_ROW_ta["TAName"]; ?></option><?php
-                                                                            $i++;
-                                                                                }
-                                                                    ?>
-                                                                
-                                                            </select>
-                                                            <div class="invalid-feedback">
-                                                                Please select a valid TA.
-                                                            </div>
-                                                        </div>
+                                                        
                                                         <div class="col-12">
                                                             <INPUT TYPE="button" VALUE="Back" onClick="history.go(-1);">
                                                         </div>
@@ -156,22 +133,7 @@
                                                                 <div class="mb-2">
                                                                     <label for="region" class="form-label">Region</label>
                                                                     <select class="form-select" name="region" id="region" required>
-                                                                        <option></option>
-                                                                        <?php                                                           
-                                                                                $dis_fetch_query = "SELECT name FROM tblregion";                                                  
-                                                                                $result_dis_fetch = mysqli_query($link, $dis_fetch_query);                                                                       
-                                                                                $i=0;
-                                                                                    while($DB_ROW_reg = mysqli_fetch_array($result_dis_fetch)) {
-                                                                                ?>
-                                                                                <option>
-                                                                                    <?php
-                                                                                        echo $DB_ROW_reg["name"];
-                                                                                    ?>
-                                                                                </option>
-                                                                                <?php
-                                                                                    $i++;
-                                                                                        }
-                                                                            ?>
+                                                                        <option selected value="<?php echo $region;?>"><?php echo get_rname($link,$region);?></option>                               
                                                                     </select>
                                                                     <div class="invalid-feedback">
                                                                         Please select a valid Malawi region.

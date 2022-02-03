@@ -17,10 +17,9 @@
 <?php include 'layouts/body.php'; ?>
 
 <?php 
-    if(isset($_GET['Submit']))
-    {   
-        $region = $_GET['region'];
-    }
+ 
+    $region = $_GET['region'];
+
     
     function get_rname($link, $rcode)
         {
@@ -89,7 +88,7 @@
                                             <!--start here -->
                                             <div class="card border border-primary">
                                                 <div class="card-header bg-transparent border-primary">
-                                                    <h5 class="my-0 text-primary"></i>Location Filter For New SLG</h5>
+                                                    <h5 class="my-0 text-primary"></i>Location Filter: New SLG</h5>
                                                 </div>
                                                 <div class="card-body">
                                                     <h5 class="card-title mt-0"></h5>
@@ -98,15 +97,15 @@
                                                             <label for="region" class="form-label">Region</label>
                                                             <div>
                                                                 <select class="form-select" name="region" id="region" value ="$region" required>
-                                                                    <option selected value = "$region"><?php echo get_rname($link,$_GET['region']);?></option>
+                                                                    <option selected value = "<?php echo $region;?>"><?php echo get_rname($link,$region);?></option>
                                                                 </select>
                                                             </div>
                                                         </div>
                                                         
                                                         <div class="col-12">
                                                             <label for="district" class="form-label">District</label>
-                                                            <select class="form-select" name="district" id="district" value ="$district" required>
-                                                                <option selected value="$district" ></option>
+                                                            <select class="form-select" name="district" id="district" required>
+                                                                <option></option>
                                                                     <?php                                                           
                                                                         $dis_fetch_query = "SELECT DistrictID,DistrictName FROM tbldistrict where regionID =$region";                                                  
                                                                         $result_dis_fetch = mysqli_query($link, $dis_fetch_query);                                                                       

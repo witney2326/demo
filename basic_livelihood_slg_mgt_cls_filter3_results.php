@@ -16,14 +16,10 @@
 
 <?php include 'layouts/body.php'; ?>
 
-<?php 
-    if(isset($_GET['Submit']))
-    {   
-        $region = $_GET['region'];
-        $district =$_GET['district'];
-        $ta =$_GET['ta'];
-
-    }
+<?php  
+    $region = $_GET['region'];
+    $district =$_GET['district'];
+    $ta =$_GET['ta'];
     
     function get_rname($link, $rcode)
         {
@@ -108,7 +104,7 @@
                                                             <label for="region" class="form-label">Region</label>
                                                             <div>
                                                                 <select class="form-select" name="region" id="region" value ="$region" required>
-                                                                    <option selected value = "$region"><?php echo get_rname($link,$_GET['region']);?></option>
+                                                                    <option selected value = "<?php echo $region;?>"><?php echo get_rname($link,$region);?></option>
                                                                 </select>
                                                             </div>
                                                         </div>
@@ -117,7 +113,7 @@
                                                             <label for="district" class="form-label">District</label>
                                                             <div>
                                                                 <select class="form-select" name="district" id="district" value ="$district" required>
-                                                                    <option selected value = "$district"><?php echo dis_name($link,$_GET['district']);?></option>
+                                                                    <option selected value = "<?php echo $district;?>"><?php echo dis_name($link,$district);?></option>
                                                                 </select>
                                                             </div>
                                                         </div>
@@ -125,7 +121,7 @@
                                                         <div class="col-12">
                                                             <label for="ta" class="form-label">Traditional Authority</label>
                                                             <select class="form-select" name="ta" id="ta" required>
-                                                                <option selected value = "$ta"><?php echo ta_name($link,$_GET['ta']);?></option>
+                                                                <option selected value = "<?php echo $ta;?>"><?php echo ta_name($link,$ta);?></option>
                                                                 
                                                             </select>
                                                             
@@ -143,7 +139,7 @@
                                                 <div class="col-12">
                                                     <div class="card border border-primary">
                                                     <div class="card-header bg-transparent border-primary">
-                                                        <h5 class="my-0 text-primary"><i class="mdi mdi-bullseye-arrow me-3"></i>SLG Clusters in <?php echo dis_name($link,$district); ?></h5>
+                                                        <h5 class="my-0 text-primary">Clusters in <?php echo dis_name($link,$district); ?></h5>
                                                     </div>
                                                     <div class="card-body">
                                                     <h7 class="card-title mt-0"></h7>

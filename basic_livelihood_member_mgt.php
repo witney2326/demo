@@ -194,7 +194,7 @@
                                                                 <tbody>
                                                                     <?Php
                                                                         
-                                                                        $query="select tblbeneficiaries.sppCode,tblbeneficiaries.cohort,tbldistrict.DistrictName,tblgroup.groupname from tblbeneficiaries inner join tbldistrict on tblbeneficiaries.districtID = tbldistrict.DistrictID inner join tblgroup on tblbeneficiaries.groupID = tblgroup.groupID;";
+                                                                        $query="select tblbeneficiaries.sppCode,tblbeneficiaries.cohort,tbldistrict.DistrictName,tblgroup.groupname from tblbeneficiaries inner join tbldistrict on tblbeneficiaries.districtID = tbldistrict.DistrictID inner join tblgroup on tblbeneficiaries.groupID = tblgroup.groupID where (tblbeneficiaries.regionID ='0');";
 
                                                                         //Variable $link is declared inside config.php file & used here
                                                                         
