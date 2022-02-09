@@ -63,12 +63,12 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                            <h4 class="mb-sm-0 font-size-18"> Member Savings and Loan Mgt</h4>
+                            <h4 class="mb-sm-0 font-size-18"> SLG Member Management</h4>
 
                             <div class="page-title-right">
                                 <ol class="breadcrumb m-0">
                                     <li class="breadcrumb-item"><a href="basic_livelihood_slg_mgt2.php">SLG Management</a></li>
-                                    <li class="breadcrumb-item active">SLG Member Savings and Loan Management</li>
+                                    <li class="breadcrumb-item active">SLG Member Management</li>
                                 </ol>
                             </div>
 
@@ -116,13 +116,18 @@
                                                     echo "<td>".$row["cohort"]."</td>\n";
                     
                                                     echo "<td>
-                                                        
+                                                    
                                                         <a href=\"basicSLGMemberview.php?id=".$row['sppCode']."\"><i class='far fa-eye' title='View Member' style='font-size:18px'></i></a>   
                                                         <a href=\"basicSLGMemberedit.php?id=".$row['sppCode']."\"><i class='far fa-edit' title='Edit Member' style='font-size:18px'></i></a> 
                                                         <a href=\"basicSLGMembersavings.php?id=".$row['sppCode']."\"><i class='fas fa-hand-holding-usd' title='Update Member Savings' style='font-size:18px'></i></a>
                                                         <a href=\"basicSLGMemberloans.php?id=".$row['sppCode']."\"><i class='fas fa-book' title='Update Member Loans' style='font-size:18px'></i></a> 
-                                                        <a href=\"basicSLGMemberiga.php?id=".$row['sppCode']."\"><i class='fas fa-balance-scale' title='Update Member IGAs' style='font-size:18px'></i></a> 
+                                                        <a href=\"basicSLGGroupMembers_iga.php?id=".$row['sppCode']."\"><i class='fas fa-balance-scale' title='Update Member IGAs' style='font-size:18px'></i></a> 
+                                                        <a href=\"basicSLGGroupMembersTraining.php?id=".$row['sppCode']."\"><i class='fas fa-school' title='Update Member Training' style='font-size:18px'></i></a> 
+                                                        <a href=\"basicSLGGroupMembersTrainingStatus.php?id=".$row['sppCode']."\"><i class='fas fa-user-graduate' title='HH Training Status' style='font-size:18px'></i></a> 
+                                                        <a href=\"basicSLGMemberNutritionSupplements.php?id=".$row['sppCode']."\"><i class='fas fa-stroopwafel fa-lg' title='Nutrition Suppliments' style='font-size:18px'></i></a> 
+                                                        
                                                         <a onClick=\"javascript: return confirm('Are You Sure You want To DELETE This HOUSEHOLD');\" href=\"basicSLGMemberdelete.php?id=".$row['sppCode']."\"><i class='far fa-trash-alt' title='Delete Member' style='font-size:18px'></i></a>    
+                                                        
                                                     </td>\n";
 
                                                 echo "</tr>\n";

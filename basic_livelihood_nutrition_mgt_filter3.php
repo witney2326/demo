@@ -16,7 +16,10 @@
 
 <?php include 'layouts/body.php'; ?>
 
-<?php		
+<?php
+$region = $_GET["region"];
+$district = $_GET["district"];
+$ta = $_GET["ta"];		
    
     function get_rname($link, $rcode)
         {
@@ -37,6 +40,13 @@
         $grp_query = mysqli_query($link,"select groupname from tblgroup where groupID='$grpID'"); // select query
         $grp = mysqli_fetch_array($grp_query);// fetch data
         return $grp['groupname'];
+        }
+
+        function ta_name($link, $taID)
+        {
+        $ta_query = mysqli_query($link,"select TAName from tblta where TAID='$taID'"); // select query
+        $grp = mysqli_fetch_array($ta_query);// fetch data
+        return $grp['TAName'];
         }
 
         function prog_name($link, $progID)
@@ -100,7 +110,7 @@
                                     </li>
 
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="link"  href="basic_livelihood_nutrition_reports.php" role="link">
+                                        <a class="link"  href="basic_livelihood_HH_reports.php" role="link">
                                             <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
                                             <span class="d-none d-sm-block">Nutrition Reports</span>
                                         </a>
@@ -125,25 +135,12 @@
                                                 </div>
                                                 <div class="card-body">
                                                     <h5 class="card-title mt-0"></h5>
-                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="basic_livelihood_nutrition_mgt_filter1.php" method="GET">
+                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="" method="GET">
                                                         <div class="col-12">
                                                             <label for="region" class="form-label">Region</label>
                                                             <div>
                                                                 <select class="form-select" name="region" id="region" required>
-                                                                    <option></option>
-                                                                    <?php                                                           
-                                                                            $dis_fetch_query = "SELECT regionID, name FROM tblregion";                                                  
-                                                                            $result_dis_fetch = mysqli_query($link, $dis_fetch_query);                                                                       
-                                                                            $i=0;
-                                                                                while($DB_ROW_reg = mysqli_fetch_array($result_dis_fetch)) {
-                                                                            ?>
-                                                                            <option value="<?php echo $DB_ROW_reg["regionID"];?>">
-                                                                                <?php echo $DB_ROW_reg["name"];?>
-                                                                            </option>
-                                                                            <?php
-                                                                                $i++;
-                                                                                    }
-                                                                        ?>
+                                                                    <option selected value = "<?php echo $region;?>"><?php echo get_rname($link,$region);?></option>
                                                                 </select>
                                                                 <div class="invalid-feedback">
                                                                     Please select a valid Malawi region.
@@ -154,19 +151,8 @@
 
                                                         <div class="col-12">
                                                             <label for="district" class="form-label">District</label>
-                                                            <select class="form-select" name="district" id="district" required disabled>
-                                                                <option selected value="$district" ></option>
-                                                                    <?php                                                           
-                                                                        $dis_fetch_query = "SELECT DistrictName FROM tbldistrict";                                                  
-                                                                        $result_dis_fetch = mysqli_query($link, $dis_fetch_query);                                                                       
-                                                                        $i=0;
-                                                                            while($DB_ROW_Dis = mysqli_fetch_array($result_dis_fetch)) {
-                                                                        ?>
-                                                                        <option>
-                                                                            <?php echo $DB_ROW_Dis["DistrictName"]; ?></option><?php
-                                                                            $i++;
-                                                                                }
-                                                                    ?>
+                                                            <select class="form-select" name="district" id="district" required >
+                                                                <option selected value="<?php echo $district;?>"> <?php echo dis_name($link,$district);?></option>
                                                             </select>
                                                             <div class="invalid-feedback">
                                                                 Please select a valid Malawi district.
@@ -175,19 +161,31 @@
 
                                                         <div class="col-12">
                                                             <label for="ta" class="form-label">Traditional Authority</label>
-                                                            <select class="form-select" name="ta" id="ta" required disabled>
-                                                                <option selected  value="$ta"></option>
+                                                            <select class="form-select" name="ta" id="ta" required >
+                                                                <option selected  value="<?php echo $ta;?>"><?php echo ta_name($link,$ta);?></option>
+                                                                
+                                                            </select>
+                                                            <div class="invalid-feedback">
+                                                                Please select a valid TA.
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-12">
+                                                            <label for="group" class="form-label">SL Group</label>
+                                                            <select class="form-select" name="group" id="group" required >
+                                                                <option></option>
                                                                 <?php                                                           
-                                                                        $ta_fetch_query = "SELECT TAName FROM tblta";                                                  
+                                                                        $ta_fetch_query = "SELECT groupID,groupname FROM tblgroup where TAID = '$ta'";                                                  
                                                                         $result_ta_fetch = mysqli_query($link, $ta_fetch_query);                                                                       
                                                                         $i=0;
                                                                             while($DB_ROW_ta = mysqli_fetch_array($result_ta_fetch)) {
                                                                         ?>
-                                                                        <option>
-                                                                            <?php echo $DB_ROW_ta["TAName"]; ?></option><?php
+                                                                        <option value="<?php echo $DB_ROW_ta["groupID"]; ?>">
+                                                                            <?php echo $DB_ROW_ta["groupname"]; ?></option><?php
                                                                             $i++;
                                                                                 }
                                                                     ?>
+                                                            
                                                             </select>
                                                             <div class="invalid-feedback">
                                                                 Please select a valid TA.
@@ -224,7 +222,6 @@
                                                                         <th>Cohort</th>
                                                                         <th>Nutrition Support Status?</th>                                           
                                                                         <th>Approve HH</th>
-                                                                        
                                                                     </tr>
                                                                 </thead>
 
@@ -232,7 +229,7 @@
                                                                 <tbody>
                                                                     <?Php
                                                                         
-                                                                        $query="select * from tblbeneficiaries where regionID ='0'";
+                                                                        $query="select * from tblbeneficiaries inner join tblgroup on tblbeneficiaries.groupID = tblgroup.groupID where tblgroup.TAID = '$ta'";
 
                                                                     //Variable $link is declared inside config.php file & used here
                                                                     
@@ -256,15 +253,15 @@
                                                                         
 
                                                                     echo "<tr>\n";
-                                                                        echo "<td>".$row["sppCode"]."</td>\n";
-                                                                        echo "\t\t<td>$prog</td>\n";
-                                                                        echo "\t\t<td>$group</td>\n";
-                                                                        echo "<td>".$row["cohort"]."</td>\n";
-                                                                        echo "\t\t<td>$hhstatus</td>\n";
+                                                                    echo "<td>".$row["sppCode"]."</td>\n";
+                                                                    echo "\t\t<td>$prog</td>\n";
+                                                                    echo "\t\t<td>$group</td>\n";
+                                                                    echo "<td>".$row["cohort"]."</td>\n";
+                                                                    echo "\t\t<td>$hhstatus</td>\n";
 
-                                                                        echo "<td> 
-                                                                         <a onClick=\"javascript: return confirm('Are You Sure You want To APPROVE This HOUSEHOLD - You Must Be a Supervisor');\" href=\"basicHHStatusApproval.php?id=".$row['sppCode']."\"><i class='far fa-thumbs-up' title='Approve Household' style='font-size:18px'></i></a>
-                                                                         </td>";
+                                                                    echo "<td> 
+                                                                     <a onClick=\"javascript: return confirm('Are You Sure You want To APPROVE This HOUSEHOLD - You Must Be a Supervisor');\" href=\"basicHHStatusApproval.php?id=".$row['sppCode']."\"><i class='far fa-thumbs-up' title='Approve Household' style='font-size:18px'></i></a>
+                                                                     </td>";
                                                                     echo "</tr>\n";
                                                                     }
                                                                     $result_set->close();

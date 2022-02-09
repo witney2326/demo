@@ -17,14 +17,9 @@
 <?php include 'layouts/body.php'; ?>
 
 <?php 
-    if(isset($_GET['Submit']))
-    {   
-        $region = $_GET['region'];
-        
-       
-     
-    }
-    
+
+    $region = $_GET['region'];
+
     function get_rname($link, $rcode)
         {
         $rg_query = mysqli_query($link,"select name from tblregion where regionID='$rcode'"); // select query
@@ -99,19 +94,17 @@
                                                         <div class="col-12">
                                                             <label for="region" class="form-label">Region</label>
                                                             <div>
-                                                                <select class="form-select" name="region" id="region" value ="<?php if(isset($_GET['region'])) {echo $_GET['region'];} ?>" required>
-                                                                    <option selected value = "$region"><?php echo get_rname($link,$_GET['region']);?></option>    
+                                                                <select class="form-select" name="region" id="region"  required>
+                                                                    <option selected value = "<?php echo $region;?>"><?php echo get_rname($link,$region);?></option>    
                                                                 </select>
-                                                                <div class="invalid-feedback">
-                                                                    Please select a valid Malawi region.
-                                                                </div>
+                                                                
                                                             </div>
                                                         </div>
                                                         
                                                         <div class="col-12">
                                                             <label for="district" class="form-label">District</label>
-                                                            <select class="form-select" name="district" id="district" value ="$district" required >
-                                                                <option selected value="$district" ></option>
+                                                            <select class="form-select" name="district" id="district"  required >
+                                                                <option></option>
                                                                     <?php                                                           
                                                                         $dis_fetch_query = "SELECT DistrictID,DistrictName FROM tbldistrict where regionID = '$region'";                                                  
                                                                         $result_dis_fetch = mysqli_query($link, $dis_fetch_query);                                                                       
@@ -185,7 +178,7 @@
 
                                                                 <tbody>
                                                                     <?Php
-                                                                        $query="select * from tblgroup where regionID = '$region'";
+                                                                        $query="select * from tblgroup where regionID = '0'";
  
                                                                         //Variable $link is declared inside config.php file & used here
                                                                          

@@ -17,13 +17,7 @@
 <?php include 'layouts/body.php'; ?>
 
 <?php 
-    if(isset($_GET['Submit']))
-    {   
-        $region = $_GET['region'];
-        $district = $_GET['district'];
-        $ta = $_GET['ta'];
-     
-    }
+  
     
     function get_rname($link, $rcode)
         {
@@ -94,8 +88,8 @@
                                                         <div class="col-12">
                                                             <label for="region" class="form-label">Region</label>
                                                             <div>
-                                                                <select class="form-select" name="region" id="region" value ="<?php if(isset($_GET['region'])) {echo $_GET['region'];} ?>" required>
-                                                                    <option selected value = "$region"></option>
+                                                                <select class="form-select" name="region" id="region" required>
+                                                                    <option></option>
                                                                     <?php                                                           
                                                                             $dis_fetch_query = "SELECT regionID, name FROM tblregion";                                                  
                                                                             $result_dis_fetch = mysqli_query($link, $dis_fetch_query);                                                                       
@@ -196,7 +190,7 @@
 
                                                                 <tbody>
                                                                     <?Php
-                                                                        $query="select * from tblcluster";
+                                                                        $query="select * from tblcluster where regionID ='0'";
  
                                                                         //Variable $link is declared inside config.php file & used here
                                                                          

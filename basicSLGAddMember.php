@@ -96,7 +96,25 @@
         <div class="page-content">
             <div class="container-fluid">
 
+
                 <!-- start page title -->
+                <!-- start page title -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                            <h4 class="mb-sm-0 font-size-18">SLG New Member</h4>
+
+                            <div class="page-title-right">
+                                <ol class="breadcrumb m-0">
+                                    <li class="breadcrumb-item"><a href="basic_livelihood_slg_mgt2.php">SLG Management</a></li>
+                                    <li class="breadcrumb-item active">SLG Members</li>
+                                </ol>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- end page title -->
                 <div class="row">
                     <div class="col-12">
 
@@ -187,20 +205,19 @@
                                     <div class="row">
                                         <div class="col-sm-9">
                                             <div>
-                                                <button type="submit" class="btn btn-primary w-md" name="Submit" value="Submit">Save New Record</button>
-                                                <INPUT TYPE="button" VALUE="Back" onClick="history.go(-1);"> 
+                                                <button type="submit" class="btn btn-primary w-md" style="width:170px" name="Submit" value="Submit">Save New Record</button>
+                                                
+                                                
                                             </div>                                   
                                         </div>
                                     </div>
                                 </form>
 
                                 <form action="basicSLGGroupMembers.php" method="POST">
-                                    <input type="hidden" class="form-control" id="group_id" name = "group_id" value="<?php echo $id ; ?>"readonly>
-                                    <div>
-                                        <button type="submit" class="btn btn-success w-md" name="Update_Group_Membership" value="Update_Group_Membership">Group Member Savings,Loans & IGAs</button>
-                                    </div>    
+                                    <input type="hidden" class="form-control" id="group_id" name = "group_id" value="<?php echo $id ; ?>"readonly>               
+                                    <button type="submit" class="btn btn-success w-md"  name="Update_Group_Membership" value="Update_Group_Membership">Member Management</button> 
                                 </form>
-                                
+                                <INPUT TYPE="button" class="btn btn-secondary w-md" style="width:170px" VALUE="Back" onClick="history.go(-1);"> 
                                 
                             </div>
                         </div>

@@ -202,7 +202,7 @@
 
                                                                 <tbody>
                                                                     <?Php
-                                                                        $query="select * from tblgroup";
+                                                                        $query="select * from tblgroup where regionID ='0'";
  
                                                                         //Variable $link is declared inside config.php file & used here
                                                                          

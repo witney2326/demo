@@ -17,12 +17,9 @@
 <?php include 'layouts/body.php'; ?>
 
 <?php 
-    if(isset($_GET['Submit']))
-    {   
-        
-        $ta = $_GET['ta'];
-     
-    }
+     $region = $_GET['region'];
+     $district = $_GET['district'];   
+     $ta = $_GET['ta'];
     
     function get_rname($link, $rcode)
         {
@@ -100,8 +97,8 @@
                                                         <div class="col-12">
                                                             <label for="region" class="form-label">Region</label>
                                                             <div>
-                                                                <select class="form-select" name="region" id="region" value ="<?php if(isset($_GET['region'])) {echo $_GET['region'];} ?>" required>
-                                                                    <option selected value = "$region"><?php echo get_rname($link,$_GET['region']);?></option>
+                                                                <select class="form-select" name="region" id="region"  required>
+                                                                    <option selected value = "<?php echo $region;?>"><?php echo get_rname($link,$region);?></option>
                                                                 </select>
                                                                 <div class="invalid-feedback">
                                                                     Please select a valid Malawi region.
@@ -111,8 +108,8 @@
                                                         
                                                         <div class="col-12">
                                                             <label for="district" class="form-label">District</label>
-                                                            <select class="form-select" name="district" id="district" value ="$district" required>
-                                                                <option ></option>
+                                                            <select class="form-select" name="district" id="district"  required>
+                                                                <option selected value="<?php echo $district;?>" ><?php echo dis_name($link,$district); ?></option>
                                                             </select>
                                                             <div class="invalid-feedback">
                                                                 Please select a valid Malawi district.
@@ -122,7 +119,7 @@
                                                         <div class="col-12">
                                                             <label for="ta" class="form-label">Traditional Authority</label>
                                                             <select class="form-select" name="ta" id="ta" required >
-                                                                <option selected value="$ta" ><?php echo ta_name($link,$ta); ?></option>
+                                                                <option selected value="<?php echo $ta;?>" ><?php echo ta_name($link,$ta); ?></option>
                                                             </select>
                                                             <div class="invalid-feedback">
                                                                 Please select a valid TA.

@@ -224,7 +224,7 @@
                                                                 <tbody>
                                                                     <?Php
                                                                         $region = $_GET["region"];
-                                                                        $query="select * from tblbeneficiaries where regionID = '$region'";
+                                                                        $query="select * from tblbeneficiaries where regionID = '0'";
 
                                                                     //Variable $link is declared inside config.php file & used here
                                                                     

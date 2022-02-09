@@ -54,6 +54,14 @@
                                             <span class="d-none d-sm-block">Stakeholder Training</span>
                                         </a>
                                     </li>
+
+                                    <li class="nav-item waves-effect waves-light">
+                                        <a class="nav-link" data-bs-toggle="tab" href="#mapping" role="tab">
+                                            <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
+                                            <span class="d-none d-sm-block">SLG/Cluster Mapping </span>
+                                        </a>
+                                    </li>
+
                                     <li class="nav-item waves-effect waves-light">
                                         <a class="nav-link" data-bs-toggle="tab" href="#Beneficiaries" role="tab">
                                             <span class="d-block d-sm-none"><i class="far fa-user"></i></span>

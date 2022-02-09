@@ -17,13 +17,9 @@
 <?php include 'layouts/body.php'; ?>
 
 <?php 
-    if(isset($_GET['Submit']))
-    {   
         $region = $_GET['region'];
         //$district = $_GET['district'];
         //$ta = $_GET['ta'];
-     
-    }
     
     function get_rname($link, $rcode)
         {
@@ -92,7 +88,7 @@
                                             <!--start here -->
                                             <div class="card border border-primary">
                                                 <div class="card-header bg-transparent border-primary">
-                                                    <h5 class="my-0 text-primary"></i>SLG Training Search Filter For :<?php echo get_rname($link,$region); ?> Region</h5>
+                                                    <h5 class="my-0 text-primary">Training Search Filter</h5>
                                                 </div>
                                                 <div class="card-body">
                                                     <h5 class="card-title mt-0"></h5>
@@ -100,16 +96,16 @@
                                                         <div class="col-12">
                                                             <label for="region" class="form-label">Region</label>
                                                             <div>
-                                                                <select class="form-select" name="region" id="region" value ="$region" required disabled>
-                                                                    <option selected value = "$region"><?php echo get_rname($link,$_GET['region']);?></option>
+                                                                <select class="form-select" name="region" id="region" required >
+                                                                    <option selected value = "<?php echo $region;?>"><?php echo get_rname($link,$region);?></option>
                                                                 </select>
                                                             </div>
                                                         </div>
                                                         
                                                         <div class="col-12">
                                                             <label for="district" class="form-label">District</label>
-                                                            <select class="form-select" name="district" id="district" value ="$district" required>
-                                                                <option selected value="$district" ></option>
+                                                            <select class="form-select" name="district" id="district" required>
+                                                                <option></option>
                                                                     <?php                                                           
                                                                         $dis_fetch_query = "SELECT DistrictID,DistrictName FROM tbldistrict where regionID = $region";                                                  
                                                                         $result_dis_fetch = mysqli_query($link, $dis_fetch_query);                                                                       
@@ -127,7 +123,7 @@
                                                         <div class="col-12">
                                                             <label for="ta" class="form-label">Traditional Authority</label>
                                                             <select class="form-select" name="ta" id="ta" required disabled>
-                                                                <option selected  value="$ta"></option>
+                                                                <option></option>
                                                                 <?php                                                           
                                                                         $ta_fetch_query = "SELECT TAName FROM tblta";                                                  
                                                                         $result_ta_fetch = mysqli_query($link, $ta_fetch_query);                                                                       
@@ -145,11 +141,12 @@
                                                                 Please select a valid TA.
                                                             </div>
                                                         </div>
-                                                        <div class="col-12">
-                                                            <INPUT TYPE="button" VALUE="Back" onClick="history.go(-1);">
-                                                        </div>
+                                                        
                                                         <div class="col-12">
                                                             <button type="submit" class="btn btn-primary w-md" name="Submit" value="Submit">Submit</button>
+                                                        </div>
+                                                        <div class="col-12">
+                                                            <INPUT TYPE="button" VALUE="Back" onClick="history.go(-1);">
                                                         </div>
                                                     </form>                                             
                                                     <!-- End Here -->
@@ -159,7 +156,7 @@
                                             <div class="row">
                                                 <div class="col-12">
                                                     <div class="card border border-primary">
-                                                    
+                                                        <h5 class="my-0 text-primary"><i class="mdi mdi-book-clock"></i>Savings and Loan Groups</h5>
                                                     <div class="card-body">
                                                     
                                                         
@@ -180,7 +177,7 @@
                                                                     <?Php
                                                                         if (isset($region))
                                                                         {
-                                                                            $query="select * from tblgroup where (regionID = '$region')";
+                                                                            $query="select * from tblgroup where (regionID = '0')";
                                                                         
                                                                         
                                                                         //Variable $link is declared inside config.php file & used here
