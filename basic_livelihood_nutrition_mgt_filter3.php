@@ -131,11 +131,11 @@ $ta = $_GET["ta"];
                                             <!--start here -->
                                             <div class="card border border-primary">
                                                 <div class="card-header bg-transparent border-primary">
-                                                    <h5 class="my-0 text-primary"><i class="mdi mdi-bullseye-arrow me-3"></i>HH Filter</h5>
+                                                    <h5 class="my-0 text-primary"><i class="mdi mdi-bullseye-arrow me-3"></i>Household Filter</h5>
                                                 </div>
                                                 <div class="card-body">
                                                     <h5 class="card-title mt-0"></h5>
-                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="" method="GET">
+                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="basic_livelihood_nutrition_mgt_filter4.php" method="GET">
                                                         <div class="col-12">
                                                             <label for="region" class="form-label">Region</label>
                                                             <div>
@@ -195,8 +195,8 @@ $ta = $_GET["ta"];
                                                         
                                                         
                                                         <div class="col-12">
-                                                            <button type="submit" class="btn btn-primary w-md" name="FormSubmit" value="Submit">Submit</button>
-                                                            <INPUT TYPE="button" VALUE="Back" onClick="history.go(-1);">
+                                                            <button type="submit" class="btn btn-primary w-md"  style ="width:120px" name="FormSubmit" value="Submit">Submit</button>
+                                                            <INPUT TYPE="button" class="btn btn-secondary w-md"  style ="width:120px" VALUE="Back" onClick="history.go(-1);">
                                                         </div>
                                                     </form>                                             
                                                     <!-- End Here -->
@@ -220,8 +220,9 @@ $ta = $_GET["ta"];
                                                                         <th>Programme</th>  
                                                                         <th>Group</th> 
                                                                         <th>Cohort</th>
-                                                                        <th>Nutrition Support Status?</th>                                           
-                                                                        <th>Approve HH</th>
+                                                                        <th>HH Approved?</th>
+                                                                        <th>WASH Approved?</th>                                           
+                                                                        <th>WASH Approval</th>
                                                                     </tr>
                                                                 </thead>
 
@@ -250,7 +251,17 @@ $ta = $_GET["ta"];
                                                                         if ($row["hhstatus"] == '0')
                                                                         {
                                                                             $hhstatus = 'No';}    
-                                                                        
+                                                                       
+                                                                            // nutrition
+                                                                       $WASHstatus = $row["washstatus"];
+
+                                                                       if ($row["washstatus"] == '1')
+                                                                       {
+                                                                           $WASHstatus = 'Yes';}
+
+                                                                       if ($row["washstatus"] == '0')
+                                                                       {
+                                                                           $WASHstatus = 'No';}   
 
                                                                     echo "<tr>\n";
                                                                     echo "<td>".$row["sppCode"]."</td>\n";
@@ -258,9 +269,9 @@ $ta = $_GET["ta"];
                                                                     echo "\t\t<td>$group</td>\n";
                                                                     echo "<td>".$row["cohort"]."</td>\n";
                                                                     echo "\t\t<td>$hhstatus</td>\n";
-
+                                                                    echo "\t\t<td>$WASHstatus</td>\n";
                                                                     echo "<td> 
-                                                                     <a onClick=\"javascript: return confirm('Are You Sure You want To APPROVE This HOUSEHOLD - You Must Be a Supervisor');\" href=\"basicHHStatusApproval.php?id=".$row['sppCode']."\"><i class='far fa-thumbs-up' title='Approve Household' style='font-size:18px'></i></a>
+                                                                     <a onClick=\"javascript: return confirm('Are You Sure You want To APPROVE This HOUSEHOLD For Nutrition Suppliments- You Must Be a Supervisor');\" href=\"basicHHStatusApproval_WASH.php?id=".$row['sppCode']."\"><i class='far fa-thumbs-up' title='Approve Household' style='font-size:18px'></i></a>
                                                                      </td>";
                                                                     echo "</tr>\n";
                                                                     }

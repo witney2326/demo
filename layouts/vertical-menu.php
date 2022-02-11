@@ -131,162 +131,32 @@
 
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="bx bx-walk"></i>
+                        <i class="bx bx-line-chart"></i>
                         <span key="t-layouts">Monitoring</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="true">
+                    
                         <li>
-                            <a href="cimis-page-coming-soon.php" class="has-arrow" key="t-vertical">Basic Livelihood</a>
+                            <a href="basicReports.php" class="has-arrow waves-effect" key="t-vertical">Basic Livelihood</a>
                             <ul class="sub-menu" aria-expanded="true">
                             </ul>
                         </li>
 
                         <li>
-                            <a href="cimis-page-coming-soon.php" class="has-arrow" key="t-horizontal">Enhanced Livelihood</a>
+                            <a href="enhancedReports.php" class="has-arrow" key="t-horizontal">Enhanced Livelihood</a>
                             <ul class="sub-menu" aria-expanded="true">
                             </ul>
                         </li>
 
                         <li>
-                            <a href="cimis-page-coming-soon.php" class="has-arrow" key="t-horizontal">Graduation</a>
+                            <a href="graduationReports.php" class="has-arrow" key="t-horizontal">Graduation</a>
                             <ul class="sub-menu" aria-expanded="true">
                             </ul>
                         </li>
                     </ul>
                 </li>
 
-                <li>
-                    <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="bx bx-line-chart"></i>
-                        <span key="t-layouts">Reports</span>
-                    </a>
-                    <ul class="sub-menu" aria-expanded="true">
-                        <li>
-                            <!-- start here -->
-                            <li>
-                                <a href="javascript: void(0);" class="has-arrow waves-effect">
-                                    <i class="bx bx-line-chart"></i>
-                                    <span key="t-layouts">Basic </span>
-                                </a>
-                                <ul class="sub-menu" aria-expanded="true">
-                                    <li>
-                                        <a href="cimis-page-coming-soon.php" class="has-arrow" key="t-vertical">Beneficiary</a>
-                                        <ul class="sub-menu" aria-expanded="true">
-                                        </ul>
-                                    </li>
-
-                                    <li>
-                                        <a href="cimis-page-coming-soon.php" class="has-arrow" key="t-horizontal">Mobilisation</a>
-                                        <ul class="sub-menu" aria-expanded="true">
-                                        </ul>
-                                    </li>
-
-                                    <li>
-                                        <a href="cimis-page-coming-soon.php" class="has-arrow" key="t-horizontal">SLGs</a>
-                                        <ul class="sub-menu" aria-expanded="true">
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="cimis-page-coming-soon.php" class="has-arrow" key="t-horizontal">Training</a>
-                                        <ul class="sub-menu" aria-expanded="true">
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="cimis-page-coming-soon.php" class="has-arrow" key="t-horizontal">CBDRA</a>
-                                        <ul class="sub-menu" aria-expanded="true">
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="cimis-page-coming-soon.php" class="has-arrow" key="t-horizontal">Nutrition</a>
-                                        <ul class="sub-menu" aria-expanded="true">
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="cimis-page-coming-soon.php" class="has-arrow" key="t-horizontal">ACSA</a>
-                                        <ul class="sub-menu" aria-expanded="true">
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="cimis-page-coming-soon.php" class="has-arrow" key="t-horizontal">Safeguards</a>
-                                        <ul class="sub-menu" aria-expanded="true">
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
-                            <!-- End here -->
-                        </li>
-
-                        <li>
-                           <!-- Start here --> 
-                           <li>
-                                <a href="javascript: void(0);" class="has-arrow waves-effect">
-                                    <i class="bx bx-line-chart"></i>
-                                    <span key="t-layouts">Enhanced </span>
-                                </a>
-                                <ul class="sub-menu" aria-expanded="true">
-                                    <li>
-                                        <a href="cimis-page-coming-soon.php" class="has-arrow" key="t-vertical">Joint Skill Grps</a>
-                                        <ul class="sub-menu" aria-expanded="true">
-                                        </ul>
-                                    </li>
-
-                                    <li>
-                                        <a href="cimis-page-coming-soon.php" class="has-arrow" key="t-horizontal">Youth Support</a>
-                                        <ul class="sub-menu" aria-expanded="true">
-                                        </ul>
-                                    </li>
-
-                                    <li>
-                                        <a href="cimis-page-coming-soon.php" class="has-arrow" key="t-horizontal">LESP</a>
-                                        <ul class="sub-menu" aria-expanded="true">
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="cimis-page-coming-soon.php" class="has-arrow" key="t-horizontal">Production VC</a>
-                                        <ul class="sub-menu" aria-expanded="true">
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="cimis-page-coming-soon.php" class="has-arrow" key="t-horizontal">Coop Devt</a>
-                                        <ul class="sub-menu" aria-expanded="true">
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
-                            <!-- End here -->
-                        </li>
-
-                        <li>
-                            <!-- start here -->
-                            <li>
-                                <a href="javascript: void(0);" class="has-arrow waves-effect">
-                                    <i class="bx bx-line-chart"></i>
-                                    <span key="t-layouts">Graduation</span>
-                                </a>
-                                <ul class="sub-menu" aria-expanded="true">
-                                    <li>
-                                        <a href="cimis-page-coming-soon.php" class="has-arrow" key="t-vertical">Beneficiary</a>
-                                        <ul class="sub-menu" aria-expanded="true">
-                                        </ul>
-                                    </li>
-
-                                    <li>
-                                        <a href="cimis-page-coming-soon.php" class="has-arrow" key="t-horizontal">Asset Transfer</a>
-                                        <ul class="sub-menu" aria-expanded="true">
-                                        </ul>
-                                    </li>
-
-                                    <li>
-                                        <a href="cimis-page-coming-soon.php" class="has-arrow" key="t-horizontal">Status</a>
-                                        <ul class="sub-menu" aria-expanded="true">
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
-                            <!-- end Here -->
-                        </li>
-                    </ul>
-                </li>
+                
 
                 <li>
                     <a href="javascript: void(0);" class="waves-effect">

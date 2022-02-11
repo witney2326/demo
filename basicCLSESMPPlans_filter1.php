@@ -66,10 +66,9 @@
         $groupname = grp_name($link,$_GET["group_code"]); 
         $buscat = $_GET["buscat"];
 
+        
         $id = $_GET['group_code']; // get id through query string
-
-
-       $query="select * from tblgroup where groupID='$id'";
+        $query="select * from tblgroup where groupID='$id'";
         
         if ($result_set = $link->query($query)) {
             while($row = $result_set->fetch_array(MYSQLI_ASSOC))

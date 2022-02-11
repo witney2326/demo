@@ -93,6 +93,8 @@
                                                 <th>HH code</th>                                           
                                                 <th>SLG Name</th>
                                                 <th>Cohort</th>
+                                                <th>HH Approved?</th>
+                                                <th>Nutrition  Approved?</th>
                                                 <th>Action</th>
                                 
                                             </tr>
@@ -110,14 +112,30 @@
                                                 while($row = $result_set->fetch_array(MYSQLI_ASSOC))
                                                 { 
                                                     $groupname = group_name($link, $ID);
+
+                                                    $hhstatus = $row["hhstatus"];
+                                                        if ($row["hhstatus"] == '1')
+                                                        {$hhstatus = 'Yes';}
+                                                        if ($row["hhstatus"] == '0')
+                                                        {$hhstatus = 'No';}    
+
+                                                    // nutrition
+                                                    $WASHstatus = $row["washstatus"];
+                                                        if ($row["washstatus"] == '1')
+                                                        {$WASHstatus = 'Yes';}
+                                                        if ($row["washstatus"] == '0')
+                                                        {$WASHstatus = 'No';} 
+
                                                     echo "<td>".$row["sppCode"]."</td>\n";
                                                     
                                                     echo "\t\t<td>$groupname</td>\n";
                                                     echo "<td>".$row["cohort"]."</td>\n";
-                    
+                                                    echo "\t\t<td>$hhstatus</td>\n";
+                                                    echo "\t\t<td>$WASHstatus</td>\n";
                                                     echo "<td>
                                                     
-                                                        <a href=\"basicSLGMemberview.php?id=".$row['sppCode']."\"><i class='far fa-eye' title='View Member' style='font-size:18px'></i></a>   
+                                                        <a href=\"basicSLGMemberview.php?id=".$row['sppCode']."\"><i class='far fa-eye' title='View Member' style='font-size:18px'></i></a> 
+                                                        <a onClick=\"javascript: return confirm('Are You Sure You want To Approve This HOUSEHOLD for Livelihood Programme?');\" href=\"basicHHStatusApproval.php?id=".$row['sppCode']."\"><i class='far fa-check-square' title='Approve Household' style='font-size:18px' color:green></i></a> 
                                                         <a href=\"basicSLGMemberedit.php?id=".$row['sppCode']."\"><i class='far fa-edit' title='Edit Member' style='font-size:18px'></i></a> 
                                                         <a href=\"basicSLGMembersavings.php?id=".$row['sppCode']."\"><i class='fas fa-hand-holding-usd' title='Update Member Savings' style='font-size:18px'></i></a>
                                                         <a href=\"basicSLGMemberloans.php?id=".$row['sppCode']."\"><i class='fas fa-book' title='Update Member Loans' style='font-size:18px'></i></a> 
