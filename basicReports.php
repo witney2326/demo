@@ -57,6 +57,7 @@
                                                 <th>Report Category</th>
                                                 <th>Report Subcategory</th>
                                                 <th>Report Detail</th>
+                                                <th>Statistics</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -70,19 +71,31 @@
                                                 <th scope="row">2</th>
                                                 <td>Group Mobilisation</td>
                                                 <td>Savings and Loan Groups</td>
-                                                <td><a href="basic_livelihood_SLG_reports.php">SLGs Formed</a></td>
+                                                <td><a href="basic_livelihood_SLG_reports1.php">Savings and Loan Groups mobilised</a></td>
                                             </tr>
                                             <tr>
-                                                <th scope="row">3</th>
+                                                <th scope="row"></th>
+                                                <td></td>
+                                                <td></td>
+                                                <td><a href="basic_livelihood_HH_CW_reports.php">SLGs Mobilised Per Case Worker Summary</a></td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row"></th>
+                                                <td></td>
+                                                <td></td>
+                                                <td><a href="basic_livelihood_HH_Dis_reports.php">SLGs Mobilised Per District Summary</a></td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row"></th>
+                                                <td></td>
+                                                <td></td>
+                                                <td><a href="basic_livelihood_CLS_reports1.php">Clusters mobilised</a></td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row"></th>
                                                 <td></td>
                                                 <td></td>
                                                 <td><a href="basic_livelihood_HH_reports.php">Households mobilised</a></td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">4</th>
-                                                <td></td>
-                                                <td></td>
-                                                <td>Clusters mobilised</td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">5</th>

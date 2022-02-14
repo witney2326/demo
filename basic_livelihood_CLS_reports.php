@@ -61,7 +61,7 @@
 
                             <div class="page-title-right">
                                 <ol class="breadcrumb m-0">
-                                    <li class="breadcrumb-item"><a href="basicReports.php">Basic Livelihood Reports</a></li>
+                                    <li class="breadcrumb-item"><a href="basic_livelihood.php">Basic Livelihood</a></li>
                                     <li class="breadcrumb-item active">SLG Reports</li>
                                 </ol>
                             </div>
@@ -72,13 +72,14 @@
                 <!-- end page title -->
 
                 <div class="row">
+
                     <div class="col-xl-12">
                         <div class="card">
                             <div class="card-body">
                                 <ul class="nav nav-pills nav-justified" role="tablist">
                                     
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link active" data-bs-toggle="tab" href="#slg" role="tab">
+                                        <a class="nav-link active" data-bs-toggle="tab" href="#hotspots" role="tab">
                                             <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
                                             <span class="d-none d-sm-block">SLGs</span>
                                         </a>
@@ -105,15 +106,16 @@
                                 </ul>
 
                                 <!-- Tab panes -->
-                                <div class="tab-content p-3 text-muted"> 
-                                    <div class="tab-pane active" id="slg" role="tabpanel">
+                                <div class="tab-content p-3 text-muted">
+                                    
+                                    <div class="tab-pane active" id="hotspots" role="tabpanel">
                                         <p class="mb-0">
                                             <div class="card border border-primary">
                                                 <div class="card-header bg-transparent border-primary">
                                                     <h5 class="my-0 text-primary"></i>Report Filter</h5>
                                                 </div>
                                                 <div class="card-body">
-                                                    
+                                                    <h5 class="card-title mt-0"></h5>
                                                     <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="basic_livelihood_cbdra_add_hotspot.php" method ="POST" >
                                                         <div class="col-12">
                                                             <label for="region" class="form-label">Region</label>
@@ -174,60 +176,64 @@
                                                 </div>
                                             </div>
 
-                                            
-                                            <div class="card border border-primary">
-                                                <div class="card-header bg-transparent border-primary">
-                                                    <h5 class="my-0 text-primary">SLGs Per Case Worker</h5>
-                                                </div>
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <div class="card border border-primary">
+                                                    <div class="card-header bg-transparent border-primary">
+                                                        <h5 class="my-0 text-primary">Savings and Loan Groups Per Case Worker</h5>
+                                                    </div>
                                                     <div class="card-body">
-
-                                                        <table id="datatable-buttons" class="table table-bordered dt-responsive  nowrap w-100">
+                                                    <h7 class="card-title mt-0"></h7>
                                                         
-                                                            <thead>
-                                                                <tr>
-                                                                    
-                                                                    <th>Case Worker</th>
-                                                                    <th>District</th>
-                                                                    <th>Group Name</th>
-                                                                    <th>Cohort</th>
-                                                                    <th>Males</th>
-                                                                    <th>Females</th>
-                                                                    
-                                                                </tr>
-                                                            </thead>
+                                                            <table id="datatable-buttons" class="table table-bordered dt-responsive  nowrap w-100">
+                                                            
+                                                                <thead>
+                                                                    <tr>
+                                                                        
+                                                                        <th>Case Worker</th>
+                                                                        <th>District</th>
+                                                                        <th>Group Name</th>
+                                                                        <th>Cohort</th>
+                                                                        <th>Males</th>
+                                                                        <th>Females</th>
+                                                                        
+                                                                    </tr>
+                                                                </thead>
 
 
-                                                            <tbody>
-                                                                <?Php
-                                                                    $query="SELECT tblcw.cwName,tblgroup.districtID,tblgroup.groupname, tblgroup.cohort, tblgroup.MembersM, tblgroup.MembersF
-                                                                    FROM cimis_sql.tblgroup 
-                                                                    INNER JOIN cimis_sql.tblcw on cimis_sql.tblcw.cwID = cimis_sql.tblgroup.cwID order by tblcw.cwName";
-
-                                                                    //Variable $link is declared inside config.php file & used here
-                                                                    
-                                                                    if ($result_set = $link->query($query)) {
-                                                                    while($row = $result_set->fetch_array(MYSQLI_ASSOC))
-                                                                    { 
-                                                                        $col_value = dis_name($link,$row["districtID"]);
-                                                                    echo "<tr>\n";
+                                                                <tbody>
+                                                                    <?Php
+                                                                        $query="SELECT tblcw.cwName,tblgroup.districtID,tblgroup.groupname, tblgroup.cohort, tblgroup.MembersM, tblgroup.MembersF
+                                                                        FROM cimis_sql.tblgroup 
+                                                                        INNER JOIN cimis_sql.tblcw on cimis_sql.tblcw.cwID = cimis_sql.tblgroup.cwID order by tblcw.cwName";
+ 
+                                                                        //Variable $link is declared inside config.php file & used here
                                                                         
-                                                                        echo "<td>".$row["cwName"]."</td>\n";
-                                                                        echo "\t\t<td>$col_value</td>\n";                                                                          
-                                                                        echo "<td>".$row["groupname"]."</td>\n";
-                                                                        echo "<td>".$row["cohort"]."</td>\n";
-                                                                        echo "<td>".$row["MembersM"]."</td>\n";
-                                                                        echo "<td>".$row["MembersF"]."</td>\n";
-                                                                        
-                                                                        
-                                                                        
-                                                                    echo "</tr>\n";
-                                                                    }
-                                                                    $result_set->close();
-                                                                    }  
-                                                                                        
-                                                                ?>
-                                                            </tbody>
-                                                        </table>
+                                                                        if ($result_set = $link->query($query)) {
+                                                                        while($row = $result_set->fetch_array(MYSQLI_ASSOC))
+                                                                        { 
+                                                                            $col_value = dis_name($link,$row["districtID"]);
+                                                                        echo "<tr>\n";
+                                                                            
+                                                                            echo "<td>".$row["cwName"]."</td>\n";
+                                                                            echo "\t\t<td>$col_value</td>\n";                                                                          
+                                                                            echo "<td>".$row["groupname"]."</td>\n";
+                                                                            echo "<td>".$row["cohort"]."</td>\n";
+                                                                            echo "<td>".$row["MembersM"]."</td>\n";
+                                                                            echo "<td>".$row["MembersF"]."</td>\n";
+                                                                            
+                                                                            
+                                                                            
+                                                                        echo "</tr>\n";
+                                                                        }
+                                                                        $result_set->close();
+                                                                        }  
+                                                                                           
+                                                                    ?>
+                                                                </tbody>
+                                                            </table>
+                                                            </p>
+                                                        </div>
                                                     </div>     
                                                 </div>            
                                             </div>    
@@ -557,6 +563,14 @@
                         </div>
                     </div>
                 </div>
+
+
+                
+
+                    
+
+               
+
 
                 <!-- Collapse -->
                 

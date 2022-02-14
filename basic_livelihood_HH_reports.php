@@ -17,13 +17,7 @@
 <?php include 'layouts/body.php'; ?>
 
 <?php 
-    if(isset($_GET['Submit']))
-    {   
-        $region = $_GET['region'];
-        $district = $_GET['district'];
-        $ta = $_GET['ta'];
-     
-    }
+   
     
     function get_rname($link, $rcode)
         {
@@ -93,7 +87,7 @@
                                     <li class="nav-item waves-effect waves-light">
                                         <a class="nav-link" data-bs-toggle="tab" href="#savings" role="tab">
                                             <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
-                                            <span class="d-none d-sm-block">Summary Per CaseWorker</span>
+                                            <span class="d-none d-sm-block">Summary Households Per CaseWorker</span>
                                         </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">
