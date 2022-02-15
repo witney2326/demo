@@ -23,6 +23,10 @@
         $row = mysqli_fetch_assoc($result); 
         $number_grps = $row['grps'];
 
+        $result = mysqli_query($link, 'SELECT COUNT(ClusterID) AS clusters FROM tblcluster WHERE deleted = 0'); 
+        $row = mysqli_fetch_assoc($result); 
+        $number_cls = $row['clusters'];
+
         $result = mysqli_query($link, 'SELECT COUNT(meetingID) AS meetings FROM tblawareness_meetings'); 
         $row = mysqli_fetch_assoc($result); 
         $number_meetings = $row['meetings'];
@@ -62,7 +66,7 @@
                             <div class="card-body">
                                 
                                 <div class="table-responsive">
-                                    <table class="table mb-3">
+                                    <table class="table table-striped">
 
                                         <thead class="table-dark">
                                             <tr>
@@ -100,17 +104,31 @@
                                                 <td></td>
                                                 <td><a href="basic_livelihood_HH_Dis_reports.php">SLGs Mobilised Per District Summary</a></td>
                                             </tr>
+                                            
                                             <tr>
                                                 <th scope="row"></th>
                                                 <td></td>
                                                 <td></td>
-                                                <td><a href="basic_livelihood_CLS_reports1.php">Clusters mobilised</a></td>
+                                                <td><a href="basic_livelihood_HH_Nat_reports.php">SLGs National Summary</a></td>
                                             </tr>
                                             <tr>
                                                 <th scope="row"></th>
                                                 <td></td>
                                                 <td></td>
-                                                <td><a href="">Clusters mobilised Summary</a></td>
+                                                <td><a href="basic_livelihood_CLS_reports1.php">Clusters mobilised</a></td>
+                                                <td><?php echo number_format($number_cls); ?> Cluster(s)</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row"></th>
+                                                <td></td>
+                                                <td></td>
+                                                <td><a href="basic_livelihood_CLS_Summary_reports.php">Clusters mobilised Summary CW</a></td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row"></th>
+                                                <td></td>
+                                                <td></td>
+                                                <td><a href=".php">Clusters mobilised Summary National</a></td>
                                             </tr>
                                             <tr>
                                                 <th scope="row"></th>
@@ -123,7 +141,20 @@
                                                 <th scope="row">5</th>
                                                 <td>Savings Mobilisation</td>
                                                 <td>Savings and Loan Groups</td>
-                                                <td>Group Savings</td>
+                                                <td><a href="basic_livelihood_savings_CW_summary_reports.php">Savings Summary per Case Worker</a></td>
+                                            </tr>
+                                            
+                                            <tr>
+                                                <th scope="row"></th>
+                                                <td></td>
+                                                <td></td>
+                                                <td><a href="basic_livelihood_savings_dis_summary_reports.php">SLG Savings Summary per District</a></td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row"></th>
+                                                <td></td>
+                                                <td></td>
+                                                <td><a href="basic_livelihood_savings_nat_summary_reports.php">SLG Savings National Summary</a></td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">6</th>
