@@ -12,8 +12,21 @@
 <!-- Begin page -->
 <div id="layout-wrapper">
 
-    <?php include 'layouts/menu.php'; ?>
+    <?php   include 'layouts/menu.php'; 
+            include 'layouts/config.php';
+    
+        $result = mysqli_query($link, 'SELECT COUNT(sppCode) AS value_sum FROM tblbeneficiaries'); 
+        $row = mysqli_fetch_assoc($result); 
+        $hh_beneficiaries = $row['value_sum'];
 
+        $result = mysqli_query($link, 'SELECT COUNT(groupID) AS grps FROM tblgroup WHERE deleted = 0'); 
+        $row = mysqli_fetch_assoc($result); 
+        $number_grps = $row['grps'];
+
+        $result = mysqli_query($link, 'SELECT COUNT(meetingID) AS meetings FROM tblawareness_meetings'); 
+        $row = mysqli_fetch_assoc($result); 
+        $number_meetings = $row['meetings'];
+    ?>
     <!-- ============================================================== -->
     <!-- Start right Content here -->
     <!-- ============================================================== -->
@@ -66,12 +79,14 @@
                                                 <td>Sensitization and Awareness</td>
                                                 <td>Programme</td>
                                                 <td><a href="basic_livelihood_sensitization_reports.php">Sensitization reports</a></td>
+                                                <td><?php echo number_format($number_meetings); ?> Meeting(s)</td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">2</th>
                                                 <td>Group Mobilisation</td>
                                                 <td>Savings and Loan Groups</td>
                                                 <td><a href="basic_livelihood_SLG_reports1.php">Savings and Loan Groups mobilised</a></td>
+                                                <td><?php echo number_format($number_grps); ?> SLGs</td>
                                             </tr>
                                             <tr>
                                                 <th scope="row"></th>
@@ -95,7 +110,14 @@
                                                 <th scope="row"></th>
                                                 <td></td>
                                                 <td></td>
-                                                <td><a href="basic_livelihood_HH_reports.php">Households mobilised</a></td>
+                                                <td><a href="">Clusters mobilised Summary</a></td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row"></th>
+                                                <td></td>
+                                                <td></td>
+                                                <td><a href="basic_livelihood_HH_Ben_reports.php">Households mobilised</a></td>
+                                                <td><?php echo number_format($hh_beneficiaries); ?> Household(s)</td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">5</th>
