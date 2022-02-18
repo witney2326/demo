@@ -2,7 +2,7 @@
 <?php include 'layouts/head-main.php'; ?>
 
 <head>
-    <title>National SLG Summary Report</title>
+    <title>Member Reports</title>
     <?php include 'layouts/head.php'; ?>
     <?php include 'layouts/head-style.php'; ?>
     <?php include 'layouts/config.php'; ?>
@@ -13,7 +13,7 @@
     <link href="assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
 
     <!--Datatable plugin CSS file -->
-<link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" />
+ <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" />
   
   <!--jQuery library file -->
   <script type="text/javascript" 
@@ -29,7 +29,13 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 <?php include 'layouts/body.php'; ?>
 
 <?php 
-   
+    if(isset($_GET['Submit']))
+    {   
+        $region = $_GET['region'];
+        $district = $_GET['district'];
+        $ta = $_GET['ta'];
+     
+    }
     
     function get_rname($link, $rcode)
         {
@@ -63,12 +69,12 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                 <div class="row">
                     <div class="col-12">
                         <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                            <h4 class="mb-sm-0 font-size-18">National SLG Summary Reports</h4>
+                            <h4 class="mb-sm-0 font-size-18">Household Savings Report</h4>
 
                             <div class="page-title-right">
                                 <ol class="breadcrumb m-0">
                                     <li class="breadcrumb-item"><a href="basicReports.php">Basic Livelihood Reports</a></li>
-                                    <li class="breadcrumb-item active">National SLG Report</li>
+                                    <li class="breadcrumb-item active">Household Savings Report</li>
                                 </ol>
                             </div>
 
@@ -76,51 +82,48 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                     </div>
                 </div>
                 <!-- end page title -->
-
-                 
-                                
                 <div class="row">
                     <div class="col-12">
                         <div class="card border border-primary">
                         <div class="card-header bg-transparent border-primary">
-                            <h5 class="my-0 text-primary">Summary Per Region</h5>
+                            <h5 class="my-0 text-primary">Household Recorded Savings</h5>
                         </div>
+
+                        
                         <div class="card-body">
+
                             <table id="datatable-buttons" class="table table-bordered dt-responsive  nowrap w-100">
                             
                                 <thead>
                                     <tr>
-                                        <th>Region</th>
-                                        <th>No Of Districts</th>
-                                        <th>No Of Groups</th>
-                                        <th>No.Males</th>
-                                        <th>No.Females</th>
-                                        <th>Total Regional Membership</th>
-                                            
+                                        <th>District</th>
+                                        <th>No.Households</th>
+                                        <th>Amount Saved</th>
+                                        
                                     </tr>
                                 </thead>
 
 
                                 <tbody>
                                     <?Php
-                                        $query="SELECT cimis_sql.tblregion.name, COUNT(DISTINCT tbldistrict.DistrictName) as NoOfDistricts,COUNT(tblgroup.groupID) as NoGroups, sum(tblgroup.MembersM) as NoMales, sum(MembersF) as NoFemales
-                                        FROM tblgroup inner join tblregion on tblregion.regionID = tblgroup.regionID 
-                                        inner join tbldistrict on tblgroup.districtID = tbldistrict.DistrictID group by tblregion.name;";
+                                        $query="select count(distinct tblslg_member_savings.hh_code) as Households,sum(tblslg_member_savings.amount) as Saved_Amount, tblbeneficiaries.districtID as District
+                                        from tblslg_member_savings inner join tblbeneficiaries on tblbeneficiaries.sppCode = tblslg_member_savings.hh_code group by tblbeneficiaries.districtID;";
 
                                         //Variable $link is declared inside config.php file & used here
                                         
                                         if ($result_set = $link->query($query)) {
                                         while($row = $result_set->fetch_array(MYSQLI_ASSOC))
                                         { 
-                                            $totalMembers = number_format($row["NoMales"] + $row["NoFemales"]);
+                                            $col_value = dis_name($link,$row["District"]);
                                         echo "<tr>\n";
-
-                                            echo "<td>".$row["name"]."</td>\n";                                                                         
-                                            echo "<td>".$row["NoOfDistricts"]."</td>\n";
-                                            echo "<td>".number_format($row["NoGroups"])."</td>\n";
-                                            echo "<td>".number_format($row["NoMales"])."</td>\n";
-                                            echo "<td>".number_format($row["NoFemales"])."</td>\n";
-                                            echo "<td>\t\t$totalMembers</td>\n";
+                                            
+                                            
+                                            echo "\t\t<td>$col_value</td>\n";
+                                            echo "<td>".$row["Households"]."</td>\n";                                                                   
+                                            
+                                            
+                                            
+                                            echo "<td>".number_format($row["Saved_Amount"],2)."</td>\n";
                                             
                                             
                                         echo "</tr>\n";
@@ -130,11 +133,11 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                             
                                     ?>
                                 </tbody>
-                            </table> 
+                            </table>
+                                
                         </div>     
                     </div>            
-                </div> 
-  
+                </div>    
 
             </div> <!-- container-fluid -->
         </div>

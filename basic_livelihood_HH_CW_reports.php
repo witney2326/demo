@@ -12,6 +12,18 @@
     <!-- Responsive datatable examples -->
     <link href="assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
 
+    <!--Datatable plugin CSS file -->
+ <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" />
+  
+  <!--jQuery library file -->
+  <script type="text/javascript" 
+      src="https://code.jquery.com/jquery-3.5.1.js">
+  </script>
+
+  <!--Datatable plugin JS library file -->
+  <script type="text/javascript" 
+src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
+  </script>
 </head>
 
 <?php include 'layouts/body.php'; ?>
@@ -79,21 +91,11 @@
                                             <h5 class="my-0 text-primary"></h5>
                                         </div>
 
-                                        <form action="exporttoexcel.php">
-                                            <div class="btn-group" role="group" aria-label="Basic example" style{"50"}>
-                                                <button type="button" class="btn btn-secondary">Copy</button>
-                                                <button type="submit" class="btn btn-secondary" value="Export to Excel" name="btn">Excel</button>
-                                                <button type="button" class="btn btn-secondary">PDF</button>
-                                                <button type="button" class="btn btn-secondary">Column Visibility</button>   
-                                            </div>
-                                        </form>
+                                       
 
                                         <div class="card-body">
-                                        <h7 class="card-title mt-0"></h7>
 
-                                            
-
-                                                <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
+                                                <table id="datatable-buttons" class="table table-bordered dt-responsive  nowrap w-100">
                                                 
                                                     <thead>
                                                         <tr>
