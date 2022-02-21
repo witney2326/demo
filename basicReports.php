@@ -47,7 +47,7 @@
         $row = mysqli_fetch_assoc($result); 
         $females_trained = $row['females_trained'];
 
-        $result = mysqli_query($link, 'SELECT COUNT(sppCode) AS households_trained FROM tblmembertrainings'); 
+        $result = mysqli_query($link, 'SELECT COUNT(distinct sppCode) AS households_trained FROM tblmembertrainings'); 
         $row = mysqli_fetch_assoc($result); 
         $households_trained = $row['households_trained'];
 
@@ -207,7 +207,7 @@
                                                 <td></td>
                                                 <td></td>
                                                 <td>Households Trained</td>
-                                                <td><?php echo number_format($households_trained);  echo ' Households';  ?></td>
+                                                <td><?php echo number_format($households_trained);  echo ' Household(s)';  ?></td>
                                             </tr>
                                             <tr>
                                                 <th scope="row"></th>
