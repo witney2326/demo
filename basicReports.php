@@ -54,6 +54,35 @@
         $result = mysqli_query($link, 'SELECT COUNT(clusterID) AS animators_trained FROM tblanimatortrainings'); 
         $row = mysqli_fetch_assoc($result); 
         $animators_trained = $row['animators_trained'];
+        
+        $result = mysqli_query($link, 'SELECT COUNT(TrainingID) AS animators_trained_acsa  FROM tblanimatortrainings where (TrainingTypeID = "13" and animatorType = "06")'); 
+        $row = mysqli_fetch_assoc($result); 
+        $animators_trained_acsa = $row['animators_trained_acsa'];
+
+        $result = mysqli_query($link, 'SELECT COUNT(sppCode) AS members_trained_acsa  FROM tblmembertrainings where (TrainingTypeID = "13")'); 
+        $row = mysqli_fetch_assoc($result); 
+        $members_trained_acsa = $row['members_trained_acsa'];
+        
+        $result = mysqli_query($link, 'SELECT COUNT(TrainID) AS male_trainers_trained  FROM tbltottraining where (gender = "M")'); 
+        $row = mysqli_fetch_assoc($result); 
+        $male_trainers_trained = $row['male_trainers_trained'];
+
+        $result = mysqli_query($link, 'SELECT COUNT(TrainID) AS female_trainers_trained  FROM tbltottraining where (gender = "F")'); 
+        $row = mysqli_fetch_assoc($result); 
+        $female_trainers_trained = $row['female_trainers_trained'];
+
+        $result = mysqli_query($link, 'SELECT COUNT(id) AS adopted_places  FROM tbladoptplace'); 
+        $row = mysqli_fetch_assoc($result); 
+        $adopted_places = $row['adopted_places'];
+
+        $result = mysqli_query($link, 'SELECT COUNT(id) AS hotspots  FROM tblhotspot'); 
+        $row = mysqli_fetch_assoc($result); 
+        $hotspots = $row['hotspots'];
+
+        $result = mysqli_query($link, 'SELECT COUNT(distinct groupID) AS esmps  FROM tblsafeguard_group_plans'); 
+        $row = mysqli_fetch_assoc($result); 
+        $esmps = $row['esmps'];
+
 
     ?>
     <!-- ============================================================== -->
@@ -221,36 +250,42 @@
                                                 <td></td>
                                                 <td></td>
                                                 <td>Lead Farmers trained in ACSA</td>
+                                                <td><?php echo number_format($animators_trained_acsa);  echo ' Lead Farmer(s)';  ?></td>
                                             </tr>
                                             <tr>
                                                 <th scope="row"></th>
                                                 <td></td>
                                                 <td></td>
                                                 <td>Members Trained in ACSA</td>
+                                                <td><?php echo number_format($members_trained_acsa);  echo ' Ordinary Member(s)';  ?></td>
                                             </tr>
                                             <tr>
                                                 <th scope="row"></th>
                                                 <td></td>
                                                 <td>Trainer Of Trainer</td>
-                                                <td>Trainers trained</td>
+                                                <td>Trainers trained</td>female_trainers_trained
+                                                <td><?php echo number_format($male_trainers_trained); echo" "; echo 'Male(s)'; echo "; "; echo number_format($female_trainers_trained); echo " "; echo 'Female(s)';?></td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">5</th>
                                                 <td>Community Based Disaster Risk Awareness</td>
                                                 <td>CBDRA</td>
                                                 <td>Adopt a Place</td>
+                                                <td><?php echo number_format($adopted_places);  echo ' Adopted Place(s)';  ?></td>
                                             </tr>
                                             <tr>
                                                 <th scope="row"></th>
                                                 <td></td>
                                                 <td></td>
                                                 <td>Disaster Hotspots</td>
+                                                <td><?php echo number_format($hotspots);  echo ' Hotspot(s)';  ?></td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">6</th>
                                                 <td>Environmental and Social Safeguards</td>
                                                 <td>ESMPs</td>
                                                 <td>Safeguard Plans</td>
+                                                <td><?php echo number_format($esmps);  echo ' ESMP(s)';  ?></td>
                                             </tr>
                                             <tr>
                                                 <th scope="row"></th>

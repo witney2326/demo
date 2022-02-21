@@ -213,6 +213,7 @@
                                                 
                                                 echo "<td>
                                                     <a href=\"basicCLSESMPPlansEdit.php?id=".$row['planID']."\"><i class='far fa-edit' style='font-size:18px'></i></a> 
+                                                    <a href=\"basicCLSESMPPlansProgressTrack.php?id=".$row['planID']."\"><i class='fas fa-chart-line' title='Safeguard Implimentation Progress' style='font-size:18px'></i></a> 
                                                     <a onClick=\"javascript: return confirm('Are You Sure You want To DELETE This ESMP Record');\" href=\"basicCLSESMPPlansDelete.php?id=".$row['planID']."\"><i class='far fa-trash-alt' style='font-size:18px'></i></a>        
                                                 </td>\n";
                                             echo "</tr>\n";

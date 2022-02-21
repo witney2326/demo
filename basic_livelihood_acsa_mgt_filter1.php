@@ -26,34 +26,36 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 <?php include 'layouts/body.php'; ?>
 
 <?php 
+    $region = $_GET["region"];  
+      
         
-    function issue_name($link, $icode)
-        {
-        $rg_query = mysqli_query($link,"select name from tblissues where id='$icode'"); // select query
-        $rg = mysqli_fetch_array($rg_query);// fetch data
-        return $rg['name'];
-        }
+    function dis_name($link, $disID)
+    {
+    $dis_query = mysqli_query($link,"select DistrictName from tbldistrict where DistrictID='$disID'"); // select query
+    $dis = mysqli_fetch_array($dis_query);// fetch data
+    return $dis['DistrictName'];
+    }
     
-        function demo_plot_found($link, $clsID)
-        {
-        $place_query = mysqli_query($link,"select id from tblacsademoplot where cluster='$clsID'"); // select query
-        $place = mysqli_fetch_array($place_query);// fetch data
-        return $place['id'];
-        }
+    function get_rname($link, $rID)
+    {
+    $dis_query = mysqli_query($link,"select name from tblregion where regionID='$rID'"); // select query
+    $dis = mysqli_fetch_array($dis_query);// fetch data
+    return $dis['name'];
+    }
 
-        function lf_found($link, $clsID)
-        {
-        $place_query = mysqli_query($link,"select TrainingID from tblanimatortrainings where (clusterID='$clsID' and animatorType ='06')"); // select query
-        $lf = mysqli_fetch_array($place_query);// fetch data
-        return $lf['TrainingID'];
-        }
+    function demo_plot_found($link, $clsID)
+    {
+    $place_query = mysqli_query($link,"select id from tblacsademoplot where cluster='$clsID'"); // select query
+    $place = mysqli_fetch_array($place_query);// fetch data
+    return $place['id'];
+    }
 
-        function dis_name($link, $disID)
-        {
-        $dis_query = mysqli_query($link,"select DistrictName from tbldistrict where DistrictID='$disID'"); // select query
-        $dis = mysqli_fetch_array($dis_query);// fetch data
-        return $dis['DistrictName'];
-        }
+    function lf_found($link, $clsID)
+    {
+    $place_query = mysqli_query($link,"select TrainingID from tblanimatortrainings where (clusterID='$clsID' and animatorType ='06')"); // select query
+    $lf = mysqli_fetch_array($place_query);// fetch data
+    return $lf['TrainingID'];
+    }
 ?>
 
 <!-- Begin page -->
@@ -107,6 +109,15 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                         </a>
                                     </li>
                                   
+                                   
+                                    <li class="nav-item waves-effect waves-light">
+                                        <a class="link" data-bs-toggle="link" href="basic_livelihood_CBDRA_adoptAPlace.php" role="link">
+                                            <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
+                                            <span class="d-none d-sm-block">ACSA Demo Plots</span>
+                                        </a>
+                                    </li>
+                                    
+                                                                      
                                     
                                     <li class="nav-item waves-effect waves-light">
                                         <a class="nav-link" data-bs-toggle="link" href="basicReports.php" role="link">
@@ -134,41 +145,22 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
                                                                 <div class="card-body">
                                                                     <h5 class="card-title mt-0"></h5>
-                                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="basic_livelihood_acsa_mgt_filter1.php" method ="GET" >
+                                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="basic_livelihood_acsa_mgt_filter2.php" method ="GET" >
                                                                         <div class="col-12">
                                                                             <label for="region" class="form-label">Region</label>
                                                                             
-                                                                                <select class="form-select" name="region" id="region"  required>
-                                                                                    <option ></option>
-                                                                                    <?php                                                           
-                                                                                            $dis_fetch_query = "SELECT regionID, name FROM tblregion";                                                  
-                                                                                            $result_dis_fetch = mysqli_query($link, $dis_fetch_query);                                                                       
-                                                                                            $i=0;
-                                                                                                while($DB_ROW_reg = mysqli_fetch_array($result_dis_fetch)) {
-                                                                                            ?>
-                                                                                            <option value ="<?php
-                                                                                                    echo $DB_ROW_reg["regionID"];?>">
-                                                                                                <?php
-                                                                                                    echo $DB_ROW_reg["name"];
-                                                                                                ?>
-                                                                                            </option>
-                                                                                            <?php
-                                                                                                $i++;
-                                                                                                    }
-                                                                                        ?>
+                                                                                <select class="form-select" name="region" id="region" value ="<?php echo $region;?>"  required>
+                                                                                    <option selected value = "<?php echo $region;?>"><?php echo get_rname($link,$region);?></option>
                                                                                 </select>
-                                                                                <div class="invalid-feedback">
-                                                                                    Please select a valid Malawi region.
-                                                                                </div>
-                                                                            
+                                                                                
                                                                         </div>
                                                                         
                                                                         <div class="col-12">
                                                                             <label for="district" class="form-label">District</label>
-                                                                            <select class="form-select" name="district" id="district"  required disabled>
-                                                                                <option  ></option>
+                                                                            <select class="form-select" name="district" id="district" value ="$district" required >
+                                                                                <option selected value="$district" ></option>
                                                                                     <?php                                                           
-                                                                                        $dis_fetch_query = "SELECT DistrictID,DistrictName FROM tbldistrict";                                                  
+                                                                                        $dis_fetch_query = "SELECT DistrictID,DistrictName FROM tbldistrict where regionID ='$region'";                                                  
                                                                                         $result_dis_fetch = mysqli_query($link, $dis_fetch_query);                                                                       
                                                                                         $i=0;
                                                                                             while($DB_ROW_Dis = mysqli_fetch_array($result_dis_fetch)) {
@@ -187,7 +179,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                                         <div class="col-12">
                                                                             <label for="ta" class="form-label">Traditional Authority</label>
                                                                             <select class="form-select" name="ta" id="ta" required disabled>
-                                                                                <option ></option>
+                                                                                <option selected  value="$ta"></option>
                                                                                 <?php                                                           
                                                                                         $ta_fetch_query = "SELECT TAName FROM tblta";                                                  
                                                                                         $result_ta_fetch = mysqli_query($link, $ta_fetch_query);                                                                       
@@ -208,6 +200,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                                         
                                                                         <div class="col-12">
                                                                             <button type="submit" class="btn btn-primary w-md" name="Submit" value="Submit">Submit</button>
+                                                                            <INPUT TYPE="button" class="btn btn-secondary w-md" VALUE="Back" onClick="history.go(-1);">
                                                                         </div>
                                                                     </form>                                             
                                                                     <!-- End Here -->
@@ -219,7 +212,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                                 <div class="col-12">
                                                                     <div class="card border border-primary">
                                                                     <div class="card-header bg-transparent border-primary">
-                                                                        <h5 class="my-0 text-primary"><i class="mdi mdi-bullseye-arrow me-3"></i>SLG Clusters</h5>
+                                                                        
                                                                     </div>
                                                                     <div class="card-body">
                                                                     <h7 class="card-title mt-0"></h7>
@@ -231,13 +224,14 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                                                         <th>Cluster code</th>
                                                                                         <th>Cluster Name</th>
                                                                                         <th>cohort</th>
-                                                                                        <th>Has a Demo Plot?</th>                                                         
-                                                                                        <th>Action</th>                                                            
+                                                                                        <th>Lead Farmer Trained?</th>
+                                                                                        <th>Demo Plot?</th>                                                         
+                                                                                        <th>Action</th>                                                           
                                                                                     </tr>
                                                                                 </thead>
                                                                                 <tbody>
                                                                                     <?Php
-                                                                                        $query="select * from tblcluster where regionID = '0'";
+                                                                                        $query="select * from tblcluster where regionID = '$region'";
                                                                                         
                                                                                         if ($result_set = $link->query($query)) {
                                                                                         while($row = $result_set->fetch_array(MYSQLI_ASSOC))
@@ -257,7 +251,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                                                         echo "<tr>\n";                                                                                          
                                                                                             echo "<td>".$row["ClusterID"]."</td>\n";
                                                                                             echo "<td>".$row["ClusterName"]."</td>\n";
-                                                                                            echo "<td>".$row["cohort"]."</td>\n";                                                                                               
+                                                                                            echo "<td>".$row["cohort"]."</td>\n";                                                                            
                                                                                             echo "<td>\t\t$check1</td>\n";
                                                                                             echo "<td>\t\t$check</td>\n";
                                                                                             echo "<td>

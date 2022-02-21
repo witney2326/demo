@@ -206,7 +206,7 @@
                                                                     echo "<td>
                                                                         <a href=\"basicCLSESMPStatusview.php?id=".$row['groupID']."\"><i class='far fa-eye' title='View Group Status' style='font-size:18px'></i></a>
                                                                         <a href=\"basicCLSESMPPlans.php?id=".$row['groupID']."\"><i class='fas fa-project-diagram' title='Safeguard Plans' style='font-size:18px'></i></a> 
-                                                                        <a href=\"basicCLSESMPProgress.php?id=".$row['groupID']."\"><i class='fas fa-chart-line' title='Safeguard Implimentation Progress' style='font-size:18px'></i></a> 
+                                                                        
                                                                        
                                                                     </td>\n";
 

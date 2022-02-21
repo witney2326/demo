@@ -47,11 +47,11 @@
 
             
             
-                $sql = "INSERT INTO tblanimatortrainings (regionID,districtID,clusterID,TrainingTypeID,StartDate,FinishDate,trainedBy,animatorName)
+                $sql = "INSERT INTO tblanimatortrainings (regionID,districtID,clusterID,TrainingTypeID,StartDate,FinishDate,trainedBy,animatorType)
                 VALUES ('$regionID ','$DistrictID','$id','$trainingtype','$startdate','$finishdate','$trainedby','$animator')";
             if (mysqli_query($link, $sql)) {
                 echo '<script type="text/javascript">'; 
-                echo 'alert("SLG Training Record has been added successfully !");'; 
+                echo 'alert("Animator Training Record has been added successfully !");'; 
                 echo 'window.location.href = "basic_livelihood_animators.php";';
                 echo '</script>';
             } else {
