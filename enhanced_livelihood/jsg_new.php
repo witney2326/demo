@@ -1,0 +1,37 @@
+<?php
+include_once 'layouts/config.php';
+if(isset($_POST['Submit']))
+{    
+    $groupID = $_POST["group_code"];
+    $district= $_POST["district"];
+    $buscat = $_POST['buscat'];
+    $iga = $_POST['iga'];
+    $males = $_POST["males"];
+    $females = $_POST["females"];
+    $jsg_name = $_POST['jsg_name'];
+     
+    if (isset($jsg_name)&&(($males>0)||($females>0)))
+    {
+        $sql = "INSERT INTO tbljsg (groupID,districtID,bus_category,type,jsg_name,no_male,no_female)
+        VALUES ('$groupID','$district','$buscat','$iga','$jsg_name','$males','$females')";
+        
+        if (mysqli_query($link, $sql)) {
+            echo '<script type="text/javascript">'; 
+            echo 'alert("JSG Record has been added successfully !");'; 
+            echo 'window.location.href = "jsg_formation.php";';
+            echo '</script>';
+        } else {
+            echo "Error: " . $sql . ":-" . mysqli_error($link);
+        }
+    }
+    else
+    {
+        echo '<script type="text/javascript">'; 
+        echo 'alert("JSG has no name or no members !");'; 
+        echo 'window.location.href = "jsg_formation.php";';
+        echo '</script>';
+    }
+    mysqli_close($link);
+            
+}
+?>

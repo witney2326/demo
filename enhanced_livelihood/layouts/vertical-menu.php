@@ -65,20 +65,20 @@
             <div class="dropdown d-inline-block">
                 <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <img class="rounded-circle header-profile-user" src="assets/images/users/avatar-1.jpg" alt="Header Avatar">
-                    <span class="d-none d-xl-inline-block ms-1"><?php echo $_SESSION["username"]; ?></span>
+                    <span class="d-none d-xl-inline-block ms-1"><?php echo $_SESSION["username"]; echo" "; echo "(logged in)"; ?></span>
                     <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
                 </button>
                 <div class="dropdown-menu dropdown-menu-end">
                     <!-- item-->
-                    <a class="dropdown-item" href="cimis-user-profile.php"><i class="bx bx-user font-size-16 align-middle me-1"></i> <span key="t-profile"><?php echo $language["Profile"]; ?></span></a>
-                    <div class="dropdown-divider"></div>
                     <a class="dropdown-item text-danger" href="logout.php"><i class="bx bx-power-off font-size-16 align-middle me-1 text-danger"></i> <span key="t-logout"><?php echo $language["Logout"]; ?></span></a>
+                    <div class="dropdown-divider"></div>
                 </div>
             </div>
 
             <div class="dropdown d-inline-block">
                 <button type="button" class="btn header-item noti-icon right-bar-toggle waves-effect">
-                    <i class="bx bx-cog bx-spin"></i>
+                    <i class="bx bx-cog bx"></i>
+                    <h7>View Settings</h7>
                 </button>
             </div>
 
@@ -116,39 +116,13 @@
                         </li>
 
                         <li>
-                            <a href="enhanced_livelihood.php" class="has-arrow" key="t-horizontal">Enhanced Livelihood</a>
+                            <a href="enhanced_livelihood/enhanced_livelihood.php" class="has-arrow" key="t-horizontal">Enhanced Livelihood</a>
                             <ul class="sub-menu" aria-expanded="true">
                             </ul>
                         </li>
 
                         <li>
-                            <a href="graduation.php" class="has-arrow" key="t-horizontal">Graduation</a>
-                            <ul class="sub-menu" aria-expanded="true">
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-
-                <li>
-                    <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="bx bx-walk"></i>
-                        <span key="t-layouts">Monitoring</span>
-                    </a>
-                    <ul class="sub-menu" aria-expanded="true">
-                        <li>
-                            <a href="cimis-page-coming-soon.php" class="has-arrow" key="t-vertical">Basic Livelihood</a>
-                            <ul class="sub-menu" aria-expanded="true">
-                            </ul>
-                        </li>
-
-                        <li>
-                            <a href="cimis-page-coming-soon.php" class="has-arrow" key="t-horizontal">Enhanced Livelihood</a>
-                            <ul class="sub-menu" aria-expanded="true">
-                            </ul>
-                        </li>
-
-                        <li>
-                            <a href="cimis-page-coming-soon.php" class="has-arrow" key="t-horizontal">Graduation</a>
+                            <a href="graduation/graduation.php" class="has-arrow" key="t-horizontal">Graduation</a>
                             <ul class="sub-menu" aria-expanded="true">
                             </ul>
                         </li>
@@ -158,135 +132,31 @@
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="bx bx-line-chart"></i>
-                        <span key="t-layouts">Reports</span>
+                        <span key="t-layouts">Monitoring</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="true">
+                    
                         <li>
-                            <!-- start here -->
-                            <li>
-                                <a href="javascript: void(0);" class="has-arrow waves-effect">
-                                    <i class="bx bx-line-chart"></i>
-                                    <span key="t-layouts">Basic </span>
-                                </a>
-                                <ul class="sub-menu" aria-expanded="true">
-                                    <li>
-                                        <a href="cimis-page-coming-soon.php" class="has-arrow" key="t-vertical">Beneficiary</a>
-                                        <ul class="sub-menu" aria-expanded="true">
-                                        </ul>
-                                    </li>
-
-                                    <li>
-                                        <a href="cimis-page-coming-soon.php" class="has-arrow" key="t-horizontal">Mobilisation</a>
-                                        <ul class="sub-menu" aria-expanded="true">
-                                        </ul>
-                                    </li>
-
-                                    <li>
-                                        <a href="cimis-page-coming-soon.php" class="has-arrow" key="t-horizontal">SLGs</a>
-                                        <ul class="sub-menu" aria-expanded="true">
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="cimis-page-coming-soon.php" class="has-arrow" key="t-horizontal">Training</a>
-                                        <ul class="sub-menu" aria-expanded="true">
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="cimis-page-coming-soon.php" class="has-arrow" key="t-horizontal">CBDRA</a>
-                                        <ul class="sub-menu" aria-expanded="true">
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="cimis-page-coming-soon.php" class="has-arrow" key="t-horizontal">Nutrition</a>
-                                        <ul class="sub-menu" aria-expanded="true">
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="cimis-page-coming-soon.php" class="has-arrow" key="t-horizontal">ACSA</a>
-                                        <ul class="sub-menu" aria-expanded="true">
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="cimis-page-coming-soon.php" class="has-arrow" key="t-horizontal">Safeguards</a>
-                                        <ul class="sub-menu" aria-expanded="true">
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
-                            <!-- End here -->
+                            <a href="basicReports.php" class="has-arrow waves-effect" key="t-vertical">Basic Livelihood</a>
+                            <ul class="sub-menu" aria-expanded="true">
+                            </ul>
                         </li>
 
                         <li>
-                           <!-- Start here --> 
-                           <li>
-                                <a href="javascript: void(0);" class="has-arrow waves-effect">
-                                    <i class="bx bx-line-chart"></i>
-                                    <span key="t-layouts">Enhanced </span>
-                                </a>
-                                <ul class="sub-menu" aria-expanded="true">
-                                    <li>
-                                        <a href="cimis-page-coming-soon.php" class="has-arrow" key="t-vertical">Joint Skill Grps</a>
-                                        <ul class="sub-menu" aria-expanded="true">
-                                        </ul>
-                                    </li>
-
-                                    <li>
-                                        <a href="cimis-page-coming-soon.php" class="has-arrow" key="t-horizontal">Youth Support</a>
-                                        <ul class="sub-menu" aria-expanded="true">
-                                        </ul>
-                                    </li>
-
-                                    <li>
-                                        <a href="cimis-page-coming-soon.php" class="has-arrow" key="t-horizontal">LESP</a>
-                                        <ul class="sub-menu" aria-expanded="true">
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="cimis-page-coming-soon.php" class="has-arrow" key="t-horizontal">Production VC</a>
-                                        <ul class="sub-menu" aria-expanded="true">
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="cimis-page-coming-soon.php" class="has-arrow" key="t-horizontal">Coop Devt</a>
-                                        <ul class="sub-menu" aria-expanded="true">
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
-                            <!-- End here -->
+                            <a href="enhancedReports.php" class="has-arrow" key="t-horizontal">Enhanced Livelihood</a>
+                            <ul class="sub-menu" aria-expanded="true">
+                            </ul>
                         </li>
 
                         <li>
-                            <!-- start here -->
-                            <li>
-                                <a href="javascript: void(0);" class="has-arrow waves-effect">
-                                    <i class="bx bx-line-chart"></i>
-                                    <span key="t-layouts">Graduation</span>
-                                </a>
-                                <ul class="sub-menu" aria-expanded="true">
-                                    <li>
-                                        <a href="cimis-page-coming-soon.php" class="has-arrow" key="t-vertical">Beneficiary</a>
-                                        <ul class="sub-menu" aria-expanded="true">
-                                        </ul>
-                                    </li>
-
-                                    <li>
-                                        <a href="cimis-page-coming-soon.php" class="has-arrow" key="t-horizontal">Asset Transfer</a>
-                                        <ul class="sub-menu" aria-expanded="true">
-                                        </ul>
-                                    </li>
-
-                                    <li>
-                                        <a href="cimis-page-coming-soon.php" class="has-arrow" key="t-horizontal">Status</a>
-                                        <ul class="sub-menu" aria-expanded="true">
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
-                            <!-- end Here -->
+                            <a href="graduationReports.php" class="has-arrow" key="t-horizontal">Graduation</a>
+                            <ul class="sub-menu" aria-expanded="true">
+                            </ul>
                         </li>
                     </ul>
                 </li>
+
+                
 
                 <li>
                     <a href="javascript: void(0);" class="waves-effect">
