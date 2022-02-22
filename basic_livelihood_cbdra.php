@@ -105,7 +105,7 @@
                                                                       
                                     
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link" data-bs-toggle="tab" href="#messages-1" role="tab">
+                                        <a class="nav-link" data-bs-toggle="link" href="basicReports.php" role="link">
                                             <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
                                             <span class="d-none d-sm-block">CBDRA Reports</span>
                                         </a>

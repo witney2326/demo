@@ -169,7 +169,8 @@
 
                                                                                                                 
                                                         <div class="col-12">
-                                                            <button type="submit" class="btn btn-primary w-md" name="Submit" value="Submit">Submit</button>
+                                                            <button type="submit" class="btn btn-btn btn-outline-primary w-md" name="Submit" value="Submit">Submit</button>
+                                                            <INPUT TYPE="button" class="btn btn-btn btn-outline-secondary w-md" VALUE="Back" onClick="history.go(-1);">
                                                         </div>
                                                     </form>                                             
                                                     <!-- End Here -->

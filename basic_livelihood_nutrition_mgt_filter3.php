@@ -110,7 +110,7 @@ $ta = $_GET["ta"];
                                     </li>
 
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="link"  href="basic_livelihood_HH_reports.php" role="link">
+                                        <a class="link"  href="basicReports.php" role="link">
                                             <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
                                             <span class="d-none d-sm-block">Nutrition Reports</span>
                                         </a>

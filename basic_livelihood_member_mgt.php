@@ -67,7 +67,7 @@
                                     </li>
                                    
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="link"  href="basic_livelihood_member_reports.php" role="link">
+                                        <a class="link"  href="basicReports.php" role="link">
                                             <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
                                             <span class="d-none d-sm-block">Member Reports</span>
                                         </a>
@@ -159,7 +159,8 @@
 
                                                         
                                                         <div class="col-12">
-                                                            <button type="submit" class="btn btn-primary w-md" name="Submit" value="Submit">Submit</button>
+                                                            <button type="submit" class="btn btn-btn btn-outline-primary w-md" name="Submit" value="Submit">Submit</button>
+                                                            <INPUT TYPE="button" class="btn btn-outline-secondary w-md"  style ="width:120px" VALUE="Back" onClick="history.go(-1);">
                                                         </div>
                                                     </form>                                             
                                                     <!-- End Here -->

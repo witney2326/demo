@@ -130,7 +130,7 @@
                                             <!--start here -->
                                             <div class="card border border-primary">
                                                 <div class="card-header bg-transparent border-primary">
-                                                    <h5 class="my-0 text-primary"><i class="mdi mdi-bullseye-arrow me-3"></i>Household Search Filter</h5>
+                                                    <h5 class="my-0 text-primary">Household Filter</h5>
                                                 </div>
                                                 <div class="card-body">
                                                     <h5 class="card-title mt-0"></h5>
@@ -206,8 +206,8 @@
                                                         
                                                         
                                                         <div class="col-12">
-                                                            <button type="submit" class="btn btn-primary w-md" name="FormSubmit" value="Submit">Submit</button>
-                                                            <INPUT TYPE="button" VALUE="Back" onClick="history.go(-1);">
+                                                            <button type="submit" class="btn btn-btn btn-outline-primary w-md" name="FormSubmit" value="Submit">Submit</button>
+                                                            <INPUT TYPE="button" class="btn btn-btn btn-outline-secondary w-md" VALUE="Back" onClick="history.go(-1);">
                                                         </div>
                                                     </form>                                             
                                                     <!-- End Here -->
@@ -218,7 +218,7 @@
                                                 <div class="col-12">
                                                     <div class="card border border-primary">
                                                     <div class="card-header bg-transparent border-primary">
-                                                        <h5 class="my-0 text-primary"><i class="mdi mdi-bullseye-arrow me-3"></i>Beneficiary Households</h5>
+                                                        <h5 class="my-0 text-primary">Beneficiary Households</h5>
                                                     </div>
                                                     <div class="card-body">
                                                     <h5 class="card-title mt-0"></h5>

@@ -267,7 +267,7 @@
                                                 <th scope="row"></th>
                                                 <td></td>
                                                 <td>Trainer Of Trainer</td>
-                                                <td>Trainers trained</td>female_trainers_trained
+                                                <td>Trainers trained</td>
                                                 <td><?php echo number_format($male_trainers_trained); echo" "; echo 'Male(s)'; echo "; "; echo number_format($female_trainers_trained); echo " "; echo 'Female(s)';?></td>
                                             </tr>
                                             <tr>

@@ -27,17 +27,18 @@
         function drawChart() {
         var data = google.visualization.arrayToDataTable([
         
-        ['District', 'Adopted_Places'],
+        ['Adopted_Places ', 'District'],
         
         <?php 
-            $select_query = "SELECT tbldistrict.DistrictName as District, count(cluster) Adopted_Places
+            $select_query = "SELECT tbldistrict.DistrictName as District, count(cluster) as Adopted_Places
             FROM tbladoptplace 
             inner join tbldistrict on tbldistrict.DistrictID = tbladoptplace.districtID
             GROUP BY tbldistrict.DistrictName";
             $query_result = mysqli_query($link,$select_query);
             while($row_val = mysqli_fetch_array($query_result)){
                 
-            echo "['".$row_val['District']."',".$row_val['Adopted_Places']."],";
+            echo "['".$row_val['Adopted_Places']."',".$row_val['District']."],";
+            
             }
         ?>
         
@@ -49,7 +50,7 @@
         var options = {'title':'', 'width':370, 'height':250};
 
         // Display the chart inside the <div> element with id="piechart"
-        var chart = new google.visualization.BarChart(document.getElementById('AdoptedPlaces'));
+        var chart = new google.visualization.ColumnChart(document.getElementById('AdoptedPlaces'));
         chart.draw(data, options);
         }
     </script> 

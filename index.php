@@ -323,7 +323,7 @@ $test = 85;
                                                                         ?>
                                                                         <h4 class="mb-0">
                                                                             <div class="container">
-                                                                                <div class="numberCircle"><?php echo "" . $sum;?></div>
+                                                                                <div class="numberCircle"><?php echo "" . number_format($sum);?></div>
                                                                             </div> 
                                                                         </h4>
                                                             </div>
@@ -441,7 +441,7 @@ $test = 85;
                         <div class = "col-lg-6">
                             <div class="card border border-success">
                                 <div class="card-header bg-transparent border-primary">
-                                    <h6 class="my-0 text-primary">Total: <?php echo $sum;?></h6>
+                                    <h6 class="my-0 text-primary">Total: <?php echo number_format($sum);?></h6>
                                 </div>
                                 <div id="actual_hhs"></div> 
                             </div>
@@ -455,7 +455,7 @@ $test = 85;
                                         $row_val = mysqli_fetch_array($query_result);
                                          $totalM =  $row_val['TotalMembers'];
                                     ?>
-                                    <h5 class="my-0 text-primary">Expected Household Distribution (BL):<?php echo $totalM;?></h5>
+                                    <h5 class="my-0 text-primary">Expected Household Distribution (BL):<?php echo number_format($totalM);?></h5>
                                 </div>
                                 <div id="piechart3"></div> 
                             </div>
