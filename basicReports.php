@@ -83,6 +83,10 @@
         $row = mysqli_fetch_assoc($result); 
         $esmps = $row['esmps'];
 
+        $result = mysqli_query($link, 'SELECT COUNT( planID) AS esmps_with_issues  FROM tblsafeguard_group_plans where (achieved_date > finishdate)'); 
+        $row = mysqli_fetch_assoc($result); 
+        $esmps_with_issues = $row['esmps_with_issues'];
+
 
     ?>
     <!-- ============================================================== -->
@@ -292,6 +296,7 @@
                                                 <td></td>
                                                 <td></td>
                                                 <td>Implimentation Progress</td>
+                                                <td><?php echo number_format($esmps_with_issues);  echo ' ESMP(s) Out of Schedule';  ?></td>
                                             </tr>
                                         </tbody>
                                     </table>

@@ -206,7 +206,7 @@
                                                                 <th>cohort</th>
                                                                 <th>GVH</th>
                                                                 
-                                                                <th>Safeguard Plans & Progress</th>
+                                                                <th>Action</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
