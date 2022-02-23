@@ -158,6 +158,7 @@
                                                                         
                                                                         <th>M</th>
                                                                         <th>F</th>
+                                                                        <th>Mapped for JSG</th>
                                                                         <th>Action On SLG</th>
                                                                         
                                                                     </tr>
@@ -183,6 +184,7 @@
                                                                             
                                                                             echo "<td>".$row["MembersM"]."</td>\n";
                                                                             echo "<td>".$row["MembersF"]."</td>\n";
+                                                                            echo "<td>\t\t</td>\n";
                                                                             
                                                                             echo "<td>
                                                                             <a href=\"../basicSLGview.php?id=".$row['groupID']."\"><i class='far fa-eye' title='View SLG' style='font-size:18px'></i></a>

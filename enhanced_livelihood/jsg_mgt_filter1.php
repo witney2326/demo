@@ -155,10 +155,9 @@
                                                                         <th>SLG code</th>
                                                                         <th>SLG Name</th>
                                                                         <th>cohort</th>
-                                                                        
-                                                                        
                                                                         <th>M</th>
                                                                         <th>F</th>
+                                                                        <th>Mapped for JSG</th>
                                                                         <th>Action On SLG</th>
                                                                         
                                                                     </tr>
@@ -175,23 +174,17 @@
                                                                         while($row = $result_set->fetch_array(MYSQLI_ASSOC))
                                                                         { 
                                                                         echo "<tr>\n";
-                                                                            
-                                                                        
                                                                             echo "<td>".$row["groupID"]."</td>\n";
                                                                             echo "<td>".$row["groupname"]."</td>\n";
                                                                             echo "<td>".$row["cohort"]."</td>\n";
-                                                                            
-                                                                            
                                                                             echo "<td>".$row["MembersM"]."</td>\n";
                                                                             echo "<td>".$row["MembersF"]."</td>\n";
-                                                                            
+                                                                            echo "<td>\t\t</td>\n";
                                                                             echo "<td>
-                                                                            <a href=\"basicSLGview.php?id=".$row['groupID']."\"><i class='far fa-eye' title='View SLG' style='font-size:18px'></i></a>
-                                                                            
-                                                                            <a href=\"basicSLG_iga.php?id=".$row['groupID']."\"><i class='fas fa-balance-scale' title='Add SLG IGAs' style='font-size:18px'></i></a> 
-                                                                            <a href=\"basicSLGAddMember.php?id=".$row['groupID']."\"><i class='fa fa-users' title='Add JSG to SLG' style='font-size:18px'></i></a> 
-                                                                            <a href=\"basicSLGAddMember.php?id=".$row['groupID']."\"><i class='fas fa-user-alt' title='Add Beneficiary to SLG' style='font-size:18px'></i></a> 
-                                                                            
+                                                                                <a href=\"basicSLGview.php?id=".$row['groupID']."\"><i class='far fa-eye' title='View SLG' style='font-size:18px'></i></a>
+                                                                                <a href=\"basicSLG_iga.php?id=".$row['groupID']."\"><i class='fas fa-balance-scale' title='Add SLG IGAs' style='font-size:18px'></i></a> 
+                                                                                <a href=\"basicSLGAddMember.php?id=".$row['groupID']."\"><i class='fa fa-users' title='Add JSG to SLG' style='font-size:18px'></i></a> 
+                                                                                <a href=\"basicSLGAddMember.php?id=".$row['groupID']."\"><i class='fas fa-user-alt' title='Add Beneficiary to SLG' style='font-size:18px'></i></a> 
                                                                             </td>\n";
 
                                                                         echo "</tr>\n";
