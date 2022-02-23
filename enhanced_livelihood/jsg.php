@@ -48,15 +48,9 @@
                             <div class="card-body">
                                 <!-- Nav tabs -->
                                 <ul class="nav nav-pills nav-justified" role="tablist">
+                                    
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link active" data-bs-toggle="tab" href="#home" role="tab">
-                                            <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
-                                            <span class="d-none d-sm-block">Stakeholder Training</span>
-                                        </a>
-                                    </li>
-
-                                    <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link" data-bs-toggle="tab" href="#mapping" role="tab">
+                                        <a class="nav-link active" data-bs-toggle="tab" href="#mapping" role="tab">
                                             <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
                                             <span class="d-none d-sm-block">SLG/Cluster Mapping </span>
                                         </a>
@@ -71,7 +65,7 @@
                                     <li class="nav-item waves-effect waves-light">
                                         <a class="nav-link" data-bs-toggle="tab" href="#jsg" role="tab">
                                             <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
-                                            <span class="d-none d-sm-block">BDS</span>
+                                            <span class="d-none d-sm-block">Business Development Services</span>
                                         </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">
@@ -83,7 +77,7 @@
                                     <li class="nav-item waves-effect waves-light">
                                         <a class="nav-link" data-bs-toggle="tab" href="#cmt" role="tab">
                                             <span class="d-block d-sm-none"><i class="fas fa-cog"></i></span>
-                                            <span class="d-none d-sm-block">Beneficiary Training</span>
+                                            <span class="d-none d-sm-block">Training (Beneficiary & Stakeholder)</span>
                                         </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">
@@ -94,7 +88,7 @@
                                     </li>
                                     
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link" data-bs-toggle="tab" href="#reports" role="tab">
+                                        <a class="nav-link" data-bs-toggle="link" href="enhancedReports.php" role="link">
                                             <span class="d-block d-sm-none"><i class="fas fa-cog"></i></span>
                                             <span class="d-none d-sm-block">Reports</span>
                                         </a>
