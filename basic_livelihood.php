@@ -246,7 +246,7 @@
                                     <li class="nav-item waves-effect waves-light">
                                         <a class="nav-link"  href="basic_livelihood_hh_mgt.php" role="link">
                                             <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
-                                            <span class="d-none d-sm-block">Beneficiary Households</span>
+                                            <span class="d-none d-sm-block">Household Verification</span>
                                         </a>
                                     </li>
                                                                         
@@ -351,13 +351,13 @@
 
                                                                             <p class="text-muted fw-medium">SLGs Formed</p>
                                                                             <?php
-                                                                                        $result = mysqli_query($link, 'SELECT COUNT(groupID) AS value_sum FROM tblgroup WHERE deleted = 0'); 
-                                                                                        $row = mysqli_fetch_assoc($result); 
-                                                                                        $sum = $row['value_sum'];
-                                                                                    ?>
-                                                                                        <div class="container">
-                                                                                            <h4><div class="mb-0"><?php echo "" . $sum;?></div></h4>
-                                                                                        </div>
+                                                                                $result = mysqli_query($link, 'SELECT COUNT(groupID) AS value_sum FROM tblgroup WHERE deleted = 0'); 
+                                                                                $row = mysqli_fetch_assoc($result); 
+                                                                                $sum = $row['value_sum'];
+                                                                            ?>
+                                                                            <div class="container">
+                                                                                <h5><div class="mb-0"><?php echo "" . $sum;?></div></h5>
+                                                                            </div>
                                                                             
                                                                         </div>
                                                                         
@@ -375,6 +375,7 @@
                                                                             <i class='fas fa-user-graduate' style='font-size:24px'></i>
 
                                                                             <p class="text-muted fw-medium">HouseHolds Trained</p>
+                                                                            
                                                                             <h4 class="mb-0">0</h4>
                                                                         </div>
                                                                         
@@ -389,10 +390,15 @@
                                                                 <div class="card-body">
                                                                     <div class="d-flex">
                                                                         <div class="flex-grow-1">
-                                                                            <i class='fas fa-chalkboard-teacher' style='font-size:24px'></i>
-
-                                                                            <p class="text-muted fw-medium">Animators Trained</p>
-                                                                            <h4 class="mb-0">0</h4>
+                                                                            <i class='fas fa-check' style='font-size:20px'></i>
+                                                                            
+                                                                            <p class="text-muted fw-medium">SCT/PWP Verified Households</p>
+                                                                            <?php
+                                                                                $result = mysqli_query($link, 'SELECT COUNT(sppCode) AS value_sum FROM tblbeneficiaries WHERE prog_status_verified = 1'); 
+                                                                                $row = mysqli_fetch_assoc($result); 
+                                                                                $sum_hhs = $row['value_sum'];
+                                                                            ?>
+                                                                            <h5 class="mb-0"><?php echo "" . $sum_hhs;?></h5>
                                                                         </div>
                                                                         
                                                                     </div>

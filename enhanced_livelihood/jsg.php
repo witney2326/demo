@@ -6,6 +6,7 @@
     <title>Joint Skill Groups</title>
     <?php include 'layouts/head.php'; ?>
     <?php include 'layouts/head-style.php'; ?>
+    <?php include 'layouts/config.php'; ?>
 </head>
 
 <?php include 'layouts/body.php'; ?>
@@ -50,16 +51,16 @@
                                 <ul class="nav nav-pills nav-justified" role="tablist">
                                     
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link active" data-bs-toggle="tab" href="#mapping" role="tab">
+                                        <a class="nav-link active" data-bs-toggle="tab" href="#home" role="tab">
                                             <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
-                                            <span class="d-none d-sm-block">SLG/Cluster Mapping </span>
+                                            <span class="d-none d-sm-block">Home </span>
                                         </a>
                                     </li>
 
                                     <li class="nav-item waves-effect waves-light">
                                         <a class="nav-link" data-bs-toggle="link" href="./jsg_formation.php" role="link">
                                             <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
-                                            <span class="d-none d-sm-block">JSG Formation</span>
+                                            <span class="d-none d-sm-block">JSG Mapping & Formation</span>
                                         </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">
@@ -98,9 +99,108 @@
 
                                 <!-- Tab panes -->
                                 <div class="tab-content p-3 text-muted">
-                                    <div class="tab-pane active" id="home-1" role="tabpanel">
+                                    <div class="tab-pane active" id="home" role="tabpanel">
                                         <p class="mb-0">
-                                            
+                                        <div class="row">                       
+                                                <div class="card-header bg-transparent border-primary">
+                                                    <div class="card-group">
+                                                        <div class="card border">
+                                                            <img src="..." class="card-img-top" alt="">
+                                                            <div class="card-body">
+                                                                
+                                                                        <div class="card-body">
+                                                                            <div class="d-flex">
+                                                                                <div class="flex-grow-1">
+                                                                                    <i class='fas fa-house-user' style='font-size:24px'></i>
+                                                                                    <p class="text-muted fw-medium">Households in JSG</p>
+                                                                                    <?php
+                                                                                        $result = mysqli_query($link, 'SELECT sum(no_male) AS total_males FROM tbljsg'); 
+                                                                                        $row = mysqli_fetch_assoc($result); 
+                                                                                        $total_males = $row['total_males'];
+                                                                                        
+                                                                                        $result2 = mysqli_query($link, 'SELECT sum(no_female) AS total_females FROM tbljsg'); 
+                                                                                        $row2 = mysqli_fetch_assoc($result2); 
+                                                                                        $total_females = $row2['total_females'];
+
+                                                                                        $sum = $total_males+$total_females;
+
+                                                                                    ?>
+                                                                                        <h5 class="mb-0">
+                                                                                            <div class="container">
+                                                                                                <div class="mb-0"><?php echo "" . $sum;?></div>
+                                                                                            </div> 
+                                                                                        </h5>
+                                                                                </div>
+                                                                                
+                                                                            </div>
+                                                                        </div>
+                                                                
+                                                            <!-- -->
+                                                            </div>
+                                                        </div>
+                                                        <div class="card border">
+                                                            <img src="..." class="card-img-top" alt="">
+                                                            <div class="card-body">
+                                                                <div class="card-body">
+                                                                    <div class="d-flex">
+                                                                        <div class="flex-grow-1">
+                                                                            <i class='fas fa-users' style='font-size:24px'></i>
+
+                                                                            <p class="text-muted fw-medium">JSGs Formed</p>
+                                                                            <?php
+                                                                                        $result = mysqli_query($link, 'SELECT COUNT(recID) AS total_jsgs FROM tbljsg'); 
+                                                                                        $row = mysqli_fetch_assoc($result); 
+                                                                                        $total_jsgs = $row['total_jsgs'];
+                                                                                    ?>
+                                                                                        <div class="container">
+                                                                                            <h4><div class="mb-0"><?php echo "" . $total_jsgs;?></div></h4>
+                                                                                        </div>
+                                                                            
+                                                                        </div>
+                                                                        
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="card border">
+                                                            <img src="..." class="card-img-top" alt="">
+                                                            <div class="card-body">
+                                                                <div class="card-body">
+                                                                    <div class="d-flex">
+                                                                        <div class="flex-grow-1">
+                                                                            <i class='fas fa-user-graduate' style='font-size:24px'></i>
+
+                                                                            <p class="text-muted fw-medium">JSG Trained</p>
+                                                                            <h4 class="mb-0">0</h4>
+                                                                        </div>
+                                                                        
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="card border">
+                                                            <img src="..." class="card-img-top" alt="">
+                                                            <div class="card-body">
+                                                                <div class="card-body">
+                                                                    <div class="d-flex">
+                                                                        <div class="flex-grow-1">
+                                                                            <i class='fas fa-chalkboard-teacher' style='font-size:24px'></i>
+
+                                                                            <p class="text-muted fw-medium">JSG Linked</p>
+                                                                            <h4 class="mb-0">0</h4>
+                                                                        </div>
+                                                                        
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div> 
+
+                                        
 
                                         </p>
                                     </div>

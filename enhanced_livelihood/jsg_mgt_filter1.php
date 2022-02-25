@@ -2,7 +2,7 @@
 <?php include 'layouts/head-main.php'; ?>
 
 <head>
-    <title>SLG Management</title>
+    <title>JSG Formation</title>
     <?php include 'layouts/head.php'; ?>
     <?php include 'layouts/head-style.php'; ?>
     <?php include 'layouts/config.php'; ?>
@@ -12,6 +12,18 @@
     <!-- Responsive datatable examples -->
     <link href="assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
 
+    <!--Datatable plugin CSS file -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" />
+  
+  <!--jQuery library file -->
+  <script type="text/javascript" 
+      src="https://code.jquery.com/jquery-3.5.1.js">
+  </script>
+
+  <!--Datatable plugin JS library file -->
+  <script type="text/javascript" 
+src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
+  </script>
 </head>
 
 <?php include 'layouts/body.php'; ?>
@@ -150,16 +162,14 @@
                                                             
                                                                 <thead>
                                                                     <tr>
-                                                                        
-                                                                        
                                                                         <th>SLG code</th>
                                                                         <th>SLG Name</th>
                                                                         <th>cohort</th>
                                                                         <th>M</th>
                                                                         <th>F</th>
-                                                                        <th>Mapped for JSG</th>
-                                                                        <th>Action On SLG</th>
-                                                                        
+                                                                        <th>Mapped?</th>
+                                                                        <th>No. JSGs</th>
+                                                                        <th>Action On SLG</th> 
                                                                     </tr>
                                                                 </thead>
 
@@ -173,18 +183,29 @@
                                                                         if ($result_set = $link->query($query)) {
                                                                         while($row = $result_set->fetch_array(MYSQLI_ASSOC))
                                                                         { 
+                                                                            $db_mapped = (string) $row["jsg_mapped"];
+                                                                            if ($db_mapped =='1'){$mapped = 'Yes';}
+                                                                            if ($db_mapped =='0'){$mapped = 'No';}
+
+                                                                            $grp = $row["groupID"];
+
+                                                                            $result1 = mysqli_query($link, "SELECT COUNT(recID) AS value_sum FROM tbljsg WHERE groupID = '$grp'"); 
+                                                                            $row2 = mysqli_fetch_assoc($result1); 
+                                                                            $jsgs = $row2['value_sum'];
+
                                                                         echo "<tr>\n";
                                                                             echo "<td>".$row["groupID"]."</td>\n";
                                                                             echo "<td>".$row["groupname"]."</td>\n";
                                                                             echo "<td>".$row["cohort"]."</td>\n";
                                                                             echo "<td>".$row["MembersM"]."</td>\n";
                                                                             echo "<td>".$row["MembersF"]."</td>\n";
-                                                                            echo "<td>\t\t</td>\n";
+                                                                            echo "<td>\t\t$mapped</td>\n";
+                                                                            echo "<td>\t\t$jsgs</td>\n";
                                                                             echo "<td>
-                                                                                <a href=\"basicSLGview.php?id=".$row['groupID']."\"><i class='far fa-eye' title='View SLG' style='font-size:18px'></i></a>
-                                                                                <a href=\"basicSLG_iga.php?id=".$row['groupID']."\"><i class='fas fa-balance-scale' title='Add SLG IGAs' style='font-size:18px'></i></a> 
-                                                                                <a href=\"basicSLGAddMember.php?id=".$row['groupID']."\"><i class='fa fa-users' title='Add JSG to SLG' style='font-size:18px'></i></a> 
-                                                                                <a href=\"basicSLGAddMember.php?id=".$row['groupID']."\"><i class='fas fa-user-alt' title='Add Beneficiary to SLG' style='font-size:18px'></i></a> 
+                                                                                <a href=\"../basicSLGview.php?id=".$row['groupID']."\"><i class='far fa-eye' title='View SLG' style='font-size:18px'></i></a>                                                                           
+                                                                                <a href=\"view_JSG.php?id=".$row['groupID']."\"><i class='fas fa-balance-scale' title='View JSGs For the Group' style='font-size:18px'></i></a> 
+                                                                                <a onClick=\"javascript: return confirm('Are You Sure You want To Map This Group For JSGs Interventions? ');\" href=\"slg_JSG_Map.php?id=".$row['groupID']."\"><i class='fas fa-stamp' title='Map SLG For JSG Intervention' style='font-size:18px'></i></a>
+                                                                                <a href=\"add_JSG.php?id=".$row['groupID']."&mapped=".$row['jsg_mapped']."\"><i class='fa fa-users' title='Add JSG to SLG' style='font-size:18px'></i></a> 
                                                                             </td>\n";
 
                                                                         echo "</tr>\n";

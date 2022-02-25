@@ -40,20 +40,24 @@ session_start();
         $iga = mysqli_fetch_array($iga_query);// fetch data
         return $iga['name'];
         }
+         
+        $mapped = $_GET["mapped"];
            
         $id = $_GET['id']; // get id through query string
-       $query="select * from tblgroup where groupID='$id'";
-        
-        if ($result_set = $link->query($query)) {
-            while($row = $result_set->fetch_array(MYSQLI_ASSOC))
-            { 
-                $districtID= $row["DistrictID"];
-                $cohort = $row["cohort"];
-                $groupname = $row["groupname"];  
+        $query="select * from tblgroup where groupID='$id'";
+            
+            if ($result_set = $link->query($query)) {
+                while($row = $result_set->fetch_array(MYSQLI_ASSOC))
+                { 
+                    $districtID= $row["DistrictID"];
+                    $cohort = $row["cohort"];
+                    $groupname = $row["groupname"];  
+                }
+                $result_set->close();
             }
-            $result_set->close();
-        }
+        
 
+        
         if(isset($_POST['Submit']))
             { 
             $groupID = $_POST["group_code"];
@@ -149,6 +153,7 @@ session_start();
                                     <div class="col-12">
                                             <input type="hidden" class="form-control" id="group_code" name = "group_code" value="<?php echo $id; ?>" style="max-width:60%;" readonly >    
                                             <input type="hidden" class="form-control" id="district" name="district" value ="<?php echo $districtID ; ?>" style="max-width:30%;">
+                                            <input type="hidden" class="form-control" id="mapped" name="mapped" value ="<?php echo $mapped ; ?>" style="max-width:30%;">
                                     </div>
                                                                         
                                     <div class="col-12">

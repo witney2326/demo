@@ -19,7 +19,7 @@
 <?php		
         $region = $_GET["region"];
          $district = $_GET['district'];
-         $ta = $_GET["ta"];
+         $cw = $_GET["cw"];
 
          function get_rname($link, $rcode)
          {
@@ -42,11 +42,11 @@
          return $grp['groupname'];
          }
  
-         function ta_name($link, $ID)
+         function cw_name($link, $ID)
          {
-         $ta_query = mysqli_query($link,"select TAName from tblta where TAID='$ID'"); // select query
-         $prog = mysqli_fetch_array($ta_query);// fetch data
-         return $prog['TAName'];
+         $cw_query = mysqli_query($link,"select cwName from tblcw where cwID='$ID'"); // select query
+         $prog = mysqli_fetch_array($cw_query);// fetch data
+         return $prog['cwName'];
          }
 
 ?>
@@ -82,208 +82,154 @@
                 </div>
                 <!-- end page title -->
 
-                <div class="row">
-                    
-                        </div>
+                <div class="card border border-primary">
+                    <div class="card-header bg-transparent border-primary">
+                        <h5 class="my-0 text-primary">Household Filter</h5>
                     </div>
-
-                    <div class="col-xl-12">
-                        <div class="card">
-                            <div class="card-body">
-
-                                
-                                <!-- Nav tabs -->
-                                <ul class="nav nav-pills nav-justified" role="tablist">
-                                    
-                                    <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link active" data-bs-toggle="tab" href="#home-1" role="tab">
-                                            <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
-                                            <span class="d-none d-sm-block">Households</span>
-                                        </a>
-                                    </li>
-
-                                    <li class="nav-item waves-effect waves-light">
-                                        <a class="link"  href="basic_livelihood_HH_reports.php" role="link">
-                                            <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
-                                            <span class="d-none d-sm-block">Household Reports</span>
-                                        </a>
-                                    </li>
-                                    
-                                </ul>
-
-                                <!-- Tab panes -->
-                                <div class="tab-content p-3 text-muted">
-
-                                    
-                                    
-
-
-
-                                    <div class="tab-pane active" id="home-1" role="tabpanel">
-                                        <p class="mb-0">
-                                            <!--start here -->
-                                            <div class="card border border-primary">
-                                                <div class="card-header bg-transparent border-primary">
-                                                    <h5 class="my-0 text-primary">Household Filter</h5>
-                                                </div>
-                                                <div class="card-body">
-                                                    <h5 class="card-title mt-0"></h5>
-                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="basic_livelihood_hh_mgt_filter2.php" method="GET">
-                                                        <div class="col-12">
-                                                            <label for="region" class="form-label">Region</label>
-                                                            <div>
-                                                                <select class="form-select" name="region" id="region" required>
-                                                                    <option selected value = "<?php echo $region; ?>"><?php echo get_rname($link,$region);?></option>
-                                                                </select>
-                                                                <div class="invalid-feedback">
-                                                                    Please select a valid Malawi region.
-                                                                </div>
-
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="col-12">
-                                                            <label for="district" class="form-label">District</label>
-                                                            <select class="form-select" name="district" id="district" required>
-                                                                <option selected value = "<?php echo $district ;?>"><?php echo dis_name($link,$district);?></option>
-                                                            </select>
-                                                            <div class="invalid-feedback">
-                                                                Please select a valid Malawi district.
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="col-12">
-                                                            <label for="ta" class="form-label">Traditional Authority</label>
-                                                            <select class="form-select" name="ta" id="ta" required>
-                                                                <option selected value = "<?php $ta; ?>"><?php echo ta_name($link,$ta);?></option>
-                                                            </select>
-                                                            <div class="invalid-feedback">
-                                                                Please select a valid TA.
-                                                            </div>
-                                                        </div>
-
-                                                        
-                                                        
-                                                        <div class="col-12">
-                                                            <button type="submit" class="btn btn-btn btn-outline-primary w-md" name="FormSubmit" value="Submit">Submit</button>
-                                                            <INPUT TYPE="button" class="btn btn-btn btn-outline-secondary w-md" VALUE="Back" onClick="history.go(-1);">
-                                                        </div>
-                                                    </form>                                             
-                                                    <!-- End Here -->
-                                                </div>
-                                            </div>
-
-                                            <div class="row">
-                                                <div class="col-12">
-                                                    <div class="card border border-primary">
-                                                    <div class="card-header bg-transparent border-primary">
-                                                        <h5 class="my-0 text-primary">Beneficiary Households in <?php echo ta_name($link,$_GET['ta']); ?> TA</h5>
-                                                    </div>
-                                                    <div class="card-body">
-                                                    <h5 class="card-title mt-0"></h5>
-                                                        
-                                                            <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
-                                                            
-                                                                <thead>
-                                                                    <tr>                    
-                                                                    <th>hhcode</th>
-                                                                        <th>Programme</th>
-                                                                        <th>Region</th>
-                                                                        <th>District</th>
-                                                                        <th>Group</th> 
-                                                                        <th>Cohort</th>
-                                                                        <th>Approved?</th>                                           
-                                                                        <th>View</th>
-                                                                        <th>Approve</th>
-                                                                    </tr>
-                                                                </thead>
-
-
-                                                                <tbody>
-                                                                    <?Php
-                                                                        $ta = $_GET["ta"];
-                                                                        $query="select * from tblbeneficiaries where TAID = $ta";
-
-                                                                    //Variable $link is declared inside config.php file & used here
-                                                                    
-                                                                    if ($result_set = $link->query($query)) {
-                                                                    while($row = $result_set->fetch_array(MYSQLI_ASSOC))
-                                                                    { 
-                                                                        $region = get_rname($link,$row["regionID"]);
-                                                                        $district = dis_name($link,$row["districtID"]);
-                                                                        $group = grp_name($link,$row["groupID"]);
-                                                                        $prog = prog_name($link, $row["spProg"]);
-
-                                                                        $hhstatus = $row["hhstatus"];
-
-                                                                        if ($row["hhstatus"] == '1')
-                                                                        {
-                                                                            $hhstatus = 'Yes';}
-
-                                                                        if ($row["hhstatus"] == '0')
-                                                                        {
-                                                                            $hhstatus = 'No';}    
-                                                                        
-
-                                                                    echo "<tr>\n";
-                                                                        echo "<td>".$row["sppCode"]."</td>\n";
-                                                                        echo "\t\t<td>$prog</td>\n";
-                                                                        echo "\t\t<td>$region</td>\n";
-                                                                        echo "\t\t<td>$district</td>\n";
-                                                                        echo "\t\t<td>$group</td>\n";
-                                                                        echo "<td>".$row["cohort"]."</td>\n";
-                                                                        echo "\t\t<td>$hhstatus</td>\n";
-                                                                        
-                                                                        
-                                                                        echo "<td> <a href=\"basicSLGMemberedit.php?id=".$row['sppCode']."\"><i class='far fa-eye' title='View Household' style='font-size:18px'></i></a>\n";
-                                                                        echo "";
-                                                                        echo "<td> <a onClick=\"javascript: return confirm('Are You Sure You want To APPROVE This HOUSEHOLD - You Must Be a Supervisor');\" href=\"basicHHStatusApproval.php?id=".$row['sppCode']."\"><i class='far fa-thumbs-up' title='Approve Household' style='font-size:18px'></i></a>\n";
-                                                                       
-                                                                    echo "</tr>\n";
-                                                                    }
-                                                                    $result_set->close();
-                                                                    }                          
-                                                                    ?>
-                                                                </tbody>
-                                                            </table>
-                                                            </p>
-                                                        </div>
-                                                    </div>     
-                                                </div>            
-                                            </div>  
-                                        </p>
+                    <div class="card-body">
+                        <h5 class="card-title mt-0"></h5>
+                        <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="basic_livelihood_hh_mgt_filter4.php" method="GET">
+                            <div class="col-12">
+                                <label for="region" class="form-label">Region</label>
+                                <div>
+                                    <select class="form-select" name="region" id="region" required>
+                                        <option selected value = "<?php echo $region; ?>"><?php echo get_rname($link,$region);?></option>
+                                    </select>
+                                    <div class="invalid-feedback">
+                                        Please select a valid Malawi region.
                                     </div>
-                                    <!-- Here -->
-                                    
-                                    <!-- end here -->
-                                    <!-- start new --> 
-                                    
-                                    <!-- end new -->
-                                    
-                                </div>
 
+                                </div>
                             </div>
-                        </div>
+
+                            <div class="col-12">
+                                <label for="district" class="form-label">District</label>
+                                <select class="form-select" name="district" id="district" required>
+                                    <option selected value = "<?php echo $district ;?>"><?php echo dis_name($link,$district);?></option>
+                                </select>
+                                <div class="invalid-feedback">
+                                    Please select a valid Malawi district.
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <label for="cw" class="form-label">Case Worker</label>
+                                <select class="form-select" name="cw" id="cw" required>
+                                    <option selected value = "<?php $cw; ?>"><?php echo cw_name($link,$cw);?></option>
+                                </select>
+                                
+                            </div>
+
+                            <div class="col-12">
+                                <label for="slg" class="form-label">SL Group</label>
+                                <select class="form-select" name="slg" id="slg" required>
+                                    <option></option>
+                                    <?php                                                           
+                                            $slg_fetch_query = "SELECT groupID,groupname FROM tblgroup where cwID ='$cw'";                                                  
+                                            $result_slg_fetch = mysqli_query($link, $slg_fetch_query);                                                                       
+                                            $i=0;
+                                                while($DB_ROW_slg = mysqli_fetch_array($result_slg_fetch)) {
+                                            ?>
+                                            <option value="<?php echo $DB_ROW_slg['groupID']; ?>">
+                                                <?php echo $DB_ROW_slg['groupname']; ?></option><?php
+                                                $i++;
+                                                    }
+                                        ?>
+                                </select>
+                                <div class="invalid-feedback">
+                                    Please select a valid SL Group.
+                                </div>
+                            </div>
+
+                            
+                            
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-btn btn-outline-primary w-md" name="FormSubmit" value="Submit">Submit</button>
+                                <INPUT TYPE="button" class="btn btn-btn btn-outline-secondary w-md" VALUE="Back" onClick="history.go(-1);">
+                            </div>
+                        </form>                                             
+                        <!-- End Here -->
                     </div>
                 </div>
 
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card border border-primary">
+                        <div class="card-header bg-transparent border-primary">
+                            <h5 class="my-0 text-primary">Beneficiary Households For CW: <?php echo cw_name($link,$_GET['cw']); ?></h5>
+                        </div>
+                        <div class="card-body">
+                        <h5 class="card-title mt-0"></h5>
+                            
+                                <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
+                                
+                                    <thead>
+                                        <tr>                    
+                                            <th>hhcode</th>
+                                            <th>Programme</th>                       
+                                            <th>Group</th> 
+                                            <th>Cohort</th>
+                                            <th>HH checked?</th>
+                                            <th>Verified?</th>
+                                            <th>Approved?</th>                                           
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
 
-                
 
-                    
+                                    <tbody>
+                                        <?Php
+                                            $cw = $_GET["cw"];
+                                            $query="select * from tblbeneficiaries where TAID = $cw";
 
-               
+                                        //Variable $link is declared inside config.php file & used here
+                                        
+                                        if ($result_set = $link->query($query)) {
+                                        while($row = $result_set->fetch_array(MYSQLI_ASSOC))
+                                        { 
+                                            $region = get_rname($link,$row["regionID"]);
+                                            $district = dis_name($link,$row["districtID"]);
+                                            $group = grp_name($link,$row["groupID"]);
+                                            $prog = prog_name($link, $row["spProg"]);
 
+                                            $Hstatus = $row["hhstatus"];
+                                            if ($Hstatus == '1'){$hhstatus = 'Yes';}
+                                            if ($Hstatus == '0'){$hhstatus = 'No';}    
 
-                <!-- Collapse -->
-                
+                                            $Hchecked = $row["prog_status_check"];
+                                            if ($Hchecked == '1'){$hhchecked = 'Yes';}
+                                            if ($Hchecked == '0'){$hhchecked = 'No';}  
 
-                
-                <!-- end row -->
+                                            $Hverified = $row["prog_status_verified"];
+                                            if ($Hverified == '1'){$hhverified = 'Yes';}
+                                            if ($Hverified == '0'){$hhverified = 'No';}  
 
-                
-                <!-- end row -->
-
+                                            
+                                        echo "<tr>\n";
+                                            echo "<td>".$row["sppCode"]."</td>\n";
+                                            echo "\t\t<td>$prog</td>\n";
+                                            echo "\t\t<td>$group</td>\n";
+                                            echo "<td>".$row["cohort"]."</td>\n";
+                                            echo "\t\t<td>$hhchecked</td>\n";
+                                            echo "\t\t<td>$hhverified</td>\n";
+                                            echo "\t\t<td>$hhstatus</td>\n";
+                                            echo "<td> 
+                                                <a href=\"basicSLGMemberedit.php?id=".$row['sppCode']."\"><i class='far fa-eye' title='View Household' style='font-size:18px'></i></a>
+                                                <a onClick=\"javascript: return confirm('Are You Sure You want To Verify This HOUSEHOLD on SCT Database - Be patient!');\" href=\"basicHHVerificationSCTP.php?id=".$row['sppCode']."\"><i class='fas fa-check' title='Verify Household on SCT List' style='font-size:18px'></i></a>
+                                                <a onClick=\"javascript: return confirm('Are You Sure You want To APPROVE This HOUSEHOLD - You Must Be a Supervisor');\" href=\"basicHHStatusApproval.php?id=".$row['sppCode']."\"><i class='far fa-thumbs-up' title='Approve Household' style='font-size:18px'></i></a>\n
+                                                <td>"; 
+                                        echo "</tr>\n";
+                                        }
+                                        $result_set->close();
+                                        }                          
+                                        ?>
+                                    </tbody>
+                                </table>
+                                
+                            </div>
+                        </div>     
+                    </div>            
+                </div>  
             </div> <!-- container-fluid -->
         </div>
         <!-- End Page-content -->

@@ -6,7 +6,8 @@
     <title>Enhanced Livelihood</title>
     <?php include 'layouts/head.php'; ?>
     <?php include 'layouts/head-style.php'; ?>
-    <?php include 'layouts/config.php'; ?>
+    <?php include './layouts/config.php'; ?>
+    
 
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script> <!-- for pie chart -->
 

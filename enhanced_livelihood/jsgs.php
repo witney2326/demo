@@ -134,28 +134,7 @@
                                                 </div>
                                             </div>
 
-                                            <div class="col-12">
-                                                <label for="ta" class="form-label">Traditional Authority</label>
-                                                <select class="form-select" name="ta" id="ta" required disabled>
-                                                    <option></option>
-                                                    <?php                                                           
-                                                            $ta_fetch_query = "SELECT TAName FROM tblta";                                                  
-                                                            $result_ta_fetch = mysqli_query($link, $ta_fetch_query);                                                                       
-                                                            $i=0;
-                                                                while($DB_ROW_ta = mysqli_fetch_array($result_ta_fetch)) {
-                                                            ?>
-                                                            <option>
-                                                                <?php echo $DB_ROW_ta["TAName"]; ?></option><?php
-                                                                $i++;
-                                                                    }
-                                                        ?>
-                                                </select>
-                                                <div class="invalid-feedback">
-                                                    Please select a valid TA.
-                                                </div>
-                                            </div>
-
-                                            
+                                                                                        
                                             <div class="col-12">
                                                 <button type="submit" class="btn btn-btn btn-outline-primary w-md" name="Submit" value="Submit">Submit</button>
                                                 <INPUT TYPE="button" class="btn btn-btn btn-outline-secondary w-md" VALUE="Back" onClick="history.go(-1);">
@@ -182,7 +161,7 @@
                                                             <th>JSG code</th>
                                                             <th>JSG Name</th>
                                                             <th>District</th>
-                                                            <th>SLG/Cluster Name</th>
+                                                            <th>SLG/Cluster ID</th>
                                                             <th>Action</th>
                                                         </tr>
                                                     </thead>
@@ -193,17 +172,18 @@
                                                             if ($result_set = $link->query($query)) {
                                                             while($row = $result_set->fetch_array(MYSQLI_ASSOC))
                                                             { 
+                                                                $disname = (string) dis_name($link,$row["districtID"]);
                                                             echo "<tr>\n";
                                                                 
                                                                 echo "<td>".$row["recID"]."</td>\n";
                                                                 echo "<td>".$row["jsg_name"]."</td>\n";
-                                                                echo "<td>".$row["districtID"]."</td>\n";
+                                                                echo "<td>\t\t$disname</td>\n";
                                                                 echo "<td>".$row["groupID"]."</td>\n";
                                                                 
                                                                 echo "<td>
                                                                     <a href=\"basicCLSview.php?id=".$row['groupID']."\"><i class='far fa-eye' title='View JSG' style='font-size:18px'></i></a>
-                                                                    <a href=\"basicCLSedit.php?id=".$row['groupID']."\"><i class='far fa-edit' title='Edit JSG Details' style='font-size:18px'></i></a>
-                                                                    <a href=\"basicCLSdelete.php?id=".$row['groupID']."\"><i class='far fa-trash-alt' title='Delete JSG' style='font-size:18px'></i></a>    
+                                                                    <a href=\".php?id=".$row['groupID']."\"><i class='far fa-edit' title='Edit JSG Details' style='font-size:18px'></i></a>
+                                                                    <a href=\".php?id=".$row['groupID']."\"><i class='far fa-trash-alt' title='Delete JSG' style='font-size:18px'></i></a>    
                                                                 </td>\n";
 
                                                             echo "</tr>\n";

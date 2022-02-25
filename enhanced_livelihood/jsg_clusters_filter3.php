@@ -148,14 +148,12 @@
                                                             
                                                                 <thead>
                                                                     <tr>
-                                                                        
-                                                                        
                                                                         <th>Cluster code</th>
                                                                         <th>Cluster Name</th>
                                                                         <th>cohort</th>
-                                                                        <th>GVH</th>
-                                                                        <th>SP Programme</th>
-                                                                        <th>Action</th>
+                                                                        <th>Mapped?</th>
+                                                                        <th>No. JSGs</th>
+                                                                        <th>Action On SLG</th>
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
@@ -167,20 +165,27 @@
                                                                         if ($result_set = $link->query($query)) {
                                                                         while($row = $result_set->fetch_array(MYSQLI_ASSOC))
                                                                         { 
+                                                                            $db_mapped = (string) $row["jsg_mapped"];
+                                                                            if ($db_mapped =='1'){$mapped = 'Yes';}
+                                                                            if ($db_mapped =='0'){$mapped = 'No';}
+
+                                                                            $cls = $row["ClusterID"];
+
+                                                                            $result1 = mysqli_query($link, "SELECT COUNT(recID) AS value_sum FROM tbljsg WHERE groupID = '$cls'"); 
+                                                                            $row2 = mysqli_fetch_assoc($result1); 
+                                                                            $jsgs = $row2['value_sum'];
+
                                                                         echo "<tr>\n";
-                                                                            
-                                                                        
                                                                             echo "<td>".$row["ClusterID"]."</td>\n";
                                                                             echo "<td>".$row["ClusterName"]."</td>\n";
                                                                             echo "<td>".$row["cohort"]."</td>\n";                                                                            
-                                                                            echo "<td>".$row["gvhID"]."</td>\n";
-                                                                            echo "<td>".$row["programID"]."</td>\n";
+                                                                            echo "<td>\t\t$mapped</td>\n";
+                                                                            echo "<td>\t\t$jsgs</td>\n";
                                                                             
                                                                             echo "<td>
-                                                                                <a href=\"basicCLSview.php?id=".$row['ClusterID']."\"><i class='far fa-eye' title='View Cluster' style='font-size:18px'></i></a>
-                                                                                <a href=\"basicCLSedit.php?id=".$row['ClusterID']."\"><i class='far fa-edit' title='Edit Cluster Details' style='font-size:18px'></i></a>
-                                                                                <a href=\"add_JSG_clusters.php?id=".$row['ClusterID']."\"><i class='fa fa-users' title='Add JSG to SLG' style='font-size:18px'></i></a> 
-                                                                                <a href=\"basicCLSdelete.php?id=".$row['ClusterID']."\"><i class='far fa-trash-alt' title='Delete Cluster' style='font-size:18px'></i></a>    
+                                                                                <a href=\"view_JSG.php?id=".$row['ClusterID']."\"><i class='fas fa-balance-scale' title='View JSGs For the Cluster' style='font-size:18px'></i></a> 
+                                                                                <a onClick=\"javascript: return confirm('Are You Sure You want To Map This Cluster For JSGs Interventions? ');\" href=\"cls_JSG_Map.php?id=".$row['ClusterID']."\"><i class='fas fa-stamp' title='Map Cluster For JSG Intervention' style='font-size:18px'></i></a>
+                                                                                <a href=\"add_JSG_clusters.php?id=".$row['ClusterID']."\"><i class='fa fa-users' title='Add JSG to Cluster' style='font-size:18px'></i></a>    
                                                                             </td>\n";
 
                                                                         echo "</tr>\n";

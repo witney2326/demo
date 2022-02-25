@@ -17,36 +17,45 @@
 <?php include 'layouts/body.php'; ?>
 
 <?php		
-    $region = $_GET["region"]; 
-    $district = $_GET['district'];
+        $region = $_GET['region'];
+         $district = $_GET['district'];
+         $cw = $_GET['cw'];
+         $slg = $_GET['slg'];
+
+         function get_rname($link, $rcode)
+         {
+         $rg_query = mysqli_query($link,"select name from tblregion where regionID='$rcode'"); // select query
+         $rg = mysqli_fetch_array($rg_query);// fetch data
+         return $rg['name'];
+         }
      
-    function get_rname($link, $rcode)
-    {
-    $rg_query = mysqli_query($link,"select name from tblregion where regionID='$rcode'"); // select query
-    $rg = mysqli_fetch_array($rg_query);// fetch data
-    return $rg['name'];
-    }
+         function dis_name($link, $disID)
+         {
+         $dis_query = mysqli_query($link,"select DistrictName from tbldistrict where DistrictID='$disID'"); // select query
+         $dis = mysqli_fetch_array($dis_query);// fetch data
+         return $dis['DistrictName'];
+         }
+ 
+         function grp_name($link, $grpID)
+         {
+         $grp_query = mysqli_query($link,"select groupname from tblgroup where groupID='$grpID'"); // select query
+         $grp = mysqli_fetch_array($grp_query);// fetch data
+         return $grp['groupname'];
+         }
+ 
+         function cw_name($link, $ID)
+         {
+         $cw_query = mysqli_query($link,"select cwName from tblcw where cwID='$ID'"); // select query
+         $prog = mysqli_fetch_array($cw_query);// fetch data
+         return $prog['cwName'];
+         }
 
-    function dis_name($link, $disID)
-    {
-    $dis_query = mysqli_query($link,"select DistrictName from tbldistrict where DistrictID='$disID'"); // select query
-    $dis = mysqli_fetch_array($dis_query);// fetch data
-    return $dis['DistrictName'];
-    }
-
-    function grp_name($link, $grpID)
-    {
-    $grp_query = mysqli_query($link,"select groupname from tblgroup where groupID='$grpID'"); // select query
-    $grp = mysqli_fetch_array($grp_query);// fetch data
-    return $grp['groupname'];
-    }
-
-    function prog_name($link, $progID)
-    {
-    $prog_query = mysqli_query($link,"select progName from tblspp where progID='$progID'"); // select query
-    $prog = mysqli_fetch_array($prog_query);// fetch data
-    return $prog['progName'];
-    }
+         function prog_name($link, $progID)
+         {
+         $prog_query = mysqli_query($link,"select progName from tblspp where progID='$progID'"); // select query
+         $prog = mysqli_fetch_array($prog_query);// fetch data
+         return $prog['progName'];
+         }
 
 ?>
 
@@ -55,6 +64,9 @@
 
     <?php include 'layouts/menu.php'; ?>
 
+    <!-- ============================================================== -->
+    <!-- Start right Content here -->
+    <!-- ============================================================== -->
     <div class="main-content">
 
         <div class="page-content">
@@ -76,15 +88,15 @@
                         </div>
                     </div>
                 </div>
-                
-                <!--start here -->
+                <!-- end page title -->
+
                 <div class="card border border-primary">
                     <div class="card-header bg-transparent border-primary">
                         <h5 class="my-0 text-primary">Household Filter</h5>
                     </div>
                     <div class="card-body">
                         <h5 class="card-title mt-0"></h5>
-                        <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="basic_livelihood_hh_mgt_filter3.php" method="GET">
+                        <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="basic_livelihood_hh_mgt_filter4.php" method="GET">
                             <div class="col-12">
                                 <label for="region" class="form-label">Region</label>
                                 <div>
@@ -97,54 +109,26 @@
                             <div class="col-12">
                                 <label for="district" class="form-label">District</label>
                                 <select class="form-select" name="district" id="district" required>
-                                    <option selected value = "<?php echo $district; ?>"><?php echo dis_name($link,$district);?></option>
+                                    <option selected value = "<?php echo $district ;?>"><?php echo dis_name($link,$district);?></option>
                                 </select>
                             </div>
 
                             <div class="col-12">
                                 <label for="cw" class="form-label">Case Worker</label>
-                                <select class="form-select" name="cw" id="cw" required >
-                                    <option></option>
-                                    <?php                                                           
-                                            $cw_fetch_query = "SELECT cwID,cwName FROM tblcw where districtID = '$district'";                                                  
-                                            $result_cw_fetch = mysqli_query($link, $cw_fetch_query);                                                                       
-                                            $i=0;
-                                                while($DB_ROW_cw = mysqli_fetch_array($result_cw_fetch)) {
-                                            ?>
-                                            <option value="<?php echo $DB_ROW_cw["cwID"]; ?>">
-                                                <?php echo $DB_ROW_cw["cwName"]; ?></option><?php
-                                                $i++;
-                                                    }
-                                        ?>
+                                <select class="form-select" name="cw" id="cw" required>
+                                    <option selected value = "<?php $cw; ?>"><?php echo cw_name($link,$cw);?></option>
                                 </select>
-                                <div class="invalid-feedback">
-                                    Please select a valid Case Worker.
-                                </div>
                             </div>
 
                             <div class="col-12">
                                 <label for="slg" class="form-label">SL Group</label>
-                                <select class="form-select" name="slg" id="slg" required disabled>
-                                    <option></option>
-                                    <?php                                                           
-                                            $slg_fetch_query = "SELECT groupID,groupname FROM tblcw";                                                  
-                                            $result_slg_fetch = mysqli_query($link, $slg_fetch_query);                                                                       
-                                            $i=0;
-                                                while($DB_ROW_slg = mysqli_fetch_array($result_slg_fetch)) {
-                                            ?>
-                                            <option value="<?php echo $DB_ROW_slg["groupID"]; ?>">
-                                                <?php echo $DB_ROW_slg["groupname"]; ?></option><?php
-                                                $i++;
-                                                    }
-                                        ?>
+                                <select class="form-select" name="slg" id="slg" required>
+                                    <option selected value="<?php $slg;?>"><?php echo grp_name($link,$slg);?></option>
                                 </select>
-                                <div class="invalid-feedback">
-                                    Please select a valid SL Group.
-                                </div>
                             </div>
 
                             <div class="col-12">
-                                <button type="submit" class="btn btn-btn btn-outline-primary w-md" name="FormSubmit" value="Submit">Submit</button>
+                                <button type="submit" class="btn btn-btn btn-outline-primary w-md" name="FormSubmit" value="Submit" disabled>Submit</button>
                                 <INPUT TYPE="button" class="btn btn-btn btn-outline-secondary w-md" VALUE="Back" onClick="history.go(-1);">
                             </div>
                         </form>                                             
@@ -156,10 +140,11 @@
                     <div class="col-12">
                         <div class="card border border-primary">
                         <div class="card-header bg-transparent border-primary">
-                            <h5 class="my-0 text-primary">Beneficiary Households in <?php echo dis_name($link,$_GET['district']); ?> District</h5>
+                            <h5 class="my-0 text-primary">Beneficiary Households For SLG: <?php echo grp_name($link,$slg); ?></h5>
                         </div>
-                            <div class="card-body">
-
+                        <div class="card-body">
+                        <h5 class="card-title mt-0"></h5>
+                            
                                 <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
                                 
                                     <thead>
@@ -178,8 +163,8 @@
 
                                     <tbody>
                                         <?Php
-                                            $district = $_GET["district"];
-                                            $query="select * from tblbeneficiaries where DistrictID = $district";
+                                            $slg = $_GET['slg'];
+                                            $query="select * from tblbeneficiaries where groupID = '$slg'";
 
                                         //Variable $link is declared inside config.php file & used here
                                         
@@ -215,7 +200,7 @@
                                             echo "<td> 
                                                 <a href=\"basicSLGMemberedit.php?id=".$row['sppCode']."\"><i class='far fa-eye' title='View Household' style='font-size:18px'></i></a>
                                                 <a onClick=\"javascript: return confirm('Are You Sure You want To Verify This HOUSEHOLD on SCT Database - Be patient!');\" href=\"basicHHVerificationSCTP.php?id=".$row['sppCode']."\"><i class='fas fa-check' title='Verify Household on SCT List' style='font-size:18px'></i></a>
-                                                <a onClick=\"javascript: return confirm('Are You Sure You want To APPROVE This HOUSEHOLD - You Must Be a Supervisor');\" href=\"basicHHStatusApproval.php?id=".$row['sppCode']."\"><i class='far fa-thumbs-up' title='Approve Household' style='font-size:18px'></i></a>
+                                                <a onClick=\"javascript: return confirm('Are You Sure You want To APPROVE This HOUSEHOLD - You Must Be a Supervisor');\" href=\"basicHHStatusApproval.php?id=".$row['sppCode']."\"><i class='far fa-thumbs-up' title='Approve Household' style='font-size:18px'></i></a>\n
                                                 <td>"; 
                                         echo "</tr>\n";
                                         }
@@ -229,7 +214,6 @@
                         </div>     
                     </div>            
                 </div>  
-
             </div> <!-- container-fluid -->
         </div>
         <!-- End Page-content -->

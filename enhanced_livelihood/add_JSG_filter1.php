@@ -51,6 +51,7 @@ session_start();
         $buscat = $_GET['buscat']; // get id through query string
        $district = $_GET["district"];
        $groupID = $_GET["group_code"];
+       $mapped = $_GET["mapped"];
        
 
        $query="select * from tblgroup where groupID='$groupID'";
@@ -225,6 +226,13 @@ session_start();
                                                 <input type="text" class="form-control" id="females" name="females" value ="" style="max-width:30%;">
                                             </div>
                                         </div>
+                                        <div class="row mb-2">
+                                            <label for="females" class="col-sm-3 col-form-label">Group Mapped?</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" id="mapped" name="mapped" value ="<?php echo $mapped;?>" readonly style="max-width:30%;">
+                                            </div>
+                                        </div>
+
 
                                         <div class="row justify-content-end">
                                             <div class="col-sm-9">

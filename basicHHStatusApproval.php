@@ -18,17 +18,34 @@
         include "layouts/config.php"; // Using database connection file here     
         
         $Rec_ID = $_GET['id']; 
+
+        $query="select prog_status_check,prog_status_verified,hhstatus from tblbeneficiaries where sppCode='$Rec_ID'";
+        
+        if ($result_set = $link->query($query)) {
+            while($row = $result_set->fetch_array(MYSQLI_ASSOC))
+            { $prog_status_check= $row["prog_status_check"];$prog_status_verified = $row["prog_status_verified"];$hhstatus = $row["hhstatus"];}
+            $result_set->close();
+        }
  
-            
-        $sql = mysqli_query($link,"update tblbeneficiaries  SET hhstatus = '1' where sppCode = '$Rec_ID'");
-                
-        if ($sql) {
+        if (($prog_status_check =='1') && ($prog_status_verified =='1') && ($hhstatus == '0'))
+        {
+            $sql = mysqli_query($link,"update tblbeneficiaries  SET hhstatus = '1' where sppCode = '$Rec_ID'");
+                    
+            if ($sql) {
+                echo '<script type="text/javascript">'; 
+                echo 'alert("Household Approved successfully !");'; 
+                echo 'window.location.href = "basic_livelihood_hh_mgt.php";';
+                echo '</script>';
+            } else {
+                echo "Error: " . $sql . ":-" . mysqli_error($link);
+            }
+        }
+        else
+        {
             echo '<script type="text/javascript">'; 
-            echo 'alert("Household Approved successfully !");'; 
+            echo 'alert("Household Already Approved OR Household is (SCT/CSPWP) Unverified !");'; 
             echo 'window.location.href = "basic_livelihood_hh_mgt.php";';
             echo '</script>';
-        } else {
-            echo "Error: " . $sql . ":-" . mysqli_error($link);
         }
         mysqli_close($link);
             
