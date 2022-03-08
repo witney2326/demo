@@ -330,7 +330,7 @@
                                                                                     ?>
                                                                                         <h5 class="mb-0">
                                                                                             <div class="container">
-                                                                                                <div class="mb-0"><?php echo "" . $sum;?></div>
+                                                                                                <div class="mb-0"><?php echo "" . number_format($sum);?></div>
                                                                                             </div> 
                                                                                         </h5>
                                                                                 </div>
@@ -356,7 +356,7 @@
                                                                                 $sum = $row['value_sum'];
                                                                             ?>
                                                                             <div class="container">
-                                                                                <h5><div class="mb-0"><?php echo "" . $sum;?></div></h5>
+                                                                                <h5><div class="mb-0"><?php echo "" . number_format($sum);?></div></h5>
                                                                             </div>
                                                                             
                                                                         </div>
@@ -398,7 +398,7 @@
                                                                                 $row = mysqli_fetch_assoc($result); 
                                                                                 $sum_hhs = $row['value_sum'];
                                                                             ?>
-                                                                            <h5 class="mb-0"><?php echo "" . $sum_hhs;?></h5>
+                                                                            <h5 class="mb-0"><?php echo "" . number_format($sum_hhs);?></h5>
                                                                         </div>
                                                                         
                                                                     </div>

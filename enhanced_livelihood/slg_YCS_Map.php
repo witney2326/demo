@@ -20,12 +20,12 @@
         $Rec_ID = $_GET['id']; 
  
             
-        $sql = mysqli_query($link,"update tblgroup  SET jsg_mapped = '1' where groupID = '$Rec_ID'");
+        $sql = mysqli_query($link,"update tblgroup  SET ycs_mapped = '1' where groupID = '$Rec_ID'");
                 
         if ($sql) {
             echo '<script type="text/javascript">'; 
-            echo 'alert("SLG Mapped successfully For JSG Interventions !");'; 
-            echo 'window.location.href = "jsg_formation.php";';
+            echo 'alert("SLG Mapped successfully For YCS Interventions !");'; 
+            echo 'window.location.href = "ycs_identification.php";';
             echo '</script>';
         } else {
             echo "Error: " . $sql . ":-" . mysqli_error($link);
