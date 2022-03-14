@@ -374,25 +374,7 @@
                                             <!-- end here row1 -->
 
                                             <!-- pie chart -->
-                                            <div class = "row">
-                                                
-                                                <div class = "col-lg-6">
-                                                    <div class="card border border-success">
-                                                        <div class="card-header bg-transparent border-primary">
-                                                            <h5 class="my-0 text-secondary">Youth Linkage Distribution</h5>
-                                                        </div>
-                                                        <div id="AdoptedPlaces"></div> 
-                                                    </div>
-                                                </div>
-                                                <div class = "col-lg-6">
-                                                    <div class="card border border-success">
-                                                        <div class="card-header bg-transparent border-primary">
-                                                            <h5 class="my-0 text-primary">Value Chain Distribution</h5>
-                                                        </div>
-                                                        <div id="barchart"></div> 
-                                                    </div>
-                                                </div>   
-                                            </div> 
+                                            
                                         </p>
                                     </div>
                                     <div class="tab-pane" id="profile-1" role="tabpanel">

@@ -109,9 +109,16 @@
                                     </li>
 
                                     <li class="nav-item waves-effect waves-light">
+                                        <a class="nav-link" data-bs-toggle="tab" href="#clusters" role="tab">
+                                            <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
+                                            <span class="d-none d-sm-block">Cluster Assesment</span>
+                                        </a>
+                                    </li>
+
+                                    <li class="nav-item waves-effect waves-light">
                                         <a class="nav-link" data-bs-toggle="tab" href="#home-1" role="tab">
                                             <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
-                                            <span class="d-none d-sm-block">Beneficiary Registration</span>
+                                            <span class="d-none d-sm-block">Beneficiary Assesment</span>
                                         </a>
                                     </li>
 

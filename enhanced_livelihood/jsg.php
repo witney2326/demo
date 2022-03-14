@@ -101,7 +101,7 @@
                                 <div class="tab-content p-3 text-muted">
                                     <div class="tab-pane active" id="home" role="tabpanel">
                                         <p class="mb-0">
-                                        <div class="row">                       
+                                            <div class="row">                       
                                                 <div class="card-header bg-transparent border-primary">
                                                     <div class="card-group">
                                                         <div class="card border">
@@ -199,8 +199,6 @@
                                                     </div>
                                                 </div>
                                             </div> 
-
-                                        
 
                                         </p>
                                     </div>
