@@ -110,13 +110,13 @@
                     </a>
                     <ul class="sub-menu" aria-expanded="true">
                         <li>
-                            <a href="basic_livelihood.php" class="has-arrow" key="t-vertical">Basic Livelihood</a>
+                            <a href="../basic_livelihood.php" class="has-arrow" key="t-vertical">Basic Livelihood</a>
                             <ul class="sub-menu" aria-expanded="true">
                             </ul>
                         </li>
 
                         <li>
-                            <a href="enhanced_livelihood.php" class="has-arrow" key="t-horizontal">Enhanced Livelihood</a>
+                            <a href="../enhanced_livelihood/enhanced_livelihood.php" class="has-arrow" key="t-horizontal">Enhanced Livelihood</a>
                             <ul class="sub-menu" aria-expanded="true">
                             </ul>
                         </li>

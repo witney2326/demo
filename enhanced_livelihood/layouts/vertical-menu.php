@@ -110,7 +110,7 @@
                     </a>
                     <ul class="sub-menu" aria-expanded="true">
                         <li>
-                            <a href="basic_livelihood.php" class="has-arrow" key="t-vertical">Basic Livelihood</a>
+                            <a href="../basic_livelihood.php" class="has-arrow" key="t-vertical">Basic Livelihood</a>
                             <ul class="sub-menu" aria-expanded="true">
                             </ul>
                         </li>
@@ -122,7 +122,7 @@
                         </li>
 
                         <li>
-                            <a href="graduation/graduation.php" class="has-arrow" key="t-horizontal">Graduation</a>
+                            <a href="../graduation/graduation.php" class="has-arrow" key="t-horizontal">Graduation</a>
                             <ul class="sub-menu" aria-expanded="true">
                             </ul>
                         </li>
@@ -137,7 +137,7 @@
                     <ul class="sub-menu" aria-expanded="true">
                     
                         <li>
-                            <a href="basicReports.php" class="has-arrow waves-effect" key="t-vertical">Basic Livelihood</a>
+                            <a href="../basicReports.php" class="has-arrow waves-effect" key="t-vertical">Basic Livelihood</a>
                             <ul class="sub-menu" aria-expanded="true">
                             </ul>
                         </li>

@@ -383,22 +383,7 @@
                                                                 <!-- pie chart -->
                                                                 <div class = "row">
                                                                     
-                                                                    <div class = "col-lg-6">
-                                                                        <div class="card border border-success">
-                                                                            <div class="card-header bg-transparent border-primary">
-                                                                                <h5 class="my-0 text-primary">Disaster Severity</h5>
-                                                                            </div>
-                                                                            <div id="piechart"></div> 
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class = "col-lg-6">
-                                                                        <div class="card border border-success">
-                                                                            <div class="card-header bg-transparent border-primary">
-                                                                                <h5 class="my-0 text-primary">Savings Mobilisation</h5>
-                                                                            </div>
-                                                                            <div id="barchart"></div> 
-                                                                        </div>
-                                                                    </div>   
+                                                                    
                                                                 </div> 
 
                                                             </p>

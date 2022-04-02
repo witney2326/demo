@@ -84,7 +84,7 @@
 
                                     <div class="card-body">
                                         <h5 class="card-title mt-0"></h5>
-                                        <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="jsgs_filter1.php" method ="GET" >
+                                        <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="youths_filter1.php" method ="GET" >
                                             <div class="col-12">
                                                 <label for="region" class="form-label">Region</label>
                                                 
@@ -149,7 +149,7 @@
                                     <div class="col-12">
                                         <div class="card border border-primary">
                                         <div class="card-header bg-transparent border-primary">
-                                            <h5 class="my-0 text-primary">Joint Skill Groups</h5>
+                                            <h5 class="my-0 text-primary">Youths in Youth Challenge Support</h5>
                                         </div>
                                         <div class="card-body">
                                         <h7 class="card-title mt-0"></h7>
@@ -158,32 +158,34 @@
                                                 
                                                     <thead>
                                                         <tr>
-                                                            <th>JSG code</th>
-                                                            <th>JSG Name</th>
+                                                            <th>Rec ID</th>
+                                                            <th>HH code</th>
+                                                            <th>Name</th>
                                                             <th>District</th>
-                                                            <th>SLG/Cluster ID</th>
+                                                            <th>Group ID</th>
                                                             <th>Action</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
                                                         <?Php
-                                                            $query="select * from tbljsg";
+                                                            $query="select * from tblycs";
                                                             
                                                             if ($result_set = $link->query($query)) {
                                                             while($row = $result_set->fetch_array(MYSQLI_ASSOC))
                                                             { 
                                                                 $disname = (string) dis_name($link,$row["districtID"]);
+
                                                             echo "<tr>\n";
-                                                                
                                                                 echo "<td>".$row["recID"]."</td>\n";
-                                                                echo "<td>".$row["jsg_name"]."</td>\n";
+                                                                echo "<td>".$row["hh_code"]."</td>\n";
+                                                                echo "<td>".$row["beneficiary"]."</td>\n";
                                                                 echo "<td>\t\t$disname</td>\n";
                                                                 echo "<td>".$row["groupID"]."</td>\n";
                                                                 
                                                                 echo "<td>
-                                                                    <a href=\"basicCLSview.php?id=".$row['groupID']."\"><i class='far fa-eye' title='View JSG' style='font-size:18px'></i></a>
-                                                                    <a href=\".php?id=".$row['groupID']."\"><i class='far fa-edit' title='Edit JSG Details' style='font-size:18px'></i></a>
-                                                                    <a href=\".php?id=".$row['groupID']."\"><i class='far fa-trash-alt' title='Delete JSG' style='font-size:18px'></i></a>    
+                                                                    <a href=\"basicCLSview.php?id=".$row['recID']."\"><i class='far fa-eye' title='View JSG' style='font-size:18px'></i></a>
+                                                                    <a href=\".php?id=".$row['recID']."\"><i class='far fa-edit' title='Edit JSG Details' style='font-size:18px'></i></a>
+                                                                    <a href=\".php?id=".$row['recID']."\"><i class='far fa-trash-alt' title='Delete JSG' style='font-size:18px'></i></a>    
                                                                 </td>\n";
 
                                                             echo "</tr>\n";

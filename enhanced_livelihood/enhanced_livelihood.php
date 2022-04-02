@@ -291,7 +291,7 @@
                                                                                     <i class='fas fa-house-user' style='font-size:24px'></i>
                                                                                     <p class="text-muted fw-medium">Youths Linked</p>
                                                                                     <?php
-                                                                                        $result = mysqli_query($link, 'SELECT COUNT(sppCode) AS value_sum FROM tblbeneficiaries'); 
+                                                                                        $result = mysqli_query($link, 'SELECT COUNT(hh_code) AS value_sum FROM tblycs'); 
                                                                                         $row = mysqli_fetch_assoc($result); 
                                                                                         $sum = $row['value_sum'];
                                                                                     ?>
