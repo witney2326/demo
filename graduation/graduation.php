@@ -266,6 +266,12 @@
                                             <span class="d-none d-sm-block">Linkages</span>
                                         </a>
                                     </li>
+                                    <li class="nav-item waves-effect waves-light">
+                                        <a class="nav-link" data-bs-toggle="tab" href="#reports3" role="tab">
+                                            <span class="d-block d-sm-none"><i class="fas fa-cog"></i></span>
+                                            <span class="d-none d-sm-block">Graduation Tracking</span>
+                                        </a>
+                                    </li>
 
                                 </ul>
 
@@ -286,15 +292,20 @@
                                                                                                 <div class="d-flex">
                                                                                                     <div class="flex-grow-1">
                                                                                                     
-                                                                                                        <p class="text-muted fw-medium">Selected HHs</p>
+                                                                                                        <p class="text-muted fw-medium">Selected SLGs</p>
                                                                                                         <?php
-                                                                                                            $result = mysqli_query($link, 'SELECT COUNT(sppCode) AS value_sum FROM tblbeneficiaries'); 
+                                                                                                            $result = mysqli_query($link, 'SELECT COUNT(groupID) AS value_groups FROM tblgroup where grad_status = 1'); 
                                                                                                             $row = mysqli_fetch_assoc($result); 
-                                                                                                            $sum = $row['value_sum'];
+                                                                                                            $sum_groups = $row['value_groups'];
+
+                                                                                                            $result2 = mysqli_query($link, 'SELECT COUNT(ClusterID) AS value_clusters FROM tblcluster where grad_status = 1'); 
+                                                                                                            $row2 = mysqli_fetch_assoc($result2); 
+                                                                                                            $sum_clusters = $row2['value_clusters'];
+
                                                                                                         ?>
                                                                                                             <h5 class="mb-0">
                                                                                                                 <div class="container">
-                                                                                                                    <div class="mb-0"><?php echo "" . $sum;?></div>
+                                                                                                                    <div class="mb-0"><?php echo "" . $sum_groups + $sum_clusters;?></div>
                                                                                                                 </div> 
                                                                                                             </h5>
                                                                                                     </div>
@@ -315,9 +326,9 @@
                                                                                     <div class="card-body">
                                                                                         <div class="d-flex">
                                                                                             <div class="flex-grow-1">
-                                                                                                <p class="text-muted fw-medium">HHs Given Assets</p>
+                                                                                                <p class="text-muted fw-medium">Selected HHs</p>
                                                                                                 <?php
-                                                                                                            $result = mysqli_query($link, 'SELECT COUNT(groupID) AS value_sum FROM tblgroup'); 
+                                                                                                            $result = mysqli_query($link, 'SELECT COUNT(sppCode) AS value_sum FROM tblbeneficiaries where grad_status ="1"'); 
                                                                                                             $row = mysqli_fetch_assoc($result); 
                                                                                                             $sum = $row['value_sum'];
                                                                                                         ?>

@@ -117,62 +117,55 @@
                                 <ul class="nav nav-pills nav-justified" role="tablist">
                                     
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link active" data-bs-toggle="tab" href="#slg_assesment" role="tab">
+                                        <a class="nav-link active " data-bs-toggle="link" href="#home"role="link">
                                             <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
-                                            <span class="d-none d-sm-block">SLG Assesment</span>
+                                            <span class="d-none d-sm-block">Home</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item waves-effect waves-light">
+                                        <a class="nav-link " data-bs-toggle="link" href="../basic_livelihood_meetings.php" role="link">
+                                            <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
+                                            <span class="d-none d-sm-block">Planning Meeting</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item waves-effect waves-light">
+                                        <a class="nav-link" data-bs-toggle="tab" href="#slg_assesment" role="tab">
+                                            <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
+                                            <span class="d-none d-sm-block">SLG Assesment & Verification</span>
                                         </a>
                                     </li>
 
                                     <li class="nav-item waves-effect waves-light">
                                         <a class="nav-link" data-bs-toggle="link" href="graduation_cluster_assesment.php" role="link">
                                             <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
-                                            <span class="d-none d-sm-block">Cluster Assesment</span>
+                                            <span class="d-none d-sm-block">Cluster Assesment & Verification</span>
                                         </a>
                                     </li>
 
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link" data-bs-toggle="tab" href="#ben_assesment" role="tab">
+                                        <a class="nav-link" data-bs-toggle="link" href="graduation_beneficiary_assesment.php" role="link">
                                             <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
-                                            <span class="d-none d-sm-block">Beneficiary Assesment</span>
+                                            <span class="d-none d-sm-block">Beneficiary Assesment & Verification</span>
                                         </a>
                                     </li>
-
-                                    <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link " data-bs-toggle="tab" href="#home-2" role="tab">
-                                            <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
-                                            <span class="d-none d-sm-block">SLG Refresher</span>
-                                        </a>
-                                    </li>
-
                                     <li class="nav-item waves-effect waves-light">
                                         <a class="nav-link " data-bs-toggle="tab" href="#home-2" role="tab">
                                             <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
                                             <span class="d-none d-sm-block">CF Identification</span>
                                         </a>
                                     </li>
-
                                     <li class="nav-item waves-effect waves-light">
                                         <a class="nav-link " data-bs-toggle="tab" href="#home-2" role="tab">
                                             <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
-                                            <span class="d-none d-sm-block">Planning Meeting</span>
+                                            <span class="d-none d-sm-block">Refresher Training</span>
                                         </a>
                                     </li>
-
                                     <li class="nav-item waves-effect waves-light">
                                         <a class="nav-link " data-bs-toggle="tab" href="#home-2" role="tab">
                                             <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
                                             <span class="d-none d-sm-block">AT Sensitization</span>
                                         </a>
-                                    </li>
-
-                                    <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link " data-bs-toggle="tab" href="#home-2" role="tab">
-                                            <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
-                                            <span class="d-none d-sm-block">Selection/Verification</span>
-                                        </a>
-                                    </li>
-
-                                                                        
+                                    </li>                                   
                                 </ul>
 
                                 <!-- Tab panes -->
@@ -181,7 +174,11 @@
                                     
                                     
 
-
+                                    <div class="tab-pane active" id="home" role="tabpanel">
+                                            <p class="mb-0">
+                                                here new
+                                            </p>
+                                    </div>
 
                                     <div class="tab-pane active" id="slg_assesment" role="tabpanel">
                                         <p class="mb-0">
