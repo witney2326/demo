@@ -155,8 +155,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                         <button class="btn btn-primary waves-effect waves-light" type="submit" value="Login">Log In</button>
                                     </div>
 
-                                    <div class="mt-4 text-center">
+                                    <div class="mt-4 text-left">
                                         <a href="auth-recoverpw.php" class="text-muted"><i class="mdi mdi-lock me-1"></i> Forgot your password?</a>
+                                       
+                                    </div>
+                                    <div class="mt-4 text-left">
+                                       
+                                        <a href="auth-register.php" class="text-muted"><i class="mdi mdi-lock me-2"></i> Comsip Staff and No Login Credentials?</a>
                                     </div>
                                 </form>
                             </div>

@@ -111,10 +111,10 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                     <tbody>
                                                         <?Php
                                                             $query="SELECT tbldistrict.DistrictName,COUNT(tblgroup.groupname) as grps, sum(tblgroup.MembersM) as smales, sum(MembersF) as sfemales
-                                                            FROM cimis_sql.tblgroup 
-                                                            INNER JOIN cimis_sql.tblcw on cimis_sql.tblcw.cwID = cimis_sql.tblgroup.cwID 
-                                                            inner join cimis_sql.tblgroupsavings on cimis_sql.tblgroup.groupID = cimis_sql.tblgroupsavings.GroupID
-                                                            inner join cimis_sql.tbldistrict on cimis_sql.tblgroupsavings.DistrictID = cimis_sql.tbldistrict.DistrictID
+                                                            FROM tblgroup 
+                                                            INNER JOIN tblcw on tblcw.cwID = tblgroup.cwID 
+                                                            inner join tblgroupsavings on tblgroup.groupID = tblgroupsavings.GroupID
+                                                            inner join tbldistrict on tblgroupsavings.DistrictID = tbldistrict.DistrictID
                                                             GROUP BY tbldistrict.DistrictName";
 
                                                             //Variable $link is declared inside config.php file & used here

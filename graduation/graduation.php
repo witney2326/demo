@@ -1,12 +1,12 @@
-<?php include 'layouts/session.php'; ?>
-<?php include 'layouts/head-main.php'; ?>
+<?php include '../layouts/session.php'; ?>
+<?php include '../layouts/head-main.php'; ?>
 
 
 <head>
     <title>Livelihood Graduation</title>
-    <?php include 'layouts/head.php'; ?>
-    <?php include 'layouts/head-style.php'; ?>
-    <?php include 'layouts/config.php'; ?>
+    <?php include '../layouts/head.php'; ?>
+    <?php include '../layouts/head-style.php'; ?>
+    <?php include '../layouts/config.php'; ?>
 
     <!-- DataTables -->
 <link href="../assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
@@ -280,7 +280,7 @@
                                     <div class="tab-pane active" id="home-1" role="tabpanel">
                                         <p class="mb-0">
                                            <!--start --> 
-                                           <div class="row">
+                                                                <div class="row">
                         
                                                                     <div class="card-header bg-transparent border-primary">
                                                                         <div class="card-group">
@@ -481,7 +481,7 @@
 <?php include __DIR__."/../layouts/vendor-scripts.php"; ?>
 
 <!-- App js -->
-<script src="assets/js/app.js"></script>
+<script src="../assets/js/app.js"></script>
 
 </body>
 

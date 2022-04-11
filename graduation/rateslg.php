@@ -1,10 +1,10 @@
-<?php include 'layouts/session.php'; ?>
-<?php include 'layouts/head-main.php'; ?>
+<?php include '../layouts/session.php'; ?>
+<?php include '../layouts/head-main.php'; ?>
 
 <head>
     <title>SLG Assesment|SLG Rating</title>
-    <?php include 'layouts/head.php'; ?>
-    <?php include 'layouts/head-style.php'; ?>
+    <?php include '../layouts/head.php'; ?>
+    <?php include '../layouts/head-style.php'; ?>
 
 }
     
@@ -12,10 +12,10 @@
 
 <div id="layout-wrapper">
 
-    <?php include 'layouts/menu.php'; ?>
+    <?php include '../layouts/menu.php'; ?>
 
     <?php
-        include "layouts/config.php"; // Using database connection file here     
+        include "../layouts/config.php"; // Using database connection file here     
         
         $grpID = $_POST['grpID'];
         $rating = $_POST['rating'];
