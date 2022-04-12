@@ -13,7 +13,9 @@
 <!-- Begin page -->
 <div id="layout-wrapper">
 
-    <?php include 'layouts/menu.php'; ?>
+    <?php include 'layouts/menu.php'; 
+    include 'layouts/config.php';
+    ?>
 
     <!-- ============================================================== -->
     <!-- Start right Content here -->
@@ -51,42 +53,149 @@
                                     <li class="nav-item waves-effect waves-light">
                                         <a class="nav-link active" data-bs-toggle="tab" href="#home" role="tab">
                                             <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
-                                            <span class="d-none d-sm-block">Cluster/SLG Assesment</span>
+                                            <span class="d-none d-sm-block">Home</span>
                                         </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link" data-bs-toggle="tab" href="#Beneficiaries" role="tab">
+                                        <a class="nav-link" data-bs-toggle="link" href="cmt_group_assesment.php" role="link">
+                                            <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
+                                            <span class="d-none d-sm-block">SLG Assesment</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item waves-effect waves-light">
+                                        <a class="nav-link" data-bs-toggle="link" href="cmt_cluster_assesment.php" role="link">
+                                            <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
+                                            <span class="d-none d-sm-block">Cluster Assesment</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item waves-effect waves-light">
+                                        <a class="nav-link" data-bs-toggle="link" href="cmt_training_registration.php" role="link">
                                             <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
-                                            <span class="d-none d-sm-block">Coop Member Education</span>
+                                            <span class="d-none d-sm-block">Coop Member Education and Registration</span>
                                         </a>
                                     </li>
+                                    
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link" data-bs-toggle="tab" href="#jsg" role="tab">
-                                            <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
-                                            <span class="d-none d-sm-block">Coop Registration</span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link" data-bs-toggle="tab" href="#ycs" role="tab">
+                                        <a class="nav-link" data-bs-toggle="tab" href="#cmt" role="tab">
                                             <span class="d-block d-sm-none"><i class="fas fa-cog"></i></span>
                                             <span class="d-none d-sm-block">Coop Management Training</span>
                                         </a>
                                     </li>
                                                                         
-                                    <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link" data-bs-toggle="tab" href="#reports" role="tab">
-                                            <span class="d-block d-sm-none"><i class="fas fa-cog"></i></span>
-                                            <span class="d-none d-sm-block">Reports</span>
-                                        </a>
-                                    </li>
+                                    
 
                                 </ul>
 
                                 <!-- Tab panes -->
                                 <div class="tab-content p-3 text-muted">
-                                    <div class="tab-pane active" id="home-1" role="tabpanel">
+                                    <div class="tab-pane active" id="home" role="tabpanel">
                                         <p class="mb-0">
                                             
+                                            <div class="row">                       
+                                                <div class="card-header bg-transparent border-primary">
+                                                    <div class="card-group">
+                                                        <div class="card border">
+                                                            <img src="..." class="card-img-top" alt="">
+                                                            <div class="card-body">
+                                                                
+                                                                        <div class="card-body">
+                                                                            <div class="d-flex">
+                                                                                <div class="flex-grow-1">
+                                                                                    <i class='fas fa-house-user' style='font-size:24px'></i>
+                                                                                    <p class="text-muted fw-medium">Clusters/SLGs Assessed</p>
+                                                                                    <?php
+                                                                                        $result = mysqli_query($link, 'SELECT count(groupID) AS total_slgs FROM tblgroup where cmt_assesed = "1"'); 
+                                                                                        $row = mysqli_fetch_assoc($result); 
+                                                                                        $total_slgs = $row['total_slgs'];
+                                                                                        
+                                                                                        $result2 = mysqli_query($link, 'SELECT count(ClusterID) AS total_cls FROM tblcluster where cmt_assesed = "1"'); 
+                                                                                        $row = mysqli_fetch_assoc($result); 
+                                                                                        $total_cls = $row['total_cls'];
+
+                                                                                        $sum = $total_slgs+$total_cls;
+
+                                                                                    ?>
+                                                                                        <h5 class="mb-0">
+                                                                                            <div class="container">
+                                                                                                <div class="mb-0"><?php echo "" . $sum;?></div>
+                                                                                            </div> 
+                                                                                        </h5>
+                                                                                </div>
+                                                                                
+                                                                            </div>
+                                                                        </div>
+                                                                
+                                                            <!-- -->
+                                                            </div>
+                                                        </div>
+                                                        <div class="card border">
+                                                            <img src="..." class="card-img-top" alt="">
+                                                            <div class="card-body">
+                                                                <div class="card-body">
+                                                                    <div class="d-flex">
+                                                                        <div class="flex-grow-1">
+                                                                            <i class='fas fa-users' style='font-size:24px'></i>
+
+                                                                            <p class="text-muted fw-medium">CMT Selected SLGs</p>
+                                                                                <?php
+                                                                                    $result = mysqli_query($link, 'SELECT count(groupID) AS total_slgs FROM tblgroup where cmt_assesed_result = "1"'); 
+                                                                                    $row = mysqli_fetch_assoc($result); 
+                                                                                    $total_slgs = $row['total_slgs'];
+                                                                                    
+                                                                                    $result2 = mysqli_query($link, 'SELECT count(ClusterID) AS total_cls FROM tblcluster where cmt_assesed_result = "1"'); 
+                                                                                    $row = mysqli_fetch_assoc($result); 
+                                                                                    $total_cls = $row['total_cls'];
+
+                                                                                    $sum = $total_slgs+$total_cls;
+
+                                                                                    ?>
+                                                                                        <div class="container">
+                                                                                            <h4><div class="mb-0"><?php echo "" . $sum;?></div></h4>
+                                                                                        </div>
+                                                                            
+                                                                        </div>
+                                                                        
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="card border">
+                                                            <img src="..." class="card-img-top" alt="">
+                                                            <div class="card-body">
+                                                                <div class="card-body">
+                                                                    <div class="d-flex">
+                                                                        <div class="flex-grow-1">
+                                                                            <i class='fas fa-user-graduate' style='font-size:24px'></i>
+
+                                                                            <p class="text-muted fw-medium">SLGs Trained in CMT/CME</p>
+                                                                            <h4 class="mb-0">0</h4>
+                                                                        </div>
+                                                                        
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="card border">
+                                                            <img src="..." class="card-img-top" alt="">
+                                                            <div class="card-body">
+                                                                <div class="card-body">
+                                                                    <div class="d-flex">
+                                                                        <div class="flex-grow-1">
+                                                                            <i class='fas fa-chalkboard-teacher' style='font-size:24px'></i>
+
+                                                                            <p class="text-muted fw-medium">SLGs Registered as Coops</p>
+                                                                            <h4 class="mb-0">0</h4>
+                                                                        </div>
+                                                                        
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div> 
 
                                         </p>
                                     </div>
@@ -102,10 +211,14 @@
 
                                         </p>
                                     </div>
-                                    <div class="tab-pane" id="settings-1" role="tabpanel">
+                                    <div class="tab-pane" id="cmt" role="tabpanel">
                                         <p class="mb-0">
-                                           
-                                            
+                                           governance and leadership
+                                           record keeping
+                                           financial mgt, business development and mgt skills
+                                            credit mgt
+                                            coop auditing
+                                            marketing
                                         </p>
                                     </div>
                                 </div>
