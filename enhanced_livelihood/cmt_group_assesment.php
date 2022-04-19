@@ -119,7 +119,7 @@
                                     </div>
                                     <div class="card-body">
                                         <h5 class="card-title mt-0"></h5>
-                                        <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="graduation_grp_assesment_filter1.php" method="GET">
+                                        <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="cmt_group_assesment_filter1.php" method="GET">
 
                                             <div class="col-12">
                                                 
@@ -219,7 +219,7 @@
                                                             <th>Rating</th>                                                                 
                                                             <th>Assessed?</th>
                                                             <th>Ass. Result</th>                                                                                                                                            
-                                                            <th>Grad.Status</th>                                           
+                                                            <th>Grp Status</th>                                           
                                                             <th>Action</th>
                                                         </tr>
                                                     </thead>
@@ -235,9 +235,9 @@
                                                         if ($result_set = $link->query($query)) {
                                                         while($row = $result_set->fetch_array(MYSQLI_ASSOC))
                                                         { 
-                                                            if ($row["grad_assesed"] == 1){$grad_assesed = "Yes";}else{$grad_assesed = "No";} 
-                                                            if ($row["grad_assesed_result"] == 1){$grad_assesed_result = "Good";}if ($row["grad_assesed_result"] == 2){$grad_assesed_result = "Poor";}if ($row["grad_assesed_result"] == 0){$grad_assesed_result = "NA";}
-                                                            if ($row["grad_status"] == 1){$grad_status = "On GP";}else{$grad_status = "N/A";}
+                                                            if ($row["cmt_assesed"] == 1){$cmt_assesed = "Yes";}else{$cmt_assesed = "No";} 
+                                                            if ($row["cmt_assesed_result"] == 1){$cmt_assesed_result = "Poor";}if ($row["cmt_assesed_result"] == 2){$cmt_assesed_result = "Good";}if ($row["cmt_assesed_result"] == 0){$cmt_assesed_result = "NA";}
+                                                            if ($row["cmt_status"] == 1){$cmt_status = "On CME";}else{$cmt_status = "N/A";}
 
                                                             $grpID = $row["groupID"];
 
@@ -245,12 +245,12 @@
                                                             echo "<td>".$row["groupID"]."</td>\n";
                                                             echo "<td>".$row["groupname"]."</td>\n";
                                                             echo "<td>";
-                                                                echo "<form action = 'rateslg.php' method ='POST'>";
+                                                                echo "<form action = 'cmt_rateslg.php' method ='POST'>";
                                                                     echo '<select id="rating"  name="rating">';
                                                                         
                                                                         echo '<option value="0">NA</option>';
-                                                                        echo '<option value="1">Good</option>';
-                                                                        echo '<option value="2">Poor</option>';
+                                                                        echo '<option value="1">Poor</option>';
+                                                                        echo '<option value="2">Good</option>';
                                                                     echo "</select>";
                                                                     echo "<input type='hidden' id='grpID' name='grpID' value='$grpID'>";
                                                                     echo "<button type='submit' class='btn-outline-primary' name='FormSubmit' value='Submit' onClick='return confirmSubmit()'>Rate</button>";
@@ -258,11 +258,11 @@
                                                             echo "</td>";
 
                                                             
-                                                            echo "\t\t<td>$grad_assesed</td>\n";
-                                                            echo "\t\t<td>$grad_assesed_result</td>\n";
-                                                            echo "\t\t<td>$grad_status</td>\n";
+                                                            echo "\t\t<td>$cmt_assesed</td>\n";
+                                                            echo "\t\t<td>$cmt_assesed_result</td>\n";
+                                                            echo "\t\t<td>$cmt_status</td>\n";
                                                             echo "<td> <a href=\"../basicSLGview.php?id=".$row['groupID']."\"><i class='far fa-eye' title='View SLG' style='font-size:18px'></i></a>\n";
-                                                            echo "<a onClick=\"javascript: return confirm('Are You Sure You want To PUT This SLG On Graduation- You Must Be a Supervisor');\" href=\"graduationSLGAssesment.php?id=".$row['groupID']."\"\><i class='fa fa-graduation-cap' title='Put SLG On Graduation Pilot' style='font-size:18px'></i></a>\n";
+                                                            echo "<a onClick=\"javascript: return confirm('Are You Sure You want To PUT This SLG On CME/CMT- You Must Be a Supervisor');\" href=\"cmt_SLGAssesment.php?id=".$row['groupID']."\"\><i class='fas fa-book-reader' title='Enrol SLG On CME' style='font-size:18px;color:green'></i></a>\n";
                                                             
                                                         echo "</tr>\n";
                                                         }
