@@ -194,8 +194,8 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                                             echo "<td>".$row["femalesNo"]."</td>\n";
                                                                             echo "<td>".$row["malesNo"]."</td>\n";
                                                                         echo "<td>
-                                                                        <a href=\"basicAwarenessMeetingview.php?id=".$row['meetingID']."\">view</a>
-                                                                        <a href=\"basicAwarenessMeetingDelete.php?id=".$row['meetingID']."\">delete</a>    
+                                                                        <a href=\"basicAwarenessMeetingview.php?id=".$row['meetingID']."\"><i class='far fa-eye' title='Meeting Details' style='font-size:18px;color:purple'></i></a>
+                                                                            <a onClick=\"javascript: return confirm('Are You Sure You want To Delete This Meeting Record - You Must Be a Supervisor');\" href=\"basicAwarenessMeetingDelete.php?id=".$row['meetingID']."\"><i class='far fa-trash-alt' style='font-size:18px;color:red'></i></a>       
                                                                             
                                                                         </td>\n";
                                                                     echo "</tr>\n";

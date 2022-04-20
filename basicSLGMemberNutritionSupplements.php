@@ -162,8 +162,8 @@
                                         <div class="row justify-content-end">
                                             <div class="col-sm-9">
                                                 <div>
-                                                    <button type="submit" class="btn btn-primary w-md" style="width:140px" name="Submit" value="Submit">Save New Record</button>
-                                                    <INPUT TYPE="button" class="btn btn-secondary w-md" style="width:140px" VALUE="Back" onClick="history.go(-1);">
+                                                    <button type="submit" class="btn btn-btn btn-outline-primary w-md" style="width:140px" name="Submit" value="Submit">Save New Record</button>
+                                                    <INPUT TYPE="button" class="btn btn-btn btn-outline-secondary w-md" style="width:140px" VALUE="Back" onClick="history.go(-1);">
                                                 </div>
                                             </div>
                                         </div>
@@ -224,8 +224,8 @@
                                                 echo "\t\t<td>$amount</td>\n";
                                                 
                                                 echo "<td>
-                                                    <a href=\"basicSLGMemberSavingsEdit.php?id=".$row['savingID']."\"><i class='far fa-edit' style='font-size:18px'></i></a> 
-                                                    <a onClick=\"javascript: return confirm('Are You Sure You want To DELETE This Record');\" href=\"basicSLGMemberSavingsDelete.php?id=".$row['savingID']."\"><i class='far fa-trash-alt' style='font-size:18px'></i></a>        
+                                                    <a href=\"basicSLGMemberSavingsEdit.php?id=".$row['savingID']."\"><i class='far fa-edit' style='font-size:18px;color:green'></i></a> 
+                                                    <a onClick=\"javascript: return confirm('Are You Sure You want To DELETE This Record');\" href=\"basicSLGMemberSavingsDelete.php?id=".$row['savingID']."\"><i class='far fa-trash-alt' style='font-size:18px;color:red'></i></a>        
                                                 </td>\n";
                                             echo "</tr>\n";
                                             }

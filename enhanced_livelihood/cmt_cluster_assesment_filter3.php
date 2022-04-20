@@ -211,10 +211,9 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                             echo "<td>";
                                                                 echo "<form action = 'cmt_ratecls.php' method ='POST'>";
                                                                     echo '<select id="rating"  name="rating">';
-                                                                        
                                                                         echo '<option value="0">NA</option>';
-                                                                        echo '<option value="2">Good</option>';
                                                                         echo '<option value="1">Poor</option>';
+                                                                        echo '<option value="2">Good</option>';
                                                                     echo "</select>";
                                                                     echo "<input type='hidden' id='grpID' name='grpID' value='$grpID'>";
                                                                     echo "<button type='submit' class='btn-outline-primary' name='FormSubmit' value='Submit' onClick='return confirmSubmit()'>Rate</button>";
@@ -225,7 +224,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                             echo "\t\t<td>$cmt_assesed</td>\n";
                                                             echo "\t\t<td>$cmt_assesed_result</td>\n";
                                                             echo "\t\t<td>$cmt_status</td>\n";
-                                                            echo "<td> <a href=\"../basicSLGview.php?id=".$row['ClusterID']."\"><i class='far fa-eye' title='View SLG' style='font-size:18px'></i></a>\n";
+                                                            echo "<td> <a href=\"../basicSLGview.php?id=".$row['ClusterID']."\"><i class='far fa-eye' title='View SLG' style='font-size:18px; color: purple'></i></a>\n";
                                                             echo "<a onClick=\"javascript: return confirm('Are You Sure You want To PUT This Cluster On CME/CMT- You Must Be a Supervisor');\" href=\"cmt_ClusterAssesment.php?id=".$row['ClusterID']."\"\><i class='fas fa-book-reader' title='Enrol Cluster On CME' style='font-size:18px;color:green'></i></a>\n";
                                                         echo "</tr>\n";
                                                         }

@@ -155,7 +155,7 @@
                                         <div class="row justify-content-end">
                                             <div class="col-sm-9">
                                                 <div>
-                                                    <INPUT TYPE="button" VALUE="Back" onClick="history.go(-1);">
+                                                    <INPUT TYPE="button" class="btn btn-btn btn-outline-secondary w-md" VALUE="Back" onClick="history.go(-1);">
                                                 </div>
                                             </div>
                                         </div>

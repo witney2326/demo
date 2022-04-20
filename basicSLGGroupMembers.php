@@ -134,17 +134,17 @@
                                                     echo "\t\t<td>$WASHstatus</td>\n";
                                                     echo "<td>
                                                     
-                                                        <a href=\"basicSLGMemberview.php?id=".$row['sppCode']."\"><i class='far fa-eye' title='View Member' style='font-size:18px'></i></a> 
-                                                        <a onClick=\"javascript: return confirm('Are You Sure You want To Approve This HOUSEHOLD for Livelihood Programme?');\" href=\"basicHHStatusApproval.php?id=".$row['sppCode']."\"><i class='far fa-check-square' title='Approve Household' style='font-size:18px' color:green></i></a> 
-                                                        <a href=\"basicSLGMemberedit.php?id=".$row['sppCode']."\"><i class='far fa-edit' title='Edit Member' style='font-size:18px'></i></a> 
-                                                        <a href=\"basicSLGMembersavings.php?id=".$row['sppCode']."\"><i class='fas fa-hand-holding-usd' title='Update Member Savings' style='font-size:18px'></i></a>
-                                                        <a href=\"basicSLGMemberloans.php?id=".$row['sppCode']."\"><i class='fas fa-book' title='Update Member Loans' style='font-size:18px'></i></a> 
-                                                        <a href=\"basicSLGGroupMembers_iga.php?id=".$row['sppCode']."\"><i class='fas fa-balance-scale' title='Update Member IGAs' style='font-size:18px'></i></a> 
-                                                        <a href=\"basicSLGGroupMembersTraining.php?id=".$row['sppCode']."\"><i class='fas fa-school' title='Update Member Training' style='font-size:18px'></i></a> 
-                                                        <a href=\"basicSLGGroupMembersTrainingStatus.php?id=".$row['sppCode']."\"><i class='fas fa-user-graduate' title='HH Training Status' style='font-size:18px'></i></a> 
-                                                        <a href=\"basicSLGMemberNutritionSupplements.php?id=".$row['sppCode']."\"><i class='fas fa-stroopwafel fa-lg' title='Nutrition Suppliments' style='font-size:18px'></i></a> 
+                                                        <a href=\"basicSLGMemberview.php?id=".$row['sppCode']."\"><i class='far fa-eye' title='View Member' style='font-size:18px;color:purple'></i></a> 
+                                                        <a onClick=\"javascript: return confirm('Are You Sure You want To Approve This HOUSEHOLD for Livelihood Programme?');\" href=\"basicHHStatusApproval.php?id=".$row['sppCode']."\"><i class='far fa-check-square' title='Approve Household' style='font-size:18px;color:green'></i></a> 
+                                                        <a href=\"basicSLGMemberedit.php?id=".$row['sppCode']."\"><i class='far fa-edit' title='Edit Member' style='font-size:18px;color:cadetblue'></i></a> 
+                                                        <a href=\"basicSLGMembersavings.php?id=".$row['sppCode']."\"><i class='fas fa-hand-holding-usd' title='Update Member Savings' style='font-size:18px;color:brown'></i></a>
+                                                        <a href=\"basicSLGMemberloans.php?id=".$row['sppCode']."\"><i class='fas fa-book' title='Update Member Loans' style='font-size:18px;color:orange'></i></a> 
+                                                        <a href=\"basicSLGGroupMembers_iga.php?id=".$row['sppCode']."\"><i class='fas fa-balance-scale' title='Update Member IGAs' style='font-size:18px;color:chocolate'></i></a> 
+                                                        <a href=\"basicSLGGroupMembersTraining.php?id=".$row['sppCode']."\"><i class='fas fa-school' title='Update Member Training' style='font-size:18px;color:darkcyan'></i></a> 
+                                                        <a href=\"basicSLGGroupMembersTrainingStatus.php?id=".$row['sppCode']."\"><i class='fas fa-user-graduate' title='HH Training Status' style='font-size:18px;color:forestgreen'></i></a> 
+                                                        <a href=\"basicSLGMemberNutritionSupplements.php?id=".$row['sppCode']."\"><i class='fas fa-stroopwafel fa-lg' title='Nutrition Suppliments' style='font-size:18px;color:lawngreen'></i></a> 
                                                         
-                                                        <a onClick=\"javascript: return confirm('Are You Sure You want To DELETE This HOUSEHOLD');\" href=\"basicSLGMemberdelete.php?id=".$row['sppCode']."\"><i class='far fa-trash-alt' title='Delete Member' style='font-size:18px'></i></a>    
+                                                        <a onClick=\"javascript: return confirm('Are You Sure You want To DELETE This HOUSEHOLD');\" href=\"basicSLGMemberdelete.php?id=".$row['sppCode']."\"><i class='far fa-trash-alt' title='Delete Member' style='font-size:18px;color:red'></i></a>    
                                                         
                                                     </td>\n";
 
@@ -159,7 +159,7 @@
                                 </div>
                                 
                             </div>
-                            <INPUT TYPE="button" VALUE="Back" onClick="history.go(-1);"> 
+                            <INPUT TYPE="button" class="btn btn-btn btn-outline-secondary w-md" VALUE="Back" onClick="history.go(-1);"> 
                              
                     </div>            
                 </div>  

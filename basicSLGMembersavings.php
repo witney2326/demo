@@ -155,8 +155,8 @@
                                         <div class="row justify-content-end">
                                             <div class="col-sm-9">
                                                 <div>
-                                                    <button type="submit" class="btn btn-primary w-md" name="Submit" value="Submit">Save New Savings Record</button>
-                                                    <INPUT TYPE="button" VALUE="Back" onClick="history.go(-1);">
+                                                    <button type="submit" class="btn btn-btn btn-outline-primary w-md" name="Submit" value="Submit">Save New Savings Record</button>
+                                                    <INPUT TYPE="button" class="btn btn-btn btn-outline-secondary w-md" VALUE="Back" onClick="history.go(-1);">
                                                 </div>
                                             </div>
                                         </div>
@@ -172,7 +172,7 @@
                     <div class="col-12">
                         <div class="card border border-primary">
                         <div class="card-header bg-transparent border-primary">
-                            <h5 class="my-0 text-primary"><i class="mdi mdi-bullseye-arrow me-3"></i>Savings Record</h5>
+                            <h5 class="my-0 text-primary">Savings Record</h5>
                         </div>
                         <div class="card-body">
                         <h5 class="card-title mt-0"></h5>
@@ -216,8 +216,8 @@
                                                 echo "\t\t<td>$amount</td>\n";
                                                 
                                                 echo "<td>
-                                                    <a href=\"basicSLGMemberSavingsEdit.php?id=".$row['savingID']."\"><i class='far fa-edit' style='font-size:18px'></i></a> 
-                                                    <a onClick=\"javascript: return confirm('Are You Sure You want To DELETE This Record');\" href=\"basicSLGMemberSavingsDelete.php?id=".$row['savingID']."\"><i class='far fa-trash-alt' style='font-size:18px'></i></a>        
+                                                    <a href=\"basicSLGMemberSavingsEdit.php?id=".$row['savingID']."\"><i class='far fa-edit' style='font-size:18px;color:green'></i></a> 
+                                                    <a onClick=\"javascript: return confirm('Are You Sure You want To DELETE This Record');\" href=\"basicSLGMemberSavingsDelete.php?id=".$row['savingID']."\"><i class='far fa-trash-alt' style='font-size:18px;color:red'></i></a>        
                                                 </td>\n";
                                             echo "</tr>\n";
                                             }

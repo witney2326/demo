@@ -319,7 +319,7 @@ $test = 85;
                                                     <div class="card-body">
                                                         <div class="d-flex">
                                                             <div class="flex-grow-1">
-                                                                <i class='fas fa-house-user' style='font-size:24px'></i><i class='fas fa-house-user' style='font-size:24px'></i>
+                                                                <i class='fas fa-house-user' style='font-size:24px'></i><i class='fas fa-house-user' style='font-size:24px; color:chocolate'></i>
                                                                 <p class="text-muted fw-medium">Basic HH Enrolment</p>
                                                                 <?php
                                                                             $result = mysqli_query($link, 'SELECT COUNT(sppCode) AS value_sum FROM tblbeneficiaries'); 
@@ -352,7 +352,7 @@ $test = 85;
                                                 <div class="card-body">
                                                     <div class="d-flex">
                                                         <div class="flex-grow-1">
-                                                        <i class='fas fa-layer-group' style='font-size:24px'></i><i class='fas fa-layer-group' style='font-size:24px'></i><i class='fas fa-layer-group' style='font-size:24px'></i>
+                                                        <i class='fas fa-layer-group' style='font-size:24px;color:darkgoldenrod'></i><i class='fas fa-layer-group' style='font-size:24px;color:brown'></i><i class='fas fa-layer-group' style='font-size:24px;color:burlywood'></i>
                                                             <p class="text-muted fw-medium">Joint Skill Groups</p>
                                                             <h4 class="mb-0">0</h4>
                                                         </div>
@@ -371,7 +371,7 @@ $test = 85;
                                                 <div class="card-body">
                                                     <div class="d-flex">
                                                         <div class="flex-grow-1">
-                                                        <i class='fas fa-hiking' style='font-size:24px'></i><i class='fas fa-running' style='font-size:24px'></i>
+                                                        <i class='fas fa-hiking' style='font-size:24px; color:chocolate'></i><i class='fas fa-running' style='font-size:24px;color:coral'></i>
                                                             <p class="text-muted fw-medium">Youth Challenge Support</p>
                                                             <h4 class="mb-0">0</h4>
                                                         </div>
@@ -392,7 +392,7 @@ $test = 85;
                                                 <div class="card-body">
                                                     <div class="d-flex">
                                                         <div class="flex-grow-1">
-                                                            <i class='fas fa-school' style='font-size:24px'></i><i class='fas fa-graduation-cap' style='font-size:24px'></i>
+                                                            <i class='fas fa-school' style='font-size:24px;color:cadetblue'></i><i class='fas fa-graduation-cap' style='font-size:24px'></i>
                                                             <p class="text-muted fw-medium">Graduating Households</p>
                                                             <h4 class="mb-0">0</h4>
                                                         </div>

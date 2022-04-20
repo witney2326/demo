@@ -151,8 +151,8 @@
                                             <div class="col-sm-9">
                                                 <div>
                                                     
-                                                    <button type="submit" class="btn btn-secondary w-md" name="Submit" value="Submit">Save Household</button>
-                                                    <INPUT TYPE="button" VALUE="Back" onClick="history.go(-1);">
+                                                    <button type="submit" class="btn btn-btn btn-outline-secondary w-md" name="Submit" value="Submit">Save Household</button>
+                                                    <INPUT TYPE="button" class="btn btn-btn btn-outline-secondary w-md" VALUE="Back" onClick="history.go(-1);">
                                                 </div>
                                             </div>
                                         </div>

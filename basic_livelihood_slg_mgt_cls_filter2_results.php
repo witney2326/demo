@@ -12,6 +12,18 @@
     <!-- Responsive datatable examples -->
     <link href="assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
 
+    <!--Datatable plugin CSS file -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" />
+  
+  <!--jQuery library file -->
+  <script type="text/javascript" 
+      src="https://code.jquery.com/jquery-3.5.1.js">
+  </script>
+
+  <!--Datatable plugin JS library file -->
+  <script type="text/javascript" 
+src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
+  </script>
 </head>
 
 <?php include 'layouts/body.php'; ?>
@@ -182,11 +194,11 @@
                                                                             echo "<td>".$row["programID"]."</td>\n";
                                                                             
                                                                             echo "<td>
-                                                                            <a href=\"basicCLSview.php?id=".$row['ClusterID']."\"><i class='far fa-eye' title='View Cluster' style='font-size:18px'></i></a>\n";
+                                                                            <a href=\"basicCLSview.php?id=".$row['ClusterID']."\"><i class='far fa-eye' title='View Cluster' style='font-size:18px;color:purple'></i></a>\n";
                                                                     echo
-                                                                        "<a href=\"basicCLSedit.php?id=".$row['ClusterID']."\"><i class='far fa-edit' title='Edit Cluster Details' style='font-size:18px'></i></a>\n";
+                                                                        "<a href=\"basicCLSedit.php?id=".$row['ClusterID']."\"><i class='far fa-edit' title='Edit Cluster Details' style='font-size:18px;color:green'></i></a>\n";
                                                                     echo 
-                                                                    "<a href=\"basicCLSdelete.php?id=".$row['ClusterID']."\"><i class='far fa-trash-alt' title='Delete Cluster' style='font-size:18px'></i></a>    
+                                                                    "<a href=\"basicCLSdelete.php?id=".$row['ClusterID']."\"><i class='far fa-trash-alt' title='Delete Cluster' style='font-size:18px;color:red'></i></a>    
                                                                             </td>\n";
 
                                                                         echo "</tr>\n";

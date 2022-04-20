@@ -38,26 +38,34 @@
         }
 
         if(isset($_POST['Submit']))
-            {    
+        {    
             $groupID = $_POST['group_id'];
             $DistrictID = $_POST['district'];
             $spp_programme = $_POST['spp_programme'];
-            
             $hhcode = $_POST['hhcode'];
-            
-            
-                $sql = "INSERT INTO tblbeneficiaries (sppCode,spProg,regionID,districtID,groupID,cohort)
-                VALUES ('$hhcode','$spp_programme','$regionID','$DistrictID','$groupID','$cohort')";
-            if (mysqli_query($link, $sql)) {
+
+            if  (empty($hhcode))
+            {
                 echo '<script type="text/javascript">'; 
-                echo 'alert("SLG Member Record has been added successfully !");'; 
+                echo 'alert("Please Enter Household code !");'; 
                 echo 'window.location.href = "basic_livelihood_slg_mgt2.php";';
                 echo '</script>';
-            } else {
-                echo "Error: " . $sql . ":-" . mysqli_error($link);
             }
-            mysqli_close($link);
+            else
+            {
+                $sql = "INSERT INTO tblbeneficiaries (sppCode,spProg,regionID,districtID,groupID,cohort)
+                VALUES ('$hhcode','$spp_programme','$regionID','$DistrictID','$groupID','$cohort')";
+                if (mysqli_query($link, $sql)) {
+                    echo '<script type="text/javascript">'; 
+                    echo 'alert("SLG Member Record has been added successfully !");'; 
+                    echo 'window.location.href = "basic_livelihood_slg_mgt2.php";';
+                    echo '</script>';
+                } else {
+                    echo "Error: " . $sql . ":-" . mysqli_error($link);
+                }
+                mysqli_close($link);
             }
+        }
         
             function get_rname($link, $rcode)
             {
@@ -196,7 +204,7 @@
                                         <div class="col-md-4">
                                             <div class="mb-3">
                                                 <label for="hhcode" class="form-label">Household Code</label>
-                                                <input type="text" class="form-control" id="hhcode" name="hhcode" value ="">
+                                                <input type="text" class="form-control" id="hhcode" name="hhcode">
                                             </div>
 
                                         </div>
@@ -205,7 +213,7 @@
                                     <div class="row">
                                         <div class="col-sm-9">
                                             <div>
-                                                <button type="submit" class="btn btn-primary w-md" style="width:170px" name="Submit" value="Submit">Save New Record</button>
+                                                <button type="submit" class="btn btn-btn btn-outline-primary w-md" style="width:170px" name="Submit" value="Submit">Save New Record</button>
                                                 
                                                 
                                             </div>                                   
@@ -215,9 +223,9 @@
 
                                 <form action="basicSLGGroupMembers.php" method="POST">
                                     <input type="hidden" class="form-control" id="group_id" name = "group_id" value="<?php echo $id ; ?>"readonly>               
-                                    <button type="submit" class="btn btn-success w-md"  name="Update_Group_Membership" value="Update_Group_Membership">Member Management</button> 
+                                    <button type="submit" class="btn btn-btn btn-outline-success w-md"  name="Update_Group_Membership" value="Update_Group_Membership">Member Management</button> 
                                 </form>
-                                <INPUT TYPE="button" class="btn btn-secondary w-md" style="width:170px" VALUE="Back" onClick="history.go(-1);"> 
+                                <INPUT TYPE="button" class="btn btn-btn btn-outline-secondary w-md" style="width:170px" VALUE="Back" onClick="history.go(-1);"> 
                                 
                             </div>
                         </div>

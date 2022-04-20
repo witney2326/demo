@@ -2,7 +2,7 @@
 <?php include '../layouts/head-main.php'; ?>
 
 <head>
-    <title>CMT Training</title>
+    <title>CME/CMT Training</title>
     <?php include '../layouts/head.php'; ?>
     <?php include '../layouts/head-style.php'; ?>
     <?php include '../layouts/config.php'; ?>
@@ -90,12 +90,12 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                            <h4 class="mb-sm-0 font-size-18">CMT Training</h4>
+                            <h4 class="mb-sm-0 font-size-18">CME/CMT Training</h4>
 
                             <div class="page-title-right">
                                 <ol class="breadcrumb m-0">
                                     <li class="breadcrumb-item"><a href="cmt.php">Coop Management Training</a></li>
-                                    <li class="breadcrumb-item active">CMT Training</li>
+                                    <li class="breadcrumb-item active">CME/CMT Training</li>
                                 </ol>
                             </div>
 
@@ -119,7 +119,7 @@
                                     </div>
                                     <div class="card-body">
                                         <h5 class="card-title mt-0"></h5>
-                                        <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="graduation_grp_assesment_filter1.php" method="GET">
+                                        <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="cmt_training_registration_filter1.php" method="GET">
 
                                             <div class="col-12">
                                                 
@@ -215,7 +215,8 @@
                                                     <thead>
                                                         <tr>                    
                                                             <th>Group Code</th>
-                                                            <th>Group Name</th>                                          
+                                                            <th>Group Name</th>
+                                                            <th>CME Trained?</th>                                      
                                                             <th>Action</th>
                                                         </tr>
                                                     </thead>
@@ -231,15 +232,13 @@
                                                         if ($result_set = $link->query($query)) {
                                                         while($row = $result_set->fetch_array(MYSQLI_ASSOC))
                                                         { 
-                                                            
-
                                                         echo "<tr>\n";
                                                             echo "<td>".$row["groupID"]."</td>\n";
                                                             echo "<td>".$row["groupname"]."</td>\n";
-                                                            
-                                                            echo "<td> <a href=\"../basicSLGview.php?id=".$row['groupID']."\"><i class='far fa-eye' title='View SLG' style='font-size:18px'></i></a>\n";
-                                                            echo "<a onClick=\"javascript: return confirm('Are You Sure You want To PUT This SLG On Graduation- You Must Be a Supervisor');\" href=\"../add_basicTrainingGD.php?id=".$row['groupID']."\"\><i class='fa fa-plus' title='Record CME Training' style='font-size:18px; color:orange'></i></a>\n";
-                                                            
+                                                            echo "<td></td>\n";
+                                                            echo "<td> <a href=\"../basicSLGview.php?id=".$row['groupID']."\"><i class='far fa-eye' title='View SLG' style='font-size:18px;color: purple'></i></a>\n";
+                                                            echo "<a onClick=\"javascript: return confirm('You want To Record CME Training?');\" href=\"../add_basicTrainingGD.php?id=".$row['groupID']."\"\><i class='fa fa-plus' title='Record CME Training' style='font-size:18px; color:orange'></i></a>\n";
+                                                            echo "<a onClick=\"javascript: return confirm('You want To Register SLG as a Cooperative?');\" href=\"cmt_SLGRegisterGroup.php?id=".$row['groupID']."\"\><i class='fa fa-user-plus' title='Register SLG as a Coop' style='font-size:18px; color:green'></i></a>\n";
                                                         echo "</tr>\n";
                                                         }
                                                         $result_set->close();

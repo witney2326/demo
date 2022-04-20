@@ -138,11 +138,11 @@
 
                                                                             <p class="text-muted fw-medium">CMT Selected SLGs</p>
                                                                                 <?php
-                                                                                    $result = mysqli_query($link, 'SELECT count(groupID) AS total_slgs FROM tblgroup where cmt_assesed_result = "1"'); 
+                                                                                    $result = mysqli_query($link, 'SELECT count(groupID) AS total_slgs FROM tblgroup where cmt_status = "1"'); 
                                                                                     $row = mysqli_fetch_assoc($result); 
                                                                                     $total_slgs = $row['total_slgs'];
                                                                                     
-                                                                                    $result2 = mysqli_query($link, 'SELECT count(ClusterID) AS total_cls FROM tblcluster where cmt_assesed_result = "1"'); 
+                                                                                    $result2 = mysqli_query($link, 'SELECT count(ClusterID) AS total_cls FROM tblcluster where cmt_status = "1"'); 
                                                                                     $row = mysqli_fetch_assoc($result); 
                                                                                     $total_cls = $row['total_cls'];
 
@@ -169,7 +169,18 @@
                                                                             <i class='fas fa-user-graduate' style='font-size:24px'></i>
 
                                                                             <p class="text-muted fw-medium">SLGs Trained in CMT/CME</p>
-                                                                            <h4 class="mb-0">0</h4>
+                                                                            <?php
+                                                                                $result = mysqli_query($link, 'SELECT count(groupID) AS total_slgs FROM tblgroup where cmt_cme_trained = "1"'); 
+                                                                                $row = mysqli_fetch_assoc($result); 
+                                                                                $total_slgs = $row['total_slgs'];
+                                                                                
+                                                                                $sum = $total_slgs;
+
+                                                                                ?>
+                                                                                    <div class="container">
+                                                                                        <h4><div class="mb-0"><?php echo "" . $sum;?></div></h4>
+                                                                                    </div>
+                                      
                                                                         </div>
                                                                         
                                                                     </div>
@@ -186,7 +197,17 @@
                                                                             <i class='fas fa-chalkboard-teacher' style='font-size:24px'></i>
 
                                                                             <p class="text-muted fw-medium">SLGs Registered as Coops</p>
-                                                                            <h4 class="mb-0">0</h4>
+                                                                            <?php
+                                                                                $result = mysqli_query($link, 'SELECT count(groupID) AS total_slgs FROM tblgroup where registered_group = "1"'); 
+                                                                                $row = mysqli_fetch_assoc($result); 
+                                                                                $total_slgs = $row['total_slgs'];
+                                                                                
+                                                                                $sum = $total_slgs;
+
+                                                                                ?>
+                                                                                    <div class="container">
+                                                                                        <h4><div class="mb-0"><?php echo "" . $sum;?></div></h4>
+                                                                                    </div>
                                                                         </div>
                                                                         
                                                                     </div>
