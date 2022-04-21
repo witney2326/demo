@@ -27,7 +27,7 @@
         function drawChart() {
         var data = google.visualization.arrayToDataTable([
         
-        ['Adopted_Places ', 'District'],
+        ['District', 'Adopted_Places'],
         
         <?php 
             $select_query = "SELECT tbldistrict.DistrictName as District, count(cluster) as Adopted_Places
@@ -37,7 +37,7 @@
             $query_result = mysqli_query($link,$select_query);
             while($row_val = mysqli_fetch_array($query_result)){
                 
-            echo "['".$row_val['Adopted_Places']."',".$row_val['District']."],";
+            echo "['".$row_val['District']."',".$row_val['Adopted_Places']."],";
             
             }
         ?>
@@ -321,7 +321,7 @@
                                                                         <div class="card-body">
                                                                             <div class="d-flex">
                                                                                 <div class="flex-grow-1">
-                                                                                    <i class='fas fa-house-user' style='font-size:24px'></i>
+                                                                                    <i class='fas fa-house-user' style='font-size:24px;color:brown'></i><i class='fas fa-house-user' style='font-size:24px;color:slategrey'></i>
                                                                                     <p class="text-muted fw-medium">Enrolled HouseHolds</p>
                                                                                     <?php
                                                                                         $result = mysqli_query($link, 'SELECT COUNT(sppCode) AS value_sum FROM tblbeneficiaries'); 
@@ -347,7 +347,7 @@
                                                                 <div class="card-body">
                                                                     <div class="d-flex">
                                                                         <div class="flex-grow-1">
-                                                                            <i class='fas fa-users' style='font-size:24px'></i>
+                                                                            <i class='fas fa-users' style='font-size:24px;color:chocolate'></i><i class='fas fa-users' style='font-size:24px;color:brown'></i>
 
                                                                             <p class="text-muted fw-medium">SLGs Formed</p>
                                                                             <?php
@@ -372,11 +372,18 @@
                                                                 <div class="card-body">
                                                                     <div class="d-flex">
                                                                         <div class="flex-grow-1">
-                                                                            <i class='fas fa-user-graduate' style='font-size:24px'></i>
-
-                                                                            <p class="text-muted fw-medium">HouseHolds Trained</p>
+                                                                            <i class='fas fa-users' style='font-size:24px;color:chocolate'></i><i class='fas fa-user-graduate' style='font-size:24px;color:black'></i><i class='fas fa-users' style='font-size:24px;color:brown'></i>
+                                                                            <p class="text-muted fw-medium">SLGs Trained</p>
+                                                                            <?php
+                                                                                $result = mysqli_query($link, 'SELECT COUNT(groupID) AS value_sum FROM tblgrouptrainings'); 
+                                                                                $row = mysqli_fetch_assoc($result); 
+                                                                                $sum = $row['value_sum'];
+                                                                            ?>
+                                                                            <div class="container">
+                                                                                <h5><div class="mb-0"><?php echo "" . number_format($sum);?></div></h5>
+                                                                            </div>
                                                                             
-                                                                            <h4 class="mb-0">0</h4>
+                                                                           
                                                                         </div>
                                                                         
                                                                     </div>
@@ -390,7 +397,7 @@
                                                                 <div class="card-body">
                                                                     <div class="d-flex">
                                                                         <div class="flex-grow-1">
-                                                                            <i class='fas fa-check' style='font-size:20px'></i>
+                                                                            <i class='fas fa-check' style='font-size:20px;color:green'></i>
                                                                             
                                                                             <p class="text-muted fw-medium">SCT/PWP Verified Households</p>
                                                                             <?php

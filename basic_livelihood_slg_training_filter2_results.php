@@ -12,6 +12,18 @@
     <!-- Responsive datatable examples -->
     <link href="assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
 
+     <!--Datatable plugin CSS file -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" />
+  
+  <!--jQuery library file -->
+  <script type="text/javascript" 
+      src="https://code.jquery.com/jquery-3.5.1.js">
+  </script>
+
+  <!--Datatable plugin JS library file -->
+  <script type="text/javascript" 
+src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
+  </script>
 </head>
 
 <?php include 'layouts/body.php'; ?>
@@ -134,10 +146,10 @@
                                                         </div>
                                                         
                                                         <div class="col-12">
-                                                            <button type="submit" class="btn btn-primary w-md" name="Submit" value="Submit">Submit</button>
+                                                            <button type="submit" class="btn btn-btn btn-outline-primary w-md" name="Submit" value="Submit">Submit</button>
                                                         </div>
                                                         <div class="col-12">
-                                                            <INPUT TYPE="button" VALUE="Back" onClick="history.go(-1);">
+                                                            <INPUT TYPE="button" class="btn btn-btn btn-outline-secondary w-md" VALUE="Back" onClick="history.go(-1);">
                                                         </div>
                                                     </form>                                             
                                                     <!-- End Here -->
@@ -147,7 +159,7 @@
                                             <div class="row">
                                                 <div class="col-12">
                                                     <div class="card border border-primary">
-                                                        <h5 class="my-0 text-primary"><i class="mdi mdi-book-clock"></i>Savings and Loan Groups</h5>
+                                                        <h5 class="my-0 text-primary">Savings and Loan Groups</h5>
                                                     <div class="card-body">
                                                     
                                                         
@@ -157,8 +169,10 @@
                                                                     <tr>
                                                                         <th>Groupcode</th>
                                                                         <th>Group Name</th>
-                                                                        <th>District</th>
-                                                                        <th> Action</th>
+                                                                        <th>Males</th>
+                                                                        <th>Females</th>
+                                                                        <th>Total Members</th>
+                                                                        <th>Action</th>    
                                                                         
                                                                     </tr>
                                                                 </thead>
@@ -176,16 +190,16 @@
                                                                         if ($result_set = $link->query($query)) {
                                                                             while($row = $result_set->fetch_array(MYSQLI_ASSOC))
                                                                             { 
-                                                                                $dis = dis_name($link,$row["DistrictID"]);
-                                                                            echo "<tr>\n";
-                                                                                
-                                                                            
+                                                                                $totalMembers = $row["MembersM"]+$row["MembersF"]; 
+                                                                            echo "<tr>\n"; 
                                                                                 echo "<td>".$row["groupID"]."</td>\n";
                                                                                 echo "<td>".$row["groupname"]."</td>\n";
-                                                                                echo "\t\t<td>$dis</td>\n";
+                                                                                echo "<td>".$row["MembersM"]."</td>\n";
+                                                                                echo "<td>".$row["MembersF"]."</td>\n";
+                                                                                echo "<td>\t\t$totalMembers</td>\n";                          
                                                                                 echo "<td>
-                                                                                    <a href=\"basicSLGTraining_view.php?id=".$row['groupID']."\"><i class='far fa-eye' title='Training Status' style='font-size:18px'></i></a>                                                                           
-                                                                                    <a href=\"add_basicTrainingGD.php?id=".$row['groupID']."\" ><i class='fas fa-pen' title='Record Training' style='font-size:18px'></i></a>                                                                            
+                                                                                    <a href=\"basicSLGTraining_view.php?id=".$row['groupID']."\"><i class='far fa-eye' title='Training Status' style='font-size:18px;color:purple'></i></a>                                                                           
+                                                                                    <a href=\"add_basicTrainingGD.php?id=".$row['groupID']."\" ><i class='fas fa-pen' title='Record Training' style='font-size:18px;color:green'></i></a>                                                                            
                                                                                     <a href=\"basicSLGTrainingReport.php?id=".$row['groupID']."\" ><i class='far fa-folder-open' title='Training Report' style='font-size:18px'></i></a>    
                                                                                 </td>\n";
                                                                             echo "</tr>\n";

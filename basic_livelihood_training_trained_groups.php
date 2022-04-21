@@ -12,6 +12,18 @@
     <!-- Responsive datatable examples -->
     <link href="assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
 
+    <!--Datatable plugin CSS file -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" />
+  
+  <!--jQuery library file -->
+  <script type="text/javascript" 
+      src="https://code.jquery.com/jquery-3.5.1.js">
+  </script>
+
+  <!--Datatable plugin JS library file -->
+  <script type="text/javascript" 
+src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
+  </script>
 </head>
 
 <?php include 'layouts/body.php'; ?>
@@ -168,7 +180,7 @@
 
                                                         
                                                         <div class="col-12">
-                                                            <button type="submit" class="btn btn-primary w-md" name="Submit" value="Submit">Submit</button>
+                                                            <button type="submit" class="btn btn-btn btn-outline-primary w-md" name="Submit" value="Submit">Submit</button>
                                                         </div>
                                                     </form>                                             
                                                     <!-- End Here -->
@@ -222,7 +234,7 @@
                                                                                         echo "<td>".$row["cohort"]."</td>\n";
                                                                                         echo "<td>".$row["MembersM"]."</td>\n";
                                                                                         echo "<td>".$row["MembersF"]."</td>\n";
-                                                                                        echo "<td><a href=\"basicSLGTraining_view.php?id=".$row['groupID']."\"><i class='far fa-eye' title='View Training Details' style='font-size:18px'></i></a></td>\n";
+                                                                                        echo "<td><a href=\"basicSLGTraining_view.php?id=".$row['groupID']."\"><i class='far fa-eye' title='View Training Details' style='font-size:18px;color:purple'></i></a></td>\n";
                                                                                     echo "</tr>\n";
                                                                                 } 
                                                                 

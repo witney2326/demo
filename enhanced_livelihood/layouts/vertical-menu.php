@@ -98,7 +98,7 @@
                 <li class="menu-title" key="t-menu"><?php echo $language["Menu"]; ?></li>
 
                 <li>
-                    <a href="index.php" class="waves-effect">
+                    <a href="../index.php" class="waves-effect">
                         <i class="bx bx-home-circle"></i><span class="badge rounded-pill bg-info float-end"></span>
                         <span key="t-dashboards">CIMIS Dashboard</span>
                     </a>
@@ -116,7 +116,7 @@
                         </li>
 
                         <li>
-                            <a href="enhanced_livelihood/enhanced_livelihood.php" class="has-arrow" key="t-horizontal">Enhanced Livelihood</a>
+                            <a href="../enhanced_livelihood/enhanced_livelihood.php" class="has-arrow" key="t-horizontal">Enhanced Livelihood</a>
                             <ul class="sub-menu" aria-expanded="true">
                             </ul>
                         </li>
