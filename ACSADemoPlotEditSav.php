@@ -23,31 +23,40 @@
             $plot = $_POST['plot'];
             $acreage = $_POST['acreage'];
             
-            if (isset($plot) and ($acreage > 0)) 
-            {
-            
-                $sql = mysqli_query($link,"update tblacsademoplot  SET plot = '$plot', acreage ='$acreage' where id = '$Rec_ID'");
-                    
-                if ($sql) 
-                    {
-                        echo '<script type="text/javascript">'; 
-                        echo 'alert("Demo Plot Record has been EDITED successfully !");'; 
-                        echo 'window.location.href = "basic_livelihood_acsa_mgt.php";';
-                        echo '</script>';
-                    } 
-                else 
-                    {
-                        echo "Error: " . $sql . ":-" . mysqli_error($link);
-                    }
-            }
-            else 
+            if (($Rec_ID =='') or (empty($Rec_ID)))
             {
                 echo '<script type="text/javascript">'; 
-                echo 'alert("Acreage cannot be ZERO OR Plot is unset!");'; 
-                echo 'window.location.href = "basic_livelihood_acsa_mgt.php";';
-                echo '</script>';
-            }
-            mysqli_close($link);
+                    echo 'alert("No Demo Plot, Please Set Plot First");'; 
+                    echo 'window.location.href = "basic_livelihood_acsa_mgt.php";';
+                    echo '</script>';
+            } else
+            {        
+                if (isset($plot) and ($acreage > 0)) 
+                {
+                
+                    $sql = mysqli_query($link,"update tblacsademoplot  SET plot = '$plot', acreage ='$acreage' where id = '$Rec_ID'");
+                        
+                    if ($sql) 
+                        {
+                            echo '<script type="text/javascript">'; 
+                            echo 'alert("Demo Plot Record has been EDITED successfully !");'; 
+                            echo 'window.location.href = "basic_livelihood_acsa_mgt.php";';
+                            echo '</script>';
+                        } 
+                    else 
+                        {
+                            echo "Error: " . $sql . ":-" . mysqli_error($link);
+                        }
+                }
+                else 
+                {
+                    echo '<script type="text/javascript">'; 
+                    echo 'alert("Acreage cannot be ZERO OR Plot is unset!");'; 
+                    echo 'window.location.href = "basic_livelihood_acsa_mgt.php";';
+                    echo '</script>';
+                }
+                mysqli_close($link);
+                }
             }
                
     ?>

@@ -32,7 +32,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
    
         $region = $_GET["region"];
         $district =$_GET["district"];
-    
+        $ta =$_GET["ta"];
     
         
         function dis_name($link, $disID)
@@ -116,11 +116,11 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                             <!--start here -->
                                             <div class="card border border-primary">
                                                 <div class="card-header bg-transparent border-primary">
-                                                    <h5 class="my-0 text-primary"></i>Pyschosocial Clinics Filter:</h5>
+                                                    <h5 class="my-0 text-primary">Pyschosocial Clinics Filter:</h5>
                                                 </div>
                                                 <div class="card-body">
                                                     <h5 class="card-title mt-0"></h5>
-                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="basic_livelihood_pyschosocial_clinics_filter3.php" method ="GET">
+                                                    <form class="row row-cols-lg-auto g-3 align-items-center" >
                                                         <div class="col-12">
                                                             <label for="region" class="form-label">Region</label>
                                                             <div>
@@ -141,28 +141,16 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
                                                         <div class="col-12">
                                                             <label for="ta" class="form-label">Traditional Authority</label>
-                                                            <select class="form-select" name="ta" id="ta"  required>
-                                                                <option ></option>
-                                                                    <?php                                                           
-                                                                        $ta_fetch_query = "SELECT TAID,TAName FROM tblta where districtID = '$district'";                                                  
-                                                                        $result_ta_fetch = mysqli_query($link, $ta_fetch_query);                                                                       
-                                                                        $i=0;
-                                                                            while($DB_ROW_ta = mysqli_fetch_array($result_ta_fetch)) {
-                                                                        ?>
-                                                                        <option value="<?php echo $DB_ROW_ta["TAID"]; ?>">
-                                                                            <?php echo $DB_ROW_ta["TAName"]; ?></option><?php
-                                                                            $i++;
-                                                                                }
-                                                                    ?>
+                                                            <select class="form-select" name="ta" id="ta" value ="<?php echo $ta;?>" required>
+                                                                <option selected value="<?php echo $ta;?>"><?php echo ta_name($link,$ta);?></option>
+                                                                    
                                                             </select>
-                                                            <div class="invalid-feedback">
-                                                                Please select a valid TA.
-                                                            </div>
+                                                            
                                                         </div>
 
                                                         
                                                         <div class="col-12">
-                                                        <button type="submit" class="btn btn-btn btn-outline-primary w-md" name="Submit" value="Submit">Submit</button>
+                                                        
                                                             <INPUT TYPE="button" class="btn btn-btn btn-outline-secondary w-md" VALUE="Back" onClick="history.go(-1);">
                                                         </div>
                                                     </form>                                             
@@ -174,7 +162,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                 <div class="col-12">
                                                     <div class="card border border-primary">
                                                     <div class="card-header bg-transparent border-primary">
-                                                        <h5 class="my-0 text-primary">Clinics Conducted in <?php echo dis_name($link,$district); ?></h5>
+                                                        <h5 class="my-0 text-primary">Clinics Conducted in TA: <?php echo ta_name($link,$ta); ?></h5>
                                                     </div>
                                                     <div class="card-body">
                                                     <h5 class="card-title mt-0"></h5>
@@ -198,7 +186,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                                 <tbody>
                                                                     <?Php
                                                                        
-                                                                        $query="select * from tblclinics where districtID ='$district'";
+                                                                        $query="select * from tblclinics where ta ='$ta'";
 
                                                                     //Variable $link is declared inside config.php file & used here
                                                                     

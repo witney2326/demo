@@ -12,15 +12,26 @@
     <!-- Responsive datatable examples -->
     <link href="assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
 
+     <!--Datatable plugin CSS file -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" />
+  
+  <!--jQuery library file -->
+  <script type="text/javascript" 
+      src="https://code.jquery.com/jquery-3.5.1.js">
+  </script>
+
+  <!--Datatable plugin JS library file -->
+  <script type="text/javascript" 
+src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
+  </script>
 </head>
 
 <?php include 'layouts/body.php'; ?>
 
 <?php 
-    if(isset($_GET['Submit']))
-    {   
-        $region = $_GET['region'];
-    }
+    
+$region = $_GET['region'];
+ 
     
     function get_rname($link, $rcode)
         {
@@ -110,7 +121,7 @@
                                             <!--start here -->
                                             <div class="card border border-primary">
                                                 <div class="card-header bg-transparent border-primary">
-                                                    <h5 class="my-0 text-primary"></i>Pyschosocial Clinics Filter</h5>
+                                                    <h5 class="my-0 text-primary">Pyschosocial Clinics Filter</h5>
                                                 </div>
                                                 <div class="card-body">
                                                     <h5 class="card-title mt-0"></h5>
@@ -118,16 +129,16 @@
                                                         <div class="col-12">
                                                             <label for="region" class="form-label">Region</label>
                                                             <div>
-                                                                <select class="form-select" name="region" id="region" value ="$region" required>
-                                                                    <option selected value = "$region"><?php echo get_rname($link,$_GET['region']);?></option>
+                                                                <select class="form-select" name="region" id="region" value ="<?php echo $region;?>"required>
+                                                                    <option selected value = "<?php echo $region; ?>"><?php echo get_rname($link,$region);?></option>
                                                                 </select>
                                                             </div>
                                                         </div>
                                                         
                                                         <div class="col-12">
                                                             <label for="district" class="form-label">District</label>
-                                                            <select class="form-select" name="district" id="district" value ="$district" required>
-                                                                <option selected value="$district" ></option>
+                                                            <select class="form-select" name="district" id="district" required>
+                                                                <option></option>
                                                                     <?php                                                           
                                                                         $dis_fetch_query = "SELECT DistrictID,DistrictName FROM tbldistrict where regionID =$region";                                                  
                                                                         $result_dis_fetch = mysqli_query($link, $dis_fetch_query);                                                                       
@@ -168,8 +179,8 @@
 
                                                         
                                                         <div class="col-12">
-                                                            <button type="submit" class="btn btn-primary w-md" name="Submit" value="Submit">Submit</button>
-                                                            <INPUT TYPE="button" VALUE="Back" onClick="history.go(-1);">
+                                                            <button type="submit" class="btn btn-btn btn-outline-primary w-md" name="Submit" value="Submit">Submit</button>
+                                                            <INPUT TYPE="button" class="btn btn-btn btn-outline-secondary w-md" VALUE="Back" onClick="history.go(-1);">
                                                         </div>
                                                     </form>                                             
                                                     <!-- End Here -->
@@ -225,8 +236,8 @@
                                                                     echo "<td>".$row["femalesNo"]."</td>\n";
                                                                     echo "<td>".$row["malesNo"]."</td>\n";
                                                                     echo "<td>
-                                                                        <a href=\"basicAwarenessMeetingview.php?id=".$row['clinicID']."\">view</a>
-                                                                        <a href=\"basicAwarenessMeetingDelete.php?id=".$row['clinicID']."\">delete</a>    
+                                                                        <a href=\"CBDRAclinicView.php?id=".$row['clinicID']."\"><i class='far fa-eye' title='Clinic Details' style='font-size:18px;color:purple'></i></a>
+                                                                        <a onClick=\"javascript: return confirm('Are You Sure You want To Delete This Clinic Record - You Must Be a Supervisor');\" href=\"CBDRAclinicDelete.php?id=".$row['clinicID']."\"><i class='far fa-trash-alt' title='Delete Clinic' style='font-size:18px;color:red'></i></a>        
                                                                             
                                                                         </td>\n";
                                                                     echo "</tr>\n";

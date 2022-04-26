@@ -12,6 +12,18 @@
     <!-- Responsive datatable examples -->
     <link href="assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
 
+     <!--Datatable plugin CSS file -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" />
+  
+  <!--jQuery library file -->
+  <script type="text/javascript" 
+      src="https://code.jquery.com/jquery-3.5.1.js">
+  </script>
+
+  <!--Datatable plugin JS library file -->
+  <script type="text/javascript" 
+src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
+  </script>
 </head>
 
 <?php include 'layouts/body.php'; 
@@ -91,16 +103,11 @@
                                     <li class="nav-item waves-effect waves-light">
                                         <a class="nav-link" data-bs-toggle="tab" href="#new-meeting" role="tab">
                                             <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
-                                            <span class="d-none d-sm-block">New Clinic</span>
+                                            <span class="d-none d-sm-block">New Psychosocial Clinic</span>
                                         </a>
                                     </li>
 
-                                    <li class="nav-item waves-effect waves-light">
-                                        <a class="link"  href="basic_livelihood_psychosocial_clinics_reports.php" role="link">
-                                            <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
-                                            <span class="d-none d-sm-block">Pyschosocial clinics Reports</span>
-                                        </a>
-                                    </li>
+                                    
                                     
                                 </ul>
 
@@ -190,7 +197,8 @@
 
                                                                                                                 
                                                         <div class="col-12">
-                                                            <button type="submit" class="btn btn-primary w-md" name="Submit" value="Submit">Submit</button>
+                                                            <button type="submit" class="btn btn-btn btn-outline-primary w-md" name="Submit" value="Submit">Submit</button>
+                                                            <INPUT TYPE="button" class="btn btn-btn btn-outline-secondary w-md" VALUE="Back" onClick="history.go(-1);">
                                                         </div>
                                                     </form>                                             
                                                     <!-- End Here -->
@@ -201,7 +209,7 @@
                                                     <div class="col-12">
                                                         <div class="card border border-primary">
                                                         <div class="card-header bg-transparent border-primary">
-                                                            <h5 class="my-0 text-primary"><i class="mdi mdi-bullseye-arrow me-3"></i>Clinics Conducted</h5>
+                                                            <h5 class="my-0 text-primary">Clinics Conducted</h5>
                                                         </div>
                                                         <div class="card-body">
                                                         <h5 class="card-title mt-0"></h5>
@@ -247,7 +255,7 @@
                                                                             echo "<td>".$row["malesNo"]."</td>\n";
                                                                             echo "<td>
                                                                             <a href=\"CBDRAclinicView.php?id=".$row['clinicID']."\"><i class='far fa-eye' title='View Clinic' style='font-size:18px'></i></a>
-                                                                            <a onClick=\"javascript: return confirm('Are You Sure You want To Delete This Clinic Record - You Must Be a Supervisor');\" href=\"CBDRAclinicDelete.php?id=".$row['clinicID']."\"><i class='far fa-trash-alt' title='Delete Clinic' style='font-size:18px'></i></a>    
+                                                                            <a onClick=\"javascript: return confirm('Are You Sure You want To Delete This Clinic Record - You Must Be a Supervisor');\" href=\"CBDRAclinicDelete.php?id=".$row['clinicID']."\"><i class='far fa-trash-alt' title='Delete Clinic' style='font-size:18px;color:red'></i></a>    
                                                                                 
                                                                             </td>\n";
                                                                         echo "</tr>\n";

@@ -285,6 +285,14 @@
                                                 <td><?php echo number_format($hotspots);  echo ' Hotspot(s)';  ?></td>
                                             </tr>
                                             <tr>
+                                                <th scope="row"></th>
+                                                <td></td>
+                                                <td></td>
+                                                
+                                                <td><a href="basic_livelihood_psychosocial_clinics_reports.php">Pyschosocial Clinics</a></td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
                                                 <th scope="row">6</th>
                                                 <td>Environmental and Social Safeguards</td>
                                                 <td>ESMPs</td>

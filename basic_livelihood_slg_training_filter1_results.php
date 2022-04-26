@@ -209,7 +209,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                                                 echo "<td>
                                                                                     <a href=\"basicSLGTraining_view.php?id=".$row['groupID']."\"><i class='far fa-eye' title='Training Status' style='font-size:18px;color:purple'></i></a>                                                                           
                                                                                     <a href=\"add_basicTrainingGD.php?id=".$row['groupID']."\" ><i class='fas fa-pen' title='Record Training' style='font-size:18px;color:green'></i></a>                                                                            
-                                                                                    <a href=\"basicSLGTrainingReport.php?id=".$row['groupID']."\" ><i class='far fa-folder-open' title='Training Report' style='font-size:18px'></i></a>    
+                                                                                    
                                                                                 </td>\n";
                                                                             echo "</tr>\n";
                                                                             }
