@@ -4,16 +4,10 @@
 <head>
     <title>Household Status|SCT Verification</title>
     <?php include 'layouts/head.php'; ?>
-    <?php include 'layouts/head-style.php'; ?>
-
-}
-    
+    <?php include 'layouts/head-style.php'; ?>  
 </head>
 
 <div id="layout-wrapper">
-
-    <?php include 'layouts/menu.php'; ?>
-
     <?php
         include "layouts/config.php";   
         
@@ -67,9 +61,6 @@
             echo 'window.location.href = "basic_livelihood_hh_mgt.php";';
             echo '</script>';
         }
-        mysqli_close($link);
-            
-               
+        mysqli_close($link);        
     ?>
-    
 </div>

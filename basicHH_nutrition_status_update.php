@@ -5,10 +5,6 @@
     <title>SLG |Household Savings</title>
     <?php include 'layouts/head.php'; ?>
     <?php include 'layouts/head-style.php'; ?>
-
-}
-    
-
 </head>
 
 <div id="layout-wrapper">

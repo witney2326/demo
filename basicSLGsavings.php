@@ -5,16 +5,9 @@
     <title>SLG |Group Savings</title>
     <?php include 'layouts/head.php'; ?>
     <?php include 'layouts/head-style.php'; ?>
-
-}
-    
-
 </head>
 
 <div id="layout-wrapper">
-
-    <?php include 'layouts/menu.php'; ?>
-
     <?php
         include "layouts/config.php"; // Using database connection file here
         
@@ -74,7 +67,7 @@
                         <div class="col-lg-9">
                             <div class="card border border-success">
                                 <div class="card-header bg-transparent border-success">
-                                    <h5 class="my-0 text-success"><i class="mdi mdi-check-all me-3"></i>Update Savings Record for the Indicated Group</h5>
+                                    <h5 class="my-0 text-success">Update Savings Record for the Indicated Group</h5>
                                 </div>
                                 <div class="card-body">
                                     

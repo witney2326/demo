@@ -13,7 +13,6 @@ session_start();
 
 <div id="layout-wrapper">
 
-    <?php include 'layouts/menu.php'; ?>
 
     <?php
         

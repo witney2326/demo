@@ -96,7 +96,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                             <!--start here -->
                                             <div class="card border border-primary">
                                                 <div class="card-header bg-transparent border-primary">
-                                                    <h5 class="my-0 text-primary"><i class="mdi mdi-bullseye-arrow me-3"></i>SLG Member Filter</h5>
+                                                    <h5 class="my-0 text-primary">SLG Member Filter</h5>
                                                 </div>
                                                 <div class="card-body">
                                                     <h5 class="card-title mt-0"></h5>
