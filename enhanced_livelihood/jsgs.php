@@ -181,9 +181,9 @@
                                                                 echo "<td>".$row["groupID"]."</td>\n";
                                                                 
                                                                 echo "<td>
-                                                                    <a href=\"basicCLSview.php?id=".$row['groupID']."\"><i class='far fa-eye' title='View JSG' style='font-size:18px'></i></a>
-                                                                    <a href=\".php?id=".$row['groupID']."\"><i class='far fa-edit' title='Edit JSG Details' style='font-size:18px'></i></a>
-                                                                    <a href=\".php?id=".$row['groupID']."\"><i class='far fa-trash-alt' title='Delete JSG' style='font-size:18px'></i></a>    
+                                                                    <a href=\"jsg_view.php?id=".$row['recID']."\"><i class='far fa-eye' title='View JSG' style='font-size:18px'></i></a>
+                                                                    <a href=\".php?id=".$row['recID']."\"><i class='far fa-edit' title='Edit JSG Details' style='font-size:18px'></i></a>
+                                                                    <a href=\".php?id=".$row['recID']."\"><i class='far fa-trash-alt' title='Delete JSG' style='font-size:18px'></i></a>    
                                                                 </td>\n";
 
                                                             echo "</tr>\n";

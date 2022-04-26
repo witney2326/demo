@@ -224,51 +224,51 @@
                                     <li class="nav-item waves-effect waves-light">
                                         <a class="nav-link active" data-bs-toggle="tab" href="#home" role="tab">
                                             <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
-                                            <span class="d-none d-sm-block">Home</span>
+                                            <span class="d-none d-sm-block">Enhanced Lvhd Dashboard</span>
                                         </a>
                                     </li>
                                     
                                     <li class="nav-item waves-effect waves-light">
                                         <a class="link" data-bs-toggle="link" href="jsg.php" role="link">
                                             <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
-                                            <span class="d-none d-sm-block">JSGs</span>
+                                            <span class="d-none d-sm-block">Joint Skill Groups</span>
                                         </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">
                                         <a class="link" data-bs-toggle="link" href="ycs.php" role="link">
                                             <span class="d-block d-sm-none"><i class="fas fa-cog"></i></span>
-                                            <span class="d-none d-sm-block">YCS</span>
+                                            <span class="d-none d-sm-block">Youth Challenge Support</span>
                                         </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">
                                         <a class="link" data-bs-toggle="link" href="cmt.php" role="link">
                                             <span class="d-block d-sm-none"><i class="fas fa-cog"></i></span>
-                                            <span class="d-none d-sm-block">CMT</span>
+                                            <span class="d-none d-sm-block">Coop Management Training</span>
                                         </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">
                                         <a class="nav-link" data-bs-toggle="link" href="vc_production_clusters.php" role="link">
                                             <span class="d-block d-sm-none"><i class="fas fa-cog"></i></span>
-                                            <span class="d-none d-sm-block">Coop VC</span>
+                                            <span class="d-none d-sm-block">Coop Value Chain</span>
                                         </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">
                                         <a class="nav-link" data-bs-toggle="tab" href="#lesp" role="tab">
                                             <span class="d-block d-sm-none"><i class="fas fa-cog"></i></span>
-                                            <span class="d-none d-sm-block">LESP</span>
+                                            <span class="d-none d-sm-block">Legumes ES Production</span>
                                         </a>
                                     </li>
                                     
                                     <li class="nav-item waves-effect waves-light">
                                         <a class="nav-link" data-bs-toggle="tab" href="#esmp" role="tab">
                                             <span class="d-block d-sm-none"><i class="fas fa-cog"></i></span>
-                                            <span class="d-none d-sm-block">Safeguards</span>
+                                            <span class="d-none d-sm-block">Safeguards Management</span>
                                         </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">
                                         <a class="nav-link" data-bs-toggle="link" href="enhancedReports.php" role="link">
                                             <span class="d-block d-sm-none"><i class="fas fa-cog"></i></span>
-                                            <span class="d-none d-sm-block">Reports</span>
+                                            <span class="d-none d-sm-block">Enhanced Reports</span>
                                         </a>
                                     </li>
 
