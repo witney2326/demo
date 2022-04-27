@@ -16,9 +16,10 @@
 
 <?php include 'layouts/body.php'; ?>
 
-<?php 
+<?php  
     $region = $_GET['region'];
     $district =$_GET['district'];
+    $ta =$_GET['ta'];
     
     function get_rname($link, $rcode)
         {
@@ -32,6 +33,13 @@
         $dis_query = mysqli_query($link,"select DistrictName from tbldistrict where DistrictID='$disID'"); // select query
         $dis = mysqli_fetch_array($dis_query);// fetch data
         return $dis['DistrictName'];
+        }
+
+        function ta_name($link, $tacode)
+        {
+        $ta_query = mysqli_query($link,"select TAName from tblta where TAID='$tacode'"); // select query
+        $taname = mysqli_fetch_array($ta_query);// fetch data
+        return $taname['TAName'];
         }
 ?>
 
@@ -52,12 +60,12 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                        <h4 class="mb-sm-0 font-size-18">Joint skill Groups - Clusters</h4>
+                        <h4 class="mb-sm-0 font-size-18">JSGs:Busines Development Services</h4>
 
                         <div class="page-title-right">
                             <ol class="breadcrumb m-0">
-                                <li class="breadcrumb-item"><a href="jsg_formation.php">JSG Formation</a></li>
-                                <li class="breadcrumb-item active">JSG Clusters</li>
+                                <li class="breadcrumb-item"><a href="jsg.php">JSG Dashboard</a></li>
+                                <li class="breadcrumb-item active">JSGs:Busines Development Services</li>
                             </ol>
                         </div>
 
@@ -87,11 +95,11 @@
                                             <!--start here -->
                                             <div class="card border border-primary">
                                                 <div class="card-header bg-transparent border-primary">
-                                                    <h5 class="my-0 text-primary">JSG Filter</h5>
+                                                    <h5 class="my-0 text-primary">JSG Filter:</h5>
                                                 </div>
                                                 <div class="card-body">
                                                     <h5 class="card-title mt-0"></h5>
-                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="jsgs_filter3.php" method ="GET">
+                                                    <form class="row row-cols-lg-auto g-3 align-items-center" >
                                                         <div class="col-12">
                                                             <label for="region" class="form-label">Region</label>
                                                             <div>
@@ -110,9 +118,16 @@
                                                             </div>
                                                         </div>
 
-                                                        
                                                         <div class="col-12">
-                                                            <button type="submit" class="btn btn-btn btn-outline-primary w-md" name="Submit" value="Submit" disabled>Submit</button>
+                                                            <label for="ta" class="form-label">Traditional Authority</label>
+                                                            <select class="form-select" name="ta" id="ta" required>
+                                                                <option selected value = "<?php echo $ta;?>"><?php echo ta_name($link,$ta);?></option>
+                                                                
+                                                            </select>
+                                                            
+                                                        </div>
+                                                        <div class="col-12">
+                                                            
                                                             <INPUT TYPE="button" class="btn btn-btn btn-outline-secondary w-md" VALUE="Back" onClick="history.go(-1);">
                                                         </div>
                                                     </form>                                             
@@ -132,17 +147,17 @@
                                                             <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
                                                             
                                                                 <thead>
-                                                                    <tr>
+                                                                    <tr>  
                                                                         <th>JSG code</th>
                                                                         <th>JSG Name</th>
                                                                         <th>District</th>
-                                                                        <th>SLG/Cluster Code</th>
+                                                                        <th>SLG/Cluster Name</th>
                                                                         <th>Action</th>
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
                                                                     <?Php
-                                                                        $query="select * from tbljsg where districtID = '$district'";
+                                                                        $query="select * from tbljsg where taID = '$ta'";
  
                                                                         //Variable $link is declared inside config.php file & used here
                                                                         
@@ -156,11 +171,11 @@
                                                                             echo "<td>".$row["jsg_name"]."</td>\n";
                                                                             echo "<td>".$row["districtID"]."</td>\n";
                                                                             echo "<td>".$row["groupID"]."</td>\n";
-
+                                                                            
                                                                             echo "<td>
                                                                                 <a href=\"basicCLSview.php?id=".$row['groupID']."\"><i class='far fa-eye' title='View JSG' style='font-size:18px;color:purple'></i></a>
-                                                                                <a href=\".php?id=".$row['groupID']."\"><i class='far fa-edit' title='Edit JSG Details' style='font-size:18px;color:green'></i></a>
-                                                                                <a href=\".php?id=".$row['groupID']."\"><i class='far fa-trash-alt' title='Delete JSG' style='font-size:18px'></i></a>    
+                                                                                <a href=\"basicCLSedit.php?id=".$row['groupID']."\"><i class='far fa-edit' title='Edit JSG Details' style='font-size:18px;color:green'></i></a>
+                                                                                <a href=\"basicCLSdelete.php?id=".$row['groupID']."\"><i class='far fa-trash-alt' title='Delete JSG' style='font-size:18px'></i></a>    
                                                                             </td>\n";
 
                                                                         echo "</tr>\n";

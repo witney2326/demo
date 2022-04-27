@@ -2,7 +2,7 @@
 <?php include 'layouts/head-main.php'; ?>
 
 <head>
-    <title>Joint Skill Groups</title>
+    <title>JSGs - Busines Plans</title>
     <?php include 'layouts/head.php'; ?>
     <?php include 'layouts/head-style.php'; ?>
     <?php include 'layouts/config.php'; ?>
@@ -52,12 +52,12 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                        <h4 class="mb-sm-0 font-size-18">Joint skill Groups - Clusters</h4>
+                        <h4 class="mb-sm-0 font-size-18">JSGs - Busines Plans</h4>
 
                         <div class="page-title-right">
                             <ol class="breadcrumb m-0">
-                                <li class="breadcrumb-item"><a href="jsg_formation.php">JSG Formation</a></li>
-                                <li class="breadcrumb-item active">JSG Clusters</li>
+                                <li class="breadcrumb-item"><a href="jsg.php">JSG Dashboard</a></li>
+                                <li class="breadcrumb-item active">JSGs - Busines Plans</li>
                             </ol>
                         </div>
 
@@ -91,7 +91,7 @@
                                                 </div>
                                                 <div class="card-body">
                                                     <h5 class="card-title mt-0"></h5>
-                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="jsgs_filter3.php" method ="GET">
+                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="jsgs_bds_filter3.php" method ="GET">
                                                         <div class="col-12">
                                                             <label for="region" class="form-label">Region</label>
                                                             <div>

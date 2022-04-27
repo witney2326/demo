@@ -2,7 +2,7 @@
 <?php include 'layouts/head-main.php'; ?>
 
 <head>
-    <title>Joint Skill Groups</title>
+    <title>YCS|Concept Development</title>
     <?php include 'layouts/head.php'; ?>
     <?php include 'layouts/head-style.php'; ?>
     <?php include 'layouts/config.php'; ?>
@@ -12,13 +12,24 @@
     <!-- Responsive datatable examples -->
     <link href="assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
 
+    <!--Datatable plugin CSS file -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" />
+  
+  <!--jQuery library file -->
+  <script type="text/javascript" 
+      src="https://code.jquery.com/jquery-3.5.1.js">
+  </script>
+
+  <!--Datatable plugin JS library file -->
+  <script type="text/javascript" 
+src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
+  </script>
 </head>
 
 <?php include 'layouts/body.php'; ?>
 
 <?php 
     $region = $_GET['region'];
-    $district =$_GET['district'];
     
     function get_rname($link, $rcode)
         {
@@ -52,14 +63,14 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                        <h4 class="mb-sm-0 font-size-18">Joint skill Groups - Clusters</h4>
+                            <h4 class="mb-sm-0 font-size-18">YCS - Concept Development</h4>
 
-                        <div class="page-title-right">
-                            <ol class="breadcrumb m-0">
-                                <li class="breadcrumb-item"><a href="jsg_formation.php">JSG Formation</a></li>
-                                <li class="breadcrumb-item active">JSG Clusters</li>
-                            </ol>
-                        </div>
+                            <div class="page-title-right">
+                                <ol class="breadcrumb m-0">
+                                <li class="breadcrumb-item"><a href="ycs.php">YCS Dashboard</a></li>
+                                    <li class="breadcrumb-item active">Concept Development</li>
+                                </ol>
+                            </div>
 
                         </div>
                     </div>
@@ -87,32 +98,50 @@
                                             <!--start here -->
                                             <div class="card border border-primary">
                                                 <div class="card-header bg-transparent border-primary">
-                                                    <h5 class="my-0 text-primary">JSG Filter</h5>
+                                                    <h5 class="my-0 text-primary"></i>SLG Search Filter</h5>
                                                 </div>
                                                 <div class="card-body">
                                                     <h5 class="card-title mt-0"></h5>
-                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="jsgs_filter3.php" method ="GET">
+                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="ycs_mgt_filter2.php" method ="GET">
                                                         <div class="col-12">
                                                             <label for="region" class="form-label">Region</label>
                                                             <div>
                                                                 <select class="form-select" name="region" id="region" value ="$region" required>
-                                                                    <option selected value = "<?php echo $region;?>"><?php echo get_rname($link,$region);?></option>
+                                                                    <option selected value = "<?php echo $region; ?>"><?php echo get_rname($link,$region);?></option>
                                                                 </select>
                                                             </div>
                                                         </div>
                                                         
                                                         <div class="col-12">
                                                             <label for="district" class="form-label">District</label>
-                                                            <div>
-                                                                <select class="form-select" name="district" id="district" value ="$district" required>
-                                                                    <option selected value = "<?php echo $district;?>"><?php echo dis_name($link,$district);?></option>
-                                                                </select>
-                                                            </div>
+                                                            <select class="form-select" name="district" id="district" value ="" required>
+                                                                <option></option>
+                                                                    <?php                                                           
+                                                                        $dis_fetch_query = "SELECT DistrictID,DistrictName FROM tbldistrict where regionID ='$region'";                                                  
+                                                                        $result_dis_fetch = mysqli_query($link, $dis_fetch_query);                                                                       
+                                                                        $i=0;
+                                                                            while($DB_ROW_Dis = mysqli_fetch_array($result_dis_fetch)) {
+                                                                        ?>
+                                                                        <option value="<?php echo $DB_ROW_Dis["DistrictID"]; ?>">
+                                                                            <?php echo $DB_ROW_Dis["DistrictName"]; ?></option><?php
+                                                                            $i++;
+                                                                                }
+                                                                    ?>
+                                                            </select>
                                                         </div>
 
-                                                        
                                                         <div class="col-12">
-                                                            <button type="submit" class="btn btn-btn btn-outline-primary w-md" name="Submit" value="Submit" disabled>Submit</button>
+                                                            <label for="ta" class="form-label">Traditional Authority</label>
+                                                            <select class="form-select" name="ta" id="ta" required disabled>
+                                                                
+                                                                
+                                                            </select>
+                                                            <div class="invalid-feedback">
+                                                                Please select a valid TA.
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-12">
+                                                            <button type="submit" class="btn btn-btn btn-outline-primary w-md" name="Submit" value="Submit">Submit</button>
                                                             <INPUT TYPE="button" class="btn btn-btn btn-outline-secondary w-md" VALUE="Back" onClick="history.go(-1);">
                                                         </div>
                                                     </form>                                             
@@ -124,7 +153,7 @@
                                                 <div class="col-12">
                                                     <div class="card border border-primary">
                                                     <div class="card-header bg-transparent border-primary">
-                                                        <h5 class="my-0 text-primary">Joint Skill Groups in <?php echo dis_name($link,$district); ?></h5>
+                                                        <h5 class="my-0 text-primary">Youth Challenge Beneficiaries in <?php echo get_rname($link,$region);?> Region</h5>
                                                     </div>
                                                     <div class="card-body">
                                                     <h7 class="card-title mt-0"></h7>
@@ -133,34 +162,46 @@
                                                             
                                                                 <thead>
                                                                     <tr>
-                                                                        <th>JSG code</th>
-                                                                        <th>JSG Name</th>
-                                                                        <th>District</th>
-                                                                        <th>SLG/Cluster Code</th>
-                                                                        <th>Action</th>
+                                                                        <th>SLG code</th>
+                                                                        <th>SLG Name</th>
+                                                                        <th>cohort</th>
+                                                                        <th>YCS Mapped?</th>
+                                                                        <th>Youths Linked</th>
+                                                                        <th>Action On SLG</th> 
                                                                     </tr>
                                                                 </thead>
+
+
                                                                 <tbody>
                                                                     <?Php
-                                                                        $query="select * from tbljsg where districtID = '$district'";
+                                                                        $query="select * from tblgroup where regionID = '0'";
  
                                                                         //Variable $link is declared inside config.php file & used here
                                                                         
                                                                         if ($result_set = $link->query($query)) {
                                                                         while($row = $result_set->fetch_array(MYSQLI_ASSOC))
                                                                         { 
-                                                                        echo "<tr>\n";
-                                                                            
-                                                                        
-                                                                            echo "<td>".$row["recID"]."</td>\n";
-                                                                            echo "<td>".$row["jsg_name"]."</td>\n";
-                                                                            echo "<td>".$row["districtID"]."</td>\n";
-                                                                            echo "<td>".$row["groupID"]."</td>\n";
+                                                                            $db_mapped = (string) $row["ycs_mapped"];
+                                                                            if ($db_mapped =='1'){$mapped = 'Yes';}
+                                                                            if ($db_mapped =='0'){$mapped = 'No';}
 
+                                                                            $grp = $row["groupID"];
+
+                                                                            $result1 = mysqli_query($link, "SELECT COUNT(recID) AS value_sum FROM tblycs WHERE groupID = '$grp'"); 
+                                                                            $row2 = mysqli_fetch_assoc($result1); 
+                                                                            $youths = $row2['value_sum'];
+
+                                                                        echo "<tr>\n";
+                                                                            echo "<td>".$row["groupID"]."</td>\n";
+                                                                            echo "<td>".$row["groupname"]."</td>\n";
+                                                                            echo "<td>".$row["cohort"]."</td>\n";
+                                                                            echo "<td>\t\t$mapped</td>\n";
+                                                                            echo "<td>\t\t$youths</td>\n";
                                                                             echo "<td>
-                                                                                <a href=\"basicCLSview.php?id=".$row['groupID']."\"><i class='far fa-eye' title='View JSG' style='font-size:18px;color:purple'></i></a>
-                                                                                <a href=\".php?id=".$row['groupID']."\"><i class='far fa-edit' title='Edit JSG Details' style='font-size:18px;color:green'></i></a>
-                                                                                <a href=\".php?id=".$row['groupID']."\"><i class='far fa-trash-alt' title='Delete JSG' style='font-size:18px'></i></a>    
+                                                                                <a href=\"../basicSLGview.php?id=".$row['groupID']."\"><i class='far fa-eye' title='View SLG' style='font-size:18px'></i></a>                                                                           
+                                                                                <a href=\"view_JSG.php?id=".$row['groupID']."\"><i class='fas fa-balance-scale' title='View JSGs For the Group' style='font-size:18px'></i></a> 
+                                                                                <a onClick=\"javascript: return confirm('Are You Sure You want To Map This Group For Youth Challenge Interventions? ');\" href=\"slg_YCS_Map.php?id=".$row['groupID']."\"><i class='fas fa-stamp' title='Map SLG For Youth Challenge Intervention' style='font-size:18px'></i></a>
+                                                                                <a href=\"add_ben_ycs.php?id=".$row['groupID']."&mapped=".$row['ycs_mapped']."\"><i class='fa fa-users' title='Add Youth to YCS intervention' style='font-size:18px'></i></a> 
                                                                             </td>\n";
 
                                                                         echo "</tr>\n";
@@ -175,13 +216,11 @@
                                                         </div>
                                                     </div>     
                                                 </div>            
-                                            </div> 
-                                </div>
+                                            </div>  
+                                        </p>
+                                    </div>
                                     <!-- Here -->
-                                    
-                                    <!-- end here -->
-                                    
-                                   
+        
                                 </div>
 
                             </div>

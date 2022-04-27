@@ -173,8 +173,8 @@
                                                                             echo "<td>".$row["groupID"]."</td>\n";
                                                                             
                                                                             echo "<td>
-                                                                                <a href=\"basicCLSview.php?id=".$row['groupID']."\"><i class='far fa-eye' title='View JSG' style='font-size:18px'></i></a>
-                                                                                <a href=\"basicCLSedit.php?id=".$row['groupID']."\"><i class='far fa-edit' title='Edit JSG Details' style='font-size:18px'></i></a>
+                                                                                <a href=\"basicCLSview.php?id=".$row['groupID']."\"><i class='far fa-eye' title='View JSG' style='font-size:18px;color:purple'></i></a>
+                                                                                <a href=\"basicCLSedit.php?id=".$row['groupID']."\"><i class='far fa-edit' title='Edit JSG Details' style='font-size:18px;color:green'></i></a>
                                                                                 <a href=\"basicCLSdelete.php?id=".$row['groupID']."\"><i class='far fa-trash-alt' title='Delete JSG' style='font-size:18px'></i></a>    
                                                                             </td>\n";
 

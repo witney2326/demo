@@ -64,25 +64,25 @@
                                         </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link" data-bs-toggle="tab" href="#jsg" role="tab">
+                                        <a class="nav-link" data-bs-toggle="link" href="jsgs_bds.php" role="link">
                                             <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
                                             <span class="d-none d-sm-block">Business Development Services</span>
                                         </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link" data-bs-toggle="tab" href="#ycs" role="tab">
+                                        <a class="nav-link" data-bs-toggle="link" href="jsgs_business_plans.php" role="link">
                                             <span class="d-block d-sm-none"><i class="fas fa-cog"></i></span>
                                             <span class="d-none d-sm-block">Business Plans</span>
                                         </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link" data-bs-toggle="tab" href="#cmt" role="tab">
+                                        <a class="nav-link" data-bs-toggle="link" href="jsg_training.php" role="link">
                                             <span class="d-block d-sm-none"><i class="fas fa-cog"></i></span>
                                             <span class="d-none d-sm-block">Training (Beneficiary & Stakeholder)</span>
                                         </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link" data-bs-toggle="tab" href="#vcp" role="tab">
+                                        <a class="nav-link" data-bs-toggle="link" href="jsg_fin_linkage.php" role="link">
                                             <span class="d-block d-sm-none"><i class="fas fa-cog"></i></span>
                                             <span class="d-none d-sm-block">Financial Linkage</span>
                                         </a>
