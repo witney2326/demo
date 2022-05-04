@@ -201,10 +201,10 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                                             echo "<td>\t\t$mapped</td>\n";
                                                                             echo "<td>\t\t$jsgs</td>\n";
                                                                             echo "<td>
-                                                                                <a href=\"../basicSLGview.php?id=".$row['groupID']."\"><i class='far fa-eye' title='View SLG' style='font-size:18px'></i></a>                                                                           
-                                                                                <a href=\"view_JSG.php?id=".$row['groupID']."\"><i class='fas fa-balance-scale' title='View JSGs For the Group' style='font-size:18px'></i></a> 
-                                                                                <a onClick=\"javascript: return confirm('Are You Sure You want To Map This Group For JSGs Interventions? ');\" href=\"slg_JSG_Map.php?id=".$row['groupID']."\"><i class='fas fa-stamp' title='Map SLG For JSG Intervention' style='font-size:18px'></i></a>
-                                                                                <a href=\"add_JSG.php?id=".$row['groupID']."&mapped=".$row['jsg_mapped']."\"><i class='fa fa-users' title='Add JSG to SLG' style='font-size:18px'></i></a> 
+                                                                                <a href=\"../basicSLGview.php?id=".$row['groupID']."\"><i class='far fa-eye' title='View SLG' style='font-size:18px;color:purple'></i></a>                                                                           
+                                                                                <a href=\"view_JSG.php?id=".$row['groupID']."\"><i class='fas fa-balance-scale' title='View JSGs For the Group' style='font-size:18px;color:orange'></i></a> 
+                                                                                <a onClick=\"javascript: return confirm('Are You Sure You want To Map This Group For JSGs Interventions? ');\" href=\"slg_JSG_Map.php?id=".$row['groupID']."\"><i class='fas fa-stamp' title='Map SLG For JSG Intervention' style='font-size:18px;color:green'></i></a>
+                                                                                <a href=\"add_JSG.php?id=".$row['groupID']."&mapped=".$row['jsg_mapped']."\"><i class='fa fa-users' title='Add JSG to SLG' style='font-size:18px;color:cadetblue'></i></a> 
                                                                             </td>\n";
                                                                         echo "</tr>\n";
                                                                         }

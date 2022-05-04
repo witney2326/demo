@@ -16,19 +16,34 @@
 
     <?php
         include "layouts/config.php"; // Using database connection file here     
-        
         $Rec_ID = $_GET['id']; 
- 
-            
-        $sql = mysqli_query($link,"update tblgroup  SET jsg_mapped = '1' where groupID = '$Rec_ID'");
-                
-        if ($sql) {
+
+        function chk_mapped($link,$grpID)
+        {
+        $grp_query = mysqli_query($link,"select jsg_mapped from tblgroup where groupID='$grpID'"); // select query
+        $grp = mysqli_fetch_array($grp_query);
+        return $grp['jsg_mapped'];
+        }
+
+        if (chk_mapped($link,$Rec_ID) == 0)
+        {
+          
+            $sql = mysqli_query($link,"update tblgroup  SET jsg_mapped = '1' where groupID = '$Rec_ID'");
+                    
+            if ($sql) {
+                echo '<script type="text/javascript">'; 
+                echo 'alert("SLG Mapped successfully For JSG Interventions !");'; 
+                echo 'window.location.href = "jsg_formation.php";';
+                echo '</script>';
+            } else {
+                echo "Error: " . $sql . ":-" . mysqli_error($link);
+            }
+        } else
+        {
             echo '<script type="text/javascript">'; 
-            echo 'alert("SLG Mapped successfully For JSG Interventions !");'; 
+            echo 'alert("SLG Already Mapped For JSG Interventions !");'; 
             echo 'window.location.href = "jsg_formation.php";';
-            echo '</script>';
-        } else {
-            echo "Error: " . $sql . ":-" . mysqli_error($link);
+            echo '</script>'; 
         }
         mysqli_close($link);
             

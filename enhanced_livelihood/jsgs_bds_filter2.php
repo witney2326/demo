@@ -52,12 +52,12 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                        <h4 class="mb-sm-0 font-size-18">JSGs:Busines Development Services</h4>
+                        <h4 class="mb-sm-0 font-size-18">Busines Development Services</h4>
 
                         <div class="page-title-right">
                             <ol class="breadcrumb m-0">
                                 <li class="breadcrumb-item"><a href="jsg.php">JSG Dashboard</a></li>
-                                <li class="breadcrumb-item active">JSGs:Busines Development Services</li>
+                                <li class="breadcrumb-item active">Busines Development Services</li>
                             </ol>
                         </div>
 
@@ -110,6 +110,26 @@
                                                             </div>
                                                         </div>
 
+                                                        <div class="col-12">
+                                                <label for="cw" class="form-label">Case Worker</label>
+                                                <select class="form-select" name="cw" id="cw"  required>
+                                                    <option ></option>
+                                                        <?php                                                           
+                                                            $dis_fetch_query = "SELECT cwID,cwName FROM tblcw where districtID = '$district'";                                                  
+                                                            $result_dis_fetch = mysqli_query($link, $dis_fetch_query);                                                                       
+                                                            $i=0;
+                                                                while($DB_ROW_Dis = mysqli_fetch_array($result_dis_fetch)) {
+                                                            ?>
+                                                            <option value="<?php echo $DB_ROW_Dis["cwID"]; ?>">
+                                                                <?php echo $DB_ROW_Dis["cwName"]; ?></option><?php
+                                                                $i++;
+                                                                    }
+                                                        ?>
+                                                </select>
+                                                <div class="invalid-feedback">
+                                                    Please select a valid Case worker.
+                                                </div>
+                                            </div>
                                                         
                                                         <div class="col-12">
                                                             <button type="submit" class="btn btn-btn btn-outline-primary w-md" name="Submit" value="Submit" disabled>Submit</button>
@@ -134,9 +154,10 @@
                                                                 <thead>
                                                                     <tr>
                                                                         <th>JSG code</th>
-                                                                        <th>JSG Name</th>
-                                                                        <th>District</th>
-                                                                        <th>SLG/Cluster Code</th>
+                                                                        <th>JSG Name</th>   
+                                                                        <th>SLG/Cluster ID</th>
+                                                                        <th>BDS Identified?</th>
+                                                                        <th>BDS Allocated?</th>
                                                                         <th>Action</th>
                                                                     </tr>
                                                                 </thead>

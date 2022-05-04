@@ -19,6 +19,7 @@
 <?php  
     $region = $_GET['region'];
     $district =$_GET['district'];
+    $cw =$_GET['cw'];
     $ta =$_GET['ta'];
     
     function get_rname($link, $rcode)
@@ -60,12 +61,12 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                        <h4 class="mb-sm-0 font-size-18">JSGs:Busines Development Services</h4>
+                        <h4 class="mb-sm-0 font-size-18">Busines Development Services</h4>
 
                         <div class="page-title-right">
                             <ol class="breadcrumb m-0">
                                 <li class="breadcrumb-item"><a href="jsg.php">JSG Dashboard</a></li>
-                                <li class="breadcrumb-item active">JSGs:Busines Development Services</li>
+                                <li class="breadcrumb-item active">Busines Development Services</li>
                             </ol>
                         </div>
 
@@ -119,6 +120,15 @@
                                                         </div>
 
                                                         <div class="col-12">
+                                                            <label for="cw" class="form-label">Case Worker</label>
+                                                            <div>
+                                                                <select class="form-select" name="cw" id="cw" value ="$cw" required>
+                                                                    <option selected value = "<?php echo $cw;?>"><?php echo $cw;?></option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-12">
                                                             <label for="ta" class="form-label">Traditional Authority</label>
                                                             <select class="form-select" name="ta" id="ta" required>
                                                                 <option selected value = "<?php echo $ta;?>"><?php echo ta_name($link,$ta);?></option>
@@ -149,9 +159,10 @@
                                                                 <thead>
                                                                     <tr>  
                                                                         <th>JSG code</th>
-                                                                        <th>JSG Name</th>
-                                                                        <th>District</th>
-                                                                        <th>SLG/Cluster Name</th>
+                                                                        <th>JSG Name</th>   
+                                                                        <th>SLG/Cluster ID</th>
+                                                                        <th>BDS Identified?</th>
+                                                                        <th>BDS Allocated?</th>
                                                                         <th>Action</th>
                                                                     </tr>
                                                                 </thead>

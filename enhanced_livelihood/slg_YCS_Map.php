@@ -18,17 +18,32 @@
         include "layouts/config.php"; // Using database connection file here     
         
         $Rec_ID = $_GET['id']; 
+
+        function chk_mapped($link,$grpID)
+        {
+            $grp_query = mysqli_query($link,"select ycs_mapped from tblgroup where groupID='$grpID'"); // select query
+            $grp = mysqli_fetch_array($grp_query);
+            return $grp['ycs_mapped'];
+        }
  
-            
-        $sql = mysqli_query($link,"update tblgroup  SET ycs_mapped = '1' where groupID = '$Rec_ID'");
-                
-        if ($sql) {
+        if (chk_mapped($link,$Rec_ID) == 0)
+        {   
+            $sql = mysqli_query($link,"update tblgroup  SET ycs_mapped = '1' where groupID = '$Rec_ID'");
+                    
+            if ($sql) {
+                echo '<script type="text/javascript">'; 
+                echo 'alert("SLG Mapped successfully For YCS Interventions !");'; 
+                echo 'window.location.href = "ycs_identification.php";';
+                echo '</script>';
+            } else {
+                echo "Error: " . $sql . ":-" . mysqli_error($link);
+            }
+        } else
+        {
             echo '<script type="text/javascript">'; 
-            echo 'alert("SLG Mapped successfully For YCS Interventions !");'; 
+            echo 'alert("SLG Already Mapped For YCS Interventions !");'; 
             echo 'window.location.href = "ycs_identification.php";';
             echo '</script>';
-        } else {
-            echo "Error: " . $sql . ":-" . mysqli_error($link);
         }
         mysqli_close($link);
             

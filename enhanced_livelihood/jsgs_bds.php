@@ -57,12 +57,12 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                            <h4 class="mb-sm-0 font-size-18">JSGs:Busines Development Services</h4>
+                            <h4 class="mb-sm-0 font-size-18">Busines Development Services</h4>
 
                             <div class="page-title-right">
                                 <ol class="breadcrumb m-0">
                                     <li class="breadcrumb-item"><a href="jsg.php">JSG Dashboard</a></li>
-                                    <li class="breadcrumb-item active">JSGs:Busines Development Services</li>
+                                    <li class="breadcrumb-item active">Busines Development Services</li>
                                 </ol>
                             </div>
 
@@ -133,6 +133,26 @@
                                                     Please select a valid Malawi district.
                                                 </div>
                                             </div>
+                                            <div class="col-12">
+                                                <label for="cw" class="form-label">Case Worker</label>
+                                                <select class="form-select" name="cw" id="cw"  required disabled>
+                                                    <option ></option>
+                                                        <?php                                                           
+                                                            $dis_fetch_query = "SELECT cwID,cwName FROM tblcw where districtID = '00'";                                                  
+                                                            $result_dis_fetch = mysqli_query($link, $dis_fetch_query);                                                                       
+                                                            $i=0;
+                                                                while($DB_ROW_Dis = mysqli_fetch_array($result_dis_fetch)) {
+                                                            ?>
+                                                            <option value="<?php echo $DB_ROW_Dis["cwID"]; ?>">
+                                                                <?php echo $DB_ROW_Dis["cwName"]; ?></option><?php
+                                                                $i++;
+                                                                    }
+                                                        ?>
+                                                </select>
+                                                <div class="invalid-feedback">
+                                                    Please select a valid Case worker.
+                                                </div>
+                                            </div>
 
                                                                                         
                                             <div class="col-12">
@@ -159,31 +179,36 @@
                                                     <thead>
                                                         <tr>
                                                             <th>JSG code</th>
-                                                            <th>JSG Name</th>
-                                                            <th>District</th>
+                                                            <th>JSG Name</th>   
                                                             <th>SLG/Cluster ID</th>
+                                                            <th>BDS Identified?</th>
+                                                            <th>BDS Allocated?</th>
                                                             <th>Action</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
                                                         <?Php
-                                                            $query="select * from tbljsg";
+                                                            $query="select * from tbljsg where districtID = '00'";
                                                             
                                                             if ($result_set = $link->query($query)) {
                                                             while($row = $result_set->fetch_array(MYSQLI_ASSOC))
                                                             { 
+                                                                if ($row["bds_identified"] == 0){$bds_identified = "No";};if ($row["bds_identified"] == 1){$bds_identified = "Yes";};
+                                                                if ($row["bds_allocated"] == 0){$bds_allocated = "No";};if ($row["bds_allocated"] == 1){$bds_allocated = "Yes";};
                                                                 $disname = (string) dis_name($link,$row["districtID"]);
                                                             echo "<tr>\n";
                                                                 
                                                                 echo "<td>".$row["recID"]."</td>\n";
                                                                 echo "<td>".$row["jsg_name"]."</td>\n";
-                                                                echo "<td>\t\t$disname</td>\n";
-                                                                echo "<td>".$row["groupID"]."</td>\n";
                                                                 
+                                                                echo "<td>".$row["groupID"]."</td>\n";
+                                                                echo "<td>\t\t$bds_identified</td>\n";
+                                                                echo "<td>\t\t$bds_allocated</td>\n";
                                                                 echo "<td>
                                                                     <a href=\"jsg_view.php?id=".$row['recID']."\"><i class='far fa-eye' title='View JSG' style='font-size:18px;color:purple'></i></a>
-                                                                    <a href=\"jsg_edit.php?id=".$row['recID']."\"><i class='far fa-edit' title='Edit JSG Details' style='font-size:18px;color:green'></i></a>
-                                                                    <a href=\".php?id=".$row['recID']."\"><i class='far fa-trash-alt' title='Delete JSG' style='font-size:18px'></i></a>    
+                                                                    <a href=\"jsg_bds_identify.php?id=".$row['recID']."\"><i class='fas fa-id-badge' title='Identify BDS' style='font-size:18px;color:orange'></i></a>
+                                                                    <a href=\"jsg_edit.php?id=".$row['recID']."\"><i class='fas fa-id-badge' title='Allocate BDS' style='font-size:18px;color:green'></i></a>
+                                                                    
                                                                 </td>\n";
 
                                                             echo "</tr>\n";
