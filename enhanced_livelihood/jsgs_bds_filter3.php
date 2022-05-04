@@ -20,7 +20,7 @@
     $region = $_GET['region'];
     $district =$_GET['district'];
     $cw =$_GET['cw'];
-    $ta =$_GET['ta'];
+    
     
     function get_rname($link, $rcode)
         {
@@ -36,11 +36,11 @@
         return $dis['DistrictName'];
         }
 
-        function ta_name($link, $tacode)
+        function cw_name($link, $cwcode)
         {
-        $ta_query = mysqli_query($link,"select TAName from tblta where TAID='$tacode'"); // select query
-        $taname = mysqli_fetch_array($ta_query);// fetch data
-        return $taname['TAName'];
+        $cw_query = mysqli_query($link,"select cwName from tblcw where cwID='$cwcode'"); // select query
+        $cwname = mysqli_fetch_array($cw_query);// fetch data
+        return $cwname['cwName'];
         }
 ?>
 
@@ -100,7 +100,7 @@
                                                 </div>
                                                 <div class="card-body">
                                                     <h5 class="card-title mt-0"></h5>
-                                                    <form class="row row-cols-lg-auto g-3 align-items-center" >
+                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="jsgs_bds_filter4.php" method ="GET" >
                                                         <div class="col-12">
                                                             <label for="region" class="form-label">Region</label>
                                                             <div>
@@ -123,21 +123,34 @@
                                                             <label for="cw" class="form-label">Case Worker</label>
                                                             <div>
                                                                 <select class="form-select" name="cw" id="cw" value ="$cw" required>
-                                                                    <option selected value = "<?php echo $cw;?>"><?php echo $cw;?></option>
+                                                                    <option selected value = "<?php echo $cw;?>"><?php echo cw_name($link,$cw);?></option>
                                                                 </select>
                                                             </div>
                                                         </div>
 
                                                         <div class="col-12">
-                                                            <label for="ta" class="form-label">Traditional Authority</label>
-                                                            <select class="form-select" name="ta" id="ta" required>
-                                                                <option selected value = "<?php echo $ta;?>"><?php echo ta_name($link,$ta);?></option>
-                                                                
+                                                            <label for="slg" class="form-label">SL Group</label>
+                                                            <select class="form-select" name="slg" id="slg"  required>
+                                                                <option ></option>
+                                                                    <?php                                                           
+                                                                        $slg_fetch_query = "SELECT groupID,groupname FROM tblgroup where cwID = '$cw'";                                                  
+                                                                        $result_slg_fetch = mysqli_query($link, $slg_fetch_query);                                                                       
+                                                                        $i=0;
+                                                                            while($DB_ROW_slg = mysqli_fetch_array($result_slg_fetch)) {
+                                                                        ?>
+                                                                        <option value="<?php echo $DB_ROW_slg["groupID"]; ?>">
+                                                                            <?php echo $DB_ROW_slg["groupname"]; ?></option><?php
+                                                                            $i++;
+                                                                                }
+                                                                    ?>
                                                             </select>
-                                                            
+                                                            <div class="invalid-feedback">
+                                                                Please select a valid SLG.
+                                                            </div>
                                                         </div>
+
                                                         <div class="col-12">
-                                                            
+                                                            <button type="submit" class="btn btn-btn btn-outline-primary w-md" name="Submit" value="Submit" >Submit</button>
                                                             <INPUT TYPE="button" class="btn btn-btn btn-outline-secondary w-md" VALUE="Back" onClick="history.go(-1);">
                                                         </div>
                                                     </form>                                             
@@ -149,7 +162,7 @@
                                                 <div class="col-12">
                                                     <div class="card border border-primary">
                                                     <div class="card-header bg-transparent border-primary">
-                                                        <h5 class="my-0 text-primary">Joint Skill Groups in <?php echo dis_name($link,$district); ?></h5>
+                                                        <h5 class="my-0 text-primary">Joint Skill Groups For CaseWorker:  <?php echo cw_name($link,$cw); ?></h5>
                                                     </div>
                                                     <div class="card-body">
                                                     <h7 class="card-title mt-0"></h7>
@@ -168,28 +181,32 @@
                                                                 </thead>
                                                                 <tbody>
                                                                     <?Php
-                                                                        $query="select * from tbljsg where taID = '$ta'";
+                                                                        $query="select tbljsg.recID, tbljsg.jsg_name, tbljsg.groupID, tbljsg.bds_identified, tbljsg.bds_allocated from tbljsg inner join tblgroup on tbljsg.groupID = tblgroup.groupID where tblgroup.cwID = '$cw'";
  
                                                                         //Variable $link is declared inside config.php file & used here
                                                                         
                                                                         if ($result_set = $link->query($query)) {
                                                                         while($row = $result_set->fetch_array(MYSQLI_ASSOC))
-                                                                        { 
-                                                                        echo "<tr>\n";
-                                                                            
+                                                                        {
                                                                         
-                                                                            echo "<td>".$row["recID"]."</td>\n";
-                                                                            echo "<td>".$row["jsg_name"]."</td>\n";
-                                                                            echo "<td>".$row["districtID"]."</td>\n";
-                                                                            echo "<td>".$row["groupID"]."</td>\n";
+                                                                            if ($row["bds_identified"] == 0){$bds_identified = "No";};if ($row["bds_identified"] == 1){$bds_identified = "Yes";};
+                                                                            if ($row["bds_allocated"] == 0){$bds_allocated = "No";};if ($row["bds_allocated"] == 1){$bds_allocated = "Yes";}; 
+                                                                            echo "<tr>\n";
+                                                                                
                                                                             
-                                                                            echo "<td>
-                                                                                <a href=\"basicCLSview.php?id=".$row['groupID']."\"><i class='far fa-eye' title='View JSG' style='font-size:18px;color:purple'></i></a>
-                                                                                <a href=\"basicCLSedit.php?id=".$row['groupID']."\"><i class='far fa-edit' title='Edit JSG Details' style='font-size:18px;color:green'></i></a>
-                                                                                <a href=\"basicCLSdelete.php?id=".$row['groupID']."\"><i class='far fa-trash-alt' title='Delete JSG' style='font-size:18px'></i></a>    
-                                                                            </td>\n";
+                                                                                echo "<td>".$row["recID"]."</td>\n";
+                                                                                echo "<td>".$row["jsg_name"]."</td>\n";
+                                                                            
+                                                                                echo "<td>".$row["groupID"]."</td>\n";
+                                                                                echo "<td>\t\t$bds_identified</td>\n";
+                                                                                echo "<td>\t\t$bds_allocated</td>\n";
+                                                                                echo "<td>
+                                                                                    <a href=\"jsg_view.php?id=".$row['recID']."\"><i class='far fa-eye' title='View JSG' style='font-size:18px;color:purple'></i></a>
+                                                                                    <a href=\"jsg_bds_identify.php?id=".$row['recID']."\"><i class='fas fa-id-badge' title='Identify BDS' style='font-size:18px;color:orange'></i></a>
+                                                                                    <a href=\"jsg_bds_allocate.php?id=".$row['recID']."\"><i class='fas fa-id-badge' title='Allocate BDS' style='font-size:18px;color:green'></i></a>
+                                                                                </td>\n";
 
-                                                                        echo "</tr>\n";
+                                                                            echo "</tr>\n";
                                                                         }
                                                                         $result_set->close();
                                                                         }  

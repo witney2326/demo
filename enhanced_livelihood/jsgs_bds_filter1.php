@@ -186,21 +186,26 @@
                                                                 if ($result_set = $link->query($query)) {
                                                                 while($row = $result_set->fetch_array(MYSQLI_ASSOC))
                                                                 { 
-                                                                echo "<tr>\n";
-                                                                    
                                                                 
-                                                                    echo "<td>".$row["recID"]."</td>\n";
-                                                                    echo "<td>".$row["jsg_name"]."</td>\n";
-                                                                    echo "<td>".$row["districtID"]."</td>\n";
-                                                                    echo "<td>".$row["groupID"]."</td>\n";
+                                                                    if ($row["bds_identified"] == 0){$bds_identified = "No";};if ($row["bds_identified"] == 1){$bds_identified = "Yes";};
+                                                                    if ($row["bds_allocated"] == 0){$bds_allocated = "No";};if ($row["bds_allocated"] == 1){$bds_allocated = "Yes";};
+                                                                    echo "<tr>\n";
+                                                                        
                                                                     
-                                                                    echo "<td>
-                                                                        <a href=\"basicCLSview.php?id=".$row['groupID']."\"><i class='far fa-eye' title='View JSG' style='font-size:18px;color:purple'></i></a>
-                                                                        <a href=\".php?id=".$row['groupID']."\"><i class='far fa-edit' title='Edit JSG Details' style='font-size:18px;color:green'></i></a>
-                                                                        <a href=\".php?id=".$row['groupID']."\"><i class='far fa-trash-alt' title='Delete JSG' style='font-size:18px'></i></a>    
-                                                                    </td>\n";
+                                                                        echo "<td>".$row["recID"]."</td>\n";
+                                                                        echo "<td>".$row["jsg_name"]."</td>\n";
+                                                                        
+                                                                        echo "<td>".$row["groupID"]."</td>\n";
+                                                                        echo "<td>\t\t$bds_identified</td>\n";
+                                                                        echo "<td>\t\t$bds_allocated</td>\n";
+                                                                        
+                                                                        echo "<td>
+                                                                            <a href=\"jsg_view.php?id=".$row['recID']."\"><i class='far fa-eye' title='View JSG' style='font-size:18px;color:purple'></i></a>
+                                                                            <a href=\"jsg_bds_identify.php?id=".$row['recID']."\"><i class='fas fa-id-badge' title='Identify BDS' style='font-size:18px;color:orange'></i></a>
+                                                                            <a href=\"jsg_bds_allocate.php?id=".$row['recID']."\"><i class='fas fa-id-badge' title='Allocate BDS' style='font-size:18px;color:green'></i></a>
+                                                                        </td>\n";
 
-                                                                echo "</tr>\n";
+                                                                    echo "</tr>\n";
                                                                 }
                                                                 $result_set->close();
                                                                 }  

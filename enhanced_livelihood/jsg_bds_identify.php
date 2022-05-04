@@ -81,13 +81,13 @@
                         <div class="col-lg-9">
                             <div class="card border border-success">
                                 <div class="card-header bg-transparent border-success">
-                                    <h6 class="my-0 text-primary">Identify BDS For JSG:<?php echo" ". $jsg_name; ?><?php echo ";"." "." "."Group ID:-"; echo " "; echo $id; echo ";"." "." "."District:-"; echo " "; echo dis_name($link,$DistrictID) ?></h6>
+                                    <h6 class="my-0 text-primary">Identify BDS For JSG:<?php echo" ". $jsg_name; ?><?php echo ";"." "." "."JSG ID:-"; echo " "; echo $id; echo ";"." "." "."District:-"; echo " "; echo dis_name($link,$DistrictID) ?></h6>
                                 </div>
                                 <div class="card-body">
                                     
                                     <form method="POST" action="">
                                         <div class="row mb-1">
-                                            <label for="group_id" class="col-sm-3 col-form-label">Group ID</label>
+                                            <label for="group_id" class="col-sm-3 col-form-label">JSG ID</label>
                                             <div class="col-sm-9">
                                                 <input type="text" class="form-control" id="group_id" name = "group_id" value="<?php echo $id ; ?>" style="max-width:30%;" readonly >
                                             </div>
@@ -139,15 +139,26 @@
                                         </div>
 
                                         <div class="row mb-4">
-                                            <label for="malesn" class="col-sm-3 col-form-label">No. Males Trained</label>
+                                            <label for="bds" class="col-sm-3 col-form-label">Available BDS</label>
+                                            
                                             <div class="col-sm-9">
-                                                <input type="number" class="form-control" id="malesn" name="malesn" min="0" max="300" value ="" style="max-width:30%;">
+                                                <select class="form-select" name="slg" id="slg" style="max-width:40%;" required>
+                                                    <option ></option>
+                                                        <?php                                                           
+                                                            $slg_fetch_query = "SELECT bdsID,bdsname FROM tblbds where ((districtID = '01') and (bustypeID = '$type'))";                                                  
+                                                            $result_slg_fetch = mysqli_query($link, $slg_fetch_query);                                                                       
+                                                            $i=0;
+                                                                while($DB_ROW_slg = mysqli_fetch_array($result_slg_fetch)) {
+                                                            ?>
+                                                            <option value="<?php echo $DB_ROW_slg["bdsID"]; ?>">
+                                                                <?php echo $DB_ROW_slg["bdsname"]; ?></option><?php
+                                                                $i++;
+                                                                    }
+                                                        ?>
+                                                </select>
                                             </div>
 
-                                            <label for="femalesn" class="col-sm-3 col-form-label">No. Females Trained</label>
-                                            <div class="col-sm-9">
-                                                <input type="number" class="form-control" id="femalesn" name="femalesn" min="0" max="300" value ="" style="max-width:30%;">
-                                            </div>
+                                            
                                         </div>
 
                                        
@@ -169,7 +180,7 @@
                                         <div class="row justify-content-end">
                                             <div class="col-sm-9">
                                                 <div>
-                                                    <button type="submit" class="btn btn-btn btn-outline-primary w-md" name="Submit" value="Submit">Save Record</button>
+                                                    <button type="submit" class="btn btn-btn btn-outline-primary w-md" name="Submit" value="Submit">Link BDS to JSG</button>
                                                     <INPUT TYPE="button" class="btn btn-btn btn-outline-secondary w-md" VALUE="Back" onClick="history.go(-1);">
                                                 </div>
                                             </div>
