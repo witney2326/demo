@@ -202,7 +202,7 @@
                                                                             
                                                                             echo "<td>".$row["groupID"]."</td>\n";
                                                                             echo "<td>";
-                                                                            echo "<form action = 'rateslg.php' method ='POST'>";
+                                                                            echo "<form action = 'jsg_bp_evaluate.php' method ='POST'>";
                                                                                 echo '<select id="rating"  name="rating">';
                                                                                     
                                                                                     echo '<option value="0">NA</option>';
