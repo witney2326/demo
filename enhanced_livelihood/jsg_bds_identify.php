@@ -162,7 +162,7 @@
                                         </div>
 
                                        
-
+                                        <h6 class="my-0 text-primary">Allocate and Schedule BDS</h6>
                                         <div class="row mb-4">
                                             <label for="startdate" class="col-sm-3 col-form-label">Start Date</label>
                                             <div class="col-sm-9">
@@ -181,6 +181,7 @@
                                             <div class="col-sm-9">
                                                 <div>
                                                     <button type="submit" class="btn btn-btn btn-outline-primary w-md" name="Submit" value="Submit">Link BDS to JSG</button>
+                                                    <button type="submit" class="btn btn-btn btn-outline-primary w-md" name="Allocate" value="Allocate">Allocate BDS to JSG</button>
                                                     <INPUT TYPE="button" class="btn btn-btn btn-outline-secondary w-md" VALUE="Back" onClick="history.go(-1);">
                                                 </div>
                                             </div>

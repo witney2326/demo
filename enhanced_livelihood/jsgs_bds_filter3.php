@@ -203,7 +203,7 @@
                                                                                 echo "<td>
                                                                                     <a href=\"jsg_view.php?id=".$row['recID']."\"><i class='far fa-eye' title='View JSG' style='font-size:18px;color:purple'></i></a>
                                                                                     <a href=\"jsg_bds_identify.php?id=".$row['recID']."\"><i class='fas fa-id-badge' title='Identify BDS' style='font-size:18px;color:orange'></i></a>
-                                                                                    <a href=\"jsg_bds_allocate.php?id=".$row['recID']."\"><i class='fas fa-id-badge' title='Allocate BDS' style='font-size:18px;color:green'></i></a>
+                                                                                    
                                                                                 </td>\n";
 
                                                                             echo "</tr>\n";

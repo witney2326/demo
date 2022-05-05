@@ -111,7 +111,7 @@
                                                                         <div class="card-body">
                                                                             <div class="d-flex">
                                                                                 <div class="flex-grow-1">
-                                                                                    <i class='fas fa-house-user' style='font-size:24px'></i>
+                                                                                    <i class='fas fa-house-user' style='font-size:24px;color:brown'></i>
                                                                                     <p class="text-muted fw-medium">Households in JSG</p>
                                                                                     <?php
                                                                                         $result = mysqli_query($link, 'SELECT sum(no_male) AS total_males FROM tbljsg'); 
@@ -144,7 +144,7 @@
                                                                 <div class="card-body">
                                                                     <div class="d-flex">
                                                                         <div class="flex-grow-1">
-                                                                            <i class='fas fa-users' style='font-size:24px'></i>
+                                                                            <i class='fas fa-users' style='font-size:24px;color:purple'></i>
 
                                                                             <p class="text-muted fw-medium">JSGs Formed</p>
                                                                             <?php
@@ -169,7 +169,32 @@
                                                                 <div class="card-body">
                                                                     <div class="d-flex">
                                                                         <div class="flex-grow-1">
-                                                                            <i class='fas fa-user-graduate' style='font-size:24px'></i>
+                                                                            
+                                                                            <i class='fas fa-certificate' style='font-size:24px;color:red'></i>
+                                                                            <p class="text-muted fw-medium">Available BDSs</p>
+                                                                            <?php
+                                                                                        $result = mysqli_query($link, 'SELECT COUNT(bdsID) AS total_bdss FROM tblbds'); 
+                                                                                        $row = mysqli_fetch_assoc($result); 
+                                                                                        $total_bdss = $row['total_bdss'];
+                                                                                    ?>
+                                                                                        <div class="container">
+                                                                                            <h4><div class="mb-0"><?php echo "" . $total_bdss;?></div></h4>
+                                                                                        </div>
+                                                                            
+                                                                        </div>
+                                                                        
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="card border">
+                                                            <img src="..." class="card-img-top" alt="">
+                                                            <div class="card-body">
+                                                                <div class="card-body">
+                                                                    <div class="d-flex">
+                                                                        <div class="flex-grow-1">
+                                                                            <i class='fas fa-user-graduate' style='font-size:24px;color:black'></i>
 
                                                                             <p class="text-muted fw-medium">JSG Trained</p>
                                                                             <h4 class="mb-0">0</h4>
@@ -186,7 +211,7 @@
                                                                 <div class="card-body">
                                                                     <div class="d-flex">
                                                                         <div class="flex-grow-1">
-                                                                            <i class='fas fa-chalkboard-teacher' style='font-size:24px'></i>
+                                                                            <i class='fas fa-chalkboard-teacher' style='font-size:24px;color:chocolate'></i>
 
                                                                             <p class="text-muted fw-medium">JSG Linked</p>
                                                                             <h4 class="mb-0">0</h4>
@@ -196,6 +221,7 @@
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                        
                                                     </div>
                                                 </div>
                                             </div> 

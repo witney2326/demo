@@ -12,6 +12,29 @@
     <!-- Responsive datatable examples -->
     <link href="assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
 
+    <!--Datatable plugin CSS file -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" />
+  
+    <!--jQuery library file -->
+    <script type="text/javascript" 
+      src="https://code.jquery.com/jquery-3.5.1.js">
+    </script>
+
+    <!--Datatable plugin JS library file -->
+    <script type="text/javascript" 
+        src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
+    </script>
+
+    <script LANGUAGE="JavaScript">
+        function confirmSubmit()
+        {
+        var agree=confirm("Are you sure you want to RATE this Cluster?");
+        if (agree)
+        return true ;
+        else
+        return false ;
+        }   
+    </script>
 </head>
 
 <?php include 'layouts/body.php'; ?>
@@ -84,7 +107,7 @@
 
                                     <div class="card-body">
                                         <h5 class="card-title mt-0"></h5>
-                                        <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="jsgs_bds_filter1.php" method ="GET" >
+                                        <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="jsgs_business_plans_filter1.php" method ="GET" >
                                             <div class="col-12">
                                                 <label for="region" class="form-label">Region</label>
                                                 
@@ -159,9 +182,12 @@
                                                     <thead>
                                                         <tr>
                                                             <th>JSG code</th>
-                                                            <th>JSG Name</th>
-                                                            <th>District</th>
+                                                            <th>JSG Name</th>             
                                                             <th>SLG/Cluster ID</th>
+                                                            <th>BP Evaluation</th>
+                                                            <th>BP Submitted</th>
+                                                            <th>BP Evaluated</th>
+                                                            <th>Ev. Result</th>
                                                             <th>Action</th>
                                                         </tr>
                                                     </thead>
@@ -172,17 +198,35 @@
                                                             if ($result_set = $link->query($query)) {
                                                             while($row = $result_set->fetch_array(MYSQLI_ASSOC))
                                                             { 
-                                                                $disname = (string) dis_name($link,$row["districtID"]);
-                                                            echo "<tr>\n";
+                                                                if ($row["bp_submitted"] == 0){$bp_submitted = "No";};if ($row["bp_submitted"] == 1){$bp_submitted = "Yes";};
+                                                                if ($row["bp_evaluated"] == 0){$bp_evaluated = "No";};if ($row["bp_evaluated"] == 1){$bp_evaluated = "Yes";};
+                                                                if ($row["evaluation_result"] == 0){$evaluation_result = "NA";};if ($row["evaluation_result"] == 1){$evaluation_result = "Pass";};if ($row["evaluation_result"] == 2){$evaluation_result = "Fail";};
+                                                                $grpID = $row["recID"];
+                                                                echo "<tr>\n";
                                                                 
                                                                 echo "<td>".$row["recID"]."</td>\n";
                                                                 echo "<td>".$row["jsg_name"]."</td>\n";
-                                                                echo "<td>\t\t$disname</td>\n";
+                                                                
                                                                 echo "<td>".$row["groupID"]."</td>\n";
+                                                                echo "<td>";
+                                                                echo "<form action = 'rateslg.php' method ='POST'>";
+                                                                    echo '<select id="rating"  name="rating">';
+                                                                        
+                                                                        echo '<option value="0">NA</option>';
+                                                                        echo '<option value="1">Pass</option>';
+                                                                        echo '<option value="2">Fail</option>';
+                                                                    echo "</select>";
+                                                                    echo "<input type='hidden' id='grpID' name='grpID' value='$grpID'>";
+                                                                    echo "<button type='submit' class='btn-outline-primary' name='FormSubmit' value='Submit' onClick='return confirmSubmit()'>Rate</button>";
+                                                                echo "</form>";
+                                                                echo "</td>";
+                                                                echo "<td>\t\t$bp_submitted</td>\n";
+                                                                echo "<td>\t\t$bp_evaluated</td>\n";
+                                                                echo "<td>\t\t$evaluation_result</td>\n";
                                                                 
                                                                 echo "<td>
                                                                     <a href=\"jsg_view.php?id=".$row['recID']."\"><i class='far fa-eye' title='View JSG' style='font-size:18px;color:purple'></i></a>
-                                                                    <a href=\"jsg_edit.php?id=".$row['recID']."\"><i class='far fa-edit' title='Edit JSG Details' style='font-size:18px;color:green'></i></a>
+                                                                    <a href=\"jsg_submit_bp.php?id=".$row['recID']."\"><i class='fa fa-check' title='Accept BP for JSG' style='font-size:18px;color:green'></i></a>
                                                                     <a href=\".php?id=".$row['recID']."\"><i class='far fa-trash-alt' title='Delete JSG' style='font-size:18px'></i></a>    
                                                                 </td>\n";
 
