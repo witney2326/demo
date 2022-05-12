@@ -165,8 +165,7 @@
                         <span key="t-authentication">Citizen Engagement</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="auth-login-1.php" key="t-login"><?php echo $language["Login"]; ?></a></li>
-                        <li><a href="auth-login-2.php" key="t-login-2"><?php echo $language["Login"]; ?> 2</a></li>
+                        
                         
                     </ul>
                 </li>

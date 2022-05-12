@@ -1,20 +1,17 @@
 <?php include 'layouts/session.php'; ?>
 <?php include 'layouts/head-main.php'; ?>
-session_start();
+
 <head>
     <title>Add JSG |Joint Skill Groups</title>
     <?php include 'layouts/head.php'; ?>
     <?php include 'layouts/head-style.php'; ?>
-
-}
-    
-
 </head>
+
 <?php include 'layouts/body.php'; ?>
 
 <div id="layout-wrapper">
 
-    <?php include 'layouts/menu.php'; ?>
+    
 
     <?php
         
@@ -43,6 +40,22 @@ session_start();
         }
            
         $id = $_GET['id']; // get id through query string
+
+        $check = substr($id, 5, 3);
+            
+            if ($check == "CLU"){
+                $name_query = mysqli_query($link,"select ClusterName from tblcluster where ClusterID='$id'"); // select query
+                while($rg = mysqli_fetch_array($name_query)){
+                $groupname = $rg['ClusterName'];}
+                $groupname = $groupname ." ". "Cluster";
+
+            }
+            if ($check == "SLG"){
+                $grpname_query = mysqli_query($link,"select groupname from tblgroup where groupID='$id'"); // select query
+                while($rg = mysqli_fetch_array($grpname_query)){
+                $groupname = $rg['groupname'];}
+                $groupname = $groupname ." ". "SLG";
+            }
         
         
     ?>
@@ -59,7 +72,7 @@ session_start();
                     <div class="col-12">
                         <div class="card border border-primary">
                         <div class="card-header bg-transparent border-primary">
-                            <h5 class="my-0 text-primary">Joint Skill Group Record for: <?php echo grp_name($link,$id);?> </h5>
+                            <h5 class="my-0 text-primary">JSG Record for: <?php echo $groupname;?> </h5>
                         </div>
                         <div class="card-body">
                         <h5 class="card-title mt-0"></h5>
@@ -76,6 +89,7 @@ session_start();
                                             <th>IGA Type</th>
                                             <th>Males</th>
                                             <th>Females</th>
+                                            <th>Action</th>
  
                                         </tr>
                                     </thead>
@@ -105,6 +119,11 @@ session_start();
                                                 echo "\t\t<td>$ig_name</td>\n";
                                                 echo "<td>".$row["no_male"]."</td>\n";
                                                 echo "<td>".$row["no_female"]."</td>\n";
+                                                echo "<td>
+                                                    <a href=\"jsg_edit.php?id=".$row['recID']."\"><i class='far fa-edit' style='font-size:18px;color:purple'></i></a>
+                                                    <a href=\"jsg_add_hh.php?id=".$row['recID']."\"><i class='fa fa-users' title='Add Beneficiary to JSG' style='font-size:18px;color:brown'></i></a>  
+                                                    
+                                                </td>\n";
                                             echo "</tr>\n";
                                             }
                                             $result_set->close();

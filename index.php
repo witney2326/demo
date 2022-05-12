@@ -557,6 +557,11 @@ $test = 85;
                                                 
                         <div class = "col-lg-6">
                             <div class="card border border-success">
+                            <?php
+                                $result = mysqli_query($link, 'SELECT COUNT(sppCode) AS value_sum FROM tblbeneficiaries'); 
+                                $row = mysqli_fetch_assoc($result); 
+                                $sum = $row['value_sum'];
+                            ?>
                                 <div class="card-header bg-transparent border-primary">
                                     <h6 class="my-0 text-primary">Total: <?php echo number_format($sum);?></h6>
                                 </div>

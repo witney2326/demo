@@ -1,8 +1,8 @@
 <?php include 'layouts/session.php'; ?>
 <?php include 'layouts/head-main.php'; ?>
-
+session_start();
 <head>
-    <title>Add JSG |Joint Skill Groups</title>
+    <title>SLG |Income Generating Activities</title>
     <?php include 'layouts/head.php'; ?>
     <?php include 'layouts/head-style.php'; ?>
 
@@ -13,7 +13,7 @@
 
 <div id="layout-wrapper">
 
-    
+    <?php include 'layouts/menu.php'; ?>
 
     <?php
         
@@ -40,17 +40,28 @@
         $iga = mysqli_fetch_array($iga_query);// fetch data
         return $iga['name'];
         }
+
+        function bus_cat_name($link, $catID)
+        {
+        $cat_query = mysqli_query($link,"select catname from tblbusines_category where categoryID='$catID'"); // select query
+        $cat = mysqli_fetch_array($cat_query);// fetch data
+        return $cat['catname'];
+        }
            
-        $id = $_GET['id']; // get id through query string
-       $query="select * from tblcluster where ClusterID='$id'";
+        $buscat = $_GET['buscat']; // get id through query string
+       $district = $_GET["district"];
+       $groupID = $_GET["group_code"];
+       $mapped = $_GET["mapped"];
+       
+
+       $query="select * from tblgroup where groupID='$groupID'";
         
         if ($result_set = $link->query($query)) {
             while($row = $result_set->fetch_array(MYSQLI_ASSOC))
             { 
-                $districtID= $row["districtID"];
+                $districtID= $row["DistrictID"];
                 $cohort = $row["cohort"];
-                $groupname = $row["ClusterName"];
-                $jsg_mapped = $row["jsg_mapped"];  
+                $groupname = $row["groupname"];  
             }
             $result_set->close();
         }
@@ -59,16 +70,15 @@
             { 
             $groupID = $_POST["group_code"];
             $district= $_POST["district"];
+            $buscat = $_POST['buscat'];
             $iga = $_POST['iga'];
             $males = $_POST["males"];
             $females = $_POST["females"];
             $amount = $_POST['amount_invested'];
-            
-            $_SESSION['groupID'] = $groupID;
-
-            
-                $sql = "INSERT INTO tblgroup_iga (groupID,districtID,type,no_male,no_female,amount_invested)
-                VALUES ('$groupID','$district','$iga','$males','$females','$amount')";
+                      
+        
+                $sql = "INSERT INTO tblgroup_iga (groupID,districtID,bus_category,type,no_male,no_female,amount_invested)
+                VALUES ('$groupID','$district','$buscat','$iga','$males','$females','$amount')";
             if (mysqli_query($link, $sql)) {
                 echo '<script type="text/javascript">'; 
                 echo 'alert("SLG IGA Record has been added successfully !");'; 
@@ -102,23 +112,13 @@
                             </div>
                             <div class="card-body">
                                 <h5 class="card-title mt-0"></h5>
-                                <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="add_JSG_clusters_filter1.php" method ="GET" >
+                                <form class="row row-cols-lg-auto g-3 align-items-center">
                                     <div class="col-12">
                                         <label for="region" class="form-label">Business Category</label>
                                         <div>
-                                            <select class="form-select" name="buscat" id="buscat" value ="" required>
-                                                <option></option>
-                                                    <?php                                                           
-                                                        $cat_fetch_query = "SELECT categoryID,catname FROM tblbusines_category";                                                  
-                                                        $result_cat_fetch = mysqli_query($link, $cat_fetch_query);                                                                       
-                                                        $i=0;
-                                                            while($DB_ROW_cat = mysqli_fetch_array($result_cat_fetch)) {
-                                                        ?>
-                                                        <option value="<?php echo $DB_ROW_cat["categoryID"]; ?>">
-                                                            <?php echo $DB_ROW_cat["catname"]; ?></option><?php
-                                                            $i++;
-                                                                }
-                                                    ?>
+                                            <select class="form-select" name="buscat" id="buscat" value ="<?php echo $buscat?>" required>
+                                                <option selected value="<?php echo $buscat?>"><?php echo bus_cat_name($link,$buscat);?></option>
+                                                    
                                             </select>
                                             <div class="invalid-feedback">
                                                 Please select a valid Business Category.
@@ -127,11 +127,11 @@
                                     </div>
                                     
                                     <div class="col-12">
-                                        <label for="iga" class="form-label">Select IGA Type</label>
-                                        <select class="form-select" name="iga" id="iga" value ="" required disabled>
+                                        <label for="iga" class="form-label">IGA Type</label>
+                                        <select class="form-select" name="iga" id="iga" value ="" required>
                                             <option></option>
                                             <?php                                                           
-                                                    $iga_fetch_query = "SELECT ID,name FROM tbliga_types";                                                  
+                                                    $iga_fetch_query = "SELECT ID,name FROM tbliga_types where categoryID = '$buscat'";                                                  
                                                     $result_iga_fetch = mysqli_query($link, $iga_fetch_query);                                                                       
                                                     $i=0;
                                                         while($DB_ROW_iga = mysqli_fetch_array($result_iga_fetch)) {
@@ -147,15 +147,10 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-12">
-                                            <input type="hidden" class="form-control" id="group_code" name = "group_code" value="<?php echo $id; ?>" style="max-width:60%;" readonly >    
-                                            <input type="hidden" class="form-control" id="district" name="district" value ="<?php echo $districtID ; ?>" style="max-width:30%;">
-                                            <input type="hidden" class="form-control" id="mapped" name="mapped" value ="<?php echo $jsg_mapped ; ?>" style="max-width:30%;">
-                                    </div>
                                                                         
                                     <div class="col-12">
-                                        <button type="submit" class="btn btn-btn btn-outline-primary w-md" name="Submit" value="Submit">Submit</button>
                                         <INPUT TYPE="button" class="btn btn-btn btn-outline-secondary w-md" VALUE="Back" onClick="history.go(-1);">
+                                        
                                     </div>
                                 </form>                                             
                                 <!-- End Here -->
@@ -165,39 +160,49 @@
                         <div class="col-lg-9">
                             <div class="card border border-success">
                                 <div class="card-header bg-transparent border-success">
-                                    <h5 class="my-0 text-success">JSG Record for -Cluster- <?php echo $groupname ; ?></h5>
+                                    <h5 class="my-0 text-success">JSG Record for -SLG- <?php echo grp_name($link,$groupID) ; ?></h5>
                                 </div>
                                 <div class="card-body">
                                     
-                                    <form method="POST" action="<?=$_SERVER['PHP_SELF'];?>">
+                                    <form method="POST" action="jsg_new_clusters.php" method="POST">
                                        
                                         <div class="row mb-2">
-                                            <label for="group_code" class="col-sm-3 col-form-label">Cluster Code</label>
+                                            <label for="group_code" class="col-sm-3 col-form-label">Group Code</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="group_code" name = "group_code" value="<?php echo $id; ?>" style="max-width:30%;" readonly >
+                                                <input type="text" class="form-control" id="group_code" name = "group_code" value="<?php echo $groupID; ?>" style="max-width:30%;" readonly >
                                             </div>
                                         </div>
                                         
                                         <div class="row mb-2">
                                             <label for="district" class="col-sm-3 col-form-label">District</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="district" name="district" value ="<?php echo $districtID ; ?>" style="max-width:30%;">
+                                                <input type="text" class="form-control" id="district" name="district" value ="<?php echo $district ; ?>" style="max-width:30%;">
                                             </div>
                                         </div>
                                         
                                         <div class="row mb-2">
                                             <label for="buscat" class="col-sm-3 col-form-label">Business Category</label>
-                                            <select class="form-select" name="buscat" id="buscat" value ="" style="max-width:30%;" disabled required>
-                                                <option></option>
+                                            <select class="form-select" name="buscat" id="buscat" value ="<?php echo $buscat;?>" style="max-width:30%;" required>
+                                                <option selected value="<?php echo $buscat;?>" ><?php echo $buscat;?></option>
                                                 
                                             </select>
                                         </div>
                                                                                
                                         <div class="row mb-2">
                                             <label for="iga" class="col-sm-3 col-form-label">Select IGA Type</label>
-                                            <select class="form-select" name="iga" id="iga" value ="" style="max-width:30%;" disabled required>
+                                            <select class="form-select" name="iga" id="iga" value ="" style="max-width:30%;" required>
                                                 <option></option>
-                                                
+                                                <?php                                                           
+                                                    $iga_fetch_query = "SELECT ID,name FROM tbliga_types where categoryID = '$buscat'";                                                  
+                                                    $result_iga_fetch = mysqli_query($link, $iga_fetch_query);                                                                       
+                                                    $i=0;
+                                                        while($DB_ROW_iga = mysqli_fetch_array($result_iga_fetch)) {
+                                                    ?>
+                                                    <option value="<?php echo $DB_ROW_iga["ID"]; ?>">
+                                                        <?php echo $DB_ROW_iga["name"]; ?></option><?php
+                                                        $i++;
+                                                            }
+                                                ?>
                                             </select>
                                         </div>
                                         
@@ -222,16 +227,17 @@
                                             </div>
                                         </div>
                                         <div class="row mb-2">
-                                            <label for="jsg_mapped" class="col-sm-3 col-form-label">Cluster Mapped</label>
+                                            <label for="females" class="col-sm-3 col-form-label">Group Mapped?</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="jsg_mapped" name="jsg_mapped" value ="<?php echo $jsg_mapped; ?>" style="max-width:30%;">
+                                                <input type="text" class="form-control" id="mapped" name="mapped" value ="<?php echo $mapped;?>" readonly style="max-width:30%;">
                                             </div>
                                         </div>
+
 
                                         <div class="row justify-content-end">
                                             <div class="col-sm-9">
                                                 <div>
-                                                    <button type="submit" class="btn btn-btn btn-outline-primary w-md" name="Submit" value="Submit" disabled>Save New Cluster JSG Record</button>
+                                                    <button type="submit" class="btn btn-btn btn-outline-primary w-md" name="Submit" value="Submit">Save New Cluster JSG Record</button>
                                                     <INPUT TYPE="button" class="btn btn-btn btn-outline-secondary w-md" VALUE="Back" onClick="history.go(-1);">
                                                 </div>
                                             </div>
@@ -248,7 +254,7 @@
                     <div class="col-12">
                         <div class="card border border-primary">
                         <div class="card-header bg-transparent border-primary">
-                            <h5 class="my-0 text-primary">Joint Skill Group Record</h5>
+                            <h5 class="my-0 text-primary">JSG Record</h5>
                         </div>
                         <div class="card-body">
                         <h5 class="card-title mt-0"></h5>
@@ -265,7 +271,7 @@
                                             <th>IGA Type</th>
                                             <th>Males</th>
                                             <th>Females</th>
-                                           
+                                            
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -273,16 +279,16 @@
 
                                     <tbody>
                                         <?Php
-                                                $id = $_GET['id'];
-                                            $query="select * from tbljsg where groupID ='$id';";
+                                            $groupID = $_GET['group_code'];
+                                            $query="select * from tbljsg where groupID ='$groupID';";
 
                                             //Variable $link is declared inside config.php file & used here
                                             
                                             if ($result_set = $link->query($query)) {
                                             while($row = $result_set->fetch_array(MYSQLI_ASSOC))
                                             { 
-                                                $group = grp_name($link, $id);
-                                                
+                                                $group = grp_name($link, $groupID);
+   
                                                 $district_name = dis_name($link,$row["districtID"]);
                                                 $ig_name = iga_name($link,$row["type"]);
                                         
@@ -296,8 +302,9 @@
                                                 echo "<td>".$row["no_male"]."</td>\n";
                                                 echo "<td>".$row["no_female"]."</td>\n";
                                                 
+                                                
                                                 echo "<td>
-                                                    <a href=\"jsg_edit.php?id=".$row['recID']."\"><i class='far fa-edit' style='font-size:18px;color:green'></i></a>
+                                                    <a href=\"jsg_edit.php?id=".$row['recID']."\"><i class='far fa-edit' style='font-size:18px;color:green'></i></a> 
                                                     <a href=\"jsg_add_hh.php?id=".$row['recID']."\"><i class='fas fa-user-alt' title='Add Beneficiary to JSG' style='font-size:18px;color:orange'></i></a>  
                                                     
                                                 </td>\n";

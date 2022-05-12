@@ -309,11 +309,8 @@
                                                                                                                 </div> 
                                                                                                             </h5>
                                                                                                     </div>
-                                                                                                    <div class="mini-stat-icon avatar-sm rounded-circle bg-primary align-self-center">
-                                                                                                        <span class="avatar-title">
-                                                                                                            <i class='fas fa-house-user' style='font-size:24px'></i>
-                                                                                                        </span>
-                                                                                                    </div>
+                                                                                                    <i class='fas fa-users' style='font-size:24px;color:chocolate'></i><i class='fas fa-users' style='font-size:24px;color:brown'></i>
+                                                                                                    
                                                                                                 </div>
                                                                                             </div>
                                                                                     
@@ -337,11 +334,7 @@
                                                                                                             </div>
                                                                                                 
                                                                                             </div>
-                                                                                            <div class="mini-stat-icon avatar-sm rounded-circle bg-primary align-self-center">
-                                                                                                <span class="avatar-title">
-                                                                                                    <i class='fas fa-house-user' style='font-size:24px'></i>
-                                                                                                </span>
-                                                                                            </div>
+                                                                                            <i class='fas fa-house-user' style='font-size:24px;color:brown'></i><i class='fas fa-house-user' style='font-size:24px;color:black'></i>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
@@ -356,11 +349,8 @@
                                                                                                 <p class="text-muted fw-medium">AMCs Formed</p>
                                                                                                 <h4 class="mb-0">0</h4>
                                                                                             </div>
-                                                                                            <div class="mini-stat-icon avatar-sm rounded-circle bg-primary align-self-center">
-                                                                                                <span class="avatar-title">
-                                                                                                    <i class='fas fa-users' style='font-size:24px'></i>
-                                                                                                </span>
-                                                                                            </div>
+                                                                                            <i class='fas fa-user-plus' style='font-size:24px;color:brown'></i>
+                                                                                            
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
@@ -375,11 +365,8 @@
                                                                                                 <p class="text-muted fw-medium">HHs Trained Asset Mgt</p>
                                                                                                 <h4 class="mb-0">0</h4>
                                                                                             </div>
-                                                                                            <div class="mini-stat-icon avatar-sm rounded-circle bg-primary align-self-center">
-                                                                                                <span class="avatar-title">
-                                                                                                    <i class='fas fa-users' style='font-size:24px'></i>
-                                                                                                </span>
-                                                                                            </div>
+                                                                                            <i class='fas fa-graduation-cap' style='font-size:24px;color:black'></i>
+                                                                                            
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>

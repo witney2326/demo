@@ -226,8 +226,9 @@
                                                                 
                                                                 echo "<td>
                                                                     <a href=\"jsg_view.php?id=".$row['recID']."\"><i class='far fa-eye' title='View JSG' style='font-size:18px;color:purple'></i></a>
-                                                                    <a href=\"jsg_submit_bp.php?id=".$row['recID']."\"><i class='fa fa-check' title='Accept BP for JSG' style='font-size:18px;color:green'></i></a>
-                                                                    <a href=\".php?id=".$row['recID']."\"><i class='far fa-trash-alt' title='Delete JSG' style='font-size:18px'></i></a>    
+                                                                    <a onClick=\"javascript: return confirm('Are You In Receipt Of Business Plan For This JSG? ');\" href=\"jsg_submit_bp.php?id=".$row['recID']."\"><i class='fa fa-check' title='Accept BP for JSG' style='font-size:18px;color:green'></i></a>
+                                                                    
+                                                                    
                                                                 </td>\n";
 
                                                             echo "</tr>\n";

@@ -214,11 +214,12 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                             
                                                                 <thead>
                                                                     <tr>
-                                                                        <th>Groupcode</th>
-                                                                        <th>Group Name</th>
-                                                                        <th>Males</th>
-                                                                        <th>Females</th>
-                                                                        <th>Total Members</th>
+                                                                        <th>JSG code</th>
+                                                                        <th>JSG Name</th>
+                                                                        <th>Group Name</th>                              
+                                                                        <th><i class="fas fa-male" style="font-size:18px"></i></th>
+                                                                        <th><i class="fas fa-female" style="font-size:18px"></i></th>
+                                                                        <th>Total</th>
                                                                         <th>Action</th>                                                                        
                                                                     </tr>
                                                                 </thead>
@@ -226,20 +227,22 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
                                                                 <tbody>
                                                                     <?Php
-                                                                        $query="select * from tblgroup where regionID ='0'";
+                                                                        $query="select * from tbljsg";
  
                                                                         //Variable $link is declared inside config.php file & used here
                                                                          
                                                                         if ($result_set = $link->query($query)) {
                                                                         while($row = $result_set->fetch_array(MYSQLI_ASSOC))
                                                                         { 
-                                                                          $totalMembers = $row["MembersM"]+$row["MembersF"];  
+                                                                          $totalMembers = $row["no_male"]+$row["no_female"];  
                                                                         echo "<tr>\n"; 
+                                                                            echo "<td>".$row["recID"]."</td>\n";
+                                                                            echo "<td>".$row["jsg_name"]."</td>\n";
                                                                             echo "<td>".$row["groupID"]."</td>\n";
-                                                                            echo "<td>".$row["groupname"]."</td>\n";
-                                                                            echo "<td>".$row["MembersM"]."</td>\n";
-                                                                            echo "<td>".$row["MembersF"]."</td>\n";
-                                                                            echo "<td>\t\t$totalMembers</td>\n";                        
+                                                                            echo "<td>".$row["no_male"]."</td>\n";
+                                                                            echo "<td>".$row["no_female"]."</td>\n";
+                                                                            echo "<td>\t\t$totalMembers</td>\n"; 
+
                                                                             echo "<td>
                                                                                 <a href=\"basicSLGTraining_view.php?id=".$row['groupID']."\"><i class='far fa-eye' title='Training Status' style='font-size:18px;color:purple'></i></a>                                                                           
                                                                                 <a href=\"add_basicTrainingGD.php?id=".$row['groupID']."\" ><i class='fas fa-pen' title='Record Training' style='font-size:18px;color:green'></i></a>                                                                            
