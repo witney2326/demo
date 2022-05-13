@@ -1,19 +1,16 @@
 <?php include 'layouts/session.php'; ?>
 <?php include 'layouts/head-main.php'; ?>
-session_start();
+
 <head>
     <title>SLG |Income Generating Activities</title>
     <?php include 'layouts/head.php'; ?>
     <?php include 'layouts/head-style.php'; ?>
 
-}
-    
-
 </head>
 
 <div id="layout-wrapper">
 
-    <?php include 'layouts/menu.php'; ?>
+    
 
     <?php
         
