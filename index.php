@@ -104,7 +104,7 @@ $test = 85;
         ]);
 
         // Optional; add a title and set the width and height of the chart
-        var options = {'title':'SL Groups Per District', 'width':370, 'height':250};
+        var options = {'title':'SL Groups Per District', 'width':490, 'height':250};
 
         // 
         var chart = new google.visualization.ColumnChart(document.getElementById('grps_per_district'));
@@ -188,11 +188,11 @@ $test = 85;
         var data = google.visualization.arrayToDataTable([
         ['Month', 'Amount'],
         <?php 
-            $select_query = "SELECT SUM(Amount) AS value_sum, Month FROM tblgroupsavings  ORDER BY month";
+            $select_query = "select month as Month1, count(distinct hh_code) as Households, sum(amount) as Amount from tblslg_member_savings group by month";
             $query_result = mysqli_query($link,$select_query);
             while($row_val = mysqli_fetch_array($query_result)){
-                $mon = month_name($row_val['Month']);
-            echo "['".$mon."',".$row_val['value_sum']."],";
+                $mon = month_name($row_val['Month1']);
+            echo "['".$mon."',".$row_val['Amount']."],";
             }
         ?>
         
@@ -201,10 +201,10 @@ $test = 85;
         
 
         // Optional; add a title and set the width and height of the chart
-        var options = {'title':'', 'width':370, 'height':250};
+        var options = {'title':'', 'width':740, 'height':250};
 
         // Display the chart inside the <div> element with id="barchart"
-        var chart = new google.visualization.ColumnChart(document.getElementById('barchart'));
+        var chart = new google.visualization.ColumnChart(document.getElementById('barchart_1'));
         chart.draw(data, options);
         }
     </script> 
@@ -232,7 +232,7 @@ $test = 85;
         
 
         // Optional; add a title and set the width and height of the chart
-        var options = {'title':'Member Savings', 'width':370, 'height':250};
+        var options = {'title':'Member Savings', 'width':370, 'height':300};
 
         // Display the chart inside the <div> element with id="barchart"
         var chart = new google.visualization.ColumnChart(document.getElementById('MemberSavings'));
@@ -251,9 +251,9 @@ $test = 85;
         ['District', 'TotalSavings'],
         
         <?php 
-            $select_query = "SELECT tbldistrict.DistrictName as District, SUM(tblgroupsavings.Amount) as TotalSavings
-            FROM tblgroupsavings 
-            INNER JOIN tbldistrict on tbldistrict.DistrictID = tblgroupsavings.DistrictID 
+            $select_query = "SELECT tbldistrict.DistrictName as District, SUM(tblslg_member_savings.amount) as TotalSavings
+            FROM tblslg_member_savings 
+            INNER JOIN tbldistrict on tbldistrict.DistrictID = tblslg_member_savings.districtID 
             GROUP BY tbldistrict.DistrictName";
             $query_result = mysqli_query($link,$select_query);
             while($row_val = mysqli_fetch_array($query_result)){
@@ -264,7 +264,7 @@ $test = 85;
         ]);
 
         // Optional; add a title and set the width and height of the chart
-        var options = {'title':'Savings per District', 'width':370, 'height':250};
+        var options = {'title':'Savings per District', 'width':490, 'height':250};
 
         // Display the chart inside the <div> element with id="barchart"
         var chart = new google.visualization.ColumnChart(document.getElementById('savings_per_district'));
@@ -527,7 +527,7 @@ $test = 85;
                             <div class="card border border-success">
                                 <div class="card-header bg-transparent border-primary">
                                     <?php 
-                                        $select_query = "SELECT COUNT(groupID) as TotalGroups FROM tblgroup";
+                                        $select_query = "SELECT COUNT(groupID) as TotalGroups FROM tblgroup where deleted ='0'";
                                         $query_result = mysqli_query($link,$select_query);
                                         $row_val = mysqli_fetch_array($query_result);
                                          $CurGroups =  $row_val['TotalGroups'];
@@ -541,7 +541,7 @@ $test = 85;
                             <div class="card border border-success">
                                 <div class="card-header bg-transparent border-primary">
                                     <?php 
-                                        $select_query = "SELECT SUM(tblgroupsavings.Amount) as TotalSavings FROM tblgroupsavings";
+                                        $select_query = "SELECT SUM(amount) as TotalSavings FROM tblslg_member_savings";
                                         $query_result = mysqli_query($link,$select_query);
                                         $row_val = mysqli_fetch_array($query_result);
                                          $CurSavings =  $row_val['TotalSavings'];
@@ -587,23 +587,15 @@ $test = 85;
                     <!-- here -->
                     <div class = "row">
                                                 
-                        <div class = "col-lg-6">
+                        <div class = "col-lg-12">
                             <div class="card border border-success">
                                 <div class="card-header bg-transparent border-primary">
                                     <h6 class="my-0 text-primary">Group Savings: </h6>
                                 </div>
-                                <div id="barchart"></div> 
+                                <div id="barchart_1"></div> 
                             </div>
                         </div>
-                        <div class = "col-lg-6">
-                            <div class="card border border-success">
-                                <div class="card-header bg-transparent border-primary">
-                                    
-                                    <h5 class="my-0 text-primary">Member Savings:</h5>
-                                </div>
-                                <div id="MemberSavings"></div> 
-                            </div>
-                        </div>   
+                        
                     </div>        
                 <!-- end row -->
 

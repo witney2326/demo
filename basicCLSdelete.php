@@ -7,12 +7,12 @@
             $id = $_GET['id'];
                      
             
-            $sql = "UPDATE tblgroup SET deleted ='1' WHERE groupID = '$id'";
+            $sql = "UPDATE tblcluster SET deleted ='1' WHERE ClusterID = '$id'";
             
             if (mysqli_query($link, $sql)) {
                 echo '<script type="text/javascript">'; 
-                echo 'alert("SLG Record successfully been deleted!");'; 
-                echo 'window.location.href = "basic_livelihood_slg_mgt2.php";';
+                echo 'alert("Cluster Record successfully been deleted!");'; 
+                echo 'window.location.href = "basic_livelihood_clusters.php";';
                 echo '</script>';
   
             } else {

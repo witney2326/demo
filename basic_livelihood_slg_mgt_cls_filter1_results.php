@@ -182,7 +182,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                         </thead>
                                                         <tbody>
                                                             <?Php
-                                                                $query="select * from tblcluster where regionID = '0'";
+                                                                $query="select * from tblcluster where ((regionID = '0') and (deleted ='0'))";
 
                                                                 //Variable $link is declared inside config.php file & used here
                                                                 
@@ -203,7 +203,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                                     echo
                                                                         "<a href=\"basicCLSedit.php?id=".$row['ClusterID']."\"><i class='far fa-edit' title='Edit Cluster Details' style='font-size:18px;color:green'></i></a>\n";
                                                                     echo 
-                                                                    "<a href=\"basicCLSdelete.php?id=".$row['ClusterID']."\"><i class='far fa-trash-alt' title='Delete Cluster' style='font-size:18px;color:red'></i></a>       
+                                                                    "<a onClick=\"javascript: return confirm('Are You Sure You want To Delete This Cluster - You Must Be a Supervisor');\" href=\"basicCLSdelete.php?id=".$row['ClusterID']."\"><i class='far fa-trash-alt' title='Delete Cluster' style='font-size:18px;color:Red'></i></a>
                                                                     </td>\n";
 
                                                                 echo "</tr>\n";

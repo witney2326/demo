@@ -67,59 +67,45 @@
                         <div class="col-lg-9">
                             <div class="card border border-success">
                                 <div class="card-header bg-transparent border-success">
-                                    <h5 class="my-0 text-success">Update Savings Record for the Indicated Group</h5>
+                                    <h5 class="my-0 text-success">Update Savings Record for SLG: <?php echo $groupname;?></h5>
                                 </div>
                                 <div class="card-body">
                                     
                                     <form method="POST" action="">
-                                        <div class="row mb-4">
-                                            <label for="group_id" class="col-sm-3 col-form-label">Group ID</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="group_id" name = "group_id" value="<?php echo $id ; ?>" style="max-width:30%;" readonly >
-                                            </div>
+                                        <div class="row mb-1">
+                                            <label for="group_id" class="col-sm-2 col-form-label">Group ID</label>                           
+                                            <input type="text" class="form-control" id="group_id" name = "group_id" value="<?php echo $id ; ?>" style="max-width:30%;" readonly >
+                                            
+                                            <label for="group_name" class="col-sm-2 col-form-label">Group Name</label>
+                                            <input type="text" class="form-control" id="group_name" name ="group_name" value = "<?php echo $groupname ; ?>" style="max-width:30%;" readonly >
                                         </div>
-                                        <div class="row mb-4">
-                                            <label for="group_name" class="col-sm-3 col-form-label">SL Group Name</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="group_name" name ="group_name" value = "<?php echo $groupname ; ?>" style="max-width:30%;" readonly >
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="row mb-4">
-                                            <label for="region" class="col-sm-3 col-form-label">Region</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="region" name="region" value ="<?php echo $regionID ; ?>" style="max-width:30%;" readonly >
-                                            </div>
-                                        </div>
-                                        <div class="row mb-4">
-                                            <label for="district" class="col-sm-3 col-form-label">District</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="district" name="district" value ="<?php echo $DistrictID ; ?>" style="max-width:30%;" readonly >
-                                            </div>
-                                        </div>
-                                        <div class="row mb-4">
-                                            <label for="ta" class="col-sm-3 col-form-label">Traditional Authority</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="ta" name="ta" value ="<?php echo $TAID ; ?>" style="max-width:30%;" readonly >
-                                            </div>
-                                        </div>
-                                        <div class="row mb-4">
-                                            <label for="gvh" class="col-sm-3 col-form-label">Group Village Head</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="gvh" name="gvh" value ="<?php echo $gvhID ; ?>" style="max-width:40%;" readonly >
-                                            </div>
+                                                                                
+                                        <div class="row mb-1">
+                                            <label for="region" class="col-sm-2 col-form-label">Region</label> 
+                                            <input type="text" class="form-control" id="region" name="region" value ="<?php echo $regionID ; ?>" style="max-width:30%;" readonly >
+                                            
+                                            <label for="district" class="col-sm-2 col-form-label">District</label>
+                                            <input type="text" class="form-control" id="district" name="district" value ="<?php echo $DistrictID ; ?>" style="max-width:30%;" readonly >
                                         </div>
                                         
-                                        <div class="row mb-4">
-                                            <label for="cohort" class="col-sm-3 col-form-label">Cohort</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="cohort" name="cohort" value ="<?php echo $cohort ; ?> " style="max-width:30%;" readonly >
-                                            </div>
+                                        <div class="row mb-1">
+                                            <label for="ta" class="col-sm-2 col-form-label">TA</label>
+                                            <input type="text" class="form-control" id="ta" name="ta" value ="<?php echo $TAID ; ?>" style="max-width:30%;" readonly >
+                                            
+                                            <label for="gvh" class="col-sm-2 col-form-label">GVH</label>
+                                            <input type="text" class="form-control" id="gvh" name="gvh" value ="<?php echo $gvhID ; ?>" style="max-width:30%;" readonly >
+                                        </div>
+                                        
+                                        
+                                        <div class="row mb-1">
+                                            <label for="cohort" class="col-sm-2 col-form-label">Cohort</label>
+                                            <input type="text" class="form-control" id="cohort" name="cohort" value ="<?php echo $cohort ; ?> " style="max-width:30%;" readonly >
+                                            
                                         </div>
 
-                                        <div class="row mb-4">
-                                            <label for="year" class="col-sm-3 col-form-label">Select Year</label>
-                                            <select class="form-select" name="year" id="year" style="max-width:20%;" required>
+                                        <div class="row mb-1">
+                                            <label for="year" class="col-sm-2 col-form-label">Select Year</label>
+                                            <select class="form-select" name="year" id="year" style="max-width:30%;" required>
                                                 <option></option>
                                                 <option value="2020">2020</option>
                                                 <option value="2021">2021</option>
@@ -127,10 +113,9 @@
                                                 <option value="2023">2023</option>
                                                 <option value="2024">2024</option>
                                             </select>
-                                        </div>
-                                        <div class="row mb-4">
-                                            <label for="month" class="col-sm-3 col-form-label">Select Month</label>
-                                            <select class="form-select" name="month" id="month" style="max-width:20%;" required>
+
+                                            <label for="month" class="col-sm-2 col-form-label">Select Month</label>
+                                            <select class="form-select" name="month" id="month" style="max-width:30%;" required>
                                                 <option></option>
                                                 <option value='01'>January</option>
                                                 <option value='02'>February</option>
@@ -147,11 +132,12 @@
                                             </select>
                                         </div>
 
-                                        <div class="row mb-4">
-                                            <label for="amount" class="col-sm-3 col-form-label">Amount Saved</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="amount" name="amount" value ="" style="max-width:30%;">
-                                            </div>
+                                        
+
+                                        <div class="row mb-1">
+                                            <label for="amount" class="col-sm-2 col-form-label">Amount Saved</label>                              
+                                            <input type="text" class="form-control" id="amount" name="amount" value ="" style="max-width:30%;">
+                                            
                                         </div>
 
                                         <div class="row justify-content-end">
