@@ -62,24 +62,25 @@
                 </div>
             </div>
 
-            <div class="dropdown d-inline-block">
+            <div class="d-inline-block">
                 <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <img class="rounded-circle header-profile-user" src="assets/images/users/avatar-1.jpg" alt="Header Avatar">
-                    <span class="d-none d-xl-inline-block ms-1"><?php echo $_SESSION["username"]; echo" "; echo "(logged in)"; ?></span>
-                    <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
+                    <span class="d-none d-xl-inline-block ms-1"><?php echo $_SESSION["username"]; ?></span>
+                    <i class="d-none d-xl-inline-block"></i>
                 </button>
-                <div class="dropdown-menu dropdown-menu-end">
-                    <!-- item-->
-                    <a class="dropdown-item text-danger" href="logout.php"><i class="bx bx-power-off font-size-16 align-middle me-1 text-danger"></i> <span key="t-logout"><?php echo $language["Logout"]; ?></span></a>
-                    <div class="dropdown-divider"></div>
-                </div>
-            </div>
 
-            <div class="dropdown d-inline-block">
-                <button type="button" class="btn header-item noti-icon right-bar-toggle waves-effect">
-                    <i class="bx bx-cog bx"></i>
-                    <h7>View Settings</h7>
-                </button>
+                <div class="d-inline-block">
+                    <form method="post" action="logout.php">
+                        <button type ="submit" class="btn btn-btn btn-outline-danger w-md">Logout</button>
+                    </form>
+                </div>
+                
+                <div class="dropdown d-inline-block">
+                    <button type="button" class="btn btn-outline-info w-md header-item noti-icon right-bar-toggle waves-effect">
+                        <i class="bx bx-cog bx"></i>
+                        <h7>View Settings</h7>
+                    </button>
+                </div> 
             </div>
 
         </div>
