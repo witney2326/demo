@@ -54,6 +54,13 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
          return $grp['groupname'];
          }
  
+         function prog_name($link, $progID)
+        {
+        $prog_query = mysqli_query($link,"select progName from tblspp where progID='$progID'"); // select query
+        $prog = mysqli_fetch_array($prog_query);// fetch data
+        return $prog['progName'];
+        }
+
          function cw_name($link, $ID)
          {
          $cw_query = mysqli_query($link,"select cwName from tblcw where cwID='$ID'"); // select query
@@ -95,10 +102,10 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                 <!-- end page title -->
 
                 <div class="card border border-primary">
-                    <div class="card-header bg-transparent border-primary">
-                        <h5 class="my-0 text-primary">Household Filter</h5>
+                    <div class="card-header bg-primary border-primary">
+                        <h5 class="my-0 text-default">Household Filter</h5>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body bg-success">
                         <h5 class="card-title mt-0"></h5>
                         <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="basic_livelihood_hh_mgt_filter4.php" method="GET">
                             <div class="col-12">
@@ -107,10 +114,6 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                     <select class="form-select" name="region" id="region" required>
                                         <option selected value = "<?php echo $region; ?>"><?php echo get_rname($link,$region);?></option>
                                     </select>
-                                    <div class="invalid-feedback">
-                                        Please select a valid Malawi region.
-                                    </div>
-
                                 </div>
                             </div>
 
@@ -118,10 +121,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                 <label for="district" class="form-label">District</label>
                                 <select class="form-select" name="district" id="district" required>
                                     <option selected value = "<?php echo $district ;?>"><?php echo dis_name($link,$district);?></option>
-                                </select>
-                                <div class="invalid-feedback">
-                                    Please select a valid Malawi district.
-                                </div>
+                                </select>                               
                             </div>
 
                             <div class="col-12">
@@ -168,7 +168,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                     <div class="col-12">
                         <div class="card border border-primary">
                         <div class="card-header bg-transparent border-primary">
-                            <h5 class="my-0 text-primary">Beneficiary Households For CW: <?php echo cw_name($link,$_GET['cw']); ?></h5>
+                            <h5 class="my-0 text-default">Beneficiary Households For CW: <?php echo cw_name($link,$_GET['cw']); ?></h5>
                         </div>
                         <div class="card-body">
                         <h5 class="card-title mt-0"></h5>
@@ -192,7 +192,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                     <tbody>
                                         <?Php
                                             $cw = $_GET["cw"];
-                                            $query="select * from tblbeneficiaries where TAID = $cw";
+                                            $query="select * from tblbeneficiaries where districtID = '00'";
 
                                         //Variable $link is declared inside config.php file & used here
                                         
@@ -229,7 +229,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                 <a href=\"basicSLGMemberedit.php?id=".$row['sppCode']."\"><i class='far fa-eye' title='View Household' style='font-size:18px;color:purple'></i></a>
                                                 <a onClick=\"javascript: return confirm('Are You Sure You want To Verify This HOUSEHOLD on SCT Database - Be patient!');\" href=\"basicHHVerificationSCTP.php?id=".$row['sppCode']."\"><i class='fas fa-check' title='Verify Household on SCT List' style='font-size:18px;color:cadetblue'></i></a>
                                                 <a onClick=\"javascript: return confirm('Are You Sure You want To APPROVE This HOUSEHOLD - You Must Be a Supervisor');\" href=\"basicHHStatusApproval.php?id=".$row['sppCode']."\"><i class='far fa-thumbs-up' title='Approve Household' style='font-size:18px;color:green'></i></a>\n
-                                                <td>"; 
+                                                </td>"; 
                                         echo "</tr>\n";
                                         }
                                         $result_set->close();

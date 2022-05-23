@@ -18,6 +18,48 @@
 
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script> <!-- for pie chart -->
 
+<?php
+    function month_name($month)
+    {
+        if($month == 1){
+            $mname ='Jan';
+        }
+        if($month == 2){
+            $mname ='Feb';
+        }
+        if($month == 3){
+            $mname ='Mar';
+        }
+        if($month == 4){
+            $mname ='Apr';
+        }
+        if($month == 5){
+            $mname ='May';
+        }
+        if($month == 6){
+            $mname ='Jun';
+        }
+        if($month == 7){
+            $mname ='Jul';
+        }
+        if($month == 8){
+            $mname ='Aug';
+        }
+        if($month == 9){
+            $mname ='Sep';
+        }
+        if($month == 10){
+            $mname ='Oct';
+        }
+        if($month == 11){
+            $mname ='Nov';
+        }
+        if($month == 12){
+            $mname ='Dec';
+        }
+        return $mname;
+    }
+    ?>
     <script type="text/javascript">
         // Load google charts
         google.charts.load('current', {'packages':['corechart']});
@@ -64,12 +106,13 @@
         // Draw the chart and set the chart values
         function drawChart() {
         var data = google.visualization.arrayToDataTable([
-        ['Month', 'Amount'],
+        ['Month', 'Savings'],
         <?php 
-            $select_query = "SELECT SUM(Amount) AS value_sum, Month FROM tblgroupsavings  ORDER BY month";
+            $select_query = "SELECT SUM(Amount) AS Savings, Month FROM tblslg_member_savings  Group BY month";
             $query_result = mysqli_query($link,$select_query);
             while($row_val = mysqli_fetch_array($query_result)){
-            echo "['".$row_val['Month']."',".$row_val['value_sum']."],";
+                $mon = month_name($row_val['Month']);
+            echo "['".$mon."',".$row_val['Savings']."],";
             }
         ?>
         
@@ -78,7 +121,7 @@
         
 
         // Optional; add a title and set the width and height of the chart
-        var options = {'title':'', 'width':370, 'height':250};
+        var options = {'title':'', 'width':580, 'height':250};
 
         // Display the chart inside the <div> element with id="barchart"
         var chart = new google.visualization.ColumnChart(document.getElementById('barchart'));

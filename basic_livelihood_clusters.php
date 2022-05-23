@@ -90,11 +90,11 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                             <div class="card-body">
      
                                 <div class="card border border-primary">
-                                    <div class="card-header bg-transparent border-primary">
-                                        <h5 class="my-0 text-primary"></i>Cluster Search Filter</h5>
+                                    <div class="card-header bg-primary border-primary">
+                                        <h5 class="my-0 text-default"></i>Cluster Filter</h5>
                                     </div>
 
-                                    <div class="card-body">
+                                    <div class="card-body bg-success">
                                         <h5 class="card-title mt-0"></h5>
                                         <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="basic_livelihood_slg_mgt_cls_filter1_results.php" method ="GET" >
                                             <div class="col-12">
@@ -169,7 +169,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
                                             
                                             <div class="col-12">
-                                                <button type="submit" class="btn btn-primary w-md" name="Submit" value="Submit">Submit</button>
+                                                <button type="submit" class="btn btn-btn btn-outline-primary w-md" name="Submit" value="Submit">Submit</button>
                                             </div>
                                         </form>                                             
                                         <!-- End Here -->

@@ -89,17 +89,17 @@
 
                                             <!--start here -->
                                             <div class="card border border-primary">
-                                                <div class="card-header bg-transparent border-primary">
-                                                    <h5 class="my-0 text-primary"></i>Meetings/Sensitization Filter:</h5>
+                                                <div class="card-header bg-primary border-primary">
+                                                    <h5 class="my-0 text-default"></i>Meeting Filter:</h5>
                                                 </div>
-                                                <div class="card-body">
+                                                <div class="card-body bg-success">
                                                     <h5 class="card-title mt-0"></h5>
                                                     <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="" method ="GET">
                                                         <div class="col-12">
                                                             <label for="region" class="form-label">Region</label>
                                                             <div>
                                                                 <select class="form-select" name="region" id="region" value ="$region" required>
-                                                                    <option selected value = "$region"><?php echo get_rname($link,$_GET['region']);?></option>
+                                                                    <option selected value = "<?php echo $region;?>"><?php echo get_rname($link,$region);?></option>
                                                                 </select>
                                                             </div>
                                                         </div>
@@ -115,7 +115,7 @@
 
                                                         
                                                         <div class="col-12">
-                                                            <INPUT TYPE="button" VALUE="Back" onClick="history.go(-1);">
+                                                            <INPUT TYPE="button" class="btn btn-secondary w-md" VALUE="Back" onClick="history.go(-1);">
                                                         </div>
                                                     </form>                                             
                                                     <!-- End Here -->

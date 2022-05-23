@@ -103,10 +103,10 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                 <!-- end page title -->
 
                 <div class="card border border-primary">
-                    <div class="card-header bg-transparent border-primary">
-                        <h5 class="my-0 text-primary">Household Filter</h5>
+                    <div class="card-header bg-primary border-primary">
+                        <h5 class="my-0 text-default">Household Filter</h5>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body bg-success">
                         <h5 class="card-title mt-0"></h5>
                         <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="basic_livelihood_hh_mgt_filter4.php" method="GET">
                             <div class="col-12">
@@ -152,7 +152,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                     <div class="col-12">
                         <div class="card border border-primary">
                         <div class="card-header bg-transparent border-primary">
-                            <h5 class="my-0 text-primary">Beneficiary Households For SLG: <?php echo grp_name($link,$slg); ?></h5>
+                            <h5 class="my-0 text-default">Beneficiary Households For SLG: <?php echo grp_name($link,$slg); ?></h5>
                         </div>
                         <div class="card-body">
                         <h5 class="card-title mt-0"></h5>
@@ -163,7 +163,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                         <tr>                    
                                             <th>hhcode</th>
                                             <th>Programme</th>                       
-                                            <th>Group</th> 
+                                            
                                             <th>Cohort</th>
                                             <th>HH checked?</th>
                                             <th>Verified?</th>
@@ -204,7 +204,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                         echo "<tr>\n";
                                             echo "<td>".$row["sppCode"]."</td>\n";
                                             echo "\t\t<td>$prog</td>\n";
-                                            echo "\t\t<td>$group</td>\n";
+                                            
                                             echo "<td>".$row["cohort"]."</td>\n";
                                             echo "\t\t<td>$hhchecked</td>\n";
                                             echo "\t\t<td>$hhverified</td>\n";
@@ -213,7 +213,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                 <a href=\"basicSLGMemberedit.php?id=".$row['sppCode']."\"><i class='far fa-eye' title='View Household' style='font-size:18px;color:purple'></i></a>
                                                 <a onClick=\"javascript: return confirm('Are You Sure You want To Verify This HOUSEHOLD on SCT Database - Be patient!');\" href=\"basicHHVerificationSCTP.php?id=".$row['sppCode']."\"><i class='fas fa-check' title='Verify Household on SCT List' style='font-size:18px;color:cadetblue'></i></a>
                                                 <a onClick=\"javascript: return confirm('Are You Sure You want To APPROVE This HOUSEHOLD - You Must Be a Supervisor');\" href=\"basicHHStatusApproval.php?id=".$row['sppCode']."\"><i class='far fa-thumbs-up' title='Approve Household' style='font-size:18px;color:green'></i></a>\n
-                                                <td>"; 
+                                                </td>"; 
                                         echo "</tr>\n";
                                         }
                                         $result_set->close();

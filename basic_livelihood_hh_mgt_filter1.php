@@ -94,10 +94,10 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                 <!-- end page title -->
                 <!--start here -->
                 <div class="card border border-primary">
-                    <div class="card-header bg-transparent border-primary">
-                        <h5 class="my-0 text-primary">Household Filter</h5>
+                    <div class="card-header bg-primary border-primary">
+                        <h5 class="my-0 text-default">Household Filter</h5>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body bg-success">
                         <h5 class="card-title mt-0"></h5>
                         <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="basic_livelihood_hh_mgt_filter2.php" method="GET">
                             <div class="col-12">
@@ -192,7 +192,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                     <div class="col-12">
                         <div class="card border border-primary">
                         <div class="card-header bg-transparent border-primary">
-                            <h5 class="my-0 text-primary">Beneficiary Households in <?php echo get_rname($link,$_GET['region']); ?> Region</h5>
+                            <h5 class="my-0 text-default">Beneficiary Households in <?php echo get_rname($link,$_GET['region']); ?> Region</h5>
                         </div>
                         <div class="card-body">
                         <h5 class="card-title mt-0"></h5>
