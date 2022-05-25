@@ -202,7 +202,10 @@
                     <ul class="sub-menu" aria-expanded="true">
                         <li>
                             
-                            <a href="user-mgt.php" class="has-arrow" key="t-vertical">User Management</a>
+                            	
+                            <a href='new_user.php' class='has-arrow' key='t-vertical'>User Management></a>	
+                                
+                                  
                             <ul class="sub-menu" aria-expanded="true">
                             </ul>
                         </li>
@@ -214,7 +217,7 @@
                         </li>
 
                         <li>
-                            <a href="cimis-page-coming-soon.php" class="has-arrow" key="t-horizontal">Systems Maintainance</a>
+                            <a href="new_user_requests.php" class="has-arrow" key="t-horizontal">Systems Maintainance</a>
                             <ul class="sub-menu" aria-expanded="true">
                             </ul>
                         </li>

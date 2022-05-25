@@ -312,8 +312,9 @@
                                                     echo "\t\t<td>$ycs_status</td>\n";
                                                     echo "\t\t<td>$graduation_status</td>\n";
                                                     
-                                                    echo "<td>
-                                                        <a href=\".php?id=".$row['sppCode']."\"><i class='far fa-eye' style='font-size:18px;color:purple'></i></a> 
+                                                    echo "<td>                                            
+                                                        <a href=\"basicSLGMemberview.php?id=".$row['sppCode']."\"><i class='far fa-eye' title='View Member' style='font-size:18px;color:purple'></i></a>   
+                                                        <a href=\"basicSLGMemberedit.php?id=".$row['sppCode']."\"><i class='far fa-edit' title='Edit Member' style='font-size:18px;color:green'></i></a> 
                                                         <a onClick=\"javascript: return confirm('Are You Sure You want To DELETE This Record');\" href=\".php?id=".$row['sppCode']."\"><i class='far fa-trash-alt' style='font-size:18px;color:red'></i></a>        
                                                     </td>\n";
                                                 echo "</tr>\n";

@@ -89,10 +89,22 @@
         
 
         // Optional; add a title and set the width and height of the chart
-        var options = {'title':'', 'width':370, 'height':250};
+        var options = {'title':'', 'width':330, 'height':250};
+
+        var options = {
+            title: 'CBDRA Adopted Places' ,
+            width: '330',
+            height: '250',
+            hAxis: {title: ''},
+            vAxis: {title: ''},
+            legend: 'none',
+            series: {
+            0: { color: '#e2431e' },
+          }
+        };
 
         // Display the chart inside the <div> element with id="piechart"
-        var chart = new google.visualization.ColumnChart(document.getElementById('AdoptedPlaces'));
+        var chart = new google.visualization.PieChart(document.getElementById('AdoptedPlaces'));
         chart.draw(data, options);
         }
     </script> 
@@ -121,10 +133,23 @@
         
 
         // Optional; add a title and set the width and height of the chart
-        var options = {'title':'', 'width':580, 'height':250};
+        var options = {'title':'', 'width':470, 'height':250};
+
+        var options = {
+            title: 'Savings Per Month' ,
+            width: '480',
+            height: '250',
+            hAxis: {title: ''},
+            vAxis: {title: 'Amount Mobilised'},
+            legend: 'none',
+            series: {
+            0: { color: '#e2431e' },
+          }
+        };
+
 
         // Display the chart inside the <div> element with id="barchart"
-        var chart = new google.visualization.ColumnChart(document.getElementById('barchart'));
+        var chart = new google.visualization.LineChart(document.getElementById('barchart'));
         chart.draw(data, options);
         }
     </script> 
@@ -462,18 +487,18 @@
                                             <!-- pie chart -->
                                             <div class = "row">
                                                 
-                                                <div class = "col-lg-6">
+                                                <div class = "col-lg-5">
                                                     <div class="card border border-success">
                                                         <div class="card-header bg-transparent border-primary">
-                                                            <h5 class="my-0 text-secondary">CBDRA Adopted Places Per District</h5>
+                                                            <h5 class="my-0 text-secondary"></h5>
                                                         </div>
                                                         <div id="AdoptedPlaces"></div> 
                                                     </div>
                                                 </div>
-                                                <div class = "col-lg-6">
+                                                <div class = "col-lg-7">
                                                     <div class="card border border-success">
                                                         <div class="card-header bg-transparent border-primary">
-                                                            <h5 class="my-0 text-primary">Savings Mobilisation</h5>
+                                                            <h5 class="my-0 text-primary"></h5>
                                                         </div>
                                                         <div id="barchart"></div> 
                                                     </div>

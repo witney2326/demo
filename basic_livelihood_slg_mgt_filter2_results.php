@@ -29,8 +29,8 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 <?php include 'layouts/body.php'; ?>
 
 <?php 
-   $region = $_GET['region'];
-   $district = $_GET['district'];
+   $region = $_POST['region'];
+   $district = $_POST['district'];
  
     
     function get_rname($link, $rcode)
@@ -104,11 +104,11 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                 </div>
                                                 <div class="card-body bg-success">
                                                     <h5 class="card-title mt-0"></h5>
-                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="basic_livelihood_slg_mgt_filter3_results.php" method ="GET">
+                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="basic_livelihood_slg_mgt_filter3_results.php" method ="POST">
                                                         <div class="col-12">
                                                             <label for="region" class="form-label">Region</label>
                                                             <div>
-                                                                <select class="form-select" name="region" id="region" value ="$region" required>
+                                                                <select class="form-select" name="region" id="region" value ="<?php echo $region; ?>" required>
                                                                     <option selected value = "<?php echo $region; ?>"><?php echo get_rname($link,$region);?></option>
                                                                 </select>
                                                             </div>
@@ -116,7 +116,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                         
                                                         <div class="col-12">
                                                             <label for="district" class="form-label">District</label>
-                                                            <select class="form-select" name="district" id="district" value ="$district" required>
+                                                            <select class="form-select" name="district" id="district" value ="<?php echo $district; ?>" required>
                                                                 <option selected value = "<?php echo $district; ?>"><?php echo dis_name($link,$district);?></option>
                                                             </select>
                                                         </div>

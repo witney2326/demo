@@ -94,59 +94,40 @@
                                 <div class="card-body">
                                     
                                     <form> 
-                                        <div class="row mb-4">
-                                            <label for="hh_id" class="col-sm-3 col-form-label">Household Code</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="hh_id" name = "hh_id" value="<?php echo $id ; ?>" style="max-width:30%;">
-                                            </div>
-                                        </div>
-                                        <div class="row mb-4">
-                                            <label for="hh_name" class="col-sm-3 col-form-label">HH Name</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="hh_name" name ="hh_name" value = "<?php echo $hhname ; ?>" style="max-width:30%;">
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="row mb-4">
-                                            <label for="region" class="col-sm-3 col-form-label">Region</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="region" name="region" value ="<?php echo get_rname($link,$regionID) ; ?>" style="max-width:30%;">
-                                            </div>
-                                        </div>
-                                        <div class="row mb-4">
-                                            <label for="district" class="col-sm-3 col-form-label">District</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="district" name="district" value ="<?php echo dis_name($link,$districtID) ; ?>" style="max-width:30%;">
-                                            </div>
-                                        </div>
-                                       
-                                        
-                                        <div class="row mb-4">
-                                            <label for="group" class="col-sm-3 col-form-label">Group Name</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="group" name="group" value ="<?php echo grp_name($link,$groupID) ; ?>" style="max-width:30%;">
-                                            </div>
-                                        </div>
-                                        <div class="row mb-4">
-                                            <label for="cohort" class="col-sm-3 col-form-label">Cohort</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="cohort" name="cohort" value =" <?php echo $cohort ; ?>" style="max-width:30%;">
-                                            </div>
-                                        </div>
-                                        <div class="row mb-4">
-                                            <label for="sppname" class="col-sm-3 col-form-label">SPP Name</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="sppname" name="sppname" value =" <?php echo prog_name($link,$sppname) ; ?>" style="max-width:30%;">
-                                            </div>
-                                        </div>
-                                        <div class="row mb-4">
-                                            <label for="hstatus" class="col-sm-3 col-form-label">HH Status</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="hstatus" name="hstatus" value ="<?php echo $hhstatus;?>" style="max-width:30%;">
-                                            </div>
-                                        </div>
-                                        
+                                        <div class="row mb-1">
+                                            <label for="hh_id" class="col-sm-2 col-form-label">HH Code</label>                                      
+                                            <input type="text" class="form-control" id="hh_id" name = "hh_id" value="<?php echo $id ; ?>" style="max-width:30%;">
 
+                                            <label for="hh_name" class="col-sm-2 col-form-label">HH Name</label>                           
+                                            <input type="text" class="form-control" id="hh_name" name ="hh_name" value = "<?php echo $hhname ; ?>" style="max-width:30%;">                       
+                                        </div>
+                                                                                
+                                        <div class="row mb-1">
+                                            <label for="region" class="col-sm-2 col-form-label">Region</label>                       
+                                            <input type="text" class="form-control" id="region" name="region" value ="<?php echo get_rname($link,$regionID) ; ?>" style="max-width:30%;">
+                                            
+                                            <label for="district" class="col-sm-2 col-form-label">District</label>
+                                            <input type="text" class="form-control" id="district" name="district" value ="<?php echo dis_name($link,$districtID) ; ?>" style="max-width:30%;">
+                                        </div>
+
+                                                                             
+                                        
+                                        <div class="row mb-1">
+                                            <label for="group" class="col-sm-2 col-form-label">SLG Name</label>               
+                                            <input type="text" class="form-control" id="group" name="group" value ="<?php echo grp_name($link,$groupID) ; ?>" style="max-width:30%;">
+                                            
+                                            <label for="cohort" class="col-sm-2 col-form-label">Cohort</label>
+                                            <input type="text" class="form-control" id="cohort" name="cohort" value =" <?php echo $cohort ; ?>" style="max-width:30%;">
+                                        </div>
+                                        
+                                        <div class="row mb-1">
+                                            <label for="sppname" class="col-sm-2 col-form-label">SPP Name</label>                                  
+                                            <input type="text" class="form-control" id="sppname" name="sppname" value =" <?php echo prog_name($link,$sppname) ; ?>" style="max-width:30%;">
+                                            
+                                            <label for="hstatus" class="col-sm-2 col-form-label">HH Status</label>
+                                            <input type="text" class="form-control" id="hstatus" name="hstatus" value ="<?php echo $hhstatus;?>" style="max-width:30%;">
+                                        </div>
+                                        
                                         <div class="row justify-content-end">
                                             <div class="col-sm-9">
                                                 <div>

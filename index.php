@@ -90,9 +90,9 @@ $test = 85;
         
         ['District', 'Groups'],
         <?php 
-            $select_query = "SELECT tbldistrict.DistrictName,COUNT(tblgroup.groupname) as grps
+            $select_query = "SELECT tbldistrict.DistrictName,COUNT(tblgroup.groupname ) as grps
             FROM tblgroup 
-            inner join tbldistrict on tblgroup.DistrictID = tbldistrict.DistrictID
+            inner join tbldistrict on tblgroup.DistrictID = tbldistrict.DistrictID where tblgroup.deleted = '0'
             GROUP BY tbldistrict.DistrictName";
             $query_result = mysqli_query($link,$select_query);
             while($row_val = mysqli_fetch_array($query_result)){
@@ -107,7 +107,7 @@ $test = 85;
         var options = {'title':'SL Groups Per District', 'width':490, 'height':250};
 
         // 
-        var chart = new google.visualization.ColumnChart(document.getElementById('grps_per_district'));
+        var chart = new google.visualization.LineChart(document.getElementById('grps_per_district'));
         chart.draw(data, options);
         }
     </script> 
@@ -137,10 +137,21 @@ $test = 85;
         ]);
 
         // Optional; add a title and set the width and height of the chart
-        var options = {'title':'Actual Households', 'width':370, 'height':250};
+        var options = {'title':'', 'width':370, 'height':250};
+
+        var options = {
+            title: 'Actual HHs Per District',
+            hAxis: {title: ''},
+            vAxis: {title: 'No HHs'},
+            legend: 'none',
+            series: {
+            0: { color: '#006400' },
+            }
+        };
+
 
         // Display the chart inside the <div> element with id="piechart"
-        var chart = new google.visualization.PieChart(document.getElementById('actual_hhs'));
+        var chart = new google.visualization.LineChart(document.getElementById('actual_hhs'));
         chart.draw(data, options);
         }
     </script> 
@@ -158,7 +169,7 @@ $test = 85;
         <?php 
             $select_query = "SELECT tbldistrict.DistrictName as District,(sum(tblgroup.MembersF)+sum(tblgroup.MembersF)) as membership
             FROM tblgroup 
-            inner join tbldistrict on tblgroup.DistrictID = tbldistrict.DistrictID
+            inner join tbldistrict on tblgroup.DistrictID = tbldistrict.DistrictID where tblgroup.deleted = '0'
             GROUP BY tbldistrict.DistrictName";
             $query_result = mysqli_query($link,$select_query);
             while($row_val = mysqli_fetch_array($query_result)){
@@ -172,8 +183,19 @@ $test = 85;
         // Optional; add a title and set the width and height of the chart
         var options = {'title':'', 'width':370, 'height':250};
 
+        
+        var options = {
+            title: 'Expected HHs Per District',
+            hAxis: {title: ''},
+            vAxis: {title: 'No HHs'},
+            legend: 'none',
+            series: {
+            0: { color: '#e2431e' },
+          }
+        };
+
         // Display the chart inside the <div> element with id="piechart"
-        var chart = new google.visualization.PieChart(document.getElementById('piechart3'));
+        var chart = new google.visualization.LineChart(document.getElementById('piechart3'));
         chart.draw(data, options);
         }
     </script> 
@@ -316,17 +338,17 @@ $test = 85;
                                                 <div class="d-flex">
                                                     <div class="flex-grow-1">
                                                         <i class='fas fa-house-user' style='font-size:24px'></i><i class='fas fa-house-user' style='font-size:24px; color:chocolate'></i>
-                                                        <p class="text-muted fw-medium">Households Reached</p>
+                                                        <p class="text-muted fw-medium">HHs Reached</p>
                                                         <?php
                                                             $result = mysqli_query($link, 'SELECT COUNT(sppCode) AS value_sum FROM tblbeneficiaries'); 
                                                             $row = mysqli_fetch_assoc($result); 
                                                             $sum = $row['value_sum'];
                                                         ?>
-                                                        <h4 class="mb-0">
+                                                        <h6 class="mb-0">
                                                             <div class="container">
                                                                 <div class="numberCircle"><?php echo "" . number_format($sum);?></div>
                                                             </div> 
-                                                        </h4>
+                                                        </h6>
                                                     </div>
                                                     <a href="basic_livelihood_hh_mgt.php">more ..</a> 
                                                 </div>
@@ -341,17 +363,17 @@ $test = 85;
                                                 <div class="d-flex">
                                                     <div class="flex-grow-1">
                                                     <i class='fas fa-layer-group' style='font-size:24px;color:darkgoldenrod'></i><i class='fas fa-layer-group' style='font-size:24px;color:brown'></i><i class='fas fa-layer-group' style='font-size:24px;color:burlywood'></i>
-                                                        <p class="text-muted fw-medium">Joint Skill Groups</p>
+                                                        <p class="text-muted fw-medium">JSGs</p>
                                                         <?php
                                                             $result = mysqli_query($link, 'SELECT COUNT(recID) AS value_total FROM tbljsg'); 
                                                             $row = mysqli_fetch_assoc($result); 
                                                             $total = $row['value_total'];
                                                         ?>
-                                                        <h4 class="mb-0">
+                                                        <h6 class="mb-0">
                                                             <div class="container">
                                                                 <div class="numberCircle"><?php echo "" . number_format($total);?></div>
                                                             </div> 
-                                                        </h4>
+                                                        </h6>
                                                     </div>
                                                     <a href="enhanced_livelihood/jsg.php">more ..</a>
                                                 </div>
@@ -372,11 +394,11 @@ $test = 85;
                                                             $row = mysqli_fetch_assoc($result); 
                                                             $v_total = $row['v_total'];
                                                         ?>
-                                                            <h4 class="mb-0">
+                                                            <h6 class="mb-0">
                                                                 <div class="container">
                                                                     <div class="numberCircle"><?php echo "" . number_format($v_total);?></div>
                                                                 </div> 
-                                                            </h4>
+                                                            </h6>
                                                     </div>
                                                     <a href="enhanced_livelihood/ycs.php">more ..</a>
                                                 </div>
@@ -402,11 +424,11 @@ $test = 85;
                                                             $sum_clusters = $row['value_clusters'];
 
                                                         ?>
-                                                        <h4 class="mb-0">
+                                                        <h6 class="mb-0">
                                                             <div class="container">
                                                                 <div class="numberCircle"><?php echo "" . number_format($sum_clusters+$sum_grps);?></div>
                                                             </div> 
-                                                        </h4>
+                                                        </h6>
                                                     </div>
                                                     <a href="graduation/graduation.php">more..</a>
                                                 </div>
@@ -439,7 +461,7 @@ $test = 85;
                                                             $sum = $row['value_sum'];
                                                         ?>
                                                         <div class="container">
-                                                            <h5><div class="mb-0"><?php echo "" . number_format($sum);?></div></h5>
+                                                            <h6><div class="mb-0"><?php echo "" . number_format($sum);?></div></h6>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -454,17 +476,17 @@ $test = 85;
                                                 <div class="d-flex">
                                                     <div class="flex-grow-1">
                                                     <i class='fas fa-layer-group' style='font-size:24px;color:darkgoldenrod'></i><i class='fas fa-chalkboard-teacher' style='font-size:24px;color:brown'></i><i class='fas fa-layer-group' style='font-size:24px;color:black'></i>
-                                                        <p class="text-muted fw-medium">SLGs Registered as Coops</p>
+                                                        <p class="text-muted fw-medium">Coops Formed</p>
                                                         <?php
                                                             $result = mysqli_query($link, 'SELECT count(groupID) AS total_slgs FROM tblgroup where registered_group = "1"'); 
                                                             $row = mysqli_fetch_assoc($result); 
                                                             $total_slgs = $row['total_slgs'];
                                                         ?>
-                                                        <h4 class="mb-0">
+                                                        <h6 class="mb-0">
                                                             <div class="container">
                                                                 <div class="numberCircle"><?php echo "" . number_format($total_slgs);?></div>
                                                             </div> 
-                                                        </h4>
+                                                        </h6>
                                                     </div>
                                                 </div>
                                             </div>
@@ -483,11 +505,11 @@ $test = 85;
                                                             $row = mysqli_fetch_assoc($result); 
                                                             $v_total = $row['v_total'];
                                                         ?>
-                                                            <h4 class="mb-0">
+                                                            <h6 class="mb-0">
                                                                 <div class="container">
                                                                     <div class="numberCircle"><?php echo "" . number_format($v_total);?></div>
                                                                 </div> 
-                                                            </h4>
+                                                            </h6>
                                                     </div>
                                                 </div>
                                             </div>
@@ -508,7 +530,7 @@ $test = 85;
                                                             $sum = $row['value_sum'];
                                                         ?>
                                                             <div class="container">
-                                                                <h4><div class="mb-0"><?php echo "" . $sum;?></div></h4>
+                                                                <h6><div class="mb-0"><?php echo "" . $sum;?></div></h6>
                                                             </div>
                                                         </h4>
                                                     </div>
@@ -563,7 +585,7 @@ $test = 85;
                                 $sum = $row['value_sum'];
                             ?>
                                 <div class="card-header bg-transparent border-primary">
-                                    <h6 class="my-0 text-primary">Total: <?php echo number_format($sum);?></h6>
+                                    <h8 class="my-0 text-default">Total (CIMIS Database): <?php echo number_format($sum);?></h8>
                                 </div>
                                 <div id="actual_hhs"></div> 
                             </div>
@@ -572,12 +594,12 @@ $test = 85;
                             <div class="card border border-success">
                                 <div class="card-header bg-transparent border-primary">
                                  <?php 
-                                        $select_query = "SELECT SUM((MembersF)+(MembersM)) as TotalMembers FROM tblgroup";
+                                        $select_query = "SELECT SUM((MembersF)+(MembersM)) as TotalMembers FROM tblgroup where deleted = '0'";
                                         $query_result = mysqli_query($link,$select_query);
                                         $row_val = mysqli_fetch_array($query_result);
                                          $totalM =  $row_val['TotalMembers'];
                                     ?>
-                                    <h5 class="my-0 text-primary">Expected Household Distribution (BL):<?php echo number_format($totalM);?></h5>
+                                    <h8 class="my-0 text-default">Total:<?php echo number_format($totalM);?></h8>
                                 </div>
                                 <div id="piechart3"></div> 
                             </div>
