@@ -98,31 +98,31 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                     <li class="nav-item waves-effect waves-light">
                                         <a class="nav-link active" data-bs-toggle="tab" href="#home-1" role="tab">
                                             <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
-                                            <span class="d-none d-sm-block">Savings and Loan Groups</span>
+                                            <span class="d-none d-sm-block">SL Groups</span>
                                         </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">
                                         <a class="link"  href="basic_livelihood_clusters.php" role="link">
                                             <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
-                                            <span class="d-none d-sm-block">Savings and Loan Clusters</span>
+                                            <span class="d-none d-sm-block">Clusters</span>
                                         </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">
                                         <a class="nav-link" data-bs-toggle="tab" href="#cls-1" role="tab">
                                             <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
-                                            <span class="d-none d-sm-block">New! Savings and Loan Cluster</span>
+                                            <span class="d-none d-sm-block">New Cluster!</span>
                                         </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">
                                         <a class="nav-link" data-bs-toggle="tab" href="#slg-1" role="tab">
                                             <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
-                                            <span class="d-none d-sm-block">New! Savings and Loan Group</span>
+                                            <span class="d-none d-sm-block">New SLG!</span>
                                         </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">
                                         <a class="link" href="basicReports.php" role="link">
                                             <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
-                                            <span class="d-none d-sm-block">Savings and Loan Group Reports</span>
+                                            <span class="d-none d-sm-block">SLG Reports</span>
                                         </a>
                                     </li>
                                     
@@ -301,12 +301,12 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                         <p class="mb-0">
                                             <!-- here -->
                                             <div class="card border border-primary">
-                                                <div class="card-header bg-transparent border-primary">
-                                                    <h5 class="my-0 text-primary"></i>Location Filter For New Cluster</h5>
+                                                <div class="card-header bg-primary border-primary">
+                                                    <h5 class="my-0 text-default"></i>New Cluster Filter</h5>
                                                 </div>
-                                                <div class="card-body">
+                                                <div class="card-body bg-success">
                                                     <h5 class="card-title mt-0"></h5>
-                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="basic_livelihood_slg_mgt_new_cls_filter1_results.php" method ="GET" >
+                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="basic_livelihood_slg_mgt_new_cls_filter1_results.php" method ="POST" >
                                                         <div class="col-12">
                                                             <label for="region" class="form-label">Region</label>
                                                             
@@ -394,12 +394,12 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
                                             <!--start here -->
                                             <div class="card border border-primary">
-                                                <div class="card-header bg-transparent border-primary">
-                                                    <h5 class="my-0 text-primary"></i>Location Filter For New SLG</h5>
+                                                <div class="card-header bg-primary border-primary">
+                                                    <h5 class="my-0 text-default"></i>New SLG Filter</h5>
                                                 </div>
-                                                <div class="card-body">
+                                                <div class="card-body bg-success">
                                                     <h5 class="card-title mt-0"></h5>
-                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="basic_livelihood_slg_mgt_new_slg_filter1_results.php" method ="GET" >
+                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="basic_livelihood_slg_mgt_new_slg_filter1_results.php" method ="POST" >
                                                         <div class="col-12">
                                                             <label for="region" class="form-label">Region</label>
                                                             

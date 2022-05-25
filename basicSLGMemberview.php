@@ -59,6 +59,54 @@
          $rg = mysqli_fetch_array($rg_query);// fetch data
          return $rg['name'];
          }
+
+        function iga_name($link, $igaID)
+        {
+        $iga_query = mysqli_query($link,"select name from tbliga_types where ID='$igaID'"); // select query
+        $iga = mysqli_fetch_array($iga_query);// fetch data
+        return $iga['name'];
+        }
+
+        function month_name($month)
+    {
+        if($month == 1){
+            $mname ='Jan';
+        }
+        if($month == 2){
+            $mname ='Feb';
+        }
+        if($month == 3){
+            $mname ='Mar';
+        }
+        if($month == 4){
+            $mname ='Apr';
+        }
+        if($month == 5){
+            $mname ='May';
+        }
+        if($month == 6){
+            $mname ='Jun';
+        }
+        if($month == 7){
+            $mname ='Jul';
+        }
+        if($month == 8){
+            $mname ='Aug';
+        }
+        if($month == 9){
+            $mname ='Sep';
+        }
+        if($month == 10){
+            $mname ='Oct';
+        }
+        if($month == 11){
+            $mname ='Nov';
+        }
+        if($month == 12){
+            $mname ='Dec';
+        }
+        return $mname;
+    }
                
     ?>
 
@@ -126,6 +174,145 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="row mb-1">
+                            <div class="col-lg-9">
+                                <div class="card border border-primary">
+                                    <div class="card-header bg-transparent border-primary">
+                                        <?php
+                                            $result = mysqli_query($link, "SELECT SUM(amount) AS value_total FROM tblslg_member_savings where hh_code ='$id'"); 
+                                            $row = mysqli_fetch_assoc($result); 
+                                            $total_savings = $row['value_total'];
+                                        ?>
+                                        <h6 class="my-0 text-default">Household Savings Summary: MK<?php echo number_format($total_savings,2); ?> </h6>
+                                        
+                                    </div>
+                                    <div class="card-body">
+                                    <h5 class="card-title mt-0"></h5>
+                                    
+                                        <div class="table-responsive">
+                                                            
+                                            <table class="table table-striped mb-0">
+                                            
+                                                <thead>
+                                                    <tr>   
+                                                        <th>Savings ID</th>                                              
+                                                        <th>Year</th>                                                                                               
+                                                        <th>Month</th>
+                                                        <th>Amount Saved</th>
+                                                        <th>Action</th>
+                                                    </tr>
+                                                </thead>
+
+
+                                                <tbody>
+                                                    <?Php
+                                                            $id = $_GET['id'];
+                                                        $query="select * from tblslg_member_savings where hh_code ='$id';";
+
+                                                        //Variable $link is declared inside config.php file & used here
+                                                        
+                                                        if ($result_set = $link->query($query)) {
+                                                        while($row = $result_set->fetch_array(MYSQLI_ASSOC))
+                                                        {                                                
+                                                            $amount = number_format($row["amount"],"2");
+            
+                                                            $month = month_name($row["month"]);
+                                                            
+                                                    
+                                                        echo "<tr>\n";                                           
+                                                            echo "<td>".$row["savingID"]."</td>\n";
+                                                            echo "<td>".$row["year"]."</td>\n";
+                                                            echo "\t\t<td>$month</td>\n";
+                                                            echo "\t\t<td>$amount</td>\n";
+                                                            
+                                                            echo "<td>
+                                                                <a href=\".php?id=".$row['savingID']."\"><i class='far fa-edit' style='font-size:18px'></i></a> 
+                                                                <a onClick=\"javascript: return confirm('Are You Sure You want To DELETE This Record');\" href=\".php?id=".$row['savingID']."\"><i class='far fa-trash-alt' style='font-size:18px'></i></a>        
+                                                            </td>\n";
+                                                        echo "</tr>\n";
+                                                        }
+                                                        $result_set->close();
+                                                        }                          
+                                                    ?>
+                                                </tbody>
+                                            </table>
+                                            </p>
+                                        </div>
+                                    </div>     
+                                </div>
+                            </div>   
+                        </div>
+
+                        <div class="row mb-1">
+                            <div class="col-lg-9">
+                                <div class="card border border-primary">
+                                    <div class="card-header bg-transparent border-primary">
+                                        <?php
+                                            $result = mysqli_query($link, "SELECT SUM(amount) AS value_total FROM tblslg_member_iga where hh_code ='$id'"); 
+                                            $row = mysqli_fetch_assoc($result); 
+                                            $total_investment = $row['value_total'];
+                                        ?>
+                                        <h6 class="my-0 text-default">Household Investments Summary: MK<?php echo number_format($total_investment,2); ?> </h6>
+                                    </div>
+                                    <div class="card-body">
+                                    <h5 class="card-title mt-0"></h5>
+                                    
+                                        <div class="table-responsive">
+                                                            
+                                            <table class="table table-striped mb-0">
+                                            
+                                                <thead>
+                                                    <tr>   
+                                                        <th>IGA ID</th>                                              
+                                                        <th>IGA Type</th>
+                                                                                                
+                                                        <th>Amount Invested</th>
+                                                        <th>Action</th>
+                                                    </tr>
+                                                </thead>
+
+
+                                                <tbody>
+                                                    <?Php
+                                                            $id = $_GET['id'];
+                                                        $query="select * from tblslg_member_iga where hh_code ='$id';";
+
+                                                        //Variable $link is declared inside config.php file & used here
+                                                        
+                                                        if ($result_set = $link->query($query)) {
+                                                        while($row = $result_set->fetch_array(MYSQLI_ASSOC))
+                                                        {                                                
+                                                            $amount = number_format($row["amount"],"2");
+            
+                                                            $ig_name = iga_name($link,$row["igaID"]);
+                                                            
+                                                    
+                                                        echo "<tr>\n";                                           
+                                                            echo "<td>".$row["igaID"]."</td>\n";
+                                                            echo "\t\t<td>$ig_name</td>\n";
+                                                            
+                                                            
+                                                            echo "\t\t<td>$amount</td>\n";
+                                                            
+                                                            echo "<td>
+                                                                <a href=\".php?id=".$row['igaID']."\"><i class='far fa-edit' style='font-size:18px'></i></a> 
+                                                                <a onClick=\"javascript: return confirm('Are You Sure You want To DELETE This Record');\" href=\".php?id=".$row['igaID']."\"><i class='far fa-trash-alt' style='font-size:18px'></i></a>        
+                                                            </td>\n";
+                                                        echo "</tr>\n";
+                                                        }
+                                                        $result_set->close();
+                                                        }                          
+                                                    ?>
+                                                </tbody>
+                                            </table>
+                                            </p>
+                                        </div>
+                                    </div>     
+                                </div>
+                            </div>   
+                        </div>
+
                     </div>
                 </div>
             </div>

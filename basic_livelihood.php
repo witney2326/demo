@@ -310,7 +310,7 @@
                                     <li class="nav-item waves-effect waves-light">
                                         <a class="nav-link active" data-bs-toggle="tab" href="#home" role="tab">
                                             <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
-                                            <span class="d-none d-sm-block">Basic Lvhd Dashboard</span>
+                                            <span class="d-none d-sm-block">Dashboard</span>
                                         </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">
@@ -323,45 +323,35 @@
                                     <li class="nav-item waves-effect waves-light">
                                         <a class="link"  href="basic_livelihood_meetings.php" role="link">
                                             <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
-                                            <span class="d-none d-sm-block">Awareness Meetings</span>
+                                            <span class="d-none d-sm-block">Awareness & Sensitization Meetings</span>
                                         </a>
                                     </li>
                                     
                                     <li class="nav-item waves-effect waves-light">
                                         <a class="nav-link" href="basic_livelihood_slg_mgt2.php" role="link">
                                             <span class="d-block d-sm-none"><i class="fas fa-cog"></i></span>
-                                            <span class="d-none d-sm-block">SLG Managmt</span>
+                                            <span class="d-none d-sm-block">Savings & Loan Group Mgt</span>
                                         </a>
                                     </li>
-                                    <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link"  href="basic_livelihood_member_mgt.php" role="link">
-                                            <span class="d-block d-sm-none"><i class="fas fa-cog"></i></span>
-                                            <span class="d-none d-sm-block">SLG Members</span>
-                                        </a>
-                                    </li>
+                                    
                                     <li class="nav-item waves-effect waves-light">
                                         <a class="nav-link" href="basic_livelihood_training.php" role="link">
                                             <span class="d-block d-sm-none"><i class="fas fa-cog"></i></span>
                                             <span class="d-none d-sm-block">Capacity Building</span>
                                         </a>
                                     </li>
-                                    <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link" href="basic_livelihood_cbdra.php" role="link">
-                                            <span class="d-block d-sm-none"><i class="fas fa-cog"></i></span>
-                                            <span class="d-none d-sm-block">Comm. Based DRA</span>
-                                        </a>
-                                    </li>
+                                    
                                     
                                     <li class="nav-item waves-effect waves-light">
                                         <a class="link"  href="basic_livelihood_acsa_mgt.php" role="link">
                                             <span class="d-block d-sm-none"><i class="fas fa-cog"></i></span>
-                                            <span class="d-none d-sm-block">Actionionable CSA</span>
+                                            <span class="d-none d-sm-block">Actionable Climate Smart Agriculture</span>
                                         </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">
                                         <a class="nav-link"  href="basic_livelihood_safeguards_mgt.php" role="link">
                                             <span class="d-block d-sm-none"><i class="fas fa-cog"></i></span>
-                                            <span class="d-none d-sm-block">Env. & Soc. Safgds Mgt</span>
+                                            <span class="d-none d-sm-block">Environmental & Social Safeguard Mgt</span>
                                         </a>
                                     </li>
                                     

@@ -96,7 +96,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
                                     <div class="card-body bg-success">
                                         <h5 class="card-title mt-0"></h5>
-                                        <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="basic_livelihood_slg_mgt_cls_filter1_results.php" method ="GET" >
+                                        <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="basic_livelihood_slg_mgt_cls_filter1_results.php" method ="POST" >
                                             <div class="col-12">
                                                 <label for="region" class="form-label">Region</label>
                                                 
@@ -170,6 +170,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                             
                                             <div class="col-12">
                                                 <button type="submit" class="btn btn-btn btn-outline-primary w-md" name="Submit" value="Submit">Submit</button>
+                                                <INPUT TYPE="button" class="btn btn-btn btn-outline-secondary w-md" VALUE="Back" onClick="history.go(-1);">
                                             </div>
                                         </form>                                             
                                         <!-- End Here -->

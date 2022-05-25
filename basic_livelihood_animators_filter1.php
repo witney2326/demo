@@ -29,7 +29,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 <?php include 'layouts/body.php'; ?>
 
 <?php 
-    $region = $_GET['region'];
+    $region = $_POST['region'];
  
     
     function get_rname($link, $rcode)
@@ -92,16 +92,16 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                         <p class="mb-0">
                                             <!--start here -->
                                             <div class="card border border-primary">
-                                                <div class="card-header bg-transparent border-primary">
-                                                    <h5 class="my-0 text-primary"></i>Animator Search Filter</h5>
+                                                <div class="card-header bg-primary border-primary">
+                                                    <h5 class="my-0 text-default"></i>Animator Filter</h5>
                                                 </div>
-                                                <div class="card-body">
+                                                <div class="card-body bg-success">
                                                     <h5 class="card-title mt-0"></h5>
-                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="basic_livelihood_animators_filter2.php" method ="GET" >
+                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="basic_livelihood_animators_filter2.php" method ="POST" >
                                                         <div class="col-12">
                                                             <label for="region" class="form-label">Region</label>
                                                             <div>
-                                                                <select class="form-select" name="region" id="region" value ="<?php if(isset($_GET['region'])) {echo $_GET['region'];} ?>" required>
+                                                                <select class="form-select" name="region" id="region" value ="<?php echo $region;?>" required>
                                                                     <option selected value = "<?php echo $region;?>"><?php echo get_rname($link,$region);?></option>
                                                                 </select>
                                                                 
@@ -152,8 +152,8 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
                                                         
                                                         <div class="col-12">
-                                                            <button type="submit" class="btn btn-primary w-md" name="Submit" value="Submit">Submit</button>
-                                                            <INPUT TYPE="button" class="btn btn-secondary w-md" VALUE="Back" onClick="history.go(-1);">
+                                                            <button type="submit" class="btn btn-btn btn-outline-primary w-md" name="Submit" value="Submit">Submit</button>
+                                                            <INPUT TYPE="button" class="btn btn-btn btn-outline-secondary w-md" VALUE="Back" onClick="history.go(-1);">
                                                         </div>
                                                     </form>                                             
                                                     <!-- End Here -->

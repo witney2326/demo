@@ -107,12 +107,12 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                     </div>
                     <div class="card-body bg-success">
                         
-                        <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="basic_livelihood_hh_mgt_filter1.php" method="GET">
+                        <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="basic_livelihood_hh_mgt_filter1.php" method="POST">
                             <div class="col-12">
                                 <label for="region" class="form-label">Region</label>
                                 <div>
                                     <select class="form-select" name="region" id="region" required>
-                                        <option selected value = "$region"></option>
+                                        <option></option>            
                                         <?php                                                           
                                                 $dis_fetch_query = "SELECT regionID, name FROM tblregion";                                                  
                                                 $result_dis_fetch = mysqli_query($link, $dis_fetch_query);                                                                       
@@ -137,7 +137,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                             <div class="col-12">
                                 <label for="district" class="form-label">District</label>
                                 <select class="form-select" name="district" id="district" required disabled>
-                                    <option selected value="$district" ></option>
+                                    <option></option> 
                                         <?php                                                           
                                             $dis_fetch_query = "SELECT DistrictName FROM tbldistrict";                                                  
                                             $result_dis_fetch = mysqli_query($link, $dis_fetch_query);                                                                       
@@ -158,7 +158,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                             <div class="col-12">
                                 <label for="cw" class="form-label">Case Worker</label>
                                 <select class="form-select" name="cw" id="cw" required disabled>
-                                    <option></option>
+                                    <option></option> 
                                     <?php                                                           
                                             $cw_fetch_query = "SELECT cwID,cwName FROM tblcw";                                                  
                                             $result_cw_fetch = mysqli_query($link, $cw_fetch_query);                                                                       
@@ -179,7 +179,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                             <div class="col-12">
                                 <label for="slg" class="form-label">SL Group</label>
                                 <select class="form-select" name="slg" id="slg" required disabled>
-                                    <option></option>
+                                    <option></option> 
                                     <?php                                                           
                                             $slg_fetch_query = "SELECT groupID,groupname FROM tblcw";                                                  
                                             $result_slg_fetch = mysqli_query($link, $slg_fetch_query);                                                                       
@@ -235,7 +235,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                     <tbody>
                                         <?Php
                                             
-                                            $query="select * from tblbeneficiaries where regionID = '0' ";
+                                            $query="select * from tblbeneficiaries where regionID = '00' ";
 
                                         //Variable $link is declared inside config.php file & used here
                                         

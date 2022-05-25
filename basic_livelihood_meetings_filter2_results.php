@@ -29,8 +29,8 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 <?php include 'layouts/body.php'; ?>
 
 <?php 
-    $region = $_GET['region'];
-    $district =$_GET['district'];
+    $region = $_POST['region'];
+    $district =$_POST['district'];
     
     
     function get_rname($link, $rcode)
@@ -174,7 +174,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
                                                                 <tbody>
                                                                     <?Php
-                                                                       $selectedDistrict = $_GET["district"];
+                                                                       $selectedDistrict = $_POST["district"];
                                                                         $query="select * from tblawareness_meetings where DistrictID ='$selectedDistrict'";
 
                                                                     //Variable $link is declared inside config.php file & used here

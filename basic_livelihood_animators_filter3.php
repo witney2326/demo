@@ -29,9 +29,9 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 <?php include 'layouts/body.php'; ?>
 
 <?php 
-     $region = $_GET['region'];
-     $district = $_GET['district'];   
-     $ta = $_GET['ta'];
+     $region = $_POST['region'];
+     $district = $_POST['district'];   
+     $ta = $_POST['ta'];
     
     function get_rname($link, $rcode)
         {
@@ -100,10 +100,10 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                         <p class="mb-0">
                                             <!--start here -->
                                             <div class="card border border-primary">
-                                                <div class="card-header bg-transparent border-primary">
-                                                    <h5 class="my-0 text-primary"></i>Animator Search Filter</h5>
+                                                <div class="card-header bg-primary border-primary">
+                                                    <h5 class="my-0 text-default"></i>Animator Filter</h5>
                                                 </div>
-                                                <div class="card-body">
+                                                <div class="card-body bg-success">
                                                     <h5 class="card-title mt-0"></h5>
                                                     <form class="row row-cols-lg-auto g-3 align-items-center" novalidate >
                                                         <div class="col-12">
@@ -112,9 +112,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                                 <select class="form-select" name="region" id="region"  required>
                                                                     <option selected value = "<?php echo $region;?>"><?php echo get_rname($link,$region);?></option>
                                                                 </select>
-                                                                <div class="invalid-feedback">
-                                                                    Please select a valid Malawi region.
-                                                                </div>
+                                                                
                                                             </div>
                                                         </div>
                                                         
@@ -123,9 +121,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                             <select class="form-select" name="district" id="district"  required>
                                                                 <option selected value="<?php echo $district;?>" ><?php echo dis_name($link,$district); ?></option>
                                                             </select>
-                                                            <div class="invalid-feedback">
-                                                                Please select a valid Malawi district.
-                                                            </div>
+                                                            
                                                         </div>
 
                                                         <div class="col-12">
@@ -133,15 +129,13 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                             <select class="form-select" name="ta" id="ta" required >
                                                                 <option selected value="<?php echo $ta;?>" ><?php echo ta_name($link,$ta); ?></option>
                                                             </select>
-                                                            <div class="invalid-feedback">
-                                                                Please select a valid TA.
-                                                            </div>
+                                                            
                                                         </div>
 
                                                         
                                                         <div class="col-12">
                                                             
-                                                        <INPUT TYPE="button" class="btn btn-secondary w-md" VALUE="Back" onClick="history.go(-1);">
+                                                        <INPUT TYPE="button" class="btn btn-btn btn-outline-secondary w-md" VALUE="Back" onClick="history.go(-1);">
                                                         </div>
                                                     </form>                                             
                                                     <!-- End Here -->

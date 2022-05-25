@@ -29,7 +29,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 <?php include 'layouts/body.php'; ?>
 
 <?php 
-    $region = $_GET['region'];
+    $region = $_POST['region'];
   
     
     function get_rname($link, $rcode)
@@ -117,7 +117,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                 </div>
                                                 <div class="card-body bg-success">
                                                     <h5 class="card-title mt-0"></h5>
-                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="basic_livelihood_meetings_filter2_results.php" method ="GET">
+                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="basic_livelihood_meetings_filter2_results.php" method ="POST">
                                                         <div class="col-12">
                                                             <label for="region" class="form-label">Region</label>
                                                             <div>
@@ -186,7 +186,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
                                                                 <tbody>
                                                                     <?Php
-                                                                        $region = $_GET["region"];
+                                                                        $region = $_POST["region"];
                                                                         $query="select * from tblawareness_meetings where regionID='$region'";
 
                                                                     //Variable $link is declared inside config.php file & used here

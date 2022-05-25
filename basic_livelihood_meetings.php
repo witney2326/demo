@@ -106,7 +106,12 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                             <span class="d-none d-sm-block">New Meeting</span>
                                         </a>
                                     </li>
-
+                                    <li class="nav-item waves-effect waves-light">
+                                        <a class="nav-link" href="basic_livelihood_cbdra.php" role="link">
+                                            <span class="d-block d-sm-none"><i class="fas fa-cog"></i></span>
+                                            <span class="d-none d-sm-block">Comm. Based DRA</span>
+                                        </a>
+                                    </li>
                                     <li class="nav-item waves-effect waves-light">
                                         <a class="link"  href="basicReports.php" role="link">
                                             <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
@@ -129,7 +134,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                 </div>
                                                 <div class="card-body bg-success">
                                                     <h5 class="card-title mt-0"></h5>
-                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="basic_livelihood_meetings_filter1_results.php" method ="GET" >
+                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="basic_livelihood_meetings_filter1_results.php" method ="POST" >
                                                         <div class="col-12">
                                                             <label for="region" class="form-label">Region</label>
                                                             

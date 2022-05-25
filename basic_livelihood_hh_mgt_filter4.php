@@ -29,10 +29,10 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 <?php include 'layouts/body.php'; ?>
 
 <?php		
-        $region = $_GET['region'];
-         $district = $_GET['district'];
-         $cw = $_GET['cw'];
-         $slg = $_GET['slg'];
+        $region = $_POST['region'];
+         $district = $_POST['district'];
+         $cw = $_POST['cw'];
+         $slg = $_POST['slg'];
 
          function get_rname($link, $rcode)
          {
@@ -108,7 +108,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                     </div>
                     <div class="card-body bg-success">
                         <h5 class="card-title mt-0"></h5>
-                        <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="basic_livelihood_hh_mgt_filter4.php" method="GET">
+                        <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="">
                             <div class="col-12">
                                 <label for="region" class="form-label">Region</label>
                                 <div>
@@ -175,7 +175,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
                                     <tbody>
                                         <?Php
-                                            $slg = $_GET['slg'];
+                                            $slg = $_POST['slg'];
                                             $query="select * from tblbeneficiaries where groupID = '$slg'";
 
                                         //Variable $link is declared inside config.php file & used here

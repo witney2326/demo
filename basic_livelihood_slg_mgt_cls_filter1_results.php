@@ -30,7 +30,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
 <?php 
   
-    $region = $_GET['region'];
+    $region = $_POST['region'];
     
     function get_rname($link, $rcode)
         {
@@ -103,11 +103,11 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                 </div>
                                                 <div class="card-body bg-success">
                                                     <h5 class="card-title mt-0"></h5>
-                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="basic_livelihood_slg_mgt_cls_filter2_results.php" method ="GET">
+                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="basic_livelihood_slg_mgt_cls_filter2_results.php" method ="POST">
                                                         <div class="col-12">
                                                             <label for="region" class="form-label">Region</label>
                                                             <div>
-                                                                <select class="form-select" name="region" id="region" value ="$region" required>
+                                                                <select class="form-select" name="region" id="region" value ="<?php echo $region;?>" required>
                                                                     <option selected value = "<?php echo $region;?>"><?php echo get_rname($link,$region);?></option>
                                                                 </select>
                                                             </div>
@@ -189,6 +189,26 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                                 if ($result_set = $link->query($query)) {
                                                                 while($row = $result_set->fetch_array(MYSQLI_ASSOC))
                                                                 { 
+                                                                    $prog = $row["programID"];
+                                                                    switch ($prog) 
+                                                                        {
+                                                                            case "01":
+                                                                                $prgname = "SCT";
+                                                                            break;
+                                                                            case "02":
+                                                                                $prgname = "EPWP";
+                                                                            break;
+                                                                            case "03":
+                                                                                $prgname = "PWP";
+                                                                            break;
+                                                                            case "04":
+                                                                                $prgname = "CSPWP";
+                                                                            break;
+                                                                            case "05":
+                                                                                $prgname = "Masaf4";
+                                                                            break;
+                                                                        }
+
                                                                 echo "<tr>\n";
                                                                     
                                                                 
@@ -196,7 +216,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                                     echo "<td>".$row["ClusterName"]."</td>\n";
                                                                     echo "<td>".$row["cohort"]."</td>\n";                                                                            
                                                                     echo "<td>".$row["gvhID"]."</td>\n";
-                                                                    echo "<td>".$row["programID"]."</td>\n";
+                                                                    echo "<td>\t\t$prgname</td>\n";
                                                                     
                                                                     echo "<td>
                                                                     <a href=\"basicCLSview.php?id=".$row['ClusterID']."\"><i class='far fa-eye' title='View Cluster' style='font-size:18px;color:purple'></i></a>\n";

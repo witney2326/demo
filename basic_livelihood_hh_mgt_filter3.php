@@ -29,9 +29,9 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 <?php include 'layouts/body.php'; ?>
 
 <?php		
-        $region = $_GET["region"];
-         $district = $_GET['district'];
-         $cw = $_GET['cw'];
+        $region = $_POST["region"];
+         $district = $_POST['district'];
+         $cw = $_POST['cw'];
 
          function get_rname($link, $rcode)
          {
@@ -107,7 +107,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                     </div>
                     <div class="card-body bg-success">
                         <h5 class="card-title mt-0"></h5>
-                        <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="basic_livelihood_hh_mgt_filter4.php" method="GET">
+                        <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="basic_livelihood_hh_mgt_filter4.php" method="POST">
                             <div class="col-12">
                                 <label for="region" class="form-label">Region</label>
                                 <div>
@@ -168,7 +168,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                     <div class="col-12">
                         <div class="card border border-primary">
                         <div class="card-header bg-transparent border-primary">
-                            <h5 class="my-0 text-default">Beneficiary Households For CW: <?php echo cw_name($link,$_GET['cw']); ?></h5>
+                            <h5 class="my-0 text-default">Beneficiary Households For CW: <?php echo cw_name($link,$cw); ?></h5>
                         </div>
                         <div class="card-body">
                         <h5 class="card-title mt-0"></h5>
@@ -191,7 +191,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
                                     <tbody>
                                         <?Php
-                                            $cw = $_GET["cw"];
+                                            $cw = $_POST["cw"];
                                             $query="select * from tblbeneficiaries where districtID = '00'";
 
                                         //Variable $link is declared inside config.php file & used here

@@ -30,7 +30,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
 <?php 
 
-    $region = $_GET['region'];
+    $region = $_POST['region'];
 
     function get_rname($link, $rcode)
         {
@@ -97,12 +97,12 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                         <p class="mb-0">
                                             <!--start here -->
                                             <div class="card border border-primary">
-                                                <div class="card-header bg-transparent border-primary">
-                                                    <h5 class="my-0 text-primary"></i>Search Filter</h5>
+                                                <div class="card-header bg-primary border-primary">
+                                                    <h5 class="my-0 text-default"></i>Search Filter</h5>
                                                 </div>
-                                                <div class="card-body">
+                                                <div class="card-body bg-success">
                                                     <h5 class="card-title mt-0"></h5>
-                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="basic_livelihood_slg_training_trained_groups_filter2.php" method ="GET" >
+                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="basic_livelihood_slg_training_trained_groups_filter2.php" method ="POST" >
                                                         <div class="col-12">
                                                             <label for="region" class="form-label">Region</label>
                                                             <div>

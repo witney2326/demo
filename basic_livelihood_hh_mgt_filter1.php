@@ -29,7 +29,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 <?php include 'layouts/body.php'; ?>
 
 <?php		  
-    $region = $_GET['region'];
+    $region = $_POST['region'];
    
 
          function get_rname($link, $rcode)
@@ -99,7 +99,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                     </div>
                     <div class="card-body bg-success">
                         <h5 class="card-title mt-0"></h5>
-                        <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="basic_livelihood_hh_mgt_filter2.php" method="GET">
+                        <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="basic_livelihood_hh_mgt_filter2.php" method="POST">
                             <div class="col-12">
                                 <label for="region" class="form-label">Region</label>
                                 <div>
@@ -192,7 +192,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                     <div class="col-12">
                         <div class="card border border-primary">
                         <div class="card-header bg-transparent border-primary">
-                            <h5 class="my-0 text-default">Beneficiary Households in <?php echo get_rname($link,$_GET['region']); ?> Region</h5>
+                            <h5 class="my-0 text-default">Beneficiary Households in <?php echo get_rname($link,$region); ?> Region</h5>
                         </div>
                         <div class="card-body">
                         <h5 class="card-title mt-0"></h5>
@@ -215,8 +215,8 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
                                     <tbody>
                                         <?Php
-                                            $region = $_GET["region"];
-                                            $query="select * from tblbeneficiaries where regionID = '0'";
+                                            $region = $_POST["region"];
+                                            $query="select * from tblbeneficiaries where regionID = '00'";
 
                                         //Variable $link is declared inside config.php file & used here
                                         
