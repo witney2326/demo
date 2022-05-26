@@ -112,13 +112,13 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                         <p class="mb-0">
                                             
                                             <div class="card border border-primary">
-                                                <div class="card-header bg-transparent border-primary">
-                                                    <h5 class="my-0 text-primary">Cluster Search Filter</h5>
+                                                <div class="card-header bg-primary border-primary">
+                                                    <h5 class="my-0 text-default">SLG Filter</h5>
                                                 </div>
 
-                                                <div class="card-body">
+                                                <div class="card-body bg-success">
                                                     <h5 class="card-title mt-0"></h5>
-                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="basic_livelihood_safeguards_mgt_filter1.php" method ="GET" >
+                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="basic_livelihood_safeguards_mgt_filter1.php" method ="POST" >
                                                         <div class="col-12">
                                                             <label for="region" class="form-label">Region</label>
                                                             
@@ -191,7 +191,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
                                                         
                                                         <div class="col-12">
-                                                            <button type="submit" class="btn btn-primary w-md" name="Submit" value="Submit">Submit</button>
+                                                            <button type="submit" class="btn btn-btn btn-outline-primary w-md" name="Submit" value="Submit">Submit</button>
                                                         </div>
                                                     </form>                                             
                                                     <!-- End Here -->

@@ -13,7 +13,7 @@
 
 <div id="layout-wrapper">
 
-    <?php include 'layouts/menu.php'; ?>
+   
 
     <?php
         include "layouts/config.php"; // Using database connection file here
@@ -125,77 +125,59 @@
                         <div class="col-lg-9">
                             <div class="card border border-success">
                                 <div class="card-header bg-transparent border-success">
-                                    <h5 class="my-0 text-success">Add Demo Plot for Cluster: <?php echo cls_name($link,$id);?> </h5>
+                                    <h5 class="my-0 text-default">Add Demo Plot for Cluster: <?php echo cls_name($link,$id);?> </h5>
                                 </div>
                                 <div class="card-body">
                                     
                                     <form method="POST" action="ACSADemoPlotAdd_1.php">
-                                        <div class="row mb-4">
-                                            <label for="group_id" class="col-sm-3 col-form-label">Cluster ID</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="group_id" name = "group_id" value="<?php echo $id ; ?>" style="max-width:30%;"  >
-                                            </div>
-                                        </div>
-                                        <div class="row mb-4">
-                                            <label for="group_name" class="col-sm-3 col-form-label">SL Cluster Name</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="group_name" name ="group_name" value = "<?php echo $groupname ; ?>" style="max-width:30%;"  >
-                                            </div>
+                                        
+                                        <div class="row mb-1">
+                                            <label for="group_id" class="col-sm-2 col-form-label">Cluster ID</label>
+                                            <input type="text" class="form-control" id="group_id" name = "group_id" value="<?php echo $id ; ?>" style="max-width:30%;"  >
+                                            
+                                            <label for="group_name" class="col-sm-2 col-form-label">Cluster Name</label>
+                                            <input type="text" class="form-control" id="group_name" name ="group_name" value = "<?php echo $groupname ; ?>" style="max-width:30%;"  >
                                         </div>
                                         
-                                        <div class="row mb-4">
-                                            <label for="region" class="col-sm-3 col-form-label">Region</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="region" name="region" value ="<?php echo rname($link,$regionID) ; ?>" style="max-width:30%;"  >
-                                            </div>
-                                        </div>
-                                        <div class="row mb-4">
-                                            <label for="district" class="col-sm-3 col-form-label">District</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="district" name="district" value ="<?php echo dis_name($link,$DistrictID) ; ?>" style="max-width:30%;" readonly >
-                                            </div>
-                                        </div>
-                                        <div class="row mb-4">
-                                            <label for="ta" class="col-sm-3 col-form-label">Traditional Authority</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="ta" name="ta" value ="<?php echo tname($link,$TAID) ; ?>" style="max-width:30%;"  >
-                                            </div>
-                                        </div>
-                                        <div class="row mb-4">
-                                            <label for="gvh" class="col-sm-3 col-form-label">Group Village Head</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="gvh" name="gvh" value ="<?php echo $gvhID ; ?>" style="max-width:40%;"  >
-                                            </div>
+                                        <div class="row mb-1">
+                                            <label for="region" class="col-sm-2 col-form-label">Region</label>
+                                            <input type="text" class="form-control" id="region" name="region" value ="<?php echo rname($link,$regionID) ; ?>" style="max-width:30%;"  >
+                                            
+                                            <label for="district" class="col-sm-2 col-form-label">District</label>
+                                            <input type="text" class="form-control" id="district" name="district" value ="<?php echo dis_name($link,$DistrictID) ; ?>" style="max-width:30%;" readonly >
                                         </div>
                                         
-                                        <div class="row mb-4">
-                                            <label for="cohort" class="col-sm-3 col-form-label">Cohort</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="cohort" name="cohort" value ="<?php echo $cohort ; ?> " style="max-width:30%;"  >
-                                            </div>
+                                        <div class="row mb-1">
+                                            <label for="ta" class="col-sm-2 col-form-label">TA</label>
+                                            <input type="text" class="form-control" id="ta" name="ta" value ="<?php echo tname($link,$TAID) ; ?>" style="max-width:30%;"  >
+                                            
+                                            <label for="gvh" class="col-sm-2 col-form-label">GVH</label>
+                                            <input type="text" class="form-control" id="gvh" name="gvh" value ="<?php echo $gvhID ; ?>" style="max-width:30%;"  >
                                         </div>
-
-                                        <div class="row mb-4">
-                                            <label for="place" class="col-sm-3 col-form-label">Demo Plot (Village)</label>
-                                            <input type="text" class="form-control" name="plot" id="plot" style="max-width:40%;" required>
-                                                
-                                        </div>
-
-                                        <div class="row mb-4">
-                                            <label for="purpose" class="col-sm-3 col-form-label">Plot Acreage</label>
-                                            <input  type="number" step="any" name="acreage" id="acreage" style="max-width:20%;" required>
-                                                
-                                        </div>
-
                                         
+                                        <div class="row mb-1">
+                                            <label for="cohort" class="col-sm-2 col-form-label">Cohort</label>
+                                            <input type="text" class="form-control" id="cohort" name="cohort" value ="<?php echo $cohort ; ?> " style="max-width:30%;"  >
+                                        </div>
+
+                                        <div class="row mb-1">
+                                            <label for="place" class="col-sm-2 col-form-label">Plot (Vge)</label>
+                                            <input type="text" class="form-control" name="plot" id="plot" style="max-width:30%;" required>
+                                            
+                                            <label for="purpose" class="col-sm-2 col-form-label">Plot Acreage</label>
+                                            <input  type="number" step="any" name="acreage" id="acreage" style="max-width:30%;" required>
+                                        </div>
+
+                                        <div class="row mb-2">
+                                                                                          
+                                        </div>
 
                                         <div class="row justify-content-end">
-                                            <div class="col-sm-9">
-                                                <div>
-                                                    <button type="submit" class="btn btn-primary w-md" name="Submit" value="Submit">Save Record</button>
-                                                    <INPUT TYPE="button" VALUE="Back" onClick="history.go(-1);">
-                                                </div>
+                                            <div>
+                                                <button type="submit" class="btn btn-btn btn-outline-primary w-md" name="Submit" value="Submit">Save Record</button>
+                                                <INPUT TYPE="button" class="btn btn-btn btn-outline-secondary w-md" VALUE="Back" onClick="history.go(-1);">
                                             </div>
+                                            
                                         </div>
                                     </form>
                                     

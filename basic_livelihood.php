@@ -69,17 +69,17 @@
         function drawChart() {
         var data = google.visualization.arrayToDataTable([
         
-        ['District', 'Adopted_Places'],
+        ['District', 'Lead_Farmers'],
         
         <?php 
-            $select_query = "SELECT tbldistrict.DistrictName as District, count(cluster) as Adopted_Places
-            FROM tbladoptplace 
-            inner join tbldistrict on tbldistrict.DistrictID = tbladoptplace.districtID
+            $select_query = "SELECT tbldistrict.DistrictName as District, count(TrainingID) as Lead_Farmers
+            FROM tblanimatortrainings 
+            inner join tbldistrict on tbldistrict.DistrictID = tblanimatortrainings.districtID where tblanimatortrainings.animatorType = '06'
             GROUP BY tbldistrict.DistrictName";
             $query_result = mysqli_query($link,$select_query);
             while($row_val = mysqli_fetch_array($query_result)){
                 
-            echo "['".$row_val['District']."',".$row_val['Adopted_Places']."],";
+            echo "['".$row_val['District']."',".$row_val['Lead_Farmers']."],";
             
             }
         ?>
@@ -92,7 +92,7 @@
         var options = {'title':'', 'width':330, 'height':250};
 
         var options = {
-            title: 'CBDRA Adopted Places' ,
+            title: 'ACSA Lead Farmers Trained' ,
             width: '330',
             height: '250',
             hAxis: {title: ''},

@@ -29,7 +29,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 <?php include 'layouts/body.php'; ?>
 
 <?php 
-    $region = $_GET["region"];  
+    $region = $_POST["region"];  
       
         
     function dis_name($link, $disID)
@@ -112,16 +112,6 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                         </a>
                                     </li>
                                   
-                                   
-                                    <li class="nav-item waves-effect waves-light">
-                                        <a class="link" data-bs-toggle="link" href="basic_livelihood_CBDRA_adoptAPlace.php" role="link">
-                                            <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
-                                            <span class="d-none d-sm-block">ACSA Demo Plots</span>
-                                        </a>
-                                    </li>
-                                    
-                                                                      
-                                    
                                     <li class="nav-item waves-effect waves-light">
                                         <a class="nav-link" data-bs-toggle="link" href="basicReports.php" role="link">
                                             <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
@@ -142,13 +132,13 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                         <div class="card-body">
                                     
                                                             <div class="card border border-primary">
-                                                                <div class="card-header bg-transparent border-primary">
-                                                                    <h5 class="my-0 text-primary"></i>Cluster Search Filter</h5>
+                                                                <div class="card-header bg-primary border-primary">
+                                                                    <h5 class="my-0 text-default"></i>Cluster Filter</h5>
                                                                 </div>
 
-                                                                <div class="card-body">
+                                                                <div class="card-body bg-success">
                                                                     <h5 class="card-title mt-0"></h5>
-                                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="basic_livelihood_acsa_mgt_filter2.php" method ="GET" >
+                                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="basic_livelihood_acsa_mgt_filter2.php" method ="POST" >
                                                                         <div class="col-12">
                                                                             <label for="region" class="form-label">Region</label>
                                                                             
@@ -160,8 +150,8 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                                         
                                                                         <div class="col-12">
                                                                             <label for="district" class="form-label">District</label>
-                                                                            <select class="form-select" name="district" id="district" value ="$district" required >
-                                                                                <option selected value="$district" ></option>
+                                                                            <select class="form-select" name="district" id="district" required >
+                                                                                <option></option>
                                                                                     <?php                                                           
                                                                                         $dis_fetch_query = "SELECT DistrictID,DistrictName FROM tbldistrict where regionID ='$region'";                                                  
                                                                                         $result_dis_fetch = mysqli_query($link, $dis_fetch_query);                                                                       
@@ -182,7 +172,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                                         <div class="col-12">
                                                                             <label for="ta" class="form-label">Traditional Authority</label>
                                                                             <select class="form-select" name="ta" id="ta" required disabled>
-                                                                                <option selected  value="$ta"></option>
+                                                                                <option ></option>
                                                                                 <?php                                                           
                                                                                         $ta_fetch_query = "SELECT TAName FROM tblta";                                                  
                                                                                         $result_ta_fetch = mysqli_query($link, $ta_fetch_query);                                                                       
@@ -202,8 +192,8 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
                                                                         
                                                                         <div class="col-12">
-                                                                            <button type="submit" class="btn btn-primary w-md" name="Submit" value="Submit">Submit</button>
-                                                                            <INPUT TYPE="button" class="btn btn-secondary w-md" VALUE="Back" onClick="history.go(-1);">
+                                                                            <button type="submit" class="btn btn-btn btn-outline-primary w-md" name="Submit" value="Submit">Submit</button>
+                                                                            <INPUT TYPE="button" class="btn btn-btn btn-outline-secondary w-md" VALUE="Back" onClick="history.go(-1);">
                                                                         </div>
                                                                     </form>                                             
                                                                     <!-- End Here -->

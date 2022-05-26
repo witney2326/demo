@@ -29,9 +29,9 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 <?php include 'layouts/body.php'; ?>
 
 <?php 
-       $region = $_GET["region"];
-       $district = $_GET["district"];
-       $ta = $_GET["ta"];
+       $region = $_POST["region"];
+       $district = $_POST["district"];
+       $ta = $_POST["ta"];
        
         function reg_name($link, $rcode)
         {
@@ -122,11 +122,11 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                         <p class="mb-0">
                                             
                                             <div class="card border border-primary">
-                                                <div class="card-header bg-transparent border-primary">
-                                                    <h5 class="my-0 text-primary">SLG Search Filter</h5>
+                                                <div class="card-header bg-primary border-primary">
+                                                    <h5 class="my-0 text-default">SLG Filter</h5>
                                                 </div>
 
-                                                <div class="card-body">
+                                                <div class="card-body bg-success">
                                                     <h5 class="card-title mt-0"></h5>
                                                     <form class="row row-cols-lg-auto g-3 align-items-center">
                                                         <div class="col-12">
@@ -164,7 +164,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                         
                                                         <div class="col-12">
                                                             
-                                                            <INPUT TYPE="button" VALUE="Back" onClick="history.go(-1);">
+                                                            <INPUT TYPE="button" class="btn btn-btn btn-outline-secondary w-md" VALUE="Back" onClick="history.go(-1);">
                                                         </div>
                                                     </form>                                             
                                                     <!-- End Here -->
