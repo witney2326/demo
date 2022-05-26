@@ -1,44 +1,37 @@
 <header id="page-topbar">
     <div class="navbar-header">
         <div class="d-flex">
-            <!-- LOGO -->
-            <div class="navbar-brand-box">
-                <a href="index.php" class="logo logo-dark">
-                    <span class="logo-sm">
-                        <img src="assets/images/logo.svg" alt="" height="22">
-                        
-                    </span>
-                    <span class="logo-lg">
-                        <img src="assets/images/logo-dark.png" alt="" height="17">
-                        
-                    </span>
-                </a>
+            <nav class="navbar navbar-light bg-transparent">
+                <nav class="navbar navbar-expand-sm py-5">
+                    <!-- LOGO -->
+                    <div class="navbar-brand-box">
+                        <a href="index.php" class="logo logo-dark">
+                            <span class="logo-sm">
+                                <img src="assets/images/logo.svg" alt="" height="22">
+                                
+                            </span>
+                            <span class="logo-lg">
+                                <img src="assets/images/logo-dark.png" alt="" height="17">
+                                
+                            </span>
+                        </a>
 
-                <a href="index.php" class="logo logo-light">
-                    <span class="logo-sm">
-                        <img src="assets/images/logo-light.svg" alt="" height="22">
-                        
-                    </span>
-                    <span class="logo-lg">
-                        <img src="assets/images/logo-light.png" alt="" height="70">
-                        
-                    </span>
-                </a>
-            </div>
-
-            <button type="button" class="btn btn-sm px-3 font-size-16 header-item waves-effect" id="vertical-menu-btn">
-                <i class="fa fa-fw fa-bars"></i>
-            </button>
-
-            <!-- App Search-->
-            <form class="app-search d-none d-lg-block">
-                <div class="position-relative">
-                    <input type="text" class="form-control" placeholder="<?php echo $language["Search"]; ?>">
-                    <span class="bx bx-search-alt"></span>
-                </div>
-            </form>
-
-            
+                        <a href="index.php" class="logo logo-light">
+                            <span class="logo-sm">
+                                <img src="assets/images/logo-light.svg" alt="" height="22">
+                                
+                            </span>
+                            <span class="logo-lg">
+                                <img src="assets/images/logo-light.png" alt="" height="70">
+                                
+                            </span>
+                        </a>
+                    </div>
+                    <div>
+                        <span><h3><b>COMSIP Intergrated MIS</h3></b></span>
+                    </div>
+                </nav>
+            </nav>
         </div>
 
         <div class="d-flex">
