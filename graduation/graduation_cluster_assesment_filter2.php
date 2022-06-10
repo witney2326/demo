@@ -41,8 +41,8 @@
 
 <?php
 
-$region = $_GET['region'];		
-$district = $_GET['district'];
+$region = $_POST['region'];		
+$district = $_POST['district'];
      
 
 
@@ -124,7 +124,7 @@ $district = $_GET['district'];
                                     <div class="card-body">
                                         <h5 class="card-title mt-0"></h5>
                                         
-                                        <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="graduation_cluster_assesment_filter3.php" method="GET">
+                                        <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="graduation_cluster_assesment_filter3.php" method="POST">
                                             <div class="col-12">
                                                 <label for="region" class="form-label">Region</label>
                                                 <div>
@@ -145,8 +145,7 @@ $district = $_GET['district'];
                                                 <label for="ta" class="form-label">Traditional Authority</label>
                                                 <select class="form-select" name="ta" id="ta" required>
                                                     <option></option>
-                                                    <?php   
-                                                            $district = $_GET["district"];                                                
+                                                    <?php                                               
                                                             $ta_fetch_query = "SELECT TAID,TAName FROM tblta where DistrictID = '$district'";                                                  
                                                             $result_ta_fetch = mysqli_query($link, $ta_fetch_query);                                                                       
                                                             $i=0;

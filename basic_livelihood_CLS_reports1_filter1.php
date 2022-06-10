@@ -29,7 +29,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
 <?php 
 
-        $region = $_GET['region'];
+        $region = $_POST['region'];
         //$district = $_GET['district'];
         //$ta = $_GET['ta'];
      
@@ -98,7 +98,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                     </div>
                                     <div class="card-body">
                                         
-                                        <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="basic_livelihood_CLS_reports1_filter2.php" method ="GET" >
+                                        <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="basic_livelihood_CLS_reports1_filter2.php" method ="POST" >
                                             
                                         <div class="col-12">
                                                 <label for="region" class="form-label">Region</label>
@@ -181,7 +181,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                 </thead>
                                                 <tbody>
                                                     <?Php
-                                                    $region = $_GET['region'];
+                                                    
                                                         $query="SELECT tblcw.cwName,tblcluster.districtID,tblcluster.ClusterName, tblcluster.cohort, tblcluster.programID
                                                         FROM tblcluster 
                                                         INNER JOIN tblcw on tblcw.cwID = tblcluster.cwID where tblcluster.regionID ='$region'";

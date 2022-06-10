@@ -170,10 +170,10 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                                         <th>SLG code</th>
                                                                         <th>SLG Name</th>
                                                                         <th>cohort</th>
-                                                                        
-                                                                        
                                                                         <th>M</th>
                                                                         <th>F</th>
+                                                                        <th>Total</th>
+                                                                        <th>Total-DB</th>
                                                                         <th>Action On SLG</th>
                                                                         
                                                                     </tr>
@@ -189,16 +189,22 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                                         if ($result_set = $link->query($query)) {
                                                                         while($row = $result_set->fetch_array(MYSQLI_ASSOC))
                                                                         { 
+                                                                            $grpID = $row["groupID"];
+                                                                            $result = mysqli_query($link, "SELECT COUNT(sppCode) AS value_count FROM tblbeneficiaries where groupID = '$grpID'"); 
+                                                                            $row_0 = mysqli_fetch_assoc($result); 
+                                                                            $count = $row_0['value_count'];
+
+                                                                            $total = $row["MembersM"] + $row["MembersF"];
                                                                         echo "<tr>\n";
                                                                             
                                                                         
                                                                             echo "<td>".$row["groupID"]."</td>\n";
                                                                             echo "<td>".$row["groupname"]."</td>\n";
                                                                             echo "<td>".$row["cohort"]."</td>\n";
-                                                                            
-                                                                            
                                                                             echo "<td>".$row["MembersM"]."</td>\n";
                                                                             echo "<td>".$row["MembersF"]."</td>\n";
+                                                                            echo "<td>\t\t$total</td>\n";
+                                                                            echo "<td>\t\t$count</td>\n";
                                                                             
                                                                             echo "<td>
                                                                             <a href=\"basicSLGview.php?id=".$row['groupID']."\"><i class='far fa-eye' title='View SLG' style='font-size:18px;color:purple'></i></a>

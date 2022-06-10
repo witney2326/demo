@@ -181,38 +181,31 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                     <div class="col-12">
                         <div class="card border border-primary">
                         <div class="card-header bg-transparent border-primary">
-                            <h5 class="my-0 text-primary">SLGs in the Cluster <?php echo $groupname ?></h5>
+                            <h5 class="my-0 text-primary">SLGs in Cluster: <?php echo $groupname ?></h5>
                         </div>
                         <div class="card-body">
-                        <h5 class="card-title mt-0"></h5>
-                            
-                                <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
-                                
+                        <h5 class="card-title mt-0"></h5>           
+                                <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">                                
                                     <thead>
-                                        <tr>
-                                            
-                                            
+                                        <tr>  
                                             <th>SLG Code</th>   
                                             <th>SLG Name</th>                                           
                                             <th>Males</th>
                                             <th>Females</th>
                                             <th>Total</th>
-                                           
                                             <th>Action</th>
                                         </tr>
                                     </thead>
-
-
                                     <tbody>
                                         <?Php
-                                                $id = $_GET['id'];
+                                            $id = $_GET['id'];
                                             $query="select * from tblgroup where ClusterID ='$id';";
                                             
                                             if ($result_set = $link->query($query)) {
                                             while($row = $result_set->fetch_array(MYSQLI_ASSOC))
                                             { 
                                                                                              
-                                                $total_members= $row["MembersM"]+$row["MembersF"];
+                                            $total_members= $row["MembersM"]+$row["MembersF"];
                                                 
                                             echo "<tr>\n";                                           
                                                 echo "<td>".$row["groupID"]."</td>\n";                                                
@@ -238,6 +231,57 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                         </div>     
                     </div>            
                 </div> 
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card border border-primary">
+                        <div class="card-header bg-transparent border-primary">
+                            <h5 class="my-0 text-default">CF(s) in Cluster: <?php echo $groupname ?></h5>
+                        </div>
+                        <div class="card-body">
+                        <h5 class="card-title mt-0"></h5>           
+                                <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">                                
+                                    <thead>
+                                        <tr>  
+                                            <th>HH Code</th>   
+                                            <th>CF Name</th>                                           
+                                            <th>Gender</th>
+                                            <th>Phone</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?Php
+                                            $query="select * from tblcfs where ClusterID ='$id';";
+                                            
+                                            if ($result_set = $link->query($query)) {
+                                            while($row = $result_set->fetch_array(MYSQLI_ASSOC))
+                                            { 
+                                                
+                                            echo "<tr>\n";                                           
+                                                echo "<td>".$row["hhcode"]."</td>\n";                                                
+                                                echo "<td>".$row["cfName"]."</td>\n";                                              
+                                                echo "<td>".$row["gender"]."</td>\n";
+                                                echo "<td>".$row["phone"]."</td>\n";
+                                                
+                                                echo "<td>
+                                                    <a href=\"basicSLGMemberview.php?id=".$row['hhcode']."\"><i class='far fa-eye' style='font-size:18px;color:purple'></i></a>
+                                                    
+                                                    
+                                                </td>\n";
+                                            echo "</tr>\n";
+                                            }
+                                            $result_set->close();
+                                            }                          
+                                        ?>
+                                    </tbody>
+                                </table>
+                                </p>
+                            </div>
+                        </div>     
+                    </div>            
+                </div> 
+
 
             </div>
         </div>

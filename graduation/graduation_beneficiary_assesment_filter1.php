@@ -40,7 +40,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 <?php include '../layouts/body.php'; ?>
 
 <?php
-    $region = $_GET['region'];
+    $region = $_POST['region'];
     
 
          function get_rname($link, $rcode)
@@ -121,7 +121,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                     <div class="card-body">
                                         <h5 class="card-title mt-0"></h5>
                                         
-                                        <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="graduation_beneficiary_assesment_filter2.php" method="GET">
+                                        <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="graduation_beneficiary_assesment_filter2.php" method="POST">
                                             <div class="col-12">
                                                 <label for="region" class="form-label">Region</label>
                                                 <div>
@@ -227,7 +227,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                                                     echo '<option value="2">Poor</option>';
                                                                                 echo "</select>";
                                                                                 echo "<input type='hidden' id='sppCode' name='sppCode' value='$sppCode'>";
-                                                                                echo "<button type='submit' class='btn-outline-primary' name='FormSubmit' value='Submit' onClick='return confirmSubmit()'>Rate</button>";
+                                                                                echo "<button type='submit' class='btn-outline-success' name='FormSubmit' value='Submit' onClick='return confirmSubmit()'>Rate</button>";
                                                                             echo "</form>";
                                                                         echo "</td>";
 
@@ -235,8 +235,8 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                                         echo "\t\t<td>$grad_assesed</td>\n";
                                                                         echo "\t\t<td>$grad_assesed_result</td>\n";
                                                                         echo "\t\t<td>$grad_status</td>\n";
-                                                                        echo "<td> <a href=\"../basicSLGview.php?id=".$row['sppCode']."\"><i class='far fa-eye' title='View HH' style='font-size:18px'></i></a>\n";
-                                                                        echo "<a onClick=\"javascript: return confirm('Are You Sure You want To PUT This HH On Graduation- You Must Be a Supervisor');\" href=\"graduationSLGAssesment.php?id=".$row['sppCode']."\"\><i class='fa fa-graduation-cap' title='Put HH On Graduation Pilot' style='font-size:18px'></i></a>\n";
+                                                                        echo "<td> <a href=\"../basicSLGMemberview.php?id=".$row['sppCode']."\"><i class='far fa-eye' title='View HH' style='font-size:18px;color:purple'></i></a>\n";
+                                                                        echo "<a onClick=\"javascript: return confirm('Are You Sure You want To PUT This HH On Graduation- You Must Be a Supervisor');\" href=\"graduationSLGAssesment.php?id=".$row['sppCode']."\"\><i class='fa fa-graduation-cap' title='Put HH On Graduation Pilot' style='font-size:18px;color:black'></i></a>\n";
                                                                         
                                                                     echo "</tr>\n";
                                                         }

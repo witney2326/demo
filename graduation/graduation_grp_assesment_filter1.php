@@ -215,7 +215,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                     <tbody>
                                                         <?Php
                                                             
-                                                            $query="select * from tblgroup where regionID = '$region'";
+                                                            $query="select * from tblgroup where ((regionID = '$region') and (deleted =0))";
 
                                                         //Variable $link is declared inside config.php file & used here
                                                         
@@ -240,7 +240,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                                                     echo '<option value="2">Poor</option>';
                                                                                 echo "</select>";
                                                                                 echo "<input type='hidden' id='grpID' name='grpID' value='$grpID'>";
-                                                                                echo "<button type='submit' class='btn-outline-primary' name='FormSubmit' value='Submit' onClick='return confirmSubmit()'>Rate</button>";
+                                                                                echo "<button type='submit' class='btn-outline-success' name='FormSubmit' value='Submit' onClick='return confirmSubmit()'>Rate</button>";
                                                                             echo "</form>";
                                                                         echo "</td>";
 
@@ -248,8 +248,8 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                                         echo "\t\t<td>$grad_assesed</td>\n";
                                                                         echo "\t\t<td>$grad_assesed_result</td>\n";
                                                                         echo "\t\t<td>$grad_status</td>\n";
-                                                                        echo "<td> <a href=\"../basicSLGview.php?id=".$row['groupID']."\"><i class='far fa-eye' title='View SLG' style='font-size:18px'></i></a>\n";
-                                                                        echo "<a onClick=\"javascript: return confirm('Are You Sure You want To PUT This SLG On Graduation- You Must Be a Supervisor');\" href=\"graduationSLGAssesment.php?id=".$row['groupID']."\"\><i class='fa fa-graduation-cap' title='Put SLG On Graduation Pilot' style='font-size:18px'></i></a>\n";
+                                                                        echo "<td> <a href=\"../basicSLGview.php?id=".$row['groupID']."\"><i class='far fa-eye' title='View SLG' style='font-size:18px;color:purple'></i></a>\n";
+                                                                        echo "<a onClick=\"javascript: return confirm('Are You Sure You want To PUT This SLG On Graduation- You Must Be a Supervisor');\" href=\"graduationSLGAssesment.php?id=".$row['groupID']."\"\><i class='fa fa-graduation-cap' title='Put SLG On Graduation Pilot' style='font-size:18px;color:black'></i></a>\n";
                                                                         
                                                                     echo "</tr>\n";
                                                         }

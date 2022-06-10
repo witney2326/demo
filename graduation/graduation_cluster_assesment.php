@@ -119,7 +119,7 @@
                                     </div>
                                     <div class="card-body">
                                         <h5 class="card-title mt-0"></h5>
-                                        <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="graduation_cluster_assesment_filter1.php" method="GET">
+                                        <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="graduation_cluster_assesment_filter1.php" method="POST">
 
                                             <div class="col-12">
                                                 

@@ -103,9 +103,9 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
                                 <tbody>
                                     <?Php
-                                        $query="SELECT cimis_sql.tblregion.name, COUNT(DISTINCT tbldistrict.DistrictName) as NoOfDistricts,COUNT(tblgroup.groupID) as NoGroups, sum(tblgroup.MembersM) as NoMales, sum(MembersF) as NoFemales
+                                        $query="SELECT tblregion.name, COUNT(DISTINCT tbldistrict.DistrictName) as NoOfDistricts,COUNT(tblgroup.groupID) as NoGroups, sum(tblgroup.MembersM) as NoMales, sum(MembersF) as NoFemales
                                         FROM tblgroup inner join tblregion on tblregion.regionID = tblgroup.regionID 
-                                        inner join tbldistrict on tblgroup.districtID = tbldistrict.DistrictID group by tblregion.name;";
+                                        inner join tbldistrict on tblgroup.districtID = tbldistrict.DistrictID where tblgroup.deleted = '0' group by tblregion.name;";
 
                                         //Variable $link is declared inside config.php file & used here
                                         

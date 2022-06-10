@@ -29,8 +29,8 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
 <?php 
 
-        $region = $_GET['region'];
-        $district = $_GET['district'];
+        $region = $_POST['region'];
+        $district = $_POST['district'];
         //$ta = $_GET['ta'];
      
     
@@ -98,7 +98,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                     </div>
                                     <div class="card-body">
                                         
-                                        <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="basic_livelihood_CLS_reports1_filter3.php" method ="GET" >
+                                        <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="basic_livelihood_CLS_reports1_filter3.php" method ="POST" >
                                             
                                             <div class="col-12">
                                             <label for="region" class="form-label">Region</label>

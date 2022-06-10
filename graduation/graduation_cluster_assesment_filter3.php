@@ -40,9 +40,9 @@
 <?php include '../layouts/body.php'; ?>
 
 <?php		
-   $region = $_GET['region'];		
-   $district = $_GET['district'];
-   $ta = $_GET['ta'];
+   $region = $_POST['region'];		
+   $district = $_POST['district'];
+   $ta = $_POST['ta'];
      
      
      
@@ -123,7 +123,7 @@
                                     <div class="card-body">
                                         <h5 class="card-title mt-0"></h5>
                                         
-                                        <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="graduation_cluster_assesment_filter3.php" method="GET">
+                                        <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="graduation_cluster_assesment_filter3.php" method="POST">
                                             <div class="col-12">
                                                 <label for="region" class="form-label">Region</label>
                                                 <div>
@@ -164,7 +164,7 @@
                                     <div class="col-12">
                                         <div class="card border border-primary">
                                         <div class="card-header bg-transparent border-primary">
-                                            <h5 class="my-0 text-primary">Clusters</h5>
+                                            <h5 class="my-0 text-primary">Clusters in TA: <?php echo ta_name($link,$ta);?></h5>
                                         </div>
                                         <div class="card-body">
                                         <h5 class="card-title mt-0"></h5>

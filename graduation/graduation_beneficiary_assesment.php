@@ -125,7 +125,7 @@
                                                 </div>
                                                 <div class="card-body">
                                                     <h5 class="card-title mt-0"></h5>
-                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="graduation_beneficiary_assesment_filter1.php" method="GET">
+                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="graduation_beneficiary_assesment_filter1.php" method="POST">
 
                                                         <div class="col-12">
                                                             
@@ -259,7 +259,7 @@
                                                                                     echo '<option value="2">Poor</option>';
                                                                                 echo "</select>";
                                                                                 echo "<input type='hidden' id='sppCode' name='sppCode' value='$sppCode'>";
-                                                                                echo "<button type='submit' class='btn-outline-primary' name='FormSubmit' value='Submit' onClick='return confirmSubmit()'>Rate</button>";
+                                                                                echo "<button type='submit' class='btn-outline-success' name='FormSubmit' value='Submit' onClick='return confirmSubmit()'>Rate</button>";
                                                                             echo "</form>";
                                                                         echo "</td>";
 
@@ -267,8 +267,8 @@
                                                                         echo "\t\t<td>$grad_assesed</td>\n";
                                                                         echo "\t\t<td>$grad_assesed_result</td>\n";
                                                                         echo "\t\t<td>$grad_status</td>\n";
-                                                                        echo "<td> <a href=\"../basicSLGview.php?id=".$row['sppCode']."\"><i class='far fa-eye' title='View SLG' style='font-size:18px'></i></a>\n";
-                                                                        echo "<a onClick=\"javascript: return confirm('Are You Sure You want To PUT This Household On Graduation- You Must Be a Supervisor');\" href=\"graduationSLGAssesment.php?id=".$row['sppCode']."\"\><i class='fa fa-graduation-cap' title='Put HH On Graduation Pilot' style='font-size:18px'></i></a>\n";
+                                                                        echo "<td> <a href=\"../basicSLGMemberview.php?id=".$row['sppCode']."\"><i class='far fa-eye' title='View SLG' style='font-size:18px;color:purple'></i></a>\n";
+                                                                        echo "<a onClick=\"javascript: return confirm('Are You Sure You want To PUT This Household On Graduation- You Must Be a Supervisor');\" href=\"graduationSLGAssesment.php?id=".$row['sppCode']."\"\><i class='fa fa-graduation-cap' title='Put HH On Graduation Pilot' style='font-size:18px;color:black'></i></a>\n";
                                                                         
                                                                     echo "</tr>\n";
                                                                     }

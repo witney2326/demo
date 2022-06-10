@@ -216,11 +216,8 @@ $test = 85;
                 $mon = month_name($row_val['Month1']);
             echo "['".$mon."',".$row_val['Amount']."],";
             }
-        ?>
-        
+        ?>   
         ]);
-
-        
 
         // Optional; add a title and set the width and height of the chart
         var options = {'title':'', 'width':740, 'height':250};
@@ -230,6 +227,35 @@ $test = 85;
         chart.draw(data, options);
         }
     </script> 
+
+<script type="text/javascript">
+        // Load google charts
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+
+        // Draw the chart and set the chart values
+        function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+        ['District', 'ESMP_Plans'],
+        <?php 
+            $select_query = "select tbldistrict.DistrictName as District, count(tblsafeguard_group_plans.planID) as ESMP_Plans from tblsafeguard_group_plans 
+            inner join tbldistrict on tblsafeguard_group_plans.districtID = tbldistrict.DistrictID group by tbldistrict.DistrictName;";
+            $query_result = mysqli_query($link,$select_query);
+            while($row_val = mysqli_fetch_array($query_result)){           
+            echo "['".$row_val['District']."',".$row_val['ESMP_Plans']."],";
+            }
+        ?>   
+        ]);
+        
+        // Optional; add a title and set the width and height of the chart
+        var options = {'title':'ESMP per District', 'width':390, 'height':250};
+
+        // Display the chart inside the <div> element with id="barchart"
+        var chart = new google.visualization.ColumnChart(document.getElementById('esmp'));
+        chart.draw(data, options);
+        }
+    </script> 
+
 
 <script type="text/javascript">
         // Load google charts
@@ -566,7 +592,7 @@ $test = 85;
                                         $select_query = "SELECT SUM(amount) as TotalSavings FROM tblslg_member_savings";
                                         $query_result = mysqli_query($link,$select_query);
                                         $row_val = mysqli_fetch_array($query_result);
-                                         $CurSavings =  $row_val['TotalSavings'];
+                                         $CurSavings =  floatval($row_val['TotalSavings']);
                                     ?>
                                     <h6 class="my-0 text-primary">Total: MK<?php echo number_format("$CurSavings",2)."<br>"  ?></h6>
                                 </div>
@@ -609,12 +635,18 @@ $test = 85;
                     <!-- here -->
                     <div class = "row">
                                                 
-                        <div class = "col-lg-12">
+                        <div class = "col-lg-6">
                             <div class="card border border-success">
                                 <div class="card-header bg-transparent border-primary">
-                                    <h6 class="my-0 text-primary">Group Savings: </h6>
+                                    <?php
+                                        $select_query_esmp = "SELECT COUNT(planID) as TotalESMPs FROM tblsafeguard_group_plans";
+                                        $query_result_esmp = mysqli_query($link,$select_query_esmp);
+                                        $row_val = mysqli_fetch_array($query_result_esmp);
+                                         $total =  $row_val['TotalESMPs'];
+                                    ?>
+                                    <h8 class="my-0 text-default">Total ESMPs: <?php echo number_format($total);?> </h8>
                                 </div>
-                                <div id="barchart_1"></div> 
+                                <div id="esmp"></div> 
                             </div>
                         </div>
                         
