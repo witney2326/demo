@@ -28,7 +28,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
     <script LANGUAGE="JavaScript">
         function confirmSubmit()
         {
-        var agree=confirm("Are you sure you want to RATE this SLG?");
+        var agree=confirm("Are you sure you want to RATE this Household?");
         if (agree)
         return true ;
         else
@@ -138,7 +138,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                 <select class="form-select" name="district" id="district" required>
                                                     <option selected value="$district" ></option>
                                                         <?php 
-                                                                $region = $_GET['region'];                                                    
+                                                                                                             
                                                             $dis_fetch_query = "SELECT DistrictID,DistrictName FROM tbldistrict where regionID = '$region'";                                                  
                                                             $result_dis_fetch = mysqli_query($link, $dis_fetch_query);                                                                       
                                                             $i=0;
@@ -202,7 +202,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                     <tbody>
                                                         <?Php
                                                             
-                                                            $query="select * from tblbeneficiaries where regionID = '$region'";
+                                                            $query="select * from tblbeneficiaries where regionID = '00'";
 
                                                         //Variable $link is declared inside config.php file & used here
                                                         
@@ -219,9 +219,8 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                                         echo "<td>".$row["sppCode"]."</td>\n";
                                                                         echo "<td>".$row["hh_head_name"]."</td>\n";
                                                                         echo "<td>";
-                                                                            echo "<form action = 'rateslg.php' method ='POST'>";
+                                                                            echo "<form action = 'rateben.php' method ='POST'>";
                                                                                 echo '<select id="rating"  name="rating">';
-                                                                                    echo '<option></option>';
                                                                                     echo '<option value="0">NA</option>';
                                                                                     echo '<option value="1">Good</option>';
                                                                                     echo '<option value="2">Poor</option>';
@@ -235,8 +234,9 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                                         echo "\t\t<td>$grad_assesed</td>\n";
                                                                         echo "\t\t<td>$grad_assesed_result</td>\n";
                                                                         echo "\t\t<td>$grad_status</td>\n";
-                                                                        echo "<td> <a href=\"../basicSLGMemberview.php?id=".$row['sppCode']."\"><i class='far fa-eye' title='View HH' style='font-size:18px;color:purple'></i></a>\n";
-                                                                        echo "<a onClick=\"javascript: return confirm('Are You Sure You want To PUT This HH On Graduation- You Must Be a Supervisor');\" href=\"graduationSLGAssesment.php?id=".$row['sppCode']."\"\><i class='fa fa-graduation-cap' title='Put HH On Graduation Pilot' style='font-size:18px;color:black'></i></a>\n";
+                                                                        echo "<td> <a href=\"../basicSLGMemberview.php?id=".$row['sppCode']."\"><i class='far fa-eye' title='View Member' style='font-size:18px;color:purple'></i></a>\n";
+                                                                        echo "<a href=\"../basicSLGMemberedit.php?id=".$row['sppCode']."\"><i class='far fa-edit' title='Edit Household' style='font-size:18px;color:green'></i></a>\n";
+                                                                        echo "<a onClick=\"javascript: return confirm('Are You Sure You want To PUT This HH On Graduation- You Must Be a Supervisor');\" href=\"graduationBenAssesment.php?id=".$row['sppCode']."\"\><i class='fa fa-graduation-cap' title='Put HH On Graduation Pilot' style='font-size:18px;color:black'></i></a>\n";
                                                                         
                                                                     echo "</tr>\n";
                                                         }

@@ -20,7 +20,7 @@
         if ($result_set = $link->query($query)) {
             while($row = $result_set->fetch_array(MYSQLI_ASSOC))
             { 
-                $hhname= $id;
+                $hhname= $row["hh_head_name"];
                 $sppname= $row["spProg"];
                 $regionID = $row["regionID"];
                 $districtID= $row["districtID"];
@@ -29,16 +29,10 @@
                 
                 $cohort = $row["cohort"];
                 $hhstatus = $row["hhstatus"];
+                $natID = $row["nat_id"];
                 
-                if ($row["hhstatus"] == 1)
-                {
-                    $hhstatus = 'Approved';
-                }
-                if ($row["hhstatus"] == 0)
-                {
-                    $hhstatus = 'Not Approved';
-                }
-
+                if ($row["hhstatus"] == 1){$hhstatus = 'Approved';}
+                if ($row["hhstatus"] == 0){$hhstatus = 'Not Approved';}
             }
             $result_set->close();
         }
@@ -93,7 +87,7 @@
                                 </div>
                                 <div class="card-body">
                                     
-                                    <form> 
+                                    <form action ="basicSLGMemberedit_saveNI.php" method="POST"> 
                                         <div class="row mb-1">
                                             <label for="hh_id" class="col-sm-2 col-form-label">HH Code</label>                                      
                                             <input type="text" class="form-control" id="hh_id" name = "hh_id" value="<?php echo $id ; ?>" style="max-width:30%;">
@@ -127,12 +121,18 @@
                                             <label for="hstatus" class="col-sm-2 col-form-label">HH Status</label>
                                             <input type="text" class="form-control" id="hstatus" name="hstatus" value ="<?php echo $hhstatus;?>" style="max-width:30%;">
                                         </div>
+                                        <div class="row mb-1">
+                                            <label for="nat_ID" class="col-sm-2 col-form-label">National ID</label>                                  
+                                            <input type="text" class="form-control" id="nat_ID" name="nat_ID" value =" <?php echo $natID; ?>" style="max-width:30%;">
+                                            
+                                            
+                                        </div>
                                         
                                         <div class="row justify-content-end">
                                             <div class="col-sm-9">
                                                 <div>
                                                     
-                                                    <button type="submit" class="btn btn-btn btn-outline-secondary w-md" name="Submit" value="Submit">Save Household</button>
+                                                    <button type="submit" class="btn btn-btn btn-outline-secondary w-md" name="Submit" value="Submit">Update National_ID or HH Name</button>
                                                     <INPUT TYPE="button" class="btn btn-btn btn-outline-secondary w-md" VALUE="Back" onClick="history.go(-1);">
                                                 </div>
                                             </div>

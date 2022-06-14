@@ -2,19 +2,15 @@
 <?php include 'layouts/head-main.php'; ?>
 
 <head>
-    <title>CIMIS | Group Training</title>
+    <title>Training | Group Training</title>
     <?php include 'layouts/head.php'; ?>
     <?php include 'layouts/head-style.php'; ?>
-
-}
-    
-
 </head>
 
 <div id="layout-wrapper">
 
     <?php
-        include "layouts/config.php"; // Using database connection file here
+        include "layouts/config.php"; 
         
         $id = $_GET['id']; // get id through query string
        $query="select * from tblgroup where groupID='$id'";
@@ -44,8 +40,6 @@
             $femalesn = $_POST['femalesn'];
             $trainedby = $_POST['trainedby'];
 
-            
-            
                 $sql = "INSERT INTO tblgrouptrainings (regionID,districtID,groupID,TrainingTypeID,StartDate,FinishDate,trainedBy,Males,Females)
                 VALUES ('$regionID ','$DistrictID','$id','$trainingtype','$startdate','$finishdate','$trainedby','$malesn','$femalesn')";
             if (mysqli_query($link, $sql)) {
@@ -102,48 +96,31 @@
                         <div class="col-lg-9">
                             <div class="card border border-success">
                                 <div class="card-header bg-transparent border-success">
-                                    <h6 class="my-0 text-primary">Update Training Record For SLG:<?php echo" ". $groupname; ?><?php echo ";"." "." "."Group ID:-"; echo " "; echo $id; echo ";"." "." "."District:-"; echo " "; echo dis_name($link,$DistrictID) ?></h6>
+                                    <h5 class="my-0 text-default">Update Training Record </h5>
                                 </div>
                                 <div class="card-body">
                                     
                                     <form method="POST" action="">
-                                        <div class="row mb-4">
-                                            <label for="group_id" class="col-sm-3 col-form-label">Group ID</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="group_id" name = "group_id" value="<?php echo $id ; ?>" style="max-width:30%;" readonly >
-                                            </div>
-
-                                            <label for="group_name" class="col-sm-3 col-form-label">SL Group Name</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="group_name" name ="group_name" value = "<?php echo $groupname ; ?>" style="max-width:30%;" readonly >
-                                            </div>
-
-                                            <label for="region" class="col-sm-3 col-form-label">Region</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="region" name="region" value ="<?php echo $regionID ; ?>" style="max-width:30%;" readonly >
-                                            </div>
-
-                                            <label for="district" class="col-sm-3 col-form-label">District</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="district" name="district" value ="<?php echo $DistrictID ; ?>" style="max-width:30%;" readonly >
-                                            </div>
-
+                                        <div class="row mb-1">
+                                            <label for="group_id" class="col-sm-2 col-form-label">Group ID</label>
+                                            <input type="text" class="form-control" id="group_id" name = "group_id" value="<?php echo $id ; ?>" style="max-width:30%;" readonly >
                                             
-
-                                            
-
-                                            <label for="cohort" class="col-sm-3 col-form-label">Cohort</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="cohort" name="cohort" value ="<?php echo $cohort ; ?> " style="max-width:30%;" readonly >
-                                            </div>
-
+                                            <label for="group_name" class="col-sm-2 col-form-label">SL Group Name</label>
+                                            <input type="text" class="form-control" id="group_name" name ="group_name" value = "<?php echo $groupname ; ?>" style="max-width:30%;" readonly >
                                         </div>
-                                        
-                                        
-
-                                        <div class="row mb-4">
-                                            <label for="trainingtype" class="col-sm-3 col-form-label">Select Training Type</label>
-                                            <select class="form-select" name="trainingtype" id="trainingtype" style="max-width:20%;" required>
+                                        <div class="row mb-1">
+                                            <label for="region" class="col-sm-2 col-form-label">Region</label>
+                                            <input type="text" class="form-control" id="region" name="region" value ="<?php echo $regionID ; ?>" style="max-width:30%;" readonly >
+                                            
+                                            <label for="district" class="col-sm-2 col-form-label">District</label>
+                                            <input type="text" class="form-control" id="district" name="district" value ="<?php echo $DistrictID ; ?>" style="max-width:30%;" readonly >
+                                        </div>
+                                        <div class="row mb-1">
+                                            <label for="cohort" class="col-sm-2 col-form-label">Cohort</label>
+                                            <input type="text" class="form-control" id="cohort" name="cohort" value ="<?php echo $cohort ; ?> " style="max-width:30%;" readonly >
+                                            
+                                            <label for="trainingtype" class="col-sm-2 col-form-label">Training Type</label>
+                                            <select class="form-select" name="trainingtype" id="trainingtype" style="max-width:30%;" required>
                                                 <option></option>
                                                 <?php                                                           
                                                    $tt_fetch_query = "SELECT trainingTypeID, training_name FROM tbltraining_types";                                                  
@@ -162,9 +139,10 @@
                                                          }
                                                 ?>
                                             </select>
-
-                                            <label for="trainedby" class="col-sm-3 col-form-label">Facilitated By</label>
-                                            <select class="form-select" name="trainedby" id="trainedby" style="max-width:20%;" required>
+                                        </div>
+                                        <div class="row mb-1">
+                                            <label for="trainedby" class="col-sm-2 col-form-label">Facilitated By</label>
+                                            <select class="form-select" name="trainedby" id="trainedby" style="max-width:30%;" required>
                                                 <option></option>
                                                 <?php                                                           
                                                    $fc_fetch_query = "SELECT facilitatorID, title FROM tblfacilitator";                                                  
@@ -186,41 +164,32 @@
 
                                         </div>
 
-                                        <div class="row mb-4">
-                                            <label for="malesn" class="col-sm-3 col-form-label">No. Males Trained</label>
-                                            <div class="col-sm-9">
-                                                <input type="number" class="form-control" id="malesn" name="malesn" min="0" max="300" value ="" style="max-width:30%;">
-                                            </div>
-
-                                            <label for="femalesn" class="col-sm-3 col-form-label">No. Females Trained</label>
-                                            <div class="col-sm-9">
-                                                <input type="number" class="form-control" id="femalesn" name="femalesn" min="0" max="300" value ="" style="max-width:30%;">
-                                            </div>
+                                        <div class="row mb-1">
+                                            <label for="malesn" class="col-sm-2 col-form-label">Males Trained</label>
+                                            <input type="number" class="form-control" id="malesn" name="malesn" min="0" max="300" value ="" style="max-width:30%;">
+                                           
+                                            <label for="femalesn" class="col-sm-2 col-form-label">Females</label>
+                                            <input type="number" class="form-control" id="femalesn" name="femalesn" min="0" max="300" value ="" style="max-width:30%;"> 
                                         </div>
 
                                        
 
                                         <div class="row mb-4">
-                                            <label for="startdate" class="col-sm-3 col-form-label">Start Date</label>
-                                            <div class="col-sm-9">
-                                                <input type="date" class="form-control" id="startdate" name="startdate" value ="" style="max-width:30%;">
-                                            </div>
-
-                                            <label for="finishdate" class="col-sm-3 col-form-label">Finish Date</label>
-                                            <div class="col-sm-9">
-                                                <input type="date" class="form-control" id="finishdate" name="finishdate" value ="" style="max-width:30%;">
-                                            </div>
-
+                                            <label for="startdate" class="col-sm-2 col-form-label">Start Date</label>   
+                                            <input type="date" class="form-control" id="startdate" name="startdate" value ="" style="max-width:30%;">
+                                            
+                                            <label for="finishdate" class="col-sm-2 col-form-label">Finish Date</label>                              
+                                            <input type="date" class="form-control" id="finishdate" name="finishdate" value ="" style="max-width:30%;"> 
                                         </div>
 
                                         
                                         <div class="row justify-content-end">
-                                            <div class="col-sm-9">
+                                            
                                                 <div>
                                                     <button type="submit" class="btn btn-btn btn-outline-primary w-md" name="Submit" value="Submit">Save Record</button>
                                                     <INPUT TYPE="button" class="btn btn-btn btn-outline-secondary w-md" VALUE="Back" onClick="history.go(-1);">
                                                 </div>
-                                            </div>
+                                            
                                         </div>
                                     </form>
                                     

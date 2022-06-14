@@ -155,17 +155,12 @@
                                         </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link " data-bs-toggle="tab" href="#home-2" role="tab">
+                                        <a class="nav-link " data-bs-toggle="link" href="graduation_refresher_training.php" role="link">
                                             <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
-                                            <span class="d-none d-sm-block">Refresher Training</span>
+                                            <span class="d-none d-sm-block">Refresher and AT Training</span>
                                         </a>
                                     </li>
-                                    <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link " data-bs-toggle="tab" href="#home-2" role="tab">
-                                            <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
-                                            <span class="d-none d-sm-block">AT Sensitization</span>
-                                        </a>
-                                    </li>                                   
+                                                                   
                                 </ul>
 
                                 <!-- Tab panes -->

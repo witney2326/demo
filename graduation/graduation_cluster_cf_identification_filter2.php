@@ -221,6 +221,7 @@ $district = $_POST['district'];
                                                             echo "\t\t<td>$noAllocated</td>\n";
                                                             echo "<td> <a href=\"../basicCLSview.php?id=".$row['ClusterID']."\"><i class='far fa-eye' title='View Cluster' style='font-size:18px;color:purple'></i></a>\n";
                                                             echo "<a href=\"graduation_add_cf.php?id=".$row['ClusterID']."\"><i class='fa fa-plus' title='Add CF to Cluster' style='font-size:18px;color:black'></i></a>\n";
+                                                            echo "<a href=\"../add_basicAnimatorTraining.php?id=".$row['ClusterID']."\"><i class='fas fa-chalkboard-teacher' title='CF Training' style='font-size:18px;color:brown'></i></a>\n";
                                                         echo "</tr>\n";
                                                         }
                                                         $result_set->close();

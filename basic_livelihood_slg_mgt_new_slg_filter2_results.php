@@ -156,12 +156,12 @@
                                                                     <select class="form-select" name="ta" id="ta" required>
                                                                         <option></option>
                                                                         <?php                                                           
-                                                                                $ta_fetch_query = "SELECT TAName FROM tblta where DistrictID = $district";                                                  
+                                                                                $ta_fetch_query = "SELECT TAID,TAName FROM tblta where DistrictID = $district";                                                  
                                                                                 $result_ta_fetch = mysqli_query($link, $ta_fetch_query);                                                                       
                                                                                 $i=0;
                                                                                     while($DB_ROW_ta = mysqli_fetch_array($result_ta_fetch)) {
                                                                                 ?>
-                                                                                <option>
+                                                                                <option value="<?php echo $DB_ROW_ta["TAID"]; ?>">
                                                                                     <?php echo $DB_ROW_ta["TAName"]; ?></option><?php
                                                                                     $i++;
                                                                                         }
@@ -206,7 +206,7 @@
                                                                 <div class="mb-2">
                                                                     <div class="form-group">
                                                                         <label for="groupname" class="form-label">Group Name</label>
-                                                                        <input type="text" name="groupname" class="form-control">
+                                                                        <input type="text" name="groupname" class="form-control" required>
                                                                     </div>
                                                                 </div>
                                                             </div>

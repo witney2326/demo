@@ -17,12 +17,10 @@
 <?php include 'layouts/body.php'; ?>
 
 <?php 
-    if(isset($_GET['Submit']))
-    {   
-        $region = $_GET['region'];
-        $district =$_GET['district'];
-    }
-    
+  
+    $region = $_POST["region"];
+    $district =$_POST["district"];
+       
     function get_rname($link, $rcode)
         {
         $rg_query = mysqli_query($link,"select name from tblregion where regionID='$rcode'"); // select query
@@ -98,7 +96,7 @@
                                                         <div class="col-12">
                                                             <label for="region" class="form-label">Region</label>
                                                             <div>
-                                                                <select class="form-select" name="region" id="region" value ="$region" required>
+                                                                <select class="form-select" name="region" id="region" value ="<?php echo $region;?>" required>
                                                                     <option selected value = "<?php echo $region;?>"><?php echo get_rname($link,$region);?></option>
                                                                 </select>
                                                             </div>
@@ -107,8 +105,8 @@
                                                         <div class="col-12">
                                                             <label for="district" class="form-label">District</label>
                                                             <div>
-                                                                <select class="form-select" name="district" id="district" value ="$district" required>
-                                                                    <option selected value = "$district"><?php echo dis_name($link,$_GET['district']);?></option>
+                                                                <select class="form-select" name="district" id="district" value ="<?php echo $district;?>" required>
+                                                                    <option selected value = "<?php echo $district;?>"><?php echo dis_name($link,$district);?></option>
                                                                 </select>
                                                             </div>
                                                         </div>
@@ -142,22 +140,7 @@
                                                                     <label for="region" class="form-label">Region</label>
                                                                 
                                                                     <select class="form-select" name="region" id="region" required>
-                                                                        <option></option>
-                                                                        <?php                                                           
-                                                                                $dis_fetch_query = "SELECT name FROM tblregion";                                                  
-                                                                                $result_dis_fetch = mysqli_query($link, $dis_fetch_query);                                                                       
-                                                                                $i=0;
-                                                                                    while($DB_ROW_reg = mysqli_fetch_array($result_dis_fetch)) {
-                                                                                ?>
-                                                                                <option>
-                                                                                    <?php
-                                                                                        echo $DB_ROW_reg["name"];
-                                                                                    ?>
-                                                                                </option>
-                                                                                <?php
-                                                                                    $i++;
-                                                                                        }
-                                                                            ?>
+                                                                        <option selected value="<?php echo $region;?>"><?php echo get_rname($link,$region);?></option>   
                                                                     </select>
                                                                     <div class="invalid-feedback">
                                                                         Please select a valid Malawi region.
@@ -224,6 +207,7 @@
                                                                    
                                                                 </div>
                                                             </div>
+                                                            
 
                                                         </div>
 
@@ -262,7 +246,7 @@
                                                                 </div>
                                                             </div>
                                                             <div class="col-12">
-                                                                <button type="submit" class="btn btn-primary w-md" name="submit" value="submit">Submit Meeting Details</button>
+                                                                <button type="submit" class="btn btn-outline-primary w-md" name="submit" value="submit">Submit Meeting Details</button>
                                                             </div>
                                                         </div>
                                                     </form>

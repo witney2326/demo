@@ -12,8 +12,6 @@
 
 <div id="layout-wrapper">
 
-    <?php include '../layouts/menu.php'; ?>
-
     <?php
         include "../layouts/config.php"; // Using database connection file here     
         

@@ -19,11 +19,11 @@
         if ($result_set = $link->query($query)) {
             while($row = $result_set->fetch_array(MYSQLI_ASSOC))
             { 
-                $hhname= $id;
+                $hhname= $row["hh_head_name"];;
                 $sppname= $row["spProg"];
                 $regionID = $row["regionID"];
                 $districtID= $row["districtID"];
-               
+                $nat_id= $row["nat_id"];
                 $groupID = $row["groupID"];
                 
                 $cohort = $row["cohort"];
@@ -159,14 +159,16 @@
                                         <div class="row mb-1">
                                             <label for="sppname" class="col-sm-2 col-form-label">SPP Name</label>                          
                                             <input type="text" class="form-control" id="sppname" name="sppname" value =" <?php echo prog_name($link,$sppname) ; ?>" style="max-width:30%;" disabled ="True">
-                                            
+
+                                            <label for="nat_id" class="col-sm-2 col-form-label">National ID</label>
+                                            <input type="text" class="form-control" id="nat_id" name="nat_id" value =" <?php echo $nat_id ; ?>" style="max-width:30%;" disabled ="True">                                           
                                         </div>
 
-                                        <div class="row justify-content-end">
-                                            <div class="col-sm-9">
-                                                <div>
+                                        <div class="row mb-1">  
+                                            <div>
+                                                <p align="right">
                                                     <INPUT TYPE="button" class="btn btn-btn btn-outline-secondary w-md" VALUE="Back" onClick="history.go(-1);">
-                                                </div>
+                                                </p>
                                             </div>
                                         </div>
                                     </form>

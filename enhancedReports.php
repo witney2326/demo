@@ -62,7 +62,7 @@
                                         <tbody>
                                             <tr>
                                                 <th scope="row">1</th>
-                                                <td>Sensitization and Awareness</td>
+                                                <td>Joint Skill Groups</td>
                                                 <td>Programme</td>
                                                 <td></td>
                                             </tr>

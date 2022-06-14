@@ -1,19 +1,13 @@
 <?php include 'layouts/session.php'; ?>
 <?php include 'layouts/head-main.php'; ?>
-session_start();
+
 <head>
     <title>SLG |Income Generating Activities</title>
     <?php include 'layouts/head.php'; ?>
     <?php include 'layouts/head-style.php'; ?>
-
-}
-    
-
 </head>
 
 <div id="layout-wrapper">
-
-    <?php include 'layouts/menu.php'; ?>
 
     <?php
         
@@ -129,7 +123,6 @@ session_start();
                                     <div class="col-12">
                                         <label for="iga" class="form-label">IGA Type</label>
                                         <select class="form-select" name="iga" id="iga" value ="" required>
-                                            <option></option>
                                             <?php                                                           
                                                     $iga_fetch_query = "SELECT ID,name FROM tbliga_types where categoryID = '$buscat'";                                                  
                                                     $result_iga_fetch = mysqli_query($link, $iga_fetch_query);                                                                       
@@ -166,32 +159,23 @@ session_start();
                                     
                                     <form method="POST" action="jsg_new.php" method="POST">
                                        
-                                        <div class="row mb-2">
-                                            <label for="group_code" class="col-sm-3 col-form-label">Group Code</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="group_code" name = "group_code" value="<?php echo $groupID; ?>" style="max-width:30%;" readonly >
-                                            </div>
+                                        <div class="row mb-1">
+                                            <label for="group_code" class="col-sm-2 col-form-label">Group Code</label>
+                                            <input type="text" class="form-control" id="group_code" name = "group_code" value="<?php echo $groupID; ?>" style="max-width:30%;" readonly >
+                                            
+                                            <label for="district" class="col-sm-2 col-form-label">District</label>
+                                            <input type="text" class="form-control" id="district" name="district" value ="<?php echo $district ; ?>" style="max-width:30%;">
                                         </div>
                                         
-                                        <div class="row mb-2">
-                                            <label for="district" class="col-sm-3 col-form-label">District</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="district" name="district" value ="<?php echo $district ; ?>" style="max-width:30%;">
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="row mb-2">
-                                            <label for="buscat" class="col-sm-3 col-form-label">Business Category</label>
-                                            <select class="form-select" name="buscat" id="buscat" value ="<?php echo $buscat;?>" style="max-width:30%;" required>
-                                                <option selected value="<?php echo $buscat;?>" ><?php echo $buscat;?></option>
-                                                
-                                            </select>
-                                        </div>
                                                                                
                                         <div class="row mb-2">
-                                            <label for="iga" class="col-sm-3 col-form-label">Select IGA Type</label>
+                                            <label for="buscat" class="col-sm-2 col-form-label">Bus Category</label>
+                                            <select class="form-select" name="buscat" id="buscat" value ="<?php echo $buscat;?>" style="max-width:30%;" required>
+                                                <option selected value="<?php echo $buscat;?>" ><?php echo $buscat;?></option>
+                                            </select>
+                                            
+                                            <label for="iga" class="col-sm-2 col-form-label">IGA Type</label>
                                             <select class="form-select" name="iga" id="iga" value ="" style="max-width:30%;" required>
-                                                <option></option>
                                                 <?php                                                           
                                                     $iga_fetch_query = "SELECT ID,name FROM tbliga_types where categoryID = '$buscat'";                                                  
                                                     $result_iga_fetch = mysqli_query($link, $iga_fetch_query);                                                                       
@@ -205,42 +189,32 @@ session_start();
                                                 ?>
                                             </select>
                                         </div>
+                                                                               
                                         
                                         <div class="row mb-2">
-                                            <label for="jsg_name" class="col-sm-3 col-form-label">JSG Name</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="jsg_name" name="jsg_name" value ="" style="max-width:30%;">
-                                            </div>
+                                            <label for="jsg_name" class="col-sm-2 col-form-label">JSG Name</label>
+                                            <input type="text" class="form-control" id="jsg_name" name="jsg_name" value ="" style="max-width:30%;">
+                                           
+                                            <label for="females" class="col-sm-2 col-form-label"> Mapped?</label>
+                                            <input type="text" class="form-control" id="mapped" name="mapped" value ="<?php echo $mapped;?>" readonly style="max-width:30%;">
                                         </div>
 
                                         <div class="row mb-2">
-                                            <label for="males" class="col-sm-3 col-form-label">No. Of Males</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="males" name="males" value ="" style="max-width:30%;">
-                                            </div>
+                                            <label for="males" class="col-sm-2 col-form-label">No. Of Males</label>
+                                            <input type="text" class="form-control" id="males" name="males" value ="" style="max-width:30%;">
+                                            
+                                            <label for="females" class="col-sm-2 col-form-label">No. Of Females</label>
+                                            <input type="text" class="form-control" id="females" name="females" value ="" style="max-width:30%;">
                                         </div>
 
-                                        <div class="row mb-2">
-                                            <label for="females" class="col-sm-3 col-form-label">No. Of Females</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="females" name="females" value ="" style="max-width:30%;">
-                                            </div>
-                                        </div>
-                                        <div class="row mb-2">
-                                            <label for="females" class="col-sm-3 col-form-label">Group Mapped?</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="mapped" name="mapped" value ="<?php echo $mapped;?>" readonly style="max-width:30%;">
-                                            </div>
-                                        </div>
-
-
+                                        
                                         <div class="row justify-content-end">
-                                            <div class="col-sm-9">
-                                                <div>
-                                                    <button type="submit" class="btn btn-btn btn-outline-primary w-md" name="Submit" value="Submit">Save New SLG JSG Record</button>
-                                                    <INPUT TYPE="button" class="btn btn-btn btn-outline-secondary w-md" VALUE="Back" onClick="history.go(-1);">
-                                                </div>
+                                            
+                                            <div>
+                                                <button type="submit" class="btn btn-btn btn-outline-primary w-md" name="Submit" value="Submit">Save New SLG JSG Record</button>
+                                                <INPUT TYPE="button" class="btn btn-btn btn-outline-secondary w-md" VALUE="Back" onClick="history.go(-1);">
                                             </div>
+                                            
                                         </div>
                                     </form>
                                     

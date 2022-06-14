@@ -141,14 +141,14 @@
                                                 <th scope="row">1</th>
                                                 <td>Sensitization and Awareness</td>
                                                 <td>Programme</td>
-                                                <td><a href="">Sensitization reports</a></td>
+                                                <td><a href="./reports/JSG_reports.php">Sensitization reports</a></td>
                                                 <td><?php ; ?> Meeting(s)</td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">2</th>
                                                 <td>Joint skills Groups</td>
                                                 <td>Formation</td>
-                                                <td><a href="">Joint Skill Groups Formed</a></td>
+                                                <td><a href="./reports/JSG_reports.php">Joint Skill Groups Formed</a></td>
                                                 <td><?php ; ?> JSGs</td>
                                             </tr>
                                             <tr>

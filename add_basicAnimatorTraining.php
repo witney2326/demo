@@ -2,7 +2,7 @@
 <?php include 'layouts/head-main.php'; ?>
 
 <head>
-    <title>CIMIS | Animator Training</title>
+    <title>Training | Animator Training</title>
     <?php include 'layouts/head.php'; ?>
     <?php include 'layouts/head-style.php'; ?>
 
@@ -45,8 +45,6 @@
             $animator = $_POST['animatortitle'];
             $trainedby = $_POST['trainedby'];
 
-            
-            
                 $sql = "INSERT INTO tblanimatortrainings (regionID,districtID,clusterID,TrainingTypeID,StartDate,FinishDate,trainedBy,animatorType)
                 VALUES ('$regionID ','$DistrictID','$id','$trainingtype','$startdate','$finishdate','$trainedby','$animator')";
             if (mysqli_query($link, $sql)) {
@@ -108,39 +106,29 @@
                                 <div class="card-body">
                                     
                                     <form method="POST" action="">
-                                        <div class="row mb-4">
-                                            <label for="cluster_id" class="col-sm-3 col-form-label">Cluster ID</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="cluster_id" name = "cluster_id" value="<?php echo $id ; ?>" style="max-width:30%;" readonly >
-                                            </div>
 
-                                            <label for="cluster_name" class="col-sm-3 col-form-label">Cluster Name</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="cluster_name" name ="cluster_name" value = "<?php echo $ClusterName ; ?>" style="max-width:30%;" readonly >
-                                            </div>
-
-                                            <label for="region" class="col-sm-3 col-form-label">Region</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="region" name="region" value ="<?php echo $regionID ; ?>" style="max-width:30%;" readonly >
-                                            </div>
-
-                                            <label for="district" class="col-sm-3 col-form-label">District</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="district" name="district" value ="<?php echo $DistrictID; ?>" style="max-width:30%;" readonly >
-                                            </div>
-
-                                            <label for="cohort" class="col-sm-3 col-form-label">Cohort</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="cohort" name="cohort" value ="<?php echo $cohort ; ?> " style="max-width:30%;" readonly >
-                                            </div>
-
+                                        <div class="row mb-1">
+                                            <label for="cluster_id" class="col-sm-2 col-form-label">Cluster ID</label>
+                                            <input type="text" class="form-control" id="cluster_id" name = "cluster_id" value="<?php echo $id ; ?>" style="max-width:30%;" readonly >
+                                            
+                                            <label for="cluster_name" class="col-sm-2 col-form-label">Cluster Name</label>
+                                            <input type="text" class="form-control" id="cluster_name" name ="cluster_name" value = "<?php echo $ClusterName ; ?>" style="max-width:30%;" readonly >  
                                         </div>
-                                        
-                                        
-
-                                        <div class="row mb-4">
-                                            <label for="trainingtype" class="col-sm-3 col-form-label">Select Training Type</label>
-                                            <select class="form-select" name="trainingtype" id="trainingtype" style="max-width:20%;" required>
+                                        <div class="row mb-1">
+                                            <label for="region" class="col-sm-2 col-form-label">Region</label>
+                                            <input type="text" class="form-control" id="region" name="region" value ="<?php echo $regionID ; ?>" style="max-width:30%;" readonly >
+                                            
+                                            <label for="district" class="col-sm-2 col-form-label">District</label>
+                                            <input type="text" class="form-control" id="district" name="district" value ="<?php echo $DistrictID; ?>" style="max-width:30%;" readonly >  
+                                        </div>
+                                        <div class="row mb-1">
+                                            <label for="cohort" class="col-sm-2 col-form-label">Cohort</label>
+                                            <input type="text" class="form-control" id="cohort" name="cohort" value ="<?php echo $cohort ; ?> " style="max-width:30%;" readonly >
+                                        </div>
+                                                                               
+                                        <div class="row mb-2">
+                                            <label for="trainingtype" class="col-sm-2 col-form-label">Training Type</label>
+                                            <select class="form-select" name="trainingtype" id="trainingtype" style="max-width:30%;background:white" required>
                                                 <option></option>
                                                 <?php                                                           
                                                    $tt_fetch_query = "SELECT trainingTypeID, training_name FROM tbltraining_types";                                                  
@@ -160,8 +148,8 @@
                                                 ?>
                                             </select>
 
-                                            <label for="trainedby" class="col-sm-3 col-form-label">Facilitated By</label>
-                                            <select class="form-select" name="trainedby" id="trainedby" style="max-width:20%;" required>
+                                            <label for="trainedby" class="col-sm-2 col-form-label">Facilitated By</label>
+                                            <select class="form-select" name="trainedby" id="trainedby" style="max-width:30%;background:white" required>
                                                 <option></option>
                                                 <?php                                                           
                                                    $fc_fetch_query = "SELECT facilitatorID, title FROM tblfacilitator";                                                  
@@ -180,9 +168,10 @@
                                                          }
                                                 ?>
                                             </select>
-
-                                            <label for="animatortitle" class="col-sm-3 col-form-label">Animator Title</label>
-                                            <select class="form-select" name="animatortitle" id="animatortitle" style="max-width:20%;" required>
+                                        </div>
+                                        <div class="row mb-2">
+                                            <label for="animatortitle" class="col-sm-2 col-form-label">Animator Title</label>
+                                            <select class="form-select" name="animatortitle" id="animatortitle" style="max-width:30%;background:white" required>
                                                 <option></option>
                                                 <?php                                                           
                                                    $an_fetch_query = "SELECT animatorID, title FROM tblanimator";                                                  
@@ -200,29 +189,23 @@
 
                                         </div>
 
-                                                                               
-
-                                        <div class="row mb-4">
-                                            <label for="startdate" class="col-sm-3 col-form-label">Start Date</label>
-                                            <div class="col-sm-9">
-                                                <input type="date" class="form-control" id="startdate" name="startdate" value ="" style="max-width:30%;">
-                                            </div>
-
-                                            <label for="finishdate" class="col-sm-3 col-form-label">Finish Date</label>
-                                            <div class="col-sm-9">
-                                                <input type="date" class="form-control" id="finishdate" name="finishdate" value ="" style="max-width:30%;">
-                                            </div>
-
+                                        <div class="row mb-2">
+                                            <label for="startdate" class="col-sm-2 col-form-label">Start Date</label>
+                                            <input type="date" class="form-control" id="startdate" name="startdate" value ="" style="max-width:30%;background:white">
+                                            
+                                            <label for="finishdate" class="col-sm-2 col-form-label">Finish Date</label>
+                                            <input type="date" class="form-control" id="finishdate" name="finishdate" value ="" style="max-width:30%;background:white">
                                         </div>
 
-                                        
                                         <div class="row justify-content-end">
-                                            <div class="col-sm-9">
+                                            
                                                 <div>
-                                                    <button type="submit" class="btn btn-primary w-md" name="Submit" value="Submit">Save Record</button>
-                                                    <INPUT TYPE="button" VALUE="Back" onClick="history.go(-1);">
+                                                    <button type="submit" class="btn btn-btn btn-outline-primary w-md" name="Submit" value="Submit">Save Record</button>
+                                                    <p align ="right">
+                                                        <INPUT TYPE="button" class="btn btn-btn btn-outline-secondary w-md" VALUE="Back" onClick="history.go(-1);">
+                                                    </p>
                                                 </div>
-                                            </div>
+                                            
                                         </div>
                                     </form>
                                     

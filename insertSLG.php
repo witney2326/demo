@@ -12,6 +12,9 @@ if(isset($_POST['submit']))
      $cohort = $_POST['Cohort'];
      $spp = $_POST['spp'];
      $cw = $_POST['cw'];
+     $regionID = $_POST['region'];
+     $DistrictID = $_POST['district']; 
+     $TAID = $_POST['ta'];
      
      function get_grp_count($link)
      {
@@ -54,11 +57,7 @@ if(isset($_POST['submit']))
 
         $groupID = $x;
 
-        $DistrictID = $_POST['district']; 
-        $TAID = ta_code($link,$_POST['ta']);
-        $regionID = region_code($link,$_POST['region']);
-
-
+        
      $sql = "INSERT INTO tblgroup (groupid,groupname,DateEstablished,clusterID,DistrictID,TAID,gvhID,MembersM,MembersF,regionID,cohort,programID,cwID,deleted)
      VALUES ('$groupID','$groupname','$DateEstablished','$clusterID','$DistrictID','$TAID','$GVHID','$membersM','$membersF','$regionID','$cohort','$spp','$cw','0')";
      if (mysqli_query($link, $sql)) {

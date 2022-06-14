@@ -266,19 +266,13 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                 
                                     <div class="tab-pane" id="new-meeting" role="tabpanel">
                                         <p class="mb-0">
-                                        
-                                            <!-- start -->
-                                            
-                                                
-                                                
-                                                <!-- here -->
                                             <div class="card border border-primary">
                                                 <div class="card-header bg-primary border-primary">
-                                                    <h5 class="my-0 text-default"></i>Meeting(s) Filter</h5>
+                                                    <h5 class="my-0 text-default"></i>Meeting Filter</h5>
                                                 </div>
                                                 <div class="card-body bg-success">
                                                     <h5 class="card-title mt-0"></h5>
-                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="basic_livelihood_new_meeting_filter1_results.php" method ="GET" >
+                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="basic_livelihood_new_meeting_filter1_results.php" method ="POST" >
                                                         <div class="col-12">
                                                             <label for="region" class="form-label">Region</label>
                                                             

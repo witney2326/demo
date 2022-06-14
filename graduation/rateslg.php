@@ -4,18 +4,13 @@
 <head>
     <title>SLG Assesment|SLG Rating</title>
     <?php include '../layouts/head.php'; ?>
-    <?php include '../layouts/head-style.php'; ?>
-
-}
-    
+    <?php include '../layouts/head-style.php'; ?>  
 </head>
 
 <div id="layout-wrapper">
 
-    <?php include '../layouts/menu.php'; ?>
-
     <?php
-        include "../layouts/config.php"; // Using database connection file here     
+        include "../layouts/config.php";   
         
         $grpID = $_POST['grpID'];
         $rating = $_POST['rating'];
@@ -49,9 +44,7 @@
             echo 'window.location.href = "graduation_grp_assesment.php";';
             echo '</script>';
         }
-        mysqli_close($link);
-            
-               
+        mysqli_close($link);          
     ?>
     
 </div>

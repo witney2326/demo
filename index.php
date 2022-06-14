@@ -439,7 +439,7 @@ $test = 85;
                                                 <div class="d-flex">
                                                     <div class="flex-grow-1">
                                                         <i class='fas fa-school' style='font-size:24px;color:cadetblue'></i><i class='fas fa-graduation-cap' style='font-size:24px'></i>
-                                                        <p class="text-muted fw-medium">SLGs In Graduation </p>
+                                                        <p class="text-muted fw-medium">SLGs On Graduation Path </p>
                                                         <?php
                                                             $result = mysqli_query($link, 'SELECT COUNT(groupID) AS value_grps FROM tblgroup where grad_status="1"'); 
                                                             $row = mysqli_fetch_assoc($result); 
@@ -549,7 +549,7 @@ $test = 85;
                                                 <div class="d-flex">
                                                     <div class="flex-grow-1">
                                                         <i class='fas fa-graduation-cap' style='font-size:24px'></i><i class='fas fa-graduation-cap' style='font-size:24px;color:cadetblue'></i>
-                                                        <p class="text-muted fw-medium">Graduating Households</p>
+                                                        <p class="text-muted fw-medium">Households on Graduation Path</p>
                                                         <?php
                                                             $result = mysqli_query($link, 'SELECT COUNT(sppCode) AS value_sum FROM tblbeneficiaries where grad_status ="1"'); 
                                                             $row = mysqli_fetch_assoc($result); 
