@@ -50,6 +50,13 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
         $dis = mysqli_fetch_array($dis_query);// fetch data
         return $dis['DistrictName'];
         }
+
+        function bustype($link, $ID)
+        {
+        $dis_query = mysqli_query($link,"select name from tbliga_types where ID='$ID'"); // select query
+        $dis = mysqli_fetch_array($dis_query);// fetch data
+        return $dis['name'];
+        }
 ?>
 
 <!-- Begin page -->
@@ -89,7 +96,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                             <div class="card-body">
                                 <div class="card border border-primary">
                                     <div class="card-header bg-transparent border-primary">
-                                        <h5 class="my-0 text-primary"></i>Report Filter</h5>
+                                        <h5 class="my-0 text-primary"></i>JSG Filter</h5>
                                     </div>
                                     <div class="card-body">
                                         
@@ -178,7 +185,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                 
                                 <div class="card border border-primary">
                                     <div class="card-header bg-transparent border-primary">
-                                        <h5 class="my-0 text-primary">SLGs Per Case Worker</h5>
+                                        <h5 class="my-0 text-primary">Joint Skill Groups</h5>
                                     </div>
                                         <div class="card-body">
 
@@ -186,43 +193,50 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                             
                                                 <thead>
                                                     <tr>
-                                                        
-                                                        <th>Case Worker</th>
-                                                        <th>District</th>
-                                                        <th>Group Name</th>
-                                                        <th>SPP</th>
-                                                        <th>Cohort</th>
-                                                        <th>Males</th>
-                                                        <th>Females</th>
+                                                        <th>JSG Name</th>
+                                                        <th>SLG Name</th>
+                                                        <th>Bus Type</th>
+                                                        <th>M</th>
+                                                        <th>F</th>
                                                         <th>Total</th>
+                                                        <th>BP Sub</th>
+                                                        <th>BP Evaltd</th>
+                                                        <th>Result</th>
                                                         
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     <?Php
-                                                        $query="SELECT tblcw.cwName,tblgroup.districtID,tblgroup.groupname, tblgroup.cohort, tblgroup.MembersM, tblgroup.MembersF, tblgroup.programID
-                                                        FROM tblgroup 
-                                                        INNER JOIN tblcw on tblcw.cwID = tblgroup.cwID where tblgroup.regionID ='0'";
+                                                        $query="SELECT * from tbljsg";
 
                                                         //Variable $link is declared inside config.php file & used here
                                                         
                                                         if ($result_set = $link->query($query)) {
                                                         while($row = $result_set->fetch_array(MYSQLI_ASSOC))
                                                         { 
-                                                            $col_value = dis_name($link,$row["districtID"]);
-                                                            $program = spp_name($link,$row["programID"]);
-                                                            $totalM = $row["MembersM"]+$row["MembersF"];
+                                                            $group_ID = $row["groupID"];
+                                                            
+
+                                                            $query_grp="SELECT * from tblgroup where groupID = '$group_ID'";
+                                                            if ($result_set2 = $link->query($query_grp)) {
+                                                                while($grp = $result_set2->fetch_array(MYSQLI_ASSOC))
+                                                                    {$group_name = $grp["groupname"];}}
+                                                            $busitype = bustype($link,$row["type"]);
+                                                            $totalM = $row["no_male"]+$row["no_female"];
+                                                            if($row["bp_submitted"] == '1'){$bp_submitted ="Yes";}else{$bp_submitted ="No";}
+                                                            if($row["bp_evaluated"] == '1'){$bp_evaluated ="Yes";}else{$bp_evaluated ="No";}
+                                                            if($row["evaluation_result"] == '1'){$evaluation_result ="Yes";}else{$evaluation_result ="No";}
                                                         echo "<tr>\n";
-                                                            
-                                                            echo "<td>".$row["cwName"]."</td>\n";
-                                                            echo "\t\t<td>$col_value</td>\n";                                                                          
-                                                            echo "<td>".$row["groupname"]."</td>\n";
-                                                            echo "\t\t<td>$program</td>\n"; 
-                                                            echo "<td>".$row["cohort"]."</td>\n";
-                                                            echo "<td>".$row["MembersM"]."</td>\n";
-                                                            echo "<td>".$row["MembersF"]."</td>\n";
+                                                                                                                       
+                                                            echo "<td>".$row["jsg_name"]."</td>\n";
+                                                            echo "<td>\t\t$group_name</td>\n";
+                                                            echo "<td>\t\t$busitype</td>\n";
+                                                            echo "<td>".$row["no_male"]."</td>\n";
+                                                            echo "<td>".$row["no_female"]."</td>\n";
                                                             echo "\t\t<td>$totalM</td>\n";
-                                                            
+                                                            echo "<td>\t\t$bp_submitted</td>\n";
+                                                            echo "<td>\t\t$bp_evaluated</td>\n";
+                                                            echo "<td>\t\t$evaluation_result</td>\n";
                                                             
                                                             
                                                         echo "</tr>\n";

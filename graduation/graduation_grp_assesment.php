@@ -149,6 +149,12 @@
                                         </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">
+                                        <a class="nav-link" data-bs-toggle="link" href="graduation_selected_beneficiary.php" role="link">
+                                            <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
+                                            <span class="d-none d-sm-block">Selected Beneficiaries</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item waves-effect waves-light">
                                         <a class="nav-link " data-bs-toggle="link" href="graduation_cluster_cf_identification.php" role="link">
                                             <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
                                             <span class="d-none d-sm-block">CF Identification</span>

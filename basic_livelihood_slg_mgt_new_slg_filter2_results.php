@@ -154,7 +154,6 @@
                                                                 <div class="mb-2">
                                                                     <label for="ta" class="form-label">TA</label>
                                                                     <select class="form-select" name="ta" id="ta" required>
-                                                                        <option></option>
                                                                         <?php                                                           
                                                                                 $ta_fetch_query = "SELECT TAID,TAName FROM tblta where DistrictID = $district";                                                  
                                                                                 $result_ta_fetch = mysqli_query($link, $ta_fetch_query);                                                                       
@@ -175,7 +174,7 @@
                                                             <div class="col-md-2">
                                                                 <div class="mb-2">
                                                                     <label for="gvh" class="form-label">GVH</label>
-                                                                    <input type="text" name="GVHID" class="form-control" required>              
+                                                                    <input type="text" name="GVHID" placeholder="Enter GVH" class="form-control" required>              
                                                                     <div class="invalid-feedback">
                                                                         Please select a valid Group Village Head.
                                                                     </div>
@@ -184,7 +183,7 @@
                                                             <div class="col-md-2">
                                                                 <div class="mb-3">
                                                                     <label for="village" class="form-label">Village</label>
-                                                                    <input type="text" name="village" class="form-control" required>                                                  
+                                                                    <input type="text" name="village" placeholder="Enter Village" class="form-control" required>                                                  
                                                                     <div class="invalid-feedback">
                                                                         Please select a valid Village in Malawi.
                                                                     </div>
@@ -206,7 +205,7 @@
                                                                 <div class="mb-2">
                                                                     <div class="form-group">
                                                                         <label for="groupname" class="form-label">Group Name</label>
-                                                                        <input type="text" name="groupname" class="form-control" required>
+                                                                        <input type="text" name="groupname" placeholder="Enter Group Name" class="form-control" required>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -221,8 +220,7 @@
                                                             <div class="col-md-2">
                                                                 <div class="mb-2">
                                                                     <label for="cluster" class="form-label">Cluster Name</label>
-                                                                    <select class="form-select" name="clusterID" id="clusterID" required>
-                                                                        <option ></option>
+                                                                    <select class="form-select" name="clusterID"  id="clusterID" required>
                                                                         <?php                                                           
                                                                                 $cls_fetch_query = "SELECT ClusterID,ClusterName FROM tblcluster where districtID=$district";                                                  
                                                                                 $result_cls_fetch = mysqli_query($link, $cls_fetch_query);                                                                       
@@ -244,7 +242,6 @@
                                                                 <div class="mb-2">
                                                                     <label for="spp" class="form-label">SP Program</label>
                                                                     <select class="form-select" name="spp" id="spp" required>
-                                                                        <option ></option>
                                                                         <?php                                                           
                                                                                 $spp_fetch_query = "SELECT pID,pName FROM tblprogram";                                                  
                                                                                 $result_spp_fetch = mysqli_query($link, $spp_fetch_query);                                                                       
@@ -268,7 +265,7 @@
                                                                 <div class="mb-2">
                                                                     <div class="form-group">
                                                                         <label>No Males</label>
-                                                                        <input type="text" name="membersM" class="form-control">
+                                                                        <input type="text" name="membersM" placeholder="0" class="form-control">
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -276,7 +273,7 @@
                                                                 <div class="mb-2">
                                                                     <div class="form-group">
                                                                     <label>No Females</label>
-                                                                        <input type="text" name="membersF" class="form-control">
+                                                                        <input type="text" name="membersF" placeholder="0"class="form-control">
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -284,7 +281,6 @@
                                                                 <div class="mb-2">
                                                                     <label for="Cohort" class="form-label">Cohort</label>
                                                                     <select class="form-select" name="Cohort" id="Cohort" required>
-                                                                        <option value =""></option>
                                                                         <option value ="1">1</option>
                                                                         <option value ="2">2</option>
                                                                         <option value ="3">3</option>
@@ -299,7 +295,6 @@
                                                                 <div class="mb-2">
                                                                     <label for="cw" class="form-label">Case Worker</label>
                                                                     <select class="form-select" name="cw" id="cw" required>
-                                                                        <option></option>
                                                                         <?php                                                           
                                                                                 $cw_fetch_query = "SELECT cwID,cwName FROM tblcw where districtID = $district";                                                  
                                                                                 $result_cw_fetch = mysqli_query($link, $cw_fetch_query);                                                                       

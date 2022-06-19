@@ -29,6 +29,7 @@
                 $MembersF = $row["MembersF"];
                 $clusterID = $row["clusterID"];
                 $cohort = $row["cohort"];
+                $spProg = $row["programID"];
             }
             $result_set->close();
         }
@@ -66,6 +67,13 @@
         $iga_query = mysqli_query($link,"select name from tbliga_types where ID='$igaID'"); // select query
         $iga = mysqli_fetch_array($iga_query);// fetch data
         return $iga['name'];
+        }
+
+        function prog_name($link, $code)
+        {
+        $prog_query = mysqli_query($link,"select progName from tblspp where progID='$code'"); // select query
+        $prog = mysqli_fetch_array($prog_query);// fetch data
+        return $prog['progName'];
         }
                
     ?>
@@ -121,6 +129,12 @@
                                         <div class="row mb-1">
                                             <label for="gvh" class="col-sm-2 col-form-label">GVH</label>                   
                                             <input type="text" class="form-control" id="gvh" name="gvh" value ="<?php echo $gvhID ; ?>" disabled ="True" style="max-width:30%;" >                                       
+
+                                            <label for="spProg" class="col-sm-2 col-form-label">SP Prog</label>
+                                            <select class="form-select" name="spProg" id="spProg" style="max-width:30%;" required>
+                                                <option value = "<?php echo $spProg;?>"><?php echo prog_name($link,$spProg);?></option>
+                                                    
+                                            </select>      
                                         </div>
 
                                         <div class="row mb-1">

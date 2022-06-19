@@ -28,6 +28,7 @@
                 $MembersF = $row["MembersF"];
                 $clusterID = $row["clusterID"];
                 $cohort = $row["cohort"];
+                $spProg = $row["programID"];
             }
             $result_set->close();
         }
@@ -58,6 +59,13 @@
         $cls_query = mysqli_query($link,"select ClusterName from tblcluster where ClusterID='$clscode'"); // select query
         $cls = mysqli_fetch_array($cls_query);// fetch data
         return $cls['ClusterName'];
+        }
+
+        function prog_name($link, $code)
+        {
+        $prog_query = mysqli_query($link,"select progName from tblspp where progID='$code'"); // select query
+        $prog = mysqli_fetch_array($prog_query);// fetch data
+        return $prog['progName'];
         }
     ?>
 
@@ -128,6 +136,22 @@
                                         <div class="row mb-1">
                                             <label for="gvh" class="col-sm-2 col-form-label">GVH</label>
                                             <input type="text" class="form-control" id="gvh" name="gvh" value ="<?php echo $gvhID ; ?>" style="max-width:30%;" >
+
+                                            <label for="spProg" class="col-sm-2 col-form-label">SP Prog</label>
+                                            <select class="form-select" name="spProg" id="spProg" style="max-width:30%;" required>
+                                                <option><?php echo prog_name($link,$spProg);?></option>
+                                                    <?php                                                           
+                                                        $ta_fetch_query = "SELECT progID,progName FROM tblspp";                                                  
+                                                        $result_ta_fetch = mysqli_query($link, $ta_fetch_query);                                                                       
+                                                        $i=0;
+                                                            while($DB_ROW_ta = mysqli_fetch_array($result_ta_fetch)) {
+                                                        ?>
+                                                        <option value="<?php echo $DB_ROW_ta["progID"]; ?>">
+                                                            <?php echo $DB_ROW_ta["progName"]; ?></option><?php
+                                                            $i++;
+                                                                }
+                                                    ?>
+                                            </select>         
                                         </div>
 
                                         <div class="row mb-1">

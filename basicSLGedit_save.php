@@ -12,10 +12,10 @@
             $females = $_POST['no_females'];
             $cluster = $_POST['cluster'];
             $cohort = $_POST['cohort'];
-          
+            $spProg = $_POST['spProg'];
             
             $sql = "UPDATE tblgroup SET groupname ='$groupname',DateEstablished = '$DateEstablished', gvhID = '$gvh', MembersM ='$males', MembersF = '$females', clusterID = '$cluster', cohort = $cohort,
-            deleted = '0' WHERE groupID = '$id'";
+            deleted = '0', programID = '$spProg' WHERE groupID = '$id'";
             
             if (mysqli_query($link, $sql)) {
                 echo '<script type="text/javascript">'; 

@@ -63,7 +63,7 @@
                 </button>
 
                 <div class="d-inline-block">
-                    <form method="post" action="../logout.php">
+                    <form method="post" action="logout.php">
                         <button type ="submit" class="btn btn-btn btn-outline-danger w-md">Logout</button>
                     </form>
                 </div>

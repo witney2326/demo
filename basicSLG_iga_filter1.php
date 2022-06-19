@@ -1,21 +1,14 @@
 <?php include 'layouts/session.php'; ?>
 <?php include 'layouts/head-main.php'; ?>
-session_start();
+
 <head>
     <title>SLG |Income Generating Activities</title>
     <?php include 'layouts/head.php'; ?>
     <?php include 'layouts/head-style.php'; ?>
-
-}
-    
-
 </head>
 
 <div id="layout-wrapper">
-
-
     <?php
-        
 
         include "layouts/config.php"; // Using database connection file here
 
@@ -163,32 +156,23 @@ session_start();
                                     
                                     <form method="POST" action="insertSLGIGA.php" method="POST">
                                        
-                                        <div class="row mb-2">
-                                            <label for="group_code" class="col-sm-3 col-form-label">Group Code</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="group_code" name = "group_code" value="<?php echo $groupID; ?>" style="max-width:30%;" readonly >
-                                            </div>
+                                        <div class="row mb-1">
+                                            <label for="group_code" class="col-sm-2 col-form-label">Group Code</label>
+                                            <input type="text" class="form-control" id="group_code" name = "group_code" value="<?php echo $groupID; ?>" style="max-width:30%;" readonly >
+
+                                            <label for="district" class="col-sm-2 col-form-label">District</label>
+                                            <input type="text" class="form-control" id="district" name="district" value ="<?php echo $districtID ; ?>" style="max-width:30%;">
                                         </div>
                                         
-                                        <div class="row mb-2">
-                                            <label for="district" class="col-sm-3 col-form-label">District</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="district" name="district" value ="<?php echo $districtID ; ?>" style="max-width:30%;">
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="row mb-2">
-                                            <label for="buscat" class="col-sm-3 col-form-label">Business Category</label>
+                                                                                
+                                        <div class="row mb-1">
+                                            <label for="buscat" class="col-sm-2 col-form-label">Bus Cat</label>
                                             <select class="form-select" name="buscat" id="buscat" value ="<?php echo $buscat;?>" style="max-width:30%;" required>
-                                                <option selected value="<?php echo $buscat;?>" ><?php echo $buscat;?></option>
-                                                
+                                                <option selected value="<?php echo $buscat;?>"><?php echo bus_cat_name($link,$buscat);?></option>
                                             </select>
-                                        </div>
-                                                                               
-                                        <div class="row mb-2">
-                                            <label for="iga" class="col-sm-3 col-form-label">Select IGA Type</label>
+
+                                            <label for="iga" class="col-sm-2 col-form-label">IGA Type</label>
                                             <select class="form-select" name="iga" id="iga" value ="" style="max-width:30%;" required>
-                                                <option></option>
                                                 <?php                                                           
                                                     $iga_fetch_query = "SELECT ID,name FROM tbliga_types where categoryID = '$buscat'";                                                  
                                                     $result_iga_fetch = mysqli_query($link, $iga_fetch_query);                                                                       
@@ -202,35 +186,23 @@ session_start();
                                                 ?>
                                             </select>
                                         </div>
-                                        
 
-                                        <div class="row mb-2">
-                                            <label for="males" class="col-sm-3 col-form-label">No. Of Males</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="males" name="males" value ="" style="max-width:30%;">
-                                            </div>
-                                        </div>
+                                        <div class="row mb-4">
+                                            <label for="males" class="col-sm-1 col-form-label">No.M</label>
+                                            <input type="text" class="form-control" id="males" name="males" placeholder="males" style="max-width:10%;">
 
-                                        <div class="row mb-2">
-                                            <label for="females" class="col-sm-3 col-form-label">No. Of Females</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="females" name="females" value ="" style="max-width:30%;">
-                                            </div>
-                                        </div>
+                                            <label for="females" class="col-sm-1 col-form-label">No.F</label>
+                                            <input type="text" class="form-control" id="females" name="females" placeholder="females" style="max-width:10%;">
 
-                                        <div class="row mb-2">
                                             <label for="amount_invested" class="col-sm-3 col-form-label">Amount Invested</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="amount_invested" name="amount_invested" value ="" style="max-width:30%;">
-                                            </div>
+                                            <input type="text" class="form-control" id="amount_invested" name="amount_invested" value ="" style="max-width:20%;">
                                         </div>
 
+                                       
                                         <div class="row justify-content-end">
-                                            <div class="col-sm-9">
-                                                <div>
-                                                    <button type="submit" class="btn btn-btn btn-outline-primary w-md" name="Submit" value="Submit">Save New SLG IGA Record</button>
-                                                    <INPUT TYPE="button" class="btn btn-btn btn-outline-secondary w-md" VALUE="Back" onClick="history.go(-1);">
-                                                </div>
+                                            <div>
+                                                <button type="submit" class="btn btn-btn btn-outline-primary w-md" name="Submit" value="Submit">Save New SLG IGA Record</button>
+                                                <INPUT TYPE="button" class="btn btn-btn btn-outline-secondary w-md" VALUE="Back" onClick="history.go(-1);">
                                             </div>
                                         </div>
                                     </form>

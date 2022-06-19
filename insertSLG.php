@@ -57,17 +57,25 @@ if(isset($_POST['submit']))
 
         $groupID = $x;
 
-        
-     $sql = "INSERT INTO tblgroup (groupid,groupname,DateEstablished,clusterID,DistrictID,TAID,gvhID,MembersM,MembersF,regionID,cohort,programID,cwID,deleted)
-     VALUES ('$groupID','$groupname','$DateEstablished','$clusterID','$DistrictID','$TAID','$GVHID','$membersM','$membersF','$regionID','$cohort','$spp','$cw','0')";
-     if (mysqli_query($link, $sql)) {
-      echo '<script type="text/javascript">'; 
-      echo 'alert("New SLG has been added successfully !");'; 
-      echo 'window.location.href = "basic_livelihood_slg_mgt2.php";';
-      echo '</script>';
-     } else {
-        echo "Error: " . $sql . ":-" . mysqli_error($link);
-     }
-     mysqli_close($link);
+        if (($groupname = " ")or($DistrictID =" ")or($regionID =" "))
+         {
+            echo '<script type="text/javascript">'; 
+            echo 'alert("Enter Group name OR Select Region and District !");'; 
+            echo 'window.location.href = "basic_livelihood_slg_mgt2.php";';
+            echo '</script>'; 
+         }
+        else{
+         $sql = "INSERT INTO tblgroup (groupid,groupname,DateEstablished,clusterID,DistrictID,TAID,gvhID,MembersM,MembersF,regionID,cohort,programID,cwID,deleted)
+         VALUES ('$groupID','$groupname','$DateEstablished','$clusterID','$DistrictID','$TAID','$GVHID','$membersM','$membersF','$regionID','$cohort','$spp','$cw','0')";
+         if (mysqli_query($link, $sql)) {
+            echo '<script type="text/javascript">'; 
+            echo 'alert("New SLG has been added successfully !");'; 
+            echo 'window.location.href = "basic_livelihood_slg_mgt2.php";';
+            echo '</script>';
+         } else {
+            echo "Error: " . $sql . ":-" . mysqli_error($link);
+         }
+         mysqli_close($link);
+      }
 }
 ?>
