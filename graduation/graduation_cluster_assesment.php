@@ -201,6 +201,25 @@
                                     </div>
                                 </div>
 
+                                <div class="row mb-1">
+                                    <div class="col-md-6">
+                                        <div class="input-group" display="inline">
+                                            <form action="../phpSearchClusterN.php" method="post">
+                                                Cluster Name <input type="text" name="search">
+                                                <input type ="submit" name='Search_Group_Name' value='Search_Name'> 
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="input-group" display="inline">
+                                            <form action="../phpSearchClusterC.php" method="post">
+                                                Cluster Code <input type="text" name="search">
+                                                <input type ="submit" name='Search_Group_Code' value='Search_Code'> 
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>                            
+
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="card border border-primary">
@@ -261,9 +280,9 @@
                                                             echo "\t\t<td>$grad_assesed</td>\n";
                                                             echo "\t\t<td>$grad_assesed_result</td>\n";
                                                             echo "\t\t<td>$grad_status</td>\n";
-                                                            echo "<td> <a href=\"../basicCLSview.php?id=".$row['ClusterID']."\"><i class='far fa-eye' title='View SLG' style='font-size:18px'></i></a>\n";
+                                                            echo "<td> <a href=\"../basicCLSview.php?id=".$row['ClusterID']."\"><i class='far fa-eye' title='View SLG' style='font-size:18px;color:purple'></i></a>\n";
                                                             echo "";
-                                                            echo "<a onClick=\"javascript: return confirm('Are You Sure You want To PUT This Cluster On Graduation- You Must Be a Supervisor');\" href=\"graduationClusterAssesment.php?id=".$row['ClusterID']."\"\><i class='fa fa-graduation-cap' title='Put Cluster On Graduation Pilot' style='font-size:18px'></i></a>\n";
+                                                            echo "<a onClick=\"javascript: return confirm('Are You Sure You want To PUT This Cluster On Graduation- You Must Be a Supervisor');\" href=\"graduationClusterAssesment.php?id=".$row['ClusterID']."\"\><i class='fa fa-graduation-cap' title='Put Cluster On Graduation Pilot' style='font-size:18px;color:green'></i></a>\n";
                                                         echo "</tr>\n";
                                                         }
                                                         $result_set->close();

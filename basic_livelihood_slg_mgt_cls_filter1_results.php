@@ -156,6 +156,24 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                             
                                         </p>
                                     </div>
+                                    <div class="row mb-1">
+                                        <div class="col-md-6">
+                                            <div class="input-group" display="inline">
+                                                <form action="phpSearchClusterN.php" method="post">
+                                                    Cluster Name <input type="text" name="search">
+                                                    <input type ="submit" name='Search_Group_Name' value='Search_Name'> 
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="input-group" display="inline">
+                                                <form action="phpSearchClusterC.php" method="post">
+                                                    Cluster Code <input type="text" name="search">
+                                                    <input type ="submit" name='Search_Group_Code' value='Search_Code'> 
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>                        
                                     <!-- start Here -->
                                     <div class="row">
                                         <div class="col-12">

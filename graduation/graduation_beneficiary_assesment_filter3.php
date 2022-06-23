@@ -155,9 +155,6 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                 </select>
                                                 
                                             </div>
-
-                                            
-                                            
                                             <div class="col-12">
                                                 
                                                 <INPUT TYPE="button" class="btn btn-btn btn-outline-secondary w-md" VALUE="Back" onClick="history.go(-1);">
@@ -166,6 +163,26 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                         <!-- End Here -->
                                     </div>
                                 </div>
+
+                                <div class="row mb-1">
+                                    <div class="col-md-6">
+                                        <div class="input-group" display="inline">
+                                            <form action="graduation_beneficiary_searchN.php" method="post">
+                                            Household Name <input type="text" name="search">
+                                                <input type ="submit" name='Search_HH_Name' value='Search_Name'> 
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="input-group" display="inline">
+                                            <form action="graduation_beneficiary_searchC.php" method="post">
+                                                Household Code <input type="text" name="search">
+                                                <input type ="submit" name='Search_HH_Code' value='Search_Code'> 
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="card border border-primary">

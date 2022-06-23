@@ -7,18 +7,30 @@
     <?php include 'layouts/head-style.php'; ?>
     <?php include 'layouts/config.php'; ?>
 <!-- DataTables -->
-    <link href="assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+<link href="assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
     <link href="assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
     <!-- Responsive datatable examples -->
     <link href="assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
 
+    <!--Datatable plugin CSS file -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" />
+  
+  <!--jQuery library file -->
+  <script type="text/javascript" 
+      src="https://code.jquery.com/jquery-3.5.1.js">
+  </script>
+
+  <!--Datatable plugin JS library file -->
+  <script type="text/javascript" 
+src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
+  </script>
 </head>
 
 <?php include 'layouts/body.php'; ?>
 
 <?php 
   
-    $region = $_GET['region'];
+    $region = $_POST['region'];
     
     function get_rname($link, $rcode)
         {
@@ -52,7 +64,7 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                        <h4 class="mb-sm-0 font-size-18">Joint skill Groups - Clusters</h4>
+                        <h4 class="mb-sm-0 font-size-18">Joint skill Groups </h4>
 
                         <div class="page-title-right">
                             <ol class="breadcrumb m-0">
@@ -91,7 +103,7 @@
                                                 </div>
                                                 <div class="card-body">
                                                     <h5 class="card-title mt-0"></h5>
-                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="jsgs_filter2.php" method ="GET">
+                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="jsgs_filter2.php" method ="POST">
                                                         <div class="col-12">
                                                             <label for="region" class="form-label">Region</label>
                                                             <div>
@@ -151,32 +163,50 @@
                                                             <tr>
                                                                 <th>JSG code</th>
                                                                 <th>JSG Name</th>
-                                                                <th>District</th>
-                                                                <th>SLG/Cluster Code</th>
+                                                                <th>Initial Invest</th>
+                                                                <th>SLG Name</th>
+                                                                <th>Cluster Name</th>
+                                                                <th>Members</th>
                                                                 <th>Action</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
                                                             <?Php
-                                                                $query="select * from tbljsg where regionID = '$region'";
+                                                                $query="select * from tbljsg inner join tbldistrict on tbldistrict.districtID = tbljsg.districtID  where tbldistrict.regionID = '$region'";
 
                                                                 //Variable $link is declared inside config.php file & used here
                                                                 
                                                                 if ($result_set = $link->query($query)) {
                                                                 while($row = $result_set->fetch_array(MYSQLI_ASSOC))
-                                                                { 
-                                                                echo "<tr>\n";
-                                                                    
+                                                                { $disname = (string) dis_name($link,$row["districtID"]);
+                                                                $membership = $row["no_male"]+$row["no_female"];
+                                                                $check = substr($row["groupID"], 5, 3);
                                                                 
+                                                                if ($check == "CLU"){
+                                                                $gpID =   $row["groupID"];                                                  
+                                                                $name_query = mysqli_query($link,"select ClusterName from tblcluster where ClusterID='$gpID'"); // select query
+                                                                while($rg = mysqli_fetch_array($name_query)){
+                                                                $clustername = $rg['ClusterName'];}} else{$clustername = "";}
+                                                    
+                                                                if ($check == "SLG"){
+                                                                $gpID =   $row["groupID"];
+                                                                $grpname_query = mysqli_query($link,"select groupname from tblgroup where groupID='$gpID'"); // select query
+                                                                while($rg = mysqli_fetch_array($grpname_query)){
+                                                                $groupname = $rg['groupname'];}} else{$groupname ="";}
+
+                                                                echo "<tr>\n";
                                                                     echo "<td>".$row["recID"]."</td>\n";
                                                                     echo "<td>".$row["jsg_name"]."</td>\n";
-                                                                    echo "<td>".$row["districtID"]."</td>\n";
-                                                                    echo "<td>".$row["groupID"]."</td>\n";
+                                                                    echo "<td>".$row["initial_invest"]."</td>\n";
+                                                                    echo "<td>\t\t$groupname</td>\n";
+                                                                    echo "<td>\t\t$clustername</td>\n";
+                                                                    echo "<td>\t\t$membership</td>\n";
                                                                     
                                                                     echo "<td>
-                                                                        <a href=\"basicCLSview.php?id=".$row['groupID']."\"><i class='far fa-eye' title='View JSG' style='font-size:18px;color:purple'></i></a>
-                                                                        <a href=\".php?id=".$row['groupID']."\"><i class='far fa-edit' title='Edit JSG Details' style='font-size:18px;color:green'></i></a>
-                                                                        <a href=\".php?id=".$row['groupID']."\"><i class='far fa-trash-alt' title='Delete JSG' style='font-size:18px'></i></a>    
+                                                                        <a href=\"jsg_view.php?id=".$row['recID']."\"><i class='far fa-eye' title='View JSG' style='font-size:18px;color:purple'></i></a>
+                                                                        <a href=\"jsg_edit.php?id=".$row['recID']."\"><i class='far fa-edit' title='Edit JSG Details' style='font-size:18px;color:green'></i></a>
+                                                                        <a href=\"jsg_add_hh.php?id=".$row['recID']."\"><i class='fas fa-user-alt' title='Add Beneficiary to JSG' style='font-size:18px;color:orange'></i></a>  
+                                                                        <a href=\".php?id=".$row['recID']."\"><i class='far fa-trash-alt' title='Delete JSG' style='font-size:18px;color:red'></i></a>    
                                                                     </td>\n";
 
                                                                 echo "</tr>\n";

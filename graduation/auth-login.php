@@ -64,7 +64,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             $_SESSION["username"] = $username;
 
                             // Redirect user to welcome page
-                            header("location: ../index.php");
+                            header("location: graduation.php");
                         } else {
                             // Display an error message if password is not valid
                             $password_err = "The password you entered was not valid.";
@@ -135,34 +135,34 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <div class="p-2">
                                 <form class="form-horizontal" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
 
-                                    <div class="mb-3 <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
-                                        <label for="username" class="form-label">Enter Username</label>
-                                        <input type="text" class="form-control" id="username" placeholder="" name="username">
+                                    
+                                    <div class="row mb-1 <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
+                                        <label for="username" class="col-sm-4 col-form-label">Username</label>
+                                        <input type="text" class="form-control" id="username" placeholder="" name="username" style="max-width:40%;">
                                         <span class="text-danger"><?php echo $username_err; ?></span>
                                     </div>
 
-                                    <div class="mb-3 <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
-                                        <label class="form-label">Enter Password</label>
-                                        <div class="input-group auth-pass-inputgroup">
-                                            <input type="password" name="password" class="form-control" placeholder="" aria-label="Password" aria-describedby="password-addon">
-                                            <button class="btn btn-light " type="button" id="password-addon"><i class="mdi mdi-eye-outline"></i></button>
-                                        </div>
+                                    <div class="row mb-1 <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
+                                        
+                                        <label class="col-sm-4 col-form-label"> Password</label>
+                                        <input type="password" name="password" class="form-control" placeholder="" aria-label="Password" aria-describedby="password-addon" style="max-width:40%;">
+                                        <button class="btn btn-light " type="button" id="password-addon" style="max-width:10%;"><i class="mdi mdi-eye-outline"></i></button>
+                                        
                                         <span class="text-danger"><?php echo $password_err; ?></span>
                                     </div>
 
                                    
-
-                                    <div class="mt-3 d-grid">
-                                        <button class="btn btn-primary waves-effect waves-light" type="submit" value="Login">Log In</button>
+                                    <div class="row mb-1">
+                                    
+                                        <button class="btn btn btn-outline-success waves-effect waves-light" type="submit" value="Login" style="width:30%">Log In</button>
+                                        <a href="auth-recoverpw.php" class="text-muted"style="width:60%"><i class="mdi mdi-lock me-1"></i> Forgot your password?</a>
+                                    
                                     </div>
 
-                                    <div class="mt-4 text-left">
-                                        <a href="auth-recoverpw.php" class="text-muted"><i class="mdi mdi-lock me-1"></i> Forgot your password?</a>
+                                    
+                                    <div class="mt-2 text-left">
                                        
-                                    </div>
-                                    <div class="mt-4 text-left">
-                                       
-                                        <a href="auth-register.php" class="text-muted"><i class="mdi mdi-lock me-2"></i> Comsip Staff and No Login Credentials?</a>
+                                        <a href="" class="text-muted"> </a>
                                     </div>
                                 </form>
                             </div>

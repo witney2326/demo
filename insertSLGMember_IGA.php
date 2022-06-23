@@ -9,7 +9,7 @@ if(isset($_POST['Submit']))
     $iga = $_POST['iga'];
     $amount = $_POST['amount_invested'];
      
-    if(empty($hhcode) or empty($$groupID) or empty($$district) or empty($buscat) or empty($iga)){
+    if(empty($hhcode) or empty($groupID) or empty($district) or empty($buscat) or empty($iga)){
         echo '<script type="text/javascript">'; 
         echo 'alert("Missing Value! Make sure all values are entered!");'; 
         echo 'window.location.href = "basic_livelihood_slg_mgt2.php";';

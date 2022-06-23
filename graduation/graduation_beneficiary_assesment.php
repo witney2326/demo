@@ -207,6 +207,25 @@
                                                 </div>
                                             </div>
 
+                                            <div class="row mb-1">
+                                                <div class="col-md-6">
+                                                    <div class="input-group" display="inline">
+                                                        <form action="graduation_beneficiary_searchN.php" method="post">
+                                                        Household Name <input type="text" name="search">
+                                                            <input type ="submit" name='Search_HH_Name' value='Search_Name'> 
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="input-group" display="inline">
+                                                        <form action="graduation_beneficiary_searchC.php" method="post">
+                                                            Household Code <input type="text" name="search">
+                                                            <input type ="submit" name='Search_HH_Code' value='Search_Code'> 
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+
                                             <div class="row">
                                                 <div class="col-12">
                                                     <div class="card border border-primary">

@@ -146,7 +146,7 @@
                             </div>
                             <div class="card-body">
                                 
-                                <form method="GET" action="jsg_add_hh_filter1.php">
+                                <form method="POST" action="jsg_add_hh_filter1.php">
 
                                     <div class="row">
                                         <div class="col-md-3">
@@ -231,15 +231,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-md-3">
-                                            <div class="mb-3">
-                                                <form action="basicSLGGroupMembers.php" method="POST">
-                                                    <input type="hidden" class="form-control" id="group_id" name = "group_id" value="<?php echo $id ; ?>"readonly>               
-                                                    <button type="submit" class="btn btn-btn btn-outline-success w-md"  name="Update_Group_Membership" value="Update_Group_Membership"><i class="fa fa-users" style="font-size:24px; color:brown" ></i> Intervention</button> 
-                                                </form>
-                                                
-                                            </div>
-                                        </div>
+                                        
                                         <div class="col-md-2">
                                             <div class="mb-3">
                                                 <INPUT TYPE="button" class="btn btn-btn btn-outline-secondary w-md" style="width:170px" VALUE="Back" onClick="history.go(-1);"> 

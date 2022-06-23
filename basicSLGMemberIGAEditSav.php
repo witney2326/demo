@@ -2,7 +2,7 @@
 <?php include 'layouts/head-main.php'; ?>
 
 <head>
-    <title>SLG |Edit Household Savings</title>
+    <title>SLG |Edit Household IGA</title>
     <?php include 'layouts/head.php'; ?>
     <?php include 'layouts/head-style.php'; ?>
 
@@ -13,22 +13,22 @@
 <div id="layout-wrapper">
 
     <?php
-        include "layouts/config.php"; // Using database connection file here     
+        include "layouts/config.php";   
 
         if(isset($_POST['Update']))
             {    
             $Rec_ID = $_POST['Rec_ID'];
-            $year1 = $_POST['year'];
-            $month1 = $_POST['month'];
+            $hh_id = $_POST['hh_id'];
+            $igatype = $_POST['igatype'];
             $amount1 = $_POST['amount'];
             $groupID = $_POST["group_code"];
             
             
-            $sql = mysqli_query($link,"update tblslg_member_savings  SET year = '$year1', month ='$month1', amount =$amount1 where savingID = '$Rec_ID'");
+            $sql = mysqli_query($link,"update tblmember_iga  SET type = '$igatype', amount_invested ='$amount1' where recID = '$Rec_ID'");
                   
             if ($sql) {
                 echo '<script type="text/javascript">'; 
-                echo 'alert("SLG Savings Record has been EDITED successfully !");'; 
+                echo 'alert("Household IGA Record has been UPDATED successfully !");'; 
                 echo 'window.location.href = "basic_livelihood_member_mgt.php";';
                 echo '</script>';
             } else {

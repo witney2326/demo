@@ -11,10 +11,12 @@
             $jsg_name = $_POST['jsg_name'];           
             $no_males = $_POST['no_males'];
             $no_females = $_POST['no_females'];
-            
+            $initialInvest = $_POST['initialInvest'];
           
+            if ( $no_males == ""){$no_males=0;}
+            if ( $no_females == ""){$no_females=0;}
             
-            $sql = "UPDATE tbljsg SET jsg_name ='$jsg_name', no_male ='$no_males', no_female = '$no_females'
+            $sql = "UPDATE tbljsg SET jsg_name ='$jsg_name', no_male ='$no_males', no_female = '$no_females', initial_invest ='$initialInvest'
             WHERE recID = '$jsg_id'";
             
             if (mysqli_query($link, $sql)) {

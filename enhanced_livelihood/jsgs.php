@@ -96,7 +96,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
                                     <div class="card-body">
                                         <h5 class="card-title mt-0"></h5>
-                                        <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="jsgs_filter1.php" method ="GET" >
+                                        <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="jsgs_filter1.php" method ="POST" >
                                             <div class="col-12">
                                                 <label for="region" class="form-label">Region</label>
                                                 
@@ -172,8 +172,10 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                         <tr>
                                                             <th>JSG code</th>
                                                             <th>JSG Name</th>
-                                                            <th>District</th>
-                                                            <th>SLG/Cluster ID</th>
+                                                            <th>Initial Invest</th>
+                                                            <th>SLG Name</th>
+                                                            <th>Cluster Name</th>
+                                                            <th>Members</th>
                                                             <th>Action</th>
                                                         </tr>
                                                     </thead>
@@ -185,16 +187,35 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                             while($row = $result_set->fetch_array(MYSQLI_ASSOC))
                                                             { 
                                                                 $disname = (string) dis_name($link,$row["districtID"]);
+                                                                $membership = $row["no_male"]+$row["no_female"];
+                                                                $check = substr($row["groupID"], 5, 3);
+                                                                
+                                                                if ($check == "CLU"){
+                                                                $gpID =   $row["groupID"];                                                  
+                                                                $name_query = mysqli_query($link,"select ClusterName from tblcluster where ClusterID='$gpID'"); // select query
+                                                                while($rg = mysqli_fetch_array($name_query)){
+                                                                $clustername = $rg['ClusterName'];}} else{$clustername = "";}
+                                                    
+                                                                if ($check == "SLG"){
+                                                                $gpID =   $row["groupID"];
+                                                                $grpname_query = mysqli_query($link,"select groupname from tblgroup where groupID='$gpID'"); // select query
+                                                                while($rg = mysqli_fetch_array($grpname_query)){
+                                                                $groupname = $rg['groupname'];}} else{$groupname ="";}
+                                                                
+                                                                
                                                             echo "<tr>\n";
                                                                 
                                                                 echo "<td>".$row["recID"]."</td>\n";
                                                                 echo "<td>".$row["jsg_name"]."</td>\n";
-                                                                echo "<td>\t\t$disname</td>\n";
-                                                                echo "<td>".$row["groupID"]."</td>\n";
+                                                                echo "<td>".$row["initial_invest"]."</td>\n";
+                                                                echo "<td>\t\t$groupname</td>\n";
+                                                                echo "<td>\t\t$clustername</td>\n";
+                                                                echo "<td>\t\t$membership</td>\n";
                                                                 
                                                                 echo "<td>
                                                                     <a href=\"jsg_view.php?id=".$row['recID']."\"><i class='far fa-eye' title='View JSG' style='font-size:18px;color:purple'></i></a>
                                                                     <a href=\"jsg_edit.php?id=".$row['recID']."\"><i class='far fa-edit' title='Edit JSG Details' style='font-size:18px;color:green'></i></a>
+                                                                    <a href=\"jsg_add_hh.php?id=".$row['recID']."\"><i class='fas fa-user-alt' title='Add Beneficiary to JSG' style='font-size:18px;color:orange'></i></a>  
                                                                     <a href=\".php?id=".$row['recID']."\"><i class='far fa-trash-alt' title='Delete JSG' style='font-size:18px;color:red'></i></a>    
                                                                 </td>\n";
 

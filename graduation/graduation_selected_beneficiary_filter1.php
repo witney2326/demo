@@ -175,11 +175,31 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                     </div>
                                 </div>
 
+                                <div class="row mb-1">
+                                    <div class="col-md-6">
+                                        <div class="input-group" display="inline">
+                                            <form action="graduation_beneficiary_searchN.php" method="post">
+                                            Household Name <input type="text" name="search">
+                                                <input type ="submit" name='Search_HH_Name' value='Search_Name'> 
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="input-group" display="inline">
+                                            <form action="graduation_beneficiary_searchC.php" method="post">
+                                                Household Code <input type="text" name="search">
+                                                <input type ="submit" name='Search_HH_Code' value='Search_Code'> 
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+
+
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="card border border-primary">
                                         <div class="card-header bg-transparent border-primary">
-                                            <h5 class="my-0 text-primary">Beneficiary Households</h5>
+                                            <h5 class="my-0 text-default">Beneficiary Households</h5>
                                         </div>
                                         <div class="card-body">
                                         <h5 class="card-title mt-0"></h5>

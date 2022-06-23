@@ -20,13 +20,13 @@
         include "layouts/config.php"; // Using database connection file here
         
         // get id through query string
-        $jsg_id = $_GET['jsg_id'];
-        $groupID = $_GET['groupID'];
-        $GroupName = $_GET['GroupName'];
+        $jsg_id = $_POST['jsg_id'];
+        $groupID = $_POST['groupID'];
+        $GroupName = $_POST['GroupName'];
         
-        $district = $_GET['district'];
-        $buscat = $_GET['buscat'];
-        $bustype = $_GET['bustype'];
+        $district = $_POST['district'];
+        $buscat = $_POST['buscat'];
+        $bustype = $_POST['bustype'];
         
 
        
@@ -149,7 +149,7 @@
                                         <div class="col-md-3">
                                             <div class="mb-3">
                                                 <label for="ClusterName" class="form-label">Cluster Name</label>
-                                                <input type="text" class="form-control" id="ClusterName" name="ClusterName" value ="<?php echo $ClusterName;?>" readonly>
+                                                <input type="text" class="form-control" id="ClusterName" name="ClusterName" value ="<?php if (isset($ClusterName)){echo $ClusterName;} ?>" readonly>
                                             </div>
                                         </div>
 
@@ -180,17 +180,30 @@
                                                 
                                                 <select class="form-select" name="hhcode" id="hhcode" required>
                                                     <option></option>
-                                                        <?php                                                           
-                                                            $dis_fetch_query = "SELECT sppCode FROM tblbeneficiaries inner join tblgroup on tblbeneficiaries.groupID = tblgroup.groupID inner join
-                                                            tblcluster on tblgroup.clusterID = tblcluster.ClusterID where tblcluster.ClusterID = '$groupID'";                                                  
-                                                            $result_dis_fetch = mysqli_query($link, $dis_fetch_query);                                                                       
-                                                            $i=0;
-                                                                while($DB_ROW_Dis = mysqli_fetch_array($result_dis_fetch)) {
-                                                            ?>
-                                                            <option value="<?php echo $DB_ROW_Dis["sppCode"]; ?>">
-                                                                <?php echo $DB_ROW_Dis["sppCode"]; ?></option><?php
-                                                                $i++;
+                                                        <?php
+                                                        if (isset($groupname))
+                                                            {
+                                                                $dis_fetch_query = "SELECT sppCode FROM tblbeneficiaries where groupID = '$groupID'";                                                  
+                                                                $result_dis_fetch = mysqli_query($link, $dis_fetch_query);                                                                       
+                                                                $i=0;
+                                                                    while($DB_ROW_Dis = mysqli_fetch_array($result_dis_fetch)) {
+                                                                ?>
+                                                                <option value="<?php echo $DB_ROW_Dis["sppCode"]; ?>">
+                                                                    <?php echo $DB_ROW_Dis["sppCode"]; ?></option><?php
+                                                                    $i++;
                                                                     }
+                                                            } else
+                                                            {                                                           
+                                                                $dis_fetch_query = "SELECT sppCode FROM tblbeneficiaries inner join tblgroup on tblbeneficiaries.groupID = tblgroup.groupID inner join
+                                                                tblcluster on tblgroup.clusterID = tblcluster.ClusterID where tblcluster.ClusterID = '$groupID'";                                                  
+                                                                $result_dis_fetch = mysqli_query($link, $dis_fetch_query);                                                                       
+                                                                $i=0;
+                                                                    while($DB_ROW_Dis = mysqli_fetch_array($result_dis_fetch)) {
+                                                                ?>
+                                                                <option value="<?php echo $DB_ROW_Dis["sppCode"]; ?>">
+                                                                    <?php echo $DB_ROW_Dis["sppCode"]; ?></option><?php
+                                                                    $i++;
+                                                                        }}
                                                         ?>
                                                 </select>
                                             </div>
@@ -210,15 +223,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-md-3">
-                                            <div class="mb-3">
-                                                <form action=".php" method="POST">
-                                                    <input type="hidden" class="form-control" id="group_id" name = "group_id" value="<?php echo $jsg_id ; ?>"readonly>               
-                                                    <button type="submit" class="btn btn-btn btn-outline-success w-md"  name="Update_Group_Membership" value="Update_Group_Membership"><i class="fa fa-users" style="font-size:24px; color:brown" ></i> Intervention</button> 
-                                                </form>  
-                                            </div>
-                                            
-                                        </div>
+                                        
                                         <div class="col-md-3">
                                             <div class="mb-0">
                                                 <INPUT TYPE="button" class="btn btn-btn btn-outline-secondary w-md" style="width:170px"  VALUE="Back"  onClick="history.go(-1);">

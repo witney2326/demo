@@ -278,28 +278,28 @@
                                                 <tbody>
                                                     <?Php
                                                             $id = $_GET['id'];
-                                                        $query="select * from tblslg_member_iga where hh_code ='$id';";
+                                                        $query="select * from tblmember_iga where sppCode ='$id';";
 
                                                         //Variable $link is declared inside config.php file & used here
                                                         
                                                         if ($result_set = $link->query($query)) {
                                                         while($row = $result_set->fetch_array(MYSQLI_ASSOC))
                                                         {                                                
-                                                            $amount = number_format($row["amount"],"2");
+                                                            $amount = number_format($row["amount_invested"],"2");
             
-                                                            $ig_name = iga_name($link,$row["igaID"]);
+                                                            $ig_name = iga_name($link,$row["type"]);
                                                             
                                                     
                                                         echo "<tr>\n";                                           
-                                                            echo "<td>".$row["igaID"]."</td>\n";
+                                                            echo "<td>".$row["recID"]."</td>\n";
                                                             echo "\t\t<td>$ig_name</td>\n";
                                                             
                                                             
                                                             echo "\t\t<td>$amount</td>\n";
                                                             
                                                             echo "<td>
-                                                                <a href=\".php?id=".$row['igaID']."\"><i class='far fa-edit' style='font-size:18px'></i></a> 
-                                                                <a onClick=\"javascript: return confirm('Are You Sure You want To DELETE This Record');\" href=\".php?id=".$row['igaID']."\"><i class='far fa-trash-alt' style='font-size:18px'></i></a>        
+                                                                <a href=\"basicSLGMemberIGAEdit.php?id=".$row['recID']."\"><i class='far fa-edit' style='font-size:18px'></i></a> 
+                                                                <a onClick=\"javascript: return confirm('Are You Sure You want To DELETE This Record');\" href=\".php?id=".$row['recID']."\"><i class='far fa-trash-alt' style='font-size:18px'></i></a>        
                                                             </td>\n";
                                                         echo "</tr>\n";
                                                         }

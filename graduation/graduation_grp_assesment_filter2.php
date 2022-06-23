@@ -175,6 +175,25 @@ $district = $_GET['district'];
                                     </div>
                                 </div>
 
+                                <div class="row mb-1">
+                                    <div class="col-md-6">
+                                        <div class="input-group" display="inline">
+                                            <form action="../phpSearch.php" method="post">
+                                                Group Name <input type="text" name="search">
+                                                <input type ="submit" name='Search_Group_Name' value='Search_Name'> 
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="input-group" display="inline">
+                                            <form action="../phpSearchgc.php" method="post">
+                                                Group Code <input type="text" name="search">
+                                                <input type ="submit" name='Search_Group_Code' value='Search_Code'> 
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="card border border-primary">

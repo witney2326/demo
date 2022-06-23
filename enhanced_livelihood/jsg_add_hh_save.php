@@ -45,7 +45,7 @@
             {
                 echo '<script type="text/javascript">'; 
                 echo 'alert("Please Enter Household code !");'; 
-                echo 'window.location.href = "jsg_clusters.php";';
+                echo 'window.location.href = "jsgs.php";';
                 //header("Location: " . $_SERVER["HTTP_REFERER"]);
                 echo '</script>';
             }
@@ -56,7 +56,7 @@
                 if (mysqli_query($link, $sql)) {
                     echo '<script type="text/javascript">'; 
                     echo 'alert("JSG Member Record has been added successfully !");'; 
-                    echo 'window.location.href = "jsg_clusters.php";';
+                    echo 'window.location.href = "jsgs.php";';
                     //header("Location: " . $_SERVER["HTTP_REFERER"]);
                     echo '</script>';
                 } else {
