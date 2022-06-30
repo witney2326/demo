@@ -77,156 +77,157 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                 </div>
                 <!-- end page title -->
 
-                <div class="row">
+                <div class="row mb-1">
                     
-                        </div>
-                    </div>
 
+                <div class="row">
                     <div class="col-xl-12">
                         <div class="card">
                             <div class="card-body">
-
-                                
-                                <!-- Nav tabs -->
-                                
-                                <!-- Tab panes -->
-                                <div class="tab-content p-3 text-muted">
-                                    <div class="tab-pane active" id="home-1" role="tabpanel">
-                                        <p class="mb-0">
-                                            
-
-                                            <!--start here -->
-                                            <div class="card border border-primary">
-                                                <div class="card-header bg-transparent border-primary">
-                                                    <h5 class="my-0 text-primary"></i>SLG Search Filter</h5>
-                                                </div>
-                                                <div class="card-body">
-                                                    <h5 class="card-title mt-0"></h5>
-                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="jsg_mgt_filter2.php" method ="POST">
-                                                        <div class="col-12">
-                                                            <label for="region" class="form-label">Region</label>
-                                                            <div>
-                                                                <select class="form-select" name="region" id="region" value ="$region" required>
-                                                                    <option selected value = "<?php echo $region; ?>"><?php echo get_rname($link,$region);?></option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                        
-                                                        <div class="col-12">
-                                                            <label for="district" class="form-label">District</label>
-                                                            <select class="form-select" name="district" id="district" value ="" required>
-                                                                <option></option>
-                                                                    <?php                                                           
-                                                                        $dis_fetch_query = "SELECT DistrictID,DistrictName FROM tbldistrict where regionID ='$region'";                                                  
-                                                                        $result_dis_fetch = mysqli_query($link, $dis_fetch_query);                                                                       
-                                                                        $i=0;
-                                                                            while($DB_ROW_Dis = mysqli_fetch_array($result_dis_fetch)) {
-                                                                        ?>
-                                                                        <option value="<?php echo $DB_ROW_Dis["DistrictID"]; ?>">
-                                                                            <?php echo $DB_ROW_Dis["DistrictName"]; ?></option><?php
-                                                                            $i++;
-                                                                                }
-                                                                    ?>
-                                                            </select>
-                                                        </div>
-
-                                                        <div class="col-12">
-                                                            <label for="ta" class="form-label">Traditional Authority</label>
-                                                            <select class="form-select" name="ta" id="ta" required disabled>
-                                                                
-                                                                
-                                                            </select>
-                                                            <div class="invalid-feedback">
-                                                                Please select a valid TA.
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-12">
-                                                            <button type="submit" class="btn btn-btn btn-outline-primary w-md" name="Submit" value="Submit">Submit</button>
-                                                            <INPUT TYPE="button" class="btn btn-btn btn-outline-secondary w-md" VALUE="Back" onClick="history.go(-1);">
-                                                        </div>
-                                                    </form>                                             
-                                                    <!-- End Here -->
+                                <div class="card border border-primary">
+                                    <div class="card-header bg-transparent border-primary">
+                                        <h5 class="my-0 text-primary"></i>SLG Search Filter</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <h5 class="card-title mt-0"></h5>
+                                        <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="jsg_mgt_filter2.php" method ="POST">
+                                            <div class="col-12">
+                                                <label for="region" class="form-label">Region</label>
+                                                <div>
+                                                    <select class="form-select" name="region" id="region" value ="$region" required>
+                                                        <option selected value = "<?php echo $region; ?>"><?php echo get_rname($link,$region);?></option>
+                                                    </select>
                                                 </div>
                                             </div>
+                                            
+                                            <div class="col-12">
+                                                <label for="district" class="form-label">District</label>
+                                                <select class="form-select" name="district" id="district" value ="" required>
+                                                    <option></option>
+                                                        <?php                                                           
+                                                            $dis_fetch_query = "SELECT DistrictID,DistrictName FROM tbldistrict where regionID ='$region'";                                                  
+                                                            $result_dis_fetch = mysqli_query($link, $dis_fetch_query);                                                                       
+                                                            $i=0;
+                                                                while($DB_ROW_Dis = mysqli_fetch_array($result_dis_fetch)) {
+                                                            ?>
+                                                            <option value="<?php echo $DB_ROW_Dis["DistrictID"]; ?>">
+                                                                <?php echo $DB_ROW_Dis["DistrictName"]; ?></option><?php
+                                                                $i++;
+                                                                    }
+                                                        ?>
+                                                </select>
+                                            </div>
 
-                                            <div class="row">
-                                                <div class="col-12">
-                                                    <div class="card border border-primary">
-                                                    <div class="card-header bg-transparent border-primary">
-                                                        <h5 class="my-0 text-primary">Savings and Loan Groups in <?php echo get_rname($link,$region);?> Region</h5>
-                                                    </div>
-                                                    <div class="card-body">
-                                                    <h7 class="card-title mt-0"></h7>
-                                                        
-                                                            <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
-                                                            
-                                                                <thead>
-                                                                    <tr>
-                                                                        <th>SLG code</th>
-                                                                        <th>SLG Name</th>
-                                                                        <th>cohort</th>
-                                                                        <th>M</th>
-                                                                        <th>F</th>
-                                                                        <th>Mapped?</th>
-                                                                        <th>No. JSGs</th>
-                                                                        <th>Action On SLG</th> 
-                                                                    </tr>
-                                                                </thead>
-
-
-                                                                <tbody>
-                                                                    <?Php
-                                                                        $query="select * from tblgroup where regionID = '0'";
- 
-                                                                        //Variable $link is declared inside config.php file & used here
-                                                                        
-                                                                        if ($result_set = $link->query($query)) {
-                                                                        while($row = $result_set->fetch_array(MYSQLI_ASSOC))
-                                                                        { 
-                                                                            $db_mapped = (string) $row["jsg_mapped"];
-                                                                            if ($db_mapped =='1'){$mapped = 'Yes';}
-                                                                            if ($db_mapped =='0'){$mapped = 'No';}
-
-                                                                            $grp = $row["groupID"];
-
-                                                                            $result1 = mysqli_query($link, "SELECT COUNT(recID) AS value_sum FROM tbljsg WHERE groupID = '$grp'"); 
-                                                                            $row2 = mysqli_fetch_assoc($result1); 
-                                                                            $jsgs = $row2['value_sum'];
-
-                                                                        echo "<tr>\n";
-                                                                            echo "<td>".$row["groupID"]."</td>\n";
-                                                                            echo "<td>".$row["groupname"]."</td>\n";
-                                                                            echo "<td>".$row["cohort"]."</td>\n";
-                                                                            echo "<td>".$row["MembersM"]."</td>\n";
-                                                                            echo "<td>".$row["MembersF"]."</td>\n";
-                                                                            echo "<td>\t\t$mapped</td>\n";
-                                                                            echo "<td>\t\t$jsgs</td>\n";
-                                                                            echo "<td>
-                                                                                <a href=\"../basicSLGview.php?id=".$row['groupID']."\"><i class='far fa-eye' title='View SLG' style='font-size:18px;color:purple'></i></a>                                                                           
-                                                                                <a href=\"view_JSG.php?id=".$row['groupID']."\"><i class='fas fa-balance-scale' title='View JSGs For the Group' style='font-size:18px;color:orange'></i></a> 
-                                                                                <a onClick=\"javascript: return confirm('Are You Sure You want To Map This Group For JSGs Interventions? ');\" href=\"slg_JSG_Map.php?id=".$row['groupID']."\"><i class='fas fa-stamp' title='Map SLG For JSG Intervention' style='font-size:18px;color:green'></i></a>
-                                                                                <a href=\"add_JSG.php?id=".$row['groupID']."&mapped=".$row['jsg_mapped']."\"><i class='fa fa-users' title='Add JSG to SLG' style='font-size:18px;color:cadetblue'></i></a> 
-                                                                            </td>\n";
-
-                                                                        echo "</tr>\n";
-                                                                        }
-                                                                        $result_set->close();
-                                                                        }  
-                                                                                           
-                                                                    ?>
-                                                                </tbody>
-                                                            </table>
-                                                            </p>
-                                                        </div>
-                                                    </div>     
-                                                </div>            
-                                            </div>  
-                                        </p>
+                                            <div class="col-12">
+                                                <label for="ta" class="form-label">Traditional Authority</label>
+                                                <select class="form-select" name="ta" id="ta" required disabled>
+                                                    
+                                                    
+                                                </select>
+                                                <div class="invalid-feedback">
+                                                    Please select a valid TA.
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <button type="submit" class="btn btn-btn btn-outline-primary w-md" name="Submit" value="Submit">Submit</button>
+                                                <INPUT TYPE="button" class="btn btn-btn btn-outline-secondary w-md" VALUE="Back" onClick="history.go(-1);">
+                                            </div>
+                                        </form>                                             
+                                        <!-- End Here -->
                                     </div>
-                                    <!-- Here -->
-        
                                 </div>
 
+                                <div class="row mb-1">
+                                    <div class="col-md-6">
+                                        <div class="input-group" display="inline">
+                                            <form action="../phpSearch.php" method="post">
+                                                Group Name <input type="text" name="search">
+                                                <input type ="submit" name='Search_Group_Name' value='Search_Name'> 
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="input-group" display="inline">
+                                            <form action="../phpSearchgc.php" method="post">
+                                                Group Code <input type="text" name="search">
+                                                <input type ="submit" name='Search_Group_Code' value='Search_Code'> 
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="card border border-primary">
+                                        <div class="card-header bg-transparent border-primary">
+                                            <h5 class="my-0 text-primary">Savings and Loan Groups in <?php echo get_rname($link,$region);?> Region</h5>
+                                        </div>
+                                        <div class="card-body">
+                                        <h7 class="card-title mt-0"></h7>
+                                            
+                                                <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
+                                                
+                                                    <thead>
+                                                        <tr>
+                                                            <th>SLG code</th>
+                                                            <th>SLG Name</th>
+                                                            <th>cohort</th>
+                                                            <th>M</th>
+                                                            <th>F</th>
+                                                            <th>Mapped?</th>
+                                                            <th>No. JSGs</th>
+                                                            <th>Action On SLG</th> 
+                                                        </tr>
+                                                    </thead>
+
+
+                                                    <tbody>
+                                                        <?Php
+                                                            $query="select * from tblgroup where regionID = '0'";
+
+                                                            //Variable $link is declared inside config.php file & used here
+                                                            
+                                                            if ($result_set = $link->query($query)) {
+                                                            while($row = $result_set->fetch_array(MYSQLI_ASSOC))
+                                                            { 
+                                                                $db_mapped = (string) $row["jsg_mapped"];
+                                                                if ($db_mapped =='1'){$mapped = 'Yes';}
+                                                                if ($db_mapped =='0'){$mapped = 'No';}
+
+                                                                $grp = $row["groupID"];
+
+                                                                $result1 = mysqli_query($link, "SELECT COUNT(recID) AS value_sum FROM tbljsg WHERE groupID = '$grp'"); 
+                                                                $row2 = mysqli_fetch_assoc($result1); 
+                                                                $jsgs = $row2['value_sum'];
+
+                                                            echo "<tr>\n";
+                                                                echo "<td>".$row["groupID"]."</td>\n";
+                                                                echo "<td>".$row["groupname"]."</td>\n";
+                                                                echo "<td>".$row["cohort"]."</td>\n";
+                                                                echo "<td>".$row["MembersM"]."</td>\n";
+                                                                echo "<td>".$row["MembersF"]."</td>\n";
+                                                                echo "<td>\t\t$mapped</td>\n";
+                                                                echo "<td>\t\t$jsgs</td>\n";
+                                                                echo "<td>
+                                                                    <a href=\"../basicSLGview.php?id=".$row['groupID']."\"><i class='far fa-eye' title='View SLG' style='font-size:18px;color:purple'></i></a>                                                                           
+                                                                    <a href=\"view_JSG.php?id=".$row['groupID']."\"><i class='fas fa-balance-scale' title='View JSGs For the Group' style='font-size:18px;color:orange'></i></a> 
+                                                                    <a onClick=\"javascript: return confirm('Are You Sure You want To Map This Group For JSGs Interventions? ');\" href=\"slg_JSG_Map.php?id=".$row['groupID']."\"><i class='fas fa-stamp' title='Map SLG For JSG Intervention' style='font-size:18px;color:green'></i></a>
+                                                                    <a href=\"add_JSG.php?id=".$row['groupID']."&mapped=".$row['jsg_mapped']."\"><i class='fa fa-users' title='Add JSG to SLG' style='font-size:18px;color:cadetblue'></i></a> 
+                                                                </td>\n";
+
+                                                            echo "</tr>\n";
+                                                            }
+                                                            $result_set->close();
+                                                            }  
+                                                                                
+                                                        ?>
+                                                    </tbody>
+                                                </table>
+                                                </p>
+                                            </div>
+                                        </div>     
+                                    </div>            
+                                </div>  
                             </div>
                         </div>
                     </div>

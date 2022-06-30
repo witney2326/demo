@@ -569,6 +569,109 @@ $test = 85;
                         </div>
                     </div> 
                     <!-- end Row 2 -->
+
+                    <div class="row">
+                        <div class="card">
+                            <div class="card-header bg-transparent border-primary">
+                                <div class="card-group">
+                                    <div class="card border">
+                                        <img src="..." class="card-img-top" alt="">
+                                        <div class="card-body">
+                                            <div class="card-body">
+                                                <div class="d-flex">
+                                                    <div class="flex-grow-1">
+                                                    <i class='fas fa-book-reader' style='font-size:24px'></i><i class='fas fa-book-reader' style='font-size:24px;color:green'></i>
+
+                                                        <p class="text-muted fw-small">Mindset Change Training SLGs Trained</p>
+                                                        <?php
+                                                            $result = mysqli_query($link, 'SELECT count(TrainingID) AS total_grps FROM tblgrouptrainings'); 
+                                                            $row = mysqli_fetch_assoc($result); 
+                                                            $sum = $row['total_grps'];
+                                                        ?>
+                                                        <div class="container">
+                                                            <h6><div class="mb-0"><?php echo "" . number_format($sum);?></div></h6>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+       
+                                    </div>
+                                    <div class="card border">
+                                        <img src="..." class="card-img-top" alt="">
+                                        <div class="card-body">
+                                            <div class="card-body">
+                                                <div class="d-flex">
+                                                    <div class="flex-grow-1">
+                                                    <i class='fas fa-layer-group' style='font-size:24px;color:darkgoldenrod'></i><i class='fas fa-chalkboard-teacher' style='font-size:24px;color:black'></i><i class='fas fa-layer-group' style='font-size:24px;color:black'></i>
+                                                        <p class="text-muted fw-medium">Mindset Change Training Clusters Trained</p>
+                                                        <?php
+                                                            $result = mysqli_query($link, 'SELECT count(TrainingID) AS total_cls FROM tblgrouptrainings'); 
+                                                            $row = mysqli_fetch_assoc($result); 
+                                                            $total_cls = $row['total_cls'];
+                                                        ?>
+                                                        <h6 class="mb-0">
+                                                            <div class="container">
+                                                                <div class="numberCircle"><?php echo "" . number_format($total_cls);?></div>
+                                                            </div> 
+                                                        </h6>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card border">
+                                        <img src="..." class="card-img-top" alt="">
+                                        <div class="card-body">
+                                            <div class="card-body">
+                                                <div class="d-flex">
+                                                    <div class="flex-grow-1">
+                                                    <i class='fas fa-user-graduate' style='font-size:24px'></i><i class='fas fa-user-graduate' style='font-size:24px;color:brown'></i>
+                                                        <p class="text-muted fw-medium">Coop Member Training Clusters Trained</p>
+                                                        <?php
+                                                            $result = mysqli_query($link, 'SELECT count(TrainingID) AS total_cls FROM tblgrouptrainings where TrainingTypeID = "14"'); 
+                                                            $row = mysqli_fetch_assoc($result); 
+                                                            $v_total = $row['total_cls'];
+                                                        ?>
+                                                            <h6 class="mb-0">
+                                                                <div class="container">
+                                                                    <div class="numberCircle"><?php echo "" . number_format($v_total);?></div>
+                                                                </div> 
+                                                            </h6>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="card border">
+                                        <img src="..." class="card-img-top" alt="">
+                                        <div class="card-body">
+                                            <div class="card-body">
+                                                <div class="d-flex">
+                                                    <div class="flex-grow-1">
+                                                        <i class='fa fa-certificate' style='font-size:24px'></i><i class='fa fa-certificate' style='font-size:24px;color:gold'></i>
+                                                        <p class="text-muted fw-medium">Youth Challenge Support Youths in Voc Schools</p>
+                                                        <?php
+                                                            $result = mysqli_query($link, 'SELECT COUNT(recID) AS value_sum FROM tblycs where vocSchoolLinked ="1"'); 
+                                                            $row = mysqli_fetch_assoc($result); 
+                                                            $sum = $row['value_sum'];
+                                                        ?>
+                                                            <div class="container">
+                                                                <h6><div class="mb-0"><?php echo "" . number_format($sum);?></div></h6>
+                                                            </div>
+                                                        </h4>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> 
+
+                    <!-- end Row 3 -->
                     <div class = "row">
                                                 
                         <div class = "col-lg-6">

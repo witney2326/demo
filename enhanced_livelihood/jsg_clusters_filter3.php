@@ -29,9 +29,9 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 <?php include 'layouts/body.php'; ?>
 
 <?php  
-    $region = $_GET['region'];
-    $district =$_GET['district'];
-    $ta =$_GET['ta'];
+    $region = $_POST['region'];
+    $district =$_POST['district'];
+    $ta =$_POST['ta'];
     
     function get_rname($link, $rcode)
         {
@@ -147,11 +147,30 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                 </div>
                                             </div>
 
+                                            <div class="row mb-1">
+                                                <div class="col-md-6">
+                                                    <div class="input-group" display="inline">
+                                                        <form action="../phpSearchClusterN.php" method="post">
+                                                            Cluster Name <input type="text" name="search">
+                                                            <input type ="submit" name='Search_Group_Name' value='Search_Name'> 
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="input-group" display="inline">
+                                                        <form action="../phpSearchClusterC.php" method="post">
+                                                            Cluster Code <input type="text" name="search">
+                                                            <input type ="submit" name='Search_Group_Code' value='Search_Code'> 
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>                          
+
                                             <div class="row">
                                                 <div class="col-12">
                                                     <div class="card border border-primary">
                                                     <div class="card-header bg-transparent border-primary">
-                                                        <h5 class="my-0 text-primary">Clusters in <?php echo dis_name($link,$district); ?></h5>
+                                                        <h5 class="my-0 text-default">Clusters in <?php echo dis_name($link,$district); ?></h5>
                                                     </div>
                                                     <div class="card-body">
                                                     <h7 class="card-title mt-0"></h7>

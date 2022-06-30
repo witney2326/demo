@@ -91,19 +91,27 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                     <li class="nav-item waves-effect waves-light">
                                         <a class="nav-link active" data-bs-toggle="tab" href="#home-1" role="tab">
                                             <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
-                                            <span class="d-none d-sm-block">SLGs</span>
+                                            <span class="d-none d-sm-block">Group Training</span> 
                                         </a>
                                     </li>
+
+                                    <li class="nav-item waves-effect waves-light">
+                                        <a class="link"  href="basic_livelihood_cluster_training.php" role="link">
+                                            <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
+                                            <span class="d-none d-sm-block">Cluster Training</span>
+                                        </a>
+                                    </li>
+
                                     <li class="nav-item waves-effect waves-light">
                                         <a class="link"  href="basic_livelihood_training_trained_groups.php" role="link">
                                             <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
-                                            <span class="d-none d-sm-block">Trained Groups</span>
+                                            <span class="d-none d-sm-block">Trained Groups/Clusters</span>
                                         </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">
                                         <a class="link"  href="basic_livelihood_animators.php" role="link">
                                             <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
-                                            <span class="d-none d-sm-block">Animators</span>
+                                            <span class="d-none d-sm-block">Animator Training</span>
                                         </a>
                                     </li>
                                     

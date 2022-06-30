@@ -40,9 +40,9 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 <?php include '../layouts/body.php'; ?>
 
 <?php		
-   $region = $_GET['region'];		
-   $district = $_GET['district'];
-   $ta = $_GET['ta'];
+   $region = $_POST['region'];		
+   $district = $_POST['district'];
+   $ta = $_POST['ta'];
      
      
      
@@ -118,12 +118,12 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                         <!--start here -->
                                 <div class="card border border-primary">
                                     <div class="card-header bg-transparent border-primary">
-                                        <h5 class="my-0 text-primary">SLG Search Filter</h5>
+                                        <h5 class="my-0 text-primary">Cluster Filter</h5>
                                     </div>
                                     <div class="card-body">
                                         <h5 class="card-title mt-0"></h5>
                                         
-                                        <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="cmt_training_registration_filter3.php" method="GET">
+                                        <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="cmt_training_registration_filter3.php" method="POST">
                                             <div class="col-12">
                                                 <label for="region" class="form-label">Region</label>
                                                 <div>
@@ -160,16 +160,11 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                     </div>
                                 </div>
 
-
-                                    
-                               
-
-
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="card border border-primary">
                                         <div class="card-header bg-transparent border-primary">
-                                            <h5 class="my-0 text-primary">Savings and Loan Groups</h5>
+                                            <h5 class="my-0 text-default">SL Clusters in TA: <?php echo ta_name($link,$ta)?></h5>
                                         </div>
                                         <div class="card-body">
                                         <h5 class="card-title mt-0"></h5>
@@ -178,8 +173,8 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                 
                                                     <thead>
                                                         <tr>                    
-                                                            <th>Group Code</th>
-                                                            <th>Group Name</th>
+                                                            <th>Cluster Code</th>
+                                                            <th>Cluster Name</th>
                                                             <th>CME Trained?</th>                                          
                                                             <th>Action</th>
                                                         </tr>
@@ -189,7 +184,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                     <tbody>
                                                         <?Php
                                                             
-                                                            $query="select * from tblgroup where ((TAID = $ta) and (cmt_status ='1'))";
+                                                            $query="select * from tblcluster where ((TAID = $ta) and (cmt_status ='1') and (deleted = '0'))";
 
                                                         //Variable $link is declared inside config.php file & used here
                                                         
@@ -197,12 +192,12 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                         while($row = $result_set->fetch_array(MYSQLI_ASSOC))
                                                         { 
                                                             echo "<tr>\n";
-                                                            echo "<td>".$row["groupID"]."</td>\n";
-                                                            echo "<td>".$row["groupname"]."</td>\n";
+                                                            echo "<td>".$row["ClusterID"]."</td>\n";
+                                                            echo "<td>".$row["ClusterName"]."</td>\n";
                                                             echo "<td></td>\n";
-                                                            echo "<td> <a href=\"../basicSLGview.php?id=".$row['groupID']."\"><i class='far fa-eye' title='View SLG' style='font-size:18px;color: purple'></i></a>\n";
-                                                            echo "<a onClick=\"javascript: return confirm('You want To Record CME Training?');\" href=\"../add_basicTrainingGD.php?id=".$row['groupID']."\"\><i class='fa fa-plus' title='Record CME Training' style='font-size:18px; color:orange'></i></a>\n";
-                                                            echo "<a onClick=\"javascript: return confirm('You want To Register SLG as a Cooperative?');\" href=\"cmt_SLGRegisterGroup.php?id=".$row['groupID']."\"\><i class='fa fa-user-plus' title='Register SLG as a Coop' style='font-size:18px; color:green'></i></a>\n";
+                                                            echo "<td> <a href=\"../basicCLSview.php?id=".$row['ClusterID']."\"><i class='far fa-eye' title='View Cluster' style='font-size:18px;color: purple'></i></a>\n";
+                                                            echo "<a onClick=\"javascript: return confirm('You want To Record CME Training?');\" href=\"../add_basicTrainingGD.php?id=".$row['ClusterID']."\"\><i class='fa fa-plus' title='Record CME Training' style='font-size:18px; color:orange'></i></a>\n";
+                                                            echo "<a onClick=\"javascript: return confirm('You want To Register Cluster as a Cooperative?');\" href=\"cmt_SLGRegisterGroup.php?id=".$row['ClusterID']."\"\><i class='fa fa-user-plus' title='Register Cluster as a Coop' style='font-size:18px; color:green'></i></a>\n";
                                                         echo "</tr>\n";
                                                         }
                                                         $result_set->close();

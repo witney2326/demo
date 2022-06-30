@@ -186,7 +186,6 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                     </div>
                                 </div>
 
-
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="card border border-primary">

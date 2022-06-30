@@ -30,7 +30,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
 <?php 
   
-    $region = $_GET['region'];
+    $region = $_POST['region'];
     
     function get_rname($link, $rcode)
         {
@@ -103,7 +103,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                 </div>
                                                 <div class="card-body">
                                                     <h5 class="card-title mt-0"></h5>
-                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="jsg_clusters_filter2.php" method ="GET">
+                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="jsg_clusters_filter2.php" method ="POST">
                                                         <div class="col-12">
                                                             <label for="region" class="form-label">Region</label>
                                                             <div>
@@ -156,7 +156,26 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                             
                                         </p>
                                     </div>
-                                    <!-- start Here -->
+                                    
+                                    <div class="row mb-1">
+                                        <div class="col-md-6">
+                                            <div class="input-group" display="inline">
+                                                <form action="../phpSearchClusterN.php" method="post">
+                                                    Cluster Name <input type="text" name="search">
+                                                    <input type ="submit" name='Search_Group_Name' value='Search_Name'> 
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="input-group" display="inline">
+                                                <form action="../phpSearchClusterC.php" method="post">
+                                                    Cluster Code <input type="text" name="search">
+                                                    <input type ="submit" name='Search_Group_Code' value='Search_Code'> 
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>                          
+
                                     <div class="row">
                                         <div class="col-12">
                                             <div class="card border border-primary">

@@ -2,7 +2,7 @@
 <?php include 'layouts/head-main.php'; ?>
 
 <head>
-    <title>JSG Clusters</title>
+    <title>Cluster Training Management</title>
     <?php include 'layouts/head.php'; ?>
     <?php include 'layouts/head-style.php'; ?>
     <?php include 'layouts/config.php'; ?>
@@ -12,7 +12,7 @@
     <!-- Responsive datatable examples -->
     <link href="assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
 
-   <!--Datatable plugin CSS file -->
+     <!--Datatable plugin CSS file -->
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" />
   
   <!--jQuery library file -->
@@ -23,19 +23,12 @@
   <!--Datatable plugin JS library file -->
   <script type="text/javascript" 
 src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
-  </script> 
+  </script>
 </head>
 
 <?php include 'layouts/body.php'; ?>
 
 <?php 
-    if(isset($_GET['Submit']))
-    {   
-        $region = $_GET['region'];
-        $district = $_GET['district'];
-        $ta = $_GET['ta'];
-     
-    }
     
     function get_rname($link, $rcode)
         {
@@ -69,12 +62,12 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                 <div class="row">
                     <div class="col-12">
                         <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                            <h4 class="mb-sm-0 font-size-18">JSGs Formation: Clusters</h4>
+                            <h4 class="mb-sm-0 font-size-18">Training Management</h4>
 
                             <div class="page-title-right">
                                 <ol class="breadcrumb m-0">
-                                    <li class="breadcrumb-item"><a href="jsg_formation.php">JSG Formation</a></li>
-                                    <li class="breadcrumb-item active">Clusters</li>
+                                    <li class="breadcrumb-item"><a href="basic_livelihood.php">Basic Livelihood</a></li>
+                                    <li class="breadcrumb-item active">Training Management</li>
                                 </ol>
                             </div>
 
@@ -85,23 +78,26 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
                 <div class="row">
                     
-                     <div class="col-xl-12">
+                        </div>
+                    </div>
+
+                    <div class="col-xl-12">
                         <div class="card">
                             <div class="card-body">
-     
+                                <!--start here -->
                                 <div class="card border border-primary">
-                                    <div class="card-header bg-transparent border-primary">
-                                        <h5 class="my-0 text-primary">Cluster Filter</h5>
+                                    <div class="card-header bg-primary border-primary">
+                                        <h5 class="my-0 text-default">Cluster Filter</h5>
                                     </div>
-
-                                    <div class="card-body">
+                                    <div class="card-body bg-success">
                                         <h5 class="card-title mt-0"></h5>
-                                        <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="jsg_clusters_filter1.php" method ="POST" >
+
+                                        <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="basic_livelihood_cluster_training_filter1.php" method ="POST" >
                                             <div class="col-12">
                                                 <label for="region" class="form-label">Region</label>
-                                                
-                                                    <select class="form-select" name="region" id="region"  required>
-                                                        <option ></option>
+                                                <div>
+                                                    <select class="form-select" name="region" id="region" required>
+                                                        <option></option>
                                                         <?php                                                           
                                                                 $dis_fetch_query = "SELECT regionID, name FROM tblregion";                                                  
                                                                 $result_dis_fetch = mysqli_query($link, $dis_fetch_query);                                                                       
@@ -122,13 +118,13 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                     <div class="invalid-feedback">
                                                         Please select a valid Malawi region.
                                                     </div>
-                                                
+                                                </div>
                                             </div>
                                             
                                             <div class="col-12">
                                                 <label for="district" class="form-label">District</label>
-                                                <select class="form-select" name="district" id="district" value ="$district" required disabled>
-                                                    <option selected value="$district" ></option>
+                                                <select class="form-select" name="district" id="district" required disabled>
+                                                    <option></option>
                                                         <?php                                                           
                                                             $dis_fetch_query = "SELECT DistrictID,DistrictName FROM tbldistrict";                                                  
                                                             $result_dis_fetch = mysqli_query($link, $dis_fetch_query);                                                                       
@@ -149,7 +145,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                             <div class="col-12">
                                                 <label for="ta" class="form-label">Traditional Authority</label>
                                                 <select class="form-select" name="ta" id="ta" required disabled>
-                                                    <option selected  value="$ta"></option>
+                                                    <option></option>
                                                     <?php                                                           
                                                             $ta_fetch_query = "SELECT TAName FROM tblta";                                                  
                                                             $result_ta_fetch = mysqli_query($link, $ta_fetch_query);                                                                       
@@ -170,37 +166,17 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                             
                                             <div class="col-12">
                                                 <button type="submit" class="btn btn-btn btn-outline-primary w-md" name="Submit" value="Submit">Submit</button>
-                                                <INPUT TYPE="button" class="btn btn-btn btn-outline-secondary w-md" VALUE="Back" onClick="history.go(-1);">
                                             </div>
                                         </form>                                             
                                         <!-- End Here -->
                                     </div>
                                 </div>
 
-                                <div class="row mb-1">
-                                    <div class="col-md-6">
-                                        <div class="input-group" display="inline">
-                                            <form action="../phpSearchClusterN.php" method="post">
-                                                Cluster Name <input type="text" name="search">
-                                                <input type ="submit" name='Search_Group_Name' value='Search_Name'> 
-                                            </form>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="input-group" display="inline">
-                                            <form action="../phpSearchClusterC.php" method="post">
-                                                Cluster Code <input type="text" name="search">
-                                                <input type ="submit" name='Search_Group_Code' value='Search_Code'> 
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>                          
-                               
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="card border border-primary">
                                         <div class="card-header bg-transparent border-primary">
-                                            <h5 class="my-0 text-default">SLG Clusters</h5>
+                                            <h5 class="my-0 text-primary">Clusters</h5>
                                         </div>
                                         <div class="card-body">
                                         <h7 class="card-title mt-0"></h7>
@@ -209,48 +185,49 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                 
                                                     <thead>
                                                         <tr>
-                                                            <th>Cluster code</th>
+                                                            <th>Code</th>
                                                             <th>Cluster Name</th>
-                                                            <th>cohort</th>
-                                                            <th>Mapped?</th>
-                                                            <th>No. JSGs</th>
-                                                            <th>Action On SLG</th>
+                                                            <th>Males</th>
+                                                            <th>Females</th>
+                                                            <th>Total Members</th>
+                                                            <th>Action</th>                                                                        
                                                         </tr>
-                                                        
                                                     </thead>
+
+
                                                     <tbody>
                                                         <?Php
                                                             $query="select * from tblcluster where regionID = '0'";
 
                                                             //Variable $link is declared inside config.php file & used here
-                                                            
+                                                                
                                                             if ($result_set = $link->query($query)) {
                                                             while($row = $result_set->fetch_array(MYSQLI_ASSOC))
                                                             { 
-                                                                $db_mapped = (string) $row["jsg_mapped"];
-                                                                if ($db_mapped =='1'){$mapped = 'Yes';}
-                                                                if ($db_mapped =='0'){$mapped = 'No';}
+                                                                //
+                                                                    $cluster_code = $row["ClusterID"];
 
-                                                                $cls = $row["ClusterID"];
+                                                                    $males = mysqli_query($link, "SELECT SUM(MembersM) AS total_males FROM tblgroup where ClusterID = '$cluster_code'"); 
+                                                                    $row_males = mysqli_fetch_assoc($males); 
+                                                                    $total_males = $row_males['total_males'];
+  
+                                                                    $females = mysqli_query($link, "SELECT SUM(MembersF) AS total_females FROM tblgroup where ClusterID = '$cluster_code'"); 
+                                                                    $row_females = mysqli_fetch_assoc($females); 
+                                                                    $total_females = $row_females['total_females'];
 
-                                                                $result1 = mysqli_query($link, "SELECT COUNT(recID) AS value_sum FROM tbljsg WHERE groupID = '$cls'"); 
-                                                                $row2 = mysqli_fetch_assoc($result1); 
-                                                                $jsgs = $row2['value_sum'];
-
-
-                                                            echo "<tr>\n";
+                                                                    $totalMembers = $total_males+$total_females; 
+                                                               
+                                                            echo "<tr>\n"; 
                                                                 echo "<td>".$row["ClusterID"]."</td>\n";
                                                                 echo "<td>".$row["ClusterName"]."</td>\n";
-                                                                echo "<td>".$row["cohort"]."</td>\n";                                                                            
-                                                                echo "<td>\t\t$mapped</td>\n";
-                                                                echo "<td>\t\t$jsgs</td>\n";
-                                                                
+                                                                echo "<td>\t\t$total_males</td>\n";
+                                                                echo "<td>\t\t$total_females</td>\n";
+                                                                echo "<td>\t\t$totalMembers</td>\n";                        
                                                                 echo "<td>
-                                                                    <a href=\"view_JSG.php?id=".$row['ClusterID']."\"><i class='fas fa-balance-scale' title='View JSGs For the Cluster' style='font-size:18px; color:purple'></i></a> 
-                                                                    <a onClick=\"javascript: return confirm('Are You Sure You want To Map This Cluster For JSGs Interventions? ');\" href=\"cls_JSG_Map.php?id=".$row['ClusterID']."\"><i class='fas fa-stamp' title='Map Cluster For JSG Intervention' style='font-size:18px; color:orange'></i></a>
-                                                                    <a href=\"add_JSG_clusters.php?id=".$row['ClusterID']."\"><i class='fa fa-users' title='Add JSG to Cluster' style='font-size:18px;color:green'></i></a>    
+                                                                    <a href=\"basicSLGTraining_view.php?id=".$row['ClusterID']."\"><i class='far fa-eye' title='Training Status' style='font-size:18px;color:purple'></i></a>                                                                           
+                                                                    <a href=\"add_basicTrainingGD.php?id=".$row['ClusterID']."\" ><i class='fas fa-pen' title='Record Training' style='font-size:18px;color:green'></i></a>                                                                            
+                                                                    
                                                                 </td>\n";
-
                                                             echo "</tr>\n";
                                                             }
                                                             $result_set->close();
@@ -263,11 +240,30 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                             </div>
                                         </div>     
                                     </div>            
-                                </div> 
+                                </div>  
+
+
                             </div>
                         </div>
                     </div>
                 </div>
+
+
+                
+
+                    
+
+               
+
+
+                <!-- Collapse -->
+                
+
+                
+                <!-- end row -->
+
+                
+                <!-- end row -->
 
             </div> <!-- container-fluid -->
         </div>

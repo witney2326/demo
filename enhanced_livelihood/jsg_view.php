@@ -97,7 +97,7 @@
                     <div class="col-12">
 
                         <?php include 'layouts/body.php'; ?>
-                        <div class="col-lg-9">
+                        <div class="col-lg-12">
                             <div class="card border border-success">
                                 <div class="card-header bg-transparent border-success">
                                     <h5 class="my-0 text-success">Joint Skill Group: - <?php echo $jsg_name ?></h5>
@@ -165,9 +165,12 @@
                                                         <thead>
                                                             <tr>
                                                                 <th>Household Code</th>
-                                                                <th>Amount Invested</th>  
+                                                                <th>Initial Invest</th> 
+                                                                <th>Current Invest</th>
                                                                 <th>Trained?</th>
-                                                                <th>Linked?</th>
+                                                                <th>Service Linked?</th>
+                                                                <th>Finance Linked?</th>
+                                                                <th>JSG Mapped</th>
                                                                 <th>Action</th>  
                                                             </tr>
                                                         </thead>
@@ -182,17 +185,39 @@
                                                                 if ($result_set = $link->query($query)) {
                                                                 while($row = $result_set->fetch_array(MYSQLI_ASSOC))
                                                                 { 
-                                                                    
-                                                                echo "<tr>\n";                                           
-                                                                    echo "<td>".$row["sppCode"]."</td>\n";
-                                                                    
-                                                                    echo "\t\t<td></td>\n";
-                                                                    echo "\t\t<td></td>\n";
-                                                                    echo "\t\t<td></td>\n";
-                                                                    echo "<td></td>\n";
-                                                                    
-                                                                    
-                                                                echo "</tr>\n";
+                                                                    $hh = $row["sppCode"];
+                                                                    $query="select jsg_mapped from tblbeneficiaries where sppCode='$hh'";
+        
+                                                                    if ($result_set = $link->query($query)) {
+                                                                        while($r_ow = $result_set->fetch_array(MYSQLI_ASSOC))
+                                                                        { $jsg_mapped= $r_ow["jsg_mapped"];}
+                                                                        
+                                                                    }
+                                                                    if ($jsg_mapped=='1'){$mapped = "Yes";}
+                                                                    if ($row["jsg_skill_trained"] =='1'){$jsg_skill_trained = "Yes";}else{$jsg_skill_trained = "NA";}
+                                                                    if ($row["service_linked"] =='1'){$service_linked = "Yes";}else{$service_linked = "NA";}
+                                                                    if ($row["finance_linked"] =='1'){$finance_linked = "Yes";}else{$finance_linked = "NA";}
+                                                                    if ($row["service_linked"] =='1'){$service_linked = "Yes";}else{$service_linked = "NA";}
+                                                                    if ($row["finance_linked"] =='1'){$finance_linked = "Yes";}else{$finance_linked = "NA";}
+                                                                    $initialInvest = number_format($row["initial_invest"],2);
+                                                                    $currentInvest = number_format($row["current_invest"],2);
+                                                                    echo "<tr>\n";                                           
+                                                                        echo "<td>".$row["sppCode"]."</td>\n";
+                                                                        
+                                                                        echo "<td>\t\t$initialInvest</td>\n";
+                                                                        echo "<td>\t\t$currentInvest</td>\n";
+                                                                        echo "<td>\t\t$jsg_skill_trained</td>\n";
+                                                                        echo "<td>\t\t$service_linked</td>\n";
+                                                                        echo "<td>\t\t$finance_linked</td>\n";
+                                                                        echo "<td>\t\t$mapped</td>\n";
+                                                                        echo "<td>
+                                                                        <a href=\"../basicSLGMemberview.php?id=".$row['sppCode']."\"><i class='far fa-eye' title='View Household' style='font-size:18px;color:purple'></i></a>
+                                                                            <a href=\"../basicSLGMemberedit.php?id=".$row['sppCode']."\"><i class='far fa-edit' title='Edit Household' style='font-size:18px;color:green'></i></a>
+                                                                            <a onClick=\"javascript: return confirm('Are You Sure You want To APPROVE This HOUSEHOLD - You Must Be a Supervisor');\" href=\"jsg_hh_link.php?id=".$row['sppCode']."\"><i class='fa fa-check' title='Link Household To JSG' style='font-size:18px;color:green'></i></a>
+                                                                        </td>\n";
+                                                                        
+                                                                        
+                                                                    echo "</tr>\n";
                                                                 }
                                                                 $result_set->close();
                                                                 }                          

@@ -16,23 +16,64 @@
         
         
         $id = $_GET['id']; // get id through query string
-       $query="select * from tblgroup where groupID='$id'";
+
+        $check = substr($id, 5, 3);
+                                                                
+        //if (($check == "CLU") or ($check == "CLS"))
         
-        if ($result_set = $link->query($query)) {
-            while($row = $result_set->fetch_array(MYSQLI_ASSOC))
-            { 
-                $groupname= $row["groupname"];
-                $DateEstablished= $row["DateEstablished"];
-                $regionID = $row["regionID"];
-                $DistrictID= $row["DistrictID"];
-                $TAID= $row["TAID"];
-                $gvhID= $row["gvhID"];
-                $MembersM= $row["MembersM"];
-                $MembersF = $row["MembersF"];
-                $clusterID = $row["clusterID"];
-                $cohort = $row["cohort"];
+        if (($check == "SLG"))
+        {
+            $query="select * from tblgroup where groupID='$id'";
+                
+            if ($result_set = $link->query($query)) {
+                while($row = $result_set->fetch_array(MYSQLI_ASSOC))
+                { 
+                    $groupname= $row["groupname"];
+                    $DateEstablished= $row["DateEstablished"];
+                    $regionID = $row["regionID"];
+                    $DistrictID= $row["DistrictID"];
+                    $TAID= $row["TAID"];
+                    $gvhID= $row["gvhID"];
+                    $MembersM= $row["MembersM"];
+                    $MembersF = $row["MembersF"];
+                    $clusterID = $row["clusterID"];
+                    $cohort = $row["cohort"];
+                    $type = "SL Group";
+                }
+                
             }
+        }
+        if (($check == "CLU") or ($check == "CLS"))
+        {
             
+                $resultM = mysqli_query($link, "SELECT SUM(MembersM) AS total_males FROM tblgroup where ClusterID = '$id'"); 
+                $rowM = mysqli_fetch_assoc($resultM); 
+                $total_males = $rowM['total_males'];
+
+                $resultF = mysqli_query($link, "SELECT SUM(MembersF) AS total_females FROM tblgroup where ClusterID = '$id'"); 
+                $rowF = mysqli_fetch_assoc($resultF); 
+                $total_females = $rowF['total_females'];
+
+           
+            $query="select * from tblcluster where ClusterID='$id'";
+                
+            if ($result_set = $link->query($query)) {
+                while($row = $result_set->fetch_array(MYSQLI_ASSOC))
+                { 
+                    $groupname= $row["ClusterName"];
+                    $DateEstablished= date('Y/m/d' );
+                    $regionID = $row["regionID"];
+                    $DistrictID= $row["districtID"];
+                    $TAID= $row["taID"];
+                    $gvhID= $row["gvhID"];
+                    $MembersM= $total_males;
+                    $MembersF = $total_females;
+                    $clusterID = $row["ClusterID"];
+                    $cohort = $row["cohort"];
+                    $type = "Cluster";
+                }
+                
+            }
         }
 
         function dis_name($link, $disID)
@@ -61,38 +102,47 @@
                 <!-- start page title -->
                 <div class="row">
                     <div class="col-12">
-                    <h5>Savings and Loan Group (SLG) Training Status</h5>
+                    <h5>Group Training Status</h5>
                         <?php include 'layouts/body.php'; ?>
                         <div class="col-lg-9">
                             <div class="card border border-success">
-                                <div class="card-header bg-transparent border-success">
-                                    <h6 class="my-0 text-primary"></i>SLG Name:- <?php echo $groupname ?> <?php echo "_"." "." "."Group ID:-"; echo " "; echo $id; echo "_"." "." "."District:-"; echo " "; echo dis_name($link,$DistrictID) ?> </h6>
-                                </div>
+                                
                                 <div class="card-body">
                                     
                                     <form>
-                                        <div class="row">
-                                            <label for="no_males" class="col-sm-3 col-form-label">No. Of Males</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="no_males" name="no_males" value ="<?php echo $MembersM ; ?>" style="max-width:30%;" disabled ="True">
-                                            </div>
-
-                                            <label for="no_females" class="col-sm-3 col-form-label">No. Of Females</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="no_females" name="no_females" value ="<?php echo $MembersF ; ?>" style="max-width:30%;" disabled ="True">
-                                            </div>
-
-                                            <label for="cluster" class="col-sm-3 col-form-label">Cluster Name</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="cluster" name="cluster" value ="<?php echo cls_name($link,$clusterID) ; ?>" style="max-width:30%;" disabled ="True">
-                                            </div>
-
-                                            <label for="cohort" class="col-sm-3 col-form-label">Cohort</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="cohort" name="cohort" value =" <?php echo $cohort ; ?>" style="max-width:30%;" disabled ="True">
-                                            </div>
-                                            
+                                        <div class="row mb-4">
+                                            <B>Group Profile</B>
                                         </div>
+                                        <div class="row mb-1">
+                                            <label for="groupID" class="col-sm-2 col-form-label">Group Code</label>
+                                            <input type="text" class="form-control" id="groupID" name="groupID" value ="<?php echo $id ; ?>" style="max-width:30%;" disabled ="True">
+                                            
+                                            <label for="groupname" class="col-sm-2 col-form-label">Group Name</label>
+                                            <input type="text" class="form-control" id="groupname" name="groupname" value ="<?php echo $groupname ; ?>" style="max-width:30%;" disabled ="True">
+                                        </div>
+                                        <div class="row mb-1">
+                                            <label for="type" class="col-sm-2 col-form-label">Group Type</label>
+                                            <input type="text" class="form-control" id="type" name="type" value ="<?php echo $type ; ?>" style="max-width:30%;" disabled ="True">
+
+                                            <label for="district" class="col-sm-2 col-form-label">District</label>
+                                            <input type="text" class="form-control" id="district" name="district" value ="<?php echo dis_name($link,$DistrictID) ; ?>" style="max-width:30%;" disabled ="True">
+                                        </div>
+                                        <div class="row mb-1">
+                                            <label for="no_males" class="col-sm-2 col-form-label">No. Of Males</label>
+                                            <input type="text" class="form-control" id="no_males" name="no_males" value ="<?php echo $MembersM ; ?>" style="max-width:30%;" disabled ="True">
+
+                                            <label for="no_females" class="col-sm-2 col-form-label">No. Of Females</label>
+                                            <input type="text" class="form-control" id="no_females" name="no_females" value ="<?php echo $MembersF ; ?>" style="max-width:30%;" disabled ="True">
+                                        </div>
+                                        <div class="row mb-1">
+                                            <label for="cluster" class="col-sm-2 col-form-label">Cluster Name</label>
+                                            <input type="text" class="form-control" id="cluster" name="cluster" value ="<?php echo cls_name($link,$clusterID) ; ?>" style="max-width:30%;" disabled ="True">
+
+                                            <label for="cohort" class="col-sm-2 col-form-label">Cohort</label>
+                                            <input type="text" class="form-control" id="cohort" name="cohort" value =" <?php echo $cohort ; ?>" style="max-width:30%;" disabled ="True">
+                                        </div>
+                                            
+                                        
                                         <div class="row mb-4">
                                             
                                         </div>

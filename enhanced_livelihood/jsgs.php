@@ -172,25 +172,26 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                         <tr>
                                                             <th>JSG code</th>
                                                             <th>JSG Name</th>
-                                                            <th>Initial Invest</th>
                                                             <th>SLG Name</th>
-                                                            <th>Cluster Name</th>
+                                                            <th>Cluster</th>
                                                             <th>Members</th>
+                                                            <th>JSG Members-DB</th>
                                                             <th>Action</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
                                                         <?Php
-                                                            $query="select * from tbljsg";
+                                                            $query="select * from tbljsg where deleted ='0'";
                                                             
                                                             if ($result_set = $link->query($query)) {
                                                             while($row = $result_set->fetch_array(MYSQLI_ASSOC))
                                                             { 
+                                                                
                                                                 $disname = (string) dis_name($link,$row["districtID"]);
                                                                 $membership = $row["no_male"]+$row["no_female"];
                                                                 $check = substr($row["groupID"], 5, 3);
                                                                 
-                                                                if ($check == "CLU"){
+                                                                if (($check == "CLU") or ($check == "CLS")){
                                                                 $gpID =   $row["groupID"];                                                  
                                                                 $name_query = mysqli_query($link,"select ClusterName from tblcluster where ClusterID='$gpID'"); // select query
                                                                 while($rg = mysqli_fetch_array($name_query)){
@@ -202,21 +203,25 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                                 while($rg = mysqli_fetch_array($grpname_query)){
                                                                 $groupname = $rg['groupname'];}} else{$groupname ="";}
                                                                 
+                                                                $DbMembers = mysqli_query($link, "SELECT COUNT(sppCode) AS HHs FROM tbljsg_hhs where groupID = '$gpID'"); 
+                                                                $db = mysqli_fetch_assoc($DbMembers); 
+                                                                $HHs = $db['HHs'];
                                                                 
                                                             echo "<tr>\n";
                                                                 
                                                                 echo "<td>".$row["recID"]."</td>\n";
                                                                 echo "<td>".$row["jsg_name"]."</td>\n";
-                                                                echo "<td>".$row["initial_invest"]."</td>\n";
+                                                                
                                                                 echo "<td>\t\t$groupname</td>\n";
                                                                 echo "<td>\t\t$clustername</td>\n";
                                                                 echo "<td>\t\t$membership</td>\n";
+                                                                echo "<td>\t\t$HHs</td>\n";
                                                                 
                                                                 echo "<td>
                                                                     <a href=\"jsg_view.php?id=".$row['recID']."\"><i class='far fa-eye' title='View JSG' style='font-size:18px;color:purple'></i></a>
                                                                     <a href=\"jsg_edit.php?id=".$row['recID']."\"><i class='far fa-edit' title='Edit JSG Details' style='font-size:18px;color:green'></i></a>
                                                                     <a href=\"jsg_add_hh.php?id=".$row['recID']."\"><i class='fas fa-user-alt' title='Add Beneficiary to JSG' style='font-size:18px;color:orange'></i></a>  
-                                                                    <a href=\".php?id=".$row['recID']."\"><i class='far fa-trash-alt' title='Delete JSG' style='font-size:18px;color:red'></i></a>    
+                                                                    <a onClick=\"javascript: return confirm('Are You Sure You want To Delete This JSG - You Must Be a Supervisor');\" href=\"jsg_delete.php?id=".$row['recID']."\"><i class='far fa-trash-alt' title='Delete JSG' style='font-size:18px;color:red'></i></a>    
                                                                 </td>\n";
 
                                                             echo "</tr>\n";
