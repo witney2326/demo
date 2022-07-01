@@ -12,20 +12,48 @@
     <?php
         include "layouts/config.php"; 
         
-        $id = $_GET['id']; // get id through query string
-       $query="select * from tblgroup where groupID='$id'";
+        $id = $_GET['id']; 
+
+        $check = substr($id, 5, 3);
+                                                                
+        //if (($check == "CLU") or ($check == "CLS"))
         
-        if ($result_set = $link->query($query)) {
-            while($row = $result_set->fetch_array(MYSQLI_ASSOC))
-            { 
-                $groupname= $row["groupname"];
-                $regionID = $row["regionID"];
-                $DistrictID= $row["DistrictID"];
-                $TAID= $row["TAID"];
-                $gvhID= $row["gvhID"];
-                $cohort = $row["cohort"];
+        if (($check == "SLG"))
+        {
+            $query="select * from tblgroup where groupID='$id'";
+                
+            if ($result_set = $link->query($query)) {
+                while($row = $result_set->fetch_array(MYSQLI_ASSOC))
+                { 
+                    $groupname= $row["groupname"];
+                    $regionID = $row["regionID"];
+                    $DistrictID= $row["DistrictID"];
+                    $TAID= $row["TAID"];
+                    $gvhID= $row["gvhID"];
+                    $cohort = $row["cohort"];
+                    $type = "SL Group";
+                }
+                $result_set->close();
             }
-            $result_set->close();
+        }
+
+        if (($check == "CLU") or ($check == "CLS"))
+        {
+            $query="select * from tblcluster where ClusterID='$id'";
+                
+            if ($result_set = $link->query($query)) {
+                while($row = $result_set->fetch_array(MYSQLI_ASSOC))
+                { 
+                    $groupname= $row["ClusterName"];
+                    $regionID = $row["regionID"];
+                    $DistrictID= $row["districtID"];
+                    $TAID= $row["taID"];
+                    $gvhID= $row["gvhID"];
+                    $cohort = $row["cohort"];
+                    $type = "Cluster";
+                }
+                $result_set->close();
+            }
         }
 
         if(isset($_POST['Submit']))
@@ -161,6 +189,9 @@
                                                          }
                                                 ?>
                                             </select>
+
+                                            <label for="type" class="col-sm-2 col-form-label">Group Type</label>
+                                            <input type="text" class="form-control" id="type" name="type" value ="<?php echo $type ; ?>" style="max-width:30%;" readonly >
 
                                         </div>
 

@@ -54,6 +54,18 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
         $dita = mysqli_fetch_array($ta_query);// fetch data
         return $dita['TAName'];
         }
+        function grp_name($link, $Gcode)
+        {
+        $dis_query = mysqli_query($link,"select groupname from tblgroup where groupID='$Gcode'"); // select query
+        $grp = mysqli_fetch_array($dis_query);// fetch data
+        return $grp['groupname'];
+        }
+        function cls_name($link, $Ccode)
+        {
+        $dis_query = mysqli_query($link,"select ClusterName from tblcluster where ClusterID='$Ccode'"); // select query
+        $cls = mysqli_fetch_array($dis_query);// fetch data
+        return $cls['ClusterName'];
+        }
 ?>
 
 <!-- Begin page -->
@@ -73,7 +85,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                 <div class="row">
                     <div class="col-12">
                         <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                            <h4 class="mb-sm-0 font-size-18">Fully Trained SLGs</h4>
+                            <h4 class="mb-sm-0 font-size-18">Trained SLGs/Clusters</h4>
 
                             <div class="page-title-right">
                                 <ol class="breadcrumb m-0">
@@ -148,7 +160,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                             </div>
 
                                             <div class="row">
-                                                <div class="col-12">
+                                                <div class="col-9">
                                                     <div class="card border border-primary">
                                                     <div class="card-header bg-transparent border-primary">
                                                         <h5 class="my-0 text-primary">Trained SLGs in TA: <?php echo ta_name($link,$ta); ?></h5>
@@ -162,9 +174,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                                     <tr>
                                                                         <th>Groupcode</th>
                                                                         <th>Group Name</th>
-                                                                        <th>Cohort</th>
-                                                                        <th>No. Males</th>
-                                                                        <th>No. Females</th>
+                                                                        <th>Group Type</th>
                                                                         <th>Action</th>
                                                                     </tr>
                                                                 </thead>
@@ -172,33 +182,23 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
                                                                 <tbody>
                                                                     <?Php
-                                                                        $query="select * from tblgroup where TAID = '$ta'";
+                                                                        $query="select * from tblgrouptrainings where districtID = '$district'";
  
                                                                         //Variable $link is declared inside config.php file & used here
                                                                          
                                                                         if ($result_set = $link->query($query)) {
                                                                             while($row = $result_set->fetch_array(MYSQLI_ASSOC))
                                                                             { 
-                                                                              $id = $row["groupID"];
-                                                                                $query_training="select distinct(groupID) from tblgrouptrainings where ((groupID='$id'))";
-                                                                                if ($result_set_GD = $link->query($query_training)) {
-                                                                                    while($row_GD = $result_set_GD->fetch_array(MYSQLI_ASSOC))
-                                                                                    { 
-                                                                                        
-                                                                                        echo "<tr>\n";
-    
-                                                                                            echo "<td>".$row["groupID"]."</td>\n";
-                                                                                            echo "<td>".$row["groupname"]."</td>\n";
-                                                                                            echo "<td>".$row["cohort"]."</td>\n";
-                                                                                            echo "<td>".$row["MembersM"]."</td>\n";
-                                                                                            echo "<td>".$row["MembersF"]."</td>\n";
-                                                                                            echo "<td><a href=\"basicSLGTraining_view.php?id=".$row['groupID']."\"><i class='far fa-eye' title='View Training Details' style='font-size:18px;color:purple'></i></a></td>\n";
-                                                                                        echo "</tr>\n";
-                                                                                    } 
-                                                                    
-                                                                                }     
-                                                                                
-                                                                            
+                                                                                $check = substr($row["groupID"], 5, 3);
+                                                                                if ($check == "SLG"){$groupname = grp_name($link,$row["groupID"]);$type = "SL Group";}
+                                                                                if (($check == "CLU") or ($check == "CLS")){$groupname = cls_name($link,$row["groupID"]);$type = "Cluster";}
+                                                                                echo "<tr>\n";
+                        
+                                                                                    echo "<td>".$row["groupID"]."</td>\n";
+                                                                                    echo "<td>\t\t$groupname</td>\n";
+                                                                                    echo "<td>\t\t$type</td>\n";
+                                                                                    echo "<td><a href=\"basicSLGTraining_view.php?id=".$row['groupID']."\"><i class='far fa-eye' title='View Training Details' style='font-size:18px;color:purple'></i></a></td>\n";
+                                                                                echo "</tr>\n"; 
                                                                             }
                                                                         $result_set->close();
                                                                         }  
