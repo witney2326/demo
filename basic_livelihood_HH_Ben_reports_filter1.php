@@ -29,7 +29,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 <?php include 'layouts/body.php'; ?>
 
 <?php 
-   $region = $_GET["region"];
+   $region = $_POST["region"];
     
     function get_rname($link, $rcode)
         {
@@ -87,7 +87,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                     </div>
                                     <div class="card-body">
                                         <h5 class="card-title mt-0"></h5>
-                                        <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="basic_livelihood_HH_Ben_reports_filter2.php" method ="GET" >
+                                        <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="basic_livelihood_HH_Ben_reports_filter2.php" method ="POST" >
                                             <div class="col-12">
                                                 <label for="region" class="form-label">Region</label>
                                                 <div>
@@ -145,7 +145,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                             <th>District</th>
                                                             <th>Group Name</th>
                                                             <th>Cohort</th>
-                                                            <th>Member ID</th>
+                                                            <th>Captured HHs</th>
                                                             
                                                             
                                                         </tr>
@@ -154,10 +154,10 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
                                                     <tbody>
                                                         <?Php
-                                                            $query="SELECT tblcw.cwName,tblgroup.districtID,tblgroup.groupname, tblgroup.cohort, tblbeneficiaries.sppCode
+                                                            $query="SELECT tblcw.cwName,tblgroup.districtID,tblgroup.groupname, tblgroup.cohort, COUNT(tblbeneficiaries.sppCode) as No_HHs
                                                             FROM tblgroup
                                                             inner join tblbeneficiaries on tblbeneficiaries.groupID = tblgroup.groupID 
-                                                            INNER JOIN tblcw on tblcw.cwID = tblgroup.cwID where tblcw.cwID = '00' order by tblgroup.groupname;";
+                                                            INNER JOIN tblcw on tblcw.cwID = tblgroup.cwID where tblcw.cwID = '00' group by tblgroup.groupname;";
 
                                                             //Variable $link is declared inside config.php file & used here
                                                             
@@ -171,7 +171,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                                 echo "\t\t<td>$col_value</td>\n";                                                                          
                                                                 echo "<td>".$row["groupname"]."</td>\n";
                                                                 echo "<td>".$row["cohort"]."</td>\n";
-                                                                echo "<td>".$row["sppCode"]."</td>\n";
+                                                                echo "<td>".$row["No_HHs"]."</td>\n";
                                                                 
                                                                 
                                                                 

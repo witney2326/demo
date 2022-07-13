@@ -267,7 +267,7 @@
                                         </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link" data-bs-toggle="tab" href="#reports3" role="tab">
+                                        <a class="nav-link" data-bs-toggle="link" href="graduation_hh_tracking.php" role="link">
                                             <span class="d-block d-sm-none"><i class="fas fa-cog"></i></span>
                                             <span class="d-none d-sm-block">Graduation Tracking</span>
                                         </a>

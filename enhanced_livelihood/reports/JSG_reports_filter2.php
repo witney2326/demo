@@ -29,7 +29,9 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 <?php include '../layouts/body.php'; ?>
 
 <?php 
-        
+        $region = $_POST["region"];
+        $district = $_POST["district"];
+
         function get_rname($link, $rcode)
         {
         $rg_query = mysqli_query($link,"select name from tblregion where regionID='$rcode'"); // select query
@@ -100,57 +102,23 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                     </div>
                                     <div class="card-body">
                                         
-                                        <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="JSG_reports_filter1.php" method ="POST" >
+                                        <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="JSG_reports_filter3.php" method ="POST" >
                                             
-                                        <div class="col-12">
+                                            <div class="col-12">
                                                 <label for="region" class="form-label">Region</label>
-                                                <div>
-                                                    <select class="form-select" name="region" id="region"  required>
-                                                        <option></option>
-                                                        <?php                                                           
-                                                                $dis_fetch_query = "SELECT regionID, name FROM tblregion";                                                  
-                                                                $result_dis_fetch = mysqli_query($link, $dis_fetch_query);                                                                       
-                                                                $i=0;
-                                                                    while($DB_ROW_reg = mysqli_fetch_array($result_dis_fetch)) {
-                                                                ?>
-                                                                <option value ="<?php
-                                                                        echo $DB_ROW_reg["regionID"];?>">
-                                                                    <?php
-                                                                        echo $DB_ROW_reg["name"];
-                                                                    ?>
-                                                                </option>
-                                                                <?php
-                                                                    $i++;
-                                                                        }
-                                                            ?>
-                                                            
-                                                    </select>
-                                                    <div class="invalid-feedback">
-                                                        Please select a valid Malawi region.
+                                                    <div>
+                                                        <select class="form-select" name="region" id="region"  required>
+                                                            <option selected value="<?php echo $region;?>"><?php echo get_rname($link,$region);?></option>        
+                                                        </select>
                                                     </div>
-                                                    
                                                 </div>
                                             </div>
                                             
                                             <div class="col-12">
                                                 <label for="district" class="form-label">District</label>
-                                                <select class="form-select" name="district" id="district" value ="$district" disabled required>
-                                                    <option selected value="$district" ></option>
-                                                        <?php                                                           
-                                                            $dis_fetch_query = "SELECT DistrictID,DistrictName FROM tbldistrict";                                                  
-                                                            $result_dis_fetch = mysqli_query($link, $dis_fetch_query);                                                                       
-                                                            $i=0;
-                                                                while($DB_ROW_Dis = mysqli_fetch_array($result_dis_fetch)) {
-                                                            ?>
-                                                            <option value="<?php echo $DB_ROW_Dis["DistrictID"]; ?>">
-                                                                <?php echo $DB_ROW_Dis["DistrictName"]; ?></option><?php
-                                                                $i++;
-                                                                    }
-                                                        ?>
+                                                <select class="form-select" name="district" id="district"  required>
+                                                    <option selected value="<?php echo $district;?>" ><?php echo dis_name($link,$district); ?></option>       
                                                 </select>
-                                                <div class="invalid-feedback">
-                                                    Please select a valid Malawi district.
-                                                </div>
                                             </div>
 
                                             <div class="col-12">
@@ -207,7 +175,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                 </thead>
                                                 <tbody>
                                                     <?Php
-                                                        $query="SELECT * from tbljsg";
+                                                        $query="SELECT * from tbljsg where districtID = '$district'";
 
                                                         //Variable $link is declared inside config.php file & used here
                                                         

@@ -592,6 +592,7 @@ $test = 85;
                                                             <h6><div class="mb-0"><?php echo "" . number_format($sum);?></div></h6>
                                                         </div>
                                                     </div>
+                                                    <a href="basic_livelihood_training_trained_groups.php">more ..</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -616,6 +617,7 @@ $test = 85;
                                                             </div> 
                                                         </h6>
                                                     </div>
+                                                    <a href="basic_livelihood_training_trained_groups.php">more ..</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -627,7 +629,7 @@ $test = 85;
                                                 <div class="d-flex">
                                                     <div class="flex-grow-1">
                                                     <i class='fas fa-user-graduate' style='font-size:24px'></i><i class='fas fa-user-graduate' style='font-size:24px;color:brown'></i>
-                                                        <p class="text-muted fw-medium">Coop Member Training Clusters Trained</p>
+                                                        <p class="text-muted fw-medium">Cooperative Member Training - Clusters Trained</p>
                                                         <?php
                                                             $result = mysqli_query($link, 'SELECT count(TrainingID) AS total_cls FROM tblgrouptrainings where TrainingTypeID = "14"'); 
                                                             $row = mysqli_fetch_assoc($result); 
@@ -639,6 +641,7 @@ $test = 85;
                                                                 </div> 
                                                             </h6>
                                                     </div>
+                                                    <a href="enhanced_livelihood/cmt_training_registration.php">more ..</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -684,6 +687,7 @@ $test = 85;
                                          $CurGroups =  $row_val['TotalGroups'];
                                     ?>
                                     <h6 class="my-0 text-primary">Total: <?php echo number_format("$CurGroups")."<br>"  ?> </h6>
+                                    <nobr><a href="basic_livelihood_HH_Nat_reports.php">more ..</a></nobr>
                                 </div>
                                 <div id="grps_per_district"></div> 
                             </div>
@@ -697,7 +701,8 @@ $test = 85;
                                         $row_val = mysqli_fetch_array($query_result);
                                          $CurSavings =  floatval($row_val['TotalSavings']);
                                     ?>
-                                    <h6 class="my-0 text-primary">Total: MK<?php echo number_format("$CurSavings",2)."<br>"  ?></h6>
+                                    <h6 class="my-0 text-primary">Total: MK<?php echo number_format("$CurSavings",2);?></h6>   
+                                    <nobr><a href="basic_livelihood_savings_members_reports.php">more ..</a></nobr>
                                 </div>
                                 <div id="savings_per_district"></div>
                             </div>
@@ -715,6 +720,7 @@ $test = 85;
                             ?>
                                 <div class="card-header bg-transparent border-primary">
                                     <h8 class="my-0 text-default">Total (CIMIS Database): <?php echo number_format($sum);?></h8>
+                                    <nobr><a href="basic_livelihood_HH_Ben_reports.php">more ..</a></nobr>
                                 </div>
                                 <div id="actual_hhs"></div> 
                             </div>

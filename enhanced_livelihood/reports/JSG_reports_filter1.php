@@ -29,7 +29,8 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 <?php include '../layouts/body.php'; ?>
 
 <?php 
-        
+        $region = $_POST["region"];
+
         function get_rname($link, $rcode)
         {
         $rg_query = mysqli_query($link,"select name from tblregion where regionID='$rcode'"); // select query
@@ -100,44 +101,23 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                     </div>
                                     <div class="card-body">
                                         
-                                        <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="JSG_reports_filter1.php" method ="POST" >
+                                        <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="JSG_reports_filter2.php" method ="POST" >
                                             
                                         <div class="col-12">
                                                 <label for="region" class="form-label">Region</label>
                                                 <div>
                                                     <select class="form-select" name="region" id="region"  required>
-                                                        <option></option>
-                                                        <?php                                                           
-                                                                $dis_fetch_query = "SELECT regionID, name FROM tblregion";                                                  
-                                                                $result_dis_fetch = mysqli_query($link, $dis_fetch_query);                                                                       
-                                                                $i=0;
-                                                                    while($DB_ROW_reg = mysqli_fetch_array($result_dis_fetch)) {
-                                                                ?>
-                                                                <option value ="<?php
-                                                                        echo $DB_ROW_reg["regionID"];?>">
-                                                                    <?php
-                                                                        echo $DB_ROW_reg["name"];
-                                                                    ?>
-                                                                </option>
-                                                                <?php
-                                                                    $i++;
-                                                                        }
-                                                            ?>
-                                                            
+                                                        <option selected value="<?php echo $region;?>"><?php echo get_rname($link,$region);?></option>        
                                                     </select>
-                                                    <div class="invalid-feedback">
-                                                        Please select a valid Malawi region.
-                                                    </div>
-                                                    
                                                 </div>
                                             </div>
                                             
                                             <div class="col-12">
                                                 <label for="district" class="form-label">District</label>
-                                                <select class="form-select" name="district" id="district" value ="$district" disabled required>
+                                                <select class="form-select" name="district" id="district"  required>
                                                     <option selected value="$district" ></option>
                                                         <?php                                                           
-                                                            $dis_fetch_query = "SELECT DistrictID,DistrictName FROM tbldistrict";                                                  
+                                                            $dis_fetch_query = "SELECT DistrictID,DistrictName FROM tbldistrict where regionID ='$region'";                                                  
                                                             $result_dis_fetch = mysqli_query($link, $dis_fetch_query);                                                                       
                                                             $i=0;
                                                                 while($DB_ROW_Dis = mysqli_fetch_array($result_dis_fetch)) {

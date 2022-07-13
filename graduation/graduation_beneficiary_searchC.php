@@ -26,9 +26,6 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
   </script>
 </head>
 <div id="layout-wrapper">
-
-    <?php include 'layouts/menu.php'; ?>
-
     <!-- ============================================================== -->
     <!-- Start right Content here -->
     <!-- ============================================================== -->
@@ -53,14 +50,17 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                         </div>
                     </div>
                 </div>
-
+				<p align="right">
+					<INPUT TYPE="button" class="btn btn-btn btn-outline-secondary" VALUE="Back" onClick="history.go(-1);">
+				</p>
 				<div class="col-lg-12">
 					<div class="card border border-success">
+					
 						<div class="card-header bg-transparent border-success">
 							<h5 class="my-0 text-success">Search Results</h5>
 						</div>
 						<div class="card-body">
-
+						
 							<table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
 											
 								<thead>
@@ -133,6 +133,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 									?>
 								</tbody>
 							</table>
+							
 						</div>
 					</div>
 				</div>

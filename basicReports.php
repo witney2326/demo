@@ -130,9 +130,11 @@
                                             <tr>
                                                 <th>S/N</th>
                                                 <th>Report Category</th>
-                                                <th>Report Subcategory</th>
-                                                <th>Report Detail</th>
-                                                <th>Statistics</th>
+                                                <th>National Summary</th>
+                                                <th>District Summary</th>
+                                                <th>Case Worker Summary</th>
+                                                <th>Detailed Report</th>
+                                                <th>Report Main Statistic</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -140,172 +142,150 @@
                                             <tr>
                                                 <th scope="row">1</th>
                                                 <td>Sensitization and Awareness</td>
-                                                <td>Programme</td>
-                                                <td><a href="basic_livelihood_sensitization_reports.php">Sensitization reports</a></td>
+                                                <td><a href="basic_livelihood_sensitization_reports.php"><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><a href="basic_livelihood_sensitization_reports.php"><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><a href="basic_livelihood_sensitization_reports.php"><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><a href="basic_livelihood_sensitization_reports.php"><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
                                                 <td><?php echo number_format($number_meetings); ?> Meeting(s)</td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">2</th>
-                                                <td>Group Mobilisation</td>
-                                                <td>Savings and Loan Groups</td>
-                                                <td><a href="basic_livelihood_SLG_reports1.php">Savings and Loan Groups mobilised</a></td>
-                                                <td><?php echo number_format($number_grps); ?> SLGs</td>
+                                                <td>SLG Mobilisation</td>
+                                                <td><a href="basic_livelihood_HH_Nat_reports.php"><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><a href="basic_livelihood_HH_Dis_reports.php"><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><a href="basic_livelihood_HH_CW_reports.php"><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><a href="basic_livelihood_SLG_reports1.php"><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><?php echo number_format($number_grps); ?></td>
                                             </tr>
-                                            <tr>
-                                                <th scope="row"></th>
-                                                <td></td>
-                                                <td></td>
-                                                <td><a href="basic_livelihood_HH_CW_reports.php">SLGs Mobilised Per Case Worker Summary</a></td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row"></th>
-                                                <td></td>
-                                                <td></td>
-                                                <td><a href="basic_livelihood_HH_Dis_reports.php">SLGs Mobilised Per District Summary</a></td>
-                                            </tr>
-                                            
-                                            <tr>
-                                                <th scope="row"></th>
-                                                <td></td>
-                                                <td></td>
-                                                <td><a href="basic_livelihood_HH_Nat_reports.php">SLGs National Summary</a></td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row"></th>
-                                                <td></td>
-                                                <td></td>
-                                                <td><a href="basic_livelihood_CLS_reports1.php">Clusters mobilised</a></td>
-                                                <td><?php echo number_format($number_cls); ?> Cluster(s)</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row"></th>
-                                                <td></td>
-                                                <td></td>
-                                                <td><a href="basic_livelihood_CLS_Summary_reports.php">Clusters mobilised Summary CW</a></td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row"></th>
-                                                <td></td>
-                                                <td></td>
-                                                <td><a href=".php">Clusters mobilised Summary National</a></td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row"></th>
-                                                <td></td>
-                                                <td></td>
-                                                <td><a href="basic_livelihood_HH_Ben_reports.php">Households mobilised</a></td>
-                                                <td><?php echo number_format($hh_beneficiaries); ?> Household(s)</td>
-                                            </tr>
+                                           
                                             <tr>
                                                 <th scope="row">3</th>
-                                                <td>Savings Mobilisation</td>
-                                                <td>Savings and Loan Groups</td>
-                                                <td><a href="basic_livelihood_savings_CW_summary_reports.php">Savings Summary per Case Worker</a></td>
-                                                <td><?php echo 'MK'; echo number_format($grp_savings,2); ?></td>
+                                                <td>Cluster Mobilisation</td>
+                                                <td><a href=""><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><a href=""><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><a href="basic_livelihood_CLS_Summary_reports.php"><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><a href="basic_livelihood_CLS_reports1.php"><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><?php echo number_format($number_cls); ?></td>
                                             </tr>
-                                            
-                                            <tr>
-                                                <th scope="row"></th>
-                                                <td></td>
-                                                <td></td>
-                                                <td><a href="basic_livelihood_savings_dis_summary_reports.php">SLG Savings Summary per District</a></td>
-                                                <td><?php echo 'MK'; echo number_format($grp_savings,2); ?></td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row"></th>
-                                                <td></td>
-                                                <td></td>
-                                                <td><a href="basic_livelihood_savings_nat_summary_reports.php">SLG Savings National Summary</a></td>
-                                                <td><?php echo 'MK'; echo number_format($grp_savings,2); ?></td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row"></th>
-                                                <td></td>
-                                                <td></td>
-                                                <td><a href="basic_livelihood_savings_members_reports.php">Household Recorded Savings District Summary</a></td>
-                                                <td><?php echo 'MK'; echo number_format($hh_savings,2); ?></td>
-                                                
-                                            </tr>
-                                            
                                             
                                             <tr>
                                                 <th scope="row">4</th>
-                                                <td>Training</td>
-                                                <td>Savings and Loan Groups</td>
-                                                <td><a href="basic_livelihood_SLG_training_reports.php">SLGs trained</a></td>
-                                                <td><?php echo number_format($males_trained); echo ' males;'; echo" "; echo number_format($females_trained); echo ' females'; ?></td>
+                                                <td>Household Mobilisation</td>
+                                                <td><a href=""><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><a href=""><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><a href=""><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><a href="basic_livelihood_HH_Ben_reports.php"><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><?php echo number_format($hh_beneficiaries); ?></td>
                                             </tr>
-                                            <tr>
-                                                <th scope="row"></th>
-                                                <td></td>
-                                                <td></td>
-                                                <td>Households Trained</td>
-                                                <td><?php echo number_format($households_trained);  echo ' Household(s)';  ?></td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row"></th>
-                                                <td></td>
-                                                <td></td>
-                                                <td>Animators Trained</td>
-                                                <td><?php echo number_format($animators_trained);  echo ' Animators';  ?></td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row"></th>
-                                                <td></td>
-                                                <td></td>
-                                                <td>Lead Farmers trained in ACSA</td>
-                                                <td><?php echo number_format($animators_trained_acsa);  echo ' Lead Farmer(s)';  ?></td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row"></th>
-                                                <td></td>
-                                                <td></td>
-                                                <td>Members Trained in ACSA</td>
-                                                <td><?php echo number_format($members_trained_acsa);  echo ' Ordinary Member(s)';  ?></td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row"></th>
-                                                <td></td>
-                                                <td>Trainer Of Trainer</td>
-                                                <td>Trainers trained</td>
-                                                <td><?php echo number_format($male_trainers_trained); echo" "; echo 'Male(s)'; echo "; "; echo number_format($female_trainers_trained); echo " "; echo 'Female(s)';?></td>
-                                            </tr>
+
                                             <tr>
                                                 <th scope="row">5</th>
-                                                <td>Community Based Disaster Risk Awareness</td>
-                                                <td>CBDRA</td>
-                                                <td>Adopt a Place</td>
-                                                <td><?php echo number_format($adopted_places);  echo ' Adopted Place(s)';  ?></td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row"></th>
-                                                <td></td>
-                                                <td></td>
-                                                <td>Disaster Hotspots</td>
-                                                <td><?php echo number_format($hotspots);  echo ' Hotspot(s)';  ?></td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row"></th>
-                                                <td></td>
-                                                <td></td>
-                                                
-                                                <td><a href="basic_livelihood_psychosocial_clinics_reports.php">Pyschosocial Clinics</a></td>
-                                                <td></td>
+                                                <td>Group Savings </td>
+                                                <td><a href="basic_livelihood_savings_nat_summary_reports.php"><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><a href="basic_livelihood_savings_dis_summary_reports.php"><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><a href="basic_livelihood_savings_CW_summary_reports.php"><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><a href="basic_livelihood_savings_CW_summary_reports.php"><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><?php echo number_format($grp_savings,2); ?></td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">6</th>
-                                                <td>Environmental and Social Safeguards</td>
-                                                <td>ESMPs</td>
-                                                <td>Safeguard Plans</td>
-                                                <td><?php echo number_format($esmps);  echo ' ESMP(s)';  ?></td>
+                                                <td>Household Savings </td>
+                                                <td><a href=""><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><a href=""><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><a href=""><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><a href="basic_livelihood_savings_members_reports.php"><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><?php echo number_format($hh_savings,2); ?></td>
                                             </tr>
                                             <tr>
-                                                <th scope="row"></th>
-                                                <td></td>
-                                                <td></td>
-                                                <td>Implimentation Progress</td>
-                                                <td><?php echo number_format($esmps_with_issues);  echo ' ESMP(s) Out of Schedule';  ?></td>
+                                                <th scope="row">7</th>
+                                                <td>SLG Training</td>
+                                                <td><a href=""><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><a href=""><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><a href=""><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><a href="basic_livelihood_SLG_training_reports.php"><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><?php echo number_format($males_trained); echo ' males;'; echo" "; echo number_format($females_trained); echo ' females'; ?></td>
                                             </tr>
+                                            <tr>
+                                                <th scope="row">8</th>
+                                                <td>Cluster Training</td>
+                                                <td><a href=""><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><a href=""><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><a href=""><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><a href=""><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td></td>
+                                            </tr>                                          
+                                            <tr>
+                                                <th scope="row">9</th>
+                                                <td>Household Training</td>
+                                                <td><a href=""><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><a href=""><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><a href=""><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><a href=""><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><?php echo number_format($households_trained); ?></td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">10</th>
+                                                <td>Animator Training</td>
+                                                <td><a href=""><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><a href=""><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><a href=""><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><a href=""><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><?php echo number_format($animators_trained); ?></td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">11</th>
+                                                <td>ACSA Training</td>
+                                                <td><a href=""><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><a href=""><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><a href=""><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><a href=""><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><?php echo number_format($animators_trained_acsa);  echo ' Lead Farmer(s)';echo number_format($members_trained_acsa);  echo ' Ordinary Member(s)'; ?></td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">12</th>
+                                                <td>Trainer Of Trainer</td>
+                                                <td><a href=""><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><a href=""><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><a href=""><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><a href=""><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><?php echo number_format($male_trainers_trained); echo" "; echo 'Male(s)'; echo "; "; echo number_format($female_trainers_trained); echo " "; echo 'Female(s)'; ?></td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">13</th>
+                                                <td>Adopt a Place</td>
+                                                <td><a href=""><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><a href=""><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><a href=""><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><a href=""><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><?php echo number_format($adopted_places);  echo ' Adopted Place(s)'; ?></td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">14</th>
+                                                <td>Disaster Hotspots</td>
+                                                <td><a href=""><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><a href=""><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><a href=""><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><a href=""><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><?php echo number_format($hotspots);  echo ' Hotspot(s)'; ?></td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">15</th>
+                                                <td>ESMPs</td>
+                                                <td><a href=""><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><a href=""><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><a href=""><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><a href=""><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><?php echo number_format($esmps);  echo ' ESMP(s)'; ?></td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">16</th>
+                                                <td>ESMPs Progress</td>
+                                                <td><a href=""><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><a href=""><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><a href=""><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><a href=""><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><?php echo number_format($esmps_with_issues);  echo ' ESMP(s) Out of Schedule'; ?></td>
+                                            </tr>                                 
                                         </tbody>
                                     </table>
                                 </div>

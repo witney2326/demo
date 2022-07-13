@@ -191,7 +191,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                     <tbody>
                                         <?Php
                                             $district = $_POST["district"];
-                                            $query="select * from tblbeneficiaries where districtID = '00'";
+                                            $query="select * from tblbeneficiaries where districtID = '$district'";
 
                                         //Variable $link is declared inside config.php file & used here
                                         

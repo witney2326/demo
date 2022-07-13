@@ -253,7 +253,7 @@
                                                                         
                                                                         $query="select * from tblbeneficiaries where grad_status ='1'";
 
-                                                                    //Variable $link is declared inside config.php file & used here
+
                                                                     
                                                                     if ($result_set = $link->query($query)) {
                                                                     while($row = $result_set->fetch_array(MYSQLI_ASSOC))
