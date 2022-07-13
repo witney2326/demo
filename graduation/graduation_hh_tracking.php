@@ -272,18 +272,24 @@
                                                                 {$val = $current_grad_score;}else{$val = 'NA';}
                                                                 
                                                                 if ($id_check > 0){$found ="Yes";}else{$found = "No";}
+                                                                
+                                                                
+                                                                if (($val>0) and ($val<30)){$status = "Slow Climber";}else{$status = "NA";}
+                                                                if (($val>=30) and ($val<50)){$status = "On Track";}
+                                                                if ($val>=50){$status = "Graduating";}
+                                                                
 
                                                                 echo "<tr>\n";
                                                                     echo "<td>".$row["sppCode"]."</td>\n";
                                                                     echo "<td>".$row["hh_head_name"]."</td>\n";
                                                                     echo "<td>\t$found</td>\n";
                                                                     echo "<td>\t\t$val</td>\n";
-                                                                    echo "<td>\t</td>\n";
+                                                                    echo "<td>\t$status</td>\n";
                                                                     echo "<td>\n";
-                                                                    echo "<a href=\"../basicSLGMemberview.php?id=".$row['sppCode']."\"><i class='fas fa-pizza-slice' title='Food_Security' style='font-size:18px;color:brown'></i></a>\n";
-                                                                    echo "<a href=\"../basicSLGMemberview.php?id=".$row['sppCode']."\"><i class='fa fa-arrow-up' title='Econ. Resilience' style='font-size:18px;color:black' aria-hidden='true'></i> </a>\n";
-                                                                    echo "<a href=\"../basicSLGMemberview.php?id=".$row['sppCode']."\"><i class='fa fa-toilet' title='Health Nutrition and Sanitation' style='font-size:18px;color:orange'></i></a>\n";
-                                                                    echo "<a href=\"../basicSLGMemberview.php?id=".$row['sppCode']."\"><i class='fa fa-power-off' title='Social.Empowerement' style='font-size:18px;color:green'></i></a>\n";
+                                                                    echo "<a href=\"graduation_hh_tracking_updateFS.php?id=".$row['sppCode']."\"><i class='fas fa-pizza-slice' title='Food_Security' style='font-size:18px;color:brown'></i></a>\n";
+                                                                    echo "<a href=\"graduation_hh_tracking_updateER.php?id=".$row['sppCode']."\"><i class='fa fa-arrow-up' title='Econ. Resilience' style='font-size:18px;color:black' aria-hidden='true'></i> </a>\n";
+                                                                    echo "<a href=\"graduation_hh_tracking_updateNHS.php?id=".$row['sppCode']."\"><i class='fa fa-toilet' title='Health Nutrition and Sanitation' style='font-size:18px;color:orange'></i></a>\n";
+                                                                    echo "<a href=\"graduation_hh_tracking_updateSE.php?id=".$row['sppCode']."\"><i class='fa fa-power-off' title='Social.Empowerement' style='font-size:18px;color:green'></i></a>\n";
                                                                     
                                                                     echo "<td>\n";
                                                                         echo "<a href=\"../basicSLGMemberview.php?id=".$row['sppCode']."\"><i class='far fa-eye' title='View Member' style='font-size:18px;color:purple'></i></a>\n";
