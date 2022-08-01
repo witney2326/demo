@@ -44,10 +44,6 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
    $district = $_POST['district'];
    $slg = $_POST['slg'];
      
-     
-     
-         
-
          function get_rname($link, $rcode)
          {
          $rg_query = mysqli_query($link,"select name from tblregion where regionID='$rcode'"); // select query

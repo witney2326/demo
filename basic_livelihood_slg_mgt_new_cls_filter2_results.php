@@ -88,10 +88,8 @@
 
                                             <!--start here -->
                                             <div class="card border border-primary">
-                                                <div class="card-header bg-primary border-primary">
-                                                    <h5 class="my-0 text-default"></i>New Cluster Filter</h5>
-                                                </div>
-                                                <div class="card-body bg-success">
+                                                
+                                                <div class="card-body ">
                                                     <h5 class="card-title mt-0"></h5>
                                                     <form class="row row-cols-lg-auto g-3 align-items-center">
                                                         <div class="col-12">

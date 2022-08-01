@@ -40,7 +40,10 @@
 
 <?php include '../layouts/body.php'; ?>
 
-<?php		
+<?php
+    $region = $_POST['region'];		
+    $district = $_POST['district'];
+    $slg = $_POST['slg'];		
     
     function get_rname($link, $rcode)
         {
@@ -69,6 +72,13 @@
         $prog = mysqli_fetch_array($prog_query);// fetch data
         return $prog['progName'];
         }
+
+        function slg_name($link, $ID)
+         {
+         $ta_query = mysqli_query($link,"select groupname from tblgroup where groupID='$ID'"); // select query
+         $prog = mysqli_fetch_array($ta_query);// fetch data
+         return $prog['groupname'];
+         }
 
 ?>
 
@@ -113,75 +123,30 @@
                                     </div>
                                     <div class="card-body">
                                         <h5 class="card-title mt-0"></h5>
-                                        <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="graduation_hh_tracking_filter1.php" method="POST">
+                                        <form class="row row-cols-lg-auto g-3 align-items-center">
 
                                             <div class="col-12">
                                                 
                                                 <label for="region" class="form-label">Region</label>
                                                 <div>
                                                     <select class="form-select" name="region" id="region" required>
-                                                        <option ></option>
-                                                        <?php                                                           
-                                                                $dis_fetch_query = "SELECT regionID, name FROM tblregion";                                                  
-                                                                $result_dis_fetch = mysqli_query($link, $dis_fetch_query);                                                                       
-                                                                $i=0;
-                                                                    while($DB_ROW_reg = mysqli_fetch_array($result_dis_fetch)) {
-                                                                ?>
-                                                                <option value="<?php echo $DB_ROW_reg["regionID"];?>">
-                                                                    <?php echo $DB_ROW_reg["name"];?>
-                                                                </option>
-                                                                <?php
-                                                                    $i++;
-                                                                        }
-                                                            ?>
+                                                        <option selected value = "<?php echo $region;?>"><?php echo get_rname($link,$region);?></option>
                                                     </select>
-                                                    <div class="invalid-feedback">
-                                                        Please select a valid Malawi region.
-                                                    </div>
-
                                                 </div>
                                             </div>
 
                                             <div class="col-12">
                                                 <label for="district" class="form-label">District</label>
-                                                <select class="form-select" name="district" id="district" required disabled>
-                                                    <option selected value="$district" ></option>
-                                                        <?php                                                           
-                                                            $dis_fetch_query = "SELECT DistrictName FROM tbldistrict";                                                  
-                                                            $result_dis_fetch = mysqli_query($link, $dis_fetch_query);                                                                       
-                                                            $i=0;
-                                                                while($DB_ROW_Dis = mysqli_fetch_array($result_dis_fetch)) {
-                                                            ?>
-                                                            <option>
-                                                                <?php echo $DB_ROW_Dis["DistrictName"]; ?></option><?php
-                                                                $i++;
-                                                                    }
-                                                        ?>
+                                                <select class="form-select" name="district" id="district" required>
+                                                    <option selected value = "<?php echo $district;?>"><?php echo dis_name($link,$district);?></option>
                                                 </select>
-                                                <div class="invalid-feedback">
-                                                    Please select a valid Malawi district.
-                                                </div>
                                             </div>
 
                                             <div class="col-12">
-                                                <label for="ta" class="form-label">SL Group</label>
-                                                <select class="form-select" name="ta" id="ta" required disabled>
-                                                    <option selected  value="$ta"></option>
-                                                    <?php                                                           
-                                                            $ta_fetch_query = "SELECT TAName FROM tblta";                                                  
-                                                            $result_ta_fetch = mysqli_query($link, $ta_fetch_query);                                                                       
-                                                            $i=0;
-                                                                while($DB_ROW_ta = mysqli_fetch_array($result_ta_fetch)) {
-                                                            ?>
-                                                            <option>
-                                                                <?php echo $DB_ROW_ta["TAName"]; ?></option><?php
-                                                                $i++;
-                                                                    }
-                                                        ?>
+                                                <label for="slg" class="form-label">SL Group</label>
+                                                <select class="form-select" name="slg" id="slg" required>
+                                                    <option selected value = "<?php echo $slg;?>"><?php echo slg_name($link,$slg);?></option>
                                                 </select>
-                                                <div class="invalid-feedback">
-                                                    Please select a valid SLG.
-                                                </div>
                                             </div>
 
                                             
@@ -239,7 +204,7 @@
                                                     </thead>
                                                     <tbody>
                                                         <?Php                                                                        
-                                                            $query="select * from tblbeneficiaries where grad_status ='1'";
+                                                            $query="select * from tblbeneficiaries where groupID = '$slg' and grad_status ='1'";
                                                         
                                                             if ($result_set = $link->query($query)) {
                                                             while($row = $result_set->fetch_array(MYSQLI_ASSOC))

@@ -78,39 +78,39 @@ label input {
             $DistrictID = $_POST['district'];
             $groupID = $_POST['groupID'];
             $sppCode = $_POST['sppCode'];
+            $nh_1 = $_POST['nh_1'];
+            $nh_2 = $_POST['nh_2'];
+            $nh_3 = $_POST['nh_3'];
+            $nh_4 = $_POST['nh_4'];
+            $nh_5 = $_POST['nh_5'];
+            $nh_6 = $_POST['nh_6'];
+            $nh_7 = $_POST['nh_7'];
+            $nh_8 = $_POST['nh_8'];
 
-            $check = substr($groupID, 5, 3);
-            
-            if ($check == "CLU"){
-                $rg_query = mysqli_query($link,"select regionID from tblcluster where ClusterID='$groupID'"); // select query
-                while($rg = mysqli_fetch_array($rg_query)){
-                $regionID = $rg['regionID'];}
+            $check = mysqli_query($link, "SELECT id FROM tblbeneficiaries_graduating where sppCode ='$id'"); 
+            $row_check = mysqli_fetch_assoc($check); 
+            $id_check = $row_check['id'];
 
-                $name_query = mysqli_query($link,"select ClusterName from tblcluster where ClusterID='$groupID'"); // select query
-                while($rg = mysqli_fetch_array($name_query)){
-                $ClusterName = $rg['ClusterName'];}
-            }
-            if ($check == "SLG"){
-                $rg_query = mysqli_query($link,"select regionID from tblgroup where groupID='$groupID'"); // select query
-                while($rg = mysqli_fetch_array($rg_query)){
-                $regionID = $rg['regionID'];}
-            }
-
-            if  (empty($hhcode))
+            if  (empty($id_check))
             {
                 echo '<script type="text/javascript">'; 
-                echo 'alert("Please Enter Household code !");'; 
-                echo 'window.location.href = "jsg_clusters.php";';
+                echo 'alert("Household NOT BEING TRACKED !");'; 
+                echo 'window.location.href = "graduation_hh_tracking.php";';
                 echo '</script>';
             }
             else
             {
-                $sql = "INSERT INTO tbljsg_hhs (sppCode,jsgID,regionID,districtID,groupID)
-                VALUES ('$hhcode','$jsgID','$regionID','$DistrictID','$groupID')";
-                if (mysqli_query($link, $sql)) {
+                $sql = "UPDATE tblbeneficiaries_graduating SET diet_diversification =$nh_1,vegitable_garden =$nh_2,small_livestock =$nh_3, pit_latrine =$nh_4, safe_drinking_water =$nh_5,Other_hygiene_behaviour =$nh_6,medical_health_care =$nh_7,Perceived_malnutrition =$nh_8 where sppCode =$id ";
+                mysqli_query($link, $sql);
+            }
+            if  (isset($id_check)){
+                $sql2 = "INSERT INTO tblbeneficiaries_graduating_nh (sppCode,vegitable_garden,small_livestock,pit_latrine,safe_drinking_water,Other_hygiene_behaviour,medical_health_care,Perceived_malnutrition)
+                VALUES ('$id','$nh_1','$nh_2','$nh_3','$nh_4','$nh_5','$nh_6','$nh_7','$nh_8')";
+                
+                if (mysqli_query($link, $sql2) ){
                     echo '<script type="text/javascript">'; 
-                    echo 'alert("JSG Member Record has been added successfully !");'; 
-                    echo 'window.location.href = "jsg_clusters.php";';
+                    echo 'alert("Nutrition Health and Sanitation Record Updated Successfully!");'; 
+                    echo 'window.location.href = "graduation_hh_tracking.php";';
                     echo '</script>';
                 } else {
                     echo "Error: " . $sql . ":-" . mysqli_error($link);
@@ -121,28 +121,25 @@ label input {
         
             function get_rname($link, $rcode)
             {
-            $rg_query = mysqli_query($link,"select name from tblregion where regionID='$rcode'"); // select query
-            while($rg = mysqli_fetch_array($rg_query)){
-               return $rg['name'];
-            };// fetch data
-            
+                $rg_query = mysqli_query($link,"select name from tblregion where regionID='$rcode'"); // select query
+                while($rg = mysqli_fetch_array($rg_query)){
+                return $rg['name'];
+                };// fetch data
             }
     
             function dis_name($link, $disID)
             {
-            $dis_query = mysqli_query($link,"select DistrictName from tbldistrict where DistrictID='$disID'"); // select query
-            while($dis = mysqli_fetch_array($dis_query)){
-               return $dis['DistrictName'];
-            };// fetch data
-            
-            
+                $dis_query = mysqli_query($link,"select DistrictName from tbldistrict where DistrictID='$disID'"); // select query
+                while($dis = mysqli_fetch_array($dis_query)){
+                return $dis['DistrictName'];
+                };// fetch data
             }
 
-            function ta_name($link, $taID)
+            function grp_name($link, $grp)
             {
-            $dis_query = mysqli_query($link,"select TAName from tblta where TAID='$taID'"); // select query
-            $tame = mysqli_fetch_array($dis_query);// fetch data
-            return $tame['TAName'];
+                $grp_query = mysqli_query($link,"select groupname from tblgroup where groupID='$grp'"); // select query
+                $gpname = mysqli_fetch_array($grp_query);// fetch data
+                return $gpname['groupname'];
             }
     ?>
 
@@ -184,7 +181,7 @@ label input {
                             </div>
                             <div class="card-body">
                                 
-                                <form method="POST" action="jsg_add_hh_filter1.php">
+                                <form method="POST" action="">
 
                                     <div class="row">
                                         <div class="col-md-3">
@@ -202,7 +199,7 @@ label input {
                                         <div class="col-md-3">
                                             <div class="mb-3">
                                                 <label for="GroupName" class="form-label">SLG Name</label>
-                                                <input type="text" class="form-control" id="GroupName" name="GroupName"  readonly>
+                                                <input type="text" class="form-control" id="GroupName" name="GroupName" value ="<?php echo grp_name($link,$groupID);?>" readonly>
                                             </div>
                                         </div>
                                         <div class="col-md-3">
@@ -218,7 +215,7 @@ label input {
                                         <div class="col-md-3">
                                             <div class="mb-3">
                                                 <label for="district" class="form-label">District</label>
-                                                <input type="text" class="form-control" id="district" name = "district" value="<?php echo $districtID; ?>"readonly>
+                                                <input type="text" class="form-control" id="district" name = "district" value="<?php echo dis_name($link,$districtID); ?>"readonly>
                                             </div>
                                         </div>
                                         <div class="col-md-3">
@@ -245,26 +242,20 @@ label input {
                                             <div class="mb-3">
                                                 <label for="nh_1" class="my-0 text-primary"><b>1. Food groups consumed over past 7 days( dietary diversification)</b></label>
                                                 <input type="radio" name="nh_1"
-                                                    <?php if (isset($nh_1) && $nh_1=="0") echo "checked";?>
-                                                    value="0"> less than 4<br>
-                                                    <input type="radio" name="nh_1"
-                                                    <?php if (isset($nh_1) && $nh_1=="2") echo "checked";?>
-                                                    value="2"> 4<br>
-                                                    <input type="radio" name="nh_1"
-                                                    <?php if (isset($nh_1) && $nh_1=="4") echo "checked";?>
-                                                    value="4"> above 4
+                                                value="0"> less than 4<br>
+                                                <input type="radio" name="nh_1"
+                                                value="2"> 4<br>
+                                                <input type="radio" name="nh_1"
+                                                value="4"> above 4
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="mb-3">
                                                 <label for="nh_2" class="my-0 text-primary"><b>2. Availability of vegetable garden ?</b></label>
                                                 <input type="radio" name="nh_2"
-                                                    <?php if (isset($nh_2) && $er_2=="0") echo "checked";?>
-                                                    value="0"> No<br>
-                                                    <input type="radio" name="nh_2"
-                                                    <?php if (isset($nh_2) && $nh_2=="2") echo "checked";?>
-                                                    value="2"> Yes<br>
-                                                    
+                                                value="0"> No<br>
+                                                <input type="radio" name="nh_2"
+                                                value="2"> Yes<br>
                                             </div>
                                         </div>
                                     </div>
@@ -274,24 +265,18 @@ label input {
                                             <div class="mb-3">
                                                 <label for="nh_3" class="my-0 text-primary"><b>3. Availability of small livestock?</b></label>
                                                 <input type="radio" name="nh_3"
-                                                    <?php if (isset($nh_3) && $nh_3=="0") echo "checked";?>
-                                                    value="0"> No <br>
-                                                    <input type="radio" name="nh_3"
-                                                    <?php if (isset($nh_3) && $nh_3=="2") echo "checked";?>
-                                                    value="2"> Yes<br>
-                                                    
+                                                value="0"> No <br>
+                                                <input type="radio" name="nh_3"
+                                                value="2"> Yes<br>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="mb-3">
                                                 <label for="nh_4" class="my-0 text-primary"><b>4. Availability of pit latrine</b></label>
                                                 <input type="radio" name="nh_4"
-                                                    <?php if (isset($er_4) && $nh_4=="0") echo "checked";?>
-                                                    value="0"> No<br>
-                                                    <input type="radio" name="nh_4"
-                                                    <?php if (isset($nh_4) && $nh_4=="2") echo "checked";?>
-                                                    value="2"> Yes<br>
-                                                    
+                                                value="0"> No<br>
+                                                <input type="radio" name="nh_4"
+                                                value="2"> Yes<br>    
                                             </div>
                                         </div>
                                     </div>
@@ -301,25 +286,18 @@ label input {
                                             <div class="mb-3">
                                                 <label for="nh_5" class="my-0 text-primary"><b>5. Access to safe drinking water</b></label>
                                                 <input type="radio" name="nh_5"
-                                                    <?php if (isset($nh_5) && $nh_5=="0") echo "checked";?>
-                                                    value="0"> No <br>
-                                                    <input type="radio" name="nh_5"
-                                                    <?php if (isset($nh_5) && $nh_5=="2") echo "checked";?>
-                                                    value="2"> Yes<br>
-                                                    
-                                                    
+                                                value="0"> No <br>
+                                                <input type="radio" name="nh_5"
+                                                value="2"> Yes<br>     
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="mb-3">
                                                 <label for="nh_6" class="my-0 text-primary"><b>6. Other hygiene behaviour- mponda-gear, mosquito nets</b></label>
                                                 <input type="radio" name="nh_6"
-                                                    <?php if (isset($nh_6) && $nh_6=="0") echo "checked";?>
-                                                    value="0"> No<br>
-                                                    <input type="radio" name="nh_6"
-                                                    <?php if (isset($nh_6) && $nh_6=="2") echo "checked";?>
-                                                    value="2"> Yes
-                                                    
+                                                value="0"> No<br>
+                                                <input type="radio" name="nh_6"
+                                                value="2"> Yes    
                                             </div>
                                         </div>
                                     </div>
@@ -328,57 +306,39 @@ label input {
                                             <div class="mb-3">
                                                 <label for="nh_7" class="my-0 text-primary"><b>7. Access to medical health  care</b></label>
                                                 <input type="radio" name="nh_7"
-                                                    <?php if (isset($nh_7) && $nh_7=="0") echo "checked";?>
-                                                    value="0"> No <br>
-                                                    <input type="radio" name="nh_7"
-                                                    <?php if (isset($nh_7) && $er_5=="2") echo "checked";?>
-                                                    value="2"> Yes<br>  
+                                                value="0"> No <br>
+                                                <input type="radio" name="nh_7"
+                                                value="2"> Yes<br>  
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="mb-3">
                                                 <label for="nh_8" class="my-0 text-primary"><b>8. Perceived malnutrition</b></label>
                                                 <input type="radio" name="nh_8"
-                                                    <?php if (isset($nh_8) && $nh_8=="0") echo "checked";?>
-                                                    value="0"> No<br>
-                                                    <input type="radio" name="nh_8"
-                                                    <?php if (isset($nh_8) && $nh_8=="2") echo "checked";?>
-                                                    value="2"> Yes
-                                                    
+                                                value="0"> No<br>
+                                                <input type="radio" name="nh_8"
+                                                value="2"> Yes  
                                             </div>
                                         </div>
                                     </div>
 
                                     <div class="row">
-                                        
                                         <div class="col-md-2">
                                             <div class="mb-3">
-                                                <button type="submit" class="btn btn-btn btn-outline-primary w-md" style="width:170px" name="Submit" value="Submit" disabled><i class="fa fa-save" style="font-size:24px; color:green"></i> Update ER</button>
+                                                <button type="submit" class="btn btn-btn btn-outline-primary w-md" style="width:170px" name="Submit" value="Submit" ><i class="fa fa-save" style="font-size:24px; color:green"></i> Update ER</button>
                                             </div>
                                         </div>
-
-                                        
                                         <div class="col-md-2">
                                             <div class="mb-3">
                                                 <INPUT TYPE="button" class="btn btn-btn btn-outline-secondary w-md" style="width:170px" VALUE="Back" onClick="history.go(-1);"> 
                                             </div>
                                         </div>
                                     </div>
-
-                                    
                                 </form>
-
-                                
-                                
                             </div>
-                        </div>
-                        
+                        </div> 
                     </div>
                 </div>
-
-                
-
-                
             </div>
         </div>
         <script src="assets/libs/datatables.net/js/jquery.dataTables.min.js"></script>

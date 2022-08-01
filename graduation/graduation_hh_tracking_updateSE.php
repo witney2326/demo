@@ -78,71 +78,66 @@ label input {
             $DistrictID = $_POST['district'];
             $groupID = $_POST['groupID'];
             $sppCode = $_POST['sppCode'];
+            $se_1 = $_POST['se_1'];
+            $se_2 = $_POST['se_2'];
+            $se_3 = $_POST['se_3'];
+            $se_4 = $_POST['se_4'];
+            $se_5 = $_POST['se_5_1']+$_POST['se_5_2']+$_POST['se_5_3'];
+            $se_6 = $_POST['se_6'];
 
-            $check = substr($groupID, 5, 3);
-            
-            if ($check == "CLU"){
-                $rg_query = mysqli_query($link,"select regionID from tblcluster where ClusterID='$groupID'"); // select query
-                while($rg = mysqli_fetch_array($rg_query)){
-                $regionID = $rg['regionID'];}
+            $check = mysqli_query($link, "SELECT id FROM tblbeneficiaries_graduating where sppCode ='$id'"); 
+            $row_check = mysqli_fetch_assoc($check); 
+            $id_check = $row_check['id'];
 
-                $name_query = mysqli_query($link,"select ClusterName from tblcluster where ClusterID='$groupID'"); // select query
-                while($rg = mysqli_fetch_array($name_query)){
-                $ClusterName = $rg['ClusterName'];}
-            }
-            if ($check == "SLG"){
-                $rg_query = mysqli_query($link,"select regionID from tblgroup where groupID='$groupID'"); // select query
-                while($rg = mysqli_fetch_array($rg_query)){
-                $regionID = $rg['regionID'];}
-            }
-
-            if  (empty($hhcode))
+            if  (empty($id_check))
             {
                 echo '<script type="text/javascript">'; 
-                echo 'alert("Please Enter Household code !");'; 
-                echo 'window.location.href = "jsg_clusters.php";';
+                echo 'alert("Household NOT BEING TRACKED !");'; 
+                echo 'window.location.href = "graduation_hh_tracking.php";';
                 echo '</script>';
             }
             else
+            {    
+                $sql = "UPDATE tblbeneficiaries_graduating SET Participating_in_community_forums ='$se_1' ,Children_of_school_going_age_attending_school ='$se_2' ,Decision_making_involves_head_spouse ='$se_3', Shared_ownership_and_access_to_resources ='$se_4', State_of_dwelling_structure ='$se_5', Improved_general_HH_wellness_and_happiness ='$se_6' where sppCode =$id ";
+                mysqli_query($link,$sql);  
+            }
+            if  (isset($id_check))
             {
-                $sql = "INSERT INTO tbljsg_hhs (sppCode,jsgID,regionID,districtID,groupID)
-                VALUES ('$hhcode','$jsgID','$regionID','$DistrictID','$groupID')";
-                if (mysqli_query($link, $sql)) {
+                $sql2 = "INSERT INTO tblbeneficiaries_graduating_se (sppCode,Children_of_school_going_age_attending_school,Decision_making_involves_head_spouse,Shared_ownership_and_access_to_resources,State_of_dwelling_structure,Improved_general_HH_wellness_and_happiness)
+                VALUES ('$id','$se_1','$se_2','$se_3','$se_4','$se_5','$se_6')";
+                 
+                if (mysqli_query($link, $sql2)) 
+                {
                     echo '<script type="text/javascript">'; 
-                    echo 'alert("JSG Member Record has been added successfully !");'; 
-                    echo 'window.location.href = "jsg_clusters.php";';
-                    echo '</script>';
-                } else {
-                    echo "Error: " . $sql . ":-" . mysqli_error($link);
-                }
+                    echo 'alert("Social Empowerement Record Updated Successfully!");'; 
+                    echo 'window.location.href = "graduation_hh_tracking.php";';
+                    echo '</script>';  
+                } else {echo "Error: " . $sql . ":-" . mysqli_error($link);}
                 mysqli_close($link);
             }
         }
         
             function get_rname($link, $rcode)
             {
-            $rg_query = mysqli_query($link,"select name from tblregion where regionID='$rcode'"); // select query
-            while($rg = mysqli_fetch_array($rg_query)){
-               return $rg['name'];
-            };// fetch data
-            
+                $rg_query = mysqli_query($link,"select name from tblregion where regionID='$rcode'"); // select query
+                while($rg = mysqli_fetch_array($rg_query)){
+                return $rg['name'];
+                };// fetch data
             }
     
             function dis_name($link, $disID)
             {
-            $dis_query = mysqli_query($link,"select DistrictName from tbldistrict where DistrictID='$disID'"); // select query
-            while($dis = mysqli_fetch_array($dis_query)){
-               return $dis['DistrictName'];
-            };// fetch data
-            
-            
+                $dis_query = mysqli_query($link,"select DistrictName from tbldistrict where DistrictID='$disID'"); // select query
+                while($dis = mysqli_fetch_array($dis_query)){
+                return $dis['DistrictName'];
+                };// fetch data
             }
 
-            function ta_name($link, $taID)
+            function grp_name($link, $grp)
             {
-            $dis_query = mysqli_query($link,"select TAName from tblta where TAID='$taID'"); // select query
-            $tame = mysqli_fetch_array($dis_query);// fetch data
-            return $tame['TAName'];
+                $grp_query = mysqli_query($link,"select groupname from tblgroup where groupID='$grp'"); // select query
+                $gpname = mysqli_fetch_array($grp_query);// fetch data
+                return $gpname['groupname'];
             }
     ?>
 
@@ -184,7 +179,7 @@ label input {
                             </div>
                             <div class="card-body">
                                 
-                                <form method="POST" action="jsg_add_hh_filter1.php">
+                                <form method="POST" action="">
 
                                     <div class="row">
                                         <div class="col-md-3">
@@ -202,7 +197,7 @@ label input {
                                         <div class="col-md-3">
                                             <div class="mb-3">
                                                 <label for="GroupName" class="form-label">SLG Name</label>
-                                                <input type="text" class="form-control" id="GroupName" name="GroupName"  readonly>
+                                                <input type="text" class="form-control" id="GroupName" name="GroupName" value = "<?php echo grp_name($link,$groupID) ; ?>" readonly>
                                             </div>
                                         </div>
                                         <div class="col-md-3">
@@ -211,7 +206,6 @@ label input {
                                                 <input type="text" class="form-control" id="ClusterName" name="ClusterName"  readonly>
                                             </div>
                                         </div>
-
                                     </div>
 
                                     <div class="row">
@@ -245,26 +239,20 @@ label input {
                                             <div class="mb-3">
                                                 <label for="se_1" class="my-0 text-primary"><b>1. Participating in community groups/forums?</b></label>
                                                 <input type="radio" name="se_1"
-                                                    <?php if (isset($se_1) && $se_1=="0") echo "checked";?>
-                                                    value="0"> No<br>
-                                                    <input type="radio" name="se_1"
-                                                    <?php if (isset($se_1) && $se_1=="2") echo "checked";?>
-                                                    value="2"> Yes
-                                                    
+                                                value="0"> No<br>
+                                                <input type="radio" name="se_1"
+                                                value="2"> Yes      
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="mb-3">
                                                 <label for="se_2" class="my-0 text-primary"><b>2. Children of school going age attending school ?</b></label>
                                                 <input type="radio" name="se_2"
-                                                    <?php if (isset($se_2) && $se_2=="1") echo "checked";?>
-                                                    value="1"> None<br>
-                                                    <input type="radio" name="se_2"
-                                                    <?php if (isset($se_2) && $se_2=="0") echo "checked";?>
-                                                    value="0"> No<br>
-                                                    <input type="radio" name="se_2"
-                                                    <?php if (isset($se_2) && $se_2=="1") echo "checked";?>
-                                                    value="1"> Yes
+                                                value="1"> None<br>
+                                                <input type="radio" name="se_2"
+                                                value="0"> No<br>
+                                                <input type="radio" name="se_2"
+                                                value="1"> Yes
                                             </div>
                                         </div>
                                     </div>
@@ -274,24 +262,18 @@ label input {
                                             <div class="mb-3">
                                                 <label for="se_3" class="my-0 text-primary"><b>3. Decision making involves both HH head and spouse?</b></label>
                                                 <input type="radio" name="se_3"
-                                                    <?php if (isset($se_3) && $se_3=="0") echo "checked";?>
-                                                    value="0"> One ONLY<br>
-                                                    <input type="radio" name="se_3"
-                                                    <?php if (isset($se_3) && $se_3=="2") echo "checked";?>
-                                                    value="2"> Both<br>
-                                                    
+                                                value="0"> One ONLY<br>
+                                                <input type="radio" name="se_3"
+                                                value="2"> Both<br>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="mb-3">
                                                 <label for="se_4" class="my-0 text-primary"><b>4. Shared ownership and access to resources</b></label>
                                                 <input type="radio" name="se_4"
-                                                    <?php if (isset($se_4) && $se_4=="0") echo "checked";?>
-                                                    value="0"> No<br>
-                                                    <input type="radio" name="se_4"
-                                                    <?php if (isset($se_4) && $se_4=="2") echo "checked";?>
-                                                    value="2"> Yes<br>
-                                                    
+                                                value="0"> No<br>
+                                                <input type="radio" name="se_4"
+                                                value="2"> Yes<br>  
                                             </div>
                                         </div>
                                     </div>
@@ -300,36 +282,26 @@ label input {
                                         <div class="col-md-6">
                                             <div class="mb-3">
                                                 <label for="se_5" class="my-0 text-primary"><b>5. State of dwelling structure</b></label>
-                                                    <input type="checkbox" name="se_5_1"
-                                                    <?php if (isset($se_5_1) && $se_5_1=="0") echo "checked";?>
-                                                    value="2"> Permanent roof <br>
-                                                    <input type="checkbox" name="se_5_2"
-                                                    <?php if (isset($se_5_2) && $se_5_2=="2") echo "checked";?>
-                                                    value="1"> Permanent wall<br>
-                                                    <input type="checkbox" name="se_5_3"
-                                                    <?php if (isset($se_5_3) && $se_5_3=="4") echo "checked";?>
-                                                    value="2"> Solid floor
-                                                    
+                                                <input type="checkbox" name="se_5_1"
+                                                value="2"> Permanent roof <br>
+                                                <input type="checkbox" name="se_5_2"
+                                                value="1"> Permanent wall<br>
+                                                <input type="checkbox" name="se_5_3"
+                                                value="2"> Solid floor    
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="mb-3">
                                                 <label for="se_6" class="my-0 text-primary"><b>6. Improved general HH wellness and happiness</b></label>
                                                 <input type="radio" name="se_6"
-                                                    <?php if (isset($se_6) && $se_6=="0") echo "checked";?>
-                                                    value="0"> Not Happy<br>
-                                                    <input type="radio" name="se_6"
-                                                    <?php if (isset($se_6) && $se_6=="2") echo "checked";?>
-                                                    value="2"> Moderate<br>
-                                                    <input type="radio" name="se_6"
-                                                    <?php if (isset($se_6) && $se_6=="4") echo "checked";?>
-                                                    value="4"> Very Happy
+                                                value="0"> Not Happy<br>
+                                                <input type="radio" name="se_6"
+                                                value="2"> Moderate<br>
+                                                <input type="radio" name="se_6"
+                                                value="4"> Very Happy
                                             </div>
                                         </div>
                                     </div>
-
-                                    
-
                                     <div class="row">
                                         
                                         <div class="col-md-2">
@@ -337,20 +309,13 @@ label input {
                                                 <button type="submit" class="btn btn-btn btn-outline-primary w-md" style="width:170px" name="Submit" value="Submit" ><i class="fa fa-save" style="font-size:24px; color:green"></i> Update SE</button>
                                             </div>
                                         </div>
-
-                                        
                                         <div class="col-md-2">
                                             <div class="mb-3">
                                                 <INPUT TYPE="button" class="btn btn-btn btn-outline-secondary w-md" style="width:170px" VALUE="Back" onClick="history.go(-1);"> 
                                             </div>
                                         </div>
                                     </div>
-
-                                    
                                 </form>
-
-                                
-                                
                             </div>
                         </div>
                         

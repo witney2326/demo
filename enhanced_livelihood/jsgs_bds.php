@@ -78,10 +78,6 @@
                             <div class="card-body">
      
                                 <div class="card border border-primary">
-                                    <div class="card-header bg-transparent border-primary">
-                                        <h5 class="my-0 text-primary">JSG Filter</h5>
-                                    </div>
-
                                     <div class="card-body">
                                         <h5 class="card-title mt-0"></h5>
                                         <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="jsgs_bds_filter1.php" method ="GET" >
@@ -160,16 +156,14 @@
                                                 <INPUT TYPE="button" class="btn btn-btn btn-outline-secondary w-md" VALUE="Back" onClick="history.go(-1);">
                                             </div>
                                         </form>                                             
-                                        <!-- End Here -->
                                     </div>
                                 </div>
 
-                                            <!-- start here -->
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="card border border-primary">
                                         <div class="card-header bg-transparent border-primary">
-                                            <h5 class="my-0 text-primary">Joint Skill Groups</h5>
+                                            <h5 class="my-0 text-default">Joint Skill Groups</h5>
                                         </div>
                                         <div class="card-body">
                                         <h7 class="card-title mt-0"></h7>

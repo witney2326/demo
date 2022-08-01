@@ -27,6 +27,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 </head>
 
 <?php include 'layouts/body.php'; ?>
+<?php include 'lib.php'; ?>
 
 <?php 
     if(isset($_GET['Submit']))
@@ -36,20 +37,6 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
         $ta = $_GET['ta'];
      
     }
-    
-    function get_rname($link, $rcode)
-        {
-        $rg_query = mysqli_query($link,"select name from tblregion where regionID='$rcode'"); // select query
-        $rg = mysqli_fetch_array($rg_query);// fetch data
-        return $rg['name'];
-        }
-    
-        function dis_name($link, $disID)
-        {
-        $dis_query = mysqli_query($link,"select DistrictName from tbldistrict where DistrictID='$disID'"); // select query
-        $dis = mysqli_fetch_array($dis_query);// fetch data
-        return $dis['DistrictName'];
-        }
 ?>
 
 <!-- Begin page -->
@@ -134,10 +121,8 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                         <p class="mb-0">
                                             <!--start here -->
                                             <div class="card border border-primary">
-                                                <div class="card-header bg-primary border-primary">
-                                                    <h5 class="my-0 text-default">SLG Search Filter</h5>
-                                                </div>
-                                                <div class="card-body bg-success">
+                                                
+                                                <div class="card-body">
                                                     <h5 class="card-title mt-0"></h5>
                                                     <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="basic_livelihood_slg_mgt_filter_results.php" method ="POST" >
                                                         <div class="col-12">
@@ -257,9 +242,9 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                                         <th>SLG code</th>
                                                                         <th>SLG Name</th>
                                                                         <th>cohort</th>
-                                                                        <th>Males</th>
-                                                                        <th>Females</th>
-                                                                        <th>Total</th>
+                                                                        <th><i class="fas fa-male" style="font-size:18px"></i></th>
+                                                                        <th><i class="fas fa-female" style="font-size:18px"></i></th>
+                                                                        <th><i class="fas fa-male" style="font-size:18px"></i>+<i class="fas fa-female" style="font-size:18px"></i></th>
                                                                         
                                                                         <th>Actions On SLG</th>
                                                                        
@@ -320,10 +305,8 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                         <p class="mb-0">
                                             <!-- here -->
                                             <div class="card border border-primary">
-                                                <div class="card-header bg-primary border-primary">
-                                                    <h5 class="my-0 text-default"></i>New Cluster Filter</h5>
-                                                </div>
-                                                <div class="card-body bg-success">
+                                                
+                                                <div class="card-body">
                                                     <h5 class="card-title mt-0"></h5>
                                                     <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="basic_livelihood_slg_mgt_new_cls_filter1_results.php" method ="POST" >
                                                         <div class="col-12">
@@ -413,10 +396,8 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
                                             <!--start here -->
                                             <div class="card border border-primary">
-                                                <div class="card-header bg-primary border-primary">
-                                                    <h5 class="my-0 text-default"></i>New SLG Filter</h5>
-                                                </div>
-                                                <div class="card-body bg-success">
+                                                
+                                                <div class="card-body">
                                                     <h5 class="card-title mt-0"></h5>
                                                     <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="basic_livelihood_slg_mgt_new_slg_filter1_results.php" method ="POST" >
                                                         <div class="col-12">

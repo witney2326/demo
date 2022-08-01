@@ -315,9 +315,257 @@
                             </div>   
                         </div>
 
+                        <div class="row mb-1">
+                            <div class="col-lg-12">
+                                <div class="card border border-primary">
+                                    <div class="card-body">
+                                    <h5 class="card-title mt-0"> Graduation Tracking: Food Security</h5>
+                                    
+                                        <div class="table-responsive">
+                                                            
+                                            <table class="table table-striped mb-0">
+                                            
+                                                <thead>
+                                                    <tr>   
+                                                        <th>Entry Date</th>                                              
+                                                        <th>Household Code</th>                                                                                               
+                                                        <th>Score:Food Secure (Months)</th>
+                                                        <th>Score:Meals/Day</th>
+                                                        <th>Score:Acces To Farmland</th>
+                                                        <th>Total Score:Food Security</th>
+                                                    </tr>
+                                                </thead>
+
+
+                                                <tbody>
+                                                    <?Php
+                                                        $id = $_GET['id'];
+                                                        $query="select * from tblbeneficiaries_graduating_fs where sppCode ='$id';";
+                                                        
+                                                        if ($result_set = $link->query($query)) {
+                                                        while($row = $result_set->fetch_array(MYSQLI_ASSOC))
+                                                        {                                                
+                                                            $fs = $row["Months_HH_FS"]+$row["Meals_Per_Day"]+$row["access_to_farming_land"];
+                                                            //$er = $row["savings_level"]+$row["highest_loan_accessed"]+$row["loan_repayment"]+$row["credit_worthiness"]+$row["income_sorce"]+$row["access_to_formal_financial_services"]+$row["value_productive_assets"]+$row["value_consuption_assets"]+$row["linked_to_service_provider"];
+                                                            //$nh = $row["diet_diversification"]+$row["vegitable_garden"]+$row["small_livestock"]+$row["pit_latrine"]+$row["safe_drinking_water"]+$row["Other_hygiene_behaviour"]+$row["medical_health_care"]+$row["Perceived_malnutrition"];
+                                                            //$se = $row["Participating_in_community_forums"]+$row["Children_of_school_going_age_attending_school"]+$row["Decision_making_involves_head_spouse"]+$row["Shared_ownership_and_access_to_resources"]+$row["State_of_dwelling_structure"]+$row["Improved_general_HH_wellness_and_happiness"];
+                                                    
+                                                        echo "<tr>\n";                                           
+                                                            echo "<td>".$row["entry_date"]."</td>\n";
+                                                            echo "<td>".$row["sppCode"]."</td>\n";
+                                                            echo "<td>".$row["Months_HH_FS"]."</td>\n";
+                                                            echo "<td>".$row["Meals_Per_Day"]."</td>\n";
+                                                            echo "<td>".$row["access_to_farming_land"]."</td>\n";
+                                                            echo "<td>\t\t$fs</td>\n";
+                                                        echo "</tr>\n";
+                                                        }
+                                                        $result_set->close();
+                                                        }                          
+                                                    ?>
+                                                </tbody>
+                                            </table>
+                                            </p>
+                                        </div>
+                                    </div>  
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-1">
+                            <div class="col-lg-12">
+                                <div class="card border border-primary">
+                                    <div class="card-body">
+                                    <h5 class="card-title mt-0"> Graduation Tracking: Economic Resillience</h5>
+                                    
+                                        <div class="table-responsive">
+                                                            
+                                            <table class="table table-striped mb-0">
+                                            
+                                                <thead>
+                                                    <tr>   
+                                                        <th>Entry Date</th>                                              
+                                                        <th>Household Code</th>                                                                                               
+                                                        <th>Saving-Level</th>
+                                                        <th>Highest Loan</th>
+                                                        <th>Repayment</th>
+                                                        <th>Credit Worth</th>                                              
+                                                        <th>Income Source</th>                                                                                               
+                                                        <th>Access FS</th>
+                                                        <th>productive assets</th>
+                                                        <th>consuption assets</th>
+                                                        <th>linked SP</th>
+                                                        <th>Total Score:ER</th>
+                                                    </tr>
+                                                </thead>
+
+
+                                                <tbody>
+                                                    <?Php
+                                                        $id = $_GET['id'];
+                                                        $query="select * from tblbeneficiaries_graduating_er where sppCode ='$id';";
+                                                        
+                                                        if ($result_set = $link->query($query)) {
+                                                        while($row = $result_set->fetch_array(MYSQLI_ASSOC))
+                                                        {                                                
+                                                            
+                                                            $er = $row["savings_level"]+$row["highest_loan_accessed"]+$row["loan_repayment"]+$row["credit_worthiness"]+$row["income_sorce"]+$row["access_to_formal_financial_services"]+$row["value_productive_assets"]+$row["value_consuption_assets"]+$row["linked_to_service_provider"];
+                                                            //$nh = $row["diet_diversification"]+$row["vegitable_garden"]+$row["small_livestock"]+$row["pit_latrine"]+$row["safe_drinking_water"]+$row["Other_hygiene_behaviour"]+$row["medical_health_care"]+$row["Perceived_malnutrition"];
+                                                            //$se = $row["Participating_in_community_forums"]+$row["Children_of_school_going_age_attending_school"]+$row["Decision_making_involves_head_spouse"]+$row["Shared_ownership_and_access_to_resources"]+$row["State_of_dwelling_structure"]+$row["Improved_general_HH_wellness_and_happiness"];
+                                                    
+                                                        echo "<tr>\n";                                           
+                                                            echo "<td>".$row["entry_date"]."</td>\n";
+                                                            echo "<td>".$row["sppCode"]."</td>\n";
+                                                            echo "<td>".$row["savings_level"]."</td>\n";
+                                                            echo "<td>".$row["highest_loan_accessed"]."</td>\n";
+                                                            echo "<td>".$row["loan_repayment"]."</td>\n";
+                                                            echo "<td>".$row["credit_worthiness"]."</td>\n";
+                                                            echo "<td>".$row["income_sorce"]."</td>\n";
+                                                            echo "<td>".$row["access_to_formal_financial_services"]."</td>\n";
+                                                            echo "<td>".$row["value_productive_assets"]."</td>\n";
+                                                            echo "<td>".$row["value_consuption_assets"]."</td>\n";
+                                                            echo "<td>".$row["linked_to_service_provider"]."</td>\n";
+                                                            echo "<td>\t\t$er</td>\n";
+                                                        echo "</tr>\n";
+                                                        }
+                                                        $result_set->close();
+                                                        }                          
+                                                    ?>
+                                                </tbody>
+                                            </table>
+                                            </p>
+                                        </div>
+                                    </div>  
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-1">
+                            <div class="col-lg-12">
+                                <div class="card border border-primary">
+                                    <div class="card-body">
+                                    <h5 class="card-title mt-0">Graduation Tracking: Nutrition Health and Sanitation</h5>
+                                    
+                                        <div class="table-responsive">
+                                                            
+                                            <table class="table table-striped mb-0">
+                                            
+                                                <thead>
+                                                    <tr>   
+                                                        <th>Entry Date</th>                                              
+                                                        <th>Household Code</th>                                                                                               
+                                                        <th>diet diversification</th>
+                                                        <th>vegitable garden</th>
+                                                        <th>small livestock</th>
+                                                        <th>pit latrine</th>                                              
+                                                        <th>safe drinking water</th>                                                                                               
+                                                        <th>Other hygiene behaviour</th>                                 
+                                                        <th>Total Score:NHS</th>
+                                                    </tr>
+                                                </thead>
+
+
+                                                <tbody>
+                                                    <?Php
+                                                        $id = $_GET['id'];
+                                                        $query="select * from tblbeneficiaries_graduating_nh where sppCode ='$id';";
+                                                        
+                                                        if ($result_set = $link->query($query)) {
+                                                        while($row = $result_set->fetch_array(MYSQLI_ASSOC))
+                                                        {                                                
+                                                            $nh = $row["diet_diversification"]+$row["vegitable_garden"]+$row["small_livestock"]+$row["pit_latrine"]+$row["safe_drinking_water"]+$row["Other_hygiene_behaviour"]+$row["medical_health_care"]+$row["Perceived_malnutrition"];
+                                                            //$se = $row["Participating_in_community_forums"]+$row["Children_of_school_going_age_attending_school"]+$row["Decision_making_involves_head_spouse"]+$row["Shared_ownership_and_access_to_resources"]+$row["State_of_dwelling_structure"]+$row["Improved_general_HH_wellness_and_happiness"];
+                                                    
+                                                        echo "<tr>\n";                                           
+                                                            echo "<td>".$row["entry_date"]."</td>\n";
+                                                            echo "<td>".$row["sppCode"]."</td>\n";
+                                                            echo "<td>".$row["diet_diversification"]."</td>\n";
+                                                            echo "<td>".$row["vegitable_garden"]."</td>\n";
+                                                            echo "<td>".$row["small_livestock"]."</td>\n";
+                                                            echo "<td>".$row["pit_latrine"]."</td>\n";
+                                                            echo "<td>".$row["safe_drinking_water"]."</td>\n";
+                                                            echo "<td>".$row["Other_hygiene_behaviour"]."</td>\n";
+                                                         
+                                                            echo "<td>\t\t$nh</td>\n";
+                                                        echo "</tr>\n";
+                                                        }
+                                                        $result_set->close();
+                                                        }                          
+                                                    ?>
+                                                </tbody>
+                                            </table>
+                                            </p>
+                                        </div>
+                                    </div>  
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-1">
+                            <div class="col-lg-12">
+                                <div class="card border border-primary">
+                                    <div class="card-body">
+                                    <h5 class="card-title mt-0">Graduation Tracking: Social Empowerment</h5>
+                                    
+                                        <div class="table-responsive">
+                                                            
+                                            <table class="table table-striped mb-0">
+                                            
+                                                <thead>
+                                                    <tr>   
+                                                        <th>Entry Date</th>                                              
+                                                        <th>Household Code</th>                                                                                               
+                                                        <th>Participating community forums</th>
+                                                        <th>Children school going age attending school</th>
+                                                        <th>Decision making involves head and spouse</th>
+                                                        <th>Shared ownership and access to resources</th>                                              
+                                                        <th>State dwelling structure</th>                                                                                               
+                                                        <th>Improved general wellness and happiness</th>                                 
+                                                        <th>Total Score:SE</th>
+                                                    </tr>
+                                                </thead>
+
+
+                                                <tbody>
+                                                    <?Php
+                                                        $id = $_GET['id'];
+                                                        $query="select * from tblbeneficiaries_graduating_se where sppCode ='$id';";
+                                                        
+                                                        if ($result_set = $link->query($query)) {
+                                                        while($row = $result_set->fetch_array(MYSQLI_ASSOC))
+                                                        {                                                
+                                                            
+                                                            $se = $row["Participating_in_community_forums"]+$row["Children_of_school_going_age_attending_school"]+$row["Decision_making_involves_head_spouse"]+$row["Shared_ownership_and_access_to_resources"]+$row["State_of_dwelling_structure"]+$row["Improved_general_HH_wellness_and_happiness"];
+                                                    
+                                                        echo "<tr>\n";                                           
+                                                            echo "<td>".$row["entry_date"]."</td>\n";
+                                                            echo "<td>".$row["sppCode"]."</td>\n";
+                                                            echo "<td>".$row["Participating_in_community_forums"]."</td>\n";
+                                                            echo "<td>".$row["Children_of_school_going_age_attending_school"]."</td>\n";
+                                                            echo "<td>".$row["Decision_making_involves_head_spouse"]."</td>\n";
+                                                            echo "<td>".$row["Shared_ownership_and_access_to_resources"]."</td>\n";
+                                                            echo "<td>".$row["State_of_dwelling_structure"]."</td>\n";
+                                                            echo "<td>".$row["Improved_general_HH_wellness_and_happiness"]."</td>\n";
+                                                         
+                                                            echo "<td>\t\t$se</td>\n";
+                                                        echo "</tr>\n";
+                                                        }
+                                                        $result_set->close();
+                                                        }                          
+                                                    ?>
+                                                </tbody>
+                                            </table>
+                                            </p>
+                                        </div>
+                                    </div>  
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
         </div>
+
+        
+
     </div>
 </div>

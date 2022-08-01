@@ -90,160 +90,122 @@
 
                     <div class="col-xl-12">
                         <div class="card">
-                            <div class="card-body">
-
-                                
-                                <!-- Nav tabs -->
-                                
-                                <!-- Tab panes -->
-                                <div class="tab-content p-3 text-muted">
-                                    <div class="tab-pane active" id="home-1" role="tabpanel">
-                                        <p class="mb-0">
-                                            
-
-                                            <!--start here -->
-                                            <div class="card border border-primary">
-                                                <div class="card-header bg-transparent border-primary">
-                                                    <h5 class="my-0 text-primary">JSG Filter:</h5>
+                            <div class="card-body">                                        
+                                <!--start here -->
+                                <div class="card border border-primary">
+                                    <div class="card-body">
+                                        <h5 class="card-title mt-0"></h5>
+                                        <form class="row row-cols-lg-auto g-3 align-items-center" >
+                                            <div class="col-12">
+                                                <label for="region" class="form-label">Region</label>
+                                                <div>
+                                                    <select class="form-select" name="region" id="region" value ="$region" required>
+                                                        <option selected value = "<?php echo $region;?>"><?php echo get_rname($link,$region);?></option>
+                                                    </select>
                                                 </div>
-                                                <div class="card-body">
-                                                    <h5 class="card-title mt-0"></h5>
-                                                    <form class="row row-cols-lg-auto g-3 align-items-center" >
-                                                        <div class="col-12">
-                                                            <label for="region" class="form-label">Region</label>
-                                                            <div>
-                                                                <select class="form-select" name="region" id="region" value ="$region" required>
-                                                                    <option selected value = "<?php echo $region;?>"><?php echo get_rname($link,$region);?></option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                        
-                                                        <div class="col-12">
-                                                            <label for="district" class="form-label">District</label>
-                                                            <div>
-                                                                <select class="form-select" name="district" id="district" value ="$district" required>
-                                                                    <option selected value = "<?php echo $district;?>"><?php echo dis_name($link,$district);?></option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="col-12">
-                                                            <label for="cw" class="form-label">Case Worker</label>
-                                                            <div>
-                                                                <select class="form-select" name="cw" id="cw" value ="$cw" required>
-                                                                    <option selected value = "<?php echo $cw;?>"><?php echo cw_name($link,$cw);?></option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="col-12">
-                                                            <label for="slg" class="form-label">SL Group</label>
-                                                            <select class="form-select" name="slg" id="slg"  required>
-                                                                <option selected value = "<?php echo $slg;?>"><?php echo grp_name($link,$slg);?></option>
-                                                                    
-                                                            </select>
-                                                            
-                                                        </div>
-
-                                                        <div class="col-12">
-                                                            <button type="submit" class="btn btn-btn btn-outline-primary w-md" name="Submit" value="Submit" >Submit</button>
-                                                            <INPUT TYPE="button" class="btn btn-btn btn-outline-secondary w-md" VALUE="Back" onClick="history.go(-1);">
-                                                        </div>
-                                                    </form>                                             
-                                                    <!-- End Here -->
+                                            </div>
+                                            
+                                            <div class="col-12">
+                                                <label for="district" class="form-label">District</label>
+                                                <div>
+                                                    <select class="form-select" name="district" id="district" value ="$district" required>
+                                                        <option selected value = "<?php echo $district;?>"><?php echo dis_name($link,$district);?></option>
+                                                    </select>
                                                 </div>
                                             </div>
 
-                                            <div class="row">
-                                                <div class="col-12">
-                                                    <div class="card border border-primary">
-                                                    <div class="card-header bg-transparent border-primary">
-                                                        <h5 class="my-0 text-primary">Joint Skill Groups For SLG:  <?php echo grp_name($link,$slg); ?></h5>
-                                                    </div>
-                                                    <div class="card-body">
-                                                    <h7 class="card-title mt-0"></h7>
+                                            <div class="col-12">
+                                                <label for="cw" class="form-label">Case Worker</label>
+                                                <div>
+                                                    <select class="form-select" name="cw" id="cw" value ="$cw" required>
+                                                        <option selected value = "<?php echo $cw;?>"><?php echo cw_name($link,$cw);?></option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12">
+                                                <label for="slg" class="form-label">SL Group</label>
+                                                <select class="form-select" name="slg" id="slg"  required>
+                                                    <option selected value = "<?php echo $slg;?>"><?php echo grp_name($link,$slg);?></option>
                                                         
-                                                            <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
+                                                </select>
+                                                
+                                            </div>
+
+                                            <div class="col-12">
+                                                <button type="submit" class="btn btn-btn btn-outline-primary w-md" name="Submit" value="Submit" >Submit</button>
+                                                <INPUT TYPE="button" class="btn btn-btn btn-outline-secondary w-md" VALUE="Back" onClick="history.go(-1);">
+                                            </div>
+                                        </form>                                             
+                                        <!-- End Here -->
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="card border border-primary">
+                                        <div class="card-header bg-transparent border-primary">
+                                            <h5 class="my-0 text-default">Joint Skill Groups For SLG:  <?php echo grp_name($link,$slg); ?></h5>
+                                        </div>
+                                        <div class="card-body">
+                                        <h7 class="card-title mt-0"></h7>
+                                            
+                                                <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
+                                                
+                                                    <thead>
+                                                        <tr>  
+                                                            <th>JSG code</th>
+                                                            <th>JSG Name</th>   
+                                                            <th>SLG/Cluster ID</th>
+                                                            <th>BDS Identified?</th>
+                                                            <th>BDS Allocated?</th>
+                                                            <th>Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <?Php
+                                                            $query="select * from tbljsg where groupID = '$slg'";
+
+                                                            //Variable $link is declared inside config.php file & used here
                                                             
-                                                                <thead>
-                                                                    <tr>  
-                                                                        <th>JSG code</th>
-                                                                        <th>JSG Name</th>   
-                                                                        <th>SLG/Cluster ID</th>
-                                                                        <th>BDS Identified?</th>
-                                                                        <th>BDS Allocated?</th>
-                                                                        <th>Action</th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                    <?Php
-                                                                        $query="select * from tbljsg where groupID = '$slg'";
- 
-                                                                        //Variable $link is declared inside config.php file & used here
+                                                            if ($result_set = $link->query($query)) {
+                                                            while($row = $result_set->fetch_array(MYSQLI_ASSOC))
+                                                            {
+                                                            
+                                                                if ($row["bds_identified"] == 0){$bds_identified = "No";};if ($row["bds_identified"] == 1){$bds_identified = "Yes";};
+                                                                if ($row["bds_allocated"] == 0){$bds_allocated = "No";};if ($row["bds_allocated"] == 1){$bds_allocated = "Yes";}; 
+                                                                echo "<tr>\n";
+                                                                    
+                                                                
+                                                                    echo "<td>".$row["recID"]."</td>\n";
+                                                                    echo "<td>".$row["jsg_name"]."</td>\n";
+                                                                
+                                                                    echo "<td>".$row["groupID"]."</td>\n";
+                                                                    echo "<td>\t\t$bds_identified</td>\n";
+                                                                    echo "<td>\t\t$bds_allocated</td>\n";
+                                                                    echo "<td>
+                                                                        <a href=\"jsg_view.php?id=".$row['recID']."\"><i class='far fa-eye' title='View JSG' style='font-size:18px;color:purple'></i></a>
+                                                                        <a href=\"jsg_bds_identify.php?id=".$row['recID']."\"><i class='fas fa-id-badge' title='Identify BDS' style='font-size:18px;color:orange'></i></a>
                                                                         
-                                                                        if ($result_set = $link->query($query)) {
-                                                                        while($row = $result_set->fetch_array(MYSQLI_ASSOC))
-                                                                        {
-                                                                        
-                                                                            if ($row["bds_identified"] == 0){$bds_identified = "No";};if ($row["bds_identified"] == 1){$bds_identified = "Yes";};
-                                                                            if ($row["bds_allocated"] == 0){$bds_allocated = "No";};if ($row["bds_allocated"] == 1){$bds_allocated = "Yes";}; 
-                                                                            echo "<tr>\n";
+                                                                    </td>\n";
+
+                                                                echo "</tr>\n";
+                                                            }
+                                                            $result_set->close();
+                                                            }  
                                                                                 
-                                                                            
-                                                                                echo "<td>".$row["recID"]."</td>\n";
-                                                                                echo "<td>".$row["jsg_name"]."</td>\n";
-                                                                            
-                                                                                echo "<td>".$row["groupID"]."</td>\n";
-                                                                                echo "<td>\t\t$bds_identified</td>\n";
-                                                                                echo "<td>\t\t$bds_allocated</td>\n";
-                                                                                echo "<td>
-                                                                                    <a href=\"jsg_view.php?id=".$row['recID']."\"><i class='far fa-eye' title='View JSG' style='font-size:18px;color:purple'></i></a>
-                                                                                    <a href=\"jsg_bds_identify.php?id=".$row['recID']."\"><i class='fas fa-id-badge' title='Identify BDS' style='font-size:18px;color:orange'></i></a>
-                                                                                    
-                                                                                </td>\n";
-
-                                                                            echo "</tr>\n";
-                                                                        }
-                                                                        $result_set->close();
-                                                                        }  
-                                                                                           
-                                                                    ?>
-                                                                </tbody>
-                                                            </table>
-                                                            </p>
-                                                        </div>
-                                                    </div>     
-                                                </div>            
-                                            </div> 
-                                </div>
-                                    <!-- Here -->
-                                    
-                                    <!-- end here -->
-                                    
-                                   
-                                </div>
-
+                                                        ?>
+                                                    </tbody>
+                                                </table>
+                                                </p>
+                                            </div>
+                                        </div>     
+                                    </div>            
+                                </div> 
                             </div>
                         </div>
                     </div>
                 </div>
-
-
-                
-
-                    
-
-               
-
-
-                <!-- Collapse -->
-                
-
-                
-                <!-- end row -->
-
-                
-                <!-- end row -->
 
             </div> <!-- container-fluid -->
         </div>

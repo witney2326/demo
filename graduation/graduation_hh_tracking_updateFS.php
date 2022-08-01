@@ -95,8 +95,15 @@ label input {
             }
             else
             {
-                $sql = "UPDATE tblbeneficiaries_graduating SET Months_HH_FS ='$fs_1' ,Meals_Per_Day ='$fs_1' ,access_to_farming_land ='$fs_1' where sppCode ='$id' ";
-                if (mysqli_query($link, $sql)) {
+                $sql = "UPDATE tblbeneficiaries_graduating SET Months_HH_FS ='$fs_1' ,Meals_Per_Day ='$fs_2' ,access_to_farming_land ='$fs_3' where sppCode ='$id' ";
+                mysqli_query($link, $sql);
+            }
+            if  (isset($id_check))
+            {
+                $sql2 = "INSERT INTO tblbeneficiaries_graduating_fs (sppCode,Months_HH_FS,Meals_Per_Day,access_to_farming_land)
+                VALUES ('$id','$fs_1','$fs_2','$fs_3')";
+                
+                if (mysqli_query($link, $sql2) ) {
                     echo '<script type="text/javascript">'; 
                     echo 'alert("Food Security Record Updated Successfully!");'; 
                     echo 'window.location.href = "graduation_hh_tracking.php";';
@@ -110,28 +117,26 @@ label input {
         
             function get_rname($link, $rcode)
             {
-            $rg_query = mysqli_query($link,"select name from tblregion where regionID='$rcode'"); // select query
-            while($rg = mysqli_fetch_array($rg_query)){
-               return $rg['name'];
-            };// fetch data
+                $rg_query = mysqli_query($link,"select name from tblregion where regionID='$rcode'"); // select query
+                while($rg = mysqli_fetch_array($rg_query)){
+                return $rg['name'];
+                };// fetch data
             
             }
     
             function dis_name($link, $disID)
             {
-            $dis_query = mysqli_query($link,"select DistrictName from tbldistrict where DistrictID='$disID'"); // select query
-            while($dis = mysqli_fetch_array($dis_query)){
-               return $dis['DistrictName'];
-            };// fetch data
-            
-            
+                $dis_query = mysqli_query($link,"select DistrictName from tbldistrict where DistrictID='$disID'"); // select query
+                while($dis = mysqli_fetch_array($dis_query)){
+                return $dis['DistrictName'];
+                };// fetch data
             }
 
             function grp_name($link, $grp)
             {
-            $grp_query = mysqli_query($link,"select groupname from tblgroup where groupID='$grp'"); // select query
-            $gpname = mysqli_fetch_array($grp_query);// fetch data
-            return $gpname['groupname'];
+                $grp_query = mysqli_query($link,"select groupname from tblgroup where groupID='$grp'"); // select query
+                $gpname = mysqli_fetch_array($grp_query);// fetch data
+                return $gpname['groupname'];
             }
     ?>
 
@@ -234,14 +239,11 @@ label input {
                                             <div class="mb-3">
                                                 <label for="fs_1" class="my-0 text-primary"><b>1. No. of Months Household is food secure over past 12 months?</b></label>
                                                 <input type="radio" name="fs_1"
-                                                    <?php if (isset($fs_1) && $fs_1=="0") echo "checked";?>
-                                                    value="0"> 0 to 3 Months<br>
-                                                    <input type="radio" name="fs_1"
-                                                    <?php if (isset($fs_1) && $fs_1=="2") echo "checked";?>
-                                                    value="2"> greater than 3 to 9 Months<br>
-                                                    <input type="radio" name="fs_1"
-                                                    <?php if (isset($fs_1) && $fs_1=="4") echo "checked";?>
-                                                    value="4"> greater than 9 Months
+                                                value="0"> 0 to 3 Months<br>
+                                                <input type="radio" name="fs_1"
+                                                value="2"> greater than 3 to 9 Months<br>
+                                                <input type="radio" name="fs_1"
+                                                value="4"> greater than 9 Months
                                             </div>
                                         </div>
                                     </div>
@@ -251,14 +253,11 @@ label input {
                                             <div class="mb-3">
                                                 <label for="fs_2" class="my-0 text-primary"><b>2. Number of Meals per day over past 7 days?</b></label>
                                                 <input type="radio" name="fs_2"
-                                                    <?php if (isset($fs_1) && $fs_2=="0") echo "checked";?>
-                                                    value="0"> Less than 2 meals<br>
-                                                    <input type="radio" name="fs_2"
-                                                    <?php if (isset($fs_1) && $fs_1=="2") echo "checked";?>
-                                                    value="2"> 2 meals<br>
-                                                    <input type="radio" name="fs_2"
-                                                    <?php if (isset($fs_1) && $fs_1=="4") echo "checked";?>
-                                                    value="4"> More than 2 meals
+                                                value="0"> Less than 2 meals<br>
+                                                <input type="radio" name="fs_2"
+                                                value="2"> 2 meals<br>
+                                                <input type="radio" name="fs_2"
+                                                value="4"> More than 2 meals
                                             </div>
                                         </div>
                                     </div>
@@ -268,25 +267,19 @@ label input {
                                             <div class="mb-3">
                                                 <label for="fs_3" class="my-0 text-primary"><b>3. Access to Farming land?</b></label>
                                                 <input type="radio" name="fs_3"
-                                                    <?php if (isset($fs_3) && $fs_3=="0") echo "checked";?>
-                                                    value="0"> No<br>
-                                                    <input type="radio" name="fs_3"
-                                                    <?php if (isset($fs_3) && $fs_1=="2") echo "checked";?>
-                                                    value="2"> Yes
-                                                    
+                                                value="0"> No<br>
+                                                <input type="radio" name="fs_3"
+                                                value="2"> Yes 
                                             </div>
                                         </div>
                                     </div>
 
                                     <div class="row">
-                                        
                                         <div class="col-md-2">
                                             <div class="mb-3">
                                                 <button type="submit" class="btn btn-btn btn-outline-primary w-md" style="width:170px" name="Submit" value="Submit" ><i class="fa fa-save" style="font-size:24px; color:green"></i> Update FS</button>
                                             </div>
                                         </div>
-
-                                        
                                         <div class="col-md-2">
                                             <div class="mb-3">
                                                 <INPUT TYPE="button" class="btn btn-btn btn-outline-secondary w-md" style="width:170px" VALUE="Back" onClick="history.go(-1);"> 

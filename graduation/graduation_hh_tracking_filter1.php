@@ -2,7 +2,7 @@
 <?php include '../layouts/head-main.php'; ?>
 
 <head>
-    <title>Household Graduation Assesment</title>
+    <title>Household Graduation Tracking</title>
     <?php include '../layouts/head.php'; ?>
     <?php include '../layouts/head-style.php'; ?>
     <?php include '../layouts/config.php'; ?>
@@ -12,18 +12,19 @@
     <!-- Responsive datatable examples -->
     <link href="../assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
 
+    
     <!--Datatable plugin CSS file -->
-<link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" />
   
-  <!--jQuery library file -->
-  <script type="text/javascript" 
+    <!--jQuery library file -->
+    <script type="text/javascript" 
       src="https://code.jquery.com/jquery-3.5.1.js">
-  </script>
+    </script>
 
-  <!--Datatable plugin JS library file -->
-  <script type="text/javascript" 
-src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
-</script>
+    <!--Datatable plugin JS library file -->
+    <script type="text/javascript" 
+        src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
+    </script>
 
     <script LANGUAGE="JavaScript">
         function confirmSubmit()
@@ -40,36 +41,35 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 <?php include '../layouts/body.php'; ?>
 
 <?php
-    $region = $_POST['region'];
+    $region = $_POST['region'];		
     
+    function get_rname($link, $rcode)
+        {
+        $rg_query = mysqli_query($link,"select name from tblregion where regionID='$rcode'"); // select query
+        $rg = mysqli_fetch_array($rg_query);// fetch data
+        return $rg['name'];
+        }
+    
+        function dis_name($link, $disID)
+        {
+        $dis_query = mysqli_query($link,"select DistrictName from tbldistrict where DistrictID='$disID'"); // select query
+        $dis = mysqli_fetch_array($dis_query);// fetch data
+        return $dis['DistrictName'];
+        }
 
-         function get_rname($link, $rcode)
-         {
-         $rg_query = mysqli_query($link,"select name from tblregion where regionID='$rcode'"); // select query
-         $rg = mysqli_fetch_array($rg_query);// fetch data
-         return $rg['name'];
-         }
-     
-         function dis_name($link, $disID)
-         {
-         $dis_query = mysqli_query($link,"select DistrictName from tbldistrict where DistrictID='$disID'"); // select query
-         $dis = mysqli_fetch_array($dis_query);// fetch data
-         return $dis['DistrictName'];
-         }
- 
-         function grp_name($link, $grpID)
-         {
-         $grp_query = mysqli_query($link,"select groupname from tblgroup where groupID='$grpID'"); // select query
-         $grp = mysqli_fetch_array($grp_query);// fetch data
-         return $grp['groupname'];
-         }
- 
-         function prog_name($link, $progID)
-         {
-         $prog_query = mysqli_query($link,"select progName from tblspp where progID='$progID'"); // select query
-         $prog = mysqli_fetch_array($prog_query);// fetch data
-         return $prog['progName'];
-         }
+        function grp_name($link, $grpID)
+        {
+        $grp_query = mysqli_query($link,"select groupname from tblgroup where groupID='$grpID'"); // select query
+        $grp = mysqli_fetch_array($grp_query);// fetch data
+        return $grp['groupname'];
+        }
+
+        function prog_name($link, $progID)
+        {
+        $prog_query = mysqli_query($link,"select progName from tblspp where progID='$progID'"); // select query
+        $prog = mysqli_fetch_array($prog_query);// fetch data
+        return $prog['progName'];
+        }
 
 ?>
 
@@ -90,12 +90,12 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                 <div class="row">
                     <div class="col-12">
                         <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                            <h4 class="mb-sm-0 font-size-18">Households Graduation Assesment</h4>
+                            <h4 class="mb-sm-0 font-size-18">Household Graduation Tracking</h4>
 
                             <div class="page-title-right">
                                 <ol class="breadcrumb m-0">
                                     <li class="breadcrumb-item"><a href="graduation.php">Graduation</a></li>
-                                    <li class="breadcrumb-item active">Households Graduation Assesment</li>
+                                    <li class="breadcrumb-item active">Household Graduation Tracking</li>
                                 </ol>
                             </div>
 
@@ -105,24 +105,19 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                 <!-- end page title -->
 
                 <div class="row">
-                    
-                        </div>
-                    </div>
-
                     <div class="col-xl-12">
                         <div class="card">
                             <div class="card-body">
-
-                                        <!--start here -->
                                 <div class="card border border-primary">
                                     <div class="card-header bg-transparent border-primary">
-                                        <h5 class="my-0 text-primary">SLG Search Filter</h5>
+                                        <h5 class="my-0 text-primary">Household Search Filter</h5>
                                     </div>
                                     <div class="card-body">
                                         <h5 class="card-title mt-0"></h5>
-                                        
-                                        <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="graduation_selected_beneficiary_filter2.php" method="POST">
+                                        <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="graduation_hh_tracking_filter2.php" method="POST">
+
                                             <div class="col-12">
+                                                
                                                 <label for="region" class="form-label">Region</label>
                                                 <div>
                                                     <select class="form-select" name="region" id="region" required>
@@ -135,8 +130,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                 <label for="district" class="form-label">District</label>
                                                 <select class="form-select" name="district" id="district" required>
                                                     <option selected value="$district" ></option>
-                                                        <?php 
-                                                                                                             
+                                                        <?php                                                           
                                                             $dis_fetch_query = "SELECT DistrictID,DistrictName FROM tbldistrict where regionID = '$region'";                                                  
                                                             $result_dis_fetch = mysqli_query($link, $dis_fetch_query);                                                                       
                                                             $i=0;
@@ -156,10 +150,22 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                             <div class="col-12">
                                                 <label for="ta" class="form-label">SL Group</label>
                                                 <select class="form-select" name="ta" id="ta" required disabled>
-                                                    <option></option>
-                                                   
+                                                    <option selected  value="$ta"></option>
+                                                    <?php                                                           
+                                                            $ta_fetch_query = "SELECT TAName FROM tblta";                                                  
+                                                            $result_ta_fetch = mysqli_query($link, $ta_fetch_query);                                                                       
+                                                            $i=0;
+                                                                while($DB_ROW_ta = mysqli_fetch_array($result_ta_fetch)) {
+                                                            ?>
+                                                            <option>
+                                                                <?php echo $DB_ROW_ta["TAName"]; ?></option><?php
+                                                                $i++;
+                                                                    }
+                                                        ?>
                                                 </select>
-                                                
+                                                <div class="invalid-feedback">
+                                                    Please select a valid SLG.
+                                                </div>
                                             </div>
 
                                             
@@ -207,41 +213,76 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                     <thead>
                                                         <tr>                    
                                                             <th>HH Code</th>
-                                                            <th>HH Head Name</th>                                                                                                                                      
-                                                            <th>Grad.Status</th>                                           
+                                                            <th>HH Head Name</th>
+                                                            <th>Tracked?</th>
+                                                            <th>Grad Score</th> 
+                                                            <th>Grad. Status</th>
+                                                            <th>Grad. Tracking</th>
                                                             <th>Action</th>
                                                         </tr>
                                                     </thead>
-
-
                                                     <tbody>
-                                                        <?Php
-                                                            
+                                                        <?Php                                                                        
                                                             $query="select * from tblbeneficiaries where ((regionID = '$region') and (grad_status = '1'))";
-
-                                                        //Variable $link is declared inside config.php file & used here
                                                         
-                                                        if ($result_set = $link->query($query)) {
-                                                        while($row = $result_set->fetch_array(MYSQLI_ASSOC))
-                                                        { 
-                                                            if ($row["grad_assesed"] == 1){$grad_assesed = "Yes";}else{$grad_assesed = "No";} 
-                                                                       if ($row["grad_assesed_result"] == 1){$grad_assesed_result = "Good";}if ($row["grad_assesed_result"] == 2){$grad_assesed_result = "Poor";}if ($row["grad_assesed_result"] == 0){$grad_assesed_result = "NA";}
-                                                                       if ($row["grad_status"] == 1){$grad_status = "On GP";}else{$grad_status = "N/A";}
+                                                            if ($result_set = $link->query($query)) {
+                                                            while($row = $result_set->fetch_array(MYSQLI_ASSOC))
+                                                            { 
+                                                                $sppCode = $row["sppCode"];
+                                                                            
+                                                                $check = mysqli_query($link, "SELECT id FROM tblbeneficiaries_graduating where sppCode ='$sppCode'"); 
+                                                                $row_check = mysqli_fetch_assoc($check); 
+                                                                $id_check = $row_check['id'];
 
-                                                                       $sppCode = $row["sppCode"];
+                                                                $fs = mysqli_query($link, "SELECT Months_HH_FS+Meals_Per_Day+access_to_farming_land AS FS FROM tblbeneficiaries_graduating where sppCode ='$sppCode'"); 
+                                                                $row_fs = mysqli_fetch_assoc($fs); 
+                                                                $total_fs = (int)$row_fs['FS'];
 
-                                                                    echo "<tr>\n";
-                                                                        echo "<td>".$row["sppCode"]."</td>\n";
-                                                                        echo "<td>".$row["hh_head_name"]."</td>\n";                                                       
-                                                                        echo "\t\t<td>$grad_status</td>\n";
-                                                                        echo "<td> <a href=\"../basicSLGMemberview.php?id=".$row['sppCode']."\"><i class='far fa-eye' title='View Member' style='font-size:18px;color:purple'></i></a>\n";
+                                                                $er = mysqli_query($link, "SELECT savings_level+highest_loan_accessed+loan_repayment+credit_worthiness+income_sorce+access_to_formal_financial_services+linked_to_service_provider+value_consuption_assets AS ER FROM tblbeneficiaries_graduating where sppCode ='$sppCode'"); 
+                                                                $row_er = mysqli_fetch_assoc($er); 
+                                                                $total_er = (int)$row_er['ER'];
+
+                                                                $nhs = mysqli_query($link, "SELECT diet_diversification+vegitable_garden+small_livestock+pit_latrine+safe_drinking_water+Other_hygiene_behaviour+medical_health_care+Perceived_malnutrition AS NHS FROM tblbeneficiaries_graduating where sppCode ='$sppCode'"); 
+                                                                $row_nhs = mysqli_fetch_assoc($nhs); 
+                                                                $total_nhs = (int)$row_nhs['NHS'];
+
+                                                                $se = mysqli_query($link, "SELECT Participating_in_community_forums+Children_of_school_going_age_attending_school+Decision_making_involves_head_spouse+Shared_ownership_and_access_to_resources+Improved_general_HH_wellness_and_happiness AS SE FROM tblbeneficiaries_graduating where sppCode ='$sppCode'"); 
+                                                                $row_se = mysqli_fetch_assoc($se); 
+                                                                $total_se = (int)$row_se['SE'];
+
+                                                                
+                                                                $current_grad_score = $total_fs+$total_er+$total_nhs+$total_se;
+                                                                if ($current_grad_score>=0)
+                                                                {$val = $current_grad_score;}else{$val = 'NA';}
+                                                                
+                                                                if ($id_check > 0){$found ="Yes";}else{$found = "No";}
+                                                                
+                                                                
+                                                                if (($val>0) and ($val<30)){$status = "Slow Climber";}else{$status = "NA";}
+                                                                if (($val>=30) and ($val<50)){$status = "On Track";}
+                                                                if ($val>=50){$status = "Graduating";}
+                                                                
+
+                                                                echo "<tr>\n";
+                                                                    echo "<td>".$row["sppCode"]."</td>\n";
+                                                                    echo "<td>".$row["hh_head_name"]."</td>\n";
+                                                                    echo "<td>\t$found</td>\n";
+                                                                    echo "<td>\t\t$val</td>\n";
+                                                                    echo "<td>\t$status</td>\n";
+                                                                    echo "<td>\n";
+                                                                    echo "<a href=\"graduation_hh_tracking_updateFS.php?id=".$row['sppCode']."\"><i class='fas fa-pizza-slice' title='Food_Security' style='font-size:18px;color:brown'></i></a>\n";
+                                                                    echo "<a href=\"graduation_hh_tracking_updateER.php?id=".$row['sppCode']."\"><i class='fa fa-arrow-up' title='Econ. Resilience' style='font-size:18px;color:black' aria-hidden='true'></i> </a>\n";
+                                                                    echo "<a href=\"graduation_hh_tracking_updateNHS.php?id=".$row['sppCode']."\"><i class='fa fa-toilet' title='Health Nutrition and Sanitation' style='font-size:18px;color:orange'></i></a>\n";
+                                                                    echo "<a href=\"graduation_hh_tracking_updateSE.php?id=".$row['sppCode']."\"><i class='fa fa-power-off' title='Social.Empowerement' style='font-size:18px;color:green'></i></a>\n";
+                                                                    
+                                                                    echo "<td>\n";
+                                                                        echo "<a href=\"../basicSLGMemberview.php?id=".$row['sppCode']."\"><i class='far fa-eye' title='View Member' style='font-size:18px;color:purple'></i></a>\n";
                                                                         echo "<a href=\"../basicSLGMemberedit.php?id=".$row['sppCode']."\"><i class='far fa-edit' title='Edit Household' style='font-size:18px;color:green'></i></a>\n";
-                                                                        echo "<a onClick=\"javascript: return confirm('Are You Sure You want To PUT This HH On Graduation- You Must Be a Supervisor');\" href=\"graduationBenAssesment.php?id=".$row['sppCode']."\"\><i class='fa fa-graduation-cap' title='Put HH On Graduation Pilot' style='font-size:18px;color:black'></i></a>\n";
-                                                                        
-                                                                    echo "</tr>\n";
-                                                        }
-                                                        $result_set->close();
-                                                        }                          
+                                                                        echo "<a onClick=\"javascript: return confirm('Are You Sure You Want To Track This Household On Graduation Path?- You Must Be a Supervisor');\" href=\"graduation_hh_tracking_addHH.php?id=".$row['sppCode']."\"\><i class='fa fa-compass' title='Track Household' style='font-size:18px;color:black'></i></a>\n";
+                                                                echo "</tr>\n";
+                                                            }
+                                                            $result_set->close();
+                                                            }                          
                                                         ?>
                                                     </tbody>
                                                 </table>
@@ -250,6 +291,8 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                         </div>     
                                     </div>            
                                 </div>  
+                                   
+                                    
                             </div>
                         </div>
                     </div>

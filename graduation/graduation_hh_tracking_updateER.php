@@ -101,18 +101,26 @@ label input {
             }
             else
             {
-                $sql = "UPDATE tblbeneficiaries_graduating SET (sppCode,jsgID,regionID,districtID,groupID)
-                VALUES ('$hhcode','$jsgID','$regionID','$DistrictID','$groupID')";
-                if (mysqli_query($link, $sql)) {
+                $sql = "UPDATE tblbeneficiaries_graduating SET savings_level = '$er_1',highest_loan_accessed = '$er_2',loan_repayment ='$er_3',credit_worthiness ='$er_4',income_sorce ='$er_5',access_to_formal_financial_services ='$er_6',value_productive_assets ='$er_7',value_consuption_assets ='$er_8',linked_to_service_provider ='$er_9'  where sppCode = '$id'";
+                mysqli_query($link, $sql);
+            }
+
+            if  (isset($id_check))
+            {
+                $sql2 = "INSERT INTO tblbeneficiaries_graduating_er (sppCode,savings_level,highest_loan_accessed,loan_repayment,credit_worthiness,income_sorce,access_to_formal_financial_services,value_productive_assets,value_consuption_assets,linked_to_service_provider)
+                VALUES ('$id','$er_1','$er_2','$er_3','$er_4','$er_5','$er_6','$er_7','$er_8','$er_9')";
+                if (mysqli_query($link, $sql2)){
                     echo '<script type="text/javascript">'; 
-                    echo 'alert("JSG Member Record has been added successfully !");'; 
-                    echo 'window.location.href = "jsg_clusters.php";';
+                    echo 'alert("Economic Resillience Record Updated Successfully!");'; 
+                    echo 'window.location.href = "graduation_hh_tracking.php";';
                     echo '</script>';
                 } else {
                     echo "Error: " . $sql . ":-" . mysqli_error($link);
                 }
-                mysqli_close($link);
             }
+
+                mysqli_close($link);
+            
         }
         
             function get_rname($link, $rcode)
@@ -121,24 +129,21 @@ label input {
             while($rg = mysqli_fetch_array($rg_query)){
                return $rg['name'];
             };// fetch data
-            
             }
     
             function dis_name($link, $disID)
             {
-            $dis_query = mysqli_query($link,"select DistrictName from tbldistrict where DistrictID='$disID'"); // select query
-            while($dis = mysqli_fetch_array($dis_query)){
-               return $dis['DistrictName'];
-            };// fetch data
-            
-            
+                $dis_query = mysqli_query($link,"select DistrictName from tbldistrict where DistrictID='$disID'"); // select query
+                while($dis = mysqli_fetch_array($dis_query)){
+                return $dis['DistrictName'];
+                };// fetch data
             }
 
-            function ta_name($link, $taID)
+            function grp_name($link, $grp)
             {
-            $dis_query = mysqli_query($link,"select TAName from tblta where TAID='$taID'"); // select query
-            $tame = mysqli_fetch_array($dis_query);// fetch data
-            return $tame['TAName'];
+                $grp_query = mysqli_query($link,"select groupname from tblgroup where groupID='$grp'"); // select query
+                $gpname = mysqli_fetch_array($grp_query);// fetch data
+                return $gpname['groupname'];
             }
     ?>
 
@@ -180,7 +185,7 @@ label input {
                             </div>
                             <div class="card-body">
                                 
-                                <form method="POST" action="jsg_add_hh_filter1.php">
+                                <form method="POST" action="">
 
                                     <div class="row">
                                         <div class="col-md-3">
@@ -198,7 +203,7 @@ label input {
                                         <div class="col-md-3">
                                             <div class="mb-3">
                                                 <label for="GroupName" class="form-label">SLG Name</label>
-                                                <input type="text" class="form-control" id="GroupName" name="GroupName"  readonly>
+                                                <input type="text" class="form-control" id="GroupName" name="GroupName" value = "<?php echo grp_name($link,$groupID) ; ?>" readonly>
                                             </div>
                                         </div>
                                         <div class="col-md-3">
@@ -214,7 +219,7 @@ label input {
                                         <div class="col-md-3">
                                             <div class="mb-3">
                                                 <label for="district" class="form-label">District</label>
-                                                <input type="text" class="form-control" id="district" name = "district" value="<?php echo $districtID; ?>"readonly>
+                                                <input type="text" class="form-control" id="district" name = "district" value="<?php echo dis_name($link,$districtID); ?>"readonly>
                                             </div>
                                         </div>
                                         <div class="col-md-3">
@@ -240,29 +245,23 @@ label input {
                                         <div class="col-md-6">
                                             <div class="mb-3">
                                                 <label for="er_1" class="my-0 text-primary"><b>1. Level of savings over past 12 months?</b></label>
+                                                <input type="radio" name="er_1"    
+                                                value="0"> 0 to K39,999.00<br>
                                                 <input type="radio" name="er_1"
-                                                    <?php if (isset($er_1) && $er_1=="0") echo "checked";?>
-                                                    value="0"> 0 to K39,999.00<br>
-                                                    <input type="radio" name="er_1"
-                                                    <?php if (isset($er_1) && $er_1=="2") echo "checked";?>
-                                                    value="2"> K40,000.00 to K59,999.00<br>
-                                                    <input type="radio" name="er_1"
-                                                    <?php if (isset($er_1) && $er_1=="4") echo "checked";?>
-                                                    value="4"> K60,0000.00 and above
+                                                value="2"> K40,000.00 to K59,999.00<br>
+                                                <input type="radio" name="er_1"
+                                                value="4"> K60,0000.00 and above
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="mb-3">
                                                 <label for="er_2" class="my-0 text-primary"><b>2. Highest loan accessed over past 12 months ?</b></label>
                                                 <input type="radio" name="er_2"
-                                                    <?php if (isset($er_2) && $er_2=="0") echo "checked";?>
-                                                    value="0"> 0 to K39,999.00<br>
-                                                    <input type="radio" name="er_2"
-                                                    <?php if (isset($er_2) && $er_2=="2") echo "checked";?>
-                                                    value="2"> K40,000.00 to K59,999.00<br>
-                                                    <input type="radio" name="er_2"
-                                                    <?php if (isset($er_2) && $er_2=="4") echo "checked";?>
-                                                    value="4"> K60,0000.00 and above
+                                                value="0"> 0 to K39,999.00<br>
+                                                <input type="radio" name="er_2"
+                                                value="2"> K40,000.00 to K59,999.00<br>
+                                                <input type="radio" name="er_2"
+                                                value="4"> K60,0000.00 and above
                                             </div>
                                         </div>
                                     </div>
@@ -272,25 +271,20 @@ label input {
                                             <div class="mb-3">
                                                 <label for="er_3" class="my-0 text-primary"><b>3. Loan Repayment?</b></label>
                                                 <input type="radio" name="er_3"
-                                                    <?php if (isset($er_3) && $er_3=="0") echo "checked";?>
-                                                    value="0"> 0 to 49.9% <br>
-                                                    <input type="radio" name="er_3"
-                                                    <?php if (isset($er_3) && $fs_1=="2") echo "checked";?>
-                                                    value="2"> 50% to 70%<br>
-                                                    <input type="radio" name="er_3"
-                                                    <?php if (isset($er_3) && $er_3=="4") echo "checked";?>
-                                                    value="4"> above 70%
+                                                value="0"> 0 to 49.9% <br>
+                                                <input type="radio" name="er_3"
+                                                value="2"> 50% to 70%<br>
+                                                <input type="radio" name="er_3"
+                                                value="4"> above 70%
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="mb-3">
                                                 <label for="er_4" class="my-0 text-primary"><b>4. Credit worthiness</b></label>
                                                 <input type="radio" name="er_4"
-                                                    <?php if (isset($er_4) && $er_4=="0") echo "checked";?>
-                                                    value="0"> Defaulter<br>
-                                                    <input type="radio" name="er_4"
-                                                    <?php if (isset($er_4) && $er_4=="2") echo "checked";?>
-                                                    value="4"> Non Defaulter<br>
+                                                value="0"> Defaulter<br>
+                                                <input type="radio" name="er_4"
+                                                value="4"> Non Defaulter<br>
                                                     
                                             </div>
                                         </div>
@@ -301,27 +295,20 @@ label input {
                                             <div class="mb-3">
                                                 <label for="er_5" class="my-0 text-primary"><b>5. Sources of Income</b></label>
                                                 <input type="radio" name="er_5"
-                                                    <?php if (isset($er_5) && $er_3=="0") echo "checked";?>
-                                                    value="0"> Ganyu/SCT <br>
-                                                    <input type="radio" name="er_5"
-                                                    <?php if (isset($er_5) && $er_5=="2") echo "checked";?>
-                                                    value="2"> 1<br>
-                                                    <input type="radio" name="er_5"
-                                                    <?php if (isset($er_5) && $er_5=="4") echo "checked";?>
-                                                    value="4"> More than 2
-                                                    
+                                                value="0"> Ganyu/SCT <br>
+                                                <input type="radio" name="er_5"
+                                                value="2"> 1<br>
+                                                <input type="radio" name="er_5"
+                                                value="4"> More than 2  
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="mb-3">
                                                 <label for="er_6" class="my-0 text-primary"><b>6. Accessing formal financial services</b></label>
                                                 <input type="radio" name="er_6"
-                                                    <?php if (isset($er_6) && $er_6=="0") echo "checked";?>
-                                                    value="0"> No<br>
-                                                    <input type="radio" name="er_6"
-                                                    <?php if (isset($er_6) && $er_6=="2") echo "checked";?>
-                                                    value="2"> Yes
-                                                    
+                                                value="0"> No<br>
+                                                <input type="radio" name="er_6"
+                                                value="2"> Yes                                                   
                                             </div>
                                         </div>
                                     </div>
@@ -331,26 +318,18 @@ label input {
                                             <div class="mb-3">
                                                 <label for="er_7" class="my-0 text-primary"><b>7. Value of productive assets</b></label>
                                                 <input type="radio" name="er_7"
-                                                    <?php if (isset($er_7) && $er_3=="0") echo "checked";?>
-                                                    value="0"> Less than K200,000.00 <br>
-                                                    <input type="radio" name="er_7"
-                                                    <?php if (isset($er_7) && $er_7=="2") echo "checked";?>
-                                                    value="4"> Greater than or equal to K200,000.00
-                                                    
-                                                    
+                                                value="0"> Less than K200,000.00 <br>
+                                                <input type="radio" name="er_7"
+                                                value="4"> Greater than or equal to K200,000.00   
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="mb-3">
                                                 <label for="er_8" class="my-0 text-primary"><b>8. Value of consumption assets-domestic items</b></label>
                                                 <input type="radio" name="er_8"
-                                                    <?php if (isset($er_8) && $er_8=="0") echo "checked";?>
-                                                    value="0"> Less than K50,000.00 <br>
-                                                    <input type="radio" name="er_8"
-                                                    <?php if (isset($er_8) && $er_8=="2") echo "checked";?>
-                                                    value="4"> Greater than or equal to K200,000.00
-                                                    
-                                                    
+                                                value="0"> Less than K50,000.00 <br>
+                                                <input type="radio" name="er_8"
+                                                value="4"> Greater than or equal to K200,000.00     
                                             </div>
                                         </div>
                                     </div>
@@ -359,39 +338,25 @@ label input {
                                             <div class="mb-3">
                                                 <label for="er_9" class="my-0 text-primary"><b>9. HH linked to service provider</b></label>
                                                 <input type="radio" name="er_9"
-                                                    <?php if (isset($er_9) && $er_9=="0") echo "checked";?>
-                                                    value="0"> No <br>
-                                                    <input type="radio" name="er_9"
-                                                    <?php if (isset($er_9) && $er_9=="2") echo "checked";?>
-                                                    value="2"> Yes<br>
-                                                    
-                                                    
+                                                value="0"> No <br>
+                                                <input type="radio" name="er_9"
+                                                value="2"> Yes<br>    
                                             </div>
                                         </div>
-                                        
                                     </div>
-
                                     <div class="row">
-                                        
                                         <div class="col-md-2">
                                             <div class="mb-3">
-                                                <button type="submit" class="btn btn-btn btn-outline-primary w-md" style="width:170px" name="Submit" value="Submit" disabled><i class="fa fa-save" style="font-size:24px; color:green"></i> Update ER</button>
+                                                <button type="submit" class="btn btn-btn btn-outline-primary w-md" style="width:170px" name="Submit" value="Submit" ><i class="fa fa-save" style="font-size:24px; color:green"></i> Update ER</button>
                                             </div>
                                         </div>
-
-                                        
                                         <div class="col-md-2">
                                             <div class="mb-3">
                                                 <INPUT TYPE="button" class="btn btn-btn btn-outline-secondary w-md" style="width:170px" VALUE="Back" onClick="history.go(-1);"> 
                                             </div>
                                         </div>
                                     </div>
-
-                                    
                                 </form>
-
-                                
-                                
                             </div>
                         </div>
                         

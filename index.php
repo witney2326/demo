@@ -104,7 +104,7 @@ $test = 85;
         ]);
 
         // Optional; add a title and set the width and height of the chart
-        var options = {'title':'SL Groups Per District', 'width':490, 'height':250};
+        var options = {'title':'Savings and Loan Group Distribution', 'width':490, 'height':250};
 
         // 
         var chart = new google.visualization.LineChart(document.getElementById('grps_per_district'));
@@ -352,419 +352,216 @@ $test = 85;
                     </div>
                 </div>
                 <!-- end page title -->
-                    <div class="row">
+                <div class ="row">
+                    <div class="col-xl-6">
                         <div class="card">
-                            <div class="card-header bg-transparent border-primary">
-                                <div class="card-group">
-                                    <div class="card border">
-                                        <img src="..." class="card-img-top" alt="">
-                                        <div class="card-body">
-                                            
-                                            <div class="card-body">
-                                                <div class="d-flex">
-                                                    <div class="flex-grow-1">
-                                                        <i class='fas fa-house-user' style='font-size:24px'></i><i class='fas fa-house-user' style='font-size:24px; color:chocolate'></i>
-                                                        <p class="text-muted fw-medium">HHs Reached</p>
-                                                        <?php
+                            <div class="card border border-success">
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-striped mb-0">
+                                            <tbody>
+                                                <tr>
+                                                    <th scope="row"><i class='fas fa-house-user' style='font-size:18px'></i></th>
+                                                    <td>HHs Reached</td>
+                                                    <?php
                                                             $result = mysqli_query($link, 'SELECT COUNT(sppCode) AS value_sum FROM tblbeneficiaries'); 
                                                             $row = mysqli_fetch_assoc($result); 
                                                             $sum = $row['value_sum'];
                                                         ?>
-                                                        <h6 class="mb-0">
-                                                            <div class="container">
-                                                                <div class="numberCircle"><?php echo "" . number_format($sum);?></div>
-                                                            </div> 
-                                                        </h6>
-                                                    </div>
-                                                    <a href="basic_livelihood_hh_mgt.php">more ..</a> 
-                                                </div>
-                                            </div>
-                                        </div>
-                                        
-                                    </div>
-                                    <div class="card border">
-                                        <img src="..." class="card-img-top" alt="">
-                                        <div class="card-body">
-                                            <div class="card-body">
-                                                <div class="d-flex">
-                                                    <div class="flex-grow-1">
-                                                    <i class='fas fa-layer-group' style='font-size:24px;color:darkgoldenrod'></i><i class='fas fa-layer-group' style='font-size:24px;color:brown'></i><i class='fas fa-layer-group' style='font-size:24px;color:burlywood'></i>
-                                                        <p class="text-muted fw-medium">JSGs</p>
-                                                        <?php
-                                                            $result = mysqli_query($link, 'SELECT COUNT(recID) AS value_total FROM tbljsg'); 
-                                                            $row = mysqli_fetch_assoc($result); 
-                                                            $total = $row['value_total'];
-                                                        ?>
-                                                        <h6 class="mb-0">
-                                                            <div class="container">
-                                                                <div class="numberCircle"><?php echo "" . number_format($total);?></div>
-                                                            </div> 
-                                                        </h6>
-                                                    </div>
-                                                    <a href="enhanced_livelihood/jsg.php">more ..</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        
-                                    </div>
-                                    <div class="card border">
-                                        <img src="..." class="card-img-top" alt="">
-                                        <div class="card-body">
-                                            <div class="card-body">
-                                                <div class="d-flex">
-                                                    <div class="flex-grow-1">
-                                                        <i class='fas fa-hiking' style='font-size:24px; color:chocolate'></i><i class='fas fa-running' style='font-size:24px;color:coral'></i>
-                                                        <p class="text-muted fw-medium">Youths Linked</p>
-                                                        <?php
-                                                            $result = mysqli_query($link, 'SELECT COUNT(recID) AS v_total FROM tblycs'); 
-                                                            $row = mysqli_fetch_assoc($result); 
-                                                            $v_total = $row['v_total'];
-                                                        ?>
-                                                            <h6 class="mb-0">
-                                                                <div class="container">
-                                                                    <div class="numberCircle"><?php echo "" . number_format($v_total);?></div>
-                                                                </div> 
-                                                            </h6>
-                                                    </div>
-                                                    <a href="enhanced_livelihood/ycs.php">more ..</a>
-                                                </div>
-                                            </div>
-                                        </div>  
-                                    </div>
-
-                                    <div class="card border">
-                                        <img src="..." class="card-img-top" alt="">
-                                        <div class="card-body">
-                                            <div class="card-body">
-                                                <div class="d-flex">
-                                                    <div class="flex-grow-1">
-                                                        <i class='fas fa-school' style='font-size:24px;color:cadetblue'></i><i class='fas fa-graduation-cap' style='font-size:24px'></i>
-                                                        <p class="text-muted fw-medium">SLGs On Graduation Path </p>
-                                                        <?php
-                                                            $result = mysqli_query($link, 'SELECT COUNT(groupID) AS value_grps FROM tblgroup where grad_status="1"'); 
-                                                            $row = mysqli_fetch_assoc($result); 
-                                                            $sum_grps = $row['value_grps'];
-
-                                                            $result_2 = mysqli_query($link, 'SELECT COUNT(ClusterID) AS value_clusters FROM tblcluster where grad_status="1"'); 
-                                                            $row = mysqli_fetch_assoc($result_2); 
-                                                            $sum_clusters = $row['value_clusters'];
-
-                                                        ?>
-                                                        <h6 class="mb-0">
-                                                            <div class="container">
-                                                                <div class="numberCircle"><?php echo "" . number_format($sum_clusters+$sum_grps);?></div>
-                                                            </div> 
-                                                        </h6>
-                                                    </div>
-                                                    <a href="graduation/graduation.php">more..</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div> 
-                    <!-- end here row1 -->
-                    <!-- Row 2 -->
-                    <div class="row">
-                        <div class="card">
-                            <div class="card-header bg-transparent border-primary">
-                                <div class="card-group">
-                                    <div class="card border">
-                                        <img src="..." class="card-img-top" alt="">
-                                        <div class="card-body">
-                                            <div class="card-body">
-                                                <div class="d-flex">
-                                                    <div class="flex-grow-1">
-                                                    <i class='fas fa-users' style='font-size:24px'></i>
-
-                                                        <p class="text-muted fw-medium">SLGs Formed</p>
-                                                        <?php
-                                                            $result = mysqli_query($link, 'SELECT COUNT(groupID) AS value_sum FROM tblgroup WHERE deleted = 0'); 
-                                                            $row = mysqli_fetch_assoc($result); 
-                                                            $sum = $row['value_sum'];
-                                                        ?>
-                                                        <div class="container">
-                                                            <h6><div class="mb-0"><?php echo "" . number_format($sum);?></div></h6>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-       
-                                    </div>
-                                    <div class="card border">
-                                        <img src="..." class="card-img-top" alt="">
-                                        <div class="card-body">
-                                            <div class="card-body">
-                                                <div class="d-flex">
-                                                    <div class="flex-grow-1">
-                                                    <i class='fas fa-layer-group' style='font-size:24px;color:darkgoldenrod'></i><i class='fas fa-chalkboard-teacher' style='font-size:24px;color:brown'></i><i class='fas fa-layer-group' style='font-size:24px;color:black'></i>
-                                                        <p class="text-muted fw-medium">Coops Formed</p>
-                                                        <?php
-                                                            $result = mysqli_query($link, 'SELECT count(groupID) AS total_slgs FROM tblgroup where registered_group = "1"'); 
-                                                            $row = mysqli_fetch_assoc($result); 
-                                                            $total_slgs = $row['total_slgs'];
-                                                        ?>
-                                                        <h6 class="mb-0">
-                                                            <div class="container">
-                                                                <div class="numberCircle"><?php echo "" . number_format($total_slgs);?></div>
-                                                            </div> 
-                                                        </h6>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card border">
-                                        <img src="..." class="card-img-top" alt="">
-                                        <div class="card-body">
-                                            <div class="card-body">
-                                                <div class="d-flex">
-                                                    <div class="flex-grow-1">
-                                                        <i class='fas fa-industry' style='font-size:24px; color:crimson'></i><i class='fas fa-industry' style='font-size:24px; color:black'></i>
-                                                        <p class="text-muted fw-medium">SLGs in Production VC</p>
-                                                        <?php
-                                                            $result = mysqli_query($link, 'SELECT COUNT(groupID) AS v_total FROM tblgroup where vc_status = "1"'); 
-                                                            $row = mysqli_fetch_assoc($result); 
-                                                            $v_total = $row['v_total'];
-                                                        ?>
-                                                            <h6 class="mb-0">
-                                                                <div class="container">
-                                                                    <div class="numberCircle"><?php echo "" . number_format($v_total);?></div>
-                                                                </div> 
-                                                            </h6>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="card border">
-                                        <img src="..." class="card-img-top" alt="">
-                                        <div class="card-body">
-                                            <div class="card-body">
-                                                <div class="d-flex">
-                                                    <div class="flex-grow-1">
-                                                        <i class='fas fa-graduation-cap' style='font-size:24px'></i><i class='fas fa-graduation-cap' style='font-size:24px;color:cadetblue'></i>
-                                                        <p class="text-muted fw-medium">Households on Graduation Path</p>
-                                                        <?php
-                                                            $result = mysqli_query($link, 'SELECT COUNT(sppCode) AS value_sum FROM tblbeneficiaries where grad_status ="1"'); 
-                                                            $row = mysqli_fetch_assoc($result); 
-                                                            $sum = $row['value_sum'];
-                                                        ?>
-                                                            <div class="container">
-                                                                <h6><div class="mb-0"><?php echo "" . $sum;?></div></h6>
-                                                            </div>
-                                                        </h4>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div> 
-                    <!-- end Row 2 -->
-
-                    <div class="row">
-                        <div class="card">
-                            <div class="card-header bg-transparent border-primary">
-                                <div class="card-group">
-                                    <div class="card border">
-                                        <img src="..." class="card-img-top" alt="">
-                                        <div class="card-body">
-                                            <div class="card-body">
-                                                <div class="d-flex">
-                                                    <div class="flex-grow-1">
-                                                    <i class='fas fa-book-reader' style='font-size:24px'></i><i class='fas fa-book-reader' style='font-size:24px;color:green'></i>
-
-                                                        <p class="text-muted fw-small">Mindset Change Training SLGs Trained</p>
-                                                        <?php
-                                                            $result = mysqli_query($link, 'SELECT count(TrainingID) AS total_grps FROM tblgrouptrainings'); 
-                                                            $row = mysqli_fetch_assoc($result); 
-                                                            $sum = $row['total_grps'];
-                                                        ?>
-                                                        <div class="container">
-                                                            <h6><div class="mb-0"><?php echo "" . number_format($sum);?></div></h6>
-                                                        </div>
-                                                    </div>
-                                                    <a href="basic_livelihood_training_trained_groups.php">more ..</a>
-                                                </div>
-                                            </div>
-                                        </div>
-       
-                                    </div>
-                                    <div class="card border">
-                                        <img src="..." class="card-img-top" alt="">
-                                        <div class="card-body">
-                                            <div class="card-body">
-                                                <div class="d-flex">
-                                                    <div class="flex-grow-1">
-                                                    <i class='fas fa-layer-group' style='font-size:24px;color:darkgoldenrod'></i><i class='fas fa-chalkboard-teacher' style='font-size:24px;color:black'></i><i class='fas fa-layer-group' style='font-size:24px;color:black'></i>
-                                                        <p class="text-muted fw-medium">Mindset Change Training Clusters Trained</p>
-                                                        <?php
-                                                            $result = mysqli_query($link, 'SELECT count(TrainingID) AS total_cls FROM tblgrouptrainings'); 
-                                                            $row = mysqli_fetch_assoc($result); 
-                                                            $total_cls = $row['total_cls'];
-                                                        ?>
-                                                        <h6 class="mb-0">
-                                                            <div class="container">
-                                                                <div class="numberCircle"><?php echo "" . number_format($total_cls);?></div>
-                                                            </div> 
-                                                        </h6>
-                                                    </div>
-                                                    <a href="basic_livelihood_training_trained_groups.php">more ..</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card border">
-                                        <img src="..." class="card-img-top" alt="">
-                                        <div class="card-body">
-                                            <div class="card-body">
-                                                <div class="d-flex">
-                                                    <div class="flex-grow-1">
-                                                    <i class='fas fa-user-graduate' style='font-size:24px'></i><i class='fas fa-user-graduate' style='font-size:24px;color:brown'></i>
-                                                        <p class="text-muted fw-medium">Cooperative Member Training - Clusters Trained</p>
-                                                        <?php
-                                                            $result = mysqli_query($link, 'SELECT count(TrainingID) AS total_cls FROM tblgrouptrainings where TrainingTypeID = "14"'); 
-                                                            $row = mysqli_fetch_assoc($result); 
-                                                            $v_total = $row['total_cls'];
-                                                        ?>
-                                                            <h6 class="mb-0">
-                                                                <div class="container">
-                                                                    <div class="numberCircle"><?php echo "" . number_format($v_total);?></div>
-                                                                </div> 
-                                                            </h6>
-                                                    </div>
-                                                    <a href="enhanced_livelihood/cmt_training_registration.php">more ..</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="card border">
-                                        <img src="..." class="card-img-top" alt="">
-                                        <div class="card-body">
-                                            <div class="card-body">
-                                                <div class="d-flex">
-                                                    <div class="flex-grow-1">
-                                                        <i class='fa fa-certificate' style='font-size:24px'></i><i class='fa fa-certificate' style='font-size:24px;color:gold'></i>
-                                                        <p class="text-muted fw-medium">Youth Challenge Support Youths in Voc Schools</p>
-                                                        <?php
-                                                            $result = mysqli_query($link, 'SELECT COUNT(recID) AS value_sum FROM tblycs where vocSchoolLinked ="1"'); 
-                                                            $row = mysqli_fetch_assoc($result); 
-                                                            $sum = $row['value_sum'];
-                                                        ?>
-                                                            <div class="container">
-                                                                <h6><div class="mb-0"><?php echo "" . number_format($sum);?></div></h6>
-                                                            </div>
-                                                        </h4>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div> 
-
-                    <!-- end Row 3 -->
-                    <div class = "row">
+                                                    <td><?php echo "" . number_format($sum);?>  </td>
+                                                    <td><a href="basic_livelihood_hh_mgt.php">more ..</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row"><i class='fas fa-users' style='font-size:18px'></i></th>
+                                                    <td>SLGs Formed</td>
+                                                    <?php
+                                                        $result = mysqli_query($link, 'SELECT COUNT(groupID) AS value_sum FROM tblgroup WHERE deleted = 0'); 
+                                                        $row = mysqli_fetch_assoc($result); 
+                                                        $sum = $row['value_sum'];
+                                                    ?>
+                                                    <td><?php echo "" . number_format($sum);?></td>
+                                                    <td><a href="basic_livelihood_HH_Nat_reports.php">more ..</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row"><i class='fas fa-book-reader' style='font-size:18px'></i></th>
+                                                    <td>SLGs Trained</td>
+                                                    <?php
+                                                        $result = mysqli_query($link, 'SELECT count(TrainingID) AS total_grps FROM tblgrouptrainings'); 
+                                                        $row = mysqli_fetch_assoc($result); 
+                                                        $sum = $row['total_grps'];
+                                                    ?>
+                                                    <td><?php echo "" . number_format($sum);?></td>
+                                                    <td><a href="basic_livelihood_training_trained_groups.php">more ..</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row"><i class='fas fa-house-user' style='font-size:18px'></i></th>
+                                                    <td>HHs Trained</td>
+                                                    <?php
+                                                        $result = mysqli_query($link, 'SELECT sum(Males+Females) AS total_hhs_trained FROM tblgrouptrainings'); 
+                                                        $row = mysqli_fetch_assoc($result); 
+                                                        $sumhhs = $row['total_hhs_trained'];
+                                                    ?>
+                                                    <td><?php echo "" . number_format($sumhhs);?></td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row"><i class='fas fa-users' style='font-size:18px'></i></th>
+                                                    <td>Clusters Formed</td>
+                                                    <?php
+                                                        $result = mysqli_query($link, 'SELECT COUNT(ClusterID) AS value_cls FROM tblcluster WHERE deleted = 0'); 
+                                                        $row = mysqli_fetch_assoc($result); 
+                                                        $sumcls = $row['value_cls'];
+                                                    ?>
+                                                    <td><?php echo "" . number_format($sumcls);?></td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row"><i class='fas fa-layer-group' style='font-size:18px;color:darkgoldenrod'></i></th>
+                                                    <td>Clusters Trained</td>
+                                                    <?php
+                                                        $result = mysqli_query($link, 'SELECT count(TrainingID) AS total_grps FROM tblgrouptrainings'); 
+                                                        $row = mysqli_fetch_assoc($result); 
+                                                        $sum = $row['total_grps'];
+                                                    ?>
+                                                    <td><?php echo "" . number_format($sum);?></td>
+                                                    <td><a href="basic_livelihood_training_trained_groups.php">more ..</a></td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row"><i class='fas fa-layer-group' style='font-size:18px;color:darkgoldenrod'></i></th>
+                                                    <td>Coops Formed</td>
+                                                    <?php
+                                                        $result = mysqli_query($link, 'SELECT count(groupID) AS total_slgs FROM tblgroup where registered_group = "1"'); 
+                                                        $row = mysqli_fetch_assoc($result); 
+                                                        $total_slgs = $row['total_slgs'];
+                                                    ?>
+                                                    <td><?php echo "" . number_format($total_slgs);?></td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row"><i class='fas fa-layer-group' style='font-size:18px;color:darkgoldenrod'></i></th>
+                                                    <td>JSGs Formed</td>
+                                                    <?php
+                                                        $result = mysqli_query($link, 'SELECT COUNT(recID) AS value_total FROM tbljsg'); 
+                                                        $row = mysqli_fetch_assoc($result); 
+                                                        $total = $row['value_total'];
+                                                    ?>
+                                                    <td><?php echo "" . number_format($total);?></td>
+                                                    <td><a href="enhanced_livelihood/jsg.php">more ..</a></td>
+                                                </tr>
                                                 
-                        <div class = "col-lg-6">
-                            <div class="card border border-success">
-                                <div class="card-header bg-transparent border-primary">
-                                    <?php 
-                                        $select_query = "SELECT COUNT(groupID) as TotalGroups FROM tblgroup where deleted ='0'";
-                                        $query_result = mysqli_query($link,$select_query);
-                                        $row_val = mysqli_fetch_array($query_result);
-                                         $CurGroups =  $row_val['TotalGroups'];
-                                    ?>
-                                    <h6 class="my-0 text-primary">Total: <?php echo number_format("$CurGroups")."<br>"  ?> </h6>
-                                    <nobr><a href="basic_livelihood_HH_Nat_reports.php">more ..</a></nobr>
+                                                <tr>
+                                                    <th scope="row"><i class='fas fa-hiking' style='font-size:18px; color:chocolate'></i></th>
+                                                    <td>Youths Linked</td>
+                                                    <?php
+                                                        $result = mysqli_query($link, 'SELECT COUNT(recID) AS v_total FROM tblycs'); 
+                                                        $row = mysqli_fetch_assoc($result); 
+                                                        $v_total = $row['v_total'];
+                                                    ?>
+                                                    <td><?php echo "" . number_format($v_total);?></td>
+                                                    <td><a href="enhanced_livelihood/ycs.php">more ..</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row"><i class='fas fa-school' style='font-size:18px;color:cadetblue'></i></th>
+                                                    <td>SLGs on Graduation</td>
+                                                    <?php
+                                                        $result = mysqli_query($link, 'SELECT COUNT(groupID) AS value_grps FROM tblgroup where grad_status="1"'); 
+                                                        $row = mysqli_fetch_assoc($result); 
+                                                        $sum_grps = $row['value_grps'];
+
+                                                        $result_2 = mysqli_query($link, 'SELECT COUNT(ClusterID) AS value_clusters FROM tblcluster where grad_status="1"'); 
+                                                        $row = mysqli_fetch_assoc($result_2); 
+                                                        $sum_clusters = $row['value_clusters'];
+
+                                                    ?>
+                                                    <td><?php echo "" . number_format($sum_clusters+$sum_grps);?></td>
+                                                    <td><a href="graduation/graduation.php">more..</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row"><i class='fas fa-graduation-cap' style='font-size:18px;color:cadetblue'></i></th>
+                                                    <td>HHs on Graduation</td>
+                                                    <?php
+                                                        $result = mysqli_query($link, 'SELECT COUNT(sppCode) AS value_sum FROM tblbeneficiaries where grad_status ="1"'); 
+                                                        $row = mysqli_fetch_assoc($result); 
+                                                        $sum = $row['value_sum'];
+                                                    ?>
+                                                    <td><?php echo "" . number_format($sum);?></td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row"><i class='fas fa-graduation-cap' style='font-size:18px'></i></th>
+                                                    <td>Graduated HHs</td>
+                                                    <?php
+                                                        $result = mysqli_query($link, 'SELECT COUNT(sppCode) AS value_sum FROM tblbeneficiaries where grad_status ="1"'); 
+                                                        $row = mysqli_fetch_assoc($result); 
+                                                        $sum = $row['value_sum'];
+                                                    ?>
+                                                    <td>0</td>
+                                                    <td></td>
+                                                </tr>
+
+                                                <tr>
+                                                    <th scope="row"><i class='fas fa-industry' style='font-size:18px; color:crimson'></i></th>
+                                                    <td>SLGs In Prod. VC</td>
+                                                    <?php
+                                                        $result = mysqli_query($link, 'SELECT COUNT(groupID) AS v_total FROM tblgroup where vc_status = "1"'); 
+                                                        $row = mysqli_fetch_assoc($result); 
+                                                        $v_total = $row['v_total'];
+                                                    ?>
+                                                    <td><?php echo "" . number_format($v_total);?></td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row"><i class='fa fa-globe' style='font-size:18px; color:green'></i></th>
+                                                    <td>Safeguard Plans</td>
+                                                    <?php
+                                                        $select_query_esmp = "SELECT COUNT(planID) as TotalESMPs FROM tblsafeguard_group_plans";
+                                                        $query_result_esmp = mysqli_query($link,$select_query_esmp);
+                                                        $row_val = mysqli_fetch_array($query_result_esmp);
+                                                        $totalesmps =  $row_val['TotalESMPs'];
+                                                    ?>
+                                                    <td><?php echo "" . number_format($totalesmps);?></td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row"><i class='fas fa-dollar-sign' style='font-size:18px; color:green'></i></th>
+                                                    <td>Savings Mobilised</td>
+                                                    <?php 
+                                                        $select_query = "SELECT SUM(amount) as TotalSavings FROM tblslg_member_savings";
+                                                        $query_result = mysqli_query($link,$select_query);
+                                                        $row_val = mysqli_fetch_array($query_result);
+                                                        $CurSavings =  floatval($row_val['TotalSavings']);
+                                                    ?>
+                                                    <td><?php echo "MK", number_format("$CurSavings",2);?></td>
+                                                    <td><a href="basic_livelihood_savings_members_reports.php">more ..</a></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class = "col-lg-6">
+                        <div class ="row">
+                            <div class="card border border-success">                               
                                 <div id="grps_per_district"></div> 
                             </div>
                         </div>
-                        <div class = "col-lg-6">
-                            <div class="card border border-success">
-                                <div class="card-header bg-transparent border-primary">
-                                    <?php 
-                                        $select_query = "SELECT SUM(amount) as TotalSavings FROM tblslg_member_savings";
-                                        $query_result = mysqli_query($link,$select_query);
-                                        $row_val = mysqli_fetch_array($query_result);
-                                         $CurSavings =  floatval($row_val['TotalSavings']);
-                                    ?>
-                                    <h6 class="my-0 text-primary">Total: MK<?php echo number_format("$CurSavings",2);?></h6>   
-                                    <nobr><a href="basic_livelihood_savings_members_reports.php">more ..</a></nobr>
-                                </div>
+                        <div class ="row">
+                            <div class="card border border-success">  
                                 <div id="savings_per_district"></div>
                             </div>
-                        </div>   
-                    </div>
-                    
-                    <div class = "row">
-                                                
-                        <div class = "col-lg-6">
-                            <div class="card border border-success">
-                            <?php
-                                $result = mysqli_query($link, 'SELECT COUNT(sppCode) AS value_sum FROM tblbeneficiaries'); 
-                                $row = mysqli_fetch_assoc($result); 
-                                $sum = $row['value_sum'];
-                            ?>
-                                <div class="card-header bg-transparent border-primary">
-                                    <h8 class="my-0 text-default">Total (CIMIS Database): <?php echo number_format($sum);?></h8>
-                                    <nobr><a href="basic_livelihood_HH_Ben_reports.php">more ..</a></nobr>
-                                </div>
+                        </div>
+                        <div class ="row">
+                            <div class="card border border-success">  
                                 <div id="actual_hhs"></div> 
                             </div>
                         </div>
-                        <div class = "col-lg-6">
-                            <div class="card border border-success">
-                                <div class="card-header bg-transparent border-primary">
-                                 <?php 
-                                        $select_query = "SELECT SUM((MembersF)+(MembersM)) as TotalMembers FROM tblgroup where deleted = '0'";
-                                        $query_result = mysqli_query($link,$select_query);
-                                        $row_val = mysqli_fetch_array($query_result);
-                                         $totalM =  $row_val['TotalMembers'];
-                                    ?>
-                                    <h8 class="my-0 text-default">Total:<?php echo number_format($totalM);?></h8>
-                                </div>
-                                <div id="piechart3"></div> 
-                            </div>
-                        </div>   
-                    </div>        
-
-                    <!-- here -->
-                    <div class = "row">
-                                                
-                        <div class = "col-lg-6">
-                            <div class="card border border-success">
-                                <div class="card-header bg-transparent border-primary">
-                                    <?php
-                                        $select_query_esmp = "SELECT COUNT(planID) as TotalESMPs FROM tblsafeguard_group_plans";
-                                        $query_result_esmp = mysqli_query($link,$select_query_esmp);
-                                        $row_val = mysqli_fetch_array($query_result_esmp);
-                                         $total =  $row_val['TotalESMPs'];
-                                    ?>
-                                    <h8 class="my-0 text-default">Total ESMPs: <?php echo number_format($total);?> </h8>
-                                </div>
-                                <div id="esmp"></div> 
-                            </div>
-                        </div>
-                        
-                    </div>        
-                <!-- end row -->
-
-                
-                <!-- end row -->
-                <!-- end row -->
+                    </div>
+                </div>
             </div>
             <!-- container-fluid -->
         </div>

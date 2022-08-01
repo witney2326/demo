@@ -303,11 +303,11 @@
                                                                                                             $sum_clusters = $row2['value_clusters'];
 
                                                                                                         ?>
-                                                                                                            <h5 class="mb-0">
-                                                                                                                <div class="container">
-                                                                                                                    <div class="mb-0"><?php echo "" . $sum_groups + $sum_clusters;?></div>
-                                                                                                                </div> 
-                                                                                                            </h5>
+                                                                                                            
+                                                                                                            <div class="container">
+                                                                                                                <div class="mb-0"><?php echo "" . number_format($sum_groups + $sum_clusters);?></div>
+                                                                                                            </div> 
+                                                                                                            
                                                                                                     </div>
                                                                                                     <i class='fas fa-users' style='font-size:24px;color:chocolate'></i><i class='fas fa-users' style='font-size:24px;color:brown'></i>
                                                                                                     
@@ -330,7 +330,7 @@
                                                                                                             $sum = $row['value_sum'];
                                                                                                         ?>
                                                                                                             <div class="container">
-                                                                                                                <h4><div class="mb-0"><?php echo "" . $sum;?></div></h4>
+                                                                                                                <div class="mb-0"><?php echo "" . number_format($sum);?></div>
                                                                                                             </div>
                                                                                                 
                                                                                             </div>
@@ -347,7 +347,7 @@
                                                                                         <div class="d-flex">
                                                                                             <div class="flex-grow-1">
                                                                                                 <p class="text-muted fw-medium">AMCs Formed</p>
-                                                                                                <h4 class="mb-0">0</h4>
+                                                                                                0
                                                                                             </div>
                                                                                             <i class='fas fa-user-plus' style='font-size:24px;color:brown'></i>
                                                                                             
@@ -363,7 +363,7 @@
                                                                                         <div class="d-flex">
                                                                                             <div class="flex-grow-1">
                                                                                                 <p class="text-muted fw-medium">HHs Trained Asset Mgt</p>
-                                                                                                <h4 class="mb-0">0</h4>
+                                                                                                0
                                                                                             </div>
                                                                                             <i class='fas fa-graduation-cap' style='font-size:24px;color:black'></i>
                                                                                             

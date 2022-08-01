@@ -97,10 +97,8 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
                                             <!--start here -->
                                             <div class="card border border-primary">
-                                                <div class="card-header bg-primary border-primary">
-                                                    <h5 class="my-0 text-default"></i>SLG Search Filter</h5>
-                                                </div>
-                                                <div class="card-body bg-success">
+                                                
+                                                <div class="card-body">
                                                     <h5 class="card-title mt-0"></h5>
                                                     <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="basic_livelihood_slg_mgt_filter2_results.php" method ="POST">
                                                         <div class="col-12">
@@ -186,9 +184,9 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                                         <th>SLG code</th>
                                                                         <th>SLG Name</th>
                                                                         <th>cohort</th>
-                                                                        <th>M</th>
-                                                                        <th>F</th>
-                                                                        <th>Total</th>
+                                                                        <th><i class="fas fa-male" style="font-size:18px"></i></th>
+                                                                        <th><i class="fas fa-female" style="font-size:18px"></i></th>
+                                                                        <th><i class="fas fa-male" style="font-size:18px"></i>+<i class="fas fa-female" style="font-size:18px"></i></th>
                                                                         <th>Total-DB</th>
                                                                         <th>Action On SLG</th>
                                                                         
