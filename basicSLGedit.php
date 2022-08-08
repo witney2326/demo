@@ -165,7 +165,7 @@
                                         <div class="row mb-1">
                                             <label for="cluster" class="col-sm-2 col-form-label">Cluster Name</label>
                                             <select class="form-select" name="cluster" id="cluster" value ="<?php echo $clusterID ; ?>" style="max-width:30%;" required>
-                                                <option selected value="$clusterID" ><?php echo cls_name($link,$clusterID) ; ?></option>
+                                                <option selected value="<?php echo $clusterID ; ?>" ><?php echo cls_name($link,$clusterID) ; ?></option>
                                                     <?php                                                           
                                                         $cls_fetch_query = "SELECT ClusterID,ClusterName FROM tblcluster where taID ='$TAID'";                                                  
                                                         $result_cls_fetch = mysqli_query($link, $cls_fetch_query);                                                                       
@@ -181,6 +181,9 @@
                                                
                                             <label for="cohort" class="col-sm-2 col-form-label">Cohort</label>
                                             <input type="text" class="form-control" id="cohort" name="cohort" value =" <?php echo $cohort ; ?>" style="max-width:30%;" >
+
+                                            <label for="clusterID" class="col-sm-2 col-form-label">Cluster ID</label>
+                                            <input type="text" class="form-control" id="clusterID" name="clusterID" value =" <?php echo $clusterID ; ?>" style="max-width:30%;" readonly>
                                         </div>
 
                                         <div class="row mb-2">

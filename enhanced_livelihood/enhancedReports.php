@@ -14,7 +14,11 @@
 
     <?php   include 'layouts/menu.php'; 
             include 'layouts/config.php';
-    
+
+        $result = mysqli_query($link, 'SELECT COUNT(recID) AS t_jsgs FROM tbljsg where deleted = 0'); 
+        $row_jsg = mysqli_fetch_assoc($result); 
+        $t_jsgs = $row_jsg['t_jsgs'];
+
         $result = mysqli_query($link, 'SELECT COUNT(sppCode) AS value_sum FROM tblbeneficiaries'); 
         $row = mysqli_fetch_assoc($result); 
         $hh_beneficiaries = $row['value_sum'];
@@ -130,134 +134,97 @@
                                             <tr>
                                                 <th>S/N</th>
                                                 <th>Report Category</th>
-                                                <th>Report Subcategory</th>
-                                                <th>Report Detail</th>
-                                                <th>Statistics</th>
+                                                <th>National Summary</th>
+                                                <th>District Summary</th>
+                                                <th>Case Worker Summary</th>
+                                                <th>Detailed Report</th>
+                                                <th>Report Main Statistic</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            
                                             <tr>
                                                 <th scope="row">1</th>
                                                 <td>Sensitization and Awareness</td>
-                                                <td>Programme</td>
-                                                <td><a href="./reports/JSG_reports.php">Sensitization reports</a></td>
-                                                <td><?php ; ?> Meeting(s)</td>
+                                                <td><a href=""><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><a href=""><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><a href=""><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><a href=""><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><?php echo number_format($number_meetings); ?></td>
                                             </tr>
                                             <tr>
-                                                <th scope="row">2</th>
+                                            <th scope="row">2</th>
                                                 <td>Joint skills Groups</td>
-                                                <td>Formation</td>
-                                                <td><a href="./reports/JSG_reports.php">Joint Skill Groups Formed</a></td>
-                                                <td><?php ; ?> JSGs</td>
+                                                <td><a href="./reports/JSG_reports.php"><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><a href="./reports/JSG_reports.php"><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><a href="./reports/JSG_reports.php"><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><a href="./reports/JSG_reports.php"><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><?php echo number_format($t_jsgs); ?></td>
                                             </tr>
-                                            <tr>
-                                                <th scope="row"></th>
-                                                <td></td>
-                                                <td></td>
-                                                <td><a href="">JSGs Mobilised Per Case Worker Summary</a></td>
+                                            <th scope="row">3</th>
+                                                <td>YCS Linkage</td>
+                                                <td><a href=""><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><a href=""><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><a href=""><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><a href=""><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><?php echo 0;?></td>
                                             </tr>
-                                            <tr>
-                                                <th scope="row"></th>
-                                                <td></td>
-                                                <td></td>
-                                                <td><a href="">JSGs Mobilised Per District Summary</a></td>
+                                            <th scope="row">4</th>
+                                                <td>YCS Skills</td>
+                                                <td><a href=""><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><a href=""><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><a href=""><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><a href=""><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><?php echo 0; ?></td>
                                             </tr>
-                                            
-                                            <tr>
-                                                <th scope="row"></th>
-                                                <td></td>
-                                                <td></td>
-                                                <td><a href="">JSGs National Summary</a></td>
+                                            <th scope="row">5</th>
+                                                <td>CME (Coop Development)</td>
+                                                <td><a href=""><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><a href=""><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><a href=""><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><a href=""><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><?php echo 0; ?></td>
                                             </tr>
-                                            <tr>
-                                                <th scope="row"></th>
-                                                <td></td>
-                                                <td>Training</td>
-                                                <td>Groups Trained</td>
-                                                <td></td>
+                                            <th scope="row">6</th>
+                                                <td>Cooperative Registration</td>
+                                                <td><a href=""><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><a href=""><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><a href=""><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><a href=""><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><?php echo 0; ?></td>
                                             </tr>
-                                            <tr>
-                                                <th scope="row"></th>
-                                                <td></td>
-                                                <td></td>
-                                                <td>Households Trained</td>
-                                                <td></td>
+                                            <th scope="row">7</th>
+                                                <td>Coop Mgt Training</td>
+                                                <td><a href=""><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><a href=""><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><a href=""><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><a href=""><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><?php echo 0; ?></td>
                                             </tr>
-                                            <tr>
-                                                <th scope="row"></th>
-                                                <td></td>
-                                                <td>Linkages</td>
-                                                <td>Sevice Linkage</td>
-                                                <td></td>
+                                            <th scope="row">8</th>
+                                                <td>Production Value Chain - Hubs</td>
+                                                <td><a href=""><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><a href=""><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><a href=""><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><a href=""><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><?php echo 0; ?></td>
                                             </tr>
-                                            <tr>
-                                                <th scope="row"></th>
-                                                <td></td>
-                                                <td></td>
-                                                <td>Financial Linkage</td>
-                                                <td></td>
+                                            <th scope="row">9</th>
+                                                <td>Production Value Chain - Spokes</td>
+                                                <td><a href=""><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><a href=""><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><a href=""><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><a href=""><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><?php echo 0; ?></td>
                                             </tr>
-                                            <tr>
-                                                <th scope="row">3</th>
-                                                <td>Youth Challenge Support</td>
-                                                <td>Linkages</td>
-                                                <td>Vocational School</a></td>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row"></th>
-                                                <td></td>
-                                                <td></td>
-                                                <td>Financial Linkage</td>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row"></th>
-                                                <td></td>
-                                                <td></td>
-                                                <td>Business Support</td>
-                                                <td></td>
-                                            </tr>
- 
-                                            <tr>
-                                                <th scope="row">4</th>
-                                                <td>Cooperative Management</td>
-                                                <td>Cooperative Education</td>
-                                                <td>Groups Trained</td>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row"></th>
-                                                <td></td>
-                                                <td></td>
-                                                <td>Groups Registered</td>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row"></th>
-                                                <td></td>
-                                                <td>Cooperative Management Training</td>
-                                                <td>Cooperatives Reached</td>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">5</th>
-                                                <td>Value Chain</td>
-                                                <td>Production</td>
-                                                <td>Production Value Chains</td>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row"></th>
-                                                <td></td>
-                                                <td>LESP</td>
-                                                <td>LESP</td>
-                                                <td></td>
+                                            <th scope="row">10</th>
+                                                <td>Value Chain - LESP</td>
+                                                <td><a href=""><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><a href=""><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><a href=""><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><a href=""><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><?php echo 0; ?></td>
                                             </tr>
 
-
-                                            
                                         </tbody>
                                     </table>
                                 </div>

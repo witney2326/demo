@@ -194,7 +194,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                                 </thead>
                                                                 <tbody>
                                                                     <?Php
-                                                                        $query="select * from tblcluster where ((districtID = '$district') and (deleted = '0'))";
+                                                                        $query="select * from tblcluster where ((districtID = '$district') and (deleted = '0')) order by ClusterName";
  
                                                                         //Variable $link is declared inside config.php file & used here
                                                                         

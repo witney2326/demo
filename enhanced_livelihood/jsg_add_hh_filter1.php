@@ -12,6 +12,17 @@
     <link href="assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
     <script src="assets/libs/datatables.net/js/jquery.dataTables.min.js"></script>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+    <script>
+        // In your Javascript
+        $(document).ready(function() {
+            $('.js-single').select2();
+        });
+    </script>
 </head>
 
 <div id="layout-wrapper">
@@ -107,7 +118,7 @@
 
                             <div class="page-title-right">
                                 <ol class="breadcrumb m-0">
-                                    <li class="breadcrumb-item"><a href="basic_livelihood_slg_mgt2.php">SLG Management</a></li>
+                                    <li class="breadcrumb-item"><a href="jsgs.php">JSG Management</a></li>
                                     <li class="breadcrumb-item active">JSG Members</li>
                                 </ol>
                             </div>
@@ -178,7 +189,7 @@
                                             <div class="mb-3">
                                                 <label for="hhcode" class="form-label">Household Code</label>
                                                 
-                                                <select class="form-select" name="hhcode" id="hhcode" required>
+                                                <select  name="hhcode" id="hhcode" class="js-single" style="width:230px;"required>
                                                     <option></option>
                                                         <?php
                                                         if (isset($groupname))
@@ -248,6 +259,7 @@
                 
             </div>
         </div>
+        
         <script src="assets/libs/datatables.net/js/jquery.dataTables.min.js"></script>
         <script src="assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
         <!-- Buttons examples -->

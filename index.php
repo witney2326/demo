@@ -80,37 +80,125 @@ $test = 85;
 ?>
 
 <script type="text/javascript">
-        // Load google charts
-        google.charts.load('current', {'packages':['corechart']});
-        google.charts.setOnLoadCallback(drawChart);
-        
-        // Draw the chart and set the chart values
-        function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-        
-        ['District', 'Groups'],
-        <?php 
-            $select_query = "SELECT tbldistrict.DistrictName,COUNT(tblgroup.groupname ) as grps
-            FROM tblgroup 
-            inner join tbldistrict on tblgroup.DistrictID = tbldistrict.DistrictID where tblgroup.deleted = '0'
-            GROUP BY tbldistrict.DistrictName";
-            $query_result = mysqli_query($link,$select_query);
-            while($row_val = mysqli_fetch_array($query_result)){
-                
+
+    google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
+    
+    function drawChart() {
+    var data = google.visualization.arrayToDataTable([
+    
+    ['District', 'Groups'],
+    <?php 
+        $select_query = "SELECT tbldistrict.DistrictName,COUNT(tblgroup.groupname ) as grps
+        FROM tblgroup 
+        inner join tbldistrict on tblgroup.DistrictID = tbldistrict.DistrictID where tblgroup.deleted = '0'
+        GROUP BY tbldistrict.DistrictName";
+
+        $query_result = mysqli_query($link,$select_query);
+        while($row_val = mysqli_fetch_array($query_result)){               
             echo "['".$row_val['DistrictName']."',".$row_val['grps']."],";
-            }
-        ?>
-        
-        ]);
-
-        // Optional; add a title and set the width and height of the chart
-        var options = {'title':'Savings and Loan Group Distribution', 'width':490, 'height':250};
-
-        // 
-        var chart = new google.visualization.LineChart(document.getElementById('grps_per_district'));
-        chart.draw(data, options);
+            
         }
-    </script> 
+        
+    ?>       
+    ]);
+    // Optional; add a title and set the width and height of the chart
+    var options = {'title':'Savings and Loan Group Distribution', 'width':490, 'height':250};
+    var chart = new google.visualization.LineChart(document.getElementById('grps_per_district'));
+    chart.draw(data, options);
+    
+    }
+</script> 
+
+
+
+
+<script type="text/javascript">
+    <?
+    $select_query1 = "SELECT tbldistrict.DistrictName as District,COUNT(tblgroup.groupname ) as grps
+    FROM tblgroup 
+    inner join tbldistrict on tblgroup.DistrictID = tbldistrict.DistrictID where tblgroup.deleted = '0'
+    GROUP BY tbldistrict.DistrictName";
+    $res1 = mysqli_query($link,$select_query1);
+
+    $data1 = array();
+    while ($row1 = $res1->fetch_assoc()) {
+        $data1[] = [$row1['District'], $row1['grps']];
+    }
+
+    $select_query2 = "SELECT tbldistrict.DistrictName as District,COUNT(tblbeneficiaries.sppCode) as households
+    FROM tblbeneficiaries 
+    inner join tbldistrict on tblbeneficiaries.DistrictID = tbldistrict.DistrictID
+    GROUP BY tbldistrict.DistrictName";
+    $res2 = mysqli_query($link,$select_query2);
+
+    $data2 = array();
+    while ($row2 = $res2->fetch_assoc()) {
+        $data2[] = [$row2['District'], $row2['households']];
+    }
+?>
+
+var grp = <?php echo json_encode($data1); ?>;
+var hhs = <?php echo json_encode($data2); ?>;
+
+google.charts.load('current', {'packages':['corechart']});
+google.charts.setOnLoadCallback(drawChart);
+
+// Current month
+var data1 = new google.visualization.DataTable();
+        data1.addColumn({label: 'groups', type: 'number'});
+        data1.addRows(grp);
+
+// Last Month
+        var data2 = new google.visualization.DataTable();
+        data2.addColumn({label: 'households', type: 'number'});
+        data2.addRows(hhs);
+
+var join1 = google.visualization.data.join(data1, data2, 'full');
+
+var options = {
+                title: '',
+                curveType: 'function',
+                legend: { position: 'bottom' }
+                };
+
+// Curved chart
+var chart = new google.visualization.LineChart(document.getElementById('test1'));
+chart.draw(join1, options);
+
+ // End bracket from drawChart
+
+    
+
+</script> 
+
+<script type="text/javascript">
+
+google.charts.load('current', {'packages':['corechart']});
+google.charts.setOnLoadCallback(drawChart);
+
+function drawChart() {
+var data = google.visualization.arrayToDataTable([
+
+['District', 'JSGs'],
+<?php 
+    $select_query = "SELECT tbldistrict.DistrictName,COUNT(tbljsg.recID ) as grps
+    FROM tbljsg 
+    inner join tbldistrict on tbljsg.districtID = tbldistrict.DistrictID where tbljsg.deleted = '0'
+    GROUP BY tbldistrict.DistrictName";
+
+    $query_result = mysqli_query($link,$select_query);
+    while($row_val = mysqli_fetch_array($query_result)){               
+        echo "['".$row_val['DistrictName']."',".$row_val['grps']."],";
+    }
+?>       
+]);
+// Optional; add a title and set the width and height of the chart
+var options = {'title':'JSG Distribution', 'width':490, 'height':250};
+var chart = new google.visualization.PieChart(document.getElementById('jsgs_per_district'));
+chart.draw(data, options);
+}
+</script> 
 
 <script type="text/javascript">
         // Load google charts
@@ -330,28 +418,8 @@ $test = 85;
     <!-- Start right Content here -->
     <!-- ============================================================== -->
     <div class="main-content">
-
         <div class="page-content">
             <div class="container-fluid">                                     
-                </div>
-
-                <!-- start page title -->
-                <div class="row">
-                    <div class="col-12">
-                        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                            <h4 class="mb-sm-0 font-size-18">CIMIS Dashboard</h4>
-
-                            <div class="page-title-right">
-                                <ol class="breadcrumb m-0">
-                                    <li class="breadcrumb-item"><a href="index.php">Dashboards</a></li>
-                                    <li class="breadcrumb-item active">CIMIS Dashboard</li>
-                                </ol>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-                <!-- end page title -->
                 <div class ="row">
                     <div class="col-xl-6">
                         <div class="card">
@@ -359,6 +427,11 @@ $test = 85;
                                 <div class="card-body">
                                     <div class="table-responsive">
                                         <table class="table table-striped mb-0">
+                                            <th></th>
+                                            <th>Track Unit</th>
+                                            <th>Achieved</th>
+                                            <th>Target</th>
+                                            <th></th>
                                             <tbody>
                                                 <tr>
                                                     <th scope="row"><i class='fas fa-house-user' style='font-size:18px'></i></th>
@@ -369,7 +442,9 @@ $test = 85;
                                                             $sum = $row['value_sum'];
                                                         ?>
                                                     <td><?php echo "" . number_format($sum);?>  </td>
+                                                    <td><?php echo number_format(70000);?></td>
                                                     <td><a href="basic_livelihood_hh_mgt.php">more ..</a></td>
+                                                    
                                                 </tr>
                                                 <tr>
                                                     <th scope="row"><i class='fas fa-users' style='font-size:18px'></i></th>
@@ -380,6 +455,7 @@ $test = 85;
                                                         $sum = $row['value_sum'];
                                                     ?>
                                                     <td><?php echo "" . number_format($sum);?></td>
+                                                    <td><?php echo number_format(0);?></td>
                                                     <td><a href="basic_livelihood_HH_Nat_reports.php">more ..</a></td>
                                                 </tr>
                                                 <tr>
@@ -391,6 +467,7 @@ $test = 85;
                                                         $sum = $row['total_grps'];
                                                     ?>
                                                     <td><?php echo "" . number_format($sum);?></td>
+                                                    <td><?php echo number_format(0);?></td>
                                                     <td><a href="basic_livelihood_training_trained_groups.php">more ..</a></td>
                                                 </tr>
                                                 <tr>
@@ -402,6 +479,7 @@ $test = 85;
                                                         $sumhhs = $row['total_hhs_trained'];
                                                     ?>
                                                     <td><?php echo "" . number_format($sumhhs);?></td>
+                                                    <td><?php echo number_format(70000);?></td>
                                                     <td></td>
                                                 </tr>
                                                 <tr>
@@ -413,6 +491,7 @@ $test = 85;
                                                         $sumcls = $row['value_cls'];
                                                     ?>
                                                     <td><?php echo "" . number_format($sumcls);?></td>
+                                                    <td><?php echo number_format(0);?></td>
                                                     <td></td>
                                                 </tr>
                                                 <tr>
@@ -424,6 +503,7 @@ $test = 85;
                                                         $sum = $row['total_grps'];
                                                     ?>
                                                     <td><?php echo "" . number_format($sum);?></td>
+                                                    <td><?php echo number_format(0);?></td>
                                                     <td><a href="basic_livelihood_training_trained_groups.php">more ..</a></td>
                                                     
                                                 </tr>
@@ -436,6 +516,7 @@ $test = 85;
                                                         $total_slgs = $row['total_slgs'];
                                                     ?>
                                                     <td><?php echo "" . number_format($total_slgs);?></td>
+                                                    <td><?php echo number_format(0);?></td>
                                                     <td></td>
                                                 </tr>
                                                 <tr>
@@ -447,6 +528,7 @@ $test = 85;
                                                         $total = $row['value_total'];
                                                     ?>
                                                     <td><?php echo "" . number_format($total);?></td>
+                                                    <td><?php echo number_format(0);?></td>
                                                     <td><a href="enhanced_livelihood/jsg.php">more ..</a></td>
                                                 </tr>
                                                 
@@ -459,6 +541,7 @@ $test = 85;
                                                         $v_total = $row['v_total'];
                                                     ?>
                                                     <td><?php echo "" . number_format($v_total);?></td>
+                                                    <td><?php echo number_format(0);?></td>
                                                     <td><a href="enhanced_livelihood/ycs.php">more ..</a></td>
                                                 </tr>
                                                 <tr>
@@ -475,6 +558,7 @@ $test = 85;
 
                                                     ?>
                                                     <td><?php echo "" . number_format($sum_clusters+$sum_grps);?></td>
+                                                    <td><?php echo number_format(0);?></td>
                                                     <td><a href="graduation/graduation.php">more..</a></td>
                                                 </tr>
                                                 <tr>
@@ -486,6 +570,7 @@ $test = 85;
                                                         $sum = $row['value_sum'];
                                                     ?>
                                                     <td><?php echo "" . number_format($sum);?></td>
+                                                    <td><?php echo number_format(8400);?></td>
                                                     <td></td>
                                                 </tr>
                                                 <tr>
@@ -497,6 +582,7 @@ $test = 85;
                                                         $sum = $row['value_sum'];
                                                     ?>
                                                     <td>0</td>
+                                                    <td><?php echo number_format(8400);?></td>
                                                     <td></td>
                                                 </tr>
 
@@ -509,6 +595,7 @@ $test = 85;
                                                         $v_total = $row['v_total'];
                                                     ?>
                                                     <td><?php echo "" . number_format($v_total);?></td>
+                                                    <td><?php echo number_format(0);?></td>
                                                     <td></td>
                                                 </tr>
                                                 <tr>
@@ -521,6 +608,7 @@ $test = 85;
                                                         $totalesmps =  $row_val['TotalESMPs'];
                                                     ?>
                                                     <td><?php echo "" . number_format($totalesmps);?></td>
+                                                    <td><?php echo number_format(0);?></td>
                                                     <td></td>
                                                 </tr>
                                                 <tr>
@@ -533,6 +621,7 @@ $test = 85;
                                                         $CurSavings =  floatval($row_val['TotalSavings']);
                                                     ?>
                                                     <td><?php echo "MK", number_format("$CurSavings",2);?></td>
+                                                    <td><?php echo number_format(0);?></td>
                                                     <td><a href="basic_livelihood_savings_members_reports.php">more ..</a></td>
                                                 </tr>
                                             </tbody>
@@ -540,6 +629,11 @@ $test = 85;
                                     </div>
 
                                 </div>
+                            </div>
+                        </div>
+                        <div class ="row">
+                            <div class="card border border-success">                               
+                                <div id="test1"></div> 
                             </div>
                         </div>
                     </div>
@@ -560,24 +654,19 @@ $test = 85;
                                 <div id="actual_hhs"></div> 
                             </div>
                         </div>
+                        <div class ="row">
+                            <div class="card border border-success">                               
+                                <div id="jsgs_per_district"></div> 
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
             <!-- container-fluid -->
         </div>
-        <!-- End Page-content -->
-
-        <!-- Transaction Modal -->
-        
-        <!-- end modal -->
-
-        <!-- subscribeModal -->
-        <!-- end modal -->
-
         <?php include 'layouts/footer.php'; ?>
     </div>
     <!-- end main content-->
-
 </div>
 <!-- END layout-wrapper -->
 

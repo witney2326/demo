@@ -86,146 +86,130 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                     <div class="col-xl-12">
                         <div class="card">
                             <div class="card-body">
-
-                                
-                                <!-- Nav tabs -->
-                                
-                                <!-- Tab panes -->
-                                <div class="tab-content p-3 text-muted">
-                                    <div class="tab-pane active" id="home-1" role="tabpanel">
-                                        <p class="mb-0">
-                                            
-
-                                            <!--start here -->
-                                            <div class="card border border-primary">
-                                                <div class="card-header bg-transparent border-primary">
-                                                    <h5 class="my-0 text-primary">JSG Filter</h5>
-                                                </div>
-                                                <div class="card-body">
-                                                    <h5 class="card-title mt-0"></h5>
-                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="jsgs_filter2.php" method ="POST">
-                                                        <div class="col-12">
-                                                            <label for="region" class="form-label">Region</label>
-                                                            <div>
-                                                                <select class="form-select" name="region" id="region" value ="$region" required>
-                                                                    <option selected value = "<?php echo $region;?>"><?php echo get_rname($link,$region);?></option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                        
-                                                        <div class="col-12">
-                                                            <label for="district" class="form-label">District</label>
-                                                            <select class="form-select" name="district" id="district" value ="" required>
-                                                                <option></option>
-                                                                    <?php                                                           
-                                                                        $dis_fetch_query = "SELECT DistrictID,DistrictName FROM tbldistrict where regionID =$region";                                                  
-                                                                        $result_dis_fetch = mysqli_query($link, $dis_fetch_query);                                                                       
-                                                                        $i=0;
-                                                                            while($DB_ROW_Dis = mysqli_fetch_array($result_dis_fetch)) {
-                                                                        ?>
-                                                                        <option value="<?php echo $DB_ROW_Dis["DistrictID"]; ?>">
-                                                                            <?php echo $DB_ROW_Dis["DistrictName"]; ?></option><?php
-                                                                            $i++;
-                                                                                }
-                                                                    ?>
-                                                            </select>
-                                                            <div class="invalid-feedback">
-                                                                Please select a valid Malawi district.
-                                                            </div>
-                                                        </div>
-
-                                                        
-                                                        <div class="col-12">
-                                                            <button type="submit" class="btn btn-btn btn-outline-primary w-md" name="Submit" value="Submit">Submit</button>
-                                                            <INPUT TYPE="button" class="btn btn-btn btn-outline-secondary w-md" VALUE="Back" onClick="history.go(-1);">
-                                                        </div>
-                                                    </form>                                             
-                                                    <!-- End Here -->
+                                <div class="card border border-primary">
+                                    
+                                    <div class="card-body">
+                                        
+                                        <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="jsgs_filter2.php" method ="POST">
+                                            <div class="col-12">
+                                                <label for="region" class="form-label">Region</label>
+                                                <div>
+                                                    <select class="form-select" name="region" id="region" value ="$region" required>
+                                                        <option selected value = "<?php echo $region;?>"><?php echo get_rname($link,$region);?></option>
+                                                    </select>
                                                 </div>
                                             </div>
-
                                             
-                                        </p>
-                                    </div>
-                                    <!-- start Here -->
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <div class="card border border-primary">
-                                            <div class="card-header bg-transparent border-primary">
-                                                <h5 class="my-0 text-primary">Joint Skill Groups in <?php echo get_rname($link,$region); ?> Region</h5>
-                                            </div>
-                                            <div class="card-body">
-                                            <h7 class="card-title mt-0"></h7>
-                                                
-                                                    <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
-                                                    
-                                                        <thead>
-                                                            <tr>
-                                                                <th>JSG code</th>
-                                                                <th>JSG Name</th>
-                                                                <th>SLG Name</th>
-                                                                <th>Cluster Name</th>
-                                                                <th>Members</th>
-                                                                <th>JSG Members-DB</th>
-                                                                <th>Action</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <?Php
-                                                                $query="select * from tbljsg inner join tbldistrict on tbldistrict.districtID = tbljsg.districtID  where ((tbldistrict.regionID = '$region') and (tbljsg.deleted ='0'))";
-
-                                                                //Variable $link is declared inside config.php file & used here
-                                                                
-                                                                if ($result_set = $link->query($query)) {
-                                                                while($row = $result_set->fetch_array(MYSQLI_ASSOC))
-                                                                { $disname = (string) dis_name($link,$row["districtID"]);
-                                                                $membership = $row["no_male"]+$row["no_female"];
-                                                                $check = substr($row["groupID"], 5, 3);
-                                                                
-                                                                if (($check == "CLU") or ($check == "CLS")){
-                                                                $gpID =   $row["groupID"];                                                  
-                                                                $name_query = mysqli_query($link,"select ClusterName from tblcluster where ClusterID='$gpID'"); // select query
-                                                                while($rg = mysqli_fetch_array($name_query)){
-                                                                $clustername = $rg['ClusterName'];}} else{$clustername = "";}
-                                                    
-                                                                if ($check == "SLG"){
-                                                                $gpID =   $row["groupID"];
-                                                                $grpname_query = mysqli_query($link,"select groupname from tblgroup where groupID='$gpID'"); // select query
-                                                                while($rg = mysqli_fetch_array($grpname_query)){
-                                                                $groupname = $rg['groupname'];}} else{$groupname ="";}
-
-                                                                $DbMembers = mysqli_query($link, "SELECT COUNT(sppCode) AS HHs FROM tbljsg_hhs where groupID = '$gpID'"); 
-                                                                $db = mysqli_fetch_assoc($DbMembers); 
-                                                                $HHs = $db['HHs'];
-
-                                                                echo "<tr>\n";
-                                                                    echo "<td>".$row["recID"]."</td>\n";
-                                                                    echo "<td>".$row["jsg_name"]."</td>\n";
-                                                                    echo "<td>\t\t$groupname</td>\n";
-                                                                    echo "<td>\t\t$clustername</td>\n";
-                                                                    echo "<td>\t\t$membership</td>\n";
-                                                                    echo "<td>\t\t$HHs</td>\n";
-                                                                    
-                                                                    echo "<td>
-                                                                        <a href=\"jsg_view.php?id=".$row['recID']."\"><i class='far fa-eye' title='View JSG' style='font-size:18px;color:purple'></i></a>
-                                                                        <a href=\"jsg_edit.php?id=".$row['recID']."\"><i class='far fa-edit' title='Edit JSG Details' style='font-size:18px;color:green'></i></a>
-                                                                        <a href=\"jsg_add_hh.php?id=".$row['recID']."\"><i class='fas fa-user-alt' title='Add Beneficiary to JSG' style='font-size:18px;color:orange'></i></a>  
-                                                                        <a onClick=\"javascript: return confirm('Are You Sure You want To Delete This JSG - You Must Be a Supervisor');\" href=\"jsg_delete.php?id=".$row['recID']."\"><i class='far fa-trash-alt' title='Delete JSG' style='font-size:18px;color:red'></i></a>    
-                                                                    </td>\n";
-
-                                                                echo "</tr>\n";
-                                                                }
-                                                                $result_set->close();
-                                                                }  
-                                                                                    
+                                            <div class="col-12">
+                                                <label for="district" class="form-label">District</label>
+                                                <select class="form-select" name="district" id="district" value ="" required>
+                                                    <option></option>
+                                                        <?php                                                           
+                                                            $dis_fetch_query = "SELECT DistrictID,DistrictName FROM tbldistrict where regionID =$region";                                                  
+                                                            $result_dis_fetch = mysqli_query($link, $dis_fetch_query);                                                                       
+                                                            $i=0;
+                                                                while($DB_ROW_Dis = mysqli_fetch_array($result_dis_fetch)) {
                                                             ?>
-                                                        </tbody>
-                                                    </table>
-                                                    </p>
+                                                            <option value="<?php echo $DB_ROW_Dis["DistrictID"]; ?>">
+                                                                <?php echo $DB_ROW_Dis["DistrictName"]; ?></option><?php
+                                                                $i++;
+                                                                    }
+                                                        ?>
+                                                </select>
+                                                <div class="invalid-feedback">
+                                                    Please select a valid Malawi district.
                                                 </div>
-                                            </div>     
-                                        </div>            
-                                    </div> 
+                                            </div>
+
+                                            
+                                            <div class="col-12">
+                                                <button type="submit" class="btn btn-btn btn-outline-primary w-md" name="Submit" value="Submit">Submit</button>
+                                                <INPUT TYPE="button" class="btn btn-btn btn-outline-secondary w-md" VALUE="Back" onClick="history.go(-1);">
+                                            </div>
+                                        </form>                                             
+                                        <!-- End Here -->
+                                    </div>
+                                </div>
+
+                                <!-- start Here -->
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="card border border-primary">
+                                        <div class="card-header bg-transparent border-primary">
+                                            <h5 class="my-0 text-primary">Joint Skill Groups in <?php echo get_rname($link,$region); ?> Region</h5>
+                                        </div>
+                                        <div class="card-body">
+                                        <h7 class="card-title mt-0"></h7>
+                                            
+                                                <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
+                                                
+                                                    <thead>
+                                                        <tr>
+                                                            <th>JSG code</th>
+                                                            <th>JSG Name</th>
+                                                            <th>SLG Name</th>
+                                                            <th>Cluster Name</th>
+                                                            <th>Members</th>
+                                                            <th>JSG Members-DB</th>
+                                                            <th>Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <?Php
+                                                            $query="select * from tbljsg inner join tbldistrict on tbldistrict.districtID = tbljsg.districtID  where ((tbldistrict.regionID = '$region') and (tbljsg.deleted ='0'))";
+
+                                                            //Variable $link is declared inside config.php file & used here
+                                                            
+                                                            if ($result_set = $link->query($query)) {
+                                                            while($row = $result_set->fetch_array(MYSQLI_ASSOC))
+                                                            { $disname = (string) dis_name($link,$row["districtID"]);
+                                                            $membership = $row["no_male"]+$row["no_female"];
+                                                            $check = substr($row["groupID"], 5, 3);
+                                                            
+                                                            if (($check == "CLU") or ($check == "CLS")){
+                                                            $gpID =   $row["groupID"];                                                  
+                                                            $name_query = mysqli_query($link,"select ClusterName from tblcluster where ClusterID='$gpID'"); // select query
+                                                            while($rg = mysqli_fetch_array($name_query)){
+                                                            $clustername = $rg['ClusterName'];}} else{$clustername = "";}
+                                                
+                                                            if ($check == "SLG"){
+                                                            $gpID =   $row["groupID"];
+                                                            $grpname_query = mysqli_query($link,"select groupname from tblgroup where groupID='$gpID'"); // select query
+                                                            while($rg = mysqli_fetch_array($grpname_query)){
+                                                            $groupname = $rg['groupname'];}} else{$groupname ="";}
+
+                                                            $DbMembers = mysqli_query($link, "SELECT COUNT(sppCode) AS HHs FROM tbljsg_hhs where groupID = '$gpID'"); 
+                                                            $db = mysqli_fetch_assoc($DbMembers); 
+                                                            $HHs = $db['HHs'];
+
+                                                            echo "<tr>\n";
+                                                                echo "<td>".$row["recID"]."</td>\n";
+                                                                echo "<td>".$row["jsg_name"]."</td>\n";
+                                                                echo "<td>\t\t$groupname</td>\n";
+                                                                echo "<td>\t\t$clustername</td>\n";
+                                                                echo "<td>\t\t$membership</td>\n";
+                                                                echo "<td>\t\t$HHs</td>\n";
+                                                                
+                                                                echo "<td>
+                                                                    <a href=\"jsg_view.php?id=".$row['recID']."\"><i class='far fa-eye' title='View JSG' style='font-size:18px;color:purple'></i></a>
+                                                                    <a href=\"jsg_edit.php?id=".$row['recID']."\"><i class='far fa-edit' title='Edit JSG Details' style='font-size:18px;color:green'></i></a>
+                                                                    <a href=\"jsg_add_hh.php?id=".$row['recID']."\"><i class='fas fa-user-alt' title='Add Beneficiary to JSG' style='font-size:18px;color:orange'></i></a>  
+                                                                    <a onClick=\"javascript: return confirm('Are You Sure You want To Delete This JSG - You Must Be a Supervisor');\" href=\"jsg_delete.php?id=".$row['recID']."\"><i class='far fa-trash-alt' title='Delete JSG' style='font-size:18px;color:red'></i></a>    
+                                                                </td>\n";
+
+                                                            echo "</tr>\n";
+                                                            }
+                                                            $result_set->close();
+                                                            }  
+                                                                                
+                                                        ?>
+                                                    </tbody>
+                                                </table>
+                                                </p>
+                                            </div>
+                                        </div>     
+                                    </div>            
+                                </div> 
                                     <!-- start Here -->
                             </div>
                         </div>
