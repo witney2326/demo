@@ -2,7 +2,7 @@
 <?php include 'layouts/head-main.php'; ?>
 
 <head>
-    <title>SLG |Income Generating Activities</title>
+    <title>YCS |Add Beneficiary Youth</title>
     <?php include 'layouts/head.php'; ?>
     <?php include 'layouts/head-style.php'; ?>
 </head>
@@ -11,7 +11,6 @@
 
     <?php
         
-
         include "layouts/config.php"; // Using database connection file here
 
         function dis_name($link, $disID)
@@ -64,7 +63,6 @@
     <!-- Start right Content here -->
     <!-- ============================================================== -->
     <div class="main-content">
-
         <div class="page-content">
             <div class="container-fluid">
 
