@@ -15,6 +15,8 @@ if(isset($_POST['Submit']))
 
     if ($mapped == '1')
      {
+        $my_sql = mysqli_query($link,"update tblbeneficiaries  SET ycs_mapped = '1' where sppCode = '$ml_code'");
+
         if ((isset($youth_name))&&(isset($ml_code))&&(isset($youth_NID))&&(isset($voc)))
         {
             $sql = "INSERT INTO tblycs (groupID,districtID,voc_type,hh_code,national_id,beneficiary,gender,dob)

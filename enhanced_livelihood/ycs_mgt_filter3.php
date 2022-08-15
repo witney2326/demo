@@ -107,9 +107,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
                                             <!--start here -->
                                             <div class="card border border-primary">
-                                                <div class="card-header bg-transparent border-primary">
-                                                    <h5 class="my-0 text-primary"></i>SLG Search Results</h5>
-                                                </div>
+                                                
                                                 <div class="card-body">
                                                     <h5 class="card-title mt-0"></h5>
                                                     <form class="row row-cols-lg-auto g-3 align-items-center">
@@ -173,7 +171,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
                                                                 <tbody>
                                                                     <?Php
-                                                                        $query="select * from tblgroup where TAID = '$ta'";
+                                                                        $query="select * from tblgroup where ((TAID = '$ta') and (deleted = '0'))";
  
                                                                         //Variable $link is declared inside config.php file & used here
                                                                         
@@ -197,10 +195,10 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                                             echo "<td>\t\t$mapped</td>\n";
                                                                             echo "<td>\t\t$youths</td>\n";
                                                                             echo "<td>
-                                                                                <a href=\"../basicSLGview.php?id=".$row['groupID']."\"><i class='far fa-eye' title='View SLG' style='font-size:18px'></i></a>                                                                           
-                                                                                <a href=\"view_JSG.php?id=".$row['groupID']."\"><i class='fas fa-balance-scale' title='View JSGs For the Group' style='font-size:18px'></i></a> 
+                                                                                <a href=\"../basicSLGview.php?id=".$row['groupID']."\"><i class='far fa-eye' title='View SLG' style='font-size:18px;color:purple'></i></a>                                                                           
+                                                                                <a href=\"view_Youths?id=".$row['groupID']."\"><i class='far fa-eye' title='View Linked Youths For the Group' style='font-size:18px;color:orange'></i></a> 
                                                                                 <a onClick=\"javascript: return confirm('Are You Sure You want To Map This Group For Youth Challenge Interventions? ');\" href=\"slg_YCS_Map.php?id=".$row['groupID']."\"><i class='fas fa-stamp' title='Map SLG For Youth Challenge Intervention' style='font-size:18px'></i></a>
-                                                                                <a href=\"add_ben_ycs.php?id=".$row['groupID']."&mapped=".$row['ycs_mapped']."\"><i class='fa fa-users' title='Add Youth to YCS intervention' style='font-size:18px'></i></a> 
+                                                                                <a href=\"add_ben_ycs.php?id=".$row['groupID']."&mapped=".$row['ycs_mapped']."\"><i class='fa fa-child' title='Add Youth to YCS intervention' style='font-size:18px;color:green'></i></a> 
                                                                             </td>\n";
                                                                         echo "</tr>\n";
                                                                         }

@@ -112,9 +112,7 @@
                                             <!--start here -->   
                                             <!-- here -->
                                             <div class="card border border-primary">
-                                                <div class="card-header bg-transparent border-primary">
-                                                    <h5 class="my-0 text-primary"></i>Search Filter</h5>
-                                                </div>
+                                                
                                                 <div class="card-body">
                                                     <h5 class="card-title mt-0"></h5>
                                                     <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="ycs_meetings_filter1.php" method ="GET" >
@@ -251,9 +249,7 @@
                                         <p class="mb-0">
 
                                             <div class="card border border-primary">
-                                                <div class="card-header bg-transparent border-primary">
-                                                    <h5 class="my-0 text-primary"></i>Search Filter</h5>
-                                                </div>
+                                                
                                                 <div class="card-body">
                                                     <h5 class="card-title mt-0"></h5>
                                                     <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="ycs_new_meeting_filter1.php" method ="GET" >

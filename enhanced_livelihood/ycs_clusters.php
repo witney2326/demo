@@ -78,9 +78,7 @@
                             <div class="card-body">
      
                                 <div class="card border border-primary">
-                                    <div class="card-header bg-transparent border-primary">
-                                        <h5 class="my-0 text-primary">Cluster Filter</h5>
-                                    </div>
+                                    
 
                                     <div class="card-body">
                                         <h5 class="card-title mt-0"></h5>
@@ -190,7 +188,7 @@
                                                     </thead>
                                                     <tbody>
                                                         <?Php
-                                                            $query="select * from tblcluster where regionID = '0'";
+                                                            $query="select * from tblcluster where ((regionID = '0') and (deleted = '0'))";
 
                                                             //Variable $link is declared inside config.php file & used here
                                                             
@@ -216,9 +214,9 @@
                                                                 echo "<td>\t\t$youths</td>\n";
                                                                 
                                                                 echo "<td>
-                                                                    <a href=\"view_JSG.php?id=".$row['ClusterID']."\"><i class='fas fa-balance-scale' title='View JSGs For the Cluster' style='font-size:18px'></i></a> 
-                                                                    <a onClick=\"javascript: return confirm('Are You Sure You want To Map This Cluster For JSGs Interventions? ');\" href=\"cls_JSG_Map.php?id=".$row['ClusterID']."\"><i class='fas fa-stamp' title='Map Cluster For JSG Intervention' style='font-size:18px'></i></a>
-                                                                    <a href=\"add_JSG_clusters.php?id=".$row['ClusterID']."\"><i class='fa fa-users' title='Add JSG to Cluster' style='font-size:18px'></i></a>    
+                                                                    <a href=\"view_Youths.php?id=".$row['ClusterID']."\"><i class='fas fa-balance-scale' title='View Linked Youths For the Cluster' style='font-size:18px; color: purple'></i></a> 
+                                                                    <a onClick=\"javascript: return confirm('Are You Sure You want To Map This Cluster For JSGs Interventions? ');\" href=\"cls_YCS_Map.php?id=".$row['ClusterID']."\"><i class='fas fa-stamp' title='Map Cluster For YCS Intervention' style='font-size:18px; color:orange'></i></a>
+                                                                    <a href=\"add_ben_ycs.php?id=".$row['ClusterID']."&mapped=".$row['ycs_mapped']."\"><i class='fa fa-users' title='Add Youth to YCS intervention' style='font-size:18px;color:green'></i></a>    
                                                                 </td>\n";
 
                                                             echo "</tr>\n";

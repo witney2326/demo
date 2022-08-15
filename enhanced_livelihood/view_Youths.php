@@ -2,16 +2,11 @@
 <?php include 'layouts/head-main.php'; ?>
 
 <head>
-    <title>View JSG |Joint Skill Groups</title>
+    <title>View Linked Youths |Youth Challenge</title>
     <?php include 'layouts/head.php'; ?>
     <?php include 'layouts/head-style.php'; ?>
 </head>
 
-<?php include 'layouts/body.php'; ?>
-
-<div id="layout-wrapper">
-
-    
 
     <?php
         
@@ -60,6 +55,8 @@
         
     ?>
 
+    
+
     <!-- ============================================================== -->
     <!-- Start right Content here -->
     <!-- ============================================================== -->
@@ -72,7 +69,7 @@
                     <div class="col-12">
                         <div class="card border border-primary">
                         <div class="card-header bg-transparent border-primary">
-                            <h5 class="my-0 text-primary">JSG Record for: <?php echo $groupname;?> </h5>
+                            <h5 class="my-0 text-primary">YCS Record for: <?php echo $groupname;?> </h5>
                         </div>
                         <div class="card-body">
                         <h5 class="card-title mt-0"></h5>
@@ -83,12 +80,13 @@
                                         <tr>
                                             
                                             
-                                            <th>JSG ID</th>   
-                                            <th>JSG Name</th>
+                                            <th>ID</th>   
+                                            <th>Name</th>
+                                            <th>SLG Name</th>
                                             <th>District</th>
-                                            <th>IGA Type</th>
-                                            <th>Males</th>
-                                            <th>Females</th>
+                                            <th>Vocational Type</th>
+                                            <th>Age</th>
+                                            <th>Voc Scool Linked</th>                                        
                                             <th>Action</th>
  
                                         </tr>
@@ -98,7 +96,7 @@
                                     <tbody>
                                         <?Php
                                                 $id = $_GET['id'];
-                                            $query="select * from tbljsg where groupID ='$id';";
+                                            $query="select * from tblycs where groupID ='$id';";
 
                                             //Variable $link is declared inside config.php file & used here
                                             
@@ -113,15 +111,15 @@
 
                                             echo "<tr>\n";                                           
                                                 echo "<td>".$row["recID"]."</td>\n";
-                                                  
+                                                echo "<td>".$row["beneficiary"]."</td>\n";
                                                 echo "<td>".$row["jsg_name"]."</td>\n";
                                                 echo "\t\t<td>$district_name</td>\n";
                                                 echo "\t\t<td>$ig_name</td>\n";
-                                                echo "<td>".$row["no_male"]."</td>\n";
-                                                echo "<td>".$row["no_female"]."</td>\n";
+                                                echo "<td>".$row["dob"]."</td>\n";
+                                                echo "<td>".$row["vocSchoolLinked"]."</td>\n";
                                                 echo "<td>
                                                     <a href=\"jsg_edit.php?id=".$row['recID']."\"><i class='far fa-edit' style='font-size:18px;color:purple'></i></a>
-                                                    <a href=\"jsg_add_hh.php?id=".$row['recID']."\"><i class='fa fa-users' title='Add Beneficiary to JSG' style='font-size:18px;color:brown'></i></a>  
+                                                    <a href=\"?id=".$row['recID']."\"><i class='fa fa-users' title='Add Beneficiary to JSG' style='font-size:18px;color:brown'></i></a>  
                                                     
                                                 </td>\n";
                                             echo "</tr>\n";
