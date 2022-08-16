@@ -12,6 +12,29 @@
     <!-- Responsive datatable examples -->
     <link href="assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
 
+     <!--Datatable plugin CSS file -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" />
+  
+  <!--jQuery library file -->
+  <script type="text/javascript" 
+      src="https://code.jquery.com/jquery-3.5.1.js">
+  </script>
+
+  <!--Datatable plugin JS library file -->
+  <script type="text/javascript" 
+src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
+  </script>
+
+<script LANGUAGE="JavaScript">
+        function confirmSubmit()
+        {
+        var agree=confirm("Are you sure you want to RATE this Cluster?");
+        if (agree)
+        return true ;
+        else
+        return false ;
+        }   
+    </script>
 </head>
 
 <?php include 'layouts/body.php'; ?>
@@ -137,21 +160,22 @@
                                     <div class="row">
                                         <div class="col-12">
                                             <div class="card border border-primary">
-                                            <div class="card-header bg-transparent border-primary">
-                                                <h5 class="my-0 text-primary">Youths in Youth Challenge Support in <?php echo get_rname($link,$region); ?> Region</h5>
-                                            </div>
+                                            
                                             <div class="card-body">
                                             <h7 class="card-title mt-0"></h7>
                                                 
-                                                    <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
+                                                    <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100"style=font-size:12px>
                                                     
                                                         <thead>
                                                             <tr>
                                                                 <th>Rec ID</th>
                                                                 <th>HH code</th>
-                                                                <th>Name</th>
-                                                                <th>District</th>
                                                                 <th>Group ID</th>
+                                                                <th>Name</th>
+                                                                <th>Bus Concept</th>
+                                                                <th>Rating</th>                                                                 
+                                                                <th>Assessed?</th>
+                                                                <th>Ass. Result</th>  
                                                                 <th>Action</th>
                                                             </tr>
                                                         </thead>
@@ -164,12 +188,29 @@
                                                                 if ($result_set = $link->query($query)) {
                                                                 while($row = $result_set->fetch_array(MYSQLI_ASSOC))
                                                                 { 
+                                                                    $grpID = $row["groupID"];
+                                                                if ($row["bus_concept_developed"]== '0'){$bc = "No";}
+                                                                if ($row["bus_concept_developed"]== '1'){$bc = "Yes";}
                                                                 echo "<tr>\n";                                                              
                                                                     echo "<td>".$row["recID"]."</td>\n";
                                                                     echo "<td>".$row["hh_code"]."</td>\n";
-                                                                    echo "<td>".$row["beneficiary"]."</td>\n";
-                                                                    echo "<td>\t\t$disname</td>\n";
                                                                     echo "<td>".$row["groupID"]."</td>\n";
+                                                                    echo "<td>".$row["beneficiary"]."</td>\n";
+                                                                    echo "<td>\t\t$bc</td>\n";
+                                                                    echo "<td>";
+                                                                    echo "<form action = 'rateslg.php' method ='POST'>";
+                                                                        echo '<select id="rating"  name="rating">';
+                                                                            
+                                                                            echo '<option value="0">NA</option>';
+                                                                            echo '<option value="1">Good</option>';
+                                                                            echo '<option value="2">Poor</option>';
+                                                                        echo "</select>";
+                                                                        echo "<input type='hidden' id='grpID' name='grpID' value='$grpID'>";
+                                                                        echo "<button type='submit' class='btn-outline-success' name='FormSubmit' value='Submit' onClick='return confirmSubmit()'>Rate</button>";
+                                                                        echo "</form>";
+                                                                    echo "</td>";
+                                                                    echo "\t\t<td></td>\n";
+                                                                    echo "\t\t<td></td>\n";
                                                                     
                                                                     echo "<td>
                                                                         <a href=\"basicCLSview.php?id=".$row['recID']."\"><i class='far fa-eye' title='View JSG' style='font-size:18px'></i></a>
