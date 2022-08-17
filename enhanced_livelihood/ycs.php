@@ -99,14 +99,6 @@
                                         </a>
                                     </li>
 
-                                    
-                                    <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link" data-bs-toggle="tab" href="#reports" role="tab">
-                                            <span class="d-block d-sm-none"><i class="fas fa-cog"></i></span>
-                                            <span class="d-none d-sm-block">Reports</span>
-                                        </a>
-                                    </li>
-
                                 </ul>
 
                                 <!-- Tab panes -->
@@ -124,7 +116,7 @@
                                                                         <div class="card-body">
                                                                             <div class="d-flex">
                                                                                 <div class="flex-grow-1">
-                                                                                    <i class='fas fa-house-user' style='font-size:24px'></i>
+                                                                                    <i class='fas fa-house-user' style='font-size:18px;color:black'></i><i class='fas fa-house-user' style='font-size:18px;color:coral'></i>
                                                                                     <p class="text-muted fw-medium">Youths Sensitized</p>
                                                                                     <?php
                                                                                         $result = mysqli_query($link, 'SELECT sum(malesNo) AS total_males FROM tblawareness_meetings where sectorID ="13"'); 
@@ -157,7 +149,7 @@
                                                                 <div class="card-body">
                                                                     <div class="d-flex">
                                                                         <div class="flex-grow-1">
-                                                                            <i class='fas fa-users' style='font-size:24px'></i>
+                                                                            <i class='fas fa-users' style='font-size:18px;color:brown'></i><i class='fas fa-users' style='font-size:18px;color:chocolate'></i>
 
                                                                             <p class="text-muted fw-medium">Youths in YCS</p>
                                                                             <?php
@@ -182,7 +174,7 @@
                                                                 <div class="card-body">
                                                                     <div class="d-flex">
                                                                         <div class="flex-grow-1">
-                                                                            <i class='fas fa-user-graduate' style='font-size:24px'></i>
+                                                                            <i class='fas fa-user-graduate' style='font-size:18px;color:black'></i><i class='fas fa-user-graduate' style='font-size:18px;color:black'></i>
 
                                                                             <p class="text-muted fw-medium">Youths Linked (Vocational Skills)</p>
                                                                             <h4 class="mb-0">0</h4>
@@ -199,7 +191,7 @@
                                                                 <div class="card-body">
                                                                     <div class="d-flex">
                                                                         <div class="flex-grow-1">
-                                                                            <i class='fas fa-chalkboard-teacher' style='font-size:24px'></i>
+                                                                            <i class='fas fa-chalkboard-teacher' style='font-size:18px;color:black'></i><i class='fas fa-chalkboard-teacher' style='font-size:18px;color:black'></i>
 
                                                                             <p class="text-muted fw-medium">Youths Linked (Financial)</p>
                                                                             <h4 class="mb-0">0</h4>
