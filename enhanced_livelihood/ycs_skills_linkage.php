@@ -91,20 +91,14 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                     <li class="nav-item waves-effect waves-light">
                                         <a class="nav-link active" data-bs-toggle="tab" href="#home-1" role="tab">
                                             <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
-                                            <span class="d-none d-sm-block">JSGs</span>
+                                            <span class="d-none d-sm-block">Selected IGPs/Concepts and Skills Linkages</span>
                                         </a>
                                     </li>
-                                    <li class="nav-item waves-effect waves-light">
-                                        <a class="link"  href="basic_livelihood_training_trained_groups.php" role="link">
-                                            <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
-                                            <span class="d-none d-sm-block">Finance Linked JSGs</span>
-                                        </a>
-                                    </li>
-                                                                       
+                                                                                                           
                                     <li class="nav-item waves-effect waves-light">
                                         <a class="link"  href="enhancedReports.php" role="link">
                                             <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
-                                            <span class="d-none d-sm-block"> Reports</span>
+                                            <span class="d-none d-sm-block"> Skills Training Reports</span>
                                         </a>
                                     </li>
                                     
