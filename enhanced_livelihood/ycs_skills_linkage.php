@@ -110,9 +110,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                         <p class="mb-0">
                                             <!--start here -->
                                             <div class="card border border-primary">
-                                                <div class="card-header bg-transparent border-primary">
-                                                    <h5 class="my-0 text-primary">Training Search Filter</h5>
-                                                </div>
+                                                
                                                 <div class="card-body">
                                                     <h5 class="card-title mt-0"></h5>
                                                     <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="ycs_skills_linkage_filter1.php" method ="GET" >
@@ -198,44 +196,43 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                             <div class="row">
                                                 <div class="col-12">
                                                     <div class="card border border-primary">
-                                                    <div class="card-header bg-transparent border-primary">
-                                                        <h5 class="my-0 text-primary">Joint Skill Groups</h5>
-                                                    </div>
-                                                    <div class="card-body">
-                                                    <h7 class="card-title mt-0"></h7>
+                                                    
+                                                        <div class="card-body">
+                                                    
                                                         
                                                             <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
                                                             
-                                                                <thead>
-                                                                    <tr>
-                                                                        <th>Groupcode</th>
-                                                                        <th>Group Name</th>
-                                                                        <th>Males</th>
-                                                                        <th>Females</th>
-                                                                        <th>Total Members</th>
-                                                                        <th>Action</th>                                                                        
-                                                                    </tr>
-                                                                </thead>
-
-
-                                                                <tbody>
-                                                                    <?Php
-                                                                        $query="select * from tblgroup where regionID ='0'";
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Rec ID</th>
+                                                                    <th>HH code</th>
+                                                                    <th>Group ID</th>
+                                                                    <th>Name</th>
+                                                                    <th>Vocational Skill</th>
+                                                                    <th>Action</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <?Php
+                                                                    $query="select * from tblycs where bc_assesed_result ='1'";
  
                                                                         //Variable $link is declared inside config.php file & used here
                                                                          
                                                                         if ($result_set = $link->query($query)) {
                                                                         while($row = $result_set->fetch_array(MYSQLI_ASSOC))
                                                                         { 
-                                                                          $totalMembers = $row["MembersM"]+$row["MembersF"];  
+                                                                          
                                                                         echo "<tr>\n"; 
+                                                                            echo "<td>".$row["recID"]."</td>\n";
+                                                                            echo "<td>".$row["hh_code"]."</td>\n";
                                                                             echo "<td>".$row["groupID"]."</td>\n";
-                                                                            echo "<td>".$row["groupname"]."</td>\n";
-                                                                            echo "<td>".$row["MembersM"]."</td>\n";
-                                                                            echo "<td>".$row["MembersF"]."</td>\n";
-                                                                            echo "<td>\t\t$totalMembers</td>\n";                        
+                                                                            echo "<td>".$row["beneficiary"]."</td>\n";
+                                                                            echo "<td>".$row["voc_type"]."</td>\n";                       
                                                                             echo "<td>
-                                                                                <a href=\"basicSLGTraining_view.php?id=".$row['groupID']."\"><i class='far fa-eye' title='Training Status' style='font-size:18px;color:purple'></i></a>                                                                           
+                                                                                <a href=\"../basicSLGTraining_view.php?id=".$row['groupID']."\"><i class='far fa-eye' title='Training Status' style='font-size:18px;color:purple'></i></a> 
+                                                                                <a href=\"?id=".$row['groupID']."\"><i class='fa fa-link' title='Link HH to Voc School' style='font-size:18px;color:orange'></i></a>                                                                         
+                                                                                <a href=\"?id=".$row['groupID']."\"><i class='fas fa-ban' title='HH Training Status' style='font-size:18px;color:blue'></i></a>                                                                         
+                                                                                
                                                                                 <a href=\"add_basicTrainingGD.php?id=".$row['groupID']."\" ><i class='fas fa-pen' title='Record Training' style='font-size:18px;color:green'></i></a>                                                                            
                                                                                 
                                                                             </td>\n";

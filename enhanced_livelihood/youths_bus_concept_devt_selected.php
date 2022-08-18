@@ -170,7 +170,6 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                         <div class="card border border-primary">
                                         
                                         <div class="card-body">
-                                        <h7 class="card-title mt-0"></h7>
                                             
                                                 <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100" style=font-size:12px>
                                                 

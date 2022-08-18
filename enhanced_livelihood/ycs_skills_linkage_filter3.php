@@ -153,8 +153,8 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                             <div class="row">
                                                 <div class="col-12">
                                                     <div class="card border border-primary">
-                                                        <h5 class="my-0 text-primary">Joint Skill Groups</h5>
-                                                    <div class="card-body">
+                                                        
+                                                        <div class="card-body">
                                                     
                                                         
                                                             <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
