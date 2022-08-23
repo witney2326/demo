@@ -98,7 +98,7 @@
                             <th>District</th>
                             <th>Vocational Type</th>
                             <th>Age</th>
-                            <th>Voc Scool Linked</th>                                        
+                            <th>Voc School Linked</th>                                        
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -118,18 +118,22 @@
                                 
                                 $district_name = dis_name($link,$row["districtID"]);
                                 $ig_name = iga_name($link,$row["voc_type"]);
-                        
 
+                                $dateOfBirth = $row["dob"];
+                                $today = date("Y-m-d");
+                                $diff = date_diff(date_create($dateOfBirth), date_create($today));
+                                $age = $diff->format('%y');
+                                                                            
                             echo "<tr>\n";                                           
                                 echo "<td>".$row["recID"]."</td>\n";
                                 echo "<td>".$row["beneficiary"]."</td>\n";
                                 echo "<td>\t\t$group</td>\n";
                                 echo "\t\t<td>$district_name</td>\n";
                                 echo "\t\t<td>$ig_name</td>\n";
-                                echo "<td>".$row["dob"]."</td>\n";
+                                echo "<td>\t\t$age</td>\n";
                                 echo "<td>".$row["vocSchoolLinked"]."</td>\n";
                                 echo "<td>
-                                    <a href=\"?id=".$row['recID']."\"><i class='far fa-edit' style='font-size:18px;color:purple'></i></a>
+                                    <a href=\"?id=".$row['recID']."\"><i class='far fa-edit' title ='Edit Record' style='font-size:18px;color:orange'></i></a>
                                     <a href=\"?id=".$row['recID']."\"><i class='fa fa-users' title='Link Beneficiary to Voc School' style='font-size:18px;color:brown'></i></a>  
                                     
                                 </td>\n";

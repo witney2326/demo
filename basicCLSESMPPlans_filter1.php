@@ -120,9 +120,7 @@
                         <?php include 'layouts/body.php'; ?>
 
                         <div class="card border border-primary">
-                            <div class="card-header bg-transparent border-primary">
-                                <h5 class="my-0 text-primary"></i>Safeguard Activity Filter</h5>
-                            </div>
+                            
                             <div class="card-body">
                                 <h5 class="card-title mt-0"></h5>
                                 <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="" method ="GET" >
@@ -157,30 +155,21 @@
                                     <form method="POST" action="insertSLGSafeguardPlan.php">
                                        
                                         <div class="row mb-2">
-                                            <label for="group_code" class="col-sm-3 col-form-label">Group Code</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="group_code" name = "group_code" value="<?php echo $id; ?>" style="max-width:30%;" readonly >
-                                            </div>
+                                            <label for="group_code" class="col-sm-2 col-form-label">Group Code</label>
+                                            <input type="text" class="form-control" id="group_code" name = "group_code" value="<?php echo $id; ?>" style="max-width:30%;" readonly >
+
+                                            <label for="district" class="col-sm-2 col-form-label">District</label>
+                                            <input type="text" class="form-control" id="district" name="district" value ="<?php echo $districtID ; ?>" style="max-width:30%;">
                                         </div>
                                         
+                                                                                                                       
                                         <div class="row mb-2">
-                                            <label for="district" class="col-sm-3 col-form-label">District</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="district" name="district" value ="<?php echo $districtID ; ?>" style="max-width:30%;">
-                                            </div>
-                                        </div>
-                                        
-                                                                               
-                                        <div class="row mb-2">
-                                            <label for="buscat1" class="col-sm-4 col-form-label">Select Business Category</label>
+                                            <label for="buscat1" class="col-sm-2 col-form-label">Bus Cat</label>
                                             <select class="form-select" name="buscat1" id="buscat1" value ="<?php echo $buscat; ?>" style="max-width:30%;" required>
-                                                <option selected value="<?php echo $buscat; ?>"><?php echo cat_name($link,$buscat); ?></option>
-                                                
+                                                <option selected value="<?php echo $buscat; ?>"><?php echo cat_name($link,$buscat); ?></option>   
                                             </select>
-                                        </div>
-                                        
-                                        <div class="row mb-2">
-                                            <label for="bustype" class="col-sm-4 col-form-label">Select Business Type</label>
+
+                                            <label for="bustype" class="col-sm-2 col-form-label">Bus Type</label>
                                             <select class="form-select" name="bustype" id="bustype" value ="" style="max-width:30%;" required >
                                                 <option></option>
                                                 <?php                                                           
@@ -196,9 +185,10 @@
                                                 ?>
                                             </select>
                                         </div>
-
+                                        
+                                        
                                         <div class="row mb-2">
-                                            <label for="sactivity" class="col-sm-4 col-form-label">Select Applicable Planned Activity</label>
+                                            <label for="sactivity" class="col-sm-2 col-form-label">Activity</label>
                                             <select class="form-select" name="sactivity" id="sactivity" value ="" style="max-width:30%;" required>
                                                 <option></option>
                                                 <?php                                                           
@@ -213,10 +203,8 @@
                                                             }
                                                 ?>
                                             </select>
-                                        </div>
 
-                                        <div class="row mb-2">
-                                            <label for="indicator" class="col-sm-4 col-form-label">Monitoring Indicator</label>
+                                            <label for="indicator" class="col-sm-2 col-form-label">Indicator</label>
                                             <select class="form-select" name="indicator" id="indicator" value ="" style="max-width:30%;" required>
                                                 <option></option>
                                                 <?php                                                           
@@ -233,42 +221,31 @@
                                             </select>
                                         </div>
 
+                                        
                                         <div class="row mb-2">
-                                            <label for="target" class="col-sm-3 col-form-label">Target</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="target" name="target" value ="" style="max-width:30%;">
-                                            </div>
+                                            <label for="target" class="col-sm-2 col-form-label">Target</label>
+                                            <input type="text" class="form-control" id="target" name="target"  style="max-width:30%;">
+
+                                            <label for="amount_invested" class="col-sm-2 col-form-label">Invested</label>
+                                            <input type="text" class="form-control" id="amount_invested" name="amount_invested"  style="max-width:30%;">
                                         </div>
 
                                         <div class="row mb-2">
-                                            <label for="startdate" class="col-sm-3 col-form-label">Start Date</label>
-                                            <div class="col-sm-9">
-                                                <input type="date" class="form-control" id="startdate" name="startdate" value ="" style="max-width:30%;">
-                                            </div>
+                                            <label for="startdate" class="col-sm-2 col-form-label">Start Date</label>
+                                            <input type="date" class="form-control" id="startdate" name="startdate"  style="max-width:30%;">
+
+                                            <label for="finishdate" class="col-sm-2 col-form-label">Finish Date</label>
+                                            <input type="date" class="form-control" id="finishdate" name="finishdate"  style="max-width:30%;">
                                         </div>
 
                                         <div class="row mb-2">
-                                            <label for="finishdate" class="col-sm-3 col-form-label">Finish Date</label>
-                                            <div class="col-sm-9">
-                                                <input type="date" class="form-control" id="finishdate" name="finishdate" value ="" style="max-width:30%;">
-                                            </div>
-                                        </div>
-
-
-
-                                        <div class="row mb-2">
-                                            <label for="amount_invested" class="col-sm-3 col-form-label">Amount Invested</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="amount_invested" name="amount_invested" value ="" style="max-width:30%;">
-                                            </div>
+                                            
                                         </div>
 
                                         <div class="row justify-content-end">
-                                            <div class="col-sm-9">
-                                                <div>
-                                                    <button type="submit" class="btn btn-btn btn-outline-primary w-md" name="Submit" value="Submit">Save New SLG Safeguard Plan Record</button>
-                                                    <INPUT TYPE="button" class="btn btn-btn btn-outline-secondary w-md" VALUE="Back" onClick="history.go(-1);">
-                                                </div>
+                                            <div>
+                                                <button type="submit" class="btn btn-btn btn-outline-primary w-md" name="Submit" value="Submit">Save New SLG Safeguard Plan Record</button>
+                                                <INPUT TYPE="button" class="btn btn-btn btn-outline-secondary w-md" VALUE="Back" onClick="history.go(-1);">
                                             </div>
                                         </div>
                                     </form>
