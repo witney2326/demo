@@ -132,7 +132,7 @@
                                                                                     ?>
                                                                                         <h5 class="mb-0">
                                                                                             <div class="container">
-                                                                                                <div class="mb-0"><?php echo "" . $sum;?></div>
+                                                                                                <div class="mb-0"><?php echo "" . number_format($sum);?></div>
                                                                                             </div> 
                                                                                         </h5>
                                                                                 </div>
@@ -158,7 +158,7 @@
                                                                                         $total_youths = $row['total_youths'];
                                                                                     ?>
                                                                                         <div class="container">
-                                                                                            <h4><div class="mb-0"><?php echo "" . $total_youths;?></div></h4>
+                                                                                            <h4><div class="mb-0"><?php echo "" . number_format($total_youths);?></div></h4>
                                                                                         </div>
                                                                             
                                                                         </div>

@@ -27,6 +27,12 @@
         $rg = mysqli_fetch_array($rg_query);
         return $rg['ClusterName'];
     }
+    function grp_name($link, $clID)
+    {
+        $rg_query = mysqli_query($link,"select groupname from tblgroup where groupID='$clID'"); // select query
+        $rg = mysqli_fetch_array($rg_query);
+        return $rg['groupname'];
+    }
 
     function r_name($link, $rcode)
     {
@@ -56,6 +62,19 @@
         return $rg['name'];
     }
 
+    function iga_name($link, $igaID)
+         {
+         $iga_query = mysqli_query($link,"select name from tbliga_types where ID='$igaID'"); // select query
+         $iga = mysqli_fetch_array($iga_query);// fetch data
+         return $iga['name'];
+         }
+    
+    function ta_name($link, $taID)
+        {
+        $ta_query = mysqli_query($link,"select TAName from tblta where TAID='$taID'"); // select query
+        $taname = mysqli_fetch_array($ta_query);// fetch data
+        return $taname['TAName'];
+    }
     
     ?>
     

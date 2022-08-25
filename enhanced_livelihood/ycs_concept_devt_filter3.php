@@ -27,33 +27,16 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 </head>
 
 <?php include 'layouts/body.php'; ?>
-
+<?php include '../lib.php'; ?>
 <?php  
-    $region = $_GET['region'];
-    $district = $_GET['district'];
-    $ta = $_GET['ta'];
+    $region = $_POST['region'];
+    $district = $_POST['district'];
+    $ta = $_POST['ta'];
    
     
-    function get_rname($link, $rcode)
-        {
-        $rg_query = mysqli_query($link,"select name from tblregion where regionID='$rcode'"); // select query
-        $rg = mysqli_fetch_array($rg_query);// fetch data
-        return $rg['name'];
-        }
     
-        function dis_name($link, $disID)
-        {
-        $dis_query = mysqli_query($link,"select DistrictName from tbldistrict where DistrictID='$disID'"); // select query
-        $dis = mysqli_fetch_array($dis_query);// fetch data
-        return $dis['DistrictName'];
-        }
 
-        function ta_name($link, $taID)
-        {
-        $ta_query = mysqli_query($link,"select TAName from tblta where TAID='$taID'"); // select query
-        $taname = mysqli_fetch_array($ta_query);// fetch data
-        return $taname['TAName'];
-        }
+        
 ?>
 
 <!-- Begin page -->
@@ -98,7 +81,36 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
                                 
                                 <!-- Nav tabs -->
-                                
+                                <!-- Nav tabs -->
+                                <ul class="nav nav-pills nav-justified" role="tablist">
+                                    <li class="nav-item waves-effect waves-light">
+                                        <a class="nav-link active" data-bs-toggle="tab" href="#home-1" role="tab">
+                                            <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
+                                            <span class="d-none d-sm-block"> Beneficiaries</span>
+                                        </a>
+                                    </li>
+                                                                       
+                                    <li class="nav-item waves-effect waves-light">
+                                        <a class="nav-link" data-bs-toggle="link" href="youths_bus_concept_devt.php" role="link">
+                                            <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
+                                            <span class="d-none d-sm-block">Business Concept Submission & Assesment</span>
+                                        </a>
+                                    </li>
+                                    
+                                    <li class="nav-item waves-effect waves-light">
+                                        <a class="link" href="youths_bus_concept_devt_selected.php" role="link">
+                                            <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
+                                            <span class="d-none d-sm-block">Selected Concepts</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item waves-effect waves-light">
+                                        <a class="link" href="enhancedReports.php" role="link">
+                                            <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
+                                            <span class="d-none d-sm-block">YCS Business Concept Reports</span>
+                                        </a>
+                                    </li>
+                                    
+                                </ul>
                                 <!-- Tab panes -->
                                 <div class="tab-content p-3 text-muted">
                                     <div class="tab-pane active" id="home-1" role="tabpanel">
@@ -159,46 +171,44 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                             
                                                                 <thead>
                                                                     <tr>
-                                                                        <th>SLG code</th>
+                                                                        <th>HH code</th>
+                                                                        <th>Ben Name</th>
                                                                         <th>SLG Name</th>
-                                                                        <th>cohort</th>
-                                                                        <th>YCS Mapped?</th>
-                                                                        <th>Youths Linked</th>
-                                                                        <th>Action On SLG</th>  
+                                                                        <th>Voc Type</th>
+                                                                        <th>Gender</th>
+                                                                        <th>Age</th>
+                                                                        <th>Bus Concept?</th>
+                                                                        <th>Action</th>  
                                                                     </tr>
                                                                 </thead>
 
 
                                                                 <tbody>
                                                                     <?Php
-                                                                        $query="select * from tblgroup where TAID = '$ta'";
+                                                                        $query="select * from tblycs inner join tblgroup on tblycs.groupID = tblgroup.groupID where tblgroup.TAID = '$ta'";
  
                                                                         //Variable $link is declared inside config.php file & used here
                                                                         
                                                                         if ($result_set = $link->query($query)) {
                                                                         while($row = $result_set->fetch_array(MYSQLI_ASSOC))
                                                                         { 
-                                                                            $db_mapped = (string) $row["ycs_mapped"];
-                                                                            if ($db_mapped =='1'){$mapped = 'Yes';}
-                                                                            if ($db_mapped =='0'){$mapped = 'No';}
+                                                                            $dateOfBirth = $row["dob"];
+                                                                            $today = date("Y-m-d");
+                                                                            $diff = date_diff(date_create($dateOfBirth), date_create($today));
+                                                                            $age = $diff->format('%y');
 
-                                                                            $grp = $row["groupID"];
-
-                                                                            $result1 = mysqli_query($link, "SELECT COUNT(recID) AS value_sum FROM tblycs WHERE groupID = '$grp'"); 
-                                                                            $row2 = mysqli_fetch_assoc($result1); 
-                                                                            $youths = $row2['value_sum'];
+                                                                            if ($row["bus_concept_developed"] == '1'){$bc = "Yes";}else{$bc = "No";}
 
                                                                         echo "<tr>\n";
-                                                                            echo "<td>".$row["groupID"]."</td>\n";
-                                                                            echo "<td>".$row["groupname"]."</td>\n";
-                                                                            echo "<td>".$row["cohort"]."</td>\n";
-                                                                            echo "<td>\t\t$mapped</td>\n";
-                                                                            echo "<td>\t\t$youths</td>\n";
+                                                                            echo "<td>".$row["hh_code"]."</td>\n";
+                                                                            echo "<td>".$row["beneficiary"]."</td>\n";
+                                                                            echo "<td>".grp_name($link,$row["groupID"])."</td>\n";
+                                                                            echo "<td>".iga_name($link,$row["voc_type"])."</td>\n";
+                                                                            echo "<td>".$row["gender"]."</td>\n";
+                                                                            echo "<td>\t\t$age</td>\n";
+                                                                            echo "<td>\t\t$bc</td>\n";
                                                                             echo "<td>
-                                                                                <a href=\"../basicSLGview.php?id=".$row['groupID']."\"><i class='far fa-eye' title='View SLG' style='font-size:18px'></i></a>                                                                           
-                                                                                <a href=\"view_JSG.php?id=".$row['groupID']."\"><i class='fas fa-balance-scale' title='View JSGs For the Group' style='font-size:18px'></i></a> 
-                                                                                <a onClick=\"javascript: return confirm('Are You Sure You want To Map This Group For Youth Challenge Interventions? ');\" href=\"slg_YCS_Map.php?id=".$row['groupID']."\"><i class='fas fa-stamp' title='Map SLG For Youth Challenge Intervention' style='font-size:18px'></i></a>
-                                                                                <a href=\"add_ben_ycs.php?id=".$row['groupID']."&mapped=".$row['ycs_mapped']."\"><i class='fa fa-users' title='Add Youth to YCS intervention' style='font-size:18px'></i></a> 
+                                                                                <a href=\"../basicSLGview.php?id=".$row['groupID']."\"><i class='far fa-eye' title='View SLG' style='font-size:18px;color:purple'></i></a>                                                                                                                                                                                                                                          
                                                                             </td>\n";
                                                                         echo "</tr>\n";
                                                                         }

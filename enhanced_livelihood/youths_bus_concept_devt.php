@@ -99,12 +99,42 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                      <div class="col-xl-12">
                         <div class="card">
                             <div class="card-body">
+
+                            <ul class="nav nav-pills nav-justified" role="tablist">
+                                    <li class="nav-item waves-effect waves-light">
+                                        <a class="nav-link " data-bs-toggle="link" href="ycs_concept_devt.php" role="link">
+                                            <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
+                                            <span class="d-none d-sm-block"> Beneficiaries</span>
+                                        </a>
+                                    </li>
+                                                                       
+                                    <li class="nav-item waves-effect waves-light">
+                                        <a class="nav-link active" data-bs-toggle="tab" href="" role="tab">
+                                            <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
+                                            <span class="d-none d-sm-block">Business Concept Submission & Assesment</span>
+                                        </a>
+                                    </li>
+                                    
+                                    <li class="nav-item waves-effect waves-light">
+                                        <a class="link" href="youths_bus_concept_devt_selected.php" role="link">
+                                            <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
+                                            <span class="d-none d-sm-block">Selected Concepts</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item waves-effect waves-light">
+                                        <a class="link" href="enhancedReports.php" role="link">
+                                            <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
+                                            <span class="d-none d-sm-block">YCS Business Concept Reports</span>
+                                        </a>
+                                    </li>
+                                    
+                                </ul>
      
                                 <div class="card border border-primary">
                                     
                                     <div class="card-body">
                                         <h5 class="card-title mt-0"></h5>
-                                        <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="youths_bus_concept_devt_filter1.php" method ="GET" >
+                                        <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="youths_bus_concept_devt_filter1.php" method ="POST" >
                                             <div class="col-12">
                                                 <label for="region" class="form-label">Region</label>
                                                 
@@ -154,6 +184,26 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                 </div>
                                             </div>
 
+                                            <div class="col-12">
+                                                <label for="ta" class="form-label">Traditional Authority</label>
+                                                <select class="form-select" name="ta" id="ta" required disabled>
+                                                    <option selected  value="$ta"></option>
+                                                    <?php                                                           
+                                                            $ta_fetch_query = "SELECT TAName FROM tblta";                                                  
+                                                            $result_ta_fetch = mysqli_query($link, $ta_fetch_query);                                                                       
+                                                            $i=0;
+                                                                while($DB_ROW_ta = mysqli_fetch_array($result_ta_fetch)) {
+                                                            ?>
+                                                            <option>
+                                                                <?php echo $DB_ROW_ta["TAName"]; ?></option><?php
+                                                                $i++;
+                                                                    }
+                                                        ?>
+                                                </select>
+                                                <div class="invalid-feedback">
+                                                    Please select a valid TA.
+                                                </div>
+                                            </div>
                                                                                         
                                             <div class="col-12">
                                                 <button type="submit" class="btn btn-btn btn-outline-primary w-md" name="Submit" value="Submit">Submit</button>
@@ -172,7 +222,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                         <div class="card-body">
                                         <h7 class="card-title mt-0"></h7>
                                             
-                                                <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100" style=font-size:11px>
+                                                <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100" style=font-size:10px>
                                                 
                                                     <thead>
                                                         <tr>

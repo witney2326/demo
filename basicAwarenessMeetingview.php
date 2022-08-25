@@ -76,54 +76,39 @@
                                 <div class="card-body">
                                     
                                     <form>
-                                        <div class="row mb-4">
-                                            <label for="hh_id" class="col-sm-3 col-form-label">Meeting ID</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="hh_id" name = "hh_id" value="<?php echo $id ; ?>" style="max-width:30%;" disabled ="True">
-                                            </div>
+                                        <div class="row mb-1">
+                                            <label for="hh_id" class="col-sm-2 col-form-label">Meeting ID</label>
+                                            <input type="text" class="form-control" id="hh_id" name = "hh_id" value="<?php echo $id ; ?>" style="max-width:30%;" disabled ="True">
+
+                                            <label for="sppname" class="col-sm-2 col-form-label">Sector Name</label>
+                                            <input type="text" class="form-control" id="sppname" name="sppname" value =" <?php echo sector_name($link,$sectorID) ; ?>" style="max-width:30%;" disabled ="True">
+
                                         </div>
                                         
                                         
-                                        <div class="row mb-4">
-                                            <label for="region" class="col-sm-3 col-form-label">Region</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="region" name="region" value ="<?php echo get_rname($link,$regionID) ; ?>" style="max-width:30%;" disabled ="True">
-                                            </div>
+                                        <div class="row mb-1">
+                                            <label for="region" class="col-sm-2 col-form-label">Region</label>
+                                            <input type="text" class="form-control" id="region" name="region" value ="<?php echo get_rname($link,$regionID) ; ?>" style="max-width:30%;" disabled ="True">
+ 
+                                            <label for="district" class="col-sm-2 col-form-label">District</label>
+                                            <input type="text" class="form-control" id="district" name="district" value ="<?php echo dis_name($link,$districtID) ; ?>" style="max-width:30%;" disabled ="True">
                                         </div>
-                                        <div class="row mb-4">
-                                            <label for="district" class="col-sm-3 col-form-label">District</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="district" name="district" value ="<?php echo dis_name($link,$districtID) ; ?>" style="max-width:30%;" disabled ="True">
-                                            </div>
-                                        </div>
-                                                                                                                       
+                                                                                                                                                             
                                         
-                                        <div class="row mb-4">
-                                            <label for="males" class="col-sm-3 col-form-label">No. Males </label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="males" name="males" value =" <?php echo $malesNo ; ?>" style="max-width:30%;" disabled ="True">
-                                            </div>
+                                        <div class="row mb-1">
+                                            <label for="males" class="col-sm-2 col-form-label">No. Males </label>
+                                            <input type="text" class="form-control" id="males" name="males" value =" <?php echo $malesNo ; ?>" style="max-width:30%;" disabled ="True">
+
+                                            <label for="females" class="col-sm-2 col-form-label">No. Females </label>
+                                            <input type="text" class="form-control" id="females" name="females" value =" <?php echo $femalesNo ; ?>" style="max-width:30%;" disabled ="True">
                                         </div>
 
-                                        <div class="row mb-4">
-                                            <label for="females" class="col-sm-3 col-form-label">No. Females </label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="females" name="females" value =" <?php echo $femalesNo ; ?>" style="max-width:30%;" disabled ="True">
-                                            </div>
+                                        <div class="row mb-3">
                                         </div>
-
-                                        <div class="row mb-4">
-                                            <label for="sppname" class="col-sm-3 col-form-label">Sector Name</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="sppname" name="sppname" value =" <?php echo sector_name($link,$sectorID) ; ?>" style="max-width:30%;" disabled ="True">
-                                            </div>
-                                        </div>
-
-                                        <div class="row justify-content-end">
-                                            <div class="col-sm-9">
-                                                <div>
-                                                    <INPUT TYPE="button" VALUE="Back" onClick="history.go(-1);">
-                                                </div>
+                                        
+                                        <div class="row justify-content-end"> 
+                                            <div>
+                                                <INPUT TYPE="button" class="btn btn-btn btn-outline-secondary w-md" VALUE="Back" onClick="history.go(-1);">
                                             </div>
                                         </div>
                                     </form>

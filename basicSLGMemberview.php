@@ -351,7 +351,7 @@
                                                 <p>
                                                     <div class="card border border-primary">
                                                         <div class="card-body">
-                                                            <h5 class="card-title mt-0"> Member Youth Challenge Support Involvement</h5>
+                                                            <h5 class="card-title mt-0"> Member YCS Involvement</h5>
 
                                                             <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
                                                                 
@@ -362,9 +362,9 @@
                                                                         <th>HH Code</th>   
                                                                         <th>Name</th>
                                                                         <th>Gender</th>
-                                                                        <th>Vocational Type</th>
+                                                                        <th>Voc Type</th>
                                                                         <th>Age</th>
-                                                                        <th>Voc Scool Linked</th>                                        
+                                                                        <th>Voc School Linkd</th>                                        
                                                                         <th>Action</th>
 
                                                                     </tr>
@@ -385,13 +385,17 @@
                                                                             $district_name = dis_name($link,$row["districtID"]);
                                                                             $ig_name = iga_name($link,$row["voc_type"]);
                                                                     
+                                                                            $dateOfBirth = $row["dob"];
+                                                                            $today = date("Y-m-d");
+                                                                            $diff = date_diff(date_create($dateOfBirth), date_create($today));
+                                                                            $age = $diff->format('%y');
 
                                                                         echo "<tr>\n";                                           
                                                                             echo "<td>".$row["hh_code"]."</td>\n";
                                                                             echo "<td>".$row["beneficiary"]."</td>\n";
                                                                             echo "<td>".$row["gender"]."</td>\n";
                                                                             echo "\t\t<td>$ig_name</td>\n";
-                                                                            echo "<td>".$row["dob"]."</td>\n";
+                                                                            echo "<td>\t\t$age</td>\n";
                                                                             echo "<td>".$row["vocSchoolLinked"]."</td>\n";
                                                                             echo "<td>
                                                                                 <a href=\"?id=".$row['hh_code']."\"><i class='far fa-edit' style='font-size:18px;color:purple'></i></a>

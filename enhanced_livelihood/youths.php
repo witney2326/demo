@@ -172,7 +172,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                         <div class="card-body">
                                         <h7 class="card-title mt-0"></h7>
                                             
-                                                <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100" style=font-size:12px>
+                                                <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100" style=font-size:10px>
                                                 
                                                     <thead>
                                                         <tr>
@@ -181,9 +181,9 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                             <th>Group ID</th>
                                                             <th>Name</th>
                                                             <th>Bus.Cpt</th>
-                                                            <th>Cpt Rating</th>                                                                 
-                                                            <th>Cpt Assessed?</th>
-                                                            <th>Ass. Reslt</th>  
+                                                            <th>Rating</th>                                                                 
+                                                            <th>Assessed?</th>
+                                                            <th>Reslt</th>  
                                                             <th>Action</th>
                                                         </tr>
                                                     </thead>
@@ -228,7 +228,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                                 echo "<td>\t\t$bc_assesed_result</td>\n";
                                                                     
                                                                 echo "<td>
-                                                                    <a href=\"../basicSLGMemberview.php?id=".$row['hh_code']."\"><i class='far fa-eye' title='View JSG' style='font-size:18px;color:purple'></i></a>                                                                    
+                                                                    <a href=\"../basicSLGMemberview.php?id=".$row['hh_code']."\"><i class='far fa-eye' title='View Household' style='font-size:18px;color:purple'></i></a>                                                                    
                                                                     <a href=\".php?id=".$row['recID']."\"><i class='fas fa-bezier-curve' title='View Business Concept' style='font-size:18px;color:orange'></i></a>    
                                                                     <a href=\".php?id=".$row['recID']."\"><i class='far fa-trash-alt' title='Delete YCS Record' style='font-size:18px;color:red'></i></a>    
                                                                 </td>\n";
