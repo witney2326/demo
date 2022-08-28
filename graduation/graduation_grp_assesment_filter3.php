@@ -40,9 +40,9 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 <?php include '../layouts/body.php'; ?>
 
 <?php		
-   $region = $_GET['region'];		
-   $district = $_GET['district'];
-   $ta = $_GET['ta'];
+   $region = $_POST['region'];		
+   $district = $_POST['district'];
+   $ta = $_POST['ta'];
      
      
      
@@ -117,9 +117,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
                                         <!--start here -->
                                 <div class="card border border-primary">
-                                    <div class="card-header bg-transparent border-primary">
-                                        <h5 class="my-0 text-primary">SLG Search Filter</h5>
-                                    </div>
+                                    
                                     <div class="card-body">
                                         <h5 class="card-title mt-0"></h5>
                                         
@@ -185,11 +183,9 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="card border border-primary">
-                                        <div class="card-header bg-transparent border-primary">
-                                            <h5 class="my-0 text-primary">Savings and Loan Groups</h5>
-                                        </div>
-                                        <div class="card-body">
-                                        <h5 class="card-title mt-0"></h5>
+                                        
+                                            <div class="card-body">
+                                            <h5 class="card-title mt-0"></h5>
                                             
                                                 <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
                                                 
@@ -209,8 +205,8 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
                                                     <tbody>
                                                         <?Php
-                                                            
-                                                            $query="select * from tblgroup where ((TAID = $ta) and (deleted ='0'))";
+                                                              $ta = $_POST['ta'];
+                                                            $query="select * from tblgroup where ((TAID = '$ta') and (deleted ='0'))";
 
                                                         //Variable $link is declared inside config.php file & used here
                                                         

@@ -114,12 +114,10 @@
                             <div class="card-body">
                                 <!--start here -->
                                 <div class="card border border-primary">
-                                    <div class="card-header bg-transparent border-primary">
-                                        <h5 class="my-0 text-primary">SLG Search Filter</h5>
-                                    </div>
+                                    
                                     <div class="card-body">
                                         <h5 class="card-title mt-0"></h5>
-                                        <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="graduation_grp_assesment_filter1.php" method="GET">
+                                        <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="graduation_grp_assesment_filter1.php" method="POST">
 
                                             <div class="col-12">
                                                 
@@ -223,11 +221,9 @@
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="card border border-primary">
-                                        <div class="card-header bg-transparent border-primary">
-                                            <h5 class="my-0 text-primary">Savings and Loan Groups</h5>
-                                        </div>
-                                        <div class="card-body">
-                                        <h5 class="card-title mt-0"></h5>
+                                        
+                                            <div class="card-body">
+                                            <h5 class="card-title mt-0"></h5>
                                             
                                                 <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
                                                 

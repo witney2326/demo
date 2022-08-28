@@ -2,7 +2,7 @@
 <?php include 'layouts/head-main.php'; ?>
 
 <head>
-    <title>YCS Clusters</title>
+    <title>Graduation Planning Meetings</title>
     <?php include 'layouts/head.php'; ?>
     <?php include 'layouts/head-style.php'; ?>
     <?php include 'layouts/config.php'; ?>
@@ -12,28 +12,62 @@
     <!-- Responsive datatable examples -->
     <link href="assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
 
-    <!--Datatable plugin CSS file -->
-<link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" />
-  
-  <!--jQuery library file -->
-  <script type="text/javascript" 
-      src="https://code.jquery.com/jquery-3.5.1.js">
-  </script>
+    
+        <!--Datatable plugin CSS file -->
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" />
+    
+    <!--jQuery library file -->
+    <script type="text/javascript" 
+        src="https://code.jquery.com/jquery-3.5.1.js">
+    </script>
 
-  <!--Datatable plugin JS library file -->
-  <script type="text/javascript" 
-src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
-  </script>
+    <!--Datatable plugin JS library file -->
+    <script type="text/javascript" 
+    src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
+    </script>
 </head>
 
 <?php include 'layouts/body.php'; ?>
-<?php include '../lib.php'; ?>
-<?php  
-    $region = $_POST['region'];
-    $district =$_POST['district'];
-    $ta =$_POST['ta'];
+
+<?php 
+    $region = $_GET['region'];
+    $district =$_GET['district'];
     
     
+    function get_rname($link, $rcode)
+        {
+        $rg_query = mysqli_query($link,"select name from tblregion where regionID='$rcode'"); // select query
+        $rg = mysqli_fetch_array($rg_query);// fetch data
+        return $rg['name'];
+        }
+    
+        function dis_name($link, $disID)
+        {
+        $dis_query = mysqli_query($link,"select DistrictName from tbldistrict where DistrictID='$disID'"); // select query
+        $dis = mysqli_fetch_array($dis_query);// fetch data
+        return $dis['DistrictName'];
+        }
+
+        function r_name($link, $rcode)
+        {
+        $region_query = mysqli_query($link,"select name from tblregion where regionID='$rcode'"); // select query
+        $dis = mysqli_fetch_array($region_query);// fetch data
+        return $dis['name'];
+    }
+
+    function s_name($link, $scode)
+        {
+        $sector_query = mysqli_query($link,"select name from tblsector where id='$scode'"); // select query
+        $dis = mysqli_fetch_array($sector_query);// fetch data
+        return $dis['name'];
+    }
+
+    function p_name($link, $id)
+        {
+        $p_query = mysqli_query($link,"select purpose from tblmeetingpurpose where id='$id'"); // select query
+        $p = mysqli_fetch_array($p_query);// fetch data
+        return $p['purpose'];
+    }
 ?>
 
 <!-- Begin page -->
@@ -53,14 +87,14 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                 <div class="row">
                     <div class="col-12">
                         <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                        <h4 class="mb-sm-0 font-size-18">YCS Identification: Clusters</h4>
+                            <h4 class="mb-sm-0 font-size-18">Graduation Meetings</h4>
 
-                        <div class="page-title-right">
-                            <ol class="breadcrumb m-0">
-                                <li class="breadcrumb-item"><a href="ycs_identification.php">YCS Identification</a></li>
-                                <li class="breadcrumb-item active">YCS Clusters</li>
-                            </ol>
-                        </div>
+                            <div class="page-title-right">
+                                <ol class="breadcrumb m-0">
+                                    <li class="breadcrumb-item"><a href="graduation_grp_assesment.php">Graduation Assesment</a></li>
+                                    <li class="breadcrumb-item active">Planning Meetings</li>
+                                </ol>
+                            </div>
 
                         </div>
                     </div>
@@ -78,36 +112,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
                                 
                                 <!-- Nav tabs -->
-                                <!-- Nav tabs -->
-                                <ul class="nav nav-pills nav-justified" role="tablist">
-                                    <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link " data-bs-toggle="link" href="ycs_identification.php" role="link">
-                                            <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
-                                            <span class="d-none d-sm-block">Savings and Loan Groups</span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link active"  role="tab">
-                                            <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
-                                            <span class="d-none d-sm-block">Clusters</span>
-                                        </a>
-                                    </li>
-                                    
-                                    <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link " data-bs-toggle="link" href="youths.php" role="link">
-                                            <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
-                                            <span class="d-none d-sm-block">Linked Youths</span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item waves-effect waves-light">
-                                        <a class="link" href="enhancedReports.php" role="link">
-                                            <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
-                                            <span class="d-none d-sm-block">YCS Reports</span>
-                                        </a>
-                                    </li>
-                                    
-                                </ul>
-                                <!-- Tab panes -->
+                                
                                 <!-- Tab panes -->
                                 <div class="tab-content p-3 text-muted">
                                     <div class="tab-pane active" id="home-1" role="tabpanel">
@@ -119,7 +124,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                 
                                                 <div class="card-body">
                                                     <h5 class="card-title mt-0"></h5>
-                                                    <form class="row row-cols-lg-auto g-3 align-items-center" >
+                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="basic_livelihood_slg_mgt_new_slg_filter2_results.php" method ="GET">
                                                         <div class="col-12">
                                                             <label for="region" class="form-label">Region</label>
                                                             <div>
@@ -138,17 +143,10 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                             </div>
                                                         </div>
 
+                                                        
                                                         <div class="col-12">
-                                                            <label for="ta" class="form-label">Traditional Authority</label>
-                                                            <select class="form-select" name="ta" id="ta" required>
-                                                                <option selected value = "<?php echo $ta;?>"><?php echo tname($link,$ta);?></option>
-                                                                
-                                                            </select>
-                                                            
-                                                        </div>
-                                                        <div class="col-12">
-                                                            
                                                             <INPUT TYPE="button" class="btn btn-btn btn-outline-secondary w-md" VALUE="Back" onClick="history.go(-1);">
+                                                            
                                                         </div>
                                                     </form>                                             
                                                     <!-- End Here -->
@@ -158,58 +156,56 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                             <div class="row">
                                                 <div class="col-12">
                                                     <div class="card border border-primary">
-                                                    
+                                                    <div class="card-header bg-transparent border-primary">
+                                                        <h5 class="my-0 text-primary">Planning Meetings Conducted in <?php echo dis_name($link,$district); ?></h5>
+                                                    </div>
                                                     <div class="card-body">
-                                                    <h7 class="card-title mt-0"></h7>
+                                                    <h5 class="card-title mt-0"></h5>
                                                         
                                                             <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
                                                             
                                                                 <thead>
-                                                                    <tr>
-                                                                        <th>Cluster code</th>
-                                                                        <th>Cluster Name</th>
-                                                                        <th>cohort</th>
-                                                                        <th>YCS Mapped?</th>
-                                                                        <th>Youths Linked</th>
-                                                                        <th>Action</th> 
+                                                                    <tr>                    
+                                                                        <th>Meeting</th>
+                                                                        <th>Purpose</th>
+                                                                        <th>Sector</th>
+                                                                        <th>Orientation Date</th>
+                                                                        <th>No. Females</th>
+                                                                        <th>No.Males</th>
+                                                                        <th>Action</th>
                                                                     </tr>
                                                                 </thead>
+
+
                                                                 <tbody>
                                                                     <?Php
-                                                                        $query="select * from tblcluster where taID = '$ta'";
- 
-                                                                        //Variable $link is declared inside config.php file & used here
-                                                                        
-                                                                        if ($result_set = $link->query($query)) {
-                                                                        while($row = $result_set->fetch_array(MYSQLI_ASSOC))
-                                                                        { 
-                                                                            $db_mapped = (string) $row["ycs_mapped"];
-                                                                            if ($db_mapped =='1'){$mapped = 'Yes';}
-                                                                            if ($db_mapped =='0'){$mapped = 'No';}
+                                                                       $selectedDistrict = $_GET["district"];
+                                                                        $query="select * from tblawareness_meetings where ((DistrictID ='$selectedDistrict') and (meetingpurpose ='03') )";
 
-                                                                            $cls = $row["ClusterID"];
-
-                                                                            $result1 = mysqli_query($link, "SELECT COUNT(recID) AS value_sum FROM tblycs WHERE groupID = '$cls'"); 
-                                                                            $row2 = mysqli_fetch_assoc($result1); 
-                                                                            $youths = $row2['value_sum'];
-
+                                                                    //Variable $link is declared inside config.php file & used here
+                                                                    
+                                                                    if ($result_set = $link->query($query)) {
+                                                                    while($row = $result_set->fetch_array(MYSQLI_ASSOC))
+                                                                    { 
+                                                                        $district = dis_name($link,$row["DistrictID"]);
+                                                                        $purpose = p_name($link,$row["meetingpurpose"]);
+                                                                        $sector = s_name($link,$row["sectorID"]);
                                                                         echo "<tr>\n";
-                                                                            echo "<td>".$row["ClusterID"]."</td>\n";
-                                                                            echo "<td>".$row["ClusterName"]."</td>\n";
-                                                                            echo "<td>".$row["cohort"]."</td>\n";                                                                            
-                                                                            echo "<td>\t\t$mapped</td>\n";
-                                                                            echo "<td>\t\t$youths</td>\n";
+                                                                            echo "<td>".$row["meetingID"]."</td>\n";
+                                                                            echo "\t\t<td>$purpose</td>\n";
+                                                                            echo "\t\t<td>$sector</td>\n";
+                                                                            echo "<td>".$row["orientationDate"]."</td>\n";
+                                                                            echo "<td>".$row["femalesNo"]."</td>\n";
+                                                                            echo "<td>".$row["malesNo"]."</td>\n";
+                                                                        echo "<td>
+                                                                        <a href=\"../basicAwarenessMeetingview.php?id=".$row['meetingID']."\"><i class='far fa-eye' title='Meeting Details' style='font-size:18px;color:purple'></i></a>
+                                                                            <a onClick=\"javascript: return confirm('Are You Sure You want To Delete This Meeting Record - You Must Be a Supervisor');\" href=\"../basicAwarenessMeetingDelete.php?id=".$row['meetingID']."\"><i class='far fa-trash-alt' style='font-size:18px;color:red'></i></a>    
                                                                             
-                                                                            echo "<td>
-                                                                            <a href=\"view_Youths.php?id=".$row['ClusterID']."\"><i class='far fa-eye' title='View Linked Youths For the Cluster' style='font-size:18px; color: purple'></i></a> 
-                                                                            
-                                                                            </td>\n";
-
-                                                                        echo "</tr>\n";
-                                                                        }
-                                                                        $result_set->close();
-                                                                        }  
-                                                                                           
+                                                                        </td>\n";
+                                                                    echo "</tr>\n";
+                                                                    }
+                                                                    $result_set->close();
+                                                                    }                          
                                                                     ?>
                                                                 </tbody>
                                                             </table>
@@ -217,7 +213,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                         </div>
                                                     </div>     
                                                 </div>            
-                                            </div> 
+                                            </div>  
                                 </div>
                                     <!-- Here -->
                                     

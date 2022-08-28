@@ -187,7 +187,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                             <div class="col-12">
                                                 <label for="ta" class="form-label">Traditional Authority</label>
                                                 <select class="form-select" name="ta" id="ta" required disabled>
-                                                    <option selected  value="$ta"></option>
+                                                    <option></option>
                                                     <?php                                                           
                                                             $ta_fetch_query = "SELECT TAName FROM tblta";                                                  
                                                             $result_ta_fetch = mysqli_query($link, $ta_fetch_query);                                                                       

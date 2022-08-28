@@ -31,7 +31,7 @@
             if ($sql) {
                 echo '<script type="text/javascript">'; 
                 echo 'alert("SLG successfully Rated!");'; 
-                echo 'window.location.href = "graduation_grp_assesment.php";';
+                echo 'window.location.href = "graduation_group_assesment.php";';
                 echo '</script>';
             } else {
                 echo "Error: " . $sql . ":-" . mysqli_error($link);
@@ -41,7 +41,7 @@
         {
             echo '<script type="text/javascript">'; 
             echo 'alert("SLG Already Rated!");'; 
-            echo 'window.location.href = "graduation_grp_assesment.php";';
+            echo 'window.location.href = "graduation_group_assesment.php";';
             echo '</script>';
         }
         mysqli_close($link);          

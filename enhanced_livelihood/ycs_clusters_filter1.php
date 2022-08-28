@@ -12,27 +12,27 @@
     <!-- Responsive datatable examples -->
     <link href="assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
 
+    <!--Datatable plugin CSS file -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" />
+  
+  <!--jQuery library file -->
+  <script type="text/javascript" 
+      src="https://code.jquery.com/jquery-3.5.1.js">
+  </script>
+
+  <!--Datatable plugin JS library file -->
+  <script type="text/javascript" 
+src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
+  </script>
 </head>
 
 <?php include 'layouts/body.php'; ?>
-
+<?php include '../lib.php'; ?>
 <?php 
   
-    $region = $_GET['region'];
+    $region = $_POST['region'];
     
-    function get_rname($link, $rcode)
-        {
-        $rg_query = mysqli_query($link,"select name from tblregion where regionID='$rcode'"); // select query
-        $rg = mysqli_fetch_array($rg_query);// fetch data
-        return $rg['name'];
-        }
     
-        function dis_name($link, $disID)
-        {
-        $dis_query = mysqli_query($link,"select DistrictName from tbldistrict where DistrictID='$disID'"); // select query
-        $dis = mysqli_fetch_array($dis_query);// fetch data
-        return $dis['DistrictName'];
-        }
 ?>
 
 <!-- Begin page -->
@@ -77,7 +77,36 @@
 
                                 
                                 <!-- Nav tabs -->
-                                
+                                <!-- Nav tabs -->
+                                <ul class="nav nav-pills nav-justified" role="tablist">
+                                    <li class="nav-item waves-effect waves-light">
+                                        <a class="nav-link " data-bs-toggle="link" href="ycs_identification.php" role="link">
+                                            <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
+                                            <span class="d-none d-sm-block">Savings and Loan Groups</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item waves-effect waves-light">
+                                        <a class="nav-link active"  role="tab">
+                                            <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
+                                            <span class="d-none d-sm-block">Clusters</span>
+                                        </a>
+                                    </li>
+                                    
+                                    <li class="nav-item waves-effect waves-light">
+                                        <a class="nav-link " data-bs-toggle="link" href="youths.php" role="link">
+                                            <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
+                                            <span class="d-none d-sm-block">Linked Youths</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item waves-effect waves-light">
+                                        <a class="link" href="enhancedReports.php" role="link">
+                                            <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
+                                            <span class="d-none d-sm-block">YCS Reports</span>
+                                        </a>
+                                    </li>
+                                    
+                                </ul>
+                                <!-- Tab panes -->
                                 <!-- Tab panes -->
                                 <div class="tab-content p-3 text-muted">
                                     <div class="tab-pane active" id="home-1" role="tabpanel">
@@ -89,7 +118,7 @@
                                                 
                                                 <div class="card-body">
                                                     <h5 class="card-title mt-0"></h5>
-                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="ycs_clusters_filter2.php" method ="GET">
+                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="ycs_clusters_filter2.php" method ="POST">
                                                         <div class="col-12">
                                                             <label for="region" class="form-label">Region</label>
                                                             <div>
@@ -146,9 +175,7 @@
                                     <div class="row">
                                         <div class="col-12">
                                             <div class="card border border-primary">
-                                            <div class="card-header bg-transparent border-primary">
-                                                <h5 class="my-0 text-primary">Clusters in <?php echo get_rname($link,$region); ?> Region</h5>
-                                            </div>
+                                            
                                             <div class="card-body">
                                             <h7 class="card-title mt-0"></h7>
                                                 
@@ -192,9 +219,8 @@
                                                                     echo "<td>\t\t$youths</td>\n";
                                                                     
                                                                     echo "<td>
-                                                                    <a href=\"view_Youths.php?id=".$row['ClusterID']."\"><i class='fas fa-balance-scale' title='View Linked Youths For the Cluster' style='font-size:18px; color: purple'></i></a> 
-                                                                    <a onClick=\"javascript: return confirm('Are You Sure You want To Map This Cluster For JSGs Interventions? ');\" href=\"cls_YCS_Map.php?id=".$row['ClusterID']."\"><i class='fas fa-stamp' title='Map Cluster For YCS Intervention' style='font-size:18px; color:orange'></i></a>
-                                                                    <a href=\"add_ben_ycs.php?id=".$row['ClusterID']."&mapped=".$row['ycs_mapped']."\"><i class='fa fa-users' title='Add Youth to YCS intervention' style='font-size:18px;color:green'></i></a>    
+                                                                    <a href=\"view_Youths.php?id=".$row['ClusterID']."\"><i class='far fa-eye' title='View Linked Youths For the Cluster' style='font-size:18px; color: purple'></i></a> 
+                                                                    
                                                                     </td>\n";
 
                                                                 echo "</tr>\n";

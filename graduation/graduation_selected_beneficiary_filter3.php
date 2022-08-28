@@ -120,9 +120,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
                                         <!--start here -->
                                 <div class="card border border-primary">
-                                    <div class="card-header bg-transparent border-primary">
-                                        <h5 class="my-0 text-primary">SLG Search Filter</h5>
-                                    </div>
+                                    
                                     <div class="card-body">
                                         <h5 class="card-title mt-0"></h5>
                                         
@@ -225,7 +223,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                                         echo "\t\t<td>$grad_status</td>\n";
                                                                         echo "<td> <a href=\"../basicSLGMemberview.php?id=".$row['sppCode']."\"><i class='far fa-eye' title='View Member' style='font-size:18px;color:purple'></i></a>\n";
                                                                         echo "<a href=\"../basicSLGMemberedit.php?id=".$row['sppCode']."\"><i class='far fa-edit' title='Edit Household' style='font-size:18px;color:green'></i></a>\n";
-                                                                        echo "<a onClick=\"javascript: return confirm('Are You Sure You want To PUT This HH On Graduation- You Must Be a Supervisor');\" href=\"graduationBenAssesment.php?id=".$row['sppCode']."\"\><i class='fa fa-graduation-cap' title='Put HH On Graduation Pilot' style='font-size:18px;color:black'></i></a>\n";
+                                                                        
                                                                         
                                                                     echo "</tr>\n";
                                                         }

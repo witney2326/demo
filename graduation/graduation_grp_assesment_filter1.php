@@ -40,7 +40,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 <?php include '../layouts/body.php'; ?>
 
 <?php
-    $region = $_GET['region'];
+    $region = $_POST['region'];
     
 
          function get_rname($link, $rcode)
@@ -115,13 +115,11 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
                                         <!--start here -->
                                 <div class="card border border-primary">
-                                    <div class="card-header bg-transparent border-primary">
-                                        <h5 class="my-0 text-primary">SLG Search Filter</h5>
-                                    </div>
+                                    
                                     <div class="card-body">
                                         <h5 class="card-title mt-0"></h5>
                                         
-                                        <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="graduation_grp_assesment_filter2.php" method="GET">
+                                        <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="graduation_grp_assesment_filter2.php" method="POST">
                                             <div class="col-12">
                                                 <label for="region" class="form-label">Region</label>
                                                 <div>
@@ -137,8 +135,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                 <label for="district" class="form-label">District</label>
                                                 <select class="form-select" name="district" id="district" required>
                                                     <option selected value="$district" ></option>
-                                                        <?php 
-                                                                $region = $_GET['region'];                                                    
+                                                        <?php                                                    
                                                             $dis_fetch_query = "SELECT DistrictID,DistrictName FROM tbldistrict where regionID = '$region'";                                                  
                                                             $result_dis_fetch = mysqli_query($link, $dis_fetch_query);                                                                       
                                                             $i=0;
@@ -209,9 +206,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="card border border-primary">
-                                        <div class="card-header bg-transparent border-primary">
-                                            <h5 class="my-0 text-primary">Savings and Loan Groups</h5>
-                                        </div>
+                                        
                                         <div class="card-body">
                                         <h5 class="card-title mt-0"></h5>
                                             

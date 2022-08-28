@@ -42,8 +42,8 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
 <?php
 
-$region = $_GET['region'];		
-$district = $_GET['district'];
+$region = $_POST['region'];		
+$district = $_POST['district'];
      
 
 
@@ -119,13 +119,11 @@ $district = $_GET['district'];
 
                                         <!--start here -->
                                 <div class="card border border-primary">
-                                    <div class="card-header bg-transparent border-primary">
-                                        <h5 class="my-0 text-primary">SLG Search Filter</h5>
-                                    </div>
+                                    
                                     <div class="card-body">
                                         <h5 class="card-title mt-0"></h5>
                                         
-                                        <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="graduation_grp_assesment_filter3.php" method="GET">
+                                        <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="graduation_grp_assesment_filter3.php" method="POST">
                                             <div class="col-12">
                                                 <label for="region" class="form-label">Region</label>
                                                 <div>
@@ -147,7 +145,7 @@ $district = $_GET['district'];
                                                 <select class="form-select" name="ta" id="ta" required>
                                                     <option></option>
                                                     <?php   
-                                                            $district = $_GET["district"];                                                
+                                                            $district = $_POST['district'];                                                
                                                             $ta_fetch_query = "SELECT TAID,TAName FROM tblta where DistrictID = '$district'";                                                  
                                                             $result_ta_fetch = mysqli_query($link, $ta_fetch_query);                                                                       
                                                             $i=0;
@@ -197,11 +195,9 @@ $district = $_GET['district'];
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="card border border-primary">
-                                        <div class="card-header bg-transparent border-primary">
-                                            <h5 class="my-0 text-primary"><i class="mdi mdi-bullseye-arrow me-3"></i>SLGs in <?php echo dis_name($link,$district); ?> District</h5>
-                                        </div>
-                                        <div class="card-body">
-                                        <h5 class="card-title mt-0"></h5>
+                                        
+                                            <div class="card-body">
+                                            <h5 class="card-title mt-0"></h5>
                                             
                                                 <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
                                                 
@@ -221,8 +217,8 @@ $district = $_GET['district'];
 
                                                     <tbody>
                                                         <?Php
-                                                            
-                                                            $query="select * from tblgroup where ((DistrictID = $district) and (deleted ='0'))";
+                                                            $district = $_POST['district'];
+                                                            $query="select * from tblgroup where ((DistrictID = '$district') and (deleted ='0'))";
 
                                                         //Variable $link is declared inside config.php file & used here
                                                         

@@ -38,24 +38,11 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 </head>
 
 <?php include 'layouts/body.php'; ?>
-
+<?php include '../lib.php'; ?>
 <?php 
   
-    $region = $_GET['region'];
-    
-    function get_rname($link, $rcode)
-        {
-        $rg_query = mysqli_query($link,"select name from tblregion where regionID='$rcode'"); // select query
-        $rg = mysqli_fetch_array($rg_query);// fetch data
-        return $rg['name'];
-        }
-    
-        function dis_name($link, $disID)
-        {
-        $dis_query = mysqli_query($link,"select DistrictName from tbldistrict where DistrictID='$disID'"); // select query
-        $dis = mysqli_fetch_array($dis_query);// fetch data
-        return $dis['DistrictName'];
-        }
+  $region = $_POST['region'];
+ 
 ?>
 
 <!-- Begin page -->
@@ -100,7 +87,34 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
                                 
                                 <!-- Nav tabs -->
-                                
+                                <ul class="nav nav-pills nav-justified" role="tablist">
+                                    <li class="nav-item waves-effect waves-light">
+                                        <a class="nav-link " data-bs-toggle="link" href="ycs_identification.php" role="link">
+                                            <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
+                                            <span class="d-none d-sm-block">Savings and Loan Groups</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item waves-effect waves-light">
+                                        <a class="link"  href="ycs_clusters.php" role="link">
+                                            <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
+                                            <span class="d-none d-sm-block">Clusters</span>
+                                        </a>
+                                    </li>
+                                    
+                                    <li class="nav-item waves-effect waves-light">
+                                        <a class="nav-link active" data-bs-toggle="link" href="#home-1" role="tab">
+                                            <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
+                                            <span class="d-none d-sm-block">Linked Youths</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item waves-effect waves-light">
+                                        <a class="link" href="enhancedReports.php" role="link">
+                                            <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
+                                            <span class="d-none d-sm-block">YCS Reports</span>
+                                        </a>
+                                    </li>
+                                    
+                                </ul>
                                 <!-- Tab panes -->
                                 <div class="tab-content p-3 text-muted">
                                     <div class="tab-pane active" id="home-1" role="tabpanel">
@@ -112,7 +126,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                 
                                                 <div class="card-body">
                                                     <h5 class="card-title mt-0"></h5>
-                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="youths_filter2.php" method ="GET">
+                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="youths_filter2.php" method ="POST">
                                                         <div class="col-12">
                                                             <label for="region" class="form-label">Region</label>
                                                             <div>
@@ -143,6 +157,26 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                             </div>
                                                         </div>
 
+                                                        <div class="col-12">
+                                                            <label for="ta" class="form-label">Traditional Authority</label>
+                                                            <select class="form-select" name="ta" id="ta" required disabled>
+                                                                <option></option>
+                                                                <?php                                                           
+                                                                        $ta_fetch_query = "SELECT TAName FROM tblta";                                                  
+                                                                        $result_ta_fetch = mysqli_query($link, $ta_fetch_query);                                                                       
+                                                                        $i=0;
+                                                                            while($DB_ROW_ta = mysqli_fetch_array($result_ta_fetch)) {
+                                                                        ?>
+                                                                        <option>
+                                                                            <?php echo $DB_ROW_ta["TAName"]; ?></option><?php
+                                                                            $i++;
+                                                                                }
+                                                                    ?>
+                                                            </select>
+                                                            <div class="invalid-feedback">
+                                                                Please select a valid TA.
+                                                            </div>
+                                                        </div>
                                                         
                                                         <div class="col-12">
                                                             <button type="submit" class="btn btn-btn btn-outline-primary w-md" name="Submit" value="Submit">Submit</button>
@@ -164,7 +198,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                             <div class="card-body">
                                             <h7 class="card-title mt-0"></h7>
                                                 
-                                                    <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100"style=font-size:12px>
+                                                    <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100"style=font-size:10px>
                                                     
                                                         <thead>
                                                             <tr>
@@ -181,7 +215,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                         </thead>
                                                         <tbody>
                                                             <?Php
-                                                                $query="select * from tblycs where regionID = '$region'";
+                                                                $query="select * from tblycs inner join tblgroup on tblycs.groupID = tblgroup.groupID where tblgroup.regionID = '$region'";
 
                                                                 //Variable $link is declared inside config.php file & used here
                                                                 
@@ -218,8 +252,8 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                                         echo "<button type='submit' class='btn-outline-success' name='FormSubmit' value='Submit' onClick='return confirmSubmit()'>Rate</button>";
                                                                         echo "</form>";
                                                                     echo "</td>";
-                                                                    echo "\t\t<td></td>\n";
-                                                                    echo "\t\t<td></td>\n";
+                                                                    echo "<td>\t\t$bc_assessed</td>\n";
+                                                                    echo "<td>\t\t$bc_assesed_result</td>\n";
                                                                     
                                                                     echo "<td>
                                                                         <a href=\"../basicSLGMemberview?id=".$row['recID']."\"><i class='far fa-eye' title='View Household' style='font-size:18px;color:purple'></i></a>

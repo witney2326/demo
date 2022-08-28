@@ -2,7 +2,7 @@
 <?php include 'layouts/head-main.php'; ?>
 
 <head>
-    <title>YCS|Beneficiary Identification</title>
+    <title>Linked Youths</title>
     <?php include 'layouts/head.php'; ?>
     <?php include 'layouts/head-style.php'; ?>
     <?php include 'layouts/config.php'; ?>
@@ -12,7 +12,7 @@
     <!-- Responsive datatable examples -->
     <link href="assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
 
-    <!--Datatable plugin CSS file -->
+     <!--Datatable plugin CSS file -->
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" />
   
   <!--jQuery library file -->
@@ -24,26 +24,26 @@
   <script type="text/javascript" 
 src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
   </script>
+
+<script LANGUAGE="JavaScript">
+        function confirmSubmit()
+        {
+        var agree=confirm("Are you sure you want to RATE this Cluster?");
+        if (agree)
+        return true ;
+        else
+        return false ;
+        }   
+    </script>
 </head>
 
 <?php include 'layouts/body.php'; ?>
-
+<?php include '../lib.php'; ?>
 <?php 
     $region = $_POST['region'];
+    $district =$_POST['district'];
+    $ta =$_POST['ta'];
     
-    function get_rname($link, $rcode)
-        {
-        $rg_query = mysqli_query($link,"select name from tblregion where regionID='$rcode'"); // select query
-        $rg = mysqli_fetch_array($rg_query);// fetch data
-        return $rg['name'];
-        }
-    
-        function dis_name($link, $disID)
-        {
-        $dis_query = mysqli_query($link,"select DistrictName from tbldistrict where DistrictID='$disID'"); // select query
-        $dis = mysqli_fetch_array($dis_query);// fetch data
-        return $dis['DistrictName'];
-        }
 ?>
 
 <!-- Begin page -->
@@ -63,14 +63,14 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                 <div class="row">
                     <div class="col-12">
                         <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                            <h4 class="mb-sm-0 font-size-18">YCS - Beneficiary Identification</h4>
+                        <h4 class="mb-sm-0 font-size-18">Linked Youths</h4>
 
-                            <div class="page-title-right">
-                                <ol class="breadcrumb m-0">
-                                <li class="breadcrumb-item"><a href="ycs.php">YCS Management</a></li>
-                                    <li class="breadcrumb-item active">Beneficiary Identification</li>
-                                </ol>
-                            </div>
+                        <div class="page-title-right">
+                            <ol class="breadcrumb m-0">
+                                <li class="breadcrumb-item"><a href="ycs.php">YCS Identification</a></li>
+                                <li class="breadcrumb-item active">Linked Youths</li>
+                            </ol>
+                        </div>
 
                         </div>
                     </div>
@@ -90,7 +90,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                 <!-- Nav tabs -->
                                 <ul class="nav nav-pills nav-justified" role="tablist">
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link active" data-bs-toggle="tab" href="#home-1" role="tab">
+                                        <a class="nav-link " data-bs-toggle="link" href="ycs_identification.php" role="link">
                                             <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
                                             <span class="d-none d-sm-block">Savings and Loan Groups</span>
                                         </a>
@@ -103,7 +103,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                     </li>
                                     
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link" data-bs-toggle="link" href="youths.php" role="link">
+                                        <a class="nav-link active" data-bs-toggle="link" href="#home-1" role="tab">
                                             <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
                                             <span class="d-none d-sm-block">Linked Youths</span>
                                         </a>
@@ -127,46 +127,36 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                 
                                                 <div class="card-body">
                                                     <h5 class="card-title mt-0"></h5>
-                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="ycs_mgt_filter2.php" method ="POST">
+                                                    <form class="row row-cols-lg-auto g-3 align-items-center">
                                                         <div class="col-12">
                                                             <label for="region" class="form-label">Region</label>
                                                             <div>
                                                                 <select class="form-select" name="region" id="region" value ="$region" required>
-                                                                    <option selected value = "<?php echo $region; ?>"><?php echo get_rname($link,$region);?></option>
+                                                                    <option selected value = "<?php echo $region;?>"><?php echo get_rname($link,$region);?></option>
                                                                 </select>
                                                             </div>
                                                         </div>
                                                         
                                                         <div class="col-12">
                                                             <label for="district" class="form-label">District</label>
-                                                            <select class="form-select" name="district" id="district" value ="" required>
-                                                                <option></option>
-                                                                    <?php                                                           
-                                                                        $dis_fetch_query = "SELECT DistrictID,DistrictName FROM tbldistrict where regionID ='$region'";                                                  
-                                                                        $result_dis_fetch = mysqli_query($link, $dis_fetch_query);                                                                       
-                                                                        $i=0;
-                                                                            while($DB_ROW_Dis = mysqli_fetch_array($result_dis_fetch)) {
-                                                                        ?>
-                                                                        <option value="<?php echo $DB_ROW_Dis["DistrictID"]; ?>">
-                                                                            <?php echo $DB_ROW_Dis["DistrictName"]; ?></option><?php
-                                                                            $i++;
-                                                                                }
-                                                                    ?>
-                                                            </select>
+                                                            <div>
+                                                                <select class="form-select" name="district" id="district" value ="$district" required>
+                                                                    <option selected value = "<?php echo $district;?>"><?php echo dis_name($link,$district);?></option>
+                                                                </select>
+                                                            </div>
                                                         </div>
 
                                                         <div class="col-12">
                                                             <label for="ta" class="form-label">Traditional Authority</label>
-                                                            <select class="form-select" name="ta" id="ta" required disabled>
-                                                                
-                                                                
-                                                            </select>
-                                                            <div class="invalid-feedback">
-                                                                Please select a valid TA.
+                                                            <div>
+                                                                <select class="form-select" name="ta" id="ta" required >
+                                                                    <option selected value = "<?php echo $ta;?>"><?php echo tname($link,$ta);?>></option>                                                               
+                                                                </select>
                                                             </div>
+                                                            
                                                         </div>
+                                                        
                                                         <div class="col-12">
-                                                            <button type="submit" class="btn btn-btn btn-outline-primary w-md" name="Submit" value="Submit">Submit</button>
                                                             <INPUT TYPE="button" class="btn btn-btn btn-outline-secondary w-md" VALUE="Back" onClick="history.go(-1);">
                                                         </div>
                                                     </form>                                             
@@ -177,57 +167,71 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                             <div class="row">
                                                 <div class="col-12">
                                                     <div class="card border border-primary">
-                                                    <div class="card-header bg-transparent border-primary">
-                                                        <h5 class="my-0 text-primary">Savings and Loan Groups in <?php echo get_rname($link,$region);?> Region</h5>
-                                                    </div>
+                                                   
                                                     <div class="card-body">
                                                     <h7 class="card-title mt-0"></h7>
                                                         
-                                                            <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
+                                                            <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100"style=font-size:10px>
                                                             
                                                                 <thead>
                                                                     <tr>
-                                                                        <th>SLG code</th>
-                                                                        <th>SLG Name</th>
-                                                                        <th>cohort</th>
-                                                                        <th>YCS Mapped?</th>
-                                                                        <th>Youths Linked</th>
-                                                                        <th>Action On SLG</th> 
+                                                                        <th>Rec ID</th>
+                                                                        <th>HH code</th>
+                                                                        <th>Group ID</th>
+                                                                        <th>Name</th>
+                                                                        <th>Bus.Cpt</th>
+                                                                        <th>Cpt Rating</th>                                                                 
+                                                                        <th>Cpt Assessed?</th>
+                                                                        <th>Ass. Reslt</th>  
+                                                                        <th>Action</th>
                                                                     </tr>
                                                                 </thead>
-
-
                                                                 <tbody>
                                                                     <?Php
-                                                                        $query="select * from tblgroup where ((regionID = '$region') and (deleted = '0'))";
+                                                                        $query="select * from tblycs inner join tblgroup on tblycs.groupID = tblgroup.groupID where tblgroup.TAID = '$ta'";
  
                                                                         //Variable $link is declared inside config.php file & used here
                                                                         
                                                                         if ($result_set = $link->query($query)) {
                                                                         while($row = $result_set->fetch_array(MYSQLI_ASSOC))
                                                                         { 
-                                                                            $db_mapped = (string) $row["ycs_mapped"];
-                                                                            if ($db_mapped =='1'){$mapped = 'Yes';}
-                                                                            if ($db_mapped =='0'){$mapped = 'No';}
+                                                                            $disname = (string) dis_name($link,$row["districtID"]);
+                                                                            if ($row["bus_concept_developed"]== '0'){$bc = "No";}
+                                                                            if ($row["bus_concept_developed"]== '1'){$bc = "Yes";}
 
-                                                                            $grp = $row["groupID"];
+                                                                            if ($row["bc_assesed"]== '0'){$bc_assessed = "No";}
+                                                                            if ($row["bc_assesed"]== '1'){$bc_assessed = "Yes";}
 
-                                                                            $result1 = mysqli_query($link, "SELECT COUNT(recID) AS value_sum FROM tblycs WHERE groupID = '$grp'"); 
-                                                                            $row2 = mysqli_fetch_assoc($result1); 
-                                                                            $youths = $row2['value_sum'];
+                                                                            if ($row["bc_assesed_result"]== '0'){$bc_assesed_result = "N/A";}
+                                                                            if ($row["bc_assesed_result"]== '1'){$bc_assesed_result = "Good";}
+                                                                            if ($row["bc_assesed_result"]== '2'){$bc_assesed_result = "Poor";}
 
+                                                                            $hhID = $row["hh_code"];
                                                                         echo "<tr>\n";
+                                                                            echo "<td>".$row["recID"]."</td>\n";
+                                                                            echo "<td>".$row["hh_code"]."</td>\n";
                                                                             echo "<td>".$row["groupID"]."</td>\n";
-                                                                            echo "<td>".$row["groupname"]."</td>\n";
-                                                                            echo "<td>".$row["cohort"]."</td>\n";
-                                                                            echo "<td>\t\t$mapped</td>\n";
-                                                                            echo "<td>\t\t$youths</td>\n";
+                                                                            echo "<td>".$row["beneficiary"]."</td>\n";
+                                                                            echo "<td>\t\t$bc</td>\n";
+                                                                            echo "<td>";
+                                                                            echo "<form action = 'youths_rateycs_bc.php' method ='POST'>";
+                                                                                echo '<select id="rating"  name="rating">';
+                                                                                    
+                                                                                    echo '<option value="0">NA</option>';
+                                                                                    echo '<option value="1">Good</option>';
+                                                                                    echo '<option value="2">Poor</option>';
+                                                                                echo "</select>";
+                                                                                echo "<input type='hidden' id='hhID' name='hhID' value='$hhID'>";
+                                                                                echo "<button type='submit' class='btn-outline-success' name='FormSubmit' value='Submit' onClick='return confirmSubmit()'>Rate</button>";
+                                                                                echo "</form>";
+                                                                            echo "</td>";
+                                                                            echo "<td>\t\t$bc_assessed</td>\n";
+                                                                             echo "<td>\t\t$bc_assesed_result</td>\n";
                                                                             echo "<td>
-                                                                                <a href=\"../basicSLGview.php?id=".$row['groupID']."\"><i class='far fa-eye' title='View SLG' style='font-size:18px;color:purple'></i></a>                                                                           
-                                                                                <a href=\"view_Youths.php?id=".$row['groupID']."\"><i class='far fa-eye' title='View Linked Youths For the Group' style='font-size:18px;color:orange'></i></a> 
-                                                                                <a onClick=\"javascript: return confirm('Are You Sure You want To Map This Group For Youth Challenge Interventions? ');\" href=\"slg_YCS_Map.php?id=".$row['groupID']."\"><i class='fas fa-stamp' title='Map SLG For Youth Challenge Intervention' style='font-size:18px'></i></a>
-                                                                                <a href=\"add_ben_ycs.php?id=".$row['groupID']."&mapped=".$row['ycs_mapped']."\"><i class='fa fa-child' title='Add Youth to YCS intervention' style='font-size:18px;color:green'></i></a> 
-                                                                            </td>\n";
+                                                                                <a href=\"../basicSLGMemberview?id=".$row['recID']."\"><i class='far fa-eye' title='View Household' style='font-size:18px;color:purple'></i></a>
+                                                                                <a href=\".php?id=".$row['recID']."\"><i class='fas fa-bezier-curve' title='View Business Concept' style='font-size:18px;color:orange'></i></a>    
+                                                                                <a href=\".php?id=".$row['recID']."\"><i class='far fa-trash-alt' title='Delete YCS Record' style='font-size:18px;color:red'></i></a>    
+                                                                                </td>\n";
 
                                                                         echo "</tr>\n";
                                                                         }
@@ -241,11 +245,13 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                         </div>
                                                     </div>     
                                                 </div>            
-                                            </div>  
-                                        </p>
-                                    </div>
+                                            </div> 
+                                </div>
                                     <!-- Here -->
-        
+                                    
+                                    <!-- end here -->
+                                    
+                                   
                                 </div>
 
                             </div>

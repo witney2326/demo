@@ -123,7 +123,7 @@
                                         </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link " data-bs-toggle="link" href="../basic_livelihood_meetings.php" role="link">
+                                        <a class="nav-link " data-bs-toggle="link" href="grad_planning_meeting_meetings.php" role="link">
                                             <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
                                             <span class="d-none d-sm-block">Planning Meeting</span>
                                         </a>
@@ -242,7 +242,14 @@
                                                                     <div class="d-flex">
                                                                         <div class="flex-grow-1">
                                                                             <p class="text-muted fw-medium">CFs Identified</p>
-                                                                            0
+                                                                            <?php
+                                                                                        $result = mysqli_query($link, 'SELECT COUNT(cfID) AS cfs FROM tblcfs'); 
+                                                                                        $row = mysqli_fetch_assoc($result); 
+                                                                                        $sum = $row['cfs'];
+                                                                                    ?>
+                                                                                        <div class="container">
+                                                                                            <div class="mb-0"><?php echo "" . number_format($sum);?></div>
+                                                                                        </div>
                                                                         </div>
                                                                         <i class='fas fa-users' style='font-size:24px;color:brown'></i>
                                                                         
