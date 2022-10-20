@@ -42,8 +42,17 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
 <?php
 
-$region = $_POST['region'];		
-$district = $_POST['district'];
+if (($_SESSION["user_role"]== '04') or ($_SESSION["user_role"]== '05')) 
+   {
+       $region = $_SESSION["user_reg"];
+       $district = $_SESSION["user_dis"];  
+   }
+   else
+   {
+       $region = $_POST['region'];
+       $district = $_POST['district'];
+   }
+     
      
 
 

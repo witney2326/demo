@@ -6,6 +6,7 @@
     <?php include 'layouts/head.php'; ?>
     <?php include 'layouts/head-style.php'; ?>
     <?php include 'layouts/config.php'; ?>
+    <?php include 'lib.php'; ?>
 <!-- DataTables -->
     <link href="assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
     <link href="assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
@@ -20,20 +21,6 @@
      
     $region = $_POST['region'];
     
-    
-    function get_rname($link, $rcode)
-        {
-        $rg_query = mysqli_query($link,"select name from tblregion where regionID='$rcode'"); // select query
-        $rg = mysqli_fetch_array($rg_query);// fetch data
-        return $rg['name'];
-        }
-    
-        function dis_name($link, $disID)
-        {
-        $dis_query = mysqli_query($link,"select DistrictName from tbldistrict where DistrictID='$disID'"); // select query
-        $dis = mysqli_fetch_array($dis_query);// fetch data
-        return $dis['DistrictName'];
-        }
 ?>
 
 <!-- Begin page -->
@@ -87,10 +74,8 @@
 
                                             <!--start here -->
                                             <div class="card border border-primary">
-                                                <div class="card-header bg-primary border-primary">
-                                                    <h5 class="my-0 text-default"></i>Filter For Sensitization Meetings</h5>
-                                                </div>
-                                                <div class="card-body bg-success">
+                                                
+                                                <div class="card-body ">
                                                     <h5 class="card-title mt-0"></h5>
                                                     <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="basic_livelihood_new_meeting_filter2_results.php" method ="POST">
                                                         <div class="col-12">

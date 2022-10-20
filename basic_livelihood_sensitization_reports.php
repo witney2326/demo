@@ -12,7 +12,17 @@
     <!-- Responsive datatable examples -->
     <link href="assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
 
+    
 </head>
+
+<style>
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: auto;
+}
+</style>
 
 <?php include 'layouts/body.php'; ?>
 
@@ -118,7 +128,7 @@
                                                 <div class="col-12">
                                                     <div class="card border border-primary">
                                                     <div class="card-header bg-transparent border-primary">
-                                                        <h5 class="my-0 text-primary">Sensitization Meetings Conducted</h5>
+                                                    <p><center><h5 class="my-0 text-primary">Sensitization Meetings Conducted</h5></p></center>
                                                     </div>
 
                                                     
@@ -127,20 +137,19 @@
                                                     <h7 class="card-title mt-0"></h7>
                                                         
                                                             <table id="datatable-buttons" class="table table-bordered dt-responsive  nowrap w-100">
-                                                            
+                                                                
+                                                                <img src="assets/images/logo-dark.png" alt="" height="64" class="center">
+                                                                
                                                                 <thead>
                                                                     <tr>
-                                                                        
                                                                         <th>Meeting ID</th>
                                                                         <th>District</th>
                                                                         <th>Sector</th>
                                                                         <th>No, Females</th>
                                                                         <th>No. Males</th>
                                                                         <th>Date</th>
-                                                                        
                                                                     </tr>
                                                                 </thead>
-
 
                                                                 <tbody>
                                                                     <?Php
@@ -191,7 +200,7 @@
                                                 <div class="col-12">
                                                     <div class="card border border-primary">
                                                     <div class="card-header bg-transparent border-primary">
-                                                        <h5 class="my-0 text-primary">Summary Per Region</h5>
+                                                    <p><center><h5 class="my-0 text-primary">Summary Per Region</h5></p></center>
                                                     </div>
 
                                                     <form action="exporttoexcel6.php">
@@ -209,7 +218,7 @@
                                                         
 
                                                             <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
-                                                            
+                                                                <img src="assets/images/logo-dark.png" alt="" height="64" class="center">
                                                                 <thead>
                                                                     <tr>
                                                                         <th>Region</th>
@@ -264,7 +273,7 @@
                                                 <div class="col-12">
                                                     <div class="card border border-primary">
                                                     <div class="card-header bg-transparent border-primary">
-                                                        <h5 class="my-0 text-primary">Sensitization Meetings Conducted Per District</h5>
+                                                    <p><center><h5 class="my-0 text-primary">Sensitization Meetings Conducted Per District</h5></p></center>
                                                     </div>
 
                                                     <form action="exporttoexcel5.php">
@@ -282,7 +291,7 @@
                                                         
 
                                                             <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
-                                                            
+                                                                <img src="assets/images/logo-dark.png" alt="" height="64" class="center">
                                                                 <thead>
                                                                     <tr>
                                                                         <th>District</th>

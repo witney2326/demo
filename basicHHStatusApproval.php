@@ -29,7 +29,7 @@
             if ($sql) {
                 echo '<script type="text/javascript">'; 
                 echo 'alert("Household Approved successfully !");'; 
-                echo 'window.location.href = "basic_livelihood_hh_mgt.php";';
+                echo 'window.location.href = "basic_livelihood_slg_mgt_check.php";';
                 echo '</script>';
             } else {
                 echo "Error: " . $sql . ":-" . mysqli_error($link);
@@ -39,7 +39,7 @@
         {
             echo '<script type="text/javascript">'; 
             echo 'alert("Household Already Approved OR Household is (SCT/CSPWP) Unverified !");'; 
-            echo 'window.location.href = "basic_livelihood_hh_mgt.php";';
+            echo 'window.location.href = "basic_livelihood_slg_mgt_check.php";';
             echo '</script>';
         }
         mysqli_close($link);

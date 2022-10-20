@@ -89,7 +89,9 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                     <div class="col-xl-12">
                         <div class="card">
                             <div class="card-body">
-
+                                <p align="right">
+                                    <INPUT TYPE="button" class="btn btn-btn btn-outline-secondary w-md" VALUE="Back" onClick="history.go(-1);">
+                                </p>
                                 <div class="tab-content p-3 text-muted">
                                     <div class="tab-pane active" id="home-1" role="tabpanel">
                                         <p class="mb-0">
@@ -161,7 +163,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                             </p>
                                                         </div>
                                                     </div>
-                                                    <INPUT TYPE="button" VALUE="Back" onClick="history.go(-1);">     
+                                                    
                                                 </div>            
                                             </div>  
                                         </p>

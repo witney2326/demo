@@ -27,13 +27,22 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 </head>
 
 <?php include 'layouts/body.php'; ?>
+<?php
 
+// do check
+if (($_SESSION["user_role"]== '05')) {
+    $region = $_SESSION["user_reg"];
+    $district = $_SESSION["user_dis"];
+    $ta = $_SESSION["user_ta"]; 
+} else
+{
+    $region = $_POST['region'];
+    $district = $_POST['district'];
+    $ta = $_POST['ta'];
+}
+?>
 <?php   
-        $region = $_POST['region'];
-        $district = $_POST['district'];
-        $ta = $_POST['ta'];
 
-    
         function get_rname($link, $rcode)
         {
         $rg_query = mysqli_query($link,"select name from tblregion where regionID='$rcode'"); // select query
@@ -77,7 +86,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
                             <div class="page-title-right">
                                 <ol class="breadcrumb m-0">
-                                    <li class="breadcrumb-item"><a href="basic_livelihood_training.php">SLG Training Management</a></li>
+                                    <li class="breadcrumb-item"><a href="basic_livelihood_training_check.php">SLG Training Management</a></li>
                                     <li class="breadcrumb-item active">SLG Training</li>
                                 </ol>
                             </div>
@@ -98,26 +107,68 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
                                 
                                 <!-- Nav tabs -->
-                                
+                                <ul class="nav nav-pills nav-justified" role="tablist">
+                                    <li class="nav-item waves-effect waves-light">
+                                        <a class="nav-link active" data-bs-toggle="tab" href="#home-1" role="tab">
+                                            <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
+                                            <span class="d-none d-sm-block">Group Training</span> 
+                                        </a>
+                                    </li>
+
+                                    <li class="nav-item waves-effect waves-light">
+                                        <a class="link"  href="basic_livelihood_cluster_training_check.php" role="link">
+                                            <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
+                                            <span class="d-none d-sm-block">Cluster Training</span>
+                                        </a>
+                                    </li>
+
+                                    <li class="nav-item waves-effect waves-light">
+                                        <a class="link"  href="basic_livelihood_training_trained_groups_check.php" role="link">
+                                            <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
+                                            <span class="d-none d-sm-block">Trained Groups/Clusters</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item waves-effect waves-light">
+                                        <a class="link"  href="basic_livelihood_animators_check.php" role="link">
+                                            <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
+                                            <span class="d-none d-sm-block">Animator Training</span>
+                                        </a>
+                                    </li>
+                                    
+                                    <li class="nav-item waves-effect waves-light">
+                                        <a class="link"  href="basic_livelihood_tot.php" role="link">
+                                            <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
+                                            <span class="d-none d-sm-block">Trainer-o-Trainers</span>
+                                        </a>
+                                    </li>
+                                    
+                                    <li class="nav-item waves-effect waves-light">
+                                        <a class="link"  href="basicReports.php" role="link">
+                                            <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
+                                            <span class="d-none d-sm-block">Training Reports</span>
+                                        </a>
+                                    </li>
+                                    
+                                </ul>
                                 <!-- Tab panes -->
+                                
                                 <div class="tab-content p-3 text-muted">
                                     <div class="tab-pane active" id="home-1" role="tabpanel">
                                         <p class="mb-0">
                                             
 
                                             <!--start here -->
+                                            
                                             <div class="card border border-primary">
-                                                <div class="card-header bg-primary border-primary">
-                                                    <h5 class="my-0 text-default">Training Filter</h5>
-                                                </div>
-                                                <div class="card-body bg-success">
+                                                
+                                                <div class="card-body">
                                                     <h5 class="card-title mt-0"></h5>
                                                     <form class="row row-cols-lg-auto g-3 align-items-center">
                                                         <div class="col-12">
                                                             <label for="region" class="form-label">Region</label>
                                                             <div>
                                                                 <select class="form-select" name="region" id="region" value ="$region" required >
-                                                                    <option selected value = "<?php echo $region;?>"><?php echo get_rname($link,$region);?></option>
+                                                                    <option selected value = "<?php if (isset($region)){echo $region;}else{echo "";}?>"><?php if (isset($region)) {echo get_rname($link,$region);}else{echo "";}?></option>
                                                                 </select>
                                                             </div>
                                                         </div>
@@ -125,7 +176,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                         <div class="col-12">
                                                             <label for="district" class="form-label">District</label>
                                                             <select class="form-select" name="district" id="district" value ="$district" required>
-                                                                <option selected value="<?php echo $district;?>" ><?php echo dis_name($link,$district); ?></option>
+                                                                <option selected value="<?php if (isset($district)){echo $district;}else{echo "";}?>" ><?php if (isset($district)) {echo dis_name($link,$district);}else{echo "";} ?></option>
                                                                     
                                                             </select>
                                                         </div>
@@ -141,12 +192,11 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                             </div>
                                                         </div>
                                                        
-                                                        <div class="col-12">
-                                                            <button type="submit" class="btn btn-btn btn-outline-primary w-md" name="Submit" value="Submit">Submit</button>
-                                                        </div>
+                                                        
                                                         <div class="col-12">
                                                             <INPUT TYPE="button" class="btn btn-btn btn-outline-secondary w-md" VALUE="Back" onClick="history.go(-1);">
                                                         </div>
+                                                        
                                                     </form>                                             
                                                     <!-- End Here -->
                                                 </div>

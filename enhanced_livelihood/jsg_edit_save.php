@@ -22,7 +22,7 @@
             if (mysqli_query($link, $sql)) {
                 echo '<script type="text/javascript">'; 
                 echo 'alert("JSG Record has been successfully edited!");'; 
-                echo 'window.location.href = "jsgs.php";';
+                echo 'window.location.href = "jsg_formation_check.php";';
                 echo '</script>';
   
             } else {

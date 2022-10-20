@@ -123,6 +123,11 @@
 
                         <?php include 'layouts/body.php'; ?>
                         <div class="col-lg-9">
+                            <div>
+                                <p align="right">
+                                    <INPUT TYPE="button" class="btn btn-btn btn-outline-secondary w-md" VALUE="Back" onClick="history.go(-1);">
+                                </p>
+                            </div>
                             <div class="card border border-success">
                                 <div class="card-header bg-transparent border-success">
                                     <h5 class="my-0 text-success">Add Adopted Place for Cluster: <?php echo cls_name($link,$id);?> </h5>
@@ -130,58 +135,58 @@
                                 <div class="card-body">
                                     
                                     <form method="POST" action="">
-                                        <div class="row mb-4">
+                                        <div class="row mb-1">
                                             <label for="group_id" class="col-sm-3 col-form-label">Cluster ID</label>
                                             <div class="col-sm-9">
                                                 <input type="text" class="form-control" id="group_id" name = "group_id" value="<?php echo $id ; ?>" style="max-width:30%;"  >
                                             </div>
                                         </div>
-                                        <div class="row mb-4">
+                                        <div class="row mb-1">
                                             <label for="group_name" class="col-sm-3 col-form-label">SL Cluster Name</label>
                                             <div class="col-sm-9">
                                                 <input type="text" class="form-control" id="group_name" name ="group_name" value = "<?php echo $groupname ; ?>" style="max-width:30%;"  >
                                             </div>
                                         </div>
                                         
-                                        <div class="row mb-4">
+                                        <div class="row mb-1">
                                             <label for="region" class="col-sm-3 col-form-label">Region</label>
                                             <div class="col-sm-9">
                                                 <input type="text" class="form-control" id="region" name="region" value ="<?php echo rname($link,$regionID) ; ?>" style="max-width:30%;"  >
                                             </div>
                                         </div>
-                                        <div class="row mb-4">
+                                        <div class="row mb-1">
                                             <label for="district" class="col-sm-3 col-form-label">District</label>
                                             <div class="col-sm-9">
                                                 <input type="text" class="form-control" id="district" name="district" value ="<?php echo dis_name($link,$DistrictID) ; ?>" style="max-width:30%;" readonly >
                                             </div>
                                         </div>
-                                        <div class="row mb-4">
+                                        <div class="row mb-1">
                                             <label for="ta" class="col-sm-3 col-form-label">Traditional Authority</label>
                                             <div class="col-sm-9">
                                                 <input type="text" class="form-control" id="ta" name="ta" value ="<?php echo tname($link,$TAID) ; ?>" style="max-width:30%;"  >
                                             </div>
                                         </div>
-                                        <div class="row mb-4">
+                                        <div class="row mb-1">
                                             <label for="gvh" class="col-sm-3 col-form-label">Group Village Head</label>
                                             <div class="col-sm-9">
                                                 <input type="text" class="form-control" id="gvh" name="gvh" value ="<?php echo $gvhID ; ?>" style="max-width:40%;"  >
                                             </div>
                                         </div>
                                         
-                                        <div class="row mb-4">
+                                        <div class="row mb-1">
                                             <label for="cohort" class="col-sm-3 col-form-label">Cohort</label>
                                             <div class="col-sm-9">
                                                 <input type="text" class="form-control" id="cohort" name="cohort" value ="<?php echo $cohort ; ?> " style="max-width:30%;"  >
                                             </div>
                                         </div>
 
-                                        <div class="row mb-4">
+                                        <div class="row mb-1">
                                             <label for="place" class="col-sm-3 col-form-label">Adopted Place</label>
                                             <input type="text" class="form-control" name="place" id="place" style="max-width:40%;" required>
                                                 
                                         </div>
 
-                                        <div class="row mb-4">
+                                        <div class="row mb-3">
                                             <label for="purpose" class="col-sm-3 col-form-label">Purpose</label>
                                             <select class="form-select" name="purpose" id="purpose" style="max-width:20%;" required>
                                                 <option></option>
@@ -208,11 +213,8 @@
                                         
 
                                         <div class="row justify-content-end">
-                                            <div class="col-sm-9">
-                                                <div>
-                                                    <button type="submit" class="btn btn-primary w-md" name="Submit" value="Submit">Save Record</button>
-                                                    <INPUT TYPE="button" VALUE="Back" onClick="history.go(-1);">
-                                                </div>
+                                            <div>
+                                                <button type="submit" class="btn btn-primary w-md" name="Submit" value="Submit">Save Record</button>
                                             </div>
                                         </div>
                                     </form>

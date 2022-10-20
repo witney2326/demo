@@ -1,23 +1,30 @@
-<?php include 'layouts/session.php'; ?>
-<?php include 'layouts/head-main.php'; ?>
+<?php include '../layouts/session.php'; ?>
+<?php include '../layouts/head-main.php'; ?>
 
 <head>
     <title>JSG |Add New Household</title>
-    <?php include 'layouts/head.php'; ?>
-    <?php include 'layouts/head-style.php'; ?>
+    <?php include '../layouts/head.php'; ?>
+    <?php include '../layouts/head-style.php'; ?>
 
+    <!-- DataTables -->
     <link href="assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
     <link href="assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
     <!-- Responsive datatable examples -->
     <link href="assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
-    <script src="assets/libs/datatables.net/js/jquery.dataTables.min.js"></script>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!--Datatable plugin CSS file -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" />
+  
+  <!--jQuery library file -->
+  <script type="text/javascript" 
+      src="https://code.jquery.com/jquery-3.5.1.js">
+  </script>
 
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-
-    <script>
+  <!--Datatable plugin JS library file -->
+  <script type="text/javascript" 
+src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
+  </script>
+  <script>
         // In your Javascript
         $(document).ready(function() {
             $('.js-single').select2();
@@ -25,91 +32,90 @@
     </script>
 </head>
 
+<?php include '../layouts/body.php'; ?>
+<?php
+      include "layouts/config.php"; // Using database connection file here
+        
+      // get id through query string
+      $jsg_id = $_POST['jsg_id'];
+      $groupID = $_POST['groupID'];
+      $GroupName = $_POST['GroupName'];
+      
+      $district = $_POST['district'];
+      $buscat = $_POST['buscat'];
+      $bustype = $_POST['bustype'];
+      
+
+     
+
+          $check = substr($groupID, 5, 3);
+          
+          if ($check == "CLU"){
+              $rg_query = mysqli_query($link,"select regionID from tblcluster where ClusterID='$groupID'"); // select query
+              while($rg = mysqli_fetch_array($rg_query)){
+              $regionID = $rg['regionID'];}
+
+              $name_query = mysqli_query($link,"select ClusterName from tblcluster where ClusterID='$groupID'"); // select query
+              while($rg = mysqli_fetch_array($name_query)){
+              $ClusterName = $rg['ClusterName'];}
+
+          }
+          if ($check == "SLG"){
+              $rg_query = mysqli_query($link,"select regionID from tblgroup where groupID='$groupID'"); // select query
+              while($rg = mysqli_fetch_array($rg_query)){
+              $regionID = $rg['regionID'];}
+
+              $grpname_query = mysqli_query($link,"select groupname from tblgroup where groupID='$groupID'"); // select query
+              while($rg = mysqli_fetch_array($grpname_query)){
+              $groupname = $rg['groupname'];}
+          }
+
+      
+          function get_rname($link, $rcode)
+          {
+          $rg_query = mysqli_query($link,"select name from tblregion where regionID='$rcode'"); // select query
+          while($rg = mysqli_fetch_array($rg_query)){
+             return $rg['name'];
+          };// fetch data
+          
+          }
+  
+          function dis_name($link, $disID)
+          {
+              $dis_query = mysqli_query($link,"select DistrictName from tbldistrict where DistrictID='$disID'"); // select query
+              while($dis = mysqli_fetch_array($dis_query)){
+              return $dis['DistrictName'];
+              };
+          }
+
+          function bus_cat($link, $catID)
+          {
+          $cat_query = mysqli_query($link,"select catname from tblbusines_category where categoryID='$catID'"); // select query
+          $name = mysqli_fetch_array($cat_query);// fetch data
+          return $name['catname'];
+          }
+
+          function bus_type($link, $typeID)
+          {
+          $cat_query = mysqli_query($link,"select name from tbliga_types where ID='$typeID'"); // select query
+          $cat_name = mysqli_fetch_array($cat_query);// fetch data
+          return $cat_name['name'];
+          }
+    ?>
+
+<!-- Begin page -->
 <div id="layout-wrapper">
 
-    <?php
-        include "layouts/config.php"; // Using database connection file here
-        
-        // get id through query string
-        $jsg_id = $_POST['jsg_id'];
-        $groupID = $_POST['groupID'];
-        $GroupName = $_POST['GroupName'];
-        
-        $district = $_POST['district'];
-        $buscat = $_POST['buscat'];
-        $bustype = $_POST['bustype'];
-        
-
-       
-
-            $check = substr($groupID, 5, 3);
-            
-            if ($check == "CLU"){
-                $rg_query = mysqli_query($link,"select regionID from tblcluster where ClusterID='$groupID'"); // select query
-                while($rg = mysqli_fetch_array($rg_query)){
-                $regionID = $rg['regionID'];}
-
-                $name_query = mysqli_query($link,"select ClusterName from tblcluster where ClusterID='$groupID'"); // select query
-                while($rg = mysqli_fetch_array($name_query)){
-                $ClusterName = $rg['ClusterName'];}
-
-            }
-            if ($check == "SLG"){
-                $rg_query = mysqli_query($link,"select regionID from tblgroup where groupID='$groupID'"); // select query
-                while($rg = mysqli_fetch_array($rg_query)){
-                $regionID = $rg['regionID'];}
-
-                $grpname_query = mysqli_query($link,"select groupname from tblgroup where groupID='$groupID'"); // select query
-                while($rg = mysqli_fetch_array($grpname_query)){
-                $groupname = $rg['groupname'];}
-            }
-
-        
-            function get_rname($link, $rcode)
-            {
-            $rg_query = mysqli_query($link,"select name from tblregion where regionID='$rcode'"); // select query
-            while($rg = mysqli_fetch_array($rg_query)){
-               return $rg['name'];
-            };// fetch data
-            
-            }
-    
-            function dis_name($link, $disID)
-            {
-                $dis_query = mysqli_query($link,"select DistrictName from tbldistrict where DistrictID='$disID'"); // select query
-                while($dis = mysqli_fetch_array($dis_query)){
-                return $dis['DistrictName'];
-                };
-            }
-
-            function bus_cat($link, $catID)
-            {
-            $cat_query = mysqli_query($link,"select catname from tblbusines_category where categoryID='$catID'"); // select query
-            $name = mysqli_fetch_array($cat_query);// fetch data
-            return $name['catname'];
-            }
-
-            function bus_type($link, $typeID)
-            {
-            $cat_query = mysqli_query($link,"select name from tbliga_types where ID='$typeID'"); // select query
-            $cat_name = mysqli_fetch_array($cat_query);// fetch data
-            return $cat_name['name'];
-            }
-
-    ?>
+    <?php include 'layouts/menu.php'; ?>
 
     <!-- ============================================================== -->
     <!-- Start right Content here -->
     <!-- ============================================================== -->
-    <?php include 'layouts/body.php'; ?>
-    
     <div class="main-content">
 
         <div class="page-content">
             <div class="container-fluid">
 
-
-                <!-- start page title -->
                 <!-- start page title -->
                 <div class="row">
                     <div class="col-12">
@@ -253,30 +259,25 @@
                         
                     </div>
                 </div>
-
-                
-
-                
-            </div>
+            </div> <!-- container-fluid -->
         </div>
-        
-        <script src="assets/libs/datatables.net/js/jquery.dataTables.min.js"></script>
-        <script src="assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
-        <!-- Buttons examples -->
-        <script src="assets/libs/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
-        <script src="assets/libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js"></script>
-        <script src="assets/libs/jszip/jszip.min.js"></script>
-        <script src="assets/libs/pdfmake/build/pdfmake.min.js"></script>
-        <script src="assets/libs/pdfmake/build/vfs_fonts.js"></script>
-        <script src="assets/libs/datatables.net-buttons/js/buttons.html5.min.js"></script>
-        <script src="assets/libs/datatables.net-buttons/js/buttons.print.min.js"></script>
-        <script src="assets/libs/datatables.net-buttons/js/buttons.colVis.min.js"></script>
-
-        <!-- Responsive examples -->
-        <script src="assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
-        <script src="assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
-
-        <!-- Datatable init js -->
-        <script src="assets/js/pages/datatables.init.js"></script>
+        <!-- End Page-content -->
+        <?php include 'layouts/footer.php'; ?>
     </div>
+    <!-- end main content-->
 </div>
+<!-- END layout-wrapper -->
+
+<!-- Right Sidebar -->
+<?php include 'layouts/right-sidebar.php'; ?>
+<!-- Right-bar -->
+
+<!-- JAVASCRIPT -->
+<?php include 'layouts/vendor-scripts.php'; ?>
+
+<!-- App js -->
+<script src="assets/js/app.js"></script>
+
+</body>
+
+</html>

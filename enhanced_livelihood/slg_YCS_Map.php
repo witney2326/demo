@@ -31,7 +31,7 @@
             if ($sql) {
                 echo '<script type="text/javascript">'; 
                 echo 'alert("SLG Mapped successfully For YCS Interventions !");'; 
-                echo 'window.location.href = "ycs_identification.php";';
+                echo 'window.location.href = "ycs_identification_check.php";';
                 echo '</script>';
             } else {
                 echo "Error: " . $sql . ":-" . mysqli_error($link);
@@ -40,7 +40,7 @@
         {
             echo '<script type="text/javascript">'; 
             echo 'alert("SLG Already Mapped For YCS Interventions !");'; 
-            echo 'window.location.href = "ycs_identification.php";';
+            echo 'window.location.href = "ycs_identification_check.php";';
             echo '</script>';
         }
         mysqli_close($link);

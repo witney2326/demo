@@ -29,9 +29,14 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 <?php include 'layouts/body.php'; ?>
 
 <?php 
-        $region = $_GET['region'];
-        //$district = $_GET['district'];
-        //$ta = $_GET['ta'];
+        if (($_SESSION["user_role"]== '03')) 
+        {
+            $region = $_SESSION["user_reg"];   
+        }
+        else
+        {
+            $region = $_POST['region'];
+        }
     
     function get_rname($link, $rcode)
         {

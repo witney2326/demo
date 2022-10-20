@@ -176,7 +176,25 @@
     </style>
 
 </head>
+<?php
+    $user = $_SESSION["user_role"];
 
+    if ($user == '05')
+    {
+        $region = $_SESSION["user_reg"];
+        $district = $_SESSION["user_dis"];
+        $ta = $_SESSION["user_ta"]; 
+    } 
+    if ($user == '04')
+    {
+        $region = $_SESSION["user_reg"];
+        $district = $_SESSION["user_dis"];
+    } 
+    if ($user == '03')
+    {
+        $region = $_SESSION["user_reg"];
+    } 
+?>
 <?php include 'layouts/body.php'; ?>
 
 <!-- Begin page -->
@@ -200,7 +218,7 @@
 
                             <div class="page-title-right">
                                 <ol class="breadcrumb m-0">
-                                    <li class="breadcrumb-item"><a href="..\index.php">Dashboard</a></li>
+                                    <li class="breadcrumb-item"><?php if ($user == '05'){echo '<a href="..\index_cw.php">Dashboard</a>';}else if ($user == '04'){echo '<a href="..\index_dc.php">Dashboard</a>';} else if ($user == '03') {echo '<a href="..\index_pc.php">Dashboard</a>';} else{echo '<a href="..\index.php">Dashboard</a>';}?></li>
                                     <li class="breadcrumb-item active">Graduation</li>
                                 </ol>
                             </div>
@@ -236,7 +254,7 @@
                                         </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link" data-bs-toggle="tab" href="#jsg" role="tab">
+                                        <a class="nav-link" data-bs-toggle="link" href="graduation_livelihood_promotion.php" role="link">
                                             <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
                                             <span class="d-none d-sm-block">Livelihood Promotion</span>
                                         </a>
@@ -278,177 +296,170 @@
                                 <!-- Tab panes -->
                                 <div class="tab-content p-3 text-muted">
                                     <div class="tab-pane active" id="home-1" role="tabpanel">
-                                        <p class="mb-0">
+                                        
                                            <!--start --> 
-                                                                <div class="row">
-                        
-                                                                    <div class="card-header bg-transparent border-primary">
-                                                                        <div class="card-group">
-                                                                            <div class="card border">
-                                                                                <img src="..." class="card-img-top" alt="">
-                                                                                <div class="card-body">
-                                                                                    
-                                                                                            <div class="card-body">
-                                                                                                <div class="d-flex">
-                                                                                                    <div class="flex-grow-1">
-                                                                                                    
-                                                                                                        <p class="text-muted fw-medium">Selected SLGs</p>
-                                                                                                        <?php
-                                                                                                            $result = mysqli_query($link, 'SELECT COUNT(groupID) AS value_groups FROM tblgroup where grad_status = 1'); 
-                                                                                                            $row = mysqli_fetch_assoc($result); 
-                                                                                                            $sum_groups = $row['value_groups'];
+                                        <div class="row">
 
-                                                                                                            $result2 = mysqli_query($link, 'SELECT COUNT(ClusterID) AS value_clusters FROM tblcluster where grad_status = 1'); 
-                                                                                                            $row2 = mysqli_fetch_assoc($result2); 
-                                                                                                            $sum_clusters = $row2['value_clusters'];
+                                            <div class="card-header bg-transparent border-primary">
+                                                <div class="card-group">
+                                                    <div class="card border">
+                                                        <img src="..." class="card-img-top" alt="">
+                                                        <div class="card-body">
+                                                            
+                                                            <div class="card-body">
+                                                                <div class="d-flex">
+                                                                    <div class="flex-grow-1">
+                                                                    
+                                                                        
+                                                                        <?php
+                                                                        if ($user == "05")
+                                                                        {
 
-                                                                                                        ?>
-                                                                                                            
-                                                                                                            <div class="container">
-                                                                                                                <div class="mb-0"><?php echo "" . number_format($sum_groups + $sum_clusters);?></div>
-                                                                                                            </div> 
-                                                                                                            
-                                                                                                    </div>
-                                                                                                    <i class='fas fa-users' style='font-size:24px;color:chocolate'></i><i class='fas fa-users' style='font-size:24px;color:brown'></i>
-                                                                                                    
-                                                                                                </div>
-                                                                                            </div>
-                                                                                    
-                                                                                <!-- -->
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="card border">
-                                                                                <img src="..." class="card-img-top" alt="">
-                                                                                <div class="card-body">
-                                                                                    <div class="card-body">
-                                                                                        <div class="d-flex">
-                                                                                            <div class="flex-grow-1">
-                                                                                                <p class="text-muted fw-medium">Selected HHs</p>
-                                                                                                <?php
-                                                                                                            $result = mysqli_query($link, 'SELECT COUNT(sppCode) AS value_sum FROM tblbeneficiaries where grad_status ="1"'); 
-                                                                                                            $row = mysqli_fetch_assoc($result); 
-                                                                                                            $sum = $row['value_sum'];
-                                                                                                        ?>
-                                                                                                            <div class="container">
-                                                                                                                <div class="mb-0"><?php echo "" . number_format($sum);?></div>
-                                                                                                            </div>
-                                                                                                
-                                                                                            </div>
-                                                                                            <i class='fas fa-house-user' style='font-size:24px;color:brown'></i><i class='fas fa-house-user' style='font-size:24px;color:black'></i>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
+                                                                            echo '<p class="text-muted fw-medium">Area: Selected SLGs</p>';
 
-                                                                            </div>
-                                                                            <div class="card border">
-                                                                                <img src="..." class="card-img-top" alt="">
-                                                                                <div class="card-body">
-                                                                                    <div class="card-body">
-                                                                                        <div class="d-flex">
-                                                                                            <div class="flex-grow-1">
-                                                                                                <p class="text-muted fw-medium">AMCs Formed</p>
-                                                                                                0
-                                                                                            </div>
-                                                                                            <i class='fas fa-user-plus' style='font-size:24px;color:brown'></i>
-                                                                                            
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
+                                                                            $result = mysqli_query($link, "SELECT COUNT(groupID) AS value_groups FROM tblgroup where ((grad_status = '1') and (TAID = '$ta'))"); 
+                                                                            $row = mysqli_fetch_assoc($result); 
+                                                                            $sum_groups = $row['value_groups'];
 
-                                                                            <div class="card border">
-                                                                                <img src="..." class="card-img-top" alt="">
-                                                                                <div class="card-body">
-                                                                                    <div class="card-body">
-                                                                                        <div class="d-flex">
-                                                                                            <div class="flex-grow-1">
-                                                                                                <p class="text-muted fw-medium">HHs Trained Asset Mgt</p>
-                                                                                                0
-                                                                                            </div>
-                                                                                            <i class='fas fa-graduation-cap' style='font-size:24px;color:black'></i>
-                                                                                            
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
+                                                                            $result2 = mysqli_query($link, "SELECT COUNT(ClusterID) AS value_clusters FROM tblcluster where ((grad_status = '1') and (taID = '$ta'))"); 
+                                                                            $row2 = mysqli_fetch_assoc($result2); 
+                                                                            $sum_clusters = $row2['value_clusters'];
+                                                                        } else if ($user == "04")
+                                                                        {
+                                                                            echo '<p class="text-muted fw-medium">District: Selected SLGs</p>';
+
+                                                                            $result = mysqli_query($link, "SELECT COUNT(groupID) AS value_groups FROM tblgroup where ((grad_status = '1') and (DistrictID = '$district'))"); 
+                                                                            $row = mysqli_fetch_assoc($result); 
+                                                                            $sum_groups = $row['value_groups'];
+
+                                                                            $result2 = mysqli_query($link, "SELECT COUNT(ClusterID) AS value_clusters FROM tblcluster where ((grad_status = '1') and (districtID = '$district'))"); 
+                                                                            $row2 = mysqli_fetch_assoc($result2); 
+                                                                            $sum_clusters = $row2['value_clusters'];
+                                                                        } else if ($user == "03")
+                                                                        {
+                                                                            echo '<p class="text-muted fw-medium">Region: Selected SLGs</p>';
+
+                                                                            $result = mysqli_query($link, "SELECT COUNT(groupID) AS value_groups FROM tblgroup where ((grad_status = '1') and (regionID = '$region'))"); 
+                                                                            $row = mysqli_fetch_assoc($result); 
+                                                                            $sum_groups = $row['value_groups'];
+
+                                                                            $result2 = mysqli_query($link, "SELECT COUNT(ClusterID) AS value_clusters FROM tblcluster where ((grad_status = '1') and (regionID = '$region'))"); 
+                                                                            $row2 = mysqli_fetch_assoc($result2); 
+                                                                            $sum_clusters = $row2['value_clusters'];
+                                                                        } else
+                                                                        {
+                                                                            echo '<p class="text-muted fw-medium">Selected SLGs</p>';
+
+                                                                            $result = mysqli_query($link, "SELECT COUNT(groupID) AS value_groups FROM tblgroup where (grad_status = '1')"); 
+                                                                            $row = mysqli_fetch_assoc($result); 
+                                                                            $sum_groups = $row['value_groups'];
+
+                                                                            $result2 = mysqli_query($link, "SELECT COUNT(ClusterID) AS value_clusters FROM tblcluster where (grad_status = '1')"); 
+                                                                            $row2 = mysqli_fetch_assoc($result2); 
+                                                                            $sum_clusters = $row2['value_clusters'];
+                                                                        }
+
+                                                                        ?>
+                                                                            <div class="container">
+                                                                                <div class="mb-0"><?php echo "" . number_format($sum_groups + $sum_clusters);?></div>
+                                                                            </div> 
+                                                                            
                                                                     </div>
-                                                                </div> 
-                                                                <!-- end here -->
-                                                                
-                                                                <!-- end here row1 -->
-
-                                                                <!-- pie chart -->
-                                                                <div class = "row">
+                                                                    <i class='fas fa-users' style='font-size:24px;color:chocolate'></i><i class='fas fa-users' style='font-size:24px;color:brown'></i>
                                                                     
+                                                                </div>
+                                                            </div>
+                                                            
+                                                        <!-- -->
+                                                        </div>
+                                                    </div>
+                                                    <div class="card border">
+                                                        <img src="..." class="card-img-top" alt="">
+                                                        <div class="card-body">
+                                                            <div class="card-body">
+                                                                <div class="d-flex">
+                                                                    <div class="flex-grow-1">
+                                                                        
+                                                                        <?php
+                                                                        if ($user == "05")
+                                                                        {
+                                                                            echo '<p class="text-muted fw-medium">Area:Selected HHs</p>';
+                                                                            $result = mysqli_query($link, "SELECT COUNT(tblbeneficiaries.sppCode) AS value_sum FROM tblbeneficiaries inner join tblgroup on 
+                                                                            tblbeneficiaries.groupID = tblgroup.groupID where ((tblbeneficiaries.grad_status ='1') and (tblgroup.TAID = '$ta'))"); 
+                                                                            $row = mysqli_fetch_assoc($result); 
+                                                                            $sum = $row['value_sum'];
+                                                                        } else if ($user == "04")
+                                                                        {
+                                                                            echo '<p class="text-muted fw-medium">District:Selected HHs</p>';
+                                                                            $result = mysqli_query($link, "SELECT COUNT(sppCode) AS value_sum FROM tblbeneficiaries where ((grad_status ='1') and (districtID = '$district'))"); 
+                                                                            $row = mysqli_fetch_assoc($result); 
+                                                                            $sum = $row['value_sum'];
+                                                                        } else if ($user == "03")
+                                                                        {
+                                                                            echo '<p class="text-muted fw-medium">Region:Selected HHs</p>';
+                                                                            $result = mysqli_query($link, "SELECT COUNT(sppCode) AS value_sum FROM tblbeneficiaries where ((grad_status ='1') and (regionID = '$region'))"); 
+                                                                            $row = mysqli_fetch_assoc($result); 
+                                                                            $sum = $row['value_sum'];
+                                                                        }else 
+                                                                        {
+                                                                            echo '<p class="text-muted fw-medium">Selected HHs</p>';
+                                                                            $result = mysqli_query($link, 'SELECT COUNT(sppCode) AS value_sum FROM tblbeneficiaries where grad_status ="1"'); 
+                                                                            $row = mysqli_fetch_assoc($result); 
+                                                                            $sum = $row['value_sum'];
+                                                                        }
+
+                                                                        ?>
+                                                                        <div class="container">
+                                                                            <div class="mb-0"><?php echo "" . number_format($sum);?></div>
+                                                                        </div>
+                                                                        
+                                                                    </div>
+                                                                    <i class='fas fa-house-user' style='font-size:24px;color:brown'></i><i class='fas fa-house-user' style='font-size:24px;color:black'></i>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="card border">
+                                                        <img src="..." class="card-img-top" alt="">
+                                                        <div class="card-body">
+                                                            <div class="card-body">
+                                                                <div class="d-flex">
+                                                                    <div class="flex-grow-1">
+                                                                        <p class="text-muted fw-medium">AMCs Formed</p>
+                                                                        0
+                                                                    </div>
+                                                                    <i class='fas fa-user-plus' style='font-size:24px;color:brown'></i>
                                                                     
-                                                                </div> 
-
-                                                            </p>
-                                                        </div>
-                                                        <div class="tab-pane" id="profile-1" role="tabpanel">
-                                                            <p class="mb-0">
-                                                                
-
-                                                            </p>
-                                                        </div>
-                                                        <div class="tab-pane" id="messages-1" role="tabpanel">
-                                                            <p class="mb-0">
-                                                                
-
-                                                            </p>
-                                                        </div>
-                                                        <div class="tab-pane" id="settings-1" role="tabpanel">
-                                                            <p class="mb-0">
-                                                                
-
-                                                            </p>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
 
+                                                    <div class="card border">
+                                                        <img src="..." class="card-img-top" alt="">
+                                                        <div class="card-body">
+                                                            <div class="card-body">
+                                                                <div class="d-flex">
+                                                                    <div class="flex-grow-1">
+                                                                        <p class="text-muted fw-medium">HHs Trained Asset Mgt</p>
+                                                                        0
+                                                                    </div>
+                                                                    <i class='fas fa-graduation-cap' style='font-size:24px;color:black'></i>
+                                                                    
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
-                                           <!-- finish -->
-                                            
-
-                                        </p>
-                                    </div>
-                                    <div class="tab-pane" id="profile-1" role="tabpanel">
-                                        <p class="mb-0">
-                                            
-
-                                        </p>
-                                    </div>
-                                    <div class="tab-pane" id="messages-1" role="tabpanel">
-                                        <p class="mb-0">
-                                           
-
-                                        </p>
-                                    </div>
-                                    <div class="tab-pane" id="settings-1" role="tabpanel">
-                                        <p class="mb-0">
-                                           
-                                            
-                                        </p>
+                                        </div> 
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     </div>
                 </div>
-
-
-
-
-
-                <!-- Collapse -->
-
-                <!-- end row -->
-
-
-                <!-- end row -->
-
             </div> <!-- container-fluid -->
         </div>
         <!-- End Page-content -->

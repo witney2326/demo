@@ -45,7 +45,7 @@
             {
                 echo '<script type="text/javascript">'; 
                 echo 'alert("Please Enter Household code !");'; 
-                echo 'window.location.href = "jsgs.php";';
+                echo 'window.location.href = "jsg_formation_check.php";';
                 //header("Location: " . $_SERVER["HTTP_REFERER"]);
                 echo '</script>';
             }
@@ -54,9 +54,11 @@
                 $sql = "INSERT INTO tbljsg_hhs (sppCode,jsgID,regionID,districtID,groupID)
                 VALUES ('$hhcode','$jsgID','$regionID','$DistrictID','$groupID')";
                 if (mysqli_query($link, $sql)) {
+                    $sql2 = mysqli_query($link,"update tblbeneficiaries  SET jsg_mapped = '1' where sppCode = '$hhcode'");    
+                    $done =  $sql2; 
                     echo '<script type="text/javascript">'; 
                     echo 'alert("JSG Member Record has been added successfully !");'; 
-                    echo 'window.location.href = "jsgs.php";';
+                    echo 'window.location.href = "jsg_formation_check.php";';
                     //header("Location: " . $_SERVER["HTTP_REFERER"]);
                     echo '</script>';
                 } else {
@@ -91,6 +93,8 @@
             $tame = mysqli_fetch_array($dis_query);// fetch data
             return $tame['TAName'];
             }
+
+            
     ?>
 
     <!-- ============================================================== -->

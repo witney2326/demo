@@ -41,7 +41,16 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
 <?php 
   
-    $region = $_GET['region'];
+  if (($_SESSION["user_role"]== '03')) 
+  {
+      $region = $_SESSION["user_reg"];
+ 
+  }
+  else
+  {
+      $region = $_POST['region'];
+  }
+  
     
     function get_rname($link, $rcode)
         {
@@ -112,7 +121,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                 
                                                 <div class="card-body">
                                                     <h5 class="card-title mt-0"></h5>
-                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="youths_bus_concept_devt_filter2_selected.php" method ="GET">
+                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="youths_bus_concept_devt_filter2_selected.php" method ="POST">
                                                         <div class="col-12">
                                                             <label for="region" class="form-label">Region</label>
                                                             <div>
@@ -181,7 +190,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                         </thead>
                                                         <tbody>
                                                             <?Php
-                                                                $query="select * from tblycs where ((regionID = '$region') and (bc_assesed_result ='1'))";
+                                                                $query="select * from tblycs inner join tblgroup on tblycs.groupID = tblgroup.groupID where ((tblgroup.regionID = '$region') and (tblycs.bc_assesed_result ='1'))";
 
                                                                 //Variable $link is declared inside config.php file & used here
                                                                 

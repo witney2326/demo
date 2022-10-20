@@ -42,8 +42,16 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
 <?php
 
-$region = $_POST['region'];		
-$district = $_POST['district'];
+if (($_SESSION["user_role"] == '04')) 
+    {
+        $region = $_SESSION["user_reg"];
+        $district = $_SESSION["user_dis"];
+    }
+    else
+    {
+        $region = $_POST['region'];
+        $district = $_POST['district'];
+    }
      
 
 
@@ -217,7 +225,16 @@ $district = $_POST['district'];
 
                                                     <tbody>
                                                         <?Php
-                                                            $district = $_POST['district'];
+                                                            if (($_SESSION["user_role"] == '04')) 
+                                                            {
+                                                                $region = $_SESSION["user_reg"];
+                                                                $district = $_SESSION["user_dis"];
+                                                            }
+                                                            else
+                                                            {
+                                                                $region = $_POST['region'];
+                                                                $district = $_POST['district'];
+                                                            }
                                                             $query="select * from tblgroup where ((DistrictID = '$district') and (deleted ='0'))";
 
                                                         //Variable $link is declared inside config.php file & used here

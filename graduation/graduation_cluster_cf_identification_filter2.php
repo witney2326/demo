@@ -41,8 +41,18 @@
 
 <?php
 
-$region = $_POST['region'];		
-$district = $_POST['district'];
+if (($_SESSION["user_role"]== '04')) 
+   {
+       $region = $_SESSION["user_reg"];
+       $district = $_SESSION["user_dis"];
+       $ta = $_SESSION["user_ta"];   
+   }
+   else
+   {
+       $region = $_POST['region'];
+       $district = $_POST['district'];
+       $ta = $_POST['ta'];
+   }
      
 
 

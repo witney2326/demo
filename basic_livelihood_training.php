@@ -45,6 +45,12 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
         }
 ?>
 
+<?php
+
+// do check
+
+?>
+
 <!-- Begin page -->
 <div id="layout-wrapper">
 
@@ -96,7 +102,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                     </li>
 
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="link"  href="basic_livelihood_cluster_training.php" role="link">
+                                        <a class="link"  href="basic_livelihood_cluster_training_check.php" role="link">
                                             <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
                                             <span class="d-none d-sm-block">Cluster Training</span>
                                         </a>
@@ -109,7 +115,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                         </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="link"  href="basic_livelihood_animators.php" role="link">
+                                        <a class="link"  href="basic_livelihood_animators_check.php" role="link">
                                             <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
                                             <span class="d-none d-sm-block">Animator Training</span>
                                         </a>
@@ -136,11 +142,11 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                     <div class="tab-pane active" id="home-1" role="tabpanel">
                                         <p class="mb-0">
                                             <!--start here -->
-                                            <div class="card border border-primary">
-                                                <div class="card-header bg-primary border-primary">
+                                            <div class="card border">
+                                                <div class="card-header">
                                                     <h5 class="my-0 text-default">Training Filter</h5>
                                                 </div>
-                                                <div class="card-body bg-success">
+                                                <div class="card-body">
                                                     <h5 class="card-title mt-0"></h5>
 
                                                     <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="basic_livelihood_slg_training_filter1_results.php" method ="POST" >

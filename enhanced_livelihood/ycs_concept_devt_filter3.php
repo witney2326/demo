@@ -29,9 +29,18 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 <?php include 'layouts/body.php'; ?>
 <?php include '../lib.php'; ?>
 <?php  
-    $region = $_POST['region'];
-    $district = $_POST['district'];
-    $ta = $_POST['ta'];
+    if (($_SESSION["user_role"]== '05')) 
+    {
+        $region = $_SESSION["user_reg"];
+        $district = $_SESSION["user_dis"];
+        $ta = $_SESSION["user_ta"];   
+    }
+    else
+    {
+        $region = $_POST['region'];
+        $district = $_POST['district'];
+        $ta = $_POST['ta'];
+    }
    
     
     
@@ -91,14 +100,14 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                     </li>
                                                                        
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link" data-bs-toggle="link" href="youths_bus_concept_devt.php" role="link">
+                                        <a class="nav-link" data-bs-toggle="link" href="youths_bus_concept_devt_check.php" role="link">
                                             <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
                                             <span class="d-none d-sm-block">Business Concept Submission & Assesment</span>
                                         </a>
                                     </li>
                                     
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="link" href="youths_bus_concept_devt_selected.php" role="link">
+                                        <a class="link" href="youths_bus_concept_devt_selected_check.php" role="link">
                                             <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
                                             <span class="d-none d-sm-block">Selected Concepts</span>
                                         </a>

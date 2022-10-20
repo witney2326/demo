@@ -29,7 +29,7 @@ if (isset($_POST['submit'])) {
 
         $subject = "Password Reset";
         $body = "Hi, $username. Click here to reset your password " . $actual_link . "/auth-reset-password.php?token=$token ";
-        // $body = "Hi, $username. Clicl here to reset your password http://localhost/Skote-PHP/auth-reset-password.php?token=$token ";
+        $body = "Hi, $username. Cliclk here to reset your password auth-reset-password.php?token=$token ";
         $sender_email = "From: $gmailid";
 
         try {

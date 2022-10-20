@@ -101,13 +101,10 @@
                             <div class="card-body">
      
                                 <div class="card border border-primary">
-                                    <div class="card-header bg-transparent border-primary">
-                                        <h5 class="my-0 text-primary">JSG Filter</h5>
-                                    </div>
-
+                                    
                                     <div class="card-body">
                                         <h5 class="card-title mt-0"></h5>
-                                        <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="jsgs_business_plans_filter1.php" method ="GET" >
+                                        <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="jsgs_business_plans_filter1.php" method ="POST" >
                                             <div class="col-12">
                                                 <label for="region" class="form-label">Region</label>
                                                 
@@ -225,7 +222,7 @@
                                                                 echo "<td>\t\t$evaluation_result</td>\n";
                                                                 
                                                                 echo "<td>
-                                                                    <a href=\"jsg_view.php?id=".$row['recID']."\"><i class='far fa-eye' title='View JSG' style='font-size:18px;color:purple'></i></a>
+                                                                    <a href=\"view_JSG1.php?id=".$row['recID']."\"><i class='far fa-eye' title='View JSG' style='font-size:18px;color:purple'></i></a>
                                                                     <a onClick=\"javascript: return confirm('Are You In Receipt Of Business Plan For This JSG? ');\" href=\"jsg_submit_bp.php?id=".$row['recID']."\"><i class='fa fa-check' title='Accept BP for JSG' style='font-size:18px;color:green'></i></a>
                                                                     
                                                                     

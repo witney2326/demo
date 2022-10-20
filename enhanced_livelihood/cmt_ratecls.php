@@ -1,16 +1,4 @@
-<?php include '../layouts/session.php'; ?>
-<?php include '../layouts/head-main.php'; ?>
 
-<head>
-    <title>SLG Assesment|Cluster Rating</title>
-    <?php include '../layouts/head.php'; ?>
-    <?php include '../layouts/head-style.php'; ?>
-
-}
-    
-</head>
-
-<div id="layout-wrapper">
 
     <?php
         include "../layouts/config.php"; // Using database connection file here     
@@ -29,12 +17,12 @@
  
         if (($cmt_assesed =='0') and ($rating == '2'))
         {
-            $sql = mysqli_query($link,"update tblcluster  SET cmt_status = '1', cmt_assesed = '1', cmt_assesed_result = '$rating' where ClusterID = '$grpID'");
+            $sql = mysqli_query($link,"update tblcluster  SET  cmt_assesed = '1', cmt_assesed_result = '$rating' where ClusterID = '$grpID'");
                     
             if ($sql) {
                 echo '<script type="text/javascript">'; 
                 echo 'alert("Cluster successfully Rated!");'; 
-                echo 'window.location.href = "cmt_cluster_assesment.php";';
+                echo 'window.location.href = "cmt_ClusterAssesment_check.php";';
                 echo '</script>';
             } else {
                 echo "Error: " . $sql . ":-" . mysqli_error($link);
@@ -47,7 +35,7 @@
             if ($sql) {
                 echo '<script type="text/javascript">'; 
                 echo 'alert("Cluster successfully Rated!");'; 
-                echo 'window.location.href = "cmt_cluster_assesment.php";';
+                echo 'window.location.href = "cmt_ClusterAssesment_check.php";';
                 echo '</script>';
             } else {
                 echo "Error: " . $sql . ":-" . mysqli_error($link);
@@ -57,7 +45,7 @@
         {
             echo '<script type="text/javascript">'; 
             echo 'alert("Cluster Already Rated!");'; 
-            echo 'window.location.href = "cmt_cluster_assesment.php";';
+            echo 'window.location.href = "cmt_ClusterAssesment_check.php";';
             echo '</script>';
         }
         mysqli_close($link);
@@ -65,4 +53,3 @@
                
     ?>
     
-</div>

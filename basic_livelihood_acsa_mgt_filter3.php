@@ -30,9 +30,18 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
 <?php 
 
-$region = $_POST["region"];
-$district = $_POST["district"];
-$ta = $_POST["ta"];
+    if (($_SESSION["user_role"]== '05')) 
+    {
+        $region = $_SESSION["user_reg"];
+        $district = $_SESSION["user_dis"];
+        $ta = $_SESSION["user_ta"];   
+    }
+    else
+    {
+        $region = $_POST['region'];
+        $district = $_POST['district'];
+        $ta = $_POST['ta'];
+    }
         
     function issue_name($link, $icode)
     {
@@ -149,11 +158,9 @@ $ta = $_POST["ta"];
                                                         <div class="card-body">
                                     
                                                             <div class="card border border-primary">
-                                                                <div class="card-header bg-primary border-primary">
-                                                                    <h5 class="my-0 text-default"></i>Cluster Filter</h5>
-                                                                </div>
+                                                                
 
-                                                                <div class="card-body bg-success">
+                                                                <div class="card-body">
                                                                     <h5 class="card-title mt-0"></h5>
                                                                     <form class="row row-cols-lg-auto g-3 align-items-center">
                                                                         <div class="col-12">

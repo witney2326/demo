@@ -1,9 +1,8 @@
-<?php include 'layouts/session.php'; ?>
-<?php include 'layouts/head-main.php'; ?>
-
+<?php
+require_once 'layouts/config.php'; 
+?>
 <head>
-    <title>Register 2 | Skote - Admin & Dashboard Template</title>
-    <?php include 'layouts/head.php'; ?>
+    <title>Register User | CIMIS</title>
 
     <!-- owl.carousel css -->
     <link rel="stylesheet" href="assets/libs/owl.carousel/assets/owl.carousel.min.css">
@@ -30,17 +29,17 @@
                                         <div class="col-lg-7">
                                             <div class="text-center">
 
-                                                <h4 class="mb-3"><i class="bx bxs-quote-alt-left text-primary h1 align-middle me-3"></i><span class="text-primary">5k</span>+ Satisfied clients</h4>
+                                                <h4 class="mb-3"><i class="bx bxs-quote-alt-left text-primary h1 align-middle me-3"></i><span class="text-primary"></h4>
 
                                                 <div dir="ltr">
                                                     <div class="owl-carousel owl-theme auth-review-carousel" id="auth-review-carousel">
                                                         <div class="item">
                                                             <div class="py-3">
-                                                                <p class="font-size-16 mb-4">" Fantastic theme with a ton of options. If you just want the HTML to integrate with your project, then this is the package. You can find the files in the 'dist' folder...no need to install git and all the other stuff the documentation talks about. "</p>
+                                                                <p class="font-size-16 mb-4">" Comsip Intergrated Management Information System "</p>
 
                                                                 <div>
-                                                                    <h4 class="font-size-16 text-primary">Abs1981</h4>
-                                                                    <p class="font-size-14 mb-0">- Skote User</p>
+                                                                    <h4 class="font-size-16 text-primary"></h4>
+                                                                    <p class="font-size-14 mb-0"></p>
                                                                 </div>
                                                             </div>
 
@@ -48,11 +47,11 @@
 
                                                         <div class="item">
                                                             <div class="py-3">
-                                                                <p class="font-size-16 mb-4">" If Every Vendor on Envato are as supportive as Themesbrand, Development with be a nice experience. You guys are Wonderful. Keep us the good work. "</p>
+                                                                <p class="font-size-16 mb-4">" Livelihoods Management Information System: Supporting Livelihoods Interventions in Malawi "</p>
 
                                                                 <div>
-                                                                    <h4 class="font-size-16 text-primary">nezerious</h4>
-                                                                    <p class="font-size-14 mb-0">- Skote User</p>
+                                                                    <h4 class="font-size-16 text-primary"></h4>
+                                                                    <p class="font-size-14 mb-0"></p>
                                                                 </div>
                                                             </div>
 
@@ -75,89 +74,109 @@
 
                             <div class="d-flex flex-column h-100">
                                 <div class="mb-4 mb-md-5">
-                                    <a href="index.php" class="d-block auth-logo">
-                                        <img src="assets/images/logo-dark.png" alt="" height="18" class="auth-logo-dark">
-                                        <img src="assets/images/logo-light.png" alt="" height="18" class="auth-logo-light">
+                                    <a href="" class="d-block auth-logo">
+                                        <img src="assets/images/logo-dark.png" alt="" height="64" class="auth-logo-dark">
+                                        <img src="assets/images/logo-light.png" alt="" height="64" class="auth-logo-light">
                                     </a>
                                 </div>
                                 <div class="my-auto">
 
                                     <div>
                                         <h5 class="text-primary">Register account</h5>
-                                        <p class="text-muted">Get your free Skote account now.</p>
+                                        <p class="text-muted">If Livelihoods Stakeholder in Malawi GET your account now.</p>
                                     </div>
 
                                     <div class="mt-4">
-                                        <form class="needs-validation" novalidate action="index.php">
+                                        <form class="needs-validation"  action="auth-register-2d.php" method="POST">
 
-                                            <div class="mb-3">
-                                                <label for="useremail" class="form-label">Email</label>
-                                                <input type="email" class="form-control" id="useremail" placeholder="Enter email" required>
+                                            <div class="mb-1">
+                                            <label for="region" class="form-label">Region</label>
+                                                                            
+                                                <select class="form-select" name="region" id="region"  required>
+                                                    <option></option>
+                                                    <option value="00">NA</option>
+                                                    <?php                                                           
+                                                            $dis_fetch_query = "SELECT regionID, name FROM tblregion";                                                  
+                                                            $result_dis_fetch = mysqli_query($link, $dis_fetch_query);                                                                       
+                                                            $i=0;
+                                                                while($DB_ROW_reg = mysqli_fetch_array($result_dis_fetch)) {
+                                                            ?>
+                                                            <option value ="<?php
+                                                                    echo $DB_ROW_reg["regionID"];?>">
+                                                                <?php
+                                                                    echo $DB_ROW_reg["name"];
+                                                                ?>
+                                                            </option>
+                                                            <?php
+                                                                $i++;
+                                                                    }
+                                                        ?>
+                                                </select>
                                                 <div class="invalid-feedback">
-                                                    Please Enter Email
+                                                    Please select a valid Malawi region.
                                                 </div>
                                             </div>
 
-                                            <div class="mb-3">
-                                                <label for="username" class="form-label">Username</label>
-                                                <input type="text" class="form-control" id="username" placeholder="Enter username" required>
+                                            <div class="mb-1">
+                                            <label for="district" class="form-label">District</label>
+                                                <select class="form-select" name="district" id="district"  required disabled>
+                                                    <option  ></option>
+                                                        <?php                                                           
+                                                            $dis_fetch_query = "SELECT DistrictID,DistrictName FROM tbldistrict";                                                  
+                                                            $result_dis_fetch = mysqli_query($link, $dis_fetch_query);                                                                       
+                                                            $i=0;
+                                                                while($DB_ROW_Dis = mysqli_fetch_array($result_dis_fetch)) {
+                                                            ?>
+                                                            <option value="<?php echo $DB_ROW_Dis["DistrictID"]; ?>">
+                                                                <?php echo $DB_ROW_Dis["DistrictName"]; ?></option><?php
+                                                                $i++;
+                                                                    }
+                                                        ?>
+                                                </select>
                                                 <div class="invalid-feedback">
-                                                    Please Enter Username
+                                                    Please select a valid Malawi district.
                                                 </div>
                                             </div>
 
-                                            <div class="mb-3">
-                                                <label for="userpassword" class="form-label">Password</label>
-                                                <input type="password" class="form-control" id="userpassword" placeholder="Enter password" required>
+                                            <div class="mb-1">
+                                            <label for="ta" class="form-label">Traditional Authority</label>
+                                                <select class="form-select" name="ta" id="ta" required disabled>
+                                                    <option ></option>
+                                                    <?php                                                           
+                                                            $ta_fetch_query = "SELECT TAName FROM tblta";                                                  
+                                                            $result_ta_fetch = mysqli_query($link, $ta_fetch_query);                                                                       
+                                                            $i=0;
+                                                                while($DB_ROW_ta = mysqli_fetch_array($result_ta_fetch)) {
+                                                            ?>
+                                                            <option>
+                                                                <?php echo $DB_ROW_ta["TAName"]; ?></option><?php
+                                                                $i++;
+                                                                    }
+                                                        ?>
+                                                </select>
                                                 <div class="invalid-feedback">
-                                                    Please Enter Password
+                                                    Please select a valid TA.
                                                 </div>
                                             </div>
 
-                                            <div>
-                                                <p class="mb-0">By registering you agree to the Skote <a href="#" class="text-primary">Terms of Use</a></p>
-                                            </div>
+                                            
 
                                             <div class="mt-4 d-grid">
-                                                <button class="btn btn-primary waves-effect waves-light" type="submit">Register</button>
+                                                <button class="btn btn-primary waves-effect waves-light" type="submit">Submit Region</button>
                                             </div>
 
                                             <div class="mt-4 text-center">
-                                                <h5 class="font-size-14 mb-3">Sign up using</h5>
-
-                                                <ul class="list-inline">
-                                                    <li class="list-inline-item">
-                                                        <a href="javascript::void()" class="social-list-item bg-primary text-white border-primary">
-                                                            <i class="mdi mdi-facebook"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li class="list-inline-item">
-                                                        <a href="javascript::void()" class="social-list-item bg-info text-white border-info">
-                                                            <i class="mdi mdi-twitter"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li class="list-inline-item">
-                                                        <a href="javascript::void()" class="social-list-item bg-danger text-white border-danger">
-                                                            <i class="mdi mdi-google"></i>
-                                                        </a>
-                                                    </li>
-                                                </ul>
+                                                
 
                                             </div>
 
                                         </form>
 
                                         <div class="mt-5 text-center">
-                                            <p>Already have an account ? <a href="auth-login-2.php" class="fw-medium text-primary"> Login</a> </p>
+                                            
                                         </div>
 
                                     </div>
-                                </div>
-
-                                <div class="mt-4 mt-md-5 text-center">
-                                    <p class="mb-0">© <script>
-                                            document.write(new Date().getFullYear())
-                                        </script> Skote. Crafted with <i class="mdi mdi-heart text-danger"></i> by Themesbrand</p>
                                 </div>
                             </div>
 
@@ -171,19 +190,14 @@
         </div>
         <!-- end container-fluid -->
     </div>
-
     <!-- JAVASCRIPT -->
     <?php include 'layouts/vendor-scripts.php'; ?>
-
     <!-- owl.carousel js -->
     <script src="assets/libs/owl.carousel/owl.carousel.min.js"></script>
-
     <!-- validation init -->
     <script src="assets/js/pages/validation.init.js"></script>
-
     <!-- auth-2-carousel init -->
     <script src="assets/js/pages/auth-2-carousel.init.js"></script>
-
     <!-- App js -->
     <script src="assets/js/app.js"></script>
 

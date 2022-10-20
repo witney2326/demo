@@ -29,6 +29,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 <?php include 'layouts/body.php'; ?>
 
 <?php 
+
     
     function get_rname($link, $rcode)
         {
@@ -85,11 +86,11 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                         <div class="card">
                             <div class="card-body">
                                 <!--start here -->
-                                <div class="card border border-primary">
-                                    <div class="card-header bg-primary border-primary">
+                                <div class="card border">
+                                    <div class="card-header">
                                         <h5 class="my-0 text-default">Cluster Filter</h5>
                                     </div>
-                                    <div class="card-body bg-success">
+                                    <div class="card-body">
                                         <h5 class="card-title mt-0"></h5>
 
                                         <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="basic_livelihood_cluster_training_filter1.php" method ="POST" >

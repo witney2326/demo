@@ -29,8 +29,16 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 <?php include 'layouts/body.php'; ?>
 
 <?php		
-    $region = $_POST["region"]; 
-    $district = $_POST['district'];
+    if (($_SESSION["user_role"] == '04')) 
+    {
+        $region = $_SESSION["user_reg"];
+        $district = $_SESSION["user_dis"];
+    }
+    else
+    {
+        $region = $_POST['region'];
+        $district = $_POST['district'];  
+    }
      
     function get_rname($link, $rcode)
     {
@@ -188,7 +196,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
                                     <tbody>
                                         <?Php
-                                            $district = $_POST["district"];
+                                            
                                             $query="select * from tblbeneficiaries where districtID = '$district'";
 
                                         //Variable $link is declared inside config.php file & used here

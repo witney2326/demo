@@ -181,7 +181,7 @@ label input {
                             </div>
                             <div class="card-body">
                                 
-                                <form method="POST" action="">
+                                <form method="POST" action="update_NHS.php">
 
                                     <div class="row">
                                         <div class="col-md-3">

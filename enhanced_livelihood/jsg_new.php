@@ -21,7 +21,7 @@ if(isset($_POST['Submit']))
             if (mysqli_query($link, $sql)) {
                 echo '<script type="text/javascript">'; 
                 echo 'alert("JSG Record has been added successfully !");'; 
-                echo 'window.location.href = "jsg_formation.php";';
+                echo 'window.location.href = "jsg_formation_check.php";';
                 echo '</script>';
             } else {
                 echo "Error: " . $sql . ":-" . mysqli_error($link);
@@ -31,7 +31,7 @@ if(isset($_POST['Submit']))
         {
             echo '<script type="text/javascript">'; 
             echo 'alert("JSG has no name or no members !");'; 
-            echo 'window.location.href = "jsg_formation.php";';
+            echo 'window.location.href = "jsg_formation_check.php";';
             echo '</script>';
         }
     }
@@ -39,7 +39,7 @@ if(isset($_POST['Submit']))
     {
         echo '<script type="text/javascript">'; 
         echo 'alert("Group Not Mapped For Joint Skill Groups!");'; 
-        echo 'window.location.href = "jsg_formation.php";';
+        echo 'window.location.href = "jsg_formation_check.php";';
         echo '</script>';
     }
     mysqli_close($link);

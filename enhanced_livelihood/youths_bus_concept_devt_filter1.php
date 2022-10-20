@@ -40,7 +40,14 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 <?php include 'layouts/body.php'; ?>
 <?php include '../lib.php'; ?>
 <?php 
-    $region = $_POST['region'];
+    if (($_SESSION["user_role"]== '03')) 
+    {
+        $region = $_SESSION["user_reg"];   
+    }
+    else
+    {
+        $region = $_POST['region'];
+    }
 ?>
 
 <!-- Begin page -->
@@ -256,7 +263,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                                     
                                                                     echo "<td>
                                                                         <a href=\"../basicSLGMemberview?id=".$row['hh_code']."\"><i class='far fa-eye' title='View Household' style='font-size:18px;color:purple'></i></a>
-                                                                        <a href=\".php?id=".$row['recID']."\"><i class='fas fa-bezier-curve' title='View Business Concept' style='font-size:18px;color:orange'></i></a>    
+                                                                        
                                                                         <a href=\".php?id=".$row['recID']."\"><i class='far fa-trash-alt' title='Delete YCS Record' style='font-size:18px;color:red'></i></a>    
                                                                     </td>\n";
 

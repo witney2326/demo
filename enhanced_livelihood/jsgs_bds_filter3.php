@@ -16,10 +16,20 @@
 
 <?php include 'layouts/body.php'; ?>
 
-<?php  
-    $region = $_GET['region'];
-    $district =$_GET['district'];
-    $cw =$_GET['cw'];
+<?php 
+
+    if (($_SESSION["user_role"]== '05')) 
+    {
+        $region = $_SESSION["user_reg"];
+        $district = $_SESSION["user_dis"];
+        $ta = $_SESSION["user_ta"];   
+    }
+    else
+    {
+        $region = $_POST['region'];
+        $district = $_POST['district'];
+        $ta = $_POST['ta'];
+    }
     
     
     function get_rname($link, $rcode)
@@ -41,6 +51,12 @@
         $cw_query = mysqli_query($link,"select cwName from tblcw where cwID='$cwcode'"); // select query
         $cwname = mysqli_fetch_array($cw_query);// fetch data
         return $cwname['cwName'];
+        }
+        function ta_name($link, $taID)
+        {
+        $dis_query = mysqli_query($link,"select TAName from tblta where TAID='$taID'"); // select query
+        $dis = mysqli_fetch_array($dis_query);// fetch data
+        return $dis['TAName'];
         }
 ?>
 
@@ -79,11 +95,41 @@
                     <div class="col-xl-12">
                         <div class="card">
                             <div class="card-body">
+                                <!-- Nav tabs -->
+                                <ul class="nav nav-pills nav-justified" role="tablist">
+                                    
+                                    <li class="nav-item waves-effect waves-light">
+                                        <a class="nav-link active" data-bs-toggle="link" href="jsgs_bdss_check" role="link">
+                                            <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
+                                            <span class="d-none d-sm-block">BDS</span>
+                                        </a>
+                                    </li>
+
+                                    <li class="nav-item waves-effect waves-light">
+                                        <a class="nav-link" data-bs-toggle="link" href="jsg_new_bds_check.php" role="link">
+                                            <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
+                                            <span class="d-none d-sm-block">New BDS</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item waves-effect waves-light">
+                                        <a class="nav-link" data-bs-toggle="link" href="jsgs_bds_check.php" role="link">
+                                            <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
+                                            <span class="d-none d-sm-block">Allocate BDS</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item waves-effect waves-light">
+                                        <a class="nav-link" data-bs-toggle="link" href="jsgs_trainingPlan_check.php" role="link">
+                                            <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
+                                            <span class="d-none d-sm-block">Training Plan</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                                <!-- Tab panes -->
                                 <!--start here -->
                                 <div class="card border border-primary">
                                     <div class="card-body">
                                         <h5 class="card-title mt-0"></h5>
-                                        <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="jsgs_bds_filter4.php" method ="GET" >
+                                        <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="jsgs_bds_filter4.php" method ="POST" >
                                             <div class="col-12">
                                                 <label for="region" class="form-label">Region</label>
                                                 <div>
@@ -103,10 +149,10 @@
                                             </div>
 
                                             <div class="col-12">
-                                                <label for="cw" class="form-label">Case Worker</label>
+                                                <label for="cw" class="form-label">Traditional Authority</label>
                                                 <div>
-                                                    <select class="form-select" name="cw" id="cw" value ="$cw" required>
-                                                        <option selected value = "<?php echo $cw;?>"><?php echo cw_name($link,$cw);?></option>
+                                                    <select class="form-select" name="ta" id="ta" value ="$ta" required>
+                                                        <option selected value = "<?php echo $ta;?>"><?php echo ta_name($link,$ta);?></option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -116,7 +162,7 @@
                                                 <select class="form-select" name="slg" id="slg"  required>
                                                     <option ></option>
                                                         <?php                                                           
-                                                            $slg_fetch_query = "SELECT groupID,groupname FROM tblgroup where cwID = '$cw'";                                                  
+                                                            $slg_fetch_query = "SELECT groupID,groupname FROM tblgroup where TAID = '$ta'";                                                  
                                                             $result_slg_fetch = mysqli_query($link, $slg_fetch_query);                                                                       
                                                             $i=0;
                                                                 while($DB_ROW_slg = mysqli_fetch_array($result_slg_fetch)) {
@@ -145,7 +191,7 @@
                                     <div class="col-12">
                                         <div class="card border border-primary">
                                         <div class="card-header bg-transparent border-primary">
-                                            <h5 class="my-0 text-default">Joint Skill Groups For CaseWorker:  <?php echo cw_name($link,$cw); ?></h5>
+                                            <h5 class="my-0 text-default">Joint Skill Groups</h5>
                                         </div>
                                         <div class="card-body">
                                         <h7 class="card-title mt-0"></h7>
@@ -164,7 +210,7 @@
                                                     </thead>
                                                     <tbody>
                                                         <?Php
-                                                            $query="select tbljsg.recID, tbljsg.jsg_name, tbljsg.groupID, tbljsg.bds_identified, tbljsg.bds_allocated from tbljsg inner join tblgroup on tbljsg.groupID = tblgroup.groupID where tblgroup.cwID = '$cw'";
+                                                            $query="select tbljsg.recID, tbljsg.jsg_name, tbljsg.groupID, tbljsg.bds_identified, tbljsg.bds_allocated from tbljsg inner join tblgroup on tbljsg.groupID = tblgroup.groupID where tblgroup.TAID = '$ta'";
 
                                                             //Variable $link is declared inside config.php file & used here
                                                             
@@ -185,7 +231,37 @@
                                                                     echo "<td>\t\t$bds_allocated</td>\n";
                                                                     echo "<td>
                                                                         <a href=\"jsg_view.php?id=".$row['recID']."\"><i class='far fa-eye' title='View JSG' style='font-size:18px;color:purple'></i></a>
-                                                                        <a href=\"jsg_bds_identify.php?id=".$row['recID']."\"><i class='fas fa-id-badge' title='Identify BDS' style='font-size:18px;color:orange'></i></a>
+                                                                        <a href=\"jsg_bds_identify.php?id=".$row['recID']."\"><i class='fas fa-id-badge' title='Training Plan' style='font-size:18px;color:orange'></i></a>
+                                                                        
+                                                                    </td>\n";
+
+                                                                echo "</tr>\n";
+                                                            }
+                                                            $result_set->close();
+                                                            } 
+                                                            
+                                                            $query="select tbljsg.recID, tbljsg.jsg_name, tbljsg.groupID, tbljsg.bds_identified, tbljsg.bds_allocated from tbljsg inner join tblcluster on tbljsg.groupID = tblcluster.ClusterID where tblcluster.TAID = '$ta'";
+
+                                                            //Variable $link is declared inside config.php file & used here
+                                                            
+                                                            if ($result_set = $link->query($query)) {
+                                                            while($row = $result_set->fetch_array(MYSQLI_ASSOC))
+                                                            {
+                                                            
+                                                                if ($row["bds_identified"] == 0){$bds_identified = "No";};if ($row["bds_identified"] == 1){$bds_identified = "Yes";};
+                                                                if ($row["bds_allocated"] == 0){$bds_allocated = "No";};if ($row["bds_allocated"] == 1){$bds_allocated = "Yes";}; 
+                                                                echo "<tr>\n";
+                                                                    
+                                                                
+                                                                    echo "<td>".$row["recID"]."</td>\n";
+                                                                    echo "<td>".$row["jsg_name"]."</td>\n";
+                                                                
+                                                                    echo "<td>".$row["groupID"]."</td>\n";
+                                                                    echo "<td>\t\t$bds_identified</td>\n";
+                                                                    echo "<td>\t\t$bds_allocated</td>\n";
+                                                                    echo "<td>
+                                                                        <a href=\"jsg_view.php?id=".$row['recID']."\"><i class='far fa-eye' title='View JSG' style='font-size:18px;color:purple'></i></a>
+                                                                        <a href=\"jsg_bds_identify.php?id=".$row['recID']."\"><i class='fas fa-id-badge' title='Training Plan' style='font-size:18px;color:orange'></i></a>
                                                                         
                                                                     </td>\n";
 

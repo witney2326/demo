@@ -197,7 +197,7 @@ label input {
                                         <div class="col-md-3">
                                             <div class="mb-3">
                                                 <label for="GroupName" class="form-label">SLG Name</label>
-                                                <input type="text" class="form-control" id="GroupName" name="GroupName" value = "<?php echo grp_name($link,$groupID) ; ?>" readonly>
+                                                
                                             </div>
                                         </div>
                                         <div class="col-md-3">

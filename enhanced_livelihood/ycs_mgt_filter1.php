@@ -29,7 +29,14 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 <?php include 'layouts/body.php'; ?>
 
 <?php 
-    $region = $_POST['region'];
+    if (($_SESSION["user_role"]== '05')) 
+    {
+        $region = $_SESSION["user_reg"];   
+    }
+    else
+    {
+        $region = $_POST['region'];
+    }
     
     function get_rname($link, $rcode)
         {
@@ -96,16 +103,16 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                         </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="link"  href="ycs_clusters.php" role="link">
+                                        <a class="link"  href="ycs_clusters_check.php" role="link">
                                             <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
                                             <span class="d-none d-sm-block">Clusters</span>
                                         </a>
                                     </li>
                                     
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link" data-bs-toggle="link" href="youths.php" role="link">
+                                        <a class="nav-link" data-bs-toggle="link" href="youths_check.php" role="link">
                                             <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
-                                            <span class="d-none d-sm-block">Linked Youths</span>
+                                            <span class="d-none d-sm-block">Enrolled Youths</span>
                                         </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">

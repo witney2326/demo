@@ -317,7 +317,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                                 <h7 class="my-0 text-secondary">Captured Households: <?php echo $total; ?> </h7>
                                                             </div>
                                                             <div class="card-body">              
-                                                                <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
+                                                                <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100" style ="font-size: 10px;">
                                                                 
                                                                     <thead>
                                                                         <tr>   

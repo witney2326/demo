@@ -6,6 +6,7 @@
     <?php include 'layouts/head.php'; ?>
     <?php include 'layouts/head-style.php'; ?>
     <?php include 'layouts/config.php'; ?>
+    <?php include 'lib.php'; ?>
 <!-- DataTables -->
     <link href="assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
     <link href="assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
@@ -18,22 +19,19 @@
 
 <?php 
   
-    $region = $_POST["region"];
-    $district =$_POST["district"];
-       
-    function get_rname($link, $rcode)
-        {
-        $rg_query = mysqli_query($link,"select name from tblregion where regionID='$rcode'"); // select query
-        $rg = mysqli_fetch_array($rg_query);// fetch data
-        return $rg['name'];
-        }
-    
-        function dis_name($link, $disID)
-        {
-        $dis_query = mysqli_query($link,"select DistrictName from tbldistrict where DistrictID='$disID'"); // select query
-        $dis = mysqli_fetch_array($dis_query);// fetch data
-        return $dis['DistrictName'];
-        }
+  if (($_SESSION["user_role"] == '04')) 
+  {
+      $region = $_SESSION["user_reg"];
+      $district = $_SESSION["user_dis"];
+  }
+  else if ((isset($_POST['region'])) and (isset($_POST['district'])))
+  {
+      $region = $_POST['region'];
+      $district = $_POST['district'];  
+  }else
+  {
+    header("location: basic_livelihood_meetings.php");
+  }
 ?>
 
 <!-- Begin page -->
@@ -53,11 +51,11 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                            <h4 class="mb-sm-0 font-size-18">Sensitization and Awareness Meetings</h4>
+                            <h4 class="mb-sm-0 font-size-18">New Sensitization Meeting</h4>
 
                             <div class="page-title-right">
                                 <ol class="breadcrumb m-0">
-                                    <li class="breadcrumb-item"><a href="basic_livelihood.php">Basic Livelihood</a></li>
+                                    <li class="breadcrumb-item"><a href="basic_livelihood_meetings.php">Sensitization Meetings</a></li>
                                     <li class="breadcrumb-item active">Sensitization Meetings</li>
                                 </ol>
                             </div>
@@ -86,48 +84,12 @@
                                             
 
                                             <!--start here -->
-                                            <div class="card border border-primary">
-                                                <div class="card-header bg-primary border-primary">
-                                                    <h5 class="my-0 text-default"></i>Meeting Filter:</h5>
-                                                </div>
-                                                <div class="card-body bg-success">
-                                                    <h5 class="card-title mt-0"></h5>
-                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="" method ="GET">
-                                                        <div class="col-12">
-                                                            <label for="region" class="form-label">Region</label>
-                                                            <div>
-                                                                <select class="form-select" name="region" id="region" value ="<?php echo $region;?>" required>
-                                                                    <option selected value = "<?php echo $region;?>"><?php echo get_rname($link,$region);?></option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                        
-                                                        <div class="col-12">
-                                                            <label for="district" class="form-label">District</label>
-                                                            <div>
-                                                                <select class="form-select" name="district" id="district" value ="<?php echo $district;?>" required>
-                                                                    <option selected value = "<?php echo $district;?>"><?php echo dis_name($link,$district);?></option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-
-                                                        
-                                                        <div class="col-12">
-                                                            <INPUT TYPE="button" class="btn btn-secondary w-md" VALUE="Back" onClick="history.go(-1);">
-                                                        </div>
-                                                    </form>                                             
-                                                    <!-- End Here -->
-                                                </div>
-                                            </div>
-
+                                           
                                             <div class="row">
                                                 <div class="col-12">
                                                     <div class="card border border-primary">
-                                                    <div class="card-header bg-transparent border-primary">
-                                                        <h5 class="my-0 text-primary"><i class="mdi mdi-bullseye-arrow me-3"></i>New Meeting/Sensitization in <?php echo dis_name($link,$district); ?></h5>
-                                                    </div>
-                                                    <div class="card-body">
-                                                    <div class="card border border-primary">
+                                                    
+                                                    
                                                         
                                                 <div class="card-body">
                                                     <h5 class="card-title mt-0"></h5>
@@ -247,7 +209,11 @@
                                                             </div>
                                                             <div class="col-12">
                                                                 <button type="submit" class="btn btn-outline-primary w-md" name="submit" value="submit">Submit Meeting Details</button>
+                                                                
+                                                                <INPUT TYPE="button" class="btn btn-outline-secondary w-md" VALUE="Back" onClick="history.go(-1);">
+                                                                
                                                             </div>
+
                                                         </div>
                                                     </form>
                                                 </div>     

@@ -25,13 +25,20 @@
 src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
   </script>
 </head>
-
+<style>
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: auto;
+}
+</style>
 <?php include 'layouts/body.php'; ?>
 
 <?php 
    
-        $region = $_GET['region'];
-        $district = $_GET['district'];
+        $region = $_POST['region'];
+        $district = $_POST['district'];
         //$ta = $_GET['ta'];
      
     
@@ -68,14 +75,6 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                     <div class="col-12">
                         <div class="page-title-box d-sm-flex align-items-center justify-content-between">
                             <h4 class="mb-sm-0 font-size-18">SLG Training Reports</h4>
-
-                            <div class="page-title-right">
-                                <ol class="breadcrumb m-0">
-                                    <li class="breadcrumb-item"><a href="basicReports.php">Basic Livelihood Reports</a></li>
-                                    <li class="breadcrumb-item active">SLG Training Reports</li>
-                                </ol>
-                            </div>
-
                         </div>
                     </div>
                 </div>
@@ -87,7 +86,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                     </div>
                     <div class="card-body">
                        
-                        <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="basic_livelihood_SLG_training_reports_filter3.php" method ="GET" >
+                        <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="basic_livelihood_SLG_training_reports_filter3.php" method ="POST" >
                             
                             <div class="col-12">
                                 <label for="region" class="form-label">Region</label>
@@ -140,18 +139,14 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                     <div class="col-12">
                         <div class="card border border-primary">
                         <div class="card-header bg-transparent border-primary">
-                            <h5 class="my-0 text-primary">Training Report</h5>
+                        <p><center><h5 class="my-0 text-primary">Training Report</h5></center></p>
                         </div>
-
-                        
 
                         <div class="card-body">
                         <h7 class="card-title mt-0"></h7>
 
-                            
-
                                 <table id="datatable-buttons" class="table table-bordered dt-responsive  nowrap w-100">
-                                
+                                <img src="assets/images/logo-dark.png" alt="" height="64" class="center">
                                     <thead>
                                         <tr>
                                             

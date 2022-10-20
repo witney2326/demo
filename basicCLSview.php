@@ -24,64 +24,63 @@
   <script type="text/javascript" 
 src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
   </script>
-
 </head>
 
+<?php include 'layouts/body.php'; ?>
+<?php
+       include "layouts/config.php"; // Using database connection file here
+        
+       $id = $_GET['id']; // get id through query string
+      $query="select * from tblcluster where ClusterID='$id'";
+       
+       if ($result_set = $link->query($query)) {
+           while($row = $result_set->fetch_array(MYSQLI_ASSOC))
+           { 
+               $groupname= $row["ClusterName"];
+               
+               $regionID = $row["regionID"];
+               $DistrictID= $row["districtID"];
+               $TAID= $row["taID"];
+               $gvhID= $row["gvhID"];
+               $cohort = $row["cohort"];
+           }
+           $result_set->close();
+       }
+
+       function dis_name($link, $disID)
+       {
+       $dis_query = mysqli_query($link,"select DistrictName from tbldistrict where DistrictID='$disID'"); // select query
+       $dis = mysqli_fetch_array($dis_query);// fetch data
+       return $dis['DistrictName'];
+       }
+
+       function r_name($link, $rcode)
+       {
+       $region_query = mysqli_query($link,"select name from tblregion where regionID='$rcode'"); // select query
+       $rg = mysqli_fetch_array($region_query);// fetch data
+       return $rg['name'];
+       }
+
+       function ta_name($link, $tacode)
+       {
+       $region_query = mysqli_query($link,"select TAName from tblta where TAID='$tacode'"); // select query
+       $ta = mysqli_fetch_array($region_query);// fetch data
+       return $ta['TAName'];
+       }
+
+       function cls_name($link, $clscode)
+       {
+       $cls_query = mysqli_query($link,"select ClusterName from tblcluster where ClusterID='$clscode'"); // select query
+       $cls = mysqli_fetch_array($cls_query);// fetch data
+       return $cls['ClusterName'];
+       }
+
+    ?>
+
+<!-- Begin page -->
 <div id="layout-wrapper">
 
- 
-
-    <?php
-        include "layouts/config.php"; // Using database connection file here
-        
-        $id = $_GET['id']; // get id through query string
-       $query="select * from tblcluster where ClusterID='$id'";
-        
-        if ($result_set = $link->query($query)) {
-            while($row = $result_set->fetch_array(MYSQLI_ASSOC))
-            { 
-                $groupname= $row["ClusterName"];
-                
-                $regionID = $row["regionID"];
-                $DistrictID= $row["districtID"];
-                $TAID= $row["taID"];
-                $gvhID= $row["gvhID"];
-                $cohort = $row["cohort"];
-            }
-            $result_set->close();
-        }
-
-        function dis_name($link, $disID)
-        {
-        $dis_query = mysqli_query($link,"select DistrictName from tbldistrict where DistrictID='$disID'"); // select query
-        $dis = mysqli_fetch_array($dis_query);// fetch data
-        return $dis['DistrictName'];
-        }
-
-        function r_name($link, $rcode)
-        {
-        $region_query = mysqli_query($link,"select name from tblregion where regionID='$rcode'"); // select query
-        $rg = mysqli_fetch_array($region_query);// fetch data
-        return $rg['name'];
-        }
-
-        function ta_name($link, $tacode)
-        {
-        $region_query = mysqli_query($link,"select TAName from tblta where TAID='$tacode'"); // select query
-        $ta = mysqli_fetch_array($region_query);// fetch data
-        return $ta['TAName'];
-        }
-
-        function cls_name($link, $clscode)
-        {
-        $cls_query = mysqli_query($link,"select ClusterName from tblcluster where ClusterID='$clscode'"); // select query
-        $cls = mysqli_fetch_array($cls_query);// fetch data
-        return $cls['ClusterName'];
-        }
-
-        
-               
-    ?>
+    <?php include 'layouts/menu.php'; ?>
 
     <!-- ============================================================== -->
     <!-- Start right Content here -->
@@ -92,6 +91,22 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
             <div class="container-fluid">
 
                 <!-- start page title -->
+                <div class="row">
+                    <div class="col-9">
+                        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                            <h4 class="mb-sm-0 font-size-18">Cluster View</h4>
+                            <div class="page-title-right">
+                                    <div>
+                                        <p align="right">
+                                            <INPUT TYPE="button" class="btn btn-btn btn-outline-secondary w-md" VALUE="Back" onClick="history.go(-1);">
+                                        </p>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end page title -->
+
                 <div class="row">
                     <div class="col-12">
 
@@ -164,11 +179,6 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
                                         <div class="row justify-content-end">
                                             <div class="col-sm-9">
-                                                <div>
-                                                    <p align="right">
-                                                        <INPUT TYPE="button" class="btn btn-btn btn-outline-secondary w-md" VALUE="Back" onClick="history.go(-1);">
-                                                    </p>
-                                                </div>
                                                 
                                             </div>
                                         </div>
@@ -181,7 +191,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                 </div>
 
                 <div class="row">
-                    <div class="col-12">
+                    <div class="col-9">
                         <div class="card border border-primary">
                         <div class="card-header bg-transparent border-primary">
                             <h5 class="my-0 text-primary">SLGs in Cluster: <?php echo $groupname ?></h5>
@@ -236,7 +246,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                 </div> 
 
                 <div class="row">
-                    <div class="col-12">
+                    <div class="col-9">
                         <div class="card border border-primary">
                         <div class="card-header bg-transparent border-primary">
                             <h5 class="my-0 text-default">CF(s) in Cluster: <?php echo $groupname ?></h5>
@@ -286,7 +296,25 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                 </div> 
 
 
-            </div>
+            </div> <!-- container-fluid -->
         </div>
+        <!-- End Page-content -->
+        <?php include 'layouts/footer.php'; ?>
     </div>
+    <!-- end main content-->
 </div>
+<!-- END layout-wrapper -->
+
+<!-- Right Sidebar -->
+<?php include 'layouts/right-sidebar.php'; ?>
+<!-- Right-bar -->
+
+<!-- JAVASCRIPT -->
+<?php include 'layouts/vendor-scripts.php'; ?>
+
+<!-- App js -->
+<script src="assets/js/app.js"></script>
+
+</body>
+
+</html>

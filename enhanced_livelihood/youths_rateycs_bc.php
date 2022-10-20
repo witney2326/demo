@@ -31,7 +31,7 @@
             if ($sql) {
                 echo '<script type="text/javascript">'; 
                 echo 'alert("YCS Record successfully Rated!");'; 
-                echo 'window.location.href = "youths.php";';
+                echo 'window.location.href = "youths_bus_concept_devt_check.php";';
                 echo '</script>';
             } else {
                 echo "Error: " . $sql . ":-" . mysqli_error($link);
@@ -41,7 +41,7 @@
         {
             echo '<script type="text/javascript">'; 
             echo 'alert("YCS Record Already Rated!");'; 
-            echo 'window.location.href = "youths.php";';
+            echo 'window.location.href = "youths_bus_concept_devt_check.php";';
             echo '</script>';
         }
         mysqli_close($link);          

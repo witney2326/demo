@@ -40,7 +40,15 @@
 <?php include '../layouts/body.php'; ?>
 
 <?php
-    $region = $_POST['region'];
+   if (($_SESSION["user_role"]== '03')) 
+   {
+       $region = $_SESSION["user_reg"];
+   
+   }
+   else
+   {
+       $region = $_POST['region'];
+   }
     
 
          function get_rname($link, $rcode)

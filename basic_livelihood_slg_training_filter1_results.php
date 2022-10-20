@@ -29,9 +29,13 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 <?php include 'layouts/body.php'; ?>
 
 <?php 
-        $region = $_POST['region'];
-        //$district = $_GET['district'];
-        //$ta = $_GET['ta'];
+        if (($_SESSION["user_role"]== '03')) {
+            $region = $_SESSION["user_reg"];           
+        } else
+        {
+            $region = $_POST['region'];
+        }
+
     
     function get_rname($link, $rcode)
         {
@@ -69,7 +73,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
                             <div class="page-title-right">
                                 <ol class="breadcrumb m-0">
-                                    <li class="breadcrumb-item"><a href="basic_livelihood_training.php">SLG Training Management</a></li>
+                                    <li class="breadcrumb-item"><a href="basic_livelihood_training_check.php">SLG Training Management</a></li>
                                     <li class="breadcrumb-item active">SLG Training</li>
                                 </ol>
                             </div>
@@ -90,7 +94,49 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
                                 
                                 <!-- Nav tabs -->
-                                
+                                <ul class="nav nav-pills nav-justified" role="tablist">
+                                    <li class="nav-item waves-effect waves-light">
+                                        <a class="nav-link active" data-bs-toggle="tab" href="#home-1" role="tab">
+                                            <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
+                                            <span class="d-none d-sm-block">Group Training</span> 
+                                        </a>
+                                    </li>
+
+                                    <li class="nav-item waves-effect waves-light">
+                                        <a class="link"  href="basic_livelihood_cluster_training_check.php" role="link">
+                                            <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
+                                            <span class="d-none d-sm-block">Cluster Training</span>
+                                        </a>
+                                    </li>
+
+                                    <li class="nav-item waves-effect waves-light">
+                                        <a class="link"  href="basic_livelihood_training_trained_groups_check.php" role="link">
+                                            <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
+                                            <span class="d-none d-sm-block">Trained Groups/Clusters</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item waves-effect waves-light">
+                                        <a class="link"  href="basic_livelihood_animators_check.php" role="link">
+                                            <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
+                                            <span class="d-none d-sm-block">Animator Training</span>
+                                        </a>
+                                    </li>
+                                    
+                                    <li class="nav-item waves-effect waves-light">
+                                        <a class="link"  href="basic_livelihood_tot.php" role="link">
+                                            <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
+                                            <span class="d-none d-sm-block">Trainer-o-Trainers</span>
+                                        </a>
+                                    </li>
+                                    
+                                    <li class="nav-item waves-effect waves-light">
+                                        <a class="link"  href="basicReports.php" role="link">
+                                            <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
+                                            <span class="d-none d-sm-block">Training Reports</span>
+                                        </a>
+                                    </li>
+                                    
+                                </ul>
                                 <!-- Tab panes -->
                                 <div class="tab-content p-3 text-muted">
                                     <div class="tab-pane active" id="home-1" role="tabpanel">
@@ -99,10 +145,10 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
                                             <!--start here -->
                                             <div class="card border border-primary">
-                                                <div class="card-header bg-primary border-primary">
+                                                <div class="card-header">
                                                     <h5 class="my-0 text-default">Training Search Filter</h5>
                                                 </div>
-                                                <div class="card-body bg-success">
+                                                <div class="card-body">
                                                     <h5 class="card-title mt-0"></h5>
                                                     <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="basic_livelihood_slg_training_filter2_results.php" method ="POST">
                                                         <div class="col-12">

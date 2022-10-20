@@ -114,12 +114,10 @@
                             <div class="card-body">
                                 <!--start here -->
                                 <div class="card border border-primary">
-                                    <div class="card-header bg-transparent border-primary">
-                                        <h5 class="my-0 text-primary">Cluster Search Filter</h5>
-                                    </div>
+                                    
                                     <div class="card-body">
                                         <h5 class="card-title mt-0"></h5>
-                                        <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="cmt_cluster_assesment_filter1.php" method="GET">
+                                        <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="cmt_cluster_assesment_filter1.php" method="POST">
 
                                             <div class="col-12">
                                                 
@@ -204,9 +202,7 @@
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="card border border-primary">
-                                        <div class="card-header bg-transparent border-primary">
-                                            <h5 class="my-0 text-primary">SLG Clusters</h5>
-                                        </div>
+                                        
                                         <div class="card-body">
                                         <h5 class="card-title mt-0"></h5>
                                             
@@ -260,7 +256,7 @@
                                                             echo "\t\t<td>$cmt_assesed</td>\n";
                                                             echo "\t\t<td>$cmt_assesed_result</td>\n";
                                                             echo "\t\t<td>$cmt_status</td>\n";
-                                                            echo "<td> <a href=\"../basicSLGview.php?id=".$row['ClusterID']."\"><i class='far fa-eye' title='View SLG' style='font-size:18px; color: purple'></i></a>\n";
+                                                            echo "<td> <a href=\"../basicCLSview.php?id=".$row['ClusterID']."\"><i class='far fa-eye' title='View SLG' style='font-size:18px; color: purple'></i></a>\n";
                                                             echo "<a onClick=\"javascript: return confirm('Are You Sure You want To PUT This Cluster On CME/CMT- You Must Be a Supervisor');\" href=\"cmt_ClusterAssesment.php?id=".$row['ClusterID']."\"\><i class='fas fa-book-reader' title='Enrol Cluster On CME' style='font-size:18px;color:green'></i></a>\n";
                                                             
                                                         echo "</tr>\n";

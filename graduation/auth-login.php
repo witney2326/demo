@@ -156,7 +156,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                     
                                         <button class="btn btn btn-outline-success waves-effect waves-light" type="submit" value="Login" style="width:30%">Log In</button>
                                         <a href="auth-recoverpw.php" class="text-muted"style="width:60%"><i class="mdi mdi-lock me-1"></i> Forgot your password?</a>
-                                    
+                                        <a href="auth-register.php" class="text-muted"style="width:60%"><i class="mdi mdi-lock me-1"></i> Register Here?</a>
                                     </div>
 
                                     

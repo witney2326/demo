@@ -93,7 +93,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                     </div>
                                     <div class="card-body">
                                         
-                                        <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="basic_livelihood_SLG_reports1_filter1.php" method ="POST" >
+                                        <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="Rp_Selected_SLG_reports_filter1.php" method ="POST" >
                                             
                                         <div class="col-12">
                                                 <label for="region" class="form-label">Region</label>

@@ -49,6 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $username_err = "Please enter a username.";
     } else {
         $username = trim($_POST["username"]);
+        $ustatus = '0';
     }
 
     // Validate password
@@ -69,27 +70,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $confirm_password_err = "Password did not match.";
         }
     }
-
+    
     // Check input errors before inserting in database
     if (empty($useremail_err) && empty($username_err) && empty($password_err) && empty($confirm_password_err)) {
 
         // Prepare an insert statement
-        $sql = "INSERT INTO users (useremail, username, password, token) VALUES (?, ?, ?, ?)";
+        $sql = "INSERT INTO users (useremail, username, ustatus, password, token) VALUES (?, ?, ?, ?, ?)";
 
         if ($stmt = mysqli_prepare($link, $sql)) {
             // Bind variables to the prepared statement as parameters
-            mysqli_stmt_bind_param($stmt, "ssss", $param_useremail, $param_username, $param_password, $param_token);
+            mysqli_stmt_bind_param($stmt, "sssss", $param_useremail, $param_username, $param_ustatus, $param_password, $param_token);
 
             // Set parameters
             $param_useremail = $useremail;
             $param_username = $username;
+            $param_ustatus = $ustatus;
             $param_password = password_hash($password, PASSWORD_DEFAULT); // Creates a password hash
             $param_token = bin2hex(random_bytes(50)); // generate unique token
 
             // Attempt to execute the prepared statement
             if (mysqli_stmt_execute($stmt)) {
                 // Redirect to login page
-                header("location: auth-login.php");
+                echo '<script type="text/javascript">'; 
+                echo 'alert("Successfully Registered, Wait for email confirmation before login!");'; 
+                echo 'window.location.href = "auth-login.php";';
+                echo '</script>';
+                //header("location: auth-login.php");
             } else {
                 echo "Something went wrong. Please try again later.";
             }
@@ -141,25 +147,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <div class="p-2">
                                 <form class="needs-validation" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
 
-                                    <div class="mb-3 <?php echo (!empty($useremail_err)) ? 'has-error' : ''; ?>">
+                                    <div class="mb-1 <?php echo (!empty($useremail_err)) ? 'has-error' : ''; ?>">
                                         <label for="useremail" class="form-label">email address</label>
                                         <input type="email" class="form-control" id="useremail" name="useremail"  value="<?php echo $useremail; ?>">
                                         <span class="text-danger"><?php echo $useremail_err; ?></span>
                                     </div>
 
-                                    <div class="mb-3 <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
+                                    <div class="mb-1 <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
                                         <label for="username" class="form-label">Enter Username</label>
                                         <input type="text" class="form-control" id="username" name="username"  value="<?php echo $username; ?>">
                                         <span class="text-danger"><?php echo $username_err; ?></span>
                                     </div>
 
-                                    <div class="mb-3 <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
+                                    <div class="mb-1 <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
                                         <label for="userpassword" class="form-label">Enter Password</label>
                                         <input type="password" class="form-control" id="userpassword" name="password"  value="<?php echo $password; ?>">
                                         <span class="text-danger"><?php echo $password_err; ?></span>
                                     </div>
 
-                                    <div class="mb-3 <?php echo (!empty($confirm_password_err)) ? 'has-error' : ''; ?>">
+                                    <div class="mb-1 <?php echo (!empty($confirm_password_err)) ? 'has-error' : ''; ?>">
                                         <label for="confirm_password" class="form-label">Confirm Your Password</label>
                                         <input type="password" class="form-control" id="confirm_password" name="confirm_password"  value="<?php echo $confirm_password; ?>">
                                         <span class="text-danger"><?php echo $confirm_password_err; ?></span>

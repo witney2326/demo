@@ -95,7 +95,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                         </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="link"  href="basic_livelihood_training_trained_groups.php" role="link">
+                                        <a class="link"  href="javascript: void(0);" role="link">
                                             <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
                                             <span class="d-none d-sm-block">Trained JSGs</span>
                                         </a>
@@ -121,7 +121,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                 </div>
                                                 <div class="card-body">
                                                     <h5 class="card-title mt-0"></h5>
-                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="jsg_training_filter1.php" method ="GET" >
+                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="jsg_training_filter1.php" method ="POST" >
                                                         <div class="col-12">
                                                             <label for="region" class="form-label">Region</label>
                                                             <div>
@@ -244,8 +244,8 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                                             echo "<td>\t\t$totalMembers</td>\n"; 
 
                                                                             echo "<td>
-                                                                                <a href=\"basicSLGTraining_view.php?id=".$row['groupID']."\"><i class='far fa-eye' title='Training Status' style='font-size:18px;color:purple'></i></a>                                                                           
-                                                                                <a href=\"add_basicTrainingGD.php?id=".$row['groupID']."\" ><i class='fas fa-pen' title='Record Training' style='font-size:18px;color:green'></i></a>                                                                            
+                                                                                <a href=\"../basicSLGTraining_view.php?id=".$row['groupID']."\"><i class='far fa-eye' title='Training Status' style='font-size:18px;color:purple'></i></a>                                                                           
+                                                                                <a href=\"jsg_add_skill_training.php?id=".$row['recID']."\" ><i class='fas fa-pen' title='Record Training' style='font-size:18px;color:green'></i></a>                                                                            
                                                                                 
                                                                             </td>\n";
                                                                         echo "</tr>\n";

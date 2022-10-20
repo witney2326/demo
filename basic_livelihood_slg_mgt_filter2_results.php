@@ -29,8 +29,16 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 <?php include 'layouts/body.php'; ?>
 
 <?php 
-   $region = $_POST['region'];
-   $district = $_POST['district'];
+   if (($_SESSION["user_role"]== '04')) 
+   {
+       $region = $_SESSION["user_reg"];
+       $district = $_SESSION["user_dis"];   
+   }
+    else
+    {
+    $region = $_POST['region'];
+    $district = $_POST['district'];   
+    }
  
     
     function get_rname($link, $rcode)
@@ -90,7 +98,39 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
                                 
                                 <!-- Nav tabs -->
-                                
+                                <ul class="nav nav-pills nav-justified" role="tablist">
+                                    <li class="nav-item waves-effect waves-light">
+                                        <a class="nav-link active" data-bs-toggle="tab" href="#home-1" role="tab">
+                                            <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
+                                            <span class="d-none d-sm-block">SL Groups</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item waves-effect waves-light">
+                                        <a class="link"  href="basic_livelihood_clusters_check.php" role="link">
+                                            <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
+                                            <span class="d-none d-sm-block">Clusters</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item waves-effect waves-light">
+                                        <a class="nav-link" data-bs-toggle="link" href="basic_livelihood_slg_mgt_new_cls_filter2_results.php" role="link">
+                                            <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
+                                            <span class="d-none d-sm-block">New Cluster!</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item waves-effect waves-light">
+                                        <a class="nav-link" data-bs-toggle="tab" href="#slg-1" role="tab">
+                                            <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
+                                            <span class="d-none d-sm-block">New SLG!</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item waves-effect waves-light">
+                                        <a class="link" href="basicReports.php" role="link">
+                                            <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
+                                            <span class="d-none d-sm-block">SLG Reports</span>
+                                        </a>
+                                    </li>
+                                    
+                                </ul>
                                 <!-- Tab panes -->
                                 <div class="tab-content p-3 text-muted">
                                     <div class="tab-pane active" id="home-1" role="tabpanel">

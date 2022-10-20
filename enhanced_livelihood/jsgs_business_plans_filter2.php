@@ -40,8 +40,16 @@
 <?php include 'layouts/body.php'; ?>
 
 <?php 
-    $region = $_GET['region'];
-    $district =$_GET['district'];
+    if (($_SESSION["user_role"]== '04')) 
+    {
+        $region = $_SESSION["user_reg"];
+        $district = $_SESSION["user_dis"];  
+    }
+    else
+    {
+        $region = $_POST['region'];
+        $district = $_POST['district'];
+    }
     
     function get_rname($link, $rcode)
         {
@@ -109,12 +117,10 @@
 
                                             <!--start here -->
                                             <div class="card border border-primary">
-                                                <div class="card-header bg-transparent border-primary">
-                                                    <h5 class="my-0 text-primary">JSG Filter</h5>
-                                                </div>
+                                                
                                                 <div class="card-body">
                                                     <h5 class="card-title mt-0"></h5>
-                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="jsgs_business_plans_filter3.php" method ="GET">
+                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="jsgs_business_plans_filter3.php" method ="POST">
                                                         <div class="col-12">
                                                             <label for="region" class="form-label">Region</label>
                                                             <div>
@@ -133,9 +139,30 @@
                                                             </div>
                                                         </div>
 
-                                                        
                                                         <div class="col-12">
-                                                            <button type="submit" class="btn btn-btn btn-outline-primary w-md" name="Submit" value="Submit" disabled>Submit</button>
+                                                            <label for="ta" class="form-label">Traditional Authority</label>
+                                                            <select class="form-select" name="ta" id="ta" required>
+                                                                <option></option>
+                                                                <?php                                                           
+                                                                        $ta_fetch_query = "SELECT TAID,TAName FROM tblta where districtID = $district";                                                  
+                                                                        $result_ta_fetch = mysqli_query($link, $ta_fetch_query);                                                                       
+                                                                        $i=0;
+                                                                            while($DB_ROW_ta = mysqli_fetch_array($result_ta_fetch)) {
+                                                                        ?>
+                                                                        <option value ="<?php echo $DB_ROW_ta["TAID"]; ?>">
+                                                                            <?php echo $DB_ROW_ta["TAName"]; ?></option><?php
+                                                                            $i++;
+                                                                                }
+                                                                    ?>
+                                                                
+                                                            </select>
+                                                            <div class="invalid-feedback">
+                                                                Please select a valid TA.
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-12">
+                                                            <button type="submit" class="btn btn-btn btn-outline-primary w-md" name="Submit" value="Submit">Submit</button>
                                                             <INPUT TYPE="button" class="btn btn-btn btn-outline-secondary w-md" VALUE="Back" onClick="history.go(-1);">
                                                         </div>
                                                     </form>                                             
@@ -147,7 +174,7 @@
                                                 <div class="col-12">
                                                     <div class="card border border-primary">
                                                     <div class="card-header bg-transparent border-primary">
-                                                        <h5 class="my-0 text-primary">Joint Skill Groups in <?php echo dis_name($link,$district); ?></h5>
+                                                        <h5 class="my-0 text-primary">Joint Skill Groups</h5>
                                                     </div>
                                                     <div class="card-body">
                                                     <h7 class="card-title mt-0"></h7>
@@ -203,7 +230,7 @@
                                                                             echo "<td>\t\t$evaluation_result</td>\n";
 
                                                                             echo "<td>
-                                                                                <a href=\"jsg_view.php?id=".$row['groupID']."\"><i class='far fa-eye' title='View JSG' style='font-size:18px;color:purple'></i></a>
+                                                                                <a href=\"view_JSG1.php?id=".$row['groupID']."\"><i class='far fa-eye' title='View JSG' style='font-size:18px;color:purple'></i></a>
                                                                                 <a onClick=\"javascript: return confirm('Are You In Receipt Of Business Plan For This JSG? ');\" href=\"jsg_submit_bp.php?id=".$row['recID']."\"><i class='fa fa-check' title='Accept BP for JSG' style='font-size:18px;color:green'></i></a>
                                                                                 
                                                                             </td>\n";

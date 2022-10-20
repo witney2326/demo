@@ -26,6 +26,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
   </script>
 </head>
 
+
 <?php include 'layouts/body.php'; ?>
 
 <?php 
@@ -131,11 +132,9 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                         <div class="card-body">
                                     
                                                             <div class="card border border-primary">
-                                                                <div class="card-header bg-primary border-primary">
-                                                                    <h5 class="my-0 text-default"></i>Cluster Filter</h5>
-                                                                </div>
+                                                                
 
-                                                                <div class="card-body bg-success">
+                                                                <div class="card-body ">
                                                                     <h5 class="card-title mt-0"></h5>
                                                                     <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="basic_livelihood_acsa_mgt_filter1.php" method ="POST" >
                                                                         <div class="col-12">

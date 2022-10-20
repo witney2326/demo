@@ -1,6 +1,6 @@
+
 <?php include '../layouts/session.php'; ?>
 <?php include '../layouts/head-main.php'; ?>
-
 <head>
     <title>SLG Graduation Assesment</title>
     <?php include '../layouts/head.php'; ?>
@@ -38,38 +38,25 @@
     </script>
 </head>
 
-<?php include '../layouts/body.php'; ?>
+<?php include '../layouts/body.php';
+include '../lib.php'; 
+?>
 
 <?php		
     
-    function get_rname($link, $rcode)
-        {
-        $rg_query = mysqli_query($link,"select name from tblregion where regionID='$rcode'"); // select query
-        $rg = mysqli_fetch_array($rg_query);// fetch data
-        return $rg['name'];
-        }
-    
-        function dis_name($link, $disID)
-        {
-        $dis_query = mysqli_query($link,"select DistrictName from tbldistrict where DistrictID='$disID'"); // select query
-        $dis = mysqli_fetch_array($dis_query);// fetch data
-        return $dis['DistrictName'];
-        }
-
-        function grp_name($link, $grpID)
-        {
-        $grp_query = mysqli_query($link,"select groupname from tblgroup where groupID='$grpID'"); // select query
-        $grp = mysqli_fetch_array($grp_query);// fetch data
-        return $grp['groupname'];
-        }
-
-        function prog_name($link, $progID)
-        {
-        $prog_query = mysqli_query($link,"select progName from tblspp where progID='$progID'"); // select query
-        $prog = mysqli_fetch_array($prog_query);// fetch data
-        return $prog['progName'];
-        }
-
+    $user = $_SESSION["user_role"];
+    if ($user == '05')
+    {
+        $region = $_SESSION["user_reg"];$district = $_SESSION["user_dis"];$ta = $_SESSION["user_ta"]; 
+    } 
+    if ($user == '04')
+    {
+        $region = $_SESSION["user_reg"];$district = $_SESSION["user_dis"];
+    } 
+    if ($user == '03')
+    {
+        $region = $_SESSION["user_reg"];
+    }      
 ?>
 
 <!-- Begin page -->
@@ -122,46 +109,46 @@
                                             <span class="d-none d-sm-block">Home</span>
                                         </a>
                                     </li>
-                                    <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link " data-bs-toggle="link" href="grad_planning_meeting_meetings.php" role="link">
+                                    <li class="nav-item waves-effect waves-light"> 
+                                        <a class="nav-link " data-bs-toggle="link" href="<?php if($_SESSION["user_role"]== '05'){echo"javascript:void(0)";}else{echo "grad_planning_meeting_meetings.php";}?>" role="link">
                                             <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
                                             <span class="d-none d-sm-block">Planning Meeting</span>
                                         </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link" data-bs-toggle="link" href="graduation_group_assesment.php" role="link">
+                                        <a class="nav-link" data-bs-toggle="link" href="graduation_group_assesment_check.php" role="link">
                                             <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
                                             <span class="d-none d-sm-block">SLG Assesment & Verification</span>
                                         </a>
                                     </li>
 
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link" data-bs-toggle="link" href="graduation_cluster_assesment.php" role="link">
+                                        <a class="nav-link" data-bs-toggle="link" href="graduation_cluster_assesment_check.php" role="link">
                                             <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
                                             <span class="d-none d-sm-block">Cluster Assesment & Verification</span>
                                         </a>
                                     </li>
 
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link" data-bs-toggle="link" href="graduation_beneficiary_assesment.php" role="link">
+                                        <a class="nav-link" data-bs-toggle="link" href="graduation_beneficiary_assesment_check.php" role="link">
                                             <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
                                             <span class="d-none d-sm-block">Beneficiary Assesment & Verification</span>
                                         </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link" data-bs-toggle="link" href="graduation_selected_beneficiary.php" role="link">
+                                        <a class="nav-link" data-bs-toggle="link" href="graduation_selected_beneficiary_check.php" role="link">
                                             <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
                                             <span class="d-none d-sm-block">Selected Beneficiaries</span>
                                         </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link " data-bs-toggle="link" href="graduation_cluster_cf_identification.php" role="link">
+                                        <a class="nav-link " data-bs-toggle="link" href="graduation_cluster_cf_identification_check.php" role="link">
                                             <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
                                             <span class="d-none d-sm-block">CF Identification</span>
                                         </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link " data-bs-toggle="link" href="graduation_refresher_training.php" role="link">
+                                        <a class="nav-link " data-bs-toggle="link" href="graduation_refresher_training_check.php" role="link">
                                             <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
                                             <span class="d-none d-sm-block">Refresher and AT Training</span>
                                         </a>
@@ -182,31 +169,62 @@
                                                             <img src="..." class="card-img-top" alt="">
                                                             <div class="card-body">
                                                                 
-                                                                        <div class="card-body">
-                                                                            <div class="d-flex">
-                                                                                <div class="flex-grow-1">
-                                                                                
-                                                                                    <p class="text-muted fw-medium">Assessed SLGs</p>
-                                                                                    <?php
-                                                                                        $result = mysqli_query($link, 'SELECT COUNT(groupID) AS value_groups FROM tblgroup where grad_status = 1'); 
-                                                                                        $row = mysqli_fetch_assoc($result); 
-                                                                                        $sum_groups = $row['value_groups'];
+                                                                <div class="card-body">
+                                                                    <div class="d-flex">
+                                                                        <div class="flex-grow-1">
+                                                                            <?php
+                                                                            if ($user == "05")
+                                                                            {
+                                                                                echo '<p class="text-muted fw-medium">Area: Assessed SLGs</p>';
+                                                                                $result = mysqli_query($link, "SELECT COUNT(groupID) AS value_groups FROM tblgroup where ((grad_status = '1') and (TAID = '$ta'))"); 
+                                                                                $row = mysqli_fetch_assoc($result); 
+                                                                                $sum_groups = $row['value_groups'];
 
-                                                                                        $result2 = mysqli_query($link, 'SELECT COUNT(ClusterID) AS value_clusters FROM tblcluster where grad_status = 1'); 
-                                                                                        $row2 = mysqli_fetch_assoc($result2); 
-                                                                                        $sum_clusters = $row2['value_clusters'];
+                                                                                $result2 = mysqli_query($link, "SELECT COUNT(ClusterID) AS value_clusters FROM tblcluster where ((grad_status = '1') and (taID = '$ta'))"); 
+                                                                                $row2 = mysqli_fetch_assoc($result2); 
+                                                                                $sum_clusters = $row2['value_clusters'];
+                                                                            } else if ($user == "04")
+                                                                            {
+                                                                                echo '<p class="text-muted fw-medium">District: Assessed SLGs</p>';
+                                                                                $result = mysqli_query($link, "SELECT COUNT(groupID) AS value_groups FROM tblgroup where ((grad_status = '1') and (DistrictID = '$district'))"); 
+                                                                                $row = mysqli_fetch_assoc($result); 
+                                                                                $sum_groups = $row['value_groups'];
 
-                                                                                    ?>
-                                                                                        
-                                                                                            <div class="container">
-                                                                                                <div class="mb-0"><?php echo "" . $sum_groups + $sum_clusters;?></div>
-                                                                                            </div> 
-                                                                                        
-                                                                                </div>
-                                                                                <i class='fas fa-users' style='font-size:24px;color:brown'></i><i class='fas fa-users' style='font-size:24px;color:black'></i>
+                                                                                $result2 = mysqli_query($link, "SELECT COUNT(ClusterID) AS value_clusters FROM tblcluster where ((grad_status = '1') and (districtID = '$district'))"); 
+                                                                                $row2 = mysqli_fetch_assoc($result2); 
+                                                                                $sum_clusters = $row2['value_clusters'];
+                                                                            } else if ($user == "03")
+                                                                            {
+                                                                                echo '<p class="text-muted fw-medium">Region: Assessed SLGs</p>';
+                                                                                $result = mysqli_query($link, "SELECT COUNT(groupID) AS value_groups FROM tblgroup where ((grad_status = '1') and (regionID = '$region'))"); 
+                                                                                $row = mysqli_fetch_assoc($result); 
+                                                                                $sum_groups = $row['value_groups'];
+
+                                                                                $result2 = mysqli_query($link, "SELECT COUNT(ClusterID) AS value_clusters FROM tblcluster where ((grad_status = '1') and (regionID = '$region'))"); 
+                                                                                $row2 = mysqli_fetch_assoc($result2); 
+                                                                                $sum_clusters = $row2['value_clusters'];
+                                                                            } else
+                                                                            {
+                                                                                echo '<p class="text-muted fw-medium">Assessed SLGs</p>';
+                                                                                $result = mysqli_query($link, 'SELECT COUNT(groupID) AS value_groups FROM tblgroup where grad_status = 1'); 
+                                                                                $row = mysqli_fetch_assoc($result); 
+                                                                                $sum_groups = $row['value_groups'];
+
+                                                                                $result2 = mysqli_query($link, 'SELECT COUNT(ClusterID) AS value_clusters FROM tblcluster where grad_status = 1'); 
+                                                                                $row2 = mysqli_fetch_assoc($result2); 
+                                                                                $sum_clusters = $row2['value_clusters'];
+                                                                            }
+                                                                            ?>
                                                                                 
-                                                                            </div>
+                                                                            <div class="container">
+                                                                                <div class="mb-0"><?php echo "" . $sum_groups + $sum_clusters;?></div>
+                                                                            </div> 
+                                                                                
                                                                         </div>
+                                                                        <i class='fas fa-users' style='font-size:24px;color:brown'></i><i class='fas fa-users' style='font-size:24px;color:black'></i>
+                                                                        
+                                                                    </div>
+                                                                </div>
                                                                 
                                                             <!-- -->
                                                             </div>
@@ -217,15 +235,38 @@
                                                                 <div class="card-body">
                                                                     <div class="d-flex">
                                                                         <div class="flex-grow-1">
-                                                                            <p class="text-muted fw-medium">Assessed HHs</p>
+                                                                            
                                                                             <?php
-                                                                                        $result = mysqli_query($link, 'SELECT COUNT(sppCode) AS value_sum FROM tblbeneficiaries where grad_status ="1"'); 
-                                                                                        $row = mysqli_fetch_assoc($result); 
-                                                                                        $sum = $row['value_sum'];
-                                                                                    ?>
-                                                                                        <div class="container">
-                                                                                            <div class="mb-0"><?php echo "" . number_format($sum);?></div>
-                                                                                        </div>
+                                                                            if ($user == "05")
+                                                                            {
+                                                                                echo '<p class="text-muted fw-medium">Area: Assessed HHs</p>';
+                                                                                $result = mysqli_query($link, "SELECT COUNT(sppCode) AS value_sum FROM tblbeneficiaries 
+                                                                                inner join tblgroup on tblbeneficiaries.groupID = tblgroup.groupID where ((tblbeneficiaries.grad_status ='1') and (tblgroup.TAID = '$ta'))"); 
+                                                                                $row = mysqli_fetch_assoc($result); 
+                                                                                $sum = $row['value_sum'];
+                                                                            } else if ($user = "04")
+                                                                            {
+                                                                                echo '<p class="text-muted fw-medium">District: Assessed HHs</p>';
+                                                                                $result = mysqli_query($link, "SELECT COUNT(sppCode) AS value_sum FROM tblbeneficiaries where ((grad_status ='1') and (districtID = '$district'))"); 
+                                                                                $row = mysqli_fetch_assoc($result); 
+                                                                                $sum = $row['value_sum'];
+                                                                            } else if ($user = "03")
+                                                                            {
+                                                                                echo '<p class="text-muted fw-medium">Region: Assessed HHs</p>';
+                                                                                $result = mysqli_query($link, "SELECT COUNT(sppCode) AS value_sum FROM tblbeneficiaries where ((grad_status ='1') and (regionID ='$region'))"); 
+                                                                                $row = mysqli_fetch_assoc($result); 
+                                                                                $sum = $row['value_sum'];
+                                                                            }else
+                                                                            {
+                                                                                echo '<p class="text-muted fw-medium">Assessed HHs</p>';
+                                                                                $result = mysqli_query($link, 'SELECT COUNT(sppCode) AS value_sum FROM tblbeneficiaries where grad_status ="1"'); 
+                                                                                $row = mysqli_fetch_assoc($result); 
+                                                                                $sum = $row['value_sum'];
+                                                                            }
+                                                                            ?>
+                                                                                <div class="container">
+                                                                                    <div class="mb-0"><?php echo "" . number_format($sum);?></div>
+                                                                                </div>
                                                                             
                                                                         </div>
                                                                         <i class='fas fa-house-user' style='font-size:24px;color:brown'></i><i class='fas fa-house-user' style='font-size:24px;color:burlywood'></i>
@@ -241,15 +282,41 @@
                                                                 <div class="card-body">
                                                                     <div class="d-flex">
                                                                         <div class="flex-grow-1">
-                                                                            <p class="text-muted fw-medium">CFs Identified</p>
+                                                                            
                                                                             <?php
-                                                                                        $result = mysqli_query($link, 'SELECT COUNT(cfID) AS cfs FROM tblcfs'); 
-                                                                                        $row = mysqli_fetch_assoc($result); 
-                                                                                        $sum = $row['cfs'];
-                                                                                    ?>
-                                                                                        <div class="container">
-                                                                                            <div class="mb-0"><?php echo "" . number_format($sum);?></div>
-                                                                                        </div>
+                                                                            if ($user == "05")
+                                                                            {
+                                                                                echo '<p class="text-muted fw-medium">Area: CFs Identified</p>';
+                                                                                $result = mysqli_query($link, "SELECT COUNT(tblcfs.cfID) AS cfs FROM tblcfs inner join tblcluster on 
+                                                                                tblcfs.clusterID = tblcluster.clusterID where tblcluster.taID = '$ta'"); 
+                                                                                $row = mysqli_fetch_assoc($result); 
+                                                                                $sum = $row['cfs'];
+                                                                            } else if ($user = "04")
+                                                                            {
+                                                                                echo '<p class="text-muted fw-medium">District: CFs Identified</p>';
+                                                                                $result = mysqli_query($link, "SELECT COUNT(cfID) AS cfs FROM tblcfs inner join tblcluster on 
+                                                                                tblcfs.clusterID = tblcluster.clusterID where tblcluster.districtID = '$district'"); 
+                                                                                $row = mysqli_fetch_assoc($result); 
+                                                                                $sum = $row['cfs'];
+                                                                            } else if ($user = "03")
+                                                                            {
+                                                                                echo '<p class="text-muted fw-medium">Region: CFs Identified</p>';
+                                                                                $result = mysqli_query($link, "SELECT COUNT(cfID) AS cfs FROM tblcfs inner join tblcluster on 
+                                                                                tblcfs.clusterID = tblcluster.clusterID where tblcluster.regionID = '$region'"); 
+                                                                                $row = mysqli_fetch_assoc($result); 
+                                                                                $sum = $row['cfs'];
+                                                                            }else
+                                                                            {
+                                                                                echo '<p class="text-muted fw-medium">CFs Identified</p>';
+                                                                                $result = mysqli_query($link, 'SELECT COUNT(cfID) AS cfs FROM tblcfs'); 
+                                                                                $row = mysqli_fetch_assoc($result); 
+                                                                                $sum = $row['cfs'];
+                                                                            }
+                                                                                
+                                                                            ?>
+                                                                                <div class="container">
+                                                                                    <div class="mb-0"><?php echo "" . number_format($sum);?></div>
+                                                                                </div>
                                                                         </div>
                                                                         <i class='fas fa-users' style='font-size:24px;color:brown'></i>
                                                                         
@@ -264,8 +331,30 @@
                                                                 <div class="card-body">
                                                                     <div class="d-flex">
                                                                         <div class="flex-grow-1">
-                                                                            <p class="text-muted fw-medium">Asset Transfer Sensitization Meetings</p>
-                                                                            0
+                                                                            <?php
+                                                                            if (($user == "05") or ($user == "04"))
+                                                                            {
+                                                                                echo '<p class="text-muted fw-medium">District: Asset Transfer Sensitization Meetings</p>';
+                                                                                $result = mysqli_query($link, "SELECT COUNT(meetingID) AS meets FROM tblawareness_meetings where ((meetingpurpose = '04') and (DistrictID = '$district'))"); 
+                                                                                $row = mysqli_fetch_assoc($result); 
+                                                                                $meets = $row['meets'];
+                                                                            } else if (($user == "05") or ($user == "03"))
+                                                                            {
+                                                                                echo '<p class="text-muted fw-medium">Region: Asset Transfer Sensitization Meetings</p>';
+                                                                                $result = mysqli_query($link, "SELECT COUNT(meetingID) AS meets FROM tblawareness_meetings where ((meetingpurpose = '04') and (regionID = '$region'))"); 
+                                                                                $row = mysqli_fetch_assoc($result); 
+                                                                                $meets = $row['meets'];
+                                                                            } else
+                                                                            {
+                                                                                echo '<p class="text-muted fw-medium">Asset Transfer Sensitization Meetings</p>';
+                                                                                $result = mysqli_query($link, "SELECT COUNT(meetingID) AS meets FROM tblawareness_meetings where meetingpurpose = '04'"); 
+                                                                                $row = mysqli_fetch_assoc($result); 
+                                                                                $meets = $row['meets'];
+                                                                            }
+                                                                            ?>
+                                                                            <div class="container">
+                                                                                    <div class="mb-0"><?php echo "" . number_format($meets);?></div>
+                                                                            </div>
                                                                         </div>
                                                                         <i class='fas fa-users' style='font-size:24px;color:chocolate'></i><i class='fas fa-users' style='font-size:24px;color:coral'></i>
                                                                     </div>
@@ -277,46 +366,12 @@
                                             </div> 
                                         </p>
                                     </div>
-
-                                    <div class="tab-pane" id="slg-1" role="tabpanel">
-                                        <p class="mb-0">
-                                            
-                                        </p>
-                                    </div>
-                                    <div class="tab-pane" id="ben_assesment" role="tabpanel">
-                                        <p class="mb-0">
-                                            
-                                        </p>
-                                    </div>
-                                    <div class="tab-pane" id="settings-1" role="tabpanel">
-                                        <p class="mb-0">
-                                            
-                                        </p>
-                                    </div>
                                 </div>
 
                             </div>
                         </div>
                     </div>
                 </div>
-
-
-                
-
-                    
-
-               
-
-
-                <!-- Collapse -->
-                
-
-                
-                <!-- end row -->
-
-                
-                <!-- end row -->
-
             </div> <!-- container-fluid -->
         </div>
         <!-- End Page-content -->

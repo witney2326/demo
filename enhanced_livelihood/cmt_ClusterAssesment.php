@@ -1,19 +1,3 @@
-<?php include '../layouts/session.php'; ?>
-<?php include '../layouts/head-main.php'; ?>
-
-<head>
-    <title>Cluster CME Approval</title>
-    <?php include '../layouts/head.php'; ?>
-    <?php include '../layouts/head-style.php'; ?>
-
-}
-    
-</head>
-
-<div id="layout-wrapper">
-
-    <?php include '../layouts/menu.php'; ?>
-
     <?php
         include "../layouts/config.php"; // Using database connection file here     
         
@@ -34,7 +18,7 @@
             if ($sql) {
                 echo '<script type="text/javascript">'; 
                 echo 'alert("Cluster successfully Put on CME!");'; 
-                echo 'window.location.href = "cmt_cluster_assesment.php";';
+                echo 'window.location.href = "cmt_ClusterAssesment_check.php";';
                 echo '</script>';
             } else {
                 echo "Error: " . $sql . ":-" . mysqli_error($link);
@@ -44,7 +28,7 @@
         {
             echo '<script type="text/javascript">'; 
             echo 'alert(" Either Cluster Has Not Been Assessed OR Check Assesment Results!");'; 
-            echo 'window.location.href = "cmt_cluster_assesment.php";';
+            echo 'window.location.href = "cmt_ClusterAssesment_check.php";';
             echo '</script>';
         }
         mysqli_close($link);
@@ -52,4 +36,3 @@
                
     ?>
     
-</div>

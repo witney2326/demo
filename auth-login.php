@@ -4,7 +4,7 @@ session_start();
 
 // Check if the user is already logged in, if yes then redirect him to index page
 if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
-    header("location: index.php");
+    header("location: index_check.php");
     exit;
 }
 // Include config file
@@ -22,6 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $username_err = "Please enter username.";
     } else {
         $username = trim($_POST["username"]);
+        
     }
 
     // Check if password is empty
@@ -34,15 +35,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Validate credentials
     if (empty($username_err) && empty($password_err)) {
         // Prepare a select statement
-        $sql = "SELECT id, username, password FROM users WHERE username = ?";
+        $sql = "SELECT id, username, userrole,userreg,userdis,userta,ustatus, password FROM users WHERE username = ?";
 
         if ($stmt = mysqli_prepare($link, $sql)) {
             // Bind variables to the prepared statement as parameters
-            mysqli_stmt_bind_param($stmt, "s", $param_username);
+            mysqli_stmt_bind_param($stmt, "s", $param_username );
             
 
             // Set parameters
             $param_username = $username;
+            
             
             // Attempt to execute the prepared statement
             if (mysqli_stmt_execute($stmt)) {
@@ -52,9 +54,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 // Check if username exists, if yes then verify password
                 if (mysqli_stmt_num_rows($stmt) == 1) {
                     // Bind result variables
-                    mysqli_stmt_bind_result($stmt, $id, $username, $hashed_password);
+                    mysqli_stmt_bind_result($stmt, $id, $username,$userrole,$userreg,$userdis,$userta,$ustatus,$hashed_password);
                     if (mysqli_stmt_fetch($stmt)) {
-                        if (password_verify($password, $hashed_password)) {
+                        if ((password_verify($password, $hashed_password)) and ($ustatus == "1")) {
                             // Password is correct, so start a new session
                             session_start();
 
@@ -62,12 +64,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             $_SESSION["loggedin"] = true;
                             $_SESSION["id"] = $id;
                             $_SESSION["username"] = $username;
+                            $_SESSION["user_reg"] = $userreg;
+                            $_SESSION["user_dis"] = $userdis;
+                            $_SESSION["user_ta"] = $userta;
+                            $_SESSION["user_role"] = $userrole;
 
                             // Redirect user to welcome page
-                            header("location: index.php");
+                            header("location: index_check.php");
                         } else {
                             // Display an error message if password is not valid
-                            $password_err = "The password you entered was not valid.";
+                            $password_err = "The password you entered was not valid, Or User NOT Yet Approved!";
                         }
                     }
                 } else {
@@ -103,9 +109,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <div class="card overflow-hidden">
                         <div class="bg-primary bg-soft">
                             <div class="row">
-                                <div class="col-7">
+                                <div class="col-4">
                                     <div class="text-primary p-4">
-                                        <h5 class="text-primary">COMSIP Intergrated MIS</h5>
+                                        <h6 class="text-default">COMSIP Intergrated MIS</h6>
                                         
                                     </div>
                                 </div>
@@ -116,18 +122,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         </div>
                         <div class="card-body pt-0">
                             <div class="auth-logo">
-                                <a href="index.php" class="auth-logo-light">
+                                <a href="" class="auth-logo-light">
                                     <div class="avatar-md profile-user-wid mb-4">
                                         <span class="avatar-title rounded-circle bg-light">
-                                            <img src="assets/images/logo-light.svg" alt="" class="rounded-circle" height="34">
+                                            <img src="assets/images/logo-light.svg" alt="" class="rounded-circle" height="64">
                                         </span>
                                     </div>
                                 </a>
 
-                                <a href="index.php" class="auth-logo-dark">
+                                <a href="" class="auth-logo-dark">
                                     <div class="avatar-md profile-user-wid mb-4">
                                         <span class="avatar-title rounded-circle bg-light">
-                                            <img src="assets/images/logo.svg" alt="" class="rounded-circle" height="34">
+                                            <img src="assets/images/logo.svg" alt="" class="rounded-circle" height="64">
                                         </span>
                                     </div>
                                 </a>
@@ -135,14 +141,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <div class="p-2">
                                 <form class="form-horizontal" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
 
-                                    
                                     <div class="row mb-1 <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
                                         <label for="username" class="col-sm-4 col-form-label">Username</label>
                                         <input type="text" class="form-control" id="username" placeholder="" name="username" style="max-width:40%;">
                                         <span class="text-danger"><?php echo $username_err; ?></span>
                                     </div>
 
-                                    <div class="row mb-1 <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
+                                    <div class="row mb-4 <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
                                         
                                         <label class="col-sm-4 col-form-label"> Password</label>
                                         <input type="password" name="password" class="form-control" placeholder="" aria-label="Password" aria-describedby="password-addon" style="max-width:40%;">
@@ -151,29 +156,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                         <span class="text-danger"><?php echo $password_err; ?></span>
                                     </div>
 
-                                   
                                     <div class="row mb-1">
-                                    
-                                        <button class="btn btn btn-outline-success waves-effect waves-light" type="submit" value="Login" style="width:30%">Log In</button>
-                                        <a href="auth-recoverpw.php" class="text-muted"style="width:60%"><i class="mdi mdi-lock me-1"></i> Forgot your password?</a>
-                                    
-                                    </div>
+                                        <div class="text-center">
+                                            <button class="btn btn btn-outline-success waves-effect waves-light" type="submit" value="Login" style="width:30%">Log In</button>
+                                            <a href="" class="text-muted"style="width:70%"></a>
 
-                                    
-                                    <div class="mt-2 text-left">
-                                       
-                                        <a href="" class="text-muted"> </a>
+                                            <div class="mt-2 text-right"> 
+                                                <a href="auth-login1.php" class="text-muted"style="width:60%"><h6 class="text-default">No Credentials? Sign In as Guest</h6></a>
+                                            </div>
+                                        </div>                                     
                                     </div>
                                 </form>
                             </div>
-
                         </div>
                     </div>
-                    <div class="mt-5 text-center">
-
-                        
-                    </div>
-
                 </div>
             </div>
         </div>

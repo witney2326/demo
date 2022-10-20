@@ -28,8 +28,12 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
 <?php include 'layouts/body.php'; ?>
 
-<?php		  
-    $region = $_POST['region'];
+<?php
+    if (($_SESSION["user_role"] == '03')) 
+    {
+        $region = $_SESSION["user_reg"];
+    }else
+        {$region = $_POST['region'];}
    
 
          function get_rname($link, $rcode)
@@ -190,7 +194,8 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                     <div class="col-12">
                         <div class="card border border-primary">
                         <div class="card-header bg-transparent border-primary">
-                            <h5 class="my-0 text-default">Beneficiary Households in <?php echo get_rname($link,$region); ?> Region</h5>
+                            <h5 class="my-0 text-default">Beneficiary Households in <?php echo get_rname($link,$region); ?></h5>
+                            <h8 class="my-0 text-primary">Please Filter To Particular District</h8>
                         </div>
                         <div class="card-body">
                         <h5 class="card-title mt-0"></h5>
@@ -213,7 +218,6 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
                                     <tbody>
                                         <?Php
-                                            $region = $_POST["region"];
                                             $query="select * from tblbeneficiaries where regionID = '00'";
 
                                         //Variable $link is declared inside config.php file & used here
@@ -251,7 +255,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                 <a href=\"basicSLGMemberedit.php?id=".$row['sppCode']."\"><i class='far fa-eye' title='View Household' style='font-size:18px;color:purple'></i></a>
                                                 <a onClick=\"javascript: return confirm('Are You Sure You want To Verify This HOUSEHOLD on SCT Database - Be patient!');\" href=\"basicHHVerificationSCTP.php?id=".$row['sppCode']."\"><i class='fas fa-check' title='Verify Household on SCT List' style='font-size:18px;color:cadetblue'></i></a>
                                                 <a onClick=\"javascript: return confirm('Are You Sure You want To APPROVE This HOUSEHOLD - You Must Be a Supervisor');\" href=\"basicHHStatusApproval.php?id=".$row['sppCode']."\"><i class='far fa-thumbs-up' title='Approve Household' style='font-size:18px;color:green'></i></a>
-                                            echo <td>"; 
+                                             <td>"; 
                                         echo "</tr>\n";
                                         }
                                         $result_set->close();

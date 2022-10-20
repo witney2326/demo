@@ -42,8 +42,17 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
 <?php
 
-$region = $_POST['region'];		
-$district = $_POST['district'];
+if (($_SESSION["user_role"]== '04') or ($_SESSION["user_role"]== '05')) 
+   {
+       $region = $_SESSION["user_reg"];
+       $district = $_SESSION["user_dis"];  
+   }
+   else
+   {
+       $region = $_POST['region'];
+       $district = $_POST['district'];
+   }
+     
      
 
 
@@ -142,6 +151,8 @@ $district = $_POST['district'];
                                                 </select>
                                             </div>
 
+                                            
+                                            
                                             <div class="col-12">
                                                 <label for="slg" class="form-label">SL Group</label>
                                                 <select class="form-select" name="slg" id="slg" required>
@@ -221,7 +232,7 @@ $district = $_POST['district'];
                                                     <tbody>
                                                         <?Php
                                                             
-                                                            $query="select tblbeneficiaries.grad_assesed,tblbeneficiaries.grad_assesed_result,tblbeneficiaries.grad_status,tblbeneficiaries.sppCode ,tblbeneficiaries.hh_head_name from tblbeneficiaries join tblgroup on tblbeneficiaries.groupID = tblgroup.groupID  where ((tblbeneficiaries.districtID = $district) and (tblgroup.grad_status = '1'))";
+                                                            $query="select tblbeneficiaries.grad_assesed,tblbeneficiaries.grad_assesed_result,tblbeneficiaries.grad_status,tblbeneficiaries.sppCode ,tblbeneficiaries.hh_head_name from tblbeneficiaries inner join tblgroup on tblbeneficiaries.groupID = tblgroup.groupID  where ((tblgroup.districtID = $district) and (tblgroup.grad_status = '1'))";
 
                                                         //Variable $link is declared inside config.php file & used here
                                                         

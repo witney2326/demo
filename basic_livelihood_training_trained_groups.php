@@ -28,14 +28,13 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
 <?php include 'layouts/body.php'; ?>
 
-<?php 
-    if(isset($_GET['Submit']))
-    {   
-        $region = $_GET['region'];
-        $district = $_GET['district'];
-        $ta = $_GET['ta'];
-     
+<?php
+    if (($_SESSION["user_role"]== '05')) {
+        header("location: basic_livelihood_slg_training_trained_groups_filter3.php");   
     }
+?>
+
+<?php 
     
     function get_rname($link, $rcode)
         {

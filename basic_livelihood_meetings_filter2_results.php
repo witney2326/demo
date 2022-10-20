@@ -29,8 +29,16 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 <?php include 'layouts/body.php'; ?>
 
 <?php 
-    $region = $_POST['region'];
-    $district =$_POST['district'];
+    if (($_SESSION["user_role"] == '04')) 
+    {
+        $region = $_SESSION["user_reg"];
+        $district = $_SESSION["user_dis"];
+    }
+    else
+    {
+        $region = $_POST['region'];
+        $district = $_POST['district'];  
+    }
     
     
     function get_rname($link, $rcode)
@@ -104,7 +112,35 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
                                 
                                 <!-- Nav tabs -->
-                                
+                                <ul class="nav nav-pills nav-justified" role="tablist">
+                                    
+                                    <li class="nav-item waves-effect waves-light">
+                                        <a class="nav-link active" data-bs-toggle="tab" href="#home-1" role="tab">
+                                            <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
+                                            <span class="d-none d-sm-block">Meetings</span>
+                                        </a>
+                                    </li>
+
+                                    <li class="nav-item waves-effect waves-light">
+                                        <a class="nav-link" data-bs-toggle="link" href="basic_livelihood_new_meeting_filter2_results.php" role="tab">
+                                            <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
+                                            <span class="d-none d-sm-block">New Meeting</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item waves-effect waves-light">
+                                        <a class="nav-link" href="basic_livelihood_cbdra.php" role="link">
+                                            <span class="d-block d-sm-none"><i class="fas fa-cog"></i></span>
+                                            <span class="d-none d-sm-block">Comm. Based DRA</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item waves-effect waves-light">
+                                        <a class="link"  href="basicReports.php" role="link">
+                                            <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
+                                            <span class="d-none d-sm-block">Sensitization Reports</span>
+                                        </a>
+                                    </li>
+                                    
+                                </ul>
                                 <!-- Tab panes -->
                                 <div class="tab-content p-3 text-muted">
                                     <div class="tab-pane active" id="home-1" role="tabpanel">
@@ -112,40 +148,11 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                             
 
                                             <!--start here -->
-                                            <div class="card border border-primary">
-                                                <div class="card-header bg-primary border-primary">
-                                                    <h5 class="my-0 text-default">Meeting Filter</h5>
-                                                </div>
-                                                <div class="card-body bg-success">
-                                                    <h5 class="card-title mt-0"></h5>
-                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="basic_livelihood_slg_mgt_new_slg_filter2_results.php" method ="GET">
-                                                        <div class="col-12">
-                                                            <label for="region" class="form-label">Region</label>
-                                                            <div>
-                                                                <select class="form-select" name="region" id="region" value ="$region" required>
-                                                                    <option selected value = "<?php echo $region;?>"><?php echo get_rname($link,$region);?></option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                        
-                                                        <div class="col-12">
-                                                            <label for="district" class="form-label">District</label>
-                                                            <div>
-                                                                <select class="form-select" name="district" id="district" value ="$district" required>
-                                                                    <option selected value = "<?php echo $district;?>"><?php echo dis_name($link,$district);?></option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
+                                            <p align="right">
+                                                <INPUT TYPE="button" class="btn btn-btn btn-outline-secondary w-md" VALUE="Back" onClick="history.go(-1);">             
+                                            </p>
 
-                                                        
-                                                        <div class="col-12">
-                                                            <INPUT TYPE="button" class="btn btn-btn btn-outline-secondary w-md" VALUE="Back" onClick="history.go(-1);">
-                                                            
-                                                        </div>
-                                                    </form>                                             
-                                                    <!-- End Here -->
-                                                </div>
-                                            </div>
+                                            
 
                                             <div class="row">
                                                 <div class="col-12">
@@ -174,8 +181,8 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
                                                                 <tbody>
                                                                     <?Php
-                                                                       $selectedDistrict = $_POST["district"];
-                                                                        $query="select * from tblawareness_meetings where DistrictID ='$selectedDistrict'";
+                                                                       
+                                                                        $query="select * from tblawareness_meetings where DistrictID ='$district'";
 
                                                                     //Variable $link is declared inside config.php file & used here
                                                                     

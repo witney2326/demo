@@ -29,9 +29,18 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 <?php include 'layouts/body.php'; ?>
 
 <?php   
-        $region = $_GET['region'];
-        $district = $_GET['district'];
-        $ta = $_GET['ta'];
+       if (($_SESSION["user_role"]== '05')) 
+       {
+           $region = $_SESSION["user_reg"];
+           $district = $_SESSION["user_dis"];
+           $ta = $_SESSION["user_ta"];   
+       }
+       else
+       {
+           $region = $_POST['region'];
+           $district = $_POST['district'];
+           $ta = $_POST['ta'];
+       }
 
     
         function get_rname($link, $rcode)
@@ -73,7 +82,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                 <div class="row">
                     <div class="col-12">
                         <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                            <h4 class="mb-sm-0 font-size-18">JSG Financial Linkag</h4>
+                            <h4 class="mb-sm-0 font-size-18">JSG Financial Linkage</h4>
 
                             <div class="page-title-right">
                                 <ol class="breadcrumb m-0">

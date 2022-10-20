@@ -68,7 +68,20 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
         }
 
 ?>
+<?php
 
+// do check
+if (($_SESSION["user_role"] == '05')) {
+    header("location: basic_livelihood.php");     
+}
+if (($_SESSION["user_role"] == '04')) {
+    header("location: basic_livelihood_hh_mgt_filter2.php");     
+}
+if (($_SESSION["user_role"] == '03')) {
+    header("location: basic_livelihood_hh_mgt_filter1.php");     
+}
+
+?>
 <!-- Begin page -->
 <div id="layout-wrapper">
 
@@ -103,7 +116,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                 <!--start here -->
                 <div class="card border border-primary">
                     
-                    <div class="card-body bg-success">
+                    <div class="card-body">
                         
                         <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="basic_livelihood_hh_mgt_filter1.php" method="POST">
                             <div class="col-12">

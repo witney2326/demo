@@ -29,13 +29,31 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 <?php include 'layouts/body.php'; ?>
 <?php include 'lib.php'; ?>
 
+<?php
+    if (($_SESSION["user_role"] == '05')) {
+        header("location: basic_livelihood_slg_mgt_filter3_results.php");   
+    }
+    if (($_SESSION["user_role"] == '04')) {
+        header("location: basic_livelihood_slg_mgt_filter2_results.php");   
+    }
+    if (($_SESSION["user_role"] == '03')) {
+        header("location: basic_livelihood_slg_mgt_filter1_results.php");   
+    }
+
+    if (($_SESSION["user_role"]== '06')) {
+        header("location: basic_livelihood_HH_Dis_reports.php");
+    }
+    if (($_SESSION["user_role"]== '08')) {
+        header("location: basic_livelihood_HH_Dis_reports.php");
+    }
+?>
+
 <?php 
     if(isset($_GET['Submit']))
     {   
         $region = $_GET['region'];
         $district = $_GET['district'];
         $ta = $_GET['ta'];
-     
     }
 ?>
 
@@ -89,7 +107,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                         </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="link"  href="basic_livelihood_clusters.php" role="link">
+                                        <a class="link"  href="basic_livelihood_clusters_check.php" role="link">
                                             <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
                                             <span class="d-none d-sm-block">Clusters</span>
                                         </a>

@@ -29,9 +29,14 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 <?php include 'layouts/body.php'; ?>
 
 <?php 
-        $region = $_POST['region'];
-        //$district = $_GET['district'];
-        //$ta = $_GET['ta'];
+       if (($_SESSION["user_role"]== '03')) 
+       {
+           $region = $_SESSION["user_reg"];   
+       }
+       else
+       {
+           $region = $_POST['region'];
+       }
     
     function get_rname($link, $rcode)
         {
@@ -99,10 +104,8 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
                                             <!--start here -->
                                             <div class="card border border-primary">
-                                                <div class="card-header bg-primary border-primary">
-                                                    <h5 class="my-0 text-default">Training Search Filter</h5>
-                                                </div>
-                                                <div class="card-body bg-success">
+                                                
+                                                <div class="card-body">
                                                     <h5 class="card-title mt-0"></h5>
                                                     <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="graduation_refresher_training_filter2.php" method ="POST">
                                                         <div class="col-12">
@@ -181,6 +184,8 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                                         <th>Males</th>
                                                                         <th>Females</th>
                                                                         <th>Total Members</th>
+                                                                        <th> Refresher</th>
+                                                                        <th> AT Oriented</th>
                                                                         <th>Action</th>    
                                                                        
                                                                     </tr>
@@ -199,13 +204,29 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                                         if ($result_set = $link->query($query)) {
                                                                             while($row = $result_set->fetch_array(MYSQLI_ASSOC))
                                                                             { 
-                                                                                $totalMembers = $row["MembersM"]+$row["MembersF"]; 
+                                                                                $totalMembers = $row["MembersM"]+$row["MembersF"];
+                                                                                
+                                                                                $grp = $row["groupID"];
+
+                                                                                $q = mysqli_query($link, "SELECT TrainingID FROM tblgrouptrainings where ((groupID ='$grp') and (TrainingTypeID='16'))"); 
+                                                                                $rw = mysqli_fetch_assoc($q); 
+                                                                                $found = $rw['TrainingID'];
+
+                                                                                if ($found > 0){$refreshed = "Yes";}else{$refreshed = "No";}
+
+                                                                                $q2 = mysqli_query($link, "SELECT TrainingID FROM tblgrouptrainings where ((groupID ='$grp') and (TrainingTypeID='10'))"); 
+                                                                                $rw2 = mysqli_fetch_assoc($q2); 
+                                                                                $found2 = $rw2['TrainingID'];
+
+                                                                                if ($found2 > 0){$at = "Yes";}else{$at = "No";}
                                                                             echo "<tr>\n"; 
                                                                                 echo "<td>".$row["groupID"]."</td>\n";
                                                                                 echo "<td>".$row["groupname"]."</td>\n";
                                                                                 echo "<td>".$row["MembersM"]."</td>\n";
                                                                                 echo "<td>".$row["MembersF"]."</td>\n";
-                                                                                echo "<td>\t\t$totalMembers</td>\n";                          
+                                                                                echo "<td>\t\t$totalMembers</td>\n"; 
+                                                                                echo "<td>\t\t$refreshed</td>\n"; 
+                                                                                echo "<td>\t\t$at</td>\n";                               
                                                                                 echo "<td>
                                                                                     <a href=\"../basicSLGTraining_view.php?id=".$row['groupID']."\"><i class='far fa-eye' title='Training Status' style='font-size:18px;color:purple'></i></a>                                                                           
                                                                                     <a href=\"../add_basicTrainingGD.php?id=".$row['groupID']."\" ><i class='fas fa-pen' title='Record Refresher Training' style='font-size:18px;color:green'></i></a>                                                                            

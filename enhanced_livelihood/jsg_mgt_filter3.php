@@ -1,11 +1,11 @@
-<?php include 'layouts/session.php'; ?>
-<?php include 'layouts/head-main.php'; ?>
+<?php include '../layouts/session.php'; ?>
+<?php include '../layouts/head-main.php'; ?>
 
 <head>
     <title>JSG Formation</title>
-    <?php include 'layouts/head.php'; ?>
-    <?php include 'layouts/head-style.php'; ?>
-    <?php include 'layouts/config.php'; ?>
+    <?php include '../layouts/head.php'; ?>
+    <?php include '../layouts/head-style.php'; ?>
+    <?php include '../layouts/config.php'; ?>
 <!-- DataTables -->
     <link href="assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
     <link href="assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
@@ -26,12 +26,21 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
   </script>
 </head>
 
-<?php include 'layouts/body.php'; ?>
+<?php include '../layouts/body.php'; ?>
 
 <?php  
-    $region = $_POST['region'];
-    $district = $_POST['district'];
-    $ta = $_POST['ta'];
+    if (($_SESSION["user_role"]== '05')) 
+    {
+        $region = $_SESSION["user_reg"];
+        $district = $_SESSION["user_dis"];
+        $ta = $_SESSION["user_ta"];   
+    }
+    else
+    {
+        $region = $_POST['region'];
+        $district = $_POST['district'];
+        $ta = $_POST['ta'];
+    }
    
     
     function get_rname($link, $rcode)
@@ -88,17 +97,40 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                 <!-- end page title -->
 
                 <div class="row">
-                    
-                        </div>
-                    </div>
 
                     <div class="col-xl-12">
                         <div class="card">
                             <div class="card-body">
 
-                                
                                 <!-- Nav tabs -->
-                                
+                                <ul class="nav nav-pills nav-justified" role="tablist">
+                                    <li class="nav-item waves-effect waves-light">
+                                        <a class="nav-link active" data-bs-toggle="tab" href="#home-1" role="tab">
+                                            <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
+                                            <span class="d-none d-sm-block">Savings and Loan Groups</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item waves-effect waves-light">
+                                        <a class="link"  href="jsg_clusters_check.php" role="link">
+                                            <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
+                                            <span class="d-none d-sm-block">Clusters</span>
+                                        </a>
+                                    </li>
+                                    
+                                    <li class="nav-item waves-effect waves-light">
+                                        <a class="nav-link" data-bs-toggle="link" href="jsgs_check.php" role="link">
+                                            <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
+                                            <span class="d-none d-sm-block">Joint Skill Groups</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item waves-effect waves-light">
+                                        <a class="link" href="enhancedReports.php" role="link">
+                                            <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
+                                            <span class="d-none d-sm-block">Joint Skill Group Reports</span>
+                                        </a>
+                                    </li>
+                                    
+                                </ul>
                                 <!-- Tab panes -->
                                 <div class="tab-content p-3 text-muted">
                                     <div class="tab-pane active" id="home-1" role="tabpanel">
@@ -220,7 +252,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                                             echo "<td>\t\t$jsgs</td>\n";
                                                                             echo "<td>
                                                                                 <a href=\"../basicSLGview.php?id=".$row['groupID']."\"><i class='far fa-eye' title='View SLG' style='font-size:18px;color:purple'></i></a>                                                                           
-                                                                                <a href=\"view_JSG.php?id=".$row['groupID']."\"><i class='fas fa-balance-scale' title='View JSGs For the Group' style='font-size:18px;color:orange'></i></a> 
+                                                                                <a href=\"view_JSG.php?id=".$row['groupID']."\"><i class='far fa-eye' title='View JSGs For the Group' style='font-size:18px;color:orange'></i></a> 
                                                                                 <a onClick=\"javascript: return confirm('Are You Sure You want To Map This Group For JSGs Interventions? ');\" href=\"slg_JSG_Map.php?id=".$row['groupID']."\"><i class='fas fa-stamp' title='Map SLG For JSG Intervention' style='font-size:18px;color:green'></i></a>
                                                                                 <a href=\"add_JSG.php?id=".$row['groupID']."&mapped=".$row['jsg_mapped']."\"><i class='fa fa-users' title='Add JSG to SLG' style='font-size:18px;color:cadetblue'></i></a> 
                                                                             </td>\n";

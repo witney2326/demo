@@ -1,16 +1,3 @@
-<?php include 'layouts/session.php'; ?>
-<?php include 'layouts/head-main.php'; ?>
-
-<head>
-    <title>YCS|Mapping</title>
-    <?php include 'layouts/head.php'; ?>
-    <?php include 'layouts/head-style.php'; ?>
-
-}
-    
-</head>
-
-<div id="layout-wrapper">
 
     <?php
         include "layouts/config.php"; // Using database connection file here     
@@ -48,4 +35,3 @@
                
     ?>
     
-</div>

@@ -27,25 +27,20 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 </head>
 
 <?php include 'layouts/body.php'; ?>
-
+<?php include '../lib.php'; ?>
 <?php   
-        $region = $_GET['region'];
-        $district = $_GET['district'];
-        //$ta = $_GET['ta'];
+        if (($_SESSION["user_role"]== '04')) 
+        {
+            $region = $_SESSION["user_reg"];
+            $district = $_SESSION["user_dis"];   
+        }
+        else
+        {
+            $region = $_POST['region'];
+            $district = $_POST['district'];
+        }
 
-        function get_rname($link, $rcode)
-        {
-        $rg_query = mysqli_query($link,"select name from tblregion where regionID='$rcode'"); // select query
-        $rg = mysqli_fetch_array($rg_query);// fetch data
-        return $rg['name'];
-        }
-    
-        function dis_name($link, $disID)
-        {
-        $dis_query = mysqli_query($link,"select DistrictName from tbldistrict where DistrictID='$disID'"); // select query
-        $dis = mysqli_fetch_array($dis_query);// fetch data
-        return $dis['DistrictName'];
-        }
+        
 ?>
 
 <!-- Begin page -->
@@ -90,7 +85,22 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
                                 
                                 <!-- Nav tabs -->
-                                
+                                <ul class="nav nav-pills nav-justified" role="tablist">
+                                    <li class="nav-item waves-effect waves-light">
+                                        <a class="nav-link active" data-bs-toggle="tab" href="#home-1" role="tab">
+                                            <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
+                                            <span class="d-none d-sm-block">Selected IGPs/Concepts and Skills Linkages</span>
+                                        </a>
+                                    </li>
+                                                                                                           
+                                    <li class="nav-item waves-effect waves-light">
+                                        <a class="link"  href="enhancedReports.php" role="link">
+                                            <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
+                                            <span class="d-none d-sm-block"> Skills Training Reports</span>
+                                        </a>
+                                    </li>
+                                    
+                                </ul>
                                 <!-- Tab panes -->
                                 <div class="tab-content p-3 text-muted">
                                     <div class="tab-pane active" id="home-1" role="tabpanel">
@@ -165,12 +175,12 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                             
                                                                 <thead>
                                                                     <tr>
-                                                                        <th>Groupcode</th>
-                                                                        <th>Group Name</th>
-                                                                        <th>Males</th>
-                                                                        <th>Females</th>
-                                                                        <th>Total Members</th>
-                                                                        <th>Action</th>    
+                                                                        <th>Rec ID</th>
+                                                                        <th>HH code</th>
+                                                                        <th>Group ID</th>
+                                                                        <th>Name</th>
+                                                                        <th>Vocational Skill</th>
+                                                                        <th>Action</th> 
                                                                         
                                                                     </tr>
                                                                 </thead>
@@ -180,7 +190,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                                     <?Php
                                                                         if (isset($district))
                                                                         {
-                                                                            $query="select * from tblgroup where (DistrictID = $district)";
+                                                                            $query="select * from tblycs where ((bc_assesed_result ='1') and (districtID = '$district'))";
                                                                         
                                                                         
                                                                         //Variable $link is declared inside config.php file & used here
@@ -188,16 +198,17 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                                         if ($result_set = $link->query($query)) {
                                                                             while($row = $result_set->fetch_array(MYSQLI_ASSOC))
                                                                             { 
-                                                                                $totalMembers = $row["MembersM"]+$row["MembersF"]; 
+                                                                                
                                                                             echo "<tr>\n"; 
-                                                                                echo "<td>".$row["groupID"]."</td>\n";
-                                                                                echo "<td>".$row["groupname"]."</td>\n";
-                                                                                echo "<td>".$row["MembersM"]."</td>\n";
-                                                                                echo "<td>".$row["MembersF"]."</td>\n";
-                                                                                echo "<td>\t\t$totalMembers</td>\n";                          
-                                                                                echo "<td>
-                                                                                    <a href=\"basicSLGTraining_view.php?id=".$row['groupID']."\"><i class='far fa-eye' title='Training Status' style='font-size:18px;color:purple'></i></a>                                                                           
-                                                                                    <a href=\"add_basicTrainingGD.php?id=".$row['groupID']."\" ><i class='fas fa-pen' title='Record Training' style='font-size:18px;color:green'></i></a>                                                                            
+                                                                            echo "<td>".$row["recID"]."</td>\n";
+                                                                            echo "<td>".$row["hh_code"]."</td>\n";
+                                                                            echo "<td>".$row["groupID"]."</td>\n";
+                                                                            echo "<td>".$row["beneficiary"]."</td>\n";
+                                                                            echo "<td>".iga_name($link,$row["voc_type"])."</td>\n";                       
+                                                                            echo "<td>
+                                                                                <a href=\"../basicSLGMemberview.php?id=".$row['hh_code']."\"><i class='far fa-eye' title='Training Status' style='font-size:18px;color:purple'></i></a> 
+                                                                                <a href=\"?id=".$row['groupID']."\"><i class='fa fa-link' title='Link HH to Voc School' style='font-size:18px;color:orange'></i></a>                                                                         
+                                                                                
                                                                                     
                                                                                 </td>\n";
                                                                             echo "</tr>\n";

@@ -59,6 +59,7 @@
                 <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <img class="rounded-circle header-profile-user" src="assets/images/users/avatar-1.jpg" alt="Header Avatar">
                     <span class="d-none d-xl-inline-block ms-1"><?php echo $_SESSION["username"]; ?></span>
+                    
                     <i class="d-none d-xl-inline-block"></i>
                 </button>
 
@@ -93,7 +94,7 @@
                 <li class="menu-title" key="t-menu"><?php echo $language["Menu"]; ?></li>
 
                 <li>
-                    <a href="index.php" class="waves-effect">
+                    <a href="index_check.php" class="waves-effect">
                         <i class="bx bx-home-circle"></i><span class="badge rounded-pill bg-info float-end"></span>
                         <span key="t-dashboards">Dashboard</span>
                     </a>
@@ -106,27 +107,18 @@
                         <span key="t-layouts">Livelihood Interventions</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="true">
-                        <li>
-                            <a href="basic_livelihood.php" class="has-arrow" key="t-vertical">Basic Livelihood</a>
-                            <ul class="sub-menu" aria-expanded="true">
-                            </ul>
+                        <li> 
+                            <?php if ($_SESSION["user_role"] == '00'){echo '<a href="javascript: void(0);" class="has-arrow" key="t-vertical">Basic Livelihood</a>' ;}else{echo '<a href="basic_livelihood.php" class="has-arrow" key="t-vertical">Basic Livelihood</a>';}  ?>
                         </li>
-
                         <li>
-                            <a href="./enhanced_livelihood/enhanced_livelihood.php" class="has-arrow" key="t-horizontal">Enhanced Livelihood</a>
-                            <ul class="sub-menu" aria-expanded="true">
-                            </ul>
+                            <?php if ($_SESSION["user_role"] == '00'){echo '<a href="javascript: void(0);" class="has-arrow" key="t-vertical">Enhanced Livelihood</a>' ;}else{echo '<a href="./enhanced_livelihood/enhanced_livelihood.php" class="has-arrow" key="t-vertical">Enhanced Livelihood</a>';}  ?>
                         </li>
-
                         <li>
-                            <a href="graduation/graduation.php" class="has-arrow" key="t-horizontal">Graduation</a>
-                            <ul class="sub-menu" aria-expanded="true">
-                            </ul>
+                            <?php if ($_SESSION["user_role"] == '00'){echo '<a href="javascript: void(0);" class="has-arrow" key="t-vertical">Graduation</a>' ;}else{echo '<a href="graduation/graduation.php" class="has-arrow" key="t-vertical">Graduation</a>';}  ?>
                         </li>
                         <li>
                             <a href="javascript: void(0);" class="has-arrow" key="t-horizontal">CS-EPWP</a>
-                            <ul class="sub-menu" aria-expanded="true">
-                            </ul>
+                            
                         </li>
                     </ul>
                 </li>
@@ -136,29 +128,18 @@
                         <i class="bx bx-line-chart" style="color:blue"></i>
                         <span key="t-layouts">Program Reports</span>
                     </a>
-                    <ul class="sub-menu" aria-expanded="true">
-                    
+                    <ul class="sub-menu" aria-expanded="true">                   
                         <li>
-                            <a href="basicReports.php" class="has-arrow waves-effect" key="t-vertical">Basic Livelihood</a>
-                            <ul class="sub-menu" aria-expanded="true">
-                            </ul>
+                            <?php if ($_SESSION["user_role"] == '00'){echo '<a href="javascript: void(0);" class="has-arrow waves-effect" key="t-vertical">Basic Livelihood</a>' ;}else{echo '<a href="basicReports.php" class="has-arrow waves-effect" key="t-vertical">Basic Livelihood</a>';}  ?>
                         </li>
-
                         <li>
-                            <a href="enhanced_livelihood/enhancedReports.php" class="has-arrow" key="t-horizontal">Enhanced Livelihood</a>
-                            <ul class="sub-menu" aria-expanded="true">
-                            </ul>
+                            <?php if ($_SESSION["user_role"] == '00'){echo '<a href="javascript: void(0);" class="has-arrow" key="t-horizontal">Enhanced Livelihood</a>' ;}else{echo '<a href="enhanced_livelihood/enhancedReports.php" class="has-arrow" key="t-horizontal">Enhanced Livelihood</a>';}  ?>
                         </li>
-
                         <li>
-                            <a href="./graduation/graduationReports.php" class="has-arrow" key="t-horizontal">Graduation</a>
-                            <ul class="sub-menu" aria-expanded="true">
-                            </ul>
+                            <?php if ($_SESSION["user_role"] == '00'){echo '<a href="javascript: void(0);" class="has-arrow" key="t-horizontal">Graduation</a>' ;}else{echo '<a href="./graduation/graduationReports.php" class="has-arrow" key="t-horizontal">Graduation</a>';}  ?>
                         </li>
                         <li>
                             <a href="javascript: void(0);" class="has-arrow" key="t-horizontal">CS-EPWP</a>
-                            <ul class="sub-menu" aria-expanded="true">
-                            </ul>
                         </li>
                     </ul>
                 </li>
@@ -186,8 +167,14 @@
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="fa fa-cog" style="color:orangered"></i>
                         <span key="t-layouts">System Administration</span>
+                        
                     </a>
+                    <ul class="sub-menu" aria-expanded="true">
                     
+                        <li>
+                            <?php if ($_SESSION["user_role"] == '01'){echo '<a href="sysadmin1.php" class="has-arrow waves-effect" key="t-vertical">Admin</a>' ;}else{echo '<a href="javascript: void(0);" class="has-arrow waves-effect" key="t-vertical">Admin</a>';}  ?>
+                        </li>
+                    </ul>
                 </li>
 
  

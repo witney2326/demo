@@ -57,19 +57,19 @@
                                         </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link" data-bs-toggle="link" href="cmt_group_assesment.php" role="link">
+                                        <a class="nav-link" data-bs-toggle="link" href="cmt_group_assesment_check.php" role="link">
                                             <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
                                             <span class="d-none d-sm-block">SLG Assesment</span>
                                         </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link" data-bs-toggle="link" href="cmt_cluster_assesment.php" role="link">
+                                        <a class="nav-link" data-bs-toggle="link" href="cmt_ClusterAssesment_check.php" role="link">
                                             <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
                                             <span class="d-none d-sm-block">Cluster Assesment</span>
                                         </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link" data-bs-toggle="link" href="cmt_training_registration.php" role="link">
+                                        <a class="nav-link" data-bs-toggle="link" href="cmt_training_registration_check.php" role="link">
                                             <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
                                             <span class="d-none d-sm-block">Coop Member Education and Registration</span>
                                         </a>
@@ -150,7 +150,7 @@
 
                                                                                     ?>
                                                                                         <div class="container">
-                                                                                            <h4><div class="mb-0"><?php echo "" . $sum;?></div></h4>
+                                                                                            <h5><div class="mb-0"><?php echo "" . $sum;?></div></h5>
                                                                                         </div>
                                                                             
                                                                         </div>
@@ -173,12 +173,16 @@
                                                                                 $result = mysqli_query($link, 'SELECT count(groupID) AS total_slgs FROM tblgroup where cmt_cme_trained = "1"'); 
                                                                                 $row = mysqli_fetch_assoc($result); 
                                                                                 $total_slgs = $row['total_slgs'];
-                                                                                
                                                                                 $sum = $total_slgs;
+
+                                                                                $resultcls = mysqli_query($link, 'SELECT count(ClusterID) AS total_cls FROM tblcluster where cmt_cme_trained = "1"'); 
+                                                                                $rowcls = mysqli_fetch_assoc($resultcls); 
+                                                                                $total_cls = $rowcls['total_cls'];
+                                                                                $sumcls = $total_cls;
 
                                                                                 ?>
                                                                                     <div class="container">
-                                                                                        <h4><div class="mb-0"><?php echo "" . $sum;?></div></h4>
+                                                                                        <h5><div class="mb-0"><?php echo "" . $sum+$sumcls;?></div></h5>
                                                                                     </div>
                                       
                                                                         </div>
@@ -201,12 +205,15 @@
                                                                                 $result = mysqli_query($link, 'SELECT count(groupID) AS total_slgs FROM tblgroup where registered_group = "1"'); 
                                                                                 $row = mysqli_fetch_assoc($result); 
                                                                                 $total_slgs = $row['total_slgs'];
-                                                                                
                                                                                 $sum = $total_slgs;
 
+                                                                                $resultcls2 = mysqli_query($link, 'SELECT count(ClusterID) AS total_cls2 FROM tblcluster where registered_group = "1"'); 
+                                                                                $rowcls2 = mysqli_fetch_assoc($resultcls2); 
+                                                                                $total_cls2 = $rowcls2['total_cls2'];
+                                                                                $sumcls2 = $total_cls2;
                                                                                 ?>
                                                                                     <div class="container">
-                                                                                        <h4><div class="mb-0"><?php echo "" . $sum;?></div></h4>
+                                                                                        <h5><div class="mb-0"><?php echo "" . $sum+$sumcls2;?></div></h5>
                                                                                     </div>
                                                                         </div>
                                                                         

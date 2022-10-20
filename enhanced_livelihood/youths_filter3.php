@@ -40,9 +40,18 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 <?php include 'layouts/body.php'; ?>
 <?php include '../lib.php'; ?>
 <?php 
-    $region = $_POST['region'];
-    $district =$_POST['district'];
-    $ta =$_POST['ta'];
+    if (($_SESSION["user_role"]== '05')) 
+    {
+        $region = $_SESSION["user_reg"];
+        $district = $_SESSION["user_dis"];
+        $ta = $_SESSION["user_ta"];   
+    }
+    else
+    {
+        $region = $_POST['region'];
+        $district = $_POST['district'];
+        $ta = $_POST['ta'];
+    }
     
 ?>
 
@@ -90,13 +99,13 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                 <!-- Nav tabs -->
                                 <ul class="nav nav-pills nav-justified" role="tablist">
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link " data-bs-toggle="link" href="ycs_identification.php" role="link">
+                                        <a class="nav-link " data-bs-toggle="link" href="ycs_identification_check.php" role="link">
                                             <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
                                             <span class="d-none d-sm-block">Savings and Loan Groups</span>
                                         </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="link"  href="ycs_clusters.php" role="link">
+                                        <a class="link"  href="ycs_clusters_check.php" role="link">
                                             <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
                                             <span class="d-none d-sm-block">Clusters</span>
                                         </a>
@@ -105,7 +114,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                     <li class="nav-item waves-effect waves-light">
                                         <a class="nav-link active" data-bs-toggle="link" href="#home-1" role="tab">
                                             <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
-                                            <span class="d-none d-sm-block">Linked Youths</span>
+                                            <span class="d-none d-sm-block">Enrolled Youths</span>
                                         </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">
@@ -229,7 +238,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                                              echo "<td>\t\t$bc_assesed_result</td>\n";
                                                                             echo "<td>
                                                                                 <a href=\"../basicSLGMemberview?id=".$row['recID']."\"><i class='far fa-eye' title='View Household' style='font-size:18px;color:purple'></i></a>
-                                                                                <a href=\".php?id=".$row['recID']."\"><i class='fas fa-bezier-curve' title='View Business Concept' style='font-size:18px;color:orange'></i></a>    
+                                                                                
                                                                                 <a href=\".php?id=".$row['recID']."\"><i class='far fa-trash-alt' title='Delete YCS Record' style='font-size:18px;color:red'></i></a>    
                                                                                 </td>\n";
 

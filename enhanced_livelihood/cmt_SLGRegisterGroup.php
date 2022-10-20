@@ -1,25 +1,11 @@
-<?php include '../layouts/session.php'; ?>
-<?php include '../layouts/head-main.php'; ?>
 
-<head>
-    <title>SLG Register Group</title>
-    <?php include '../layouts/head.php'; ?>
-    <?php include '../layouts/head-style.php'; ?>
-
-}
-    
-</head>
-
-<div id="layout-wrapper">
-
-    <?php include '../layouts/menu.php'; ?>
 
     <?php
         include "../layouts/config.php"; // Using database connection file here     
         
         $Rec_ID = $_GET['id']; 
 
-        $query="select cmt_cme_trained,cmt_status from tblgroup where groupID='$Rec_ID'";
+        $query="select cmt_cme_trained,cmt_status from tblcluster where ClusterID='$Rec_ID'";
         
         if ($result_set = $link->query($query)) {
             while($row = $result_set->fetch_array(MYSQLI_ASSOC))
@@ -29,12 +15,12 @@
  
         if (($cmt_cme_trained =='1') && ($cmt_status =='1'))
         {
-            $sql = mysqli_query($link,"update tblgroup  SET registered_group = '1' where groupID = '$Rec_ID'");
+            $sql = mysqli_query($link,"update tblcluster  SET registered_group = '1' where ClusterID = '$Rec_ID'");
                     
             if ($sql) {
                 echo '<script type="text/javascript">'; 
                 echo 'alert("SLG successfully Registered as Cooperative!");'; 
-                echo 'window.location.href = "cmt_training_registration.php";';
+                echo 'window.location.href = "cmt_training_registration_check.php";';
                 echo '</script>';
             } else {
                 echo "Error: " . $sql . ":-" . mysqli_error($link);
@@ -44,7 +30,7 @@
         {
             echo '<script type="text/javascript">'; 
             echo 'alert("SLG Not Trained in CME!");'; 
-            echo 'window.location.href = "cmt_training_registration.php";';
+            echo 'window.location.href = "cmt_training_registration_check.php";';
             echo '</script>';
         }
         mysqli_close($link);
@@ -52,4 +38,3 @@
                
     ?>
     
-</div>

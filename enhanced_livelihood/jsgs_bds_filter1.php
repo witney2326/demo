@@ -18,7 +18,14 @@
 
 <?php 
   
-    $region = $_GET['region'];
+  if (($_SESSION["user_role"]== '03')) 
+  {
+      $region = $_SESSION["user_reg"]; 
+  }
+  else
+  {
+      $region = $_POST['region'];
+  }
     
     function get_rname($link, $rcode)
         {
@@ -71,10 +78,40 @@
                         <div class="card">
                             <div class="card-body">
                                 <!--start here -->
+                                <!-- Nav tabs -->
+                                <ul class="nav nav-pills nav-justified" role="tablist">
+                                    
+                                    <li class="nav-item waves-effect waves-light">
+                                        <a class="nav-link active" data-bs-toggle="link" href="#home-1" role="link">
+                                            <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
+                                            <span class="d-none d-sm-block">BDS</span>
+                                        </a>
+                                    </li>
+
+                                    <li class="nav-item waves-effect waves-light">
+                                        <a class="nav-link" data-bs-toggle="link" href="jsg_new_bds_check.php" role="link">
+                                            <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
+                                            <span class="d-none d-sm-block">New BDS</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item waves-effect waves-light">
+                                        <a class="nav-link" data-bs-toggle="link" href="jsgs_bds_check.php" role="link">
+                                            <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
+                                            <span class="d-none d-sm-block">Allocate BDS</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item waves-effect waves-light">
+                                        <a class="nav-link" data-bs-toggle="link" href="jsgs_trainingPlan_check.php" role="link">
+                                            <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
+                                            <span class="d-none d-sm-block">Training Plan</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                                <!-- Tab panes -->
                                 <div class="card border border-primary">
                                     <div class="card-body">
                                         <h5 class="card-title mt-0"></h5>
-                                        <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="jsgs_bds_filter2.php" method ="GET">
+                                        <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="jsgs_bds_filter2.php" method ="POST">
                                             <div class="col-12">
                                                 <label for="region" class="form-label">Region</label>
                                                 <div>
@@ -180,7 +217,7 @@
                                                                     
                                                                     echo "<td>
                                                                         <a href=\"jsg_view.php?id=".$row['recID']."\"><i class='far fa-eye' title='View JSG' style='font-size:18px;color:purple'></i></a>
-                                                                        <a href=\"jsg_bds_identify.php?id=".$row['recID']."\"><i class='fas fa-id-badge' title='Identify BDS' style='font-size:18px;color:orange'></i></a>
+                                                                        <a href=\"jsg_bds_identify.php?id=".$row['recID']."\"><i class='fas fa-id-badge' title='Training Plan' style='font-size:18px;color:orange'></i></a>
                                                                         
                                                                     </td>\n";
 

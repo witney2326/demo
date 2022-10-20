@@ -102,21 +102,21 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
                             <ul class="nav nav-pills nav-justified" role="tablist">
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link " data-bs-toggle="link" href="ycs_concept_devt.php" role="link">
+                                        <a class="nav-link " data-bs-toggle="link" href="ycs_concept_devt_check.php" role="link">
                                             <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
                                             <span class="d-none d-sm-block"> Beneficiaries</span>
                                         </a>
                                     </li>
                                                                        
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link active" data-bs-toggle="tab" href="" role="tab">
+                                        <a class="nav-link active" data-bs-toggle="tab" href="javascript: void();" role="tab">
                                             <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
                                             <span class="d-none d-sm-block">Business Concept Submission & Assesment</span>
                                         </a>
                                     </li>
                                     
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="link" href="youths_bus_concept_devt_selected.php" role="link">
+                                        <a class="link" href="youths_bus_concept_devt_selected_check.php" role="link">
                                             <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
                                             <span class="d-none d-sm-block">Selected Concepts</span>
                                         </a>

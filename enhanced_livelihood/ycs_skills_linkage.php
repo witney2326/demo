@@ -227,13 +227,11 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                                             echo "<td>".$row["hh_code"]."</td>\n";
                                                                             echo "<td>".$row["groupID"]."</td>\n";
                                                                             echo "<td>".$row["beneficiary"]."</td>\n";
-                                                                            echo "<td>".$row["voc_type"]."</td>\n";                       
+                                                                            echo "<td>".iga_name($link,$row["voc_type"])."</td>\n";                       
                                                                             echo "<td>
-                                                                                <a href=\"../basicSLGTraining_view.php?id=".$row['groupID']."\"><i class='far fa-eye' title='Training Status' style='font-size:18px;color:purple'></i></a> 
+                                                                                <a href=\"../basicSLGMemberview.php?id=".$row['hh_code']."\"><i class='far fa-eye' title='Training Status' style='font-size:18px;color:purple'></i></a> 
                                                                                 <a href=\"?id=".$row['groupID']."\"><i class='fa fa-link' title='Link HH to Voc School' style='font-size:18px;color:orange'></i></a>                                                                         
-                                                                                <a href=\"?id=".$row['groupID']."\"><i class='fas fa-ban' title='HH Training Status' style='font-size:18px;color:blue'></i></a>                                                                         
                                                                                 
-                                                                                <a href=\"add_basicTrainingGD.php?id=".$row['groupID']."\" ><i class='fas fa-pen' title='Record Training' style='font-size:18px;color:green'></i></a>                                                                            
                                                                                 
                                                                             </td>\n";
                                                                         echo "</tr>\n";

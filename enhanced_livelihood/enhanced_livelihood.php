@@ -1,12 +1,11 @@
-<?php include 'layouts/session.php'; ?>
-<?php include 'layouts/head-main.php'; ?>
-
+<?php include '../layouts/session.php'; ?>
+<?php include '../layouts/head-main.php'; ?>
 
 <head>
     <title>Enhanced Livelihood</title>
-    <?php include 'layouts/head.php'; ?>
-    <?php include 'layouts/head-style.php'; ?>
-    <?php include './layouts/config.php'; ?>
+    <?php include '../layouts/head.php'; ?>
+    <?php include '../layouts/head-style.php'; ?>
+    <?php include '../layouts/config.php'; ?>
     
 
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script> <!-- for pie chart -->
@@ -180,13 +179,30 @@
 </style>
 
 </head>
-
-<?php include 'layouts/body.php'; ?>
+<?php
+    $user = $_SESSION["user_role"];
+    if ($user == '05') 
+        {
+        $region = $_SESSION["user_reg"];
+        $district = $_SESSION["user_dis"];
+        $ta = $_SESSION["user_ta"]; 
+    } 
+    if ($user == '04') 
+        {
+        $region = $_SESSION["user_reg"];
+        $district = $_SESSION["user_dis"]; 
+    } 
+    if ($user == '03') 
+        {
+        $region = $_SESSION["user_reg"];
+    } 
+?>
+<?php include '../layouts/body.php'; ?>
 
 <!-- Begin page -->
 <div id="layout-wrapper">
 
-    <?php include 'layouts/menu.php'; ?>
+    <?php include '../layouts/menu.php'; ?>
 
     <!-- ============================================================== -->
     <!-- Start right Content here -->
@@ -204,7 +220,7 @@
 
                             <div class="page-title-right">
                                 <ol class="breadcrumb m-0">
-                                    <li class="breadcrumb-item"><a href="..\index.php">Dashboard</a></li>
+                                    <li class="breadcrumb-item"><?php if ($user == '05'){echo '<a href="..\index_cw.php">Dashboard</a>';}else if ($user == '04'){echo '<a href="..\index_dc.php">Dashboard</a>';} else if ($user == '03') {echo '<a href="..\index_pc.php">Dashboard</a>';} else{echo '<a href="..\index.php">Dashboard</a>';}?></li>
                                     <li class="breadcrumb-item active">Enhanced Livelihood</li>
                                 </ol>
                             </div>
@@ -291,9 +307,18 @@
                                                                                     <i class='fas fa-house-user' style='font-size:24px'></i>
                                                                                     <p class="text-muted fw-medium">Youths Linked</p>
                                                                                     <?php
+                                                                                    if ($user == "05")
+                                                                                    {
+                                                                                        $result = mysqli_query($link, "SELECT COUNT(recID) AS v_total FROM tblycs inner join tblgroup 
+                                                                                        on tblycs.groupID = tblgroup.groupID where tblgroup.TAID = '$ta'"); 
+                                                                                        $row = mysqli_fetch_assoc($result); 
+                                                                                        $sum = $row['v_total'];
+                                                                                    } else 
+                                                                                    {
                                                                                         $result = mysqli_query($link, 'SELECT COUNT(hh_code) AS value_sum FROM tblycs'); 
                                                                                         $row = mysqli_fetch_assoc($result); 
                                                                                         $sum = $row['value_sum'];
+                                                                                    }
                                                                                     ?>
                                                                                         <h5 class="mb-0">
                                                                                             <div class="container">
@@ -318,13 +343,22 @@
 
                                                                             <p class="text-muted fw-medium">JSGs Formed</p>
                                                                             <?php
-                                                                                        $result = mysqli_query($link, 'SELECT COUNT(recID) AS total_jsgs FROM tbljsg'); 
-                                                                                        $row = mysqli_fetch_assoc($result); 
-                                                                                        $total_jsgs = $row['total_jsgs'];
-                                                                                    ?>
-                                                                                        <div class="container">
-                                                                                            <h4><div class="mb-0"><?php echo "" . $total_jsgs;?></div></h4>
-                                                                                        </div>
+                                                                                if ($user == "05")
+                                                                                {
+                                                                                    $result = mysqli_query($link, "SELECT COUNT(recID) AS value_total FROM tbljsg inner join tblgroup 
+                                                                                    on tbljsg.groupID = tblgroup.groupID where tblgroup.TAID = '$ta'"); 
+                                                                                    $row = mysqli_fetch_assoc($result); 
+                                                                                    $total_jsgs = $row['value_total'];
+                                                                                } else
+                                                                                {
+                                                                                    $result = mysqli_query($link, 'SELECT COUNT(recID) AS total_jsgs FROM tbljsg'); 
+                                                                                    $row = mysqli_fetch_assoc($result); 
+                                                                                    $total_jsgs = $row['total_jsgs'];
+                                                                                }
+                                                                            ?>
+                                                                                <div class="container">
+                                                                                    <h5><div class="mb-0"><?php echo "" . $total_jsgs;?></div></h5>
+                                                                                </div>
                                                                             
                                                                         </div>
                                                                         
@@ -342,7 +376,20 @@
                                                                             <i class='fas fa-user-graduate' style='font-size:24px'></i>
 
                                                                             <p class="text-muted fw-medium">Coops Formed</p>
-                                                                            <h4 class="mb-0">0</h4>
+                                                                            <?php
+
+                                                                                if ($user == "05")
+                                                                                {
+                                                                                    $result = mysqli_query($link, "SELECT count(groupID) AS total_slgs FROM tblgroup where ((registered_group = '1') and (TAID ='$ta'))"); 
+                                                                                    $row = mysqli_fetch_assoc($result); 
+                                                                                    $total_slgs = $row['total_slgs'];
+
+                                                                                    $resultcls2 = mysqli_query($link, "SELECT count(ClusterID) AS total_cls2 FROM tblcluster where ((registered_group = '1') and (taID ='$ta'))"); 
+                                                                                    $rowcls2 = mysqli_fetch_assoc($resultcls2); 
+                                                                                    $total_cls2 = $rowcls2['total_cls2'];
+                                                                                }
+                                                                                echo '<h5 class="mb-0">'. number_format($total_slgs+$total_cls2); echo '</h5>'
+                                                                            ?>
                                                                         </div>
                                                                         
                                                                     </div>

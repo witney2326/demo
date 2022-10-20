@@ -25,7 +25,7 @@ if(isset($_POST['Submit']))
             if (mysqli_query($link, $sql)) {
                 echo '<script type="text/javascript">'; 
                 echo 'alert("YCS Record has been added successfully !");'; 
-                echo 'window.location.href = "ycs_identification.php";';
+                echo 'window.location.href = "ycs_identification_check.php";';
                 echo '</script>';
             } else {
                 echo "Error: " . $sql . ":-" . mysqli_error($link);
@@ -35,7 +35,7 @@ if(isset($_POST['Submit']))
         {
             echo '<script type="text/javascript">'; 
             echo 'alert("YCS has either no name or no ML Code or no National ID or no vocational skill selected  !");'; 
-            echo 'window.location.href = "ycs_identification.php";';
+            echo 'window.location.href = "ycs_identification_check.php";';
             echo '</script>';
         }
     }

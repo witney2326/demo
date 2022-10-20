@@ -77,6 +77,11 @@
 
                         <?php include 'layouts/body.php'; ?>
                         <div class="col-lg-9">
+                            <div>
+                                <p align="right">
+                                    <INPUT TYPE="button" class="btn btn-btn btn-outline-secondary w-md" VALUE="Back" onClick="history.go(-1);">
+                                </p>
+                            </div>
                             <div class="card border border-success">
                                 <div class="card-header bg-transparent border-success">
                                     <h5 class="my-0 text-success">Adopt Place Record No. -- <?php if (isset($PlaceNo)) {echo $PlaceNo ;} else {echo "Not Set";} ?></h5>
@@ -86,42 +91,42 @@
                                     <form method="POST" action="CBDRAAdoptPlaceEditSav.php">
                                         
                                         
-                                        <div class="row mb-4">
+                                        <div class="row mb-1">
                                             <label for="rec_no" class="col-sm-3 col-form-label">Record No.</label>
                                             <div class="col-sm-9">
                                                 <input type="text" class="form-control" id="rec_no" name = "rec_no" value="<?php if (isset($PlaceNo)) echo $PlaceNo ; ?>" style="max-width:30%;" >
                                             </div>
                                         </div>
 
-                                        <div class="row mb-4">
+                                        <div class="row mb-1">
                                             <label for="cluster_name" class="col-sm-3 col-form-label">Cluster Name</label>
                                             <div class="col-sm-9">
                                                 <input type="text" class="form-control" id="cluster_name" name = "cluster_name" value="<?php echo cluster_name($link,$id) ; ?>" style="max-width:30%;"  >
                                             </div>
                                         </div>
                                         
-                                        <div class="row mb-4">
+                                        <div class="row mb-1">
                                             <label for="district" class="col-sm-3 col-form-label">District</label>
                                             <div class="col-sm-9">
                                                 <input type="text" class="form-control" id="district" name="district" value ="<?php if (isset($districtID)) {echo dis_name($link,$districtID) ;} ?>" style="max-width:30%;"  >
                                             </div>
                                         </div>
                                         
-                                        <div class="row mb-4">
+                                        <div class="row mb-1">
                                             <label for="ta" class="col-sm-3 col-form-label">Trad. Authority</label>
                                             <div class="col-sm-9">
                                                 <input type="text" class="form-control" id="ta" name="ta" value ="<?php if (isset($ta)) {echo ta_name($link,$ta) ;} ?>" style="max-width:30%;"  >
                                             </div>
                                         </div>
                                                                                
-                                        <div class="row mb-4">
+                                        <div class="row mb-1">
                                             <label for="place" class="col-sm-3 col-form-label">Place</label>
                                             <div class="col-sm-9">
                                                 <input type="text" class="form-control" name="place" id="place" value="<?php if (isset($place)) {echo $place ;} else {echo "";} ?>" style="max-width:40%;" required>
                                             </div>  
                                         </div>
 
-                                        <div class="row mb-4">
+                                        <div class="row mb-3">
                                             <label for="purpose" class="col-sm-3 col-form-label">Purpose For Adoption</label>
                                             <select class="form-select" name="purpose" id="purpose" style="max-width:30%;" required>
                                                 <option value="<?php if (isset($purpose)) {echo $purpose;}?>"><?php if (isset($purpose)) {echo purpose_name($link,$purpose);} ?></option>
@@ -141,13 +146,11 @@
 
                                         
                                         <div class="row justify-content-end">
-                                            <div class="col-sm-9">
+                                            
                                                 <div>
                                                     <button type="submit" class="btn btn-primary w-md" name="Update" id="Update" value="Update">Update Current Record</button>
-                                                    
-                                                    <INPUT TYPE="button" VALUE="Back" onClick="history.go(-1);">
                                                 </div>
-                                            </div>
+                                            
                                         </div>
                                     </form>
                                     

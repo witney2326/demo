@@ -29,9 +29,19 @@
 <?php include 'layouts/body.php'; ?>
 
 <?php 
+
+    if (($_SESSION["user_role"]== '05')) 
+    {
+        $region = $_SESSION["user_reg"];
+        $district = $_SESSION["user_dis"];
+        $ta = $_SESSION["user_ta"];   
+    }
+ else
+    {
     $region = $_POST['region'];
     $district =$_POST['district'];
     $ta =$_POST['ta'];
+    }
 ?>
 
 <!-- Begin page -->
@@ -95,7 +105,7 @@
                                                     <div class="card-body">
                                                     
                                                     
-                                                    <form action="insertSLG.php" method="post">
+                                                    <form action="insertSLG.php" method="POST">
                                                         <!-- start here -->
                                                         <div class="row">
                                                             <div class="col-md-2">

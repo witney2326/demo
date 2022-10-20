@@ -40,7 +40,14 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 <?php include '../layouts/body.php'; ?>
 
 <?php
-    $region = $_POST['region'];
+    if (($_SESSION["user_role"]== '03')) 
+    {
+        $region = $_SESSION["user_reg"];  
+    }
+    else
+    {
+        $region = $_POST['region'];
+    }
     
 
          function get_rname($link, $rcode)
@@ -115,9 +122,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
                                         <!--start here -->
                                 <div class="card border border-primary">
-                                    <div class="card-header bg-transparent border-primary">
-                                        <h5 class="my-0 text-primary">Cluster Filter</h5>
-                                    </div>
+                                    
                                     <div class="card-body">
                                         <h5 class="card-title mt-0"></h5>
                                         
@@ -190,9 +195,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="card border border-primary">
-                                        <div class="card-header bg-transparent border-primary">
-                                            <h5 class="my-0 text-default">SL Clusters</h5>
-                                        </div>
+                                        
                                         <div class="card-body">
                                         <h5 class="card-title mt-0"></h5>
                                             
@@ -224,7 +227,8 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                                 echo "<td>".$row["ClusterName"]."</td>\n";
                                                                 echo "<td></td>\n";
                                                                 echo "<td> <a href=\"../basicCLSview.php?id=".$row['ClusterID']."\"><i class='far fa-eye' title='View Cluster' style='font-size:18px;color: purple'></i></a>\n";
-                                                                echo "<a onClick=\"javascript: return confirm('You want To Record CME Training?');\" href=\"../add_basicTrainingGD.php?id=".$row['ClusterID']."\"\><i class='fa fa-plus' title='Record CME Training' style='font-size:18px; color:orange'></i></a>\n";
+                                                                echo "<a onClick=\"javascript: return confirm('You want To Record CME Training?');\" href=\"cmt_add_cmeTrainingRegGrp.php?id=".$row['ClusterID']."\"\><i class='fa fa-plus' title='Update Status' style='font-size:18px; color:blue'></i></a>\n";
+                                                                echo "<a onClick=\"javascript: return confirm('You want To Record CME Training?');\" href=\"cmt_add_cmeTraining.php?id=".$row['ClusterID']."\"\><i class='fa fa-plus' title='Record CME Training' style='font-size:18px; color:orange'></i></a>\n";
                                                                 echo "<a onClick=\"javascript: return confirm('You want To Register SLG as a Cooperative?');\" href=\"cmt_SLGRegisterGroup.php?id=".$row['ClusterID']."\"\><i class='fa fa-user-plus' title='Register SLG as a Coop' style='font-size:18px; color:green'></i></a>\n";
                                                             echo "</tr>\n";
                                                         }

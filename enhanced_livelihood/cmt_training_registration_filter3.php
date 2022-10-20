@@ -40,9 +40,18 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 <?php include '../layouts/body.php'; ?>
 
 <?php		
-   $region = $_POST['region'];		
-   $district = $_POST['district'];
-   $ta = $_POST['ta'];
+   if (($_SESSION["user_role"]== '05')) 
+   {
+       $region = $_SESSION["user_reg"];
+       $district = $_SESSION["user_dis"];
+       $ta = $_SESSION["user_ta"];   
+   }
+   else
+   {
+       $region = $_POST['region'];
+       $district = $_POST['district'];
+       $ta = $_POST['ta'];
+   }
      
      
      
@@ -117,9 +126,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
                                         <!--start here -->
                                 <div class="card border border-primary">
-                                    <div class="card-header bg-transparent border-primary">
-                                        <h5 class="my-0 text-primary">Cluster Filter</h5>
-                                    </div>
+                                    
                                     <div class="card-body">
                                         <h5 class="card-title mt-0"></h5>
                                         
@@ -163,9 +170,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="card border border-primary">
-                                        <div class="card-header bg-transparent border-primary">
-                                            <h5 class="my-0 text-default">SL Clusters in TA: <?php echo ta_name($link,$ta)?></h5>
-                                        </div>
+                                        
                                         <div class="card-body">
                                         <h5 class="card-title mt-0"></h5>
                                             
@@ -184,19 +189,19 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                     <tbody>
                                                         <?Php
                                                             
-                                                            $query="select * from tblcluster where ((TAID = $ta) and (cmt_status ='1') and (deleted = '0'))";
+                                                        $query="select * from tblcluster where ((TAID = $ta) and (cmt_status ='1') and (deleted = '0'))";
 
-                                                        //Variable $link is declared inside config.php file & used here
-                                                        
                                                         if ($result_set = $link->query($query)) {
                                                         while($row = $result_set->fetch_array(MYSQLI_ASSOC))
                                                         { 
+                                                            if ($row["cmt_cme_trained"] == '1'){$cmeTrained = 'Yes';}else{$cmeTrained ='No';}
                                                             echo "<tr>\n";
                                                             echo "<td>".$row["ClusterID"]."</td>\n";
                                                             echo "<td>".$row["ClusterName"]."</td>\n";
-                                                            echo "<td></td>\n";
+                                                            echo "<td>\t\t$cmeTrained</td>\n";
                                                             echo "<td> <a href=\"../basicCLSview.php?id=".$row['ClusterID']."\"><i class='far fa-eye' title='View Cluster' style='font-size:18px;color: purple'></i></a>\n";
-                                                            echo "<a onClick=\"javascript: return confirm('You want To Record CME Training?');\" href=\"../add_basicTrainingGD.php?id=".$row['ClusterID']."\"\><i class='fa fa-plus' title='Record CME Training' style='font-size:18px; color:orange'></i></a>\n";
+                                                            echo "<a onClick=\"javascript: return confirm('You want To Update Training Status?');\" href=\"cmt_reg_cluster.php?id=".$row['ClusterID']."\"\><i class='fa fa-plus' title='Update Cluster CME Training Status' style='font-size:18px; color:blue'></i></a>\n";
+                                                            echo "<a onClick=\"javascript: return confirm('You want To Record CME Training?');\" href=\"cmt_add_cmeTraining.php?id=".$row['ClusterID']."\"\><i class='fa fa-plus' title='Record CME Training' style='font-size:18px; color:orange'></i></a>\n";
                                                             echo "<a onClick=\"javascript: return confirm('You want To Register Cluster as a Cooperative?');\" href=\"cmt_SLGRegisterGroup.php?id=".$row['ClusterID']."\"\><i class='fa fa-user-plus' title='Register Cluster as a Coop' style='font-size:18px; color:green'></i></a>\n";
                                                         echo "</tr>\n";
                                                         }

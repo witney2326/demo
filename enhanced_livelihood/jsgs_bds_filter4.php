@@ -17,10 +17,10 @@
 <?php include 'layouts/body.php'; ?>
 
 <?php  
-    $region = $_GET['region'];
-    $district =$_GET['district'];
-    $cw =$_GET['cw'];
-    $slg =$_GET['slg'];
+    $region = $_POST['region'];
+    $district =$_POST['district'];
+    $ta =$_POST['ta'];
+    $slg =$_POST['slg'];
     
     
     function get_rname($link, $rcode)
@@ -49,6 +49,12 @@
         $grp_query = mysqli_query($link,"select groupname from tblgroup where groupID='$grpcode'"); // select query
         $grpname = mysqli_fetch_array($grp_query);// fetch data
         return $grpname['groupname'];
+        }
+        function ta_name($link, $taID)
+        {
+        $dis_query = mysqli_query($link,"select TAName from tblta where TAID='$taID'"); // select query
+        $dis = mysqli_fetch_array($dis_query);// fetch data
+        return $dis['TAName'];
         }
 ?>
 
@@ -115,10 +121,10 @@
                                             </div>
 
                                             <div class="col-12">
-                                                <label for="cw" class="form-label">Case Worker</label>
+                                                <label for="ta" class="form-label">Traditional Authority</label>
                                                 <div>
-                                                    <select class="form-select" name="cw" id="cw" value ="$cw" required>
-                                                        <option selected value = "<?php echo $cw;?>"><?php echo cw_name($link,$cw);?></option>
+                                                    <select class="form-select" name="ta" id="ta" value ="$ta" required>
+                                                        <option selected value = "<?php echo $ta;?>"><?php echo ta_name($link,$ta);?></option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -185,7 +191,7 @@
                                                                     echo "<td>\t\t$bds_allocated</td>\n";
                                                                     echo "<td>
                                                                         <a href=\"jsg_view.php?id=".$row['recID']."\"><i class='far fa-eye' title='View JSG' style='font-size:18px;color:purple'></i></a>
-                                                                        <a href=\"jsg_bds_identify.php?id=".$row['recID']."\"><i class='fas fa-id-badge' title='Identify BDS' style='font-size:18px;color:orange'></i></a>
+                                                                        <a href=\"jsg_bds_identify.php?id=".$row['recID']."\"><i class='fas fa-id-badge' title='Training Plan' style='font-size:18px;color:orange'></i></a>
                                                                         
                                                                     </td>\n";
 

@@ -1,20 +1,40 @@
-<?php include 'layouts/session.php'; ?>
-<?php include 'layouts/head-main.php'; ?>
+<?php include '../layouts/session.php'; ?>
+<?php include '../layouts/head-main.php'; ?>
 
 
 <head>
     <title>Joint Skill Groups</title>
-    <?php include 'layouts/head.php'; ?>
-    <?php include 'layouts/head-style.php'; ?>
-    <?php include 'layouts/config.php'; ?>
+    <?php include '../layouts/head.php'; ?>
+    <?php include '../layouts/head-style.php'; ?>
+    <?php include '../layouts/config.php'; ?>
 </head>
 
-<?php include 'layouts/body.php'; ?>
+<?php 
+    include '../layouts/body.php'; 
+    
+    $user = $_SESSION["user_role"];
+
+    if ($user == '05')
+    {
+        $region = $_SESSION["user_reg"];
+        $district = $_SESSION["user_dis"];
+        $ta = $_SESSION["user_ta"]; 
+    } 
+    if ($user == '04')
+    {
+        $region = $_SESSION["user_reg"];
+        $district = $_SESSION["user_dis"];
+    } 
+    if ($user == '03')
+    {
+        $region = $_SESSION["user_reg"];
+    } 
+?>
 
 <!-- Begin page -->
 <div id="layout-wrapper">
 
-    <?php include 'layouts/menu.php'; ?>
+    <?php include '../layouts/menu.php'; ?>
 
     <!-- ============================================================== -->
     <!-- Start right Content here -->
@@ -58,31 +78,31 @@
                                     </li>
 
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link" data-bs-toggle="link" href = "jsg_formation.php" role="link">
+                                        <a class="nav-link" data-bs-toggle="link" href = "jsg_formation_check.php" role="link">
                                             <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
                                             <span class="d-none d-sm-block">JSG Mapping & Formation</span>
                                         </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link" data-bs-toggle="link" href="jsgs_bds.php" role="link">
+                                        <a class="nav-link" data-bs-toggle="link" href="jsgs_bds_check.php" role="link">
                                             <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
                                             <span class="d-none d-sm-block">Business Development Services</span>
                                         </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link" data-bs-toggle="link" href="jsgs_business_plans.php" role="link">
+                                        <a class="nav-link" data-bs-toggle="link" href="jsgs_business_plans_check.php" role="link">
                                             <span class="d-block d-sm-none"><i class="fas fa-cog"></i></span>
                                             <span class="d-none d-sm-block">Business Plans</span>
                                         </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link" data-bs-toggle="link" href="jsg_training.php" role="link">
+                                        <a class="nav-link" data-bs-toggle="link" href="jsg_training_check.php" role="link">
                                             <span class="d-block d-sm-none"><i class="fas fa-cog"></i></span>
                                             <span class="d-none d-sm-block">Training (Beneficiary & Stakeholder)</span>
                                         </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link" data-bs-toggle="link" href="jsg_fin_linkage.php" role="link">
+                                        <a class="nav-link" data-bs-toggle="link" href="jsgs_check.php" role="link">
                                             <span class="d-block d-sm-none"><i class="fas fa-cog"></i></span>
                                             <span class="d-none d-sm-block">Financial Linkage</span>
                                         </a>
@@ -114,6 +134,21 @@
                                                                                     <i class='fas fa-house-user' style='font-size:24px;color:brown'></i>
                                                                                     <p class="text-muted fw-medium">Households in JSG</p>
                                                                                     <?php
+                                                                                    if ($user == "05")
+                                                                                    {
+                                                                                        $result = mysqli_query($link, "SELECT sum(no_male) AS total_males FROM tbljsg inner join tblgroup on
+                                                                                        tbljsg.groupID = tblgroup.groupID where tblgroup.TAID = '$ta'"); 
+                                                                                        $row = mysqli_fetch_assoc($result); 
+                                                                                        $total_males = $row['total_males'];
+                                                                                        
+                                                                                        $result2 = mysqli_query($link, "SELECT sum(no_female) AS total_females FROM tbljsg inner join tblgroup on
+                                                                                        tbljsg.groupID = tblgroup.groupID where tblgroup.TAID = '$ta'"); 
+                                                                                        $row2 = mysqli_fetch_assoc($result2); 
+                                                                                        $total_females = $row2['total_females'];
+
+                                                                                        $sum = $total_males+$total_females;
+                                                                                    } else
+                                                                                    {
                                                                                         $result = mysqli_query($link, 'SELECT sum(no_male) AS total_males FROM tbljsg'); 
                                                                                         $row = mysqli_fetch_assoc($result); 
                                                                                         $total_males = $row['total_males'];
@@ -123,6 +158,7 @@
                                                                                         $total_females = $row2['total_females'];
 
                                                                                         $sum = $total_males+$total_females;
+                                                                                    }
 
                                                                                     ?>
                                                                                         <h5 class="mb-0">
@@ -148,10 +184,19 @@
 
                                                                             <p class="text-muted fw-medium">JSGs Formed</p>
                                                                             <?php
-                                                                                        $result = mysqli_query($link, 'SELECT COUNT(recID) AS total_jsgs FROM tbljsg'); 
-                                                                                        $row = mysqli_fetch_assoc($result); 
-                                                                                        $total_jsgs = $row['total_jsgs'];
-                                                                                    ?>
+                                                                            if ($user == "05")
+                                                                            {
+                                                                                $result = mysqli_query($link, "SELECT COUNT(recID) AS total_jsgs FROM tbljsg inner join tblgroup on
+                                                                                tbljsg.groupID = tblgroup.groupID where tblgroup.TAID = '$ta'"); 
+                                                                                $row = mysqli_fetch_assoc($result); 
+                                                                                $total_jsgs = $row['total_jsgs'];
+                                                                            }else
+                                                                            {
+                                                                                $result = mysqli_query($link, 'SELECT COUNT(recID) AS total_jsgs FROM tbljsg'); 
+                                                                                $row = mysqli_fetch_assoc($result); 
+                                                                                $total_jsgs = $row['total_jsgs'];
+                                                                            }
+                                                                            ?>
                                                                                         <div class="container">
                                                                                             <h4><div class="mb-0"><?php echo "" . $total_jsgs;?></div></h4>
                                                                                         </div>

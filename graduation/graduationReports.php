@@ -110,7 +110,7 @@
 
                             <div class="page-title-right">
                                 <ol class="breadcrumb m-0">
-                                    <li class="breadcrumb-item"><a href="enhanced_livelihood.php">Graduation Pilot</a></li>
+                                    <li class="breadcrumb-item"><a href="graduation.php">Graduation Pilot</a></li>
                                     <li class="breadcrumb-item active">Graduation Pilot Reports</li>
                                 </ol>
                             </div>
@@ -146,10 +146,10 @@
                                             <tr>
                                                 <th scope="row">1</th>
                                                 <td>Selected SLGs</td>
-                                                <td><a href=""><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
-                                                <td><a href=""><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
-                                                <td><a href=""><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
-                                                <td><a href=""><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><a href="Rp_Selected_SLG_reports.php"><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><a href="Rp_Selected_SLG_reports.php"><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><a href="Rp_Selected_SLG_reports.php"><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><a href="Rp_Selected_SLG_reports.php"><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
                                                 <?php
                                                         $result = mysqli_query($link, 'SELECT COUNT(groupID) AS value_grps FROM tblgroup where grad_status="1"'); 
                                                         $row = mysqli_fetch_assoc($result); 
@@ -165,10 +165,10 @@
                                             <tr>
                                             <th scope="row">2</th>
                                                 <td>Selected and Graduating Households</td>
-                                                <td><a href="./reports/JSG_reports.php"><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
-                                                <td><a href="./reports/JSG_reports.php"><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
-                                                <td><a href="./reports/JSG_reports.php"><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
-                                                <td><a href="./reports/JSG_reports.php"><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><a href="Rp_Selected_Ben_reports.php"><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><a href="Rp_Selected_Ben_reports.php"><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><a href="Rp_Selected_Ben_reports.php"><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
+                                                <td><a href="Rp_Selected_Ben_reports.php"><i class="fa fa-file" style='font-size:24px' aria-hidden="true"></i></a></td>
                                                     <?php
                                                         $result = mysqli_query($link, 'SELECT COUNT(sppCode) AS value_sum FROM tblbeneficiaries where grad_status ="1"'); 
                                                         $row = mysqli_fetch_assoc($result); 

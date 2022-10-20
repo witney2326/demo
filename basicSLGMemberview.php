@@ -9,6 +9,7 @@
 
 <?php include 'layouts/body.php'; ?>
 <?php include 'layouts/config.php'; ?>
+<?php include 'lib.php'; ?>
 <?php
         $id = $_GET['id']; // get id through query string
         $query="select * from tblbeneficiaries where sppCode='$id'";
@@ -28,41 +29,8 @@
              $result_set->close();
          }
  
-         function dis_name($link, $disID)
-          {
-          $dis_query = mysqli_query($link,"select DistrictName from tbldistrict where DistrictID='$disID'"); // select query
-          $dis = mysqli_fetch_array($dis_query);// fetch data
-          return $dis['DistrictName'];
-          }
-  
-          function grp_name($link, $grpID)
-          {
-          $grp_query = mysqli_query($link,"select groupname from tblgroup where groupID='$grpID'"); // select query
-          $grp = mysqli_fetch_array($grp_query);// fetch data
-          return $grp['groupname'];
-          }
-  
-          function prog_name($link, $progID)
-          {
-          $prog_query = mysqli_query($link,"select progName from tblspp where progID='$progID'"); // select query
-          $prog = mysqli_fetch_array($prog_query);// fetch data
-          return $prog['progName'];
-          }
- 
-          function get_rname($link, $rcode)
-          {
-          $rg_query = mysqli_query($link,"select name from tblregion where regionID='$rcode'"); // select query
-          $rg = mysqli_fetch_array($rg_query);// fetch data
-          return $rg['name'];
-          }
- 
-         function iga_name($link, $igaID)
-         {
-         $iga_query = mysqli_query($link,"select name from tbliga_types where ID='$igaID'"); // select query
-         $iga = mysqli_fetch_array($iga_query);// fetch data
-         return $iga['name'];
-         }
- 
+             
+
          function month_name($month)
      {
          if($month == 1){
@@ -451,7 +419,7 @@
                                                                             $group = grp_name($link, $id);
                                                                             
                                                                             $district_name = dis_name($link,$row["districtID"]);
-                                                                            $ig_name = iga_name($link,$row["voc_type"]);
+                                                                            
                                                                     
 
                                                                         echo "<tr>\n";                                           

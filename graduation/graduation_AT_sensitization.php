@@ -45,7 +45,7 @@
             if (mysqli_query($link, $sql)) {
                 echo '<script type="text/javascript">'; 
                 echo 'alert("Asset Transfer Sensitization has been added to SLG successfully !");'; 
-                echo 'window.location.href = "graduation_refresher_training.php";';
+                echo 'window.location.href = "graduation_refresher_training_check.php";';
                 echo '</script>';
             } else {
                 echo "Error: " . $sql . ":-" . mysqli_error($link);

@@ -30,7 +30,14 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
 <?php 
   
-    $region = $_POST['region'];
+  if (($_SESSION["user_role"]== '04')) 
+  {
+      $region = $_SESSION["user_reg"];  
+  }
+  else
+  {
+      $region = $_POST['region'];
+  }
     
     function get_rname($link, $rcode)
         {
@@ -68,7 +75,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
                         <div class="page-title-right">
                             <ol class="breadcrumb m-0">
-                                <li class="breadcrumb-item"><a href="jsg_formation.php">JSG Formation</a></li>
+                                <li class="breadcrumb-item"><a href="jsg_formation_check.php">JSG Formation</a></li>
                                 <li class="breadcrumb-item active">JSG Clusters</li>
                             </ol>
                         </div>
@@ -156,7 +163,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                     </thead>
                                                     <tbody>
                                                         <?Php
-                                                            $query="select * from tbljsg inner join tbldistrict on tbldistrict.districtID = tbljsg.districtID  where ((tbldistrict.regionID = '$region') and (tbljsg.deleted ='0'))";
+                                                            $query="select * from tbljsg inner join tblgroup on tbljsg.groupID = tblgroup.groupID  where ((tblgroup.regionID = '$region') and (tbljsg.deleted ='0'))";
 
                                                             //Variable $link is declared inside config.php file & used here
                                                             
@@ -194,6 +201,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                                     <a href=\"jsg_view.php?id=".$row['recID']."\"><i class='far fa-eye' title='View JSG' style='font-size:18px;color:purple'></i></a>
                                                                     <a href=\"jsg_edit.php?id=".$row['recID']."\"><i class='far fa-edit' title='Edit JSG Details' style='font-size:18px;color:green'></i></a>
                                                                     <a href=\"jsg_add_hh.php?id=".$row['recID']."\"><i class='fas fa-user-alt' title='Add Beneficiary to JSG' style='font-size:18px;color:orange'></i></a>  
+                                                                    <a href=\"?".$row['recID']."\"><i class='fa fa-link' title='Link to COMSIV' style='font-size:18px;color:brown'></i></a> 
                                                                     <a onClick=\"javascript: return confirm('Are You Sure You want To Delete This JSG - You Must Be a Supervisor');\" href=\"jsg_delete.php?id=".$row['recID']."\"><i class='far fa-trash-alt' title='Delete JSG' style='font-size:18px;color:red'></i></a>    
                                                                 </td>\n";
 

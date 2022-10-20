@@ -29,9 +29,18 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 <?php include 'layouts/body.php'; ?>
 
 <?php   
-        $region = $_GET['region'];
-        $district = $_GET['district'];
-        $ta = $_GET['ta'];
+        if (($_SESSION["user_role"]== '05')) 
+        {
+            $region = $_SESSION["user_reg"];
+            $district = $_SESSION["user_dis"];
+            $ta = $_SESSION["user_ta"];   
+        }
+        else
+        {
+            $region = $_POST['region'];
+            $district = $_POST['district'];
+            $ta = $_POST['ta'];
+        }
 
     
         function get_rname($link, $rcode)
@@ -77,7 +86,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
                             <div class="page-title-right">
                                 <ol class="breadcrumb m-0">
-                                    <li class="breadcrumb-item"><a href="jsg.php">SLG Training Management</a></li>
+                                    <li class="breadcrumb-item"><a href="jsg.php">JSG Dashboard</a></li>
                                     <li class="breadcrumb-item active">JSG Training Management</li>
                                 </ol>
                             </div>
@@ -98,7 +107,28 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
                                 
                                 <!-- Nav tabs -->
-                                
+                                <ul class="nav nav-pills nav-justified" role="tablist">
+                                    <li class="nav-item waves-effect waves-light">
+                                        <a class="nav-link active" data-bs-toggle="tab" href="#home-1" role="tab">
+                                            <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
+                                            <span class="d-none d-sm-block">JSGs</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item waves-effect waves-light">
+                                        <a class="link"  href="jsg_training_trained_groups_check.php" role="link">
+                                            <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
+                                            <span class="d-none d-sm-block">Trained JSGs</span>
+                                        </a>
+                                    </li>
+                                                                       
+                                    <li class="nav-item waves-effect waves-light">
+                                        <a class="link"  href="enhancedReports.php" role="link">
+                                            <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
+                                            <span class="d-none d-sm-block">JSGs Training Reports</span>
+                                        </a>
+                                    </li>
+                                    
+                                </ul>
                                 <!-- Tab panes -->
                                 <div class="tab-content p-3 text-muted">
                                     <div class="tab-pane active" id="home-1" role="tabpanel">
@@ -163,13 +193,13 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                             
                                                                 <thead>
                                                                     <tr>
-                                                                        <th>Groupcode</th>
-                                                                        <th>Group Name</th>
-                                                                        <th>Males</th>
-                                                                        <th>Females</th>
-                                                                        <th>Total Members</th>
-                                                                        <th>Action</th>    
-                                                                        
+                                                                        <th>JSG code</th>
+                                                                        <th>JSG Name</th>
+                                                                        <th>Group Name</th>                              
+                                                                        <th><i class="fas fa-male" style="font-size:18px"></i></th>
+                                                                        <th><i class="fas fa-female" style="font-size:18px"></i></th>
+                                                                        <th>Total</th>
+                                                                        <th>Action</th>       
                                                                     </tr>
                                                                 </thead>
 
@@ -178,7 +208,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                                     <?Php
                                                                         if (isset($ta))
                                                                         {
-                                                                            $query="select * from tblgroup where (TAID = $ta)";
+                                                                            $query="select * from tbljsg inner join tblgroup on tbljsg.groupID = tblgroup.groupID where tblgroup.TAID = '$ta'";
                                                                         
                                                                         
                                                                         //Variable $link is declared inside config.php file & used here
@@ -186,18 +216,19 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                                         if ($result_set = $link->query($query)) {
                                                                             while($row = $result_set->fetch_array(MYSQLI_ASSOC))
                                                                             { 
-                                                                                $totalMembers = $row["MembersM"]+$row["MembersF"]; 
-                                                                            echo "<tr>\n"; 
-                                                                                echo "<td>".$row["groupID"]."</td>\n";
-                                                                                echo "<td>".$row["groupname"]."</td>\n";
-                                                                                echo "<td>".$row["MembersM"]."</td>\n";
-                                                                                echo "<td>".$row["MembersF"]."</td>\n";
-                                                                                echo "<td>\t\t$totalMembers</td>\n";                         
-                                                                                echo "<td>
-                                                                                    <a href=\"basicSLGTraining_view.php?id=".$row['groupID']."\"><i class='far fa-eye' title='Training Status' style='font-size:18px;color:purple'></i></a>                                                                           
-                                                                                    <a href=\"add_basicTrainingGD.php?id=".$row['groupID']."\" ><i class='fas fa-pen' title='Record Training' style='font-size:18px;color:green'></i></a>                                                                            
-                                                                                    
-                                                                                </td>\n";
+                                                                                $totalMembers = $row["no_male"]+$row["no_female"];  
+                                                                        echo "<tr>\n"; 
+                                                                            echo "<td>".$row["recID"]."</td>\n";
+                                                                            echo "<td>".$row["jsg_name"]."</td>\n";
+                                                                            echo "<td>".$row["groupID"]."</td>\n";
+                                                                            echo "<td>".$row["no_male"]."</td>\n";
+                                                                            echo "<td>".$row["no_female"]."</td>\n";
+                                                                            echo "<td>\t\t$totalMembers</td>\n";                      
+                                                                            echo "<td>
+                                                                                <a href=\"../basicSLGTraining_view.php?id=".$row['groupID']."\"><i class='far fa-eye' title='Training Status' style='font-size:18px;color:purple'></i></a>                                                                           
+                                                                                <a href=\"jsg_add_skill_training.php?id=".$row['recID']."\" ><i class='fas fa-pen' title='Record Training' style='font-size:18px;color:green'></i></a>                                                                            
+                                                                                
+                                                                            </td>\n";
                                                                             echo "</tr>\n";
                                                                             }
                                                                             $result_set->close();

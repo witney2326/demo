@@ -92,7 +92,7 @@
                 <li class="menu-title" key="t-menu"><?php echo $language["Menu"]; ?></li>
 
                     <li>
-                        <a href="../index.php" class="waves-effect">
+                        <a href="../index_check.php" class="waves-effect">
                             <i class="bx bx-home-circle"></i><span class="badge rounded-pill bg-info float-end"></span>
                             <span key="t-dashboards">Dashboard</span>
                         </a>

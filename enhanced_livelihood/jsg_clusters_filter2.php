@@ -29,8 +29,18 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 <?php include 'layouts/body.php'; ?>
 
 <?php 
-    $region = $_POST['region'];
-    $district =$_POST['district'];
+    if (($_SESSION["user_role"]== '04')) 
+    {
+        $region = $_SESSION["user_reg"];
+        $district = $_SESSION["user_dis"];
+  
+    }
+    else
+    {
+        $region = $_POST['region'];
+        $district = $_POST['district'];
+
+    }
     
     function get_rname($link, $rcode)
         {
@@ -89,7 +99,34 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
                                 
                                 <!-- Nav tabs -->
-                                
+                                <ul class="nav nav-pills nav-justified" role="tablist">
+                                    <li class="nav-item waves-effect waves-light">
+                                        <a class="nav-link"  href="jsg_formation_check" role="link">
+                                            <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
+                                            <span class="d-none d-sm-block">Savings and Loan Groups</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item waves-effect waves-light">
+                                        <a class="nav-link active" data-bs-toggle="tab"  href="javascript: void(0);" role="tab">
+                                            <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
+                                            <span class="d-none d-sm-block">Clusters</span>
+                                        </a>
+                                    </li>
+                                    
+                                    <li class="nav-item waves-effect waves-light">
+                                        <a class="nav-link" data-bs-toggle="link" href="jsgs_check.php" role="link">
+                                            <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
+                                            <span class="d-none d-sm-block">Joint Skill Groups</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item waves-effect waves-light">
+                                        <a class="link" href="enhancedReports.php" role="link">
+                                            <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
+                                            <span class="d-none d-sm-block">Joint Skill Group Reports</span>
+                                        </a>
+                                    </li>
+                                    
+                                </ul>
                                 <!-- Tab panes -->
                                 <div class="tab-content p-3 text-muted">
                                     <div class="tab-pane active" id="home-1" role="tabpanel">
@@ -220,7 +257,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                                             echo "<td>\t\t$jsgs</td>\n";
                                                                             
                                                                             echo "<td>
-                                                                                <a href=\"view_JSG.php?id=".$row['ClusterID']."\"><i class='fas fa-balance-scale' title='View JSGs For the Cluster' style='font-size:18px;color:purple'></i></a> 
+                                                                                <a href=\"view_JSG.php?id=".$row['ClusterID']."\"><i class='far fa-eye' title='View JSGs For the Cluster' style='font-size:18px;color:purple'></i></a> 
                                                                                 <a onClick=\"javascript: return confirm('Are You Sure You want To Map This Cluster For JSGs Interventions? ');\" href=\"cls_JSG_Map.php?id=".$row['ClusterID']."\"><i class='fas fa-stamp' title='Map Cluster For JSG Intervention' style='font-size:18px;color:orange'></i></a>
                                                                                 <a href=\"add_JSG_clusters.php?id=".$row['ClusterID']."\"><i class='fa fa-users' title='Add JSG to Cluster' style='font-size:18px;color:green'></i></a>    
                                                                             </td>\n";

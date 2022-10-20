@@ -40,9 +40,18 @@
 <?php include 'layouts/body.php'; ?>
 
 <?php  
-    $region = $_GET['region'];
-    $district =$_GET['district'];
-    $ta =$_GET['ta'];
+    if (($_SESSION["user_role"]== '05')) 
+    {
+        $region = $_SESSION["user_reg"];
+        $district = $_SESSION["user_dis"];
+        $ta = $_SESSION["user_ta"];   
+    }
+    else
+    {
+        $region = $_POST['region'];
+        $district = $_POST['district'];
+        $ta = $_POST['ta'];
+    }
     
     function get_rname($link, $rcode)
         {
@@ -117,9 +126,7 @@
 
                                             <!--start here -->
                                             <div class="card border border-primary">
-                                                <div class="card-header bg-transparent border-primary">
-                                                    <h5 class="my-0 text-primary">JSG Filter:</h5>
-                                                </div>
+                                                
                                                 <div class="card-body">
                                                     <h5 class="card-title mt-0"></h5>
                                                     <form class="row row-cols-lg-auto g-3 align-items-center" >
@@ -144,11 +151,10 @@
                                                         <div class="col-12">
                                                             <label for="ta" class="form-label">Traditional Authority</label>
                                                             <select class="form-select" name="ta" id="ta" required>
-                                                                <option selected value = "<?php echo $ta;?>"><?php echo ta_name($link,$ta);?></option>
-                                                                
+                                                                <option selected value = "<?php echo $ta;?>"><?php echo ta_name($link,$ta);?></option> 
                                                             </select>
-                                                            
                                                         </div>
+                                                        
                                                         <div class="col-12">
                                                             
                                                             <INPUT TYPE="button" class="btn btn-btn btn-outline-secondary w-md" VALUE="Back" onClick="history.go(-1);">
@@ -162,7 +168,7 @@
                                                 <div class="col-12">
                                                     <div class="card border border-primary">
                                                     <div class="card-header bg-transparent border-primary">
-                                                        <h5 class="my-0 text-primary">Joint Skill Groups in <?php echo dis_name($link,$district); ?></h5>
+                                                        <h5 class="my-0 text-primary">Joint Skill Groups</h5>
                                                     </div>
                                                     <div class="card-body">
                                                     <h7 class="card-title mt-0"></h7>
@@ -183,7 +189,7 @@
                                                                 </thead>
                                                                 <tbody>
                                                                     <?Php
-                                                                        $query="select * from tbljsg where taID = '$ta'";
+                                                                        $query="select * from tbljsg inner join tblgroup on tbljsg.groupID = tblgroup.groupID where tblgroup.TAID = '$ta'";
  
                                                                         //Variable $link is declared inside config.php file & used here
                                                                         
@@ -218,7 +224,7 @@
                                                                             echo "<td>\t\t$evaluation_result</td>\n";
                                                                             
                                                                             echo "<td>
-                                                                                <a href=\"jsg_view.php?id=".$row['groupID']."\"><i class='far fa-eye' title='View JSG' style='font-size:18px;color:purple'></i></a>
+                                                                                <a href=\"view_JSG1.php?id=".$row['groupID']."\"><i class='far fa-eye' title='View JSG' style='font-size:18px;color:purple'></i></a>
                                                                                 <a onClick=\"javascript: return confirm('Are You In Receipt Of Business Plan For This JSG? ');\" href=\"jsg_submit_bp.php?id=".$row['recID']."\"><i class='fa fa-check' title='Accept BP for JSG' style='font-size:18px;color:green'></i></a>
                                                                                 
                                                                             </td>\n";

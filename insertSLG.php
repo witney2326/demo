@@ -1,12 +1,14 @@
 <?php
 include_once 'layouts/config.php';
+include 'layouts/session.php';
+
 if(isset($_POST['submit']))
 {    
      
-     $groupname = $_POST['groupname'];
+     $groupname = $_POST["groupname"];
      $DateEstablished = $_POST['DateEstablished'];
      $clusterID = $_POST['clusterID'];
-     $GVHID = $_POST['GVHID'];
+     $GVHID = $_POST["GVHID"];
      $membersM = $_POST['membersM'];
      $membersF = $_POST['membersF'];
      $cohort = $_POST['Cohort'];
@@ -15,6 +17,8 @@ if(isset($_POST['submit']))
      $regionID = $_POST['region'];
      $DistrictID = $_POST['district']; 
      $TAID = $_POST['ta'];
+
+    
      
      function get_grp_count($link)
      {
@@ -57,14 +61,8 @@ if(isset($_POST['submit']))
 
         $groupID = $x;
 
-        if (($groupname = " ")or($DistrictID =" ")or($regionID =" "))
-         {
-            echo '<script type="text/javascript">'; 
-            echo 'alert("Enter Group name OR Select Region and District !");'; 
-            echo 'window.location.href = "basic_livelihood_slg_mgt2.php";';
-            echo '</script>'; 
-         }
-        else{
+        
+        
          $sql = "INSERT INTO tblgroup (groupid,groupname,DateEstablished,clusterID,DistrictID,TAID,gvhID,MembersM,MembersF,regionID,cohort,programID,cwID,deleted)
          VALUES ('$groupID','$groupname','$DateEstablished','$clusterID','$DistrictID','$TAID','$GVHID','$membersM','$membersF','$regionID','$cohort','$spp','$cw','0')";
          if (mysqli_query($link, $sql)) {
@@ -76,6 +74,6 @@ if(isset($_POST['submit']))
             echo "Error: " . $sql . ":-" . mysqli_error($link);
          }
          mysqli_close($link);
-      }
+      
 }
 ?>

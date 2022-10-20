@@ -40,7 +40,14 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 <?php include '../layouts/body.php'; ?>
 
 <?php
-    $region = $_GET['region'];
+   if (($_SESSION["user_role"]== '03')) 
+   {
+       $region = $_SESSION["user_reg"];  
+   }
+   else
+   {
+       $region = $_POST['region'];
+   }
     
 
          function get_rname($link, $rcode)
@@ -90,12 +97,12 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                 <div class="row">
                     <div class="col-12">
                         <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                            <h4 class="mb-sm-0 font-size-18">SLG CMT Assesment</h4>
+                            <h4 class="mb-sm-0 font-size-18">Cluster CMT Assesment</h4>
 
                             <div class="page-title-right">
                                 <ol class="breadcrumb m-0">
                                     <li class="breadcrumb-item"><a href="cmt.php">Coop Management Training</a></li>
-                                    <li class="breadcrumb-item active">SLG CMT Assesment</li>
+                                    <li class="breadcrumb-item active">Cluster CMT Assesment</li>
                                 </ol>
                             </div>
 
@@ -115,13 +122,11 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
                                         <!--start here -->
                                 <div class="card border border-primary">
-                                    <div class="card-header bg-transparent border-primary">
-                                        <h5 class="my-0 text-primary">SLG Search Filter</h5>
-                                    </div>
+                                    
                                     <div class="card-body">
                                         <h5 class="card-title mt-0"></h5>
                                         
-                                        <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="cmt_cluster_assesment_filter2.php" method="GET">
+                                        <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="cmt_cluster_assesment_filter2.php" method="POST">
                                             <div class="col-12">
                                                 <label for="region" class="form-label">Region</label>
                                                 <div>
@@ -137,8 +142,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                 <label for="district" class="form-label">District</label>
                                                 <select class="form-select" name="district" id="district" required>
                                                     <option selected value="$district" ></option>
-                                                        <?php 
-                                                                $region = $_GET['region'];                                                    
+                                                        <?php                                                     
                                                             $dis_fetch_query = "SELECT DistrictID,DistrictName FROM tbldistrict where regionID = '$region'";                                                  
                                                             $result_dis_fetch = mysqli_query($link, $dis_fetch_query);                                                                       
                                                             $i=0;
@@ -190,9 +194,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="card border border-primary">
-                                        <div class="card-header bg-transparent border-primary">
-                                            <h5 class="my-0 text-primary">Clusters</h5>
-                                        </div>
+                                        
                                         <div class="card-body">
                                         <h5 class="card-title mt-0"></h5>
                                             
@@ -246,7 +248,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                             echo "\t\t<td>$cmt_assesed</td>\n";
                                                             echo "\t\t<td>$cmt_assesed_result</td>\n";
                                                             echo "\t\t<td>$cmt_status</td>\n";
-                                                            echo "<td> <a href=\"../basicSLGview.php?id=".$row['ClusterID']."\"><i class='far fa-eye' title='View SLG' style='font-size:18px; color: purple'></i></a>\n";
+                                                            echo "<td> <a href=\"../basicCLSview.php?id=".$row['ClusterID']."\"><i class='far fa-eye' title='View SLG' style='font-size:18px; color: purple'></i></a>\n";
                                                             echo "<a onClick=\"javascript: return confirm('Are You Sure You want To PUT This Cluster On CME/CMT- You Must Be a Supervisor');\" href=\"cmt_ClusterAssesment.php?id=".$row['ClusterID']."\"\><i class='fas fa-book-reader' title='Enrol Cluster On CME' style='font-size:18px;color:green'></i></a>\n";
                                                                                 
                                                                     echo "</tr>\n";

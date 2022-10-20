@@ -421,6 +421,9 @@ chart.draw(data, options);
         <div class="page-content">
             <div class="container-fluid">                                     
                 <div class ="row">
+                    <?php
+                        if ($_SESSION["user_role"] == '00'){echo '<div class="alert alert-warning" role="alert">You are Logged in as a CIMIS Guest Please Get Registered! <a href="auth-register-2.php">here ..</a></div>';}
+                    ?>
                     <div class="col-xl-6">
                         <div class="card">
                             <div class="card border border-success">
@@ -443,8 +446,7 @@ chart.draw(data, options);
                                                         ?>
                                                     <td><?php echo "" . number_format($sum);?>  </td>
                                                     <td><?php echo number_format(70000);?></td>
-                                                    <td><a href="basic_livelihood_hh_mgt.php">more ..</a></td>
-                                                    
+                                                    <td><?php if ($_SESSION["user_role"] == '00'){echo '<a href="javascript: void(0);">more..</a>' ;}else{echo '<a href="basic_livelihood_hh_mgt.php">more ..</a>';}  ?></td> 
                                                 </tr>
                                                 <tr>
                                                     <th scope="row"><i class='fas fa-users' style='font-size:18px'></i></th>
@@ -456,7 +458,7 @@ chart.draw(data, options);
                                                     ?>
                                                     <td><?php echo "" . number_format($sum);?></td>
                                                     <td><?php echo number_format(0);?></td>
-                                                    <td><a href="basic_livelihood_HH_Nat_reports.php">more ..</a></td>
+                                                    <td><?php if ($_SESSION["user_role"] == '00'){echo '<a href="javascript: void(0);">more..</a>' ;}else{echo '<a href="basic_livelihood_HH_Nat_reports.php">more ..</a>';}  ?></td>              
                                                 </tr>
                                                 <tr>
                                                     <th scope="row"><i class='fas fa-book-reader' style='font-size:18px'></i></th>
@@ -468,7 +470,7 @@ chart.draw(data, options);
                                                     ?>
                                                     <td><?php echo "" . number_format($sum);?></td>
                                                     <td><?php echo number_format(0);?></td>
-                                                    <td><a href="basic_livelihood_training_trained_groups.php">more ..</a></td>
+                                                    <td><?php if ($_SESSION["user_role"] == '00'){echo '<a href="javascript: void(0);">more..</a>' ;}else{echo '<a href="basic_livelihood_training_trained_groups.php">more ..</a>';}  ?></td>                         
                                                 </tr>
                                                 <tr>
                                                     <th scope="row"><i class='fas fa-house-user' style='font-size:18px'></i></th>
@@ -504,8 +506,7 @@ chart.draw(data, options);
                                                     ?>
                                                     <td><?php echo "" . number_format($sum);?></td>
                                                     <td><?php echo number_format(0);?></td>
-                                                    <td><a href="basic_livelihood_training_trained_groups.php">more ..</a></td>
-                                                    
+                                                    <td><?php if ($_SESSION["user_role"] == '00'){echo '<a href="javascript: void(0);">more..</a>' ;}else{echo '<a href="basic_livelihood_training_trained_groups.php">more ..</a>';}  ?></td>                         
                                                 </tr>
                                                 <tr>
                                                     <th scope="row"><i class='fas fa-layer-group' style='font-size:18px;color:darkgoldenrod'></i></th>
@@ -514,8 +515,13 @@ chart.draw(data, options);
                                                         $result = mysqli_query($link, 'SELECT count(groupID) AS total_slgs FROM tblgroup where registered_group = "1"'); 
                                                         $row = mysqli_fetch_assoc($result); 
                                                         $total_slgs = $row['total_slgs'];
+
+                                                        $resultcls2 = mysqli_query($link, 'SELECT count(ClusterID) AS total_cls2 FROM tblcluster where registered_group = "1"'); 
+                                                        $rowcls2 = mysqli_fetch_assoc($resultcls2); 
+                                                        $total_cls2 = $rowcls2['total_cls2'];
+                                                        
                                                     ?>
-                                                    <td><?php echo "" . number_format($total_slgs);?></td>
+                                                    <td><?php echo "" . number_format($total_slgs+$total_cls2);?></td>
                                                     <td><?php echo number_format(0);?></td>
                                                     <td></td>
                                                 </tr>
@@ -529,7 +535,7 @@ chart.draw(data, options);
                                                     ?>
                                                     <td><?php echo "" . number_format($total);?></td>
                                                     <td><?php echo number_format(0);?></td>
-                                                    <td><a href="enhanced_livelihood/jsg.php">more ..</a></td>
+                                                    <td><?php if ($_SESSION["user_role"] == '00'){echo '<a href="javascript: void(0);">more..</a>' ;}else{echo '<a href="enhanced_livelihood/jsg.php">more ..</a>';}  ?></td>                         
                                                 </tr>
                                                 
                                                 <tr>
@@ -542,7 +548,7 @@ chart.draw(data, options);
                                                     ?>
                                                     <td><?php echo "" . number_format($v_total);?></td>
                                                     <td><?php echo number_format(0);?></td>
-                                                    <td><a href="enhanced_livelihood/ycs.php">more ..</a></td>
+                                                    <td><?php if ($_SESSION["user_role"] == '00'){echo '<a href="javascript: void(0);">more..</a>' ;}else{echo '<a href="enhanced_livelihood/ycs.php">more ..</a>';}  ?></td>                         
                                                 </tr>
                                                 <tr>
                                                     <th scope="row"><i class='fas fa-school' style='font-size:18px;color:cadetblue'></i></th>
@@ -559,7 +565,7 @@ chart.draw(data, options);
                                                     ?>
                                                     <td><?php echo "" . number_format($sum_clusters+$sum_grps);?></td>
                                                     <td><?php echo number_format(0);?></td>
-                                                    <td><a href="graduation/graduation.php">more..</a></td>
+                                                    <td><?php if ($_SESSION["user_role"] == '00'){echo '<a href="javascript: void(0);">more..</a>' ;}else{echo '<a href="graduation/graduation.php">more..</a>';}  ?></td>
                                                 </tr>
                                                 <tr>
                                                     <th scope="row"><i class='fas fa-graduation-cap' style='font-size:18px;color:cadetblue'></i></th>
@@ -622,7 +628,7 @@ chart.draw(data, options);
                                                     ?>
                                                     <td><?php echo "MK", number_format("$CurSavings",2);?></td>
                                                     <td><?php echo number_format(0);?></td>
-                                                    <td><a href="basic_livelihood_savings_members_reports.php">more ..</a></td>
+                                                    <td><?php if ($_SESSION["user_role"] == '00'){echo '<a href="javascript: void(0);">more..</a>' ;}else{echo '<a href="basic_livelihood_savings_members_reports.php">more ..</a>';}  ?></td>
                                                 </tr>
                                             </tbody>
                                         </table>

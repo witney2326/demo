@@ -29,9 +29,17 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 <?php include 'layouts/body.php'; ?>
 
 <?php 
-       $region = $_POST["region"];
-       $district = $_POST["district"];
-       
+       if (($_SESSION["user_role"]== '04')) 
+       {
+           $region = $_SESSION["user_reg"];
+           $district = $_SESSION["user_dis"];   
+       }
+       else
+       {
+        $region = $_POST['region'];
+        $district = $_POST['district'];
+       }
+ 
         function reg_name($link, $rcode)
         {
         $rg_query = mysqli_query($link,"select name from tblregion where regionID='$rcode'"); // select query

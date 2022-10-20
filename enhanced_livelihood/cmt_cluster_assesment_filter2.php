@@ -42,8 +42,18 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
 <?php
 
-$region = $_GET['region'];		
-$district = $_GET['district'];
+if (($_SESSION["user_role"]== '04')) 
+    {
+        $region = $_SESSION["user_reg"];
+        $district = $_SESSION["user_dis"];
+  
+    }
+    else
+    {
+        $region = $_POST['region'];
+        $district = $_POST['district'];
+
+    }
      
 
 
@@ -94,12 +104,12 @@ $district = $_GET['district'];
                 <div class="row">
                     <div class="col-12">
                         <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                            <h4 class="mb-sm-0 font-size-18">SLG CMT Assesment</h4>
+                            <h4 class="mb-sm-0 font-size-18">Cluster CMT Assesment</h4>
 
                             <div class="page-title-right">
                                 <ol class="breadcrumb m-0">
                                     <li class="breadcrumb-item"><a href="cmt.php">Coop Management Training</a></li>
-                                    <li class="breadcrumb-item active">SLG CMT Assesment</li>
+                                    <li class="breadcrumb-item active">Cluster CMT Assesment</li>
                                 </ol>
                             </div>
 
@@ -119,13 +129,11 @@ $district = $_GET['district'];
 
                                         <!--start here -->
                                 <div class="card border border-primary">
-                                    <div class="card-header bg-transparent border-primary">
-                                        <h5 class="my-0 text-primary">SLG Search Filter</h5>
-                                    </div>
+                                    
                                     <div class="card-body">
                                         <h5 class="card-title mt-0"></h5>
                                         
-                                        <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="cmt_cluster_assesment_filter3.php" method="GET">
+                                        <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="cmt_cluster_assesment_filter3.php" method="POST">
                                             <div class="col-12">
                                                 <label for="region" class="form-label">Region</label>
                                                 <div>
@@ -146,8 +154,7 @@ $district = $_GET['district'];
                                                 <label for="ta" class="form-label">Traditional Authority</label>
                                                 <select class="form-select" name="ta" id="ta" required>
                                                     <option></option>
-                                                    <?php   
-                                                            $district = $_GET["district"];                                                
+                                                    <?php                                                  
                                                             $ta_fetch_query = "SELECT TAID,TAName FROM tblta where DistrictID = '$district'";                                                  
                                                             $result_ta_fetch = mysqli_query($link, $ta_fetch_query);                                                                       
                                                             $i=0;
@@ -178,9 +185,7 @@ $district = $_GET['district'];
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="card border border-primary">
-                                        <div class="card-header bg-transparent border-primary">
-                                            <h5 class="my-0 text-primary">Clusters  in <?php echo dis_name($link,$district); ?> District</h5>
-                                        </div>
+                                        
                                         <div class="card-body">
                                         <h5 class="card-title mt-0"></h5>
                                             
@@ -234,7 +239,7 @@ $district = $_GET['district'];
                                                             echo "\t\t<td>$cmt_assesed</td>\n";
                                                             echo "\t\t<td>$cmt_assesed_result</td>\n";
                                                             echo "\t\t<td>$cmt_status</td>\n";
-                                                            echo "<td> <a href=\"../basicSLGview.php?id=".$row['ClusterID']."\"><i class='far fa-eye' title='View SLG' style='font-size:18px; color: purple'></i></a>\n";
+                                                            echo "<td> <a href=\"../basicCLSview.php?id=".$row['ClusterID']."\"><i class='far fa-eye' title='View SLG' style='font-size:18px; color: purple'></i></a>\n";
                                                             echo "<a onClick=\"javascript: return confirm('Are You Sure You want To PUT This Cluster On CME/CMT- You Must Be a Supervisor');\" href=\"cmt_ClusterAssesment.php?id=".$row['ClusterID']."\"\><i class='fas fa-book-reader' title='Enrol Cluster On CME' style='font-size:18px;color:green'></i></a>\n";
                                                                         
                                                                  echo "</tr>\n";
