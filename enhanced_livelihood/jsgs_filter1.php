@@ -30,7 +30,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
 <?php 
   
-  if (($_SESSION["user_role"]== '04')) 
+  if (($_SESSION["user_role"]== '03')) 
   {
       $region = $_SESSION["user_reg"];  
   }

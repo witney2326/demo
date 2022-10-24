@@ -8,7 +8,7 @@
         header("location: basic_livelihood_slg_mgt_filter2_results.php");   
     }
     if (($_SESSION["user_role"] == '03')) {
-        header("location: basic_livelihood_slg_mgt_filter1_results.php");   
+        header("location: basic_livelihood_slg_mgt_filter_results.php");   
     }
 
     if (($_SESSION["user_role"] == '02')) {

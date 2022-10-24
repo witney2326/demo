@@ -26,25 +26,13 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
   </script>
 </head>
 
-<?php include 'layouts/body.php'; ?>
-
 <?php 
-   $region = $_POST["region"];
-    
-    function get_rname($link, $rcode)
-        {
-        $rg_query = mysqli_query($link,"select name from tblregion where regionID='$rcode'"); // select query
-        $rg = mysqli_fetch_array($rg_query);// fetch data
-        return $rg['name'];
-        }
-    
-        function dis_name($link, $disID)
-        {
-        $dis_query = mysqli_query($link,"select DistrictName from tbldistrict where DistrictID='$disID'"); // select query
-        $dis = mysqli_fetch_array($dis_query);// fetch data
-        return $dis['DistrictName'];
-        }
+include 'layouts/body.php'; 
+include 'lib.php';
+if (($_SESSION["user_role"]== '03')) {$region = $_SESSION["user_reg"]; } else{$region = $_POST["region"];}
 ?>
+
+
 
 <!-- Begin page -->
 <div id="layout-wrapper">
@@ -63,7 +51,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                 <div class="row">
                     <div class="col-12">
                         <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                            <h4 class="mb-sm-0 font-size-18">Beneficiary Household Report</h4>
+                            <h4 class="mb-sm-0 font-size-18">Beneficiaries Per SLG</h4>
 
                             <div class="page-title-right">
                                 <ol class="breadcrumb m-0">
@@ -82,9 +70,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                         <div class="card">
                             <div class="card-body">
                                 <div class="card border border-primary">
-                                    <div class="card-header bg-transparent border-primary">
-                                        <h5 class="my-0 text-primary"></i>Report Filter</h5>
-                                    </div>
+                                    
                                     <div class="card-body">
                                         <h5 class="card-title mt-0"></h5>
                                         <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="basic_livelihood_HH_Ben_reports_filter2.php" method ="POST" >
@@ -119,8 +105,8 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                             </div>
                         
                                             <div class="col-12">
-                                                <button type="submit" class="btn btn-primary w-md" name="Submit" value="Submit">Submit</button>
-                                                <INPUT TYPE="button" class="btn btn-secondary w-md" style="width:120px" VALUE="Back" onClick="history.go(-1);">
+                                                <button type="submit" class="btn btn-outline-primary w-md" name="Submit" value="Submit">Submit</button>
+                                                <INPUT TYPE="button" class="btn btn-outline-secondary w-md" style="width:120px" VALUE="Back" onClick="history.go(-1);">
                                             </div>
                                         </form>                                             
                                         <!-- End Here -->
@@ -130,9 +116,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="card border border-primary">
-                                        <div class="card-header bg-transparent border-primary">
-                                            <h5 class="my-0 text-primary">Beneficiaries Per SLG Per Case Worker</h5>
-                                        </div>
+                                        
                                         <div class="card-body">
                                         <h7 class="card-title mt-0"></h7>
                                             

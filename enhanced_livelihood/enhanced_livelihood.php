@@ -313,7 +313,19 @@
                                                                                         on tblycs.groupID = tblgroup.groupID where tblgroup.TAID = '$ta'"); 
                                                                                         $row = mysqli_fetch_assoc($result); 
                                                                                         $sum = $row['v_total'];
-                                                                                    } else 
+                                                                                    } else if ($user == "04")
+                                                                                    {
+                                                                                        $result = mysqli_query($link, "SELECT COUNT(recID) AS v_total FROM tblycs inner join tblgroup 
+                                                                                        on tblycs.groupID = tblgroup.groupID where tblgroup.districtID = '$district'"); 
+                                                                                        $row = mysqli_fetch_assoc($result); 
+                                                                                        $sum = $row['v_total'];
+                                                                                    } else if ($user == "03")
+                                                                                    {
+                                                                                        $result = mysqli_query($link, "SELECT COUNT(recID) AS v_total FROM tblycs inner join tblgroup 
+                                                                                        on tblycs.groupID = tblgroup.groupID where tblgroup.regionID = '$region'"); 
+                                                                                        $row = mysqli_fetch_assoc($result); 
+                                                                                        $sum = $row['v_total'];
+                                                                                    }else
                                                                                     {
                                                                                         $result = mysqli_query($link, 'SELECT COUNT(hh_code) AS value_sum FROM tblycs'); 
                                                                                         $row = mysqli_fetch_assoc($result); 
@@ -347,6 +359,20 @@
                                                                                 {
                                                                                     $result = mysqli_query($link, "SELECT COUNT(recID) AS value_total FROM tbljsg inner join tblgroup 
                                                                                     on tbljsg.groupID = tblgroup.groupID where tblgroup.TAID = '$ta'"); 
+                                                                                    $row = mysqli_fetch_assoc($result); 
+                                                                                    $total_jsgs = $row['value_total'];
+                                                                                } 
+                                                                                else if ($user == "04")
+                                                                                {
+                                                                                    $result = mysqli_query($link, "SELECT COUNT(recID) AS value_total FROM tbljsg inner join tblgroup 
+                                                                                    on tbljsg.groupID = tblgroup.groupID where tblgroup.districtID = '$district'"); 
+                                                                                    $row = mysqli_fetch_assoc($result); 
+                                                                                    $total_jsgs = $row['value_total'];
+                                                                                } 
+                                                                                else if ($user == "03")
+                                                                                {
+                                                                                    $result = mysqli_query($link, "SELECT COUNT(recID) AS value_total FROM tbljsg inner join tblgroup 
+                                                                                    on tbljsg.groupID = tblgroup.groupID where tblgroup.regionID = '$region'"); 
                                                                                     $row = mysqli_fetch_assoc($result); 
                                                                                     $total_jsgs = $row['value_total'];
                                                                                 } else
@@ -385,6 +411,26 @@
                                                                                     $total_slgs = $row['total_slgs'];
 
                                                                                     $resultcls2 = mysqli_query($link, "SELECT count(ClusterID) AS total_cls2 FROM tblcluster where ((registered_group = '1') and (taID ='$ta'))"); 
+                                                                                    $rowcls2 = mysqli_fetch_assoc($resultcls2); 
+                                                                                    $total_cls2 = $rowcls2['total_cls2'];
+                                                                                }
+                                                                                if ($user == "04")
+                                                                                {
+                                                                                    $result = mysqli_query($link, "SELECT count(groupID) AS total_slgs FROM tblgroup where ((registered_group = '1') and (districtID ='$district'))"); 
+                                                                                    $row = mysqli_fetch_assoc($result); 
+                                                                                    $total_slgs = $row['total_slgs'];
+
+                                                                                    $resultcls2 = mysqli_query($link, "SELECT count(ClusterID) AS total_cls2 FROM tblcluster where ((registered_group = '1') and (districtID ='$district'))"); 
+                                                                                    $rowcls2 = mysqli_fetch_assoc($resultcls2); 
+                                                                                    $total_cls2 = $rowcls2['total_cls2'];
+                                                                                }
+                                                                                if ($user == "03")
+                                                                                {
+                                                                                    $result = mysqli_query($link, "SELECT count(groupID) AS total_slgs FROM tblgroup where ((registered_group = '1') and (regionID ='$region'))"); 
+                                                                                    $row = mysqli_fetch_assoc($result); 
+                                                                                    $total_slgs = $row['total_slgs'];
+
+                                                                                    $resultcls2 = mysqli_query($link, "SELECT count(ClusterID) AS total_cls2 FROM tblcluster where ((registered_group = '1') and (regionID ='$region'))"); 
                                                                                     $rowcls2 = mysqli_fetch_assoc($resultcls2); 
                                                                                     $total_cls2 = $rowcls2['total_cls2'];
                                                                                 }

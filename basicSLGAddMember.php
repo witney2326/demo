@@ -56,7 +56,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
             {
                 echo '<script type="text/javascript">'; 
                 echo 'alert("Please Enter Household code !");'; 
-                echo 'window.location.href = "basic_livelihood_slg_mgt2.php";';
+                echo 'window.location.href = "basic_livelihood_slg_mgt_check.php";';
                 echo '</script>';
             }
             else
@@ -66,7 +66,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                 if (mysqli_query($link, $sql)) {
                     echo '<script type="text/javascript">'; 
                     echo 'alert("SLG Member Record has been added successfully !");'; 
-                    echo 'window.location.href = "basic_livelihood_slg_mgt2.php";';
+                    echo 'window.location.href = "basic_livelihood_slg_mgt_check.php";';
                     echo '</script>';
                 } else {
                     echo "Error: " . $sql . ":-" . mysqli_error($link);

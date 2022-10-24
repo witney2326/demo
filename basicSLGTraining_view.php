@@ -30,12 +30,19 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 <?php
 
 // do check
-if (($_SESSION["user_role"]= '05')) {
+if (($_SESSION["user_role"])== '05') {
     $region = $_SESSION["user_reg"];
     $ta = $_SESSION["user_ta"];
     $district = $_SESSION["user_dis"];
      
-} else
+} else if (($_SESSION["user_role"])== '04') 
+{
+    $region = $_SESSION["user_reg"];
+    $district = $_SESSION["user_dis"];
+} else if (($_SESSION["user_role"])== '03') 
+{
+    $region = $_SESSION["user_reg"];
+}else
 {
     $region = $_POST['region'];
     $district = $_POST['district'];

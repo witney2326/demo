@@ -26,25 +26,11 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
   </script>
 </head>
 
-<?php include 'layouts/body.php'; ?>
-
-<?php 
-    $region = $_POST['region'];
-    
-    function get_rname($link, $rcode)
-        {
-        $rg_query = mysqli_query($link,"select name from tblregion where regionID='$rcode'"); // select query
-        $rg = mysqli_fetch_array($rg_query);// fetch data
-        return $rg['name'];
-        }
-    
-        function dis_name($link, $disID)
-        {
-        $dis_query = mysqli_query($link,"select DistrictName from tbldistrict where DistrictID='$disID'"); // select query
-        $dis = mysqli_fetch_array($dis_query);// fetch data
-        return $dis['DistrictName'];
-        }
+<?php include 'layouts/body.php'; 
+include 'lib.php';
 ?>
+
+<?php if (($_SESSION["user_role"]== '03')) {$region = $_SESSION["user_reg"];  }else{$region = $_POST['region'];}?>
 
 <!-- Begin page -->
 <div id="layout-wrapper">
@@ -228,7 +214,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
                                                                 <tbody>
                                                                     <?Php
-                                                                        $query="select * from tblgroup where ((regionID = '0') and (deleted = '0'))";
+                                                                        $query="select * from tblgroup where ((regionID = '$region') and (deleted = '0'))";
  
                                                                         //Variable $link is declared inside config.php file & used here
                                                                         
@@ -237,8 +223,8 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                                         { 
                                                                             $grpID = $row["groupID"];
                                                                             $result = mysqli_query($link, "SELECT COUNT(sppCode) AS value_count FROM tblbeneficiaries where groupID = '$grpID'"); 
-                                                                            $row = mysqli_fetch_assoc($result); 
-                                                                            $count = $row['value_count'];
+                                                                            $row2 = mysqli_fetch_assoc($result); 
+                                                                            $count = $row2['value_count'];
 
                                                                             $total = $row["MembersM"]+$row["MembersF"];
                                                                         echo "<tr>\n";

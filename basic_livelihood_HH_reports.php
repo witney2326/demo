@@ -525,7 +525,7 @@
                                                                         <th>No Of Groups</th>
                                                                         <th>No.Males</th>
                                                                         <th>No.Females</th>
-                                                                        <th>Total Savings</th> 
+                                                                        <th>Total Members</th> 
                                                                     </tr>
                                                                 </thead>
 
@@ -533,10 +533,10 @@
                                                                 <tbody>
                                                                     <?Php
                                                                         $query="SELECT tbldistrict.DistrictName,COUNT(tblgroup.groupname) as grps, sum(tblgroup.MembersM) as smales, sum(MembersF) as sfemales, SUM(tblgroupsavings.Amount) as sAmount
-                                                                        FROM cimis_sql.tblgroup 
-                                                                        INNER JOIN cimis_sql.tblcw on cimis_sql.tblcw.cwID = cimis_sql.tblgroup.cwID 
-                                                                        inner join cimis_sql.tblgroupsavings on cimis_sql.tblgroup.groupID = cimis_sql.tblgroupsavings.GroupID
-                                                                        inner join cimis_sql.tbldistrict on cimis_sql.tblgroupsavings.DistrictID = cimis_sql.tbldistrict.DistrictID
+                                                                        FROM tblgroup 
+                                                                        INNER JOIN tblcw on tblcw.cwID = tblgroup.cwID 
+                                                                        inner join tblgroupsavings on tblgroup.groupID = tblgroupsavings.GroupID
+                                                                        inner join tbldistrict on tblgroupsavings.DistrictID = tbldistrict.DistrictID where tbldistrict.regionID = '02'
                                                                         GROUP BY tbldistrict.DistrictName";
  
                                                                         //Variable $link is declared inside config.php file & used here
@@ -544,13 +544,14 @@
                                                                         if ($result_set = $link->query($query)) {
                                                                         while($row = $result_set->fetch_array(MYSQLI_ASSOC))
                                                                         { 
+                                                                            $total = number_format($row["smales"]+$row["sfemales"]);
                                                                         echo "<tr>\n";
  
                                                                             echo "<td>".$row["DistrictName"]."</td>\n";                                                                         
-                                                                            echo "<td>".$row["grps"]."</td>\n";
-                                                                            echo "<td>".$row["smales"]."</td>\n";
-                                                                            echo "<td>".$row["sfemales"]."</td>\n";
-                                                                            echo "<td>".$row["sAmount"]."</td>\n";
+                                                                            echo "<td>".number_format($row["grps"])."</td>\n";
+                                                                            echo "<td>".number_format($row["smales"])."</td>\n";
+                                                                            echo "<td>".number_format($row["sfemales"])."</td>\n";
+                                                                            echo "<td>\t\t$total</td>\n";
                                                                             
                                                                             
                                                                         echo "</tr>\n";

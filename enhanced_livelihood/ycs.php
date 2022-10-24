@@ -159,7 +159,7 @@
                                                                                             $row = mysqli_fetch_assoc($result); 
                                                                                             $total_males = $row['total_males'];
                                                                                             
-                                                                                            $result2 = mysqli_query($link, "SELECT sum(femalesNo) AS total_females FROM tblawareness_meetings where ((sectorID ='13') and (regionID = '$district'))"); 
+                                                                                            $result2 = mysqli_query($link, "SELECT sum(femalesNo) AS total_females FROM tblawareness_meetings where ((sectorID ='13') and (regionID = '$region'))"); 
                                                                                             $row2 = mysqli_fetch_assoc($result2); 
                                                                                             $total_females = $row2['total_females'];
 

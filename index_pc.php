@@ -6,6 +6,7 @@
     <?php include 'layouts/head.php'; ?>
     <?php include 'layouts/head-style.php'; ?>
     <?php include 'layouts/config.php'; ?>
+    <?php include 'lib.php'; ?>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/fontawesome.min.css" integrity="sha384-jLKHWM3JRmfMU0A5x5AkjWkw/EYfGUAGagvnfryNV3F9VqM98XiIH7VBGVoxVSc7" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -56,6 +57,8 @@
         }
         return $mname;
     }
+
+    if (($_SESSION["user_role"]== '03')) {$region = $_SESSION["user_reg"]; } 
 ?>
 
 <?php 
@@ -91,7 +94,7 @@ $test = 85;
     <?php 
         $select_query = "SELECT tbldistrict.DistrictName,COUNT(tblgroup.groupname ) as grps
         FROM tblgroup 
-        inner join tbldistrict on tblgroup.DistrictID = tbldistrict.DistrictID where tblgroup.deleted = '0'
+        inner join tbldistrict on tblgroup.DistrictID = tbldistrict.DistrictID where ((tblgroup.deleted = '0') and (tbldistrict.regionID = '$region'))
         GROUP BY tbldistrict.DistrictName";
 
         $query_result = mysqli_query($link,$select_query);
@@ -104,6 +107,7 @@ $test = 85;
     ]);
     // Optional; add a title and set the width and height of the chart
     var options = {'title':'Savings and Loan Group Distribution', 'width':490, 'height':250};
+    var options = {series: {0: { color: 'purple' },}};
     var chart = new google.visualization.LineChart(document.getElementById('grps_per_district'));
     chart.draw(data, options);
     
@@ -182,14 +186,16 @@ var data = google.visualization.arrayToDataTable([
 
 ['District', 'JSGs'],
 <?php 
-    $select_query = "SELECT tbldistrict.DistrictName,COUNT(tbljsg.recID ) as grps
+    $select_query = "SELECT tbljsg.districtID as district,COUNT(tbljsg.recID ) as grps
     FROM tbljsg 
-    inner join tbldistrict on tbljsg.districtID = tbldistrict.DistrictID where tbljsg.deleted = '0'
-    GROUP BY tbldistrict.DistrictName";
+    
+    inner join tblgroup on tbljsg.groupID = tblgroup.groupID 
+    where ((tbljsg.deleted = '0') and (tblgroup.regionID = '$region'))
+    ";
 
     $query_result = mysqli_query($link,$select_query);
     while($row_val = mysqli_fetch_array($query_result)){               
-        echo "['".$row_val['DistrictName']."',".$row_val['grps']."],";
+        echo "['".dis_name($link,$row_val['district'])."',".$row_val['grps']."],";
     }
 ?>       
 ]);
@@ -213,7 +219,7 @@ chart.draw(data, options);
         <?php 
             $select_query = "SELECT tbldistrict.DistrictName as District,COUNT(tblbeneficiaries.sppCode) as households
             FROM tblbeneficiaries 
-            inner join tbldistrict on tblbeneficiaries.DistrictID = tbldistrict.DistrictID
+            inner join tbldistrict on tblbeneficiaries.DistrictID = tbldistrict.DistrictID where tbldistrict.regionID = '$region'
             GROUP BY tbldistrict.DistrictName";
             $query_result = mysqli_query($link,$select_query);
             while($row_val = mysqli_fetch_array($query_result)){
@@ -240,6 +246,7 @@ chart.draw(data, options);
 
         // Display the chart inside the <div> element with id="piechart"
         var chart = new google.visualization.LineChart(document.getElementById('actual_hhs'));
+
         chart.draw(data, options);
         }
     </script> 
@@ -389,7 +396,7 @@ chart.draw(data, options);
         <?php 
             $select_query = "SELECT tbldistrict.DistrictName as District, SUM(tblslg_member_savings.amount) as TotalSavings
             FROM tblslg_member_savings 
-            INNER JOIN tbldistrict on tbldistrict.DistrictID = tblslg_member_savings.districtID 
+            INNER JOIN tbldistrict on tbldistrict.DistrictID = tblslg_member_savings.districtID  where tbldistrict.regionID = '$region'
             GROUP BY tbldistrict.DistrictName";
             $query_result = mysqli_query($link,$select_query);
             while($row_val = mysqli_fetch_array($query_result)){
@@ -401,6 +408,9 @@ chart.draw(data, options);
 
         // Optional; add a title and set the width and height of the chart
         var options = {'title':'Savings per District', 'width':490, 'height':250};
+        
+        var options = {series: {0: { color: 'orange' },}};
+
 
         // Display the chart inside the <div> element with id="barchart"
         var chart = new google.visualization.ColumnChart(document.getElementById('savings_per_district'));
@@ -422,7 +432,12 @@ chart.draw(data, options);
             <div class="container-fluid">                                     
                 <div class ="row">
                     <?php
-                        if ($_SESSION["user_role"] == '03'){echo '<div class="alert alert-warning" role="alert">Region Summary</div>';}
+                        if ($_SESSION["user_role"] == '03'){
+                            echo '<div class="alert alert-warning" role="alert">Region Summary:';
+                            echo ' ';
+                            echo r_name($link,$region);
+                            echo '</div>';
+                        }
                     ?>
                     <div class="col-xl-6">
                         <div class="card">
@@ -440,43 +455,43 @@ chart.draw(data, options);
                                                     <th scope="row"><i class='fas fa-house-user' style='font-size:18px'></i></th>
                                                     <td>HHs Reached</td>
                                                     <?php
-                                                            $result = mysqli_query($link, 'SELECT COUNT(sppCode) AS value_sum FROM tblbeneficiaries'); 
+                                                            $result = mysqli_query($link, "SELECT COUNT(sppCode) AS value_sum FROM tblbeneficiaries where regionID = '$region'"); 
                                                             $row = mysqli_fetch_assoc($result); 
                                                             $sum = $row['value_sum'];
                                                         ?>
                                                     <td><?php echo "" . number_format($sum);?>  </td>
                                                     <td><?php echo number_format(70000);?></td>
-                                                    <td><?php if ($_SESSION["user_role"] == '00'){echo '<a href="javascript: void(0);">more..</a>' ;}else{echo '<a href="basic_livelihood_hh_mgt.php">more ..</a>';}  ?></td> 
+                                                    <td><?php if ($_SESSION["user_role"] == '00'){echo '<a href="javascript: void(0);">more..</a>' ;}else{echo '<a href="basic_livelihood_HH_Ben_reports_check.php">more ..</a>';}  ?></td> 
                                                 </tr>
                                                 <tr>
                                                     <th scope="row"><i class='fas fa-users' style='font-size:18px'></i></th>
                                                     <td>SLGs Formed</td>
                                                     <?php
-                                                        $result = mysqli_query($link, 'SELECT COUNT(groupID) AS value_sum FROM tblgroup WHERE deleted = 0'); 
+                                                        $result = mysqli_query($link, "SELECT COUNT(groupID) AS value_sum FROM tblgroup WHERE ((deleted = '0') and (regionID ='$region'))"); 
                                                         $row = mysqli_fetch_assoc($result); 
                                                         $sum = $row['value_sum'];
                                                     ?>
                                                     <td><?php echo "" . number_format($sum);?></td>
                                                     <td><?php echo number_format(0);?></td>
-                                                    <td><?php if ($_SESSION["user_role"] == '00'){echo '<a href="javascript: void(0);">more..</a>' ;}else{echo '<a href="basic_livelihood_HH_Nat_reports.php">more ..</a>';}  ?></td>              
+                                                    <td><?php if ($_SESSION["user_role"] == '00'){echo '<a href="javascript: void(0);">more..</a>' ;}else{echo '<a href="slg_membership_reports.php">more ..</a>';}  ?></td>              
                                                 </tr>
                                                 <tr>
                                                     <th scope="row"><i class='fas fa-book-reader' style='font-size:18px'></i></th>
                                                     <td>SLGs Trained</td>
                                                     <?php
-                                                        $result = mysqli_query($link, 'SELECT count(TrainingID) AS total_grps FROM tblgrouptrainings'); 
+                                                        $result = mysqli_query($link, "SELECT count(TrainingID) AS total_grps FROM tblgrouptrainings where regionID = '$region'"); 
                                                         $row = mysqli_fetch_assoc($result); 
                                                         $sum = $row['total_grps'];
                                                     ?>
                                                     <td><?php echo "" . number_format($sum);?></td>
                                                     <td><?php echo number_format(0);?></td>
-                                                    <td><?php if ($_SESSION["user_role"] == '00'){echo '<a href="javascript: void(0);">more..</a>' ;}else{echo '<a href="basic_livelihood_training_trained_groups.php">more ..</a>';}  ?></td>                         
+                                                    <td><?php if ($_SESSION["user_role"] == '00'){echo '<a href="javascript: void(0);">more..</a>' ;}else{echo '<a href="basic_livelihood_training_trained_groups_check.php">more ..</a>';}  ?></td>                         
                                                 </tr>
                                                 <tr>
                                                     <th scope="row"><i class='fas fa-house-user' style='font-size:18px'></i></th>
                                                     <td>HHs Trained</td>
                                                     <?php
-                                                        $result = mysqli_query($link, 'SELECT sum(Males+Females) AS total_hhs_trained FROM tblgrouptrainings'); 
+                                                        $result = mysqli_query($link, "SELECT sum(Males+Females) AS total_hhs_trained FROM tblgrouptrainings where regionID = '$region'"); 
                                                         $row = mysqli_fetch_assoc($result); 
                                                         $sumhhs = $row['total_hhs_trained'];
                                                     ?>
@@ -488,7 +503,7 @@ chart.draw(data, options);
                                                     <th scope="row"><i class='fas fa-users' style='font-size:18px'></i></th>
                                                     <td>Clusters Formed</td>
                                                     <?php
-                                                        $result = mysqli_query($link, 'SELECT COUNT(ClusterID) AS value_cls FROM tblcluster WHERE deleted = 0'); 
+                                                        $result = mysqli_query($link, "SELECT COUNT(ClusterID) AS value_cls FROM tblcluster WHERE ((deleted = 0) and (regionID = '$region'))"); 
                                                         $row = mysqli_fetch_assoc($result); 
                                                         $sumcls = $row['value_cls'];
                                                     ?>
@@ -500,19 +515,19 @@ chart.draw(data, options);
                                                     <th scope="row"><i class='fas fa-layer-group' style='font-size:18px;color:darkgoldenrod'></i></th>
                                                     <td>Clusters Trained</td>
                                                     <?php
-                                                        $result = mysqli_query($link, 'SELECT count(TrainingID) AS total_grps FROM tblgrouptrainings'); 
+                                                        $result = mysqli_query($link, "SELECT count(TrainingID) AS total_grps FROM tblgrouptrainings where regionID = '$region'"); 
                                                         $row = mysqli_fetch_assoc($result); 
                                                         $sum = $row['total_grps'];
                                                     ?>
                                                     <td><?php echo "" . number_format($sum);?></td>
                                                     <td><?php echo number_format(0);?></td>
-                                                    <td><?php if ($_SESSION["user_role"] == '00'){echo '<a href="javascript: void(0);">more..</a>' ;}else{echo '<a href="basic_livelihood_training_trained_groups.php">more ..</a>';}  ?></td>                         
+                                                    <td><?php if ($_SESSION["user_role"] == '00'){echo '<a href="javascript: void(0);">more..</a>' ;}else{echo '<a href="basic_livelihood_training_trained_groups_check.php">more ..</a>';}  ?></td>                         
                                                 </tr>
                                                 <tr>
                                                     <th scope="row"><i class='fas fa-layer-group' style='font-size:18px;color:darkgoldenrod'></i></th>
                                                     <td>Coops Formed</td>
                                                     <?php
-                                                        $result = mysqli_query($link, 'SELECT count(groupID) AS total_slgs FROM tblgroup where registered_group = "1"'); 
+                                                        $result = mysqli_query($link, "SELECT count(groupID) AS total_slgs FROM tblgroup where ((registered_group = '1') and (regionID = '$region'))"); 
                                                         $row = mysqli_fetch_assoc($result); 
                                                         $total_slgs = $row['total_slgs'];
                                                     ?>
@@ -524,36 +539,43 @@ chart.draw(data, options);
                                                     <th scope="row"><i class='fas fa-layer-group' style='font-size:18px;color:darkgoldenrod'></i></th>
                                                     <td>JSGs Formed</td>
                                                     <?php
-                                                        $result = mysqli_query($link, 'SELECT COUNT(recID) AS value_total FROM tbljsg'); 
+                                                        $result = mysqli_query($link, "SELECT COUNT(tbljsg.recID) AS value_total FROM tbljsg inner join tblgroup on
+                                                        tbljsg.groupID = tblgroup.groupID where tblgroup.regionID = '$region'"); 
                                                         $row = mysqli_fetch_assoc($result); 
-                                                        $total = $row['value_total'];
+                                                        $totalgrps = $row['value_total'];
+
+                                                        $result2 = mysqli_query($link, "SELECT COUNT(tbljsg.recID) AS value_total FROM tbljsg inner join tblcluster on
+                                                        tbljsg.groupID = tblcluster.ClusterID where tblcluster.regionID = '$region'"); 
+                                                        $row = mysqli_fetch_assoc($result2); 
+                                                        $totalcls = $row['value_total'];
                                                     ?>
-                                                    <td><?php echo "" . number_format($total);?></td>
+                                                    <td><?php echo "" . number_format($totalgrps + $totalcls);?></td>
                                                     <td><?php echo number_format(0);?></td>
-                                                    <td><?php if ($_SESSION["user_role"] == '00'){echo '<a href="javascript: void(0);">more..</a>' ;}else{echo '<a href="enhanced_livelihood/jsg.php">more ..</a>';}  ?></td>                         
+                                                    <td><?php if ($_SESSION["user_role"] == '00'){echo '<a href="javascript: void(0);">more..</a>' ;}else{echo '<a href="slg_jsg_reports.php">more ..</a>';}  ?></td>                         
                                                 </tr>
                                                 
                                                 <tr>
                                                     <th scope="row"><i class='fas fa-hiking' style='font-size:18px; color:chocolate'></i></th>
                                                     <td>Youths Linked</td>
                                                     <?php
-                                                        $result = mysqli_query($link, 'SELECT COUNT(recID) AS v_total FROM tblycs'); 
+                                                        $result = mysqli_query($link, "SELECT COUNT(tblycs.recID) AS v_total FROM tblycs inner join tblgroup on
+                                                        tblycs.groupID = tblgroup.groupID where tblgroup.regionID = '$region'"); 
                                                         $row = mysqli_fetch_assoc($result); 
                                                         $v_total = $row['v_total'];
                                                     ?>
                                                     <td><?php echo "" . number_format($v_total);?></td>
                                                     <td><?php echo number_format(0);?></td>
-                                                    <td><?php if ($_SESSION["user_role"] == '00'){echo '<a href="javascript: void(0);">more..</a>' ;}else{echo '<a href="enhanced_livelihood/ycs.php">more ..</a>';}  ?></td>                         
+                                                    <td><?php if ($_SESSION["user_role"] == '00'){echo '<a href="javascript: void(0);">more..</a>' ;}else{echo '<a href="slg_ycs_reports.php">more ..</a>';}  ?></td>                         
                                                 </tr>
                                                 <tr>
                                                     <th scope="row"><i class='fas fa-school' style='font-size:18px;color:cadetblue'></i></th>
                                                     <td>SLGs on Graduation</td>
                                                     <?php
-                                                        $result = mysqli_query($link, 'SELECT COUNT(groupID) AS value_grps FROM tblgroup where grad_status="1"'); 
+                                                        $result = mysqli_query($link, "SELECT COUNT(groupID) AS value_grps FROM tblgroup where ((grad_status='1') and (regionID = '$region'))"); 
                                                         $row = mysqli_fetch_assoc($result); 
                                                         $sum_grps = $row['value_grps'];
 
-                                                        $result_2 = mysqli_query($link, 'SELECT COUNT(ClusterID) AS value_clusters FROM tblcluster where grad_status="1"'); 
+                                                        $result_2 = mysqli_query($link, "SELECT COUNT(ClusterID) AS value_clusters FROM tblcluster where ((grad_status='1') and (regionID = '$region'))"); 
                                                         $row = mysqli_fetch_assoc($result_2); 
                                                         $sum_clusters = $row['value_clusters'];
 
@@ -566,7 +588,7 @@ chart.draw(data, options);
                                                     <th scope="row"><i class='fas fa-graduation-cap' style='font-size:18px;color:cadetblue'></i></th>
                                                     <td>HHs on Graduation</td>
                                                     <?php
-                                                        $result = mysqli_query($link, 'SELECT COUNT(sppCode) AS value_sum FROM tblbeneficiaries where grad_status ="1"'); 
+                                                        $result = mysqli_query($link, "SELECT COUNT(sppCode) AS value_sum FROM tblbeneficiaries where ((grad_status ='1') and (regionID = '$region'))"); 
                                                         $row = mysqli_fetch_assoc($result); 
                                                         $sum = $row['value_sum'];
                                                     ?>
@@ -591,7 +613,7 @@ chart.draw(data, options);
                                                     <th scope="row"><i class='fas fa-industry' style='font-size:18px; color:crimson'></i></th>
                                                     <td>SLGs In Prod. VC</td>
                                                     <?php
-                                                        $result = mysqli_query($link, 'SELECT COUNT(groupID) AS v_total FROM tblgroup where vc_status = "1"'); 
+                                                        $result = mysqli_query($link, "SELECT COUNT(groupID) AS v_total FROM tblgroup where ((vc_status = '1') and (regionID = '$region'))"); 
                                                         $row = mysqli_fetch_assoc($result); 
                                                         $v_total = $row['v_total'];
                                                     ?>
@@ -603,7 +625,8 @@ chart.draw(data, options);
                                                     <th scope="row"><i class='fa fa-globe' style='font-size:18px; color:green'></i></th>
                                                     <td>Safeguard Plans</td>
                                                     <?php
-                                                        $select_query_esmp = "SELECT COUNT(planID) as TotalESMPs FROM tblsafeguard_group_plans";
+                                                        $select_query_esmp = "SELECT COUNT(tblsafeguard_group_plans.planID) as TotalESMPs FROM tblsafeguard_group_plans inner join tblgroup on
+                                                        tblsafeguard_group_plans.groupID = tblgroup.groupID where tblgroup.regionID = '$region'";
                                                         $query_result_esmp = mysqli_query($link,$select_query_esmp);
                                                         $row_val = mysqli_fetch_array($query_result_esmp);
                                                         $totalesmps =  $row_val['TotalESMPs'];
@@ -616,7 +639,8 @@ chart.draw(data, options);
                                                     <th scope="row"><i class='fas fa-dollar-sign' style='font-size:18px; color:green'></i></th>
                                                     <td>Savings Mobilised</td>
                                                     <?php 
-                                                        $select_query = "SELECT SUM(amount) as TotalSavings FROM tblslg_member_savings";
+                                                        $select_query = "SELECT SUM(tblslg_member_savings.amount) as TotalSavings FROM tblslg_member_savings inner join tblgroup on
+                                                        tblslg_member_savings.groupID = tblgroup.groupID where tblgroup.regionID = '$region'";
                                                         $query_result = mysqli_query($link,$select_query);
                                                         $row_val = mysqli_fetch_array($query_result);
                                                         $CurSavings =  floatval($row_val['TotalSavings']);
@@ -657,7 +681,7 @@ chart.draw(data, options);
                         </div>
                         <div class ="row">
                             <div class="card border border-success">                               
-                                <div id="jsgs_per_district"></div> 
+                                <!-- <div id="jsgs_per_district"></div> -->
                             </div>
                         </div>
                     </div>
