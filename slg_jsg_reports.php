@@ -15,9 +15,7 @@
 </head>
 
 <?php include 'layouts/body.php'; 
-      include 'lib.php';
-
-      if (($_SESSION["user_role"]== '03')) {$region = $_SESSION["user_reg"]; } else{$region = $_POST["region"];}
+      include 'lib.php'; 
 ?>
 
 
@@ -94,10 +92,34 @@
 
                                                     <tbody>
                                                         <?Php
-                                                            $query="SELECT tbljsg.districtID,COUNT(tbljsg.recID) as jsgs
-                                                            FROM tbljsg inner join tblgroup on tbljsg.groupID = tblgroup.groupID 
-                                                            where ((tblgroup.regionID = '$region') and (tblgroup.deleted = '0')) GROUP BY tblgroup.districtID";
-                                                            
+                                                            if (($_SESSION["user_role"]== '03')) 
+                                                            {
+                                                                $region = $_SESSION["user_reg"]; 
+
+                                                                $query="SELECT tbljsg.districtID,COUNT(tbljsg.recID) as jsgs
+                                                                FROM tbljsg inner join tblgroup on tbljsg.groupID = tblgroup.groupID 
+                                                                where ((tblgroup.regionID = '$region') and (tblgroup.deleted = '0')) GROUP BY tblgroup.districtID";
+                                                            } else if (($_SESSION["user_role"]== '04'))
+                                                            {
+                                                                $district = $_SESSION["user_dis"]; 
+
+                                                                $query="SELECT tbljsg.districtID,COUNT(tbljsg.recID) as jsgs
+                                                                FROM tbljsg inner join tblgroup on tbljsg.groupID = tblgroup.groupID 
+                                                                where ((tblgroup.DistrictID = '$district') and (tblgroup.deleted = '0')) GROUP BY tblgroup.districtID";
+                                                            }else if (($_SESSION["user_role"]== '05'))
+                                                            {
+                                                                $ta = $_SESSION["user_ta"]; 
+
+                                                                $query="SELECT tbljsg.districtID,COUNT(tbljsg.recID) as jsgs
+                                                                FROM tbljsg inner join tblgroup on tbljsg.groupID = tblgroup.groupID 
+                                                                where ((tblgroup.TAID = '$ta') and (tblgroup.deleted = '0')) GROUP BY tblgroup.districtID";
+                                                            }else
+                                                            {
+                                                                $query="SELECT tbljsg.districtID,COUNT(tbljsg.recID) as jsgs
+                                                                FROM tbljsg inner join tblgroup on tbljsg.groupID = tblgroup.groupID 
+                                                                where ((tblgroup.deleted = '0')) GROUP BY tblgroup.districtID";
+                                                            }
+
                                                             if ($result_set = $link->query($query)) {
                                                             while($row = $result_set->fetch_array(MYSQLI_ASSOC))
                                                             {   
@@ -107,10 +129,30 @@
                                                             echo "</tr>\n";
                                                             }}
                                                             
-                                                            $query2="SELECT tbljsg.districtID,COUNT(tbljsg.recID) as jsgs2
-                                                            FROM tbljsg inner join tblcluster on tbljsg.groupID = tblcluster.ClusterID 
-                                                            where ((tblcluster.regionID = '$region') and (tblcluster.deleted = '0')) GROUP BY tblcluster.districtID";
-                                                            
+                                                            if (($_SESSION["user_role"]== '03')) 
+                                                            {
+                                                                $region = $_SESSION["user_reg"]; 
+                                                                $query2="SELECT tbljsg.districtID,COUNT(tbljsg.recID) as jsgs2
+                                                                FROM tbljsg inner join tblcluster on tbljsg.groupID = tblcluster.ClusterID 
+                                                                where ((tblcluster.regionID = '$region') and (tblcluster.deleted = '0')) GROUP BY tblcluster.districtID";
+                                                            } else if (($_SESSION["user_role"]== '04'))
+                                                            {
+                                                                $district = $_SESSION["user_dis"]; 
+                                                                $query2="SELECT tbljsg.districtID,COUNT(tbljsg.recID) as jsgs2
+                                                                FROM tbljsg inner join tblcluster on tbljsg.groupID = tblcluster.ClusterID 
+                                                                where ((tblcluster.districtID = '$district') and (tblcluster.deleted = '0')) GROUP BY tblcluster.districtID";
+                                                            } else if (($_SESSION["user_role"]== '05'))
+                                                            {
+                                                                $ta = $_SESSION["user_ta"]; 
+                                                                $query2="SELECT tbljsg.districtID,COUNT(tbljsg.recID) as jsgs2
+                                                                FROM tbljsg inner join tblcluster on tbljsg.groupID = tblcluster.ClusterID 
+                                                                where ((tblcluster.taID = '$ta') and (tblcluster.deleted = '0')) GROUP BY tblcluster.districtID";
+                                                            } else
+                                                            {
+                                                                $query2="SELECT tbljsg.districtID,COUNT(tbljsg.recID) as jsgs2
+                                                                FROM tbljsg inner join tblcluster on tbljsg.groupID = tblcluster.ClusterID 
+                                                                where ((tblcluster.deleted = '0')) GROUP BY tblcluster.districtID";
+                                                            }
                                                             if ($result_set2 = $link->query($query2)) {
                                                             while($row2 = $result_set2->fetch_array(MYSQLI_ASSOC))
                                                             { 

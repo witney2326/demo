@@ -17,7 +17,7 @@
 <?php include 'layouts/body.php'; 
       include 'lib.php';
 
-      if (($_SESSION["user_role"]== '03')) {$region = $_SESSION["user_reg"]; } else{$region = $_POST["region"];}
+      
 ?>
 
 
@@ -94,11 +94,31 @@
 
                                                     <tbody>
                                                         <?Php
-                                                            $query="SELECT tblycs.districtID,COUNT(tblycs.recID) as youths
-                                                            FROM tblycs inner join tblgroup on tblycs.groupID = tblgroup.groupID 
-                                                            where ((tblgroup.regionID = '$region') and (tblgroup.deleted = '0')) GROUP BY tblgroup.districtID";
-
-                                                            //Variable $link is declared inside config.php file & used here
+                                                            if (($_SESSION["user_role"]== '03')) 
+                                                            {   
+                                                                $region = $_SESSION["user_reg"]; 
+                                                                $query="SELECT tblycs.districtID,COUNT(tblycs.recID) as youths
+                                                                FROM tblycs inner join tblgroup on tblycs.groupID = tblgroup.groupID 
+                                                                where ((tblgroup.regionID = '$region') and (tblgroup.deleted = '0')) GROUP BY tblgroup.districtID";
+                                                            }else if (($_SESSION["user_role"]== '04')) 
+                                                            {   
+                                                                $district = $_SESSION["user_dis"]; 
+                                                                $query="SELECT tblycs.districtID,COUNT(tblycs.recID) as youths
+                                                                FROM tblycs inner join tblgroup on tblycs.groupID = tblgroup.groupID 
+                                                                where ((tblgroup.districtID = '$district') and (tblgroup.deleted = '0')) GROUP BY tblgroup.districtID";
+                                                            }else if (($_SESSION["user_role"]== '05')) 
+                                                            {   
+                                                                $ta = $_SESSION["user_ta"]; 
+                                                                $query="SELECT tblycs.districtID,COUNT(tblycs.recID) as youths
+                                                                FROM tblycs inner join tblgroup on tblycs.groupID = tblgroup.groupID 
+                                                                where ((tblgroup.TAID = '$ta') and (tblgroup.deleted = '0')) GROUP BY tblgroup.districtID";
+                                                            }else
+                                                            {
+                                                                $query="SELECT tblycs.districtID,COUNT(tblycs.recID) as youths
+                                                                FROM tblycs inner join tblgroup on tblycs.groupID = tblgroup.groupID 
+                                                                where ((tblgroup.deleted = '0')) GROUP BY tblgroup.districtID";
+                                                            }
+                                                            
                                                             
                                                             if ($result_set = $link->query($query)) {
                                                             while($row = $result_set->fetch_array(MYSQLI_ASSOC))

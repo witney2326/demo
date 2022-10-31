@@ -106,7 +106,7 @@
 
                     <tbody>
                         <?Php
-                                $id = $_GET['id'];
+                            $id = $_GET['id'];
                             $query="select * from tblycs where groupID ='$id';";
 
                             //Variable $link is declared inside config.php file & used here
@@ -133,8 +133,9 @@
                                 echo "<td>\t\t$age</td>\n";
                                 echo "<td>".$row["vocSchoolLinked"]."</td>\n";
                                 echo "<td>
-                                    <a href=\"?id=".$row['recID']."\"><i class='far fa-edit' title ='Edit Record' style='font-size:18px;color:orange'></i></a>
-                                    <a href=\"?id=".$row['recID']."\"><i class='fa fa-users' title='Link Beneficiary to Voc School' style='font-size:18px;color:brown'></i></a>  
+                                    <a href=\"basicYCSedit.php?id=".$row['recID']."\"><i class='far fa-edit' title ='Edit YCS Record' style='font-size:18px;color:green'></i></a>
+                                    
+                                    <a onClick=\"javascript: return confirm('Are You Sure You want To Delete This YCS Record ');\" href=\"basicYCSdelete.php?id=".$row['recID']."\"><i class='far fa-trash-alt' title='Delete SLG' style='font-size:18px;color:Red'></i></a>  
                                     
                                 </td>\n";
                             echo "</tr>\n";

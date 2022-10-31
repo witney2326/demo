@@ -196,7 +196,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                                             echo "<td>".iga_name($link,$row["voc_type"])."</td>\n";                       
                                                                             echo "<td>
                                                                                 <a href=\"../basicSLGMemberview.php?id=".$row['hh_code']."\"><i class='far fa-eye' title='Training Status' style='font-size:18px;color:purple'></i></a> 
-                                                                                <a href=\"?id=".$row['groupID']."\"><i class='fa fa-link' title='Link HH to Voc School' style='font-size:18px;color:orange'></i></a>                                                                         
+                                                                                <a href=\"ycs_voc_allocate.php?id=".$row['recID']."\"><i class='fa fa-link' title='Link HH to Voc School' style='font-size:18px;color:orange'></i></a>                                                                         
                                                                                 
                                                                                     
                                                                                 </td>\n";

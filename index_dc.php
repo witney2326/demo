@@ -537,7 +537,7 @@ chart.draw(data, options);
                                                     ?>
                                                     <td><?php echo "" . number_format($total);?></td>
                                                     <td><?php echo number_format(0);?></td>
-                                                    <td><?php if ($_SESSION["user_role"] == '00'){echo '<a href="javascript: void(0);">more..</a>' ;}else{echo '<a href="enhanced_livelihood/jsg.php">more ..</a>';}  ?></td>                         
+                                                    <td><?php if ($_SESSION["user_role"] == '00'){echo '<a href="javascript: void(0);">more..</a>' ;}else{echo '<a href="slg_jsg_reports.php">more ..</a>';}  ?></td>                         
                                                 </tr>
                                                 
                                                 <tr>
@@ -550,7 +550,7 @@ chart.draw(data, options);
                                                     ?>
                                                     <td><?php echo "" . number_format($v_total);?></td>
                                                     <td><?php echo number_format(0);?></td>
-                                                    <td><?php if ($_SESSION["user_role"] == '00'){echo '<a href="javascript: void(0);">more..</a>' ;}else{echo '<a href="enhanced_livelihood/ycs.php">more ..</a>';}  ?></td>                         
+                                                    <td><?php if ($_SESSION["user_role"] == '00'){echo '<a href="javascript: void(0);">more..</a>' ;}else{echo '<a href="slg_ycs_reports.php">more ..</a>';}  ?></td>                         
                                                 </tr>
                                                 <tr>
                                                     <th scope="row"><i class='fas fa-school' style='font-size:18px;color:cadetblue'></i></th>

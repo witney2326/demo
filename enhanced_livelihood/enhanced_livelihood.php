@@ -433,6 +433,15 @@
                                                                                     $resultcls2 = mysqli_query($link, "SELECT count(ClusterID) AS total_cls2 FROM tblcluster where ((registered_group = '1') and (regionID ='$region'))"); 
                                                                                     $rowcls2 = mysqli_fetch_assoc($resultcls2); 
                                                                                     $total_cls2 = $rowcls2['total_cls2'];
+                                                                                } else
+                                                                                {
+                                                                                    $result = mysqli_query($link, "SELECT count(groupID) AS total_slgs FROM tblgroup where ((registered_group = '1'))"); 
+                                                                                    $row = mysqli_fetch_assoc($result); 
+                                                                                    $total_slgs = $row['total_slgs'];
+
+                                                                                    $resultcls2 = mysqli_query($link, "SELECT count(ClusterID) AS total_cls2 FROM tblcluster where ((registered_group = '1'))"); 
+                                                                                    $rowcls2 = mysqli_fetch_assoc($resultcls2); 
+                                                                                    $total_cls2 = $rowcls2['total_cls2'];
                                                                                 }
                                                                                 echo '<h5 class="mb-0">'. number_format($total_slgs+$total_cls2); echo '</h5>'
                                                                             ?>

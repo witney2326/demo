@@ -1,11 +1,11 @@
-<?php include 'layouts/session.php'; ?>
-<?php include 'layouts/head-main.php'; ?>
+<?php include '../layouts/session.php'; ?>
+<?php include '../layouts/head-main.php'; ?>
 
 <head>
     <title>YCS|Skills Linkage</title>
-    <?php include 'layouts/head.php'; ?>
-    <?php include 'layouts/head-style.php'; ?>
-    <?php include 'layouts/config.php'; ?>
+    <?php include '../layouts/head.php'; ?>
+    <?php include '../layouts/head-style.php'; ?>
+    <?php include '../layouts/config.php'; ?>
 <!-- DataTables -->
     <link href="assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
     <link href="assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
@@ -26,23 +26,8 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
   </script>
 </head>
 
-<?php include 'layouts/body.php'; ?>
-
-<?php 
-    
-    function get_rname($link, $rcode)
-        {
-        $rg_query = mysqli_query($link,"select name from tblregion where regionID='$rcode'"); // select query
-        $rg = mysqli_fetch_array($rg_query);// fetch data
-        return $rg['name'];
-        }
-    
-        function dis_name($link, $disID)
-        {
-        $dis_query = mysqli_query($link,"select DistrictName from tbldistrict where DistrictID='$disID'"); // select query
-        $dis = mysqli_fetch_array($dis_query);// fetch data
-        return $dis['DistrictName'];
-        }
+<?php include '../layouts/body.php'; 
+      include '../lib.php'; 
 ?>
 
 <!-- Begin page -->
@@ -230,7 +215,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                                             echo "<td>".iga_name($link,$row["voc_type"])."</td>\n";                       
                                                                             echo "<td>
                                                                                 <a href=\"../basicSLGMemberview.php?id=".$row['hh_code']."\"><i class='far fa-eye' title='Training Status' style='font-size:18px;color:purple'></i></a> 
-                                                                                <a href=\"?id=".$row['groupID']."\"><i class='fa fa-link' title='Link HH to Voc School' style='font-size:18px;color:orange'></i></a>                                                                         
+                                                                                <a href=\"ycs_voc_allocate.php?id=".$row['recID']."\"><i class='fa fa-link' title='Link HH to Voc School' style='font-size:18px;color:orange'></i></a>                                                                         
                                                                                 
                                                                                 
                                                                             </td>\n";

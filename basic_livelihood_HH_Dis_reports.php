@@ -109,10 +109,20 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
                                                     <tbody>
                                                         <?Php
-                                                            $query="SELECT tbldistrict.DistrictName,COUNT(tblgroup.groupname) as grps, sum(tblgroup.MembersM) as smales, sum(MembersF) as sfemales
-                                                            FROM tblgroup          
-                                                            inner join tbldistrict on tbldistrict.DistrictID = tblgroup.districtID where tblgroup.deleted = '0'
-                                                            GROUP BY tbldistrict.DistrictName";
+                                                            if ($_SESSION["user_role"] == '03')
+                                                            {
+                                                                $region = $_SESSION["user_reg"];
+                                                                $query="SELECT tbldistrict.DistrictName,COUNT(tblgroup.groupname) as grps, sum(tblgroup.MembersM) as smales, sum(MembersF) as sfemales
+                                                                FROM tblgroup          
+                                                                inner join tbldistrict on tbldistrict.DistrictID = tblgroup.districtID where ((tblgroup.regionID = $region) and (tblgroup.deleted = '0'))
+                                                                GROUP BY tbldistrict.DistrictName";
+                                                            }else
+                                                            {
+                                                                $query="SELECT tbldistrict.DistrictName,COUNT(tblgroup.groupname) as grps, sum(tblgroup.MembersM) as smales, sum(MembersF) as sfemales
+                                                                FROM tblgroup          
+                                                                inner join tbldistrict on tbldistrict.DistrictID = tblgroup.districtID where tblgroup.deleted = '0'
+                                                                GROUP BY tbldistrict.DistrictName";
+                                                            }
 
                                                             //Variable $link is declared inside config.php file & used here
                                                             

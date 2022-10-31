@@ -154,6 +154,12 @@
         return $position['position'];
         }
 
+        function BusCat($link, $typeID)
+        {
+        $BusCat_query = mysqli_query($link,"select categoryID from tbliga_types where ID='$typeID'"); // select query
+        $BusCat = mysqli_fetch_array($BusCat_query);// fetch data
+        return $BusCat['categoryID'];
+        }
 
         
     ?>
