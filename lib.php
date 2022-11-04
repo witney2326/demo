@@ -68,6 +68,13 @@
          $iga = mysqli_fetch_array($iga_query);// fetch data
          return $iga['name'];
          }
+
+    function iga_type($link, $name)
+         {
+         $iga_query = mysqli_query($link,"select ID from tbliga_types where name='$name'"); // select query
+         $iga = mysqli_fetch_array($iga_query);// fetch data
+         return $iga['ID'];
+         }
     
     function ta_name($link, $taID)
         {

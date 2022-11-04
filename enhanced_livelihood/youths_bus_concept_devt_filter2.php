@@ -112,7 +112,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                     </li>
                                     
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="link" href="youths_bus_concept_devt_selected.php" role="link">
+                                        <a class="link" href="youths_bus_concept_devt_selected_check.php" role="link">
                                             <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
                                             <span class="d-none d-sm-block">Selected Concepts</span>
                                         </a>

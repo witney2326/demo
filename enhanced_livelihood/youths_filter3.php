@@ -172,7 +172,24 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                     <!-- End Here -->
                                                 </div>
                                             </div>
-
+                                            <div class="row mb-1">
+                                                <div class="col-md-6">
+                                                    <div class="input-group" display="inline">
+                                                        <form action="../phpSearch_hhName.php" method="post">
+                                                            Household Name <input type="text" name="search">
+                                                            <input type ="submit" name='Search_Group_Name' value='Search_Name'> 
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="input-group" display="inline">
+                                                        <form action="../phpSearch_hhc.php" method="post">
+                                                            Household Code <input type="text" name="search">
+                                                            <input type ="submit" name='Search_Group_Code' value='Search_Code'> 
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <div class="row">
                                                 <div class="col-12">
                                                     <div class="card border border-primary">
@@ -237,9 +254,9 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                                             echo "<td>\t\t$bc_assessed</td>\n";
                                                                              echo "<td>\t\t$bc_assesed_result</td>\n";
                                                                             echo "<td>
-                                                                                <a href=\"../basicSLGMemberview?id=".$row['recID']."\"><i class='far fa-eye' title='View Household' style='font-size:18px;color:purple'></i></a>
+                                                                                <a href=\"../basicSLGMemberview?id=".$row['hh_code']."\"><i class='far fa-eye' title='View Household' style='font-size:18px;color:purple'></i></a>
                                                                                 
-                                                                                <a href=\".php?id=".$row['recID']."\"><i class='far fa-trash-alt' title='Delete YCS Record' style='font-size:18px;color:red'></i></a>    
+                                                                                
                                                                                 </td>\n";
 
                                                                         echo "</tr>\n";

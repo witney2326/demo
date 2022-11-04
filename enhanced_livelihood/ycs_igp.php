@@ -1,18 +1,18 @@
-<?php include 'layouts/session.php'; ?>
-<?php include 'layouts/head-main.php'; ?>
+<?php include '../layouts/session.php'; ?>
+<?php include '../layouts/head-main.php'; ?>
 
 <head>
-    <title>YCS|Concept Development</title>
-    <?php include 'layouts/head.php'; ?>
-    <?php include 'layouts/head-style.php'; ?>
-    <?php include 'layouts/config.php'; ?>
+    <title>YCS|IGP</title>
+    <?php include '../layouts/head.php'; ?>
+    <?php include '../layouts/head-style.php'; ?>
+    <?php include '../layouts/config.php'; ?>
 <!-- DataTables -->
     <link href="assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
     <link href="assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
     <!-- Responsive datatable examples -->
     <link href="assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
 
-    <!--Datatable plugin CSS file -->
+     <!--Datatable plugin CSS file -->
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" />
   
   <!--jQuery library file -->
@@ -26,26 +26,8 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
   </script>
 </head>
 
-<?php include 'layouts/body.php'; ?>
-<?php include '../lib.php'; ?>
-<?php  
-    if (($_SESSION["user_role"]== '05')) 
-    {
-        $region = $_SESSION["user_reg"];
-        $district = $_SESSION["user_dis"];
-        $ta = $_SESSION["user_ta"];   
-    }
-    else
-    {
-        $region = $_POST['region'];
-        $district = $_POST['district'];
-        $ta = $_POST['ta'];
-    }
-   
-    
-    
-
-        
+<?php include '../layouts/body.php'; 
+      include '../lib.php'; 
 ?>
 
 <!-- Begin page -->
@@ -65,12 +47,12 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                 <div class="row">
                     <div class="col-12">
                         <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                            <h4 class="mb-sm-0 font-size-18">YCS - Concept Development</h4>
+                            <h4 class="mb-sm-0 font-size-18">YCS IGP</h4>
 
                             <div class="page-title-right">
                                 <ol class="breadcrumb m-0">
-                                <li class="breadcrumb-item"><a href="ycs.php">YCS Dashboard</a></li>
-                                <li class="breadcrumb-item active">Concept Development</li>
+                                    <li class="breadcrumb-item"><a href="ycs.php">YCS Dashboard</a></li>
+                                    <li class="breadcrumb-item active">YCS Income Generating Projects</li>
                                 </ol>
                             </div>
 
@@ -90,77 +72,116 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
                                 
                                 <!-- Nav tabs -->
-                                <!-- Nav tabs -->
                                 <ul class="nav nav-pills nav-justified" role="tablist">
                                     <li class="nav-item waves-effect waves-light">
                                         <a class="nav-link active" data-bs-toggle="tab" href="#home-1" role="tab">
                                             <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
-                                            <span class="d-none d-sm-block"> Beneficiaries</span>
-                                        </a>
-                                    </li>
-                                                                       
-                                    <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link" data-bs-toggle="link" href="youths_bus_concept_devt_check.php" role="link">
-                                            <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
-                                            <span class="d-none d-sm-block">Business Concept Submission & Assesment</span>
-                                        </a>
-                                    </li>
-                                    
-                                    <li class="nav-item waves-effect waves-light">
-                                        <a class="link" href="youths_bus_concept_devt_selected_check.php" role="link">
-                                            <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
                                             <span class="d-none d-sm-block">Selected Concepts</span>
                                         </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="link" href="enhancedReports.php" role="link">
+                                        <a class="link"  href="enhancedReports.php" role="link">
                                             <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
-                                            <span class="d-none d-sm-block">YCS Business Concept Reports</span>
+                                            <span class="d-none d-sm-block"> IGP and Plans</span>
                                         </a>
                                     </li>
-                                    
+                                    <li class="nav-item waves-effect waves-light">
+                                        <a class="link"  href="enhancedReports.php" role="link">
+                                            <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
+                                            <span class="d-none d-sm-block"> IGP Startup Capital</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item waves-effect waves-light">
+                                        <a class="link"  href="enhancedReports.php" role="link">
+                                            <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
+                                            <span class="d-none d-sm-block"> Financial Linkage</span>
+                                        </a>
+                                    </li>
                                 </ul>
+
                                 <!-- Tab panes -->
                                 <div class="tab-content p-3 text-muted">
                                     <div class="tab-pane active" id="home-1" role="tabpanel">
                                         <p class="mb-0">
-                                            
-
                                             <!--start here -->
                                             <div class="card border border-primary">
                                                 
                                                 <div class="card-body">
                                                     <h5 class="card-title mt-0"></h5>
-                                                    <form class="row row-cols-lg-auto g-3 align-items-center">
+                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="ycs_igp_filter1.php" method ="POST" >
                                                         <div class="col-12">
                                                             <label for="region" class="form-label">Region</label>
                                                             <div>
-                                                                <select class="form-select" name="region" id="region" value ="$region" required >
-                                                                    <option selected value = "<?php echo $region; ?>"><?php echo get_rname($link,$region);?></option> 
+                                                                <select class="form-select" name="region" id="region" required>
+                                                                    <option></option>
+                                                                    <?php                                                           
+                                                                            $dis_fetch_query = "SELECT regionID, name FROM tblregion";                                                  
+                                                                            $result_dis_fetch = mysqli_query($link, $dis_fetch_query);                                                                       
+                                                                            $i=0;
+                                                                                while($DB_ROW_reg = mysqli_fetch_array($result_dis_fetch)) {
+                                                                            ?>
+                                                                            <option value ="<?php
+                                                                                    echo $DB_ROW_reg["regionID"];?>">
+                                                                                <?php
+                                                                                    echo $DB_ROW_reg["name"];
+                                                                                ?>
+                                                                            </option>
+                                                                            <?php
+                                                                                $i++;
+                                                                                    }
+                                                                        ?>
                                                                 </select>
+                                                                <div class="invalid-feedback">
+                                                                    Please select a valid Malawi region.
+                                                                </div>
                                                             </div>
                                                         </div>
                                                         
                                                         <div class="col-12">
                                                             <label for="district" class="form-label">District</label>
-                                                            <select class="form-select" name="district" id="district" value ="$district" required >
-                                                                <option selected value = "<?php echo $district; ?>"><?php echo dis_name($link,$district);?></option>  
+                                                            <select class="form-select" name="district" id="district" required disabled>
+                                                                <option></option>
+                                                                    <?php                                                           
+                                                                        $dis_fetch_query = "SELECT DistrictID,DistrictName FROM tbldistrict";                                                  
+                                                                        $result_dis_fetch = mysqli_query($link, $dis_fetch_query);                                                                       
+                                                                        $i=0;
+                                                                            while($DB_ROW_Dis = mysqli_fetch_array($result_dis_fetch)) {
+                                                                        ?>
+                                                                        <option value="<?php echo $DB_ROW_Dis["DistrictID"]; ?>">
+                                                                            <?php echo $DB_ROW_Dis["DistrictName"]; ?></option><?php
+                                                                            $i++;
+                                                                                }
+                                                                    ?>
                                                             </select>
+                                                            <div class="invalid-feedback">
+                                                                Please select a valid Malawi district.
+                                                            </div>
                                                         </div>
 
                                                         <div class="col-12">
                                                             <label for="ta" class="form-label">Traditional Authority</label>
-                                                            <select class="form-select" name="ta" id="ta" required >
-                                                                <option selected value = "<?php echo $ta;?>"><?php echo ta_name($link,$ta);?></option>
-                                                                
+                                                            <select class="form-select" name="ta" id="ta" required disabled>
+                                                                <option></option>
+                                                                <?php                                                           
+                                                                        $ta_fetch_query = "SELECT TAName FROM tblta";                                                  
+                                                                        $result_ta_fetch = mysqli_query($link, $ta_fetch_query);                                                                       
+                                                                        $i=0;
+                                                                            while($DB_ROW_ta = mysqli_fetch_array($result_ta_fetch)) {
+                                                                        ?>
+                                                                        <option>
+                                                                            <?php echo $DB_ROW_ta["TAName"]; ?></option><?php
+                                                                            $i++;
+                                                                                }
+                                                                    ?>
                                                             </select>
                                                             <div class="invalid-feedback">
                                                                 Please select a valid TA.
                                                             </div>
                                                         </div>
+
+                                                        
                                                         <div class="col-12">
-                                                            
-                                                            <INPUT TYPE="button" class="btn btn-btn btn-outline-secondary w-md" VALUE="Back" onClick="history.go(-1);">
+                                                            <button type="submit" class="btn btn-btn btn-outline-primary w-md" name="Submit" value="Submit">Submit</button>
                                                         </div>
                                                     </form>                                             
                                                     <!-- End Here -->
@@ -170,55 +191,43 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                             <div class="row">
                                                 <div class="col-12">
                                                     <div class="card border border-primary">
-                                                    <div class="card-header bg-transparent border-primary">
-                                                        <h5 class="my-0 text-primary">Youth Challenge Beneficiaries in TA <?php echo ta_name($link,$ta);?> </h5>
-                                                    </div>
-                                                    <div class="card-body">
-                                                    <h7 class="card-title mt-0"></h7>
+                                                    
+                                                        <div class="card-body">
+                                                    
                                                         
                                                             <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
                                                             
-                                                                <thead>
-                                                                    <tr>
-                                                                        <th>HH code</th>
-                                                                        <th>Ben Name</th>
-                                                                        <th>SLG Name</th>
-                                                                        <th>Voc Type</th>
-                                                                        <th>Gender</th>
-                                                                        <th>Age</th>
-                                                                        <th>Bus Concept?</th>
-                                                                        <th>Action</th>  
-                                                                    </tr>
-                                                                </thead>
-
-
-                                                                <tbody>
-                                                                    <?Php
-                                                                        $query="select * from tblycs inner join tblgroup on tblycs.groupID = tblgroup.groupID where tblgroup.TAID = '$ta'";
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Rec ID</th>
+                                                                    <th>HH code</th>
+                                                                    <th>Group ID</th>
+                                                                    <th>Name</th>
+                                                                    <th>Vocational Skill</th>
+                                                                    <th>IGP?</th>
+                                                                    <th>Action</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <?Php
+                                                                    $query="select * from tblycs where bc_assesed_result ='1'";
  
                                                                         //Variable $link is declared inside config.php file & used here
-                                                                        
+                                                                         
                                                                         if ($result_set = $link->query($query)) {
                                                                         while($row = $result_set->fetch_array(MYSQLI_ASSOC))
                                                                         { 
-                                                                            $dateOfBirth = $row["dob"];
-                                                                            $today = date("Y-m-d");
-                                                                            $diff = date_diff(date_create($dateOfBirth), date_create($today));
-                                                                            $age = $diff->format('%y');
-
-                                                                            if ($row["bus_concept_developed"] == '1'){$bc = "Yes";}else{$bc = "No";}
-
-                                                                        echo "<tr>\n";
+                                                                            if($row["igp"]=='1'){$igp = "Yes";}else{$igp = "No";}
+                                                                        echo "<tr>\n"; 
+                                                                            echo "<td>".$row["recID"]."</td>\n";
                                                                             echo "<td>".$row["hh_code"]."</td>\n";
+                                                                            echo "<td>".$row["groupID"]."</td>\n";
                                                                             echo "<td>".$row["beneficiary"]."</td>\n";
-                                                                            echo "<td>".grp_name($link,$row["groupID"])."</td>\n";
-                                                                            echo "<td>".iga_name($link,$row["voc_type"])."</td>\n";
-                                                                            echo "<td>".$row["gender"]."</td>\n";
-                                                                            echo "<td>\t\t$age</td>\n";
-                                                                            echo "<td>\t\t$bc</td>\n";
+                                                                            echo "<td>".iga_name($link,$row["voc_type"])."</td>\n";                       
+                                                                            echo "<td>\t\t$igp</td>\n"; 
                                                                             echo "<td>
-                                                                                <a href=\"../basicSLGview.php?id=".$row['groupID']."\"><i class='far fa-eye' title='View SLG' style='font-size:18px;color:purple'></i></a>                                                                                                                                                                                                                                          
-                                                                                <a href=\"../basicSLGMemberview.php?id=".$row['hh_code']."\"><i class='far fa-eye' title='View Household' style='font-size:18px;color:orange'></i></a>
+                                                                                <a href=\"../basicSLGMemberview.php?id=".$row['hh_code']."\"><i class='far fa-eye' title='Training Status' style='font-size:18px;color:purple'></i></a> 
+ 
                                                                             </td>\n";
                                                                         echo "</tr>\n";
                                                                         }
@@ -236,7 +245,16 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                         </p>
                                     </div>
                                     <!-- Here -->
-        
+                                    
+                                    <!-- end here -->
+                                    
+                                    
+                                    <div class="tab-pane" id="training-reports" role="tabpanel">
+                                        <p class="mb-0">
+                                            
+                                        
+                                        </p>
+                                    </div>
                                 </div>
 
                             </div>

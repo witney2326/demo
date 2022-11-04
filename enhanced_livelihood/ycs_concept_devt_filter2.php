@@ -224,6 +224,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                                             echo "<td>\t\t$bc</td>\n";
                                                                             echo "<td>
                                                                                 <a href=\"../basicSLGview.php?id=".$row['groupID']."\"><i class='far fa-eye' title='View SLG' style='font-size:18px;color:purple'></i></a>                                                                                                                                                                                                                                          
+                                                                                <a href=\"../basicSLGMemberview.php?id=".$row['hh_code']."\"><i class='far fa-eye' title='View Household' style='font-size:18px;color:orange'></i></a>
                                                                             </td>\n";
                                                                         echo "</tr>\n";
                                                                         }
