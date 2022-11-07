@@ -1,11 +1,13 @@
-<?php include 'layouts/session.php'; ?>
-<?php include 'layouts/head-main.php'; ?>
+<?php include '../layouts/session.php'; ?>
+<?php include '../layouts/head-main.php'; ?>
 
 <head>
     <title>VC Production Clusters</title>
-    <?php include 'layouts/head.php'; ?>
-    <?php include 'layouts/head-style.php'; ?>
-    <?php include 'layouts/config.php'; ?>
+    <?php include '../layouts/head.php'; ?>
+    <?php include '../layouts/head-style.php'; ?>
+    <?php include '../layouts/config.php'; ?>
+    <?php include '../lib.php'; ?>
+
 <!-- DataTables -->
     <link href="assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
     <link href="assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
@@ -26,39 +28,28 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 </script>
 </head>
 
-<?php include 'layouts/body.php'; ?>
+<?php include '../layouts/body.php'; ?>
 
 <?php  
-    $region = $_GET['region'];
-    $district =$_GET['district'];
-    $ta =$_GET['ta'];
+    if (($_SESSION["user_role"]== '05')) 
+    {
+        $region = $_SESSION["user_reg"];
+        $district = $_SESSION["user_dis"];
+        $ta = $_SESSION["user_ta"];   
+    }
+    else
+    {
+        $region = $_POST['region'];
+        $district = $_POST['district'];
+        $ta = $_POST['ta'];
+    }
     
-    function get_rname($link, $rcode)
-        {
-        $rg_query = mysqli_query($link,"select name from tblregion where regionID='$rcode'"); // select query
-        $rg = mysqli_fetch_array($rg_query);// fetch data
-        return $rg['name'];
-        }
-    
-        function dis_name($link, $disID)
-        {
-        $dis_query = mysqli_query($link,"select DistrictName from tbldistrict where DistrictID='$disID'"); // select query
-        $dis = mysqli_fetch_array($dis_query);// fetch data
-        return $dis['DistrictName'];
-        }
-
-        function ta_name($link, $tacode)
-        {
-        $ta_query = mysqli_query($link,"select TAName from tblta where TAID='$tacode'"); // select query
-        $taname = mysqli_fetch_array($ta_query);// fetch data
-        return $taname['TAName'];
-        }
 ?>
 
 <!-- Begin page -->
 <div id="layout-wrapper">
 
-    <?php include 'layouts/menu.php'; ?>
+    <?php include '../layouts/vertical-menu.php'; ?>
 
     <!-- ============================================================== -->
     <!-- Start right Content here -->
@@ -72,7 +63,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                 <div class="row">
                     <div class="col-12">
                         <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                            <h4 class="mb-sm-0 font-size-18">VC Production Clusters</h4>
+                            <h4 class="mb-sm-0 font-size-18">VC BP Submission and Evaluation</h4>
 
                             <div class="page-title-right">
                                 <ol class="breadcrumb m-0">
@@ -92,21 +83,21 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                 <!-- Nav tabs -->
                                 <ul class="nav nav-pills nav-justified" role="tablist">
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link active" data-bs-toggle="tab" href="#home1" role="tab">
+                                        <a class="nav-link" data-bs-toggle="tab" href="#home1" role="tab">
                                             <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
                                             <span class="d-none d-sm-block">Home</span>
                                         </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link " data-bs-toggle="link" href="" role="link">
+                                        <a class="nav-link active " data-bs-toggle="link" href="javascript: void(0);" role="tab">
                                             <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
-                                            <span class="d-none d-sm-block">Mapped Clusters/Coops</span>
+                                            <span class="d-none d-sm-block">Mapped Groups- BP Evaluation</span>
                                         </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link" data-bs-toggle="link" href="" role="link">
+                                        <a class="nav-link" data-bs-toggle="link" href="vc_mapped_clusters_selected_bp_check.php" role="link">
                                             <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
-                                            <span class="d-none d-sm-block">Business Proposal Evaluation</span>
+                                            <span class="d-none d-sm-block">Selected Business Proposals</span>
                                         </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">
@@ -136,158 +127,137 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                 </div>
                 <!-- end menu -->
                 <div class="row">
-                    
-                        </div>
-                    </div>
-
                     <div class="col-xl-12">
                         <div class="card">
                             <div class="card-body">
-
-                                
-                                <!-- Nav tabs -->
-                                
-                                <!-- Tab panes -->
-                                <div class="tab-content p-3 text-muted">
-                                    <div class="tab-pane active" id="home-1" role="tabpanel">
-                                        <p class="mb-0">
-                                            
-
-                                            <!--start here -->
-                                            <div class="card border border-primary">
-                                                <div class="card-header bg-transparent border-primary">
-                                                    <h5 class="my-0 text-primary"></i>Cluster Filter:</h5>
+                                <div class="card border border-primary">
+                                    <div class="card-body">
+                                        <h5 class="card-title mt-0"></h5>
+                                        <form class="row row-cols-lg-auto g-3 align-items-center" >
+                                            <div class="col-12">
+                                                <label for="region" class="form-label">Region</label>
+                                                <div>
+                                                    <select class="form-select" name="region" id="region" value ="$region" required>
+                                                        <option selected value = "<?php echo $region;?>"><?php echo get_rname($link,$region);?></option>
+                                                    </select>
                                                 </div>
-                                                <div class="card-body">
-                                                    <h5 class="card-title mt-0"></h5>
-                                                    <form class="row row-cols-lg-auto g-3 align-items-center" >
-                                                        <div class="col-12">
-                                                            <label for="region" class="form-label">Region</label>
-                                                            <div>
-                                                                <select class="form-select" name="region" id="region" value ="$region" required>
-                                                                    <option selected value = "<?php echo $region;?>"><?php echo get_rname($link,$region);?></option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                        
-                                                        <div class="col-12">
-                                                            <label for="district" class="form-label">District</label>
-                                                            <div>
-                                                                <select class="form-select" name="district" id="district" value ="$district" required>
-                                                                    <option selected value = "<?php echo $district;?>"><?php echo dis_name($link,$district);?></option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="col-12">
-                                                            <label for="ta" class="form-label">Traditional Authority</label>
-                                                            <select class="form-select" name="ta" id="ta" required>
-                                                                <option selected value = "<?php echo $ta;?>"><?php echo ta_name($link,$ta);?></option>
-                                                                
-                                                            </select>
-                                                            
-                                                        </div>
-                                                        <div class="col-12">
-                                                            
-                                                            <INPUT TYPE="button" class="btn btn-btn btn-outline-secondary w-md" VALUE="Back" onClick="history.go(-1);">
-                                                        </div>
-                                                    </form>                                             
-                                                    <!-- End Here -->
+                                            </div>
+                                            
+                                            <div class="col-12">
+                                                <label for="district" class="form-label">District</label>
+                                                <div>
+                                                    <select class="form-select" name="district" id="district" value ="$district" required>
+                                                        <option selected value = "<?php echo $district;?>"><?php echo dis_name($link,$district);?></option>
+                                                    </select>
                                                 </div>
                                             </div>
 
-                                            <div class="row">
-                                                <div class="col-12">
-                                                    <div class="card border border-primary">
-                                                    <div class="card-header bg-transparent border-primary">
-                                                        <h5 class="my-0 text-primary">Clusters in <?php echo dis_name($link,$district); ?></h5>
-                                                    </div>
-                                                    <div class="card-body">
-                                                    <h7 class="card-title mt-0"></h7>
-                                                        
-                                                            <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
+                                            <div class="col-12">
+                                                <label for="ta" class="form-label">Traditional Authority</label>
+                                                <select class="form-select" name="ta" id="ta" required>
+                                                    <option selected value = "<?php echo $ta;?>"><?php echo ta_name($link,$ta);?></option>
+                                                    
+                                                </select>
+                                                
+                                            </div>
+                                            <div class="col-12">
+                                                
+                                                <INPUT TYPE="button" class="btn btn-btn btn-outline-secondary w-md" VALUE="Back" onClick="history.go(-1);">
+                                            </div>
+                                        </form>                                             
+                                        <!-- End Here -->
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="card border border-primary">
+                                        <div class="card-header bg-transparent border-primary">
+                                            <h5 class="my-0 text-primary">VC Mapped Groups in <?php echo dis_name($link,$district); ?></h5>
+                                        </div>
+                                        <div class="card-body">
+                                        <h7 class="card-title mt-0"></h7>
+                                            
+                                                <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
+                                                
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Cluster code</th>
+                                                            <th>Cluster Name</th>                                           
+                                                            <th>Evaluate Proposal</th>
+                                                            <th>P.Submitted</th> 
+                                                            <th>P.Evaluation Rslt</th>                                                      
+                                                            <th>Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <?Php
+                                                            $query="select * from tblcluster where ((taID = '$ta') and (vc_mapped = '1'))";
+
+                                                            //Variable $link is declared inside config.php file & used here
                                                             
-                                                                <thead>
-                                                                    <tr>
-                                                                        <th>Cluster code</th>
-                                                                        <th>Cluster Name</th>                                           
-                                                                        <th>GVH</th>
-                                                                        <th>VC Mapped?</th>                                                          
-                                                                        <th>Map Cluster</th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                    <?Php
-                                                                        $query="select * from tblcluster where taID = '$ta'";
- 
-                                                                        //Variable $link is declared inside config.php file & used here
-                                                                        
-                                                                        if ($result_set = $link->query($query)) {
-                                                                        while($row = $result_set->fetch_array(MYSQLI_ASSOC))
-                                                                        { 
-                                                                            $vc_mapped = (string) $row["vc_mapped"];
-                                                                            if ($vc_mapped =='1'){$mapped = 'Yes';}
-                                                                            if ($vc_mapped =='0'){$mapped = 'No';}
-
-                                                                            echo "<tr>\n";
-                                                                            
-                                                                                echo "<td>".$row["ClusterID"]."</td>\n";
-                                                                                echo "<td>".$row["ClusterName"]."</td>\n";                                                                                                                                          
-                                                                                echo "<td>".$row["gvhID"]."</td>\n";
-                                                                                echo "<td>\t\t$mapped</td>\n";
+                                                            if ($result_set = $link->query($query)) {
+                                                                while($row = $result_set->fetch_array(MYSQLI_ASSOC))
+                                                                { 
+                                                                    $grpID = $row["ClusterID"];
+                                                                    $vc_p_submitted = (string) $row["vc_p_submitted"];
+                                                                    if ($vc_p_submitted =='1'){$psubmitted = 'Yes';}
+                                                                    if ($vc_p_submitted =='0'){$psubmitted = 'No';}
+    
+                                                                    $vc_p_result = (string) $row["vc_p_result"];
+                                                                    if ($vc_p_result =='0'){$p_result = 'Not_Rated';}
+                                                                    if ($vc_p_result =='1'){$p_result = 'Fail';}
+                                                                    if ($vc_p_result =='2'){$p_result = 'Pass';}
+    
+                                                                    
+                                                                echo "<tr>\n";
+                                                                                                                               
+                                                                    echo "<td>".$row["ClusterID"]."</td>\n";
+                                                                    echo "<td>".$row["ClusterName"]."</td>\n";                                                                                                                                          
+                                                                    echo "<td>";
+                                                                        echo "<form action = 'vc_ratecls.php' method ='POST'>";
+                                                                            echo '<select id="rating"  name="rating">';
                                                                                 
-                                                                            echo "<td>
-                                                                                <a onClick=\"javascript: return confirm('Are You Sure You want To Map Cluster For VC Production Interventions? ');\" href=\"vc_cls_map.php?id=".$row['ClusterID']."\"><i class='fas fa-map' title='Map Cluster For VC Production Intervention' style='font-size:18px'></i></a>\n 
-                                                                            </td>\n";
-
-                                                                        echo "</tr>\n";
-                                                                        }
-                                                                        $result_set->close();
-                                                                        }  
-                                                                                           
-                                                                    ?>
-                                                                </tbody>
-                                                            </table>
-                                                            </p>
-                                                        </div>
-                                                    </div>     
-                                                </div>            
-                                            </div> 
-                                </div>
-                                    <!-- Here -->
-                                    
-                                    <!-- end here -->
-                                    
-                                   
-                                </div>
-
+                                                                                echo '<option value="0">Not_Rated</option>';
+                                                                                echo '<option value="1">Fail</option>';
+                                                                                echo '<option value="2">Pass</option>';
+                                                                            echo "</select>";
+                                                                            echo "<input type='hidden' id='grpID' name='grpID' value='$grpID'>";
+                                                                            echo "<button type='submit' class='btn-outline-primary' name='FormSubmit' value='Submit' onClick='return confirmSubmit()'>Evaluate</button>";
+                                                                        echo "</form>";
+                                                                    echo "</td>";
+                                                                    echo "<td>\t\t$psubmitted</td>\n";
+                                                                    echo "<td>\t\t$p_result</td>\n";
+                                                                    
+                                                                    
+                                                                    echo "<td>
+                                                                        <a onClick=\"javascript: return confirm('Are You In Receipt Of VC Business Proposal for The Cluster? ');\" href=\"vc_submit_proposal.php?id=".$row['ClusterID']."\"><i class='fas fa-hands' title='Receive Cluster VC Proposal' style='font-size:18px'></i></a>\n 
+                                                                        
+                                                                         
+                                                                        </td>\n";
+    
+                                                                echo "</tr>\n";
+                                                            }
+                                                            $result_set->close();
+                                                            }  
+                                                                                
+                                                        ?>
+                                                    </tbody>
+                                                </table>
+                                                </p>
+                                            </div>
+                                        </div>     
+                                    </div>            
+                                </div> 
                             </div>
                         </div>
                     </div>
                 </div>
-
-
-                
-
-                    
-
-               
-
-
-                <!-- Collapse -->
-                
-
-                
-                <!-- end row -->
-
-                
-                <!-- end row -->
-
             </div> <!-- container-fluid -->
         </div>
         <!-- End Page-content -->
 
-        <?php include 'layouts/footer.php'; ?>
+        <?php include '../layouts/footer.php'; ?>
     </div>
     <!-- end main content-->
 
@@ -295,11 +265,11 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 <!-- END layout-wrapper -->
 
 <!-- Right Sidebar -->
-<?php include 'layouts/right-sidebar.php'; ?>
+<?php include '../layouts/right-sidebar.php'; ?>
 <!-- Right-bar -->
 
 <!-- JAVASCRIPT -->
-<?php include 'layouts/vendor-scripts.php'; ?>
+<?php include '../layouts/vendor-scripts.php'; ?>
 
 <!-- App js -->
 <script src="assets/js/app.js"></script>

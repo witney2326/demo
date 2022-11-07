@@ -1,11 +1,12 @@
-<?php include 'layouts/session.php'; ?>
-<?php include 'layouts/head-main.php'; ?>
+<?php include '../layouts/session.php'; ?>
+<?php include '../layouts/head-main.php'; ?>
 
 <head>
     <title>VC Mapped Clusters</title>
-    <?php include 'layouts/head.php'; ?>
-    <?php include 'layouts/head-style.php'; ?>
-    <?php include 'layouts/config.php'; ?>
+    <?php include '../layouts/head.php'; ?>
+    <?php include '../layouts/head-style.php'; ?>
+    <?php include '../layouts/config.php'; ?>
+    <?php include '../lib.php'; ?>
 <!-- DataTables -->
     <link href="assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
     <link href="assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
@@ -26,36 +27,16 @@
     </script>
 </head>
 
-<?php include 'layouts/body.php'; ?>
+<?php include '../layouts/body.php'; ?>
 
 <?php 
-    if(isset($_GET['Submit']))
-    {   
-        $region = $_GET['region'];
-        $district = $_GET['district'];
-        $ta = $_GET['ta'];
-     
-    }
-    
-    function get_rname($link, $rcode)
-        {
-        $rg_query = mysqli_query($link,"select name from tblregion where regionID='$rcode'"); // select query
-        $rg = mysqli_fetch_array($rg_query);// fetch data
-        return $rg['name'];
-        }
-    
-        function dis_name($link, $disID)
-        {
-        $dis_query = mysqli_query($link,"select DistrictName from tbldistrict where DistrictID='$disID'"); // select query
-        $dis = mysqli_fetch_array($dis_query);// fetch data
-        return $dis['DistrictName'];
-        }
+       
 ?>
 
 <!-- Begin page -->
 <div id="layout-wrapper">
 
-    <?php include 'layouts/menu.php'; ?>
+    <?php include '../layouts/vertical-menu.php'; ?>
 
     <!-- ============================================================== -->
     <!-- Start right Content here -->
@@ -95,12 +76,17 @@
                                         </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link active" data-bs-toggle="link" href="" role="link">
+                                        <a class="nav-link active" data-bs-toggle="link" href="javascript: void(0);" role="link">
                                             <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
                                             <span class="d-none d-sm-block">Mapped Clusters/Coops</span>
                                         </a>
                                     </li>
-                                    
+                                    <li class="nav-item waves-effect waves-light">
+                                        <a class="nav-link" data-bs-toggle="link" href="vc_mapped_clusters_selected_bp_check.php" role="link">
+                                            <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
+                                            <span class="d-none d-sm-block">Selected Business Proposals</span>
+                                        </a>
+                                    </li>
                                     <li class="nav-item waves-effect waves-light">
                                         <a class="nav-link" data-bs-toggle="link" href="vc_evaluated_clusters.php" role="link">
                                             <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
@@ -135,13 +121,9 @@
                             <div class="card-body">
      
                                 <div class="card border border-primary">
-                                    <div class="card-header bg-transparent border-primary">
-                                        <h5 class="my-0 text-primary"></i>Cluster Search Filter</h5>
-                                    </div>
-
                                     <div class="card-body">
                                         <h5 class="card-title mt-0"></h5>
-                                        <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="vc_production_clusters_filter1.php" method ="GET" >
+                                        <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="vc_production_clusters_filter1.php" method ="POST" >
                                             <div class="col-12">
                                                 <label for="region" class="form-label">Region</label>
                                                 
@@ -311,7 +293,7 @@
         </div>
         <!-- End Page-content -->
 
-        <?php include 'layouts/footer.php'; ?>
+        <?php include '../layouts/footer.php'; ?>
     </div>
     <!-- end main content-->
 
@@ -319,11 +301,11 @@
 <!-- END layout-wrapper -->
 
 <!-- Right Sidebar -->
-<?php include 'layouts/right-sidebar.php'; ?>
+<?php include '../layouts/right-sidebar.php'; ?>
 <!-- Right-bar -->
 
 <!-- JAVASCRIPT -->
-<?php include 'layouts/vendor-scripts.php'; ?>
+<?php include '../layouts/vendor-scripts.php'; ?>
 
 <!-- App js -->
 <script src="assets/js/app.js"></script>

@@ -1,15 +1,15 @@
-<?php include 'layouts/session.php'; ?>
-<?php include 'layouts/head-main.php'; ?>
+<?php include '../layouts/session.php'; ?>
+<?php include '../layouts/head-main.php'; ?>
 
 
 <head>
     <title>Youth Challenge Support</title>
-    <?php include 'layouts/head.php'; ?>
-    <?php include 'layouts/head-style.php'; ?>
-    <?php include 'layouts/config.php'; ?>
+    <?php include '../layouts/head.php'; ?>
+    <?php include '../layouts/head-style.php'; ?>
+    <?php include '../layouts/config.php'; ?>
 </head>
 
-<?php include 'layouts/body.php'; 
+<?php include '../layouts/body.php'; 
 
     $user = $_SESSION["user_role"];
 
@@ -34,7 +34,7 @@
 <!-- Begin page -->
 <div id="layout-wrapper">
 
-    <?php include 'layouts/menu.php'; ?>
+    <?php include '../layouts/vertical-menu.php'; ?>
 
     <!-- ============================================================== -->
     <!-- Start right Content here -->

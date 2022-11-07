@@ -67,7 +67,7 @@ if ($result_set = $link->query($query)) {
 <!-- Begin page -->
 <div id="layout-wrapper">
 
-    <?php include 'layouts/menu.php'; ?>
+    <?php include '../layouts/vertical-menu.php'; ?>
 
     <!-- ============================================================== -->
     <!-- Start right Content here -->
@@ -234,7 +234,7 @@ if ($result_set = $link->query($query)) {
         </div>
         <!-- End Page-content -->
 
-        <?php include 'layouts/footer.php'; ?>
+        <?php include '../layouts/footer.php'; ?>
     </div>
     <!-- end main content-->
 
@@ -242,11 +242,11 @@ if ($result_set = $link->query($query)) {
 <!-- END layout-wrapper -->
 
 <!-- Right Sidebar -->
-<?php include 'layouts/right-sidebar.php'; ?>
+<?php include '../layouts/right-sidebar.php'; ?>
 <!-- Right-bar -->
 
 <!-- JAVASCRIPT -->
-<?php include 'layouts/vendor-scripts.php'; ?>
+<?php include '../layouts/vendor-scripts.php'; ?>
 
 <!-- App js -->
 <script src="assets/js/app.js"></script>

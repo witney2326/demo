@@ -1,17 +1,17 @@
-<?php include 'layouts/session.php'; ?>
-<?php include 'layouts/head-main.php'; ?>
+<?php include '../layouts/session.php'; ?>
+<?php include '../layouts/head-main.php'; ?>
 
 <head>
     <title>View Linked Youths |Youth Challenge</title>
-    <?php include 'layouts/head.php'; ?>
-    <?php include 'layouts/head-style.php'; ?>
+    <?php include '../layouts/head.php'; ?>
+    <?php include '../layouts/head-style.php'; ?>
 </head>
 
 
     <?php
         
 
-        include "layouts/config.php"; // Using database connection file here
+        include "../layouts/config.php"; // Using database connection file here
 
         function dis_name($link, $disID)
         {

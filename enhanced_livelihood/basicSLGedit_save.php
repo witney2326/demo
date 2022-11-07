@@ -3,7 +3,7 @@
     
 
     <?php
-        include "layouts/config.php"; // Using database connection file here
+        include "../layouts/config.php"; // Using database connection file here
 
         if(isset($_POST['Submit']))
         {

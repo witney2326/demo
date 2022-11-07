@@ -8,7 +8,7 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
     exit;
 }
 // Include config file
-require_once "layouts/config.php";
+require_once "../layouts/config.php";
 
 // Define variables and initialize with empty values
 $username = $password = "";
@@ -87,12 +87,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     mysqli_close($link);
 }
 ?>
-<?php include 'layouts/head-main.php'; ?>
+<?php include '../layouts/head-main.php'; ?>
 
 <head>
     <title>Login | Comsip Intergrated MIS</title>
-    <?php include 'layouts/head.php'; ?>
-    <?php include 'layouts/head-style.php'; ?>
+    <?php include '../layouts/head.php'; ?>
+    <?php include '../layouts/head-style.php'; ?>
 </head>
 
 <body>
@@ -181,7 +181,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <!-- end account-pages -->
 
     <!-- JAVASCRIPT -->
-<?php include 'layouts/vendor-scripts.php'; ?>
+<?php include '../layouts/vendor-scripts.php'; ?>
 
 <!-- App js -->
 <script src="assets/js/app.js"></script>

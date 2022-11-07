@@ -167,7 +167,13 @@
         $BusCat = mysqli_fetch_array($BusCat_query);// fetch data
         return $BusCat['categoryID'];
         }
-
+        
+        function slg_name($link, $ID)
+        {
+        $ta_query = mysqli_query($link,"select groupname from tblgroup where groupID='$ID'"); // select query
+        $prog = mysqli_fetch_array($ta_query);// fetch data
+        return $prog['groupname'];
+        }
         
     ?>
     

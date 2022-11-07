@@ -1,19 +1,19 @@
-<?php include 'layouts/session.php'; ?>
-<?php include 'layouts/head-main.php'; ?>
+<?php include '../layouts/session.php'; ?>
+<?php include '../layouts/head-main.php'; ?>
 
 <head>
     <title>Enhanced Reports | Enhanced Livelihood</title>
-    <?php include 'layouts/head.php'; ?>
-    <?php include 'layouts/head-style.php'; ?>
+    <?php include '../layouts/head.php'; ?>
+    <?php include '../layouts/head-style.php'; ?>
 </head>
 
-<?php include 'layouts/body.php'; ?>
+<?php include '../layouts/body.php'; ?>
 
 <!-- Begin page -->
 <div id="layout-wrapper">
 
-    <?php   include 'layouts/menu.php'; 
-            include 'layouts/config.php';
+    <?php   include '../layouts/vertical-menu.php'; 
+            include '../layouts/config.php';
 
         $result = mysqli_query($link, 'SELECT COUNT(recID) AS t_jsgs FROM tbljsg where deleted = 0'); 
         $row_jsg = mysqli_fetch_assoc($result); 
@@ -244,7 +244,7 @@
         </div>
         <!-- End Page-content -->
 
-        <?php include 'layouts/footer.php'; ?>
+        <?php include '../layouts/footer.php'; ?>
     </div>
     <!-- end main content-->
 
@@ -252,11 +252,11 @@
 <!-- END layout-wrapper -->
 
 <!-- Right Sidebar -->
-<?php include 'layouts/right-sidebar.php'; ?>
+<?php include '../layouts/right-sidebar.php'; ?>
 <!-- Right-bar -->
 
 <!-- JAVASCRIPT -->
-<?php include 'layouts/vendor-scripts.php'; ?>
+<?php include '../layouts/vendor-scripts.php'; ?>
 
 <script src="assets/js/app.js"></script>
 

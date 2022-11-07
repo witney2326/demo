@@ -1,20 +1,20 @@
-<?php include 'layouts/session.php'; ?>
-<?php include 'layouts/head-main.php'; ?>
+<?php include '../layouts/session.php'; ?>
+<?php include '../layouts/head-main.php'; ?>
 
 
 <head>
     <title>Coop Management Training</title>
-    <?php include 'layouts/head.php'; ?>
-    <?php include 'layouts/head-style.php'; ?>
+    <?php include '../layouts/head.php'; ?>
+    <?php include '../layouts/head-style.php'; ?>
 </head>
 
-<?php include 'layouts/body.php'; ?>
+<?php include '../layouts/body.php'; ?>
 
 <!-- Begin page -->
 <div id="layout-wrapper">
 
-    <?php include 'layouts/menu.php'; 
-    include 'layouts/config.php';
+    <?php include '../layouts/vertical-menu.php'; 
+    include '../layouts/config.php';
     ?>
 
     <!-- ============================================================== -->

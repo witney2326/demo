@@ -1,11 +1,11 @@
-<?php include 'layouts/session.php'; ?>
-<?php include 'layouts/head-main.php'; ?>
+<?php include '../layouts/session.php'; ?>
+<?php include '../layouts/head-main.php'; ?>
 
 <head>
     <title>SLG Reports</title>
-    <?php include 'layouts/head.php'; ?>
-    <?php include 'layouts/head-style.php'; ?>
-    <?php include 'layouts/config.php'; ?>
+    <?php include '../layouts/head.php'; ?>
+    <?php include '../layouts/head-style.php'; ?>
+    <?php include '../layouts/config.php'; ?>
 <!-- DataTables -->
     <link href="assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
     <link href="assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
@@ -26,7 +26,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
   </script>
 </head>
 
-<?php include 'layouts/body.php'; ?>
+<?php include '../layouts/body.php'; ?>
 
 <?php 
 
@@ -68,7 +68,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 <!-- Begin page -->
 <div id="layout-wrapper">
 
-    <?php include 'layouts/menu.php'; ?>
+    <?php include '../layouts/vertical-menu.php'; ?>
 
     <!-- ============================================================== -->
     <!-- Start right Content here -->
@@ -215,7 +215,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
         </div>
         <!-- End Page-content -->
 
-        <?php include 'layouts/footer.php'; ?>
+        <?php include '../layouts/footer.php'; ?>
     </div>
     <!-- end main content-->
 
@@ -223,11 +223,11 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 <!-- END layout-wrapper -->
 
 <!-- Right Sidebar -->
-<?php include 'layouts/right-sidebar.php'; ?>
+<?php include '../layouts/right-sidebar.php'; ?>
 <!-- Right-bar -->
 
 <!-- JAVASCRIPT -->
-<?php include 'layouts/vendor-scripts.php'; ?>
+<?php include '../layouts/vendor-scripts.php'; ?>
 
 <!-- App js -->
 <script src="assets/js/app.js"></script>

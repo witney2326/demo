@@ -6,6 +6,7 @@
     <?php include '../layouts/head.php'; ?>
     <?php include '../layouts/head-style.php'; ?>
     <?php include '../layouts/config.php'; ?>
+    <?php include '../lib.php'; ?>
 <!-- DataTables -->
     <link href="../assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
     <link href="../assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
@@ -44,47 +45,19 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
    $district = $_POST['district'];
    $slg = $_POST['slg'];
      
-         function get_rname($link, $rcode)
-         {
-         $rg_query = mysqli_query($link,"select name from tblregion where regionID='$rcode'"); // select query
-         $rg = mysqli_fetch_array($rg_query);// fetch data
-         return $rg['name'];
-         }
-     
-         function dis_name($link, $disID)
-         {
-         $dis_query = mysqli_query($link,"select DistrictName from tbldistrict where DistrictID='$disID'"); // select query
-         $dis = mysqli_fetch_array($dis_query);// fetch data
-         return $dis['DistrictName'];
-         }
+         
+        
  
-         function grp_name($link, $grpID)
-         {
-         $grp_query = mysqli_query($link,"select groupname from tblgroup where groupID='$grpID'"); // select query
-         $grp = mysqli_fetch_array($grp_query);// fetch data
-         return $grp['groupname'];
-         }
- 
-         function ta_name($link, $ID)
-         {
-         $ta_query = mysqli_query($link,"select TAName from tblta where TAID='$ID'"); // select query
-         $prog = mysqli_fetch_array($ta_query);// fetch data
-         return $prog['TAName'];
-         }
+         
 
-         function slg_name($link, $ID)
-         {
-         $ta_query = mysqli_query($link,"select groupname from tblgroup where groupID='$ID'"); // select query
-         $prog = mysqli_fetch_array($ta_query);// fetch data
-         return $prog['groupname'];
-         }
+         
 
 ?>
 
 <!-- Begin page -->
 <div id="layout-wrapper">
 
-    <?php include '../layouts/menu.php'; ?>
+    <?php include '../layouts/vertical-menu.php'; ?>
 
     <!-- ============================================================== -->
     <!-- Start right Content here -->

@@ -34,7 +34,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
 <?php include '../layouts/body.php'; ?>
 <?php
-      include "layouts/config.php"; // Using database connection file here
+      include "../layouts/config.php"; // Using database connection file here
         
       // get id through query string
       $jsg_id = $_POST['jsg_id'];
@@ -106,7 +106,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 <!-- Begin page -->
 <div id="layout-wrapper">
 
-    <?php include 'layouts/menu.php'; ?>
+    <?php include '../layouts/vertical-menu.php'; ?>
 
     <!-- ============================================================== -->
     <!-- Start right Content here -->
@@ -262,18 +262,18 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
             </div> <!-- container-fluid -->
         </div>
         <!-- End Page-content -->
-        <?php include 'layouts/footer.php'; ?>
+        <?php include '../layouts/footer.php'; ?>
     </div>
     <!-- end main content-->
 </div>
 <!-- END layout-wrapper -->
 
 <!-- Right Sidebar -->
-<?php include 'layouts/right-sidebar.php'; ?>
+<?php include '../layouts/right-sidebar.php'; ?>
 <!-- Right-bar -->
 
 <!-- JAVASCRIPT -->
-<?php include 'layouts/vendor-scripts.php'; ?>
+<?php include '../layouts/vendor-scripts.php'; ?>
 
 <!-- App js -->
 <script src="assets/js/app.js"></script>

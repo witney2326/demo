@@ -1,10 +1,10 @@
-<?php include 'layouts/session.php'; ?>
-<?php include 'layouts/head-main.php'; ?>
+<?php include '../layouts/session.php'; ?>
+<?php include '../layouts/head-main.php'; ?>
 
 <head>
     <title>CIMIS | Group Training</title>
-    <?php include 'layouts/head.php'; ?>
-    <?php include 'layouts/head-style.php'; ?>
+    <?php include '../layouts/head.php'; ?>
+    <?php include '../layouts/head-style.php'; ?>
 
 }
     
@@ -14,7 +14,7 @@
 <div id="layout-wrapper">
 
     <?php
-        include "layouts/config.php"; // Using database connection file here
+        include "../layouts/config.php"; // Using database connection file here
         
         $id = $_GET['id']; // get id through query string
        $query="select * from tblgroup where groupID='$id'";
@@ -98,7 +98,7 @@
                 <div class="row">
                     <div class="col-12">
 
-                        <?php include 'layouts/body.php'; ?>
+                        <?php include '../layouts/body.php'; ?>
                         <div class="col-lg-9">
                             <div class="card border border-success">
                                 <div class="card-header bg-transparent border-success">

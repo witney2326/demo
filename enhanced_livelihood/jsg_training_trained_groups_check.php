@@ -1,5 +1,5 @@
 <?php
-    include 'layouts/session.php';
+    include '../layouts/session.php';
 
     $user = $_SESSION["user_role"];
 

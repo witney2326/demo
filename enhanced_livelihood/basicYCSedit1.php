@@ -11,7 +11,7 @@
 <div id="layout-wrapper">
 
     <?php
-        include "layouts/config.php"; // Using database connection file here
+        include "../layouts/config.php"; // Using database connection file here
         
         $id = $_GET['id']; // get id through query string
        $query="select * from tblycs where recID='$id'";
@@ -49,7 +49,7 @@
                 <div class="row">
                     <div class="col-12">
 
-                        <?php include 'layouts/body.php'; ?>
+                        <?php include '../layouts/body.php'; ?>
                         <div class="col-lg-9">
                             <div class="card border border-success">
                                 <div class="card-header bg-transparent border-success">

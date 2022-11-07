@@ -1,5 +1,5 @@
 <?php
-include_once 'layouts/config.php';
+include_once '../layouts/config.php';
 if(isset($_POST['Submit']))
 {    
     $hhcode = $_POST["hhcode"];

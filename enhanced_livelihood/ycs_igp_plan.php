@@ -33,7 +33,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 <!-- Begin page -->
 <div id="layout-wrapper">
 
-    <?php include 'layouts/menu.php'; ?>
+    <?php include '../layouts/vertical-menu.php'; ?>
 
     <!-- ============================================================== -->
     <!-- Start right Content here -->
@@ -74,13 +74,13 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                 <!-- Nav tabs -->
                                 <ul class="nav nav-pills nav-justified" role="tablist">
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link active" data-bs-toggle="tab" href="#home-1" role="tab">
+                                        <a class="nav-link" data-bs-toggle="link" href="#home-1" role="link">
                                             <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
                                             <span class="d-none d-sm-block">Selected Concepts</span>
                                         </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="link"  href="ycs_igp_plan_check.php" role="link">
+                                        <a class="nav-link active"  href="javascript:void(0);" role="tab">
                                             <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
                                             <span class="d-none d-sm-block"> IGP and Plans</span>
                                         </a>
@@ -128,7 +128,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
                                                     <tbody>
                                                         <?Php
-                                                            $id = $_GET['id'];
+                                                          
                                                             if (($_SESSION["user_role"] == "01") or ($_SESSION["user_role"] == "02"))
                                                             {
                                                                 $query="select * from tblycs_igp;";
@@ -208,7 +208,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
         </div>
         <!-- End Page-content -->
 
-        <?php include 'layouts/footer.php'; ?>
+        <?php include '../layouts/footer.php'; ?>
     </div>
     <!-- end main content-->
 
@@ -216,11 +216,11 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 <!-- END layout-wrapper -->
 
 <!-- Right Sidebar -->
-<?php include 'layouts/right-sidebar.php'; ?>
+<?php include '../layouts/right-sidebar.php'; ?>
 <!-- Right-bar -->
 
 <!-- JAVASCRIPT -->
-<?php include 'layouts/vendor-scripts.php'; ?>
+<?php include '../layouts/vendor-scripts.php'; ?>
 
 <!-- App js -->
 <script src="assets/js/app.js"></script>

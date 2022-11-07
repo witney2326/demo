@@ -1,18 +1,18 @@
-<?php include 'layouts/session.php'; ?>
-<?php include 'layouts/head-main.php'; ?>
+<?php include '../layouts/session.php'; ?>
+<?php include '../layouts/head-main.php'; ?>
 
 <head>
     <title>JSG Busines Plan|Submission</title>
-    <?php include 'layouts/head.php'; ?>
-    <?php include 'layouts/head-style.php'; ?>   
+    <?php include '../layouts/head.php'; ?>
+    <?php include '../layouts/head-style.php'; ?>   
 </head>
 
 <div id="layout-wrapper">
 
-    <?php include 'layouts/menu.php'; ?>
+    <?php include '../layouts/vertical-menu.php'; ?>
 
     <?php
-        include "layouts/config.php"; // Using database connection file here     
+        include "../layouts/config.php"; // Using database connection file here     
         
         $Rec_ID = $_GET['id']; 
  

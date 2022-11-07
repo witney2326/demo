@@ -577,7 +577,7 @@ chart.draw(data, options);
                                                     ?>
                                                     <td><?php echo "" . number_format($sum);?></td>
                                                     <td><?php echo number_format(8400);?></td>
-                                                    <td></td>
+                                                    <td><?php if ($_SESSION["user_role"] == '00'){echo '<a href="javascript: void(0);">more..</a>' ;}else{echo '<a href="graduation/Rp_Selected_Ben_reports.php">more..</a>';}  ?></td>
                                                 </tr>
                                                 <tr>
                                                     <th scope="row"><i class='fas fa-graduation-cap' style='font-size:18px'></i></th>

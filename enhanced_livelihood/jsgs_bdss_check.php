@@ -1,5 +1,5 @@
 <?php
-    include 'layouts/session.php';
+    include '../layouts/session.php';
    
     if (($_SESSION["user_role"]== '05')) {
         header("location: jsgs_bdss_filter2_results.php");

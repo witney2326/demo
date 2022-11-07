@@ -60,7 +60,7 @@
 <!-- Begin page -->
 <div id="layout-wrapper">
 
-    <?php include '../layouts/menu.php'; ?>
+    <?php include '../layouts/vertical-menu.php'; ?>
 
     <!-- ============================================================== -->
     <!-- Start right Content here -->
@@ -374,23 +374,6 @@
                         </div>
                     </div>
                 </div>
-
-
-                
-
-                    
-
-               
-
-
-                <!-- Collapse -->
-                
-
-                
-                <!-- end row -->
-
-                
-                <!-- end row -->
 
             </div> <!-- container-fluid -->
         </div>

@@ -44,7 +44,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 <!-- Begin page -->
 <div id="layout-wrapper">
 
-    <?php include '../layouts/menu.php'; ?>
+    <?php include '../layouts/vertical-menu.php'; ?>
 
     <!-- ============================================================== -->
     <!-- Start right Content here -->
@@ -116,7 +116,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                     <div class="col-12">
                                         <div class="card border border-primary">
                                         <div class="card-header bg-transparent border-primary">
-                                            <h5 class="my-0 text-primary">Income Generating Projects</h5>
+                                            <h5 class="my-0 text-primary">IGPs Under Region</h5>
                                         </div>
                                         <div class="card-body">
                                         <h5 class="card-title mt-0"></h5>
@@ -219,7 +219,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
         </div>
         <!-- End Page-content -->
 
-        <?php include 'layouts/footer.php'; ?>
+        <?php include '../layouts/footer.php'; ?>
     </div>
     <!-- end main content-->
 
@@ -227,11 +227,11 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 <!-- END layout-wrapper -->
 
 <!-- Right Sidebar -->
-<?php include 'layouts/right-sidebar.php'; ?>
+<?php include '../layouts/right-sidebar.php'; ?>
 <!-- Right-bar -->
 
 <!-- JAVASCRIPT -->
-<?php include 'layouts/vendor-scripts.php'; ?>
+<?php include '../layouts/vendor-scripts.php'; ?>
 
 <!-- App js -->
 <script src="assets/js/app.js"></script>
