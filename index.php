@@ -523,7 +523,7 @@ chart.draw(data, options);
                                                     ?>
                                                     <td><?php echo "" . number_format($total_slgs+$total_cls2);?></td>
                                                     <td><?php echo number_format(0);?></td>
-                                                    <td></td>
+                                                    <td><?php if ($_SESSION["user_role"] == '00'){echo '<a href="javascript: void(0);">more..</a>' ;}else{echo '<a href="slg_coop_formation_reports.php">more ..</a>';}  ?></td>
                                                 </tr>
                                                 <tr>
                                                     <th scope="row"><i class='fas fa-layer-group' style='font-size:18px;color:darkgoldenrod'></i></th>

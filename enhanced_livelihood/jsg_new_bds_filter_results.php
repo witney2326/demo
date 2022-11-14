@@ -17,11 +17,6 @@
 
 <?php include '../layouts/body.php'; ?>
 
-<?php 
-     
-    $region = $_POST['region'];
-    
-?>
 
 <!-- Begin page -->
 <div id="layout-wrapper">
@@ -68,19 +63,30 @@
                                     
                                     <div class="card-body ">
                                         <h5 class="card-title mt-0"></h5>
-                                        <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="jsg_new_bds_filter2_results.php" method ="POST">
+                                        <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="jsg_new_bds_filter1_results.php" method ="POST">
                                             <div class="col-12">
                                                 <label for="region" class="form-label">Region</label>
                                                 <div>
                                                     <select class="form-select" name="region" id="region" value ="<?php echo $region;?>" required>
-                                                        <option selected value = "<?php echo $region;?>"><?php echo get_rname($link,$region);?></option>
+                                                        <option></option>
+                                                        <?php                                                           
+                                                            $dis_fetch_query = "SELECT regionID,name FROM tblregion";                                                  
+                                                            $result_dis_fetch = mysqli_query($link, $dis_fetch_query);                                                                       
+                                                            $i=0;
+                                                                while($DB_ROW_Dis = mysqli_fetch_array($result_dis_fetch)) {
+                                                            ?>
+                                                            <option value="<?php echo $DB_ROW_Dis["regionID"]; ?>">
+                                                                <?php echo $DB_ROW_Dis["name"]; ?></option><?php
+                                                                $i++;
+                                                                    }
+                                                        ?>
                                                     </select>
                                                 </div>
                                             </div>
                                             
                                             <div class="col-12">
                                                 <label for="district" class="form-label">District</label>
-                                                <select class="form-select" name="district" id="district"  required>
+                                                <select class="form-select" name="district" id="district"  required disabled>
                                                     <option></option>
                                                         <?php                                                           
                                                             $dis_fetch_query = "SELECT DistrictID,DistrictName FROM tbldistrict where regionID =$region";                                                  

@@ -1,57 +1,41 @@
-<?php include '../layouts/session.php'; ?>
-<?php include '../layouts/head-main.php'; ?>
 
-<head>
-    <title>JSG BP Evaluation|JSG Evaluate</title>
-    <?php include '../layouts/head.php'; ?>
-    <?php include '../layouts/head-style.php'; ?>
-
-}
+<?php
+    include "../layouts/config.php"; // Using database connection file here     
     
-</head>
+    $grpID = $_POST['grpID'];
+    $rating = $_POST['rating'];
 
-<div id="layout-wrapper">
+    
+    $query="select bp_submitted,bp_evaluated from tbljsg where recID='$grpID'";
+    
+    if ($result_set = $link->query($query)) {
+        while($row = $result_set->fetch_array(MYSQLI_ASSOC))
+        { $bp_submitted= $row["bp_submitted"];$bp_evaluated = $row["bp_evaluated"];}
+        $result_set->close();
+    }
 
-    <?php include '../layouts/vertical-menu.php'; ?>
-
-    <?php
-        include "../layouts/config.php"; // Using database connection file here     
-        
-        $grpID = $_POST['grpID'];
-        $rating = $_POST['rating'];
-
-        
-        $query="select bp_submitted,bp_evaluated from tbljsg where recID='$grpID'";
-        
-        if ($result_set = $link->query($query)) {
-            while($row = $result_set->fetch_array(MYSQLI_ASSOC))
-            { $grad_assesed= $row["grad_assesed"];$grad_assesed_result = $row["grad_assesed_result"];}
-            $result_set->close();
-        }
- 
-        if (($grad_assesed =='0'))
-        {
-            $sql = mysqli_query($link,"update tblgroup  SET grad_assesed = '1', grad_assesed_result = '$rating' where groupID = '$grpID'");
-                    
-            if ($sql) {
-                echo '<script type="text/javascript">'; 
-                echo 'alert("SLG successfully Rated!");'; 
-                echo 'window.location.href = "graduation_grp_assesment.php";';
-                echo '</script>';
-            } else {
-                echo "Error: " . $sql . ":-" . mysqli_error($link);
-            }
-        }
-        else
-        {
+    if (($bp_submitted =='1') and ($bp_evaluated =='0'))
+    {
+        $sql = mysqli_query($link,"update tbljsg  SET bp_evaluated = '1', evaluation_result = '$rating' where recID = '$grpID'");
+                
+        if ($sql) {
             echo '<script type="text/javascript">'; 
-            echo 'alert("SLG Already Rated!");'; 
-            echo 'window.location.href = "graduation_grp_assesment.php";';
+            echo 'alert("JSG successfully Rated!");'; 
+            echo 'window.location.href = "jsgs_business_plans_check.php";';
             echo '</script>';
+        } else {
+            echo "Error: " . $sql . ":-" . mysqli_error($link);
         }
-        mysqli_close($link);
+    }
+    else
+    {
+        echo '<script type="text/javascript">'; 
+        echo 'alert("JSG Already Rated! OR JSG does not have a BP");'; 
+        echo 'window.location.href = "jsgs_business_plans_check.php";';
+        echo '</script>';
+    }
+    mysqli_close($link);
+        
             
-               
-    ?>
+?>
     
-</div>

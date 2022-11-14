@@ -82,7 +82,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                     </li>
 
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link" data-bs-toggle="tab" href="#new-meeting" role="tab">
+                                        <a class="nav-link" data-bs-toggle="link" href="jsg_new_bds_check.php" role="link">
                                             <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
                                             <span class="d-none d-sm-block">New BDS</span>
                                         </a>

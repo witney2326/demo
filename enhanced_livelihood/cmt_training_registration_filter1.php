@@ -38,6 +38,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 </head>
 
 <?php include '../layouts/body.php'; ?>
+<?php include '../lib.php'; ?>
 
 <?php
     if (($_SESSION["user_role"]== '03')) 
@@ -48,35 +49,6 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
     {
         $region = $_POST['region'];
     }
-    
-
-         function get_rname($link, $rcode)
-         {
-         $rg_query = mysqli_query($link,"select name from tblregion where regionID='$rcode'"); // select query
-         $rg = mysqli_fetch_array($rg_query);// fetch data
-         return $rg['name'];
-         }
-     
-         function dis_name($link, $disID)
-         {
-         $dis_query = mysqli_query($link,"select DistrictName from tbldistrict where DistrictID='$disID'"); // select query
-         $dis = mysqli_fetch_array($dis_query);// fetch data
-         return $dis['DistrictName'];
-         }
- 
-         function grp_name($link, $grpID)
-         {
-         $grp_query = mysqli_query($link,"select groupname from tblgroup where groupID='$grpID'"); // select query
-         $grp = mysqli_fetch_array($grp_query);// fetch data
-         return $grp['groupname'];
-         }
- 
-         function prog_name($link, $progID)
-         {
-         $prog_query = mysqli_query($link,"select progName from tblspp where progID='$progID'"); // select query
-         $prog = mysqli_fetch_array($prog_query);// fetch data
-         return $prog['progName'];
-         }
 
 ?>
 
@@ -221,11 +193,11 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                         if ($result_set = $link->query($query)) {
                                                         while($row = $result_set->fetch_array(MYSQLI_ASSOC))
                                                         { 
-                                                        
+                                                            if ($row["cmt_cme_trained"] == '1'){$cme_trained = "Yes";}else{$cme_trained = "No";}
                                                             echo "<tr>\n";
                                                                 echo "<td>".$row["ClusterID"]."</td>\n";
                                                                 echo "<td>".$row["ClusterName"]."</td>\n";
-                                                                echo "<td></td>\n";
+                                                                echo "<td>\t\t$cme_trained</td>\n";
                                                                 echo "<td> <a href=\"../basicCLSview.php?id=".$row['ClusterID']."\"><i class='far fa-eye' title='View Cluster' style='font-size:18px;color: purple'></i></a>\n";
                                                                 echo "<a onClick=\"javascript: return confirm('You want To Record CME Training?');\" href=\"cmt_add_cmeTrainingRegGrp.php?id=".$row['ClusterID']."\"\><i class='fa fa-plus' title='Update Status' style='font-size:18px; color:blue'></i></a>\n";
                                                                 echo "<a onClick=\"javascript: return confirm('You want To Record CME Training?');\" href=\"cmt_add_cmeTraining.php?id=".$row['ClusterID']."\"\><i class='fa fa-plus' title='Record CME Training' style='font-size:18px; color:orange'></i></a>\n";

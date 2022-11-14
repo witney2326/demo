@@ -15,37 +15,8 @@
 </head>
 
 <?php include '../layouts/body.php'; ?>
+<?php include '../lib.php'; ?>
 
-<?php 
-    
-    
-    function get_rname($link, $rcode)
-        {
-        $rg_query = mysqli_query($link,"select name from tblregion where regionID='$rcode'"); // select query
-        $rg = mysqli_fetch_array($rg_query);// fetch data
-        return $rg['name'];
-        }
-    
-        function dis_name($link, $disID)
-        {
-        $dis_query = mysqli_query($link,"select DistrictName from tbldistrict where DistrictID='$disID'"); // select query
-        $dis = mysqli_fetch_array($dis_query);// fetch data
-        return $dis['DistrictName'];
-        }
-
-        function cw_name($link, $cwcode)
-        {
-        $cw_query = mysqli_query($link,"select cwName from tblcw where cwID='$cwcode'"); // select query
-        $cwname = mysqli_fetch_array($cw_query);// fetch data
-        return $cwname['cwName'];
-        }
-        function ta_name($link, $taID)
-        {
-        $dis_query = mysqli_query($link,"select TAName from tblta where TAID='$taID'"); // select query
-        $dis = mysqli_fetch_array($dis_query);// fetch data
-        return $dis['TAName'];
-        }
-?>
 
 <!-- Begin page -->
 <div id="layout-wrapper">
@@ -98,12 +69,7 @@
                                             <span class="d-none d-sm-block">New BDS</span>
                                         </a>
                                     </li>
-                                    <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link" data-bs-toggle="link" href="jsgs_bds_check.php" role="link">
-                                            <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
-                                            <span class="d-none d-sm-block">Allocate BDS</span>
-                                        </a>
-                                    </li>
+                                    
                                     <li class="nav-item waves-effect waves-light">
                                         <a class="nav-link active" data-bs-toggle="link" href="<?php echo 'javascript:void(0)';?>" role="link">
                                             <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
@@ -116,12 +82,28 @@
                                 <div class="card border border-primary">
                                     <div class="card-body">
                                         <h5 class="card-title mt-0"></h5>
-                                        <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="jsgs_bds_filter4.php" method ="POST" >
+                                        <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="jsgs_trainingPlan_filter1.php" method ="POST" >
                                             <div class="col-12">
                                                 <label for="region" class="form-label">Region</label>
                                                 <div>
                                                     <select class="form-select" name="region" id="region" value ="$region" required>
-                                                        <option selected value = "<?php echo $region;?>"><?php echo get_rname($link,$region);?></option>
+                                                    <option ></option>
+                                                        <?php                                                           
+                                                                $dis_fetch_query = "SELECT regionID, name FROM tblregion";                                                  
+                                                                $result_dis_fetch = mysqli_query($link, $dis_fetch_query);                                                                       
+                                                                $i=0;
+                                                                    while($DB_ROW_reg = mysqli_fetch_array($result_dis_fetch)) {
+                                                                ?>
+                                                                <option value ="<?php
+                                                                        echo $DB_ROW_reg["regionID"];?>">
+                                                                    <?php
+                                                                        echo $DB_ROW_reg["name"];
+                                                                    ?>
+                                                                </option>
+                                                                <?php
+                                                                    $i++;
+                                                                        }
+                                                            ?>
                                                     </select>
                                                 </div>
                                             </div>
@@ -129,18 +111,40 @@
                                             <div class="col-12">
                                                 <label for="district" class="form-label">District</label>
                                                 <div>
-                                                    <select class="form-select" name="district" id="district" value ="$district" required>
-                                                        <option selected value = "<?php echo $district;?>"><?php echo dis_name($link,$district);?></option>
-                                                    </select>
+                                                <select class="form-select" name="district" id="district" value ="$district" required disabled>
+                                                    <option selected value="$district" ></option>
+                                                        <?php                                                           
+                                                            $dis_fetch_query = "SELECT DistrictID,DistrictName FROM tbldistrict";                                                  
+                                                            $result_dis_fetch = mysqli_query($link, $dis_fetch_query);                                                                       
+                                                            $i=0;
+                                                                while($DB_ROW_Dis = mysqli_fetch_array($result_dis_fetch)) {
+                                                            ?>
+                                                            <option value="<?php echo $DB_ROW_Dis["DistrictID"]; ?>">
+                                                                <?php echo $DB_ROW_Dis["DistrictName"]; ?></option><?php
+                                                                $i++;
+                                                                    }
+                                                        ?>
+                                                </select>
                                                 </div>
                                             </div>
 
                                             <div class="col-12">
                                                 <label for="cw" class="form-label">Traditional Authority</label>
                                                 <div>
-                                                    <select class="form-select" name="ta" id="ta" value ="$ta" required>
-                                                        <option selected value = "<?php echo $ta;?>"><?php echo ta_name($link,$ta);?></option>
-                                                    </select>
+                                                <select class="form-select" name="ta" id="ta" required disabled>
+                                                    <option selected  value="$ta"></option>
+                                                    <?php                                                           
+                                                            $ta_fetch_query = "SELECT TAName FROM tblta";                                                  
+                                                            $result_ta_fetch = mysqli_query($link, $ta_fetch_query);                                                                       
+                                                            $i=0;
+                                                                while($DB_ROW_ta = mysqli_fetch_array($result_ta_fetch)) {
+                                                            ?>
+                                                            <option>
+                                                                <?php echo $DB_ROW_ta["TAName"]; ?></option><?php
+                                                                $i++;
+                                                                    }
+                                                        ?>
+                                                </select>
                                                 </div>
                                             </div>
 
@@ -200,7 +204,7 @@
                                                     </thead>
                                                     <tbody>
                                                         <?Php
-                                                            $query="select tbljsg_training_plan.planID as pID, tbljsg_training_plan.jsgID as jID, tbljsg.jsg_name as jName, tbljsg_training_plan.skillTypeID as sSkill, tbljsg_training_plan.StartDate as sDate, tbljsg_training_plan.bds as bds from tbljsg_training_plan inner join tbljsg on tbljsg_training_plan.jsgID = tbljsg.recID inner join tblgroup on tbljsg.groupID = tblgroup.groupID where tblgroup.TAID = '$ta'";
+                                                            $query="select tbljsg_training_plan.planID as pID, tbljsg_training_plan.jsgID as jID, tbljsg.jsg_name as jName, tbljsg_training_plan.skillTypeID as sSkill, tbljsg_training_plan.StartDate as sDate, tbljsg_training_plan.bds as bds from tbljsg_training_plan inner join tbljsg on tbljsg_training_plan.jsgID = tbljsg.recID inner join tblgroup on tbljsg.groupID = tblgroup.groupID";
 
                                                             //Variable $link is declared inside config.php file & used here
                                                             
@@ -216,8 +220,8 @@
                                                                     echo "<td>".$row["jID"]."</td>\n";
                                                                     echo "<td>".$row["jName"]."</td>\n";
                                                                     echo "<td></td>\n";
-                                                                    echo "<td>".$row["sSkill"]."</td>\n";
-                                                                    echo "<td>".$row["bds"]."</td>\n";
+                                                                    echo "<td>".iga_name($link,$row["sSkill"])."</td>\n";
+                                                                    echo "<td>".bdsname($link,$row["bds"])."</td>\n";
                                                                     echo "<td>".$row["sDate"]."</td>\n";
                                                                     echo "<td></td>\n";
                                                                     echo "<td>

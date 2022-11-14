@@ -48,6 +48,13 @@
         return $rg['TAName'];
     }
 
+    function bdsname($link, $bdscode)
+    {
+        $rg_query = mysqli_query($link,"select bdsname from tblbds where bdsID='$bdscode'"); // select query
+        $rg = mysqli_fetch_array($rg_query);// fetch data
+        return $rg['bdsname'];
+    }
+
     function tcode($link, $tname)
     {
         $rg_query = mysqli_query($link,"select TAID from tblta where TAName='$tname'"); // select query
@@ -174,7 +181,12 @@
         $prog = mysqli_fetch_array($ta_query);// fetch data
         return $prog['groupname'];
         }
-        
+        function cw_name($link, $cwcode)
+        {
+        $cw_query = mysqli_query($link,"select cwName from tblcw where cwID='$cwcode'"); // select query
+        $cwname = mysqli_fetch_array($cw_query);// fetch data
+        return $cwname['cwName'];
+        }
     ?>
     
 </div>

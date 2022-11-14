@@ -28,7 +28,7 @@
     <script LANGUAGE="JavaScript">
         function confirmSubmit()
         {
-        var agree=confirm("Are you sure you want to RATE this Cluster?");
+        var agree=confirm("Are you sure you want to RATE this JSG?");
         if (agree)
         return true ;
         else
@@ -179,7 +179,7 @@
                                                     <div class="card-body">
                                                     <h7 class="card-title mt-0"></h7>
                                                         
-                                                            <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
+                                                            <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100" style="font-size:11px;">
                                                             
                                                                 <thead>
                                                                     <tr>

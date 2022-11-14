@@ -27,6 +27,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 </head>
 
 <?php include '../layouts/body.php'; ?>
+<?php include '../lib.php'; ?>
 <?php
 
 // do check
@@ -42,9 +43,11 @@ $check = substr($id, 5, 3);
 
 
 if(isset($_POST['reg'])){
+    $GID = $_POST["group_id"];
+    $check = substr($GID, 5, 3);
     if (($check == "CLU") or ($check == "CLS"))
     {
-        $query = "UPDATE tblcluster SET cmt_cme_trained ='1' WHERE ClusterID=$id";;
+        $query = "UPDATE tblcluster SET cmt_cme_trained ='1' WHERE ClusterID=$GID";;
             
         if (mysqli_query($link, $query)) {
             echo '<script type="text/javascript">'; 
@@ -57,7 +60,7 @@ if(isset($_POST['reg'])){
         mysqli_close($link);
     } else
     if (($check == "SLG")){
-        $sql_cls_update = "UPDATE tblgroup SET cmt_cme_trained ='1' WHERE groupID=$id";
+        $sql_cls_update = "UPDATE tblgroup SET cmt_cme_trained ='1' WHERE groupID=$GID";
         if (mysqli_query($link, $sql_cls_update)) {
             echo '<script type="text/javascript">'; 
             echo 'alert("SLG Training Record has been added successfully !");'; 
@@ -69,33 +72,7 @@ if(isset($_POST['reg'])){
         mysqli_close($link);
     }
 }
-      
-
-    function get_rname($link, $rcode)
-    {
-    $rg_query = mysqli_query($link,"select name from tblregion where regionID='$rcode'"); // select query
-    while($rg = mysqli_fetch_array($rg_query)){
-        return $rg['name'];
-    };// fetch data
-    
-    }
-
-    function dis_name($link, $disID)
-    {
-    $dis_query = mysqli_query($link,"select DistrictName from tbldistrict where DistrictID='$disID'"); // select query
-    while($dis = mysqli_fetch_array($dis_query)){
-        return $dis['DistrictName'];
-    };// fetch data
-    
-    
-    }
-
-    function ta_name($link, $taID)
-    {
-    $dis_query = mysqli_query($link,"select TAName from tblta where TAID='$taID'"); // select query
-    $tame = mysqli_fetch_array($dis_query);// fetch data
-    return $tame['TAName'];
-    }
+       
 ?>
 
 <!-- Begin page -->
@@ -149,7 +126,7 @@ if(isset($_POST['reg'])){
                                         </div>
                                         <div class="card-body">
                                             
-                                            <form method="POST" action="">
+                                            <form method="POST" action="cmt_cmeRegGrp.php">
                                                 <div class="row mb-1">
                                                     <label for="group_id" class="col-sm-2 col-form-label">Group ID</label>
                                                     <input type="text" class="form-control" id="group_id" name = "group_id" value="<?php echo $id ; ?>" style="max-width:30%;" readonly >
@@ -211,7 +188,7 @@ if(isset($_POST['reg'])){
                                                     
                                                         <div>
                                                             <button type="submit" class="btn btn-btn btn-outline-primary w-md" name="reg" value="reg">Register Group</button>
-                                                            <button type="submit" class="btn btn-btn btn-outline-primary w-md" name="Submit" value="Submit" disabled>Save Record</button>
+                                                            
                                                             <INPUT TYPE="button" class="btn btn-btn btn-outline-secondary w-md" VALUE="Back" onClick="history.go(-1);">
                                                         </div>
                                                     

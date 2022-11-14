@@ -15,6 +15,7 @@
 </head>
 
 <?php include '../layouts/body.php'; ?>
+<?php include '../lib.php'; ?>
 
 <?php 
 
@@ -32,32 +33,6 @@
     }
     
     
-    function get_rname($link, $rcode)
-        {
-        $rg_query = mysqli_query($link,"select name from tblregion where regionID='$rcode'"); // select query
-        $rg = mysqli_fetch_array($rg_query);// fetch data
-        return $rg['name'];
-        }
-    
-        function dis_name($link, $disID)
-        {
-        $dis_query = mysqli_query($link,"select DistrictName from tbldistrict where DistrictID='$disID'"); // select query
-        $dis = mysqli_fetch_array($dis_query);// fetch data
-        return $dis['DistrictName'];
-        }
-
-        function cw_name($link, $cwcode)
-        {
-        $cw_query = mysqli_query($link,"select cwName from tblcw where cwID='$cwcode'"); // select query
-        $cwname = mysqli_fetch_array($cw_query);// fetch data
-        return $cwname['cwName'];
-        }
-        function ta_name($link, $taID)
-        {
-        $dis_query = mysqli_query($link,"select TAName from tblta where TAID='$taID'"); // select query
-        $dis = mysqli_fetch_array($dis_query);// fetch data
-        return $dis['TAName'];
-        }
 ?>
 
 <!-- Begin page -->
@@ -111,12 +86,7 @@
                                             <span class="d-none d-sm-block">New BDS</span>
                                         </a>
                                     </li>
-                                    <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link" data-bs-toggle="link" href="jsgs_bds_check.php" role="link">
-                                            <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
-                                            <span class="d-none d-sm-block">Allocate BDS</span>
-                                        </a>
-                                    </li>
+                                    
                                     <li class="nav-item waves-effect waves-light">
                                         <a class="nav-link active" data-bs-toggle="link" href="<?php echo 'javascript:void(0)';?>" role="link">
                                             <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
@@ -129,7 +99,7 @@
                                 <div class="card border border-primary">
                                     <div class="card-body">
                                         <h5 class="card-title mt-0"></h5>
-                                        <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="jsgs_bds_filter4.php" method ="POST" >
+                                        <form class="row row-cols-lg-auto g-3 align-items-center">
                                             <div class="col-12">
                                                 <label for="region" class="form-label">Region</label>
                                                 <div>
@@ -157,29 +127,9 @@
                                                 </div>
                                             </div>
 
-                                            <div class="col-12">
-                                                <label for="slg" class="form-label">SL Group</label>
-                                                <select class="form-select" name="slg" id="slg"  required>
-                                                    <option ></option>
-                                                        <?php                                                           
-                                                            $slg_fetch_query = "SELECT groupID,groupname FROM tblgroup where TAID = '$ta'";                                                  
-                                                            $result_slg_fetch = mysqli_query($link, $slg_fetch_query);                                                                       
-                                                            $i=0;
-                                                                while($DB_ROW_slg = mysqli_fetch_array($result_slg_fetch)) {
-                                                            ?>
-                                                            <option value="<?php echo $DB_ROW_slg["groupID"]; ?>">
-                                                                <?php echo $DB_ROW_slg["groupname"]; ?></option><?php
-                                                                $i++;
-                                                                    }
-                                                        ?>
-                                                </select>
-                                                <div class="invalid-feedback">
-                                                    Please select a valid SLG.
-                                                </div>
-                                            </div>
+                                            
 
-                                            <div class="col-12">
-                                                <button type="submit" class="btn btn-btn btn-outline-primary w-md" name="Submit" value="Submit" >Submit</button>
+                                            <div class="col-12">                                               
                                                 <INPUT TYPE="button" class="btn btn-btn btn-outline-secondary w-md" VALUE="Back" onClick="history.go(-1);">
                                             </div>
                                         </form>                                             
@@ -229,8 +179,8 @@
                                                                     echo "<td>".$row["jID"]."</td>\n";
                                                                     echo "<td>".$row["jName"]."</td>\n";
                                                                     echo "<td></td>\n";
-                                                                    echo "<td>".$row["sSkill"]."</td>\n";
-                                                                    echo "<td>".$row["bds"]."</td>\n";
+                                                                    echo "<td>".iga_name($link,$row["sSkill"])."</td>\n";
+                                                                    echo "<td>".bdsname($link,$row["bds"])."</td>\n";
                                                                     echo "<td>".$row["sDate"]."</td>\n";
                                                                     echo "<td></td>\n";
                                                                     echo "<td>

@@ -137,12 +137,14 @@
                                     if ($_SESSION["user_role"] == '00'){echo '<a href="javascript: void(0);" class="has-arrow" key="t-vertical">Enhanced Livelihood</a>' ;}else{echo '<a href="./enhanced_livelihood/enhanced_livelihood.php" class="has-arrow" key="t-vertical">Enhanced Livelihood</a>';}
                                 } else
                                 {
-                                    if ($_SESSION["user_role"] == '00'){echo '<a href="javascript: void(0);" class="has-arrow" key="t-vertical">Enhanced Livelihood</a>' ;}else{echo '<a href="../enhanced_livelihood/enhanced_livelihood.php" class="has-arrow" key="t-vertical">Enhanced Livelihood</a>';}
+                                    if ($_SESSION["user_role"] == '00'){echo '<a href="javascript: void(0);" class="has-arrow" key="t-vertical">Enhanced Livelihood</a>' ;}else{echo '<a href="enhanced_livelihood/enhanced_livelihood.php" class="has-arrow" key="t-vertical">Enhanced Livelihood</a>';}
                                 }
                             ?>
                         </li>
                         <li>
                             <?php
+                                
+
                                 if ($curPageName == "enhanced_livelihood.php")
                                 {
                                     if ($_SESSION["user_role"] == '00'){echo '<a href="javascript: void(0);" class="has-arrow" key="t-vertical">Graduation</a>' ;}else{echo '<a href="../graduation/graduation.php" class="has-arrow" key="t-vertical">Graduation</a>';} 
@@ -151,7 +153,7 @@
                                     if ($_SESSION["user_role"] == '00'){echo '<a href="javascript: void(0);" class="has-arrow" key="t-vertical">Graduation</a>' ;}else{echo '<a href="graduation/graduation.php" class="has-arrow" key="t-vertical">Graduation</a>';}
                                 } else
                                 {
-                                    if ($_SESSION["user_role"] == '00'){echo '<a href="javascript: void(0);" class="has-arrow" key="t-vertical">Graduation</a>' ;}else{echo '<a href="../graduation/graduation.php" class="has-arrow" key="t-vertical">Graduation</a>';}
+                                    if ($_SESSION["user_role"] == '00'){echo '<a href="javascript: void(0);" class="has-arrow" key="t-vertical">Graduation</a>' ;}else{echo '<a href="graduation/graduation.php" class="has-arrow" key="t-vertical">Graduation</a>';}
                                 }
                             ?>
                             

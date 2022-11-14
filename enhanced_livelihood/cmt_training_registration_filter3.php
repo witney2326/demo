@@ -194,11 +194,11 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                         if ($result_set = $link->query($query)) {
                                                         while($row = $result_set->fetch_array(MYSQLI_ASSOC))
                                                         { 
-                                                            if ($row["cmt_cme_trained"] == '1'){$cmeTrained = 'Yes';}else{$cmeTrained ='No';}
+                                                            if ($row["cmt_cme_trained"] == '1'){$cme_trained = "Yes";}else{$cme_trained = "No";}
                                                             echo "<tr>\n";
                                                             echo "<td>".$row["ClusterID"]."</td>\n";
                                                             echo "<td>".$row["ClusterName"]."</td>\n";
-                                                            echo "<td>\t\t$cmeTrained</td>\n";
+                                                            echo "<td>\t\t$cme_trained</td>\n";
                                                             echo "<td> <a href=\"../basicCLSview.php?id=".$row['ClusterID']."\"><i class='far fa-eye' title='View Cluster' style='font-size:18px;color: purple'></i></a>\n";
                                                             echo "<a onClick=\"javascript: return confirm('You want To Update Training Status?');\" href=\"cmt_reg_cluster.php?id=".$row['ClusterID']."\"\><i class='fa fa-plus' title='Update Cluster CME Training Status' style='font-size:18px; color:blue'></i></a>\n";
                                                             echo "<a onClick=\"javascript: return confirm('You want To Record CME Training?');\" href=\"cmt_add_cmeTraining.php?id=".$row['ClusterID']."\"\><i class='fa fa-plus' title='Record CME Training' style='font-size:18px; color:orange'></i></a>\n";

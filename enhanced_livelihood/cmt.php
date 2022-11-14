@@ -104,12 +104,12 @@
                                                                                     <i class='fas fa-house-user' style='font-size:24px'></i>
                                                                                     <p class="text-muted fw-medium">Clusters/SLGs Assessed</p>
                                                                                     <?php
-                                                                                        $result = mysqli_query($link, 'SELECT count(groupID) AS total_slgs FROM tblgroup where cmt_assesed = "1"'); 
+                                                                                        $result = mysqli_query($link, "SELECT count(groupID) AS total_slgs FROM tblgroup where cmt_assesed = '1'"); 
                                                                                         $row = mysqli_fetch_assoc($result); 
                                                                                         $total_slgs = $row['total_slgs'];
                                                                                         
-                                                                                        $result2 = mysqli_query($link, 'SELECT count(ClusterID) AS total_cls FROM tblcluster where cmt_assesed = "1"'); 
-                                                                                        $row = mysqli_fetch_assoc($result); 
+                                                                                        $result2 = mysqli_query($link, "SELECT count(ClusterID) AS total_cls FROM tblcluster where cmt_assesed = '1'"); 
+                                                                                        $row = mysqli_fetch_assoc($result2); 
                                                                                         $total_cls = $row['total_cls'];
 
                                                                                         $sum = $total_slgs+$total_cls;

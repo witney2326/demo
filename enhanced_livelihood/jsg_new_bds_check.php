@@ -13,10 +13,10 @@
     }
 
     if (($_SESSION["user_role"]== '02')) {
-        header("location: jsgs_bdss.php");   
+        header("location: jsg_new_bds_filter_results.php");   
     }
     if (($_SESSION["user_role"]== '01')) {
-        header("location: jsgs_bdss.php");   
+        header("location: jsg_new_bds_filter_results.php");   
     }
     if (($_SESSION["user_role"]== '00')) {
         header("location: index.php");   
@@ -26,7 +26,7 @@
         header("location: enhancedReports.php");   
     }
     if (($_SESSION["user_role"]== '07')) {
-        header("location: jsgs_bdss.php");   
+        header("location: jsg_new_bds_filter_results.php");   
     }
     if (($_SESSION["user_role"]== '08')) {
         header("location: enhancedReports.php");   
