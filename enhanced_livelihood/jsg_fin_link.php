@@ -2,10 +2,10 @@
 <?php include '../layouts/head-main.php'; ?>
 
 <head>
-    <title>YCS |COMSIV Financial Linkage</title>
+    <title>JSG |COMSIV Financial Linkage</title>
     <?php include '../layouts/head.php'; ?>
     <?php include '../layouts/head-style.php'; ?>
-    <?php include '../lib.php'; ?>
+
     <!-- DataTables -->
     <link href="assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
     <link href="assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
@@ -42,47 +42,29 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
       include "../layouts/config.php"; // Using database connection file here
         
       $id = $_GET['id']; // get id through query string
-     $query="select * from tblbeneficiaries where sppCode='$id'";
+     $query="select * from tbljsg where recID='$id'";
       
       if ($result_set = $link->query($query)) {
           while($row = $result_set->fetch_array(MYSQLI_ASSOC))
           { 
-              $hhname= $row["hh_head_name"];
-              $sppname= $row["spProg"];
-              $regionID = $row["regionID"];
+              $jsg_name= $row["jsg_name"];
+              $type= $row["type"];
+              
               $districtID= $row["districtID"];
               $groupID = $row["groupID"];
-              $cohort = $row["cohort"];
+              $cohort = $row["bus_category"];
           }
           $result_set->close();
       }
 
-      if(isset($_POST['Submit']))
-          {    
-          $hh_id = $_POST['hh_id'];
-          $year = $_POST['year'];
-          $month = $_POST['month'];
-          $amount = $_POST['amount'];
-          
-          
-              $sql = "INSERT INTO tblcomsiv_hh_fin_linkage (hh_code,ldate,rdate,period,amount)
-              VALUES ('$hh_id','$groupID','$year','$month','$amount')";
-          if (mysqli_query($link, $sql)) {
-              echo '<script type="text/javascript">'; 
-              echo 'alert("SLG Loan Record has been added successfully !");'; 
-              echo 'window.location.href = "basic_livelihood_slg_mgt_check.php";';
-              echo '</script>';
-          } else {
-              echo "Error: " . $sql . ":-" . mysqli_error($link);
-          }
-          mysqli_close($link);
-          }
+      
     ?>
 
 <!-- Begin page -->
 <div id="layout-wrapper">
 
     <?php include '../layouts/vertical-menu.php'; ?>
+    <?php include '../lib.php'; ?>
 
     <!-- ============================================================== -->
     <!-- Start right Content here -->
@@ -96,7 +78,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                 <div class="row">
                     <div class="col-12">
                         <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                            <h4 class="mb-sm-0 font-size-18">YCS Financial Linkage - COMSIV</h4>
+                            <h4 class="mb-sm-0 font-size-18">JSG Financial Linkage - COMSIV</h4>
                             <div class="page-title-right">
                                     <div>
                                         <p align="right">
@@ -118,21 +100,22 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                 
                                 <div class="card-body">
                                     
-                                    <form method="POST" action="">
+                                    <form method="POST" action="jsg_fin_link1.php" method="POST">
                                         <div class="row mb-1">
-                                            <label for="hh_id" class="col-sm-2 col-form-label">HH Code</label>
-                                            <input type="text" class="form-control" id="hh_id" name = "hh_id" value="<?php echo $id ; ?>" style="max-width:30%;" readonly >
+                                            <label for="jsg_id" class="col-sm-2 col-form-label">JSG ID</label>
+                                            <input type="text" class="form-control" id="jsg_id" name = "jsg_id" value="<?php echo $id ; ?>" style="max-width:30%;" readonly >
 
-                                            <label for="hh_name" class="col-sm-2 col-form-label">HH Name</label>
-                                            <input type="text" class="form-control" id="hh_name" name ="hh_name" value = "<?php echo $hhname ; ?>" style="max-width:30%;" readonly >
+                                            <label for="jsg_name" class="col-sm-2 col-form-label">JSG Name</label>
+                                            <input type="text" class="form-control" id="jsg_name" name ="jsg_name" value = "<?php echo $jsg_name ; ?>" style="max-width:30%;" readonly >
                                         </div>
                                         
                                         <div class="row mb-1">
-                                            <label for="region" class="col-sm-2 col-form-label">Region</label>
-                                            <input type="text" class="form-control" id="region" name="region" value ="<?php echo get_rname($link,$regionID) ; ?>" style="max-width:30%;" readonly >
-
+                                            
                                             <label for="district" class="col-sm-2 col-form-label">District</label>
                                             <input type="text" class="form-control" id="district" name="district" value ="<?php echo dis_name($link,$districtID) ; ?>" style="max-width:30%;" readonly >
+
+                                            <label for="type" class="col-sm-2 col-form-label">Business Type</label>
+                                            <input type="text" class="form-control" id="type" name="type" value ="<?php echo iga_type($link,$type) ; ?>" style="max-width:30%;" readonly >
                                         </div>
                                         <div class="row mb-1">
                                             <label for="ldate" class="col-sm-2 col-form-label">Date Taken</label>

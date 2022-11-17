@@ -95,7 +95,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                         </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="link"  href="basic_livelihood_training_trained_groups.php" role="link">
+                                        <a class="link"  href="javascript:void(0);" role="link">
                                             <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
                                             <span class="d-none d-sm-block">Finance Linked JSGs</span>
                                         </a>
@@ -116,12 +116,10 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                         <p class="mb-0">
                                             <!--start here -->
                                             <div class="card border border-primary">
-                                                <div class="card-header bg-transparent border-primary">
-                                                    <h5 class="my-0 text-primary">Training Search Filter</h5>
-                                                </div>
+                                                
                                                 <div class="card-body">
                                                     <h5 class="card-title mt-0"></h5>
-                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="jsg_fin_linkage_filter1.php" method ="GET" >
+                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="jsg_fin_linkage_filter1.php" method ="POST" >
                                                         <div class="col-12">
                                                             <label for="region" class="form-label">Region</label>
                                                             <div>
@@ -214,11 +212,12 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                             
                                                                 <thead>
                                                                     <tr>
-                                                                        <th>Groupcode</th>
-                                                                        <th>Group Name</th>
+                                                                        <th>JSG code</th>
+                                                                        <th>JSG Name</th>
                                                                         <th>Males</th>
                                                                         <th>Females</th>
                                                                         <th>Total Members</th>
+                                                                        <th>Linked?</th>
                                                                         <th>Action</th>                                                                        
                                                                     </tr>
                                                                 </thead>
@@ -226,23 +225,30 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
                                                                 <tbody>
                                                                     <?Php
-                                                                        $query="select * from tblgroup where regionID ='0'";
+                                                                        $query="select * from tbljsg";
  
                                                                         //Variable $link is declared inside config.php file & used here
                                                                          
                                                                         if ($result_set = $link->query($query)) {
                                                                         while($row = $result_set->fetch_array(MYSQLI_ASSOC))
                                                                         { 
-                                                                          $totalMembers = $row["MembersM"]+$row["MembersF"];  
+                                                                            $rec = $row["recID"];
+                                                                            $result = mysqli_query($link, "SELECT count(jsg_code) AS CL FROM tblcomsiv_jsg_fin_linkage 
+                                                                            where jsg_code = '$rec'"); 
+                                                                            $row2 = mysqli_fetch_assoc($result); 
+                                                                            if ($row2['CL'] > 0){$CLoccurred = "Yes";}else{$CLoccurred = "No";}
+
+                                                                            $totalMembers = $row["no_male"]+$row["no_female"];  
                                                                         echo "<tr>\n"; 
-                                                                            echo "<td>".$row["groupID"]."</td>\n";
-                                                                            echo "<td>".$row["groupname"]."</td>\n";
-                                                                            echo "<td>".$row["MembersM"]."</td>\n";
-                                                                            echo "<td>".$row["MembersF"]."</td>\n";
-                                                                            echo "<td>\t\t$totalMembers</td>\n";                        
+                                                                            echo "<td>".$row["recID"]."</td>\n";
+                                                                            echo "<td>".$row["jsg_name"]."</td>\n";
+                                                                            echo "<td>".$row["no_male"]."</td>\n";
+                                                                            echo "<td>".$row["no_female"]."</td>\n";
+                                                                            echo "<td>\t\t$totalMembers</td>\n"; 
+                                                                            echo "<td>\t\t$CLoccurred</td>\n";                       
                                                                             echo "<td>
-                                                                                <a href=\"basicSLGTraining_view.php?id=".$row['groupID']."\"><i class='far fa-eye' title='Training Status' style='font-size:18px;color:purple'></i></a>                                                                           
-                                                                                <a href=\"add_basicTrainingGD.php?id=".$row['groupID']."\" ><i class='fas fa-pen' title='Record Training' style='font-size:18px;color:green'></i></a>                                                                            
+                                                                            
+                                                                                <a href=\"jsg_fin_link.php?id=".$row['recID']."\" ><i class='fas fa-donate' title='Record Training' style='font-size:18px;color:green'></i></a>                                                                            
                                                                                 
                                                                             </td>\n";
                                                                         echo "</tr>\n";

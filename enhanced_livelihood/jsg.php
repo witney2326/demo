@@ -102,7 +102,7 @@
                                         </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link" data-bs-toggle="link" href="jsgs_check.php" role="link">
+                                        <a class="nav-link" data-bs-toggle="link" href="jsg_fin_linkage_check.php" role="link">
                                             <span class="d-block d-sm-none"><i class="fas fa-cog"></i></span>
                                             <span class="d-none d-sm-block">Financial Linkage</span>
                                         </a>

@@ -2,7 +2,7 @@
 <?php include '../layouts/head-main.php'; ?>
 
 <head>
-    <title>CME/CMT Training</title>
+    <title>CME Training</title>
     <?php include '../layouts/head.php'; ?>
     <?php include '../layouts/head-style.php'; ?>
     <?php include '../layouts/config.php'; ?>
@@ -77,12 +77,12 @@ if (($_SESSION["user_role"]== '04'))
                 <div class="row">
                     <div class="col-12">
                         <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                            <h4 class="mb-sm-0 font-size-18">CME/CMT Training</h4>
+                            <h4 class="mb-sm-0 font-size-18">CME Training</h4>
 
                             <div class="page-title-right">
                                 <ol class="breadcrumb m-0">
-                                    <li class="breadcrumb-item"><a href="cmt.php">Coop Management Training</a></li>
-                                    <li class="breadcrumb-item active">CME/CMT Training</li>
+                                    <li class="breadcrumb-item"><a href="cmt.php">Coop Member Education Training</a></li>
+                                    <li class="breadcrumb-item active">CME Training</li>
                                 </ol>
                             </div>
 

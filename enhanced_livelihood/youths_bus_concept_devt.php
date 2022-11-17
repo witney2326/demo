@@ -100,7 +100,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                         <div class="card">
                             <div class="card-body">
 
-                            <ul class="nav nav-pills nav-justified" role="tablist">
+                                <ul class="nav nav-pills nav-justified" role="tablist">
                                     <li class="nav-item waves-effect waves-light">
                                         <a class="nav-link " data-bs-toggle="link" href="ycs_concept_devt_check.php" role="link">
                                             <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
@@ -279,7 +279,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                                     
                                                                 echo "<td>
                                                                     <a href=\"../basicSLGMemberview.php?id=".$row['hh_code']."\"><i class='far fa-eye' title='View JSG' style='font-size:18px;color:purple'></i></a>                                                                    
-                                                                    <a href=\".php?id=".$row['recID']."\"><i class='fas fa-bezier-curve' title='View Business Concept' style='font-size:18px;color:orange'></i></a>    
+                                                                    
                                                                     <a href=\".php?id=".$row['recID']."\"><i class='far fa-trash-alt' title='Delete YCS Record' style='font-size:18px;color:red'></i></a>    
                                                                 </td>\n";
 

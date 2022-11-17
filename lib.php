@@ -33,6 +33,12 @@
         $rg = mysqli_fetch_array($rg_query);
         return $rg['groupname'];
     }
+    function jsg_name($link, $jsgID)
+    {
+        $rg_query = mysqli_query($link,"select jsg_name from tbljsg where recID='$jsgID'"); // select query
+        $rg = mysqli_fetch_array($rg_query);
+        return $rg['jsg_name'];
+    }
 
     function r_name($link, $rcode)
     {

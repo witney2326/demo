@@ -27,19 +27,20 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 </head>
 
 <?php include '../layouts/body.php'; ?>
+<?php include '../lib.php'; ?>
 <?php
 
 // do check
-if (($_SESSION["user_role"]= '05')) {
+if (($_SESSION["user_role"]== '05')) {
     $region = $_SESSION["user_reg"];
     $ta = $_SESSION["user_ta"];
     $district = $_SESSION["user_dis"];
      
-} else
-{
-    $region = $_POST['region'];
-    $district = $_POST['district'];
-    $ta = $_POST['ta'];
+} else if (($_SESSION["user_role"]== '04')) {
+    $region = $_SESSION["user_reg"];
+    $district = $_SESSION["user_dis"];
+}else if (($_SESSION["user_role"]== '03')) {
+    $region = $_SESSION["user_reg"];
 }
 ?>
 <?php   
@@ -55,13 +56,23 @@ if ($result_set = $link->query($query)) {
         $groupID= $row["groupID"];
         $no_male = $row["no_male"];
         $no_female = $row["no_female"];
+        $bds=$row["bds"];
+        $bustype = $row["type"];
     }
     $result_set->close();
 }
-
-
-        
+    $q2="select * from tbljsg_training_plan where jsgID='$id'";
     
+if ($result_set = $link->query($q2)) {
+    while($rw = $result_set->fetch_array(MYSQLI_ASSOC))
+    { 
+        $StartDate= $rw["StartDate"];
+        $FinishDate= $rw["FinishDate"];
+        
+    }
+    $result_set->close();
+
+}  
 ?>
 
 <!-- Begin page -->
@@ -129,23 +140,7 @@ if ($result_set = $link->query($query)) {
                                                     
                                                     <label for="trainingtype" class="col-sm-2 col-form-label">Skill Type</label>
                                                     <select class="form-select" name="trainingtype" id="trainingtype" style="max-width:30%;" required>
-                                                        <option></option>
-                                                        <?php                                                           
-                                                        $tt_fetch_query = "SELECT ID, name FROM tbliga_types";                                                  
-                                                        $result_tt_fetch = mysqli_query($link, $tt_fetch_query);                                                                       
-                                                        $i=0;
-                                                            while($DB_ROW_tt = mysqli_fetch_array($result_tt_fetch)) {
-                                                        ?>
-                                                        <option value ="<?php
-                                                                echo $DB_ROW_tt["ID"];?>">
-                                                            <?php
-                                                                echo $DB_ROW_tt["name"];
-                                                            ?>
-                                                        </option>
-                                                        <?php
-                                                            $i++;
-                                                                }
-                                                        ?>
+                                                        <option selected value="<?php echo $bustype;?>"><?php echo iga_name($link,$bustype);?></option>
                                                     </select>
                                                 </div>
 
@@ -153,44 +148,26 @@ if ($result_set = $link->query($query)) {
                                                 <div class="row mb-1">
                                                     <label for="trainedby" class="col-sm-2 col-form-label">Facilitated By</label>
                                                     <select class="form-select" name="trainedby" id="trainedby" style="max-width:30%;" required>
-                                                        <option></option>
-                                                        <?php                                                           
-                                                        $fc_fetch_query = "SELECT facilitatorID, title FROM tblfacilitator";                                                  
-                                                        $result_fc_fetch = mysqli_query($link, $fc_fetch_query);                                                                       
-                                                        $i=0;
-                                                            while($DB_ROW_fc = mysqli_fetch_array($result_fc_fetch)) {
-                                                        ?>
-                                                        <option value ="<?php
-                                                                echo $DB_ROW_fc["facilitatorID"];?>">
-                                                            <?php
-                                                                echo $DB_ROW_fc["title"];
-                                                            ?>
-                                                        </option>
-                                                        <?php
-                                                            $i++;
-                                                                }
-                                                        ?>
+                                                        <option selected value="<?php echo $bds;?>"><?php echo bdsname($link,$bds)?></option>
                                                     </select>
-
-                                                    
                                                 </div>
 
                                                 <div class="row mb-1">
                                                     <label for="malesn" class="col-sm-2 col-form-label">Males Trained</label>
-                                                    <input type="number" class="form-control" id="malesn" name="malesn" min="0" max="300" value ="" style="max-width:30%;">
+                                                    <input type="number" class="form-control" id="malesn" name="malesn" min="0" max="300" value ="<?php echo $no_male;?>" style="max-width:30%;">
                                                 
                                                     <label for="femalesn" class="col-sm-2 col-form-label">Females</label>
-                                                    <input type="number" class="form-control" id="femalesn" name="femalesn" min="0" max="300" value ="" style="max-width:30%;"> 
+                                                    <input type="number" class="form-control" id="femalesn" name="femalesn" min="0" max="300" value ="<?php echo $no_female;?>" style="max-width:30%;"> 
                                                 </div>
 
                                             
 
                                                 <div class="row mb-4">
                                                     <label for="startdate" class="col-sm-2 col-form-label">Start Date</label>   
-                                                    <input type="date" class="form-control" id="startdate" name="startdate" value ="" style="max-width:30%;">
+                                                    <input type="date" class="form-control" id="startdate" name="startdate" value ="<?php echo $StartDate;?>" style="max-width:30%;">
                                                     
                                                     <label for="finishdate" class="col-sm-2 col-form-label">Finish Date</label>                              
-                                                    <input type="date" class="form-control" id="finishdate" name="finishdate" value ="" style="max-width:30%;"> 
+                                                    <input type="date" class="form-control" id="finishdate" name="finishdate" value ="<?php echo $FinishDate;?>" style="max-width:30%;"> 
                                                 </div>
 
                                                 

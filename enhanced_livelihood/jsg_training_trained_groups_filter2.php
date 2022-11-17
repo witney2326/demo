@@ -27,6 +27,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 </head>
 
 <?php include '../layouts/body.php'; ?>
+<?php include '../lib.php'; ?>
 
 <?php 
         if (($_SESSION["user_role"]== '04')) 
@@ -40,33 +41,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
             $district =$_POST['district'];
         }
  
-    function get_rname($link, $rcode)
-        {
-        $rg_query = mysqli_query($link,"select name from tblregion where regionID='$rcode'"); // select query
-        $rg = mysqli_fetch_array($rg_query);// fetch data
-        return $rg['name'];
-        }
     
-        function dis_name($link, $disID)
-        {
-        $dis_query = mysqli_query($link,"select DistrictName from tbldistrict where DistrictID='$disID'"); // select query
-        $dis = mysqli_fetch_array($dis_query);// fetch data
-        return $dis['DistrictName'];
-        }
-
-        function jsg_name($link, $Gcode)
-        {
-        $jquery = mysqli_query($link,"select jsg_name from tbljsg where recID='$Gcode'"); // select query
-        $grp = mysqli_fetch_array($jquery);// fetch data
-        return $grp['jsg_name'];
-        }
-
-        function cls_name($link, $Ccode)
-        {
-        $dis_query = mysqli_query($link,"select ClusterName from tblcluster where ClusterID='$Ccode'"); // select query
-        $cls = mysqli_fetch_array($dis_query);// fetch data
-        return $cls['ClusterName'];
-        }
 ?>
 
 <!-- Begin page -->
@@ -99,14 +74,35 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                     </div>
                 </div>
                 <!-- end page title -->
-
+                <ul class="nav nav-pills nav-justified" role="tablist">
+                    <li class="nav-item waves-effect waves-light">
+                        <a class="nav-link" data-bs-toggle="link" href="jsg_training_check" role="link">
+                            <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
+                            <span class="d-none d-sm-block">JSGs</span>
+                        </a>
+                    </li>
+                    <li class="nav-item waves-effect waves-light">
+                        <a class="nav-link active"  href="javascript:void(0);" role="tab">
+                            <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
+                            <span class="d-none d-sm-block">Trained JSGs</span>
+                        </a>
+                    </li>
+                                                        
+                    <li class="nav-item waves-effect waves-light">
+                        <a class="link"  href="enhancedReports.php" role="link">
+                            <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
+                            <span class="d-none d-sm-block">JSGs Training Reports</span>
+                        </a>
+                    </li>
+                    
+                </ul>
                 <div class="row">
-                    <div class="col-xl-9">    
+                    <div class="col-xl-12">    
                         <div class="card border border-primary">
                             
                             <div class="card-body">
                                 <h5 class="card-title mt-0"></h5>
-                                <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="basic_livelihood_slg_training_trained_groups_filter3.php" method ="POST" >
+                                <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="jsg_training_trained_groups_filter3.php" method ="POST" >
                                     <div class="col-12">
                                         <label for="region" class="form-label">Region</label>
                                         <div>
@@ -127,7 +123,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
                                     <div class="col-12">
                                         <label for="ta" class="form-label">Traditional Authority</label>
-                                        <select class="form-select" name="ta" id="ta" required disabled>
+                                        <select class="form-select" name="ta" id="ta" required >
                                             <option selected  value="$ta"></option>
                                             <?php                                                           
                                                     $ta_fetch_query = "SELECT TAID,TAName FROM tblta where DistrictID ='$district'";                                                  
@@ -160,7 +156,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
 
                 <div class="row">
-                    <div class="col-9">
+                    <div class="col-12">
                         <div class="card border border-primary">
                         <div class="card-header bg-transparent border-primary">
                             <h5 class="my-0 text-primary">Trained JSGs in <?php echo dis_name($link,$district); ?></h5>
@@ -172,8 +168,11 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                 
                                     <thead>
                                         <tr>
-                                            <th>Groupcode</th>
+                                            <th>JSG ID</th>
                                             <th>JSG Name</th>
+                                            <th>Groupcode</th>
+                                            <th>Group Name</th>
+                                            <th>Group Type</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -189,11 +188,17 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                 while($row = $result_set->fetch_array(MYSQLI_ASSOC))
                                                 { 
                                                     $groupname = jsg_name($link,$row["jsgID"]);
+                                                    $check = substr($row["groupID"], 5, 3);
+                                                        if ($check == "SLG"){$groupname = grp_name($link,$row["groupID"]);$type = "SL Group";}
+                                                        if (($check == "CLU") or ($check == "CLS")){$groupname = cls_name($link,$row["groupID"]);$type = "Cluster";}
                                                     echo "<tr>\n";
 
                                                         echo "<td>".$row["jsgID"]."</td>\n";
+                                                        echo "<td>".jsg_name($link,$row["jsgID"])."</td>\n";
+                                                        echo "<td>".$row["groupID"]."</td>\n";
                                                         echo "<td>\t\t$groupname</td>\n";
-                                                        echo "<td><a href=\"basicSLGTraining_view.php?id=".$row['groupID']."\"><i class='far fa-eye' title='View Training Details' style='font-size:18px;color:purple'></i></a></td>\n";
+                                                        echo "<td>\t\t$type</td>\n";
+                                                        echo "<td>\t\t</td>\n";
                                                     echo "</tr>\n"; 
                                                 }
                                             $result_set->close();

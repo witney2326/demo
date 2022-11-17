@@ -27,9 +27,10 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 </head>
 
 <?php include '../layouts/body.php'; ?>
+<?php include '../lib.php'; ?>
 
 <?php   
-        if (($_SESSION["user_role"]== '05')) 
+        if (($_SESSION["user_role"]== '04')) 
         {
             $region = $_SESSION["user_reg"];
             $district = $_SESSION["user_dis"]; 
@@ -40,19 +41,6 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
             $district = $_POST['district'];
         }
 
-        function get_rname($link, $rcode)
-        {
-        $rg_query = mysqli_query($link,"select name from tblregion where regionID='$rcode'"); // select query
-        $rg = mysqli_fetch_array($rg_query);// fetch data
-        return $rg['name'];
-        }
-    
-        function dis_name($link, $disID)
-        {
-        $dis_query = mysqli_query($link,"select DistrictName from tbldistrict where DistrictID='$disID'"); // select query
-        $dis = mysqli_fetch_array($dis_query);// fetch data
-        return $dis['DistrictName'];
-        }
 ?>
 
 <!-- Begin page -->
@@ -127,9 +115,6 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
                                             <!--start here -->
                                             <div class="card border border-primary">
-                                                <div class="card-header bg-transparent border-primary">
-                                                    <h5 class="my-0 text-primary">Training Search Filter</h5>
-                                                </div>
                                                 <div class="card-body">
                                                     <h5 class="card-title mt-0"></h5>
                                                     <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="jsg_training_filter3.php" method ="POST">
@@ -145,7 +130,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                         
                                                         <div class="col-12">
                                                             <label for="district" class="form-label">District</label>
-                                                            <select class="form-select" name="district" id="district" value ="$district" required >
+                                                            <select class="form-select" name="district" id="district" required >
                                                                 <option selected value="<?php echo $district;?>" ><?php echo dis_name($link,$district); ?></option>
                                                                     
                                                             </select>
@@ -201,6 +186,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                                         <th><i class="fas fa-male" style="font-size:18px"></i></th>
                                                                         <th><i class="fas fa-female" style="font-size:18px"></i></th>
                                                                         <th>Total</th>
+                                                                        <th>JSG Trained?</th>
                                                                         <th>Action</th>       
                                                                     </tr>
                                                                 </thead>
@@ -218,6 +204,12 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                                         if ($result_set = $link->query($query)) {
                                                                             while($row = $result_set->fetch_array(MYSQLI_ASSOC))
                                                                             { 
+                                                                                $rec = $row["recID"];
+                                                                                $result = mysqli_query($link, "SELECT count(jsgID) AS TRs FROM tbljsg_trainings 
+                                                                                where jsgID = '$rec'"); 
+                                                                                $row2 = mysqli_fetch_assoc($result); 
+                                                                                if ($row2['TRs'] > 0){$TOccurred = "Yes";}else{$TOccurred = "No";}
+
                                                                                 $totalMembers = $row["no_male"]+$row["no_female"];  
                                                                         echo "<tr>\n"; 
                                                                             echo "<td>".$row["recID"]."</td>\n";
@@ -225,9 +217,10 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                                             echo "<td>".$row["groupID"]."</td>\n";
                                                                             echo "<td>".$row["no_male"]."</td>\n";
                                                                             echo "<td>".$row["no_female"]."</td>\n";
-                                                                            echo "<td>\t\t$totalMembers</td>\n";                        
+                                                                            echo "<td>\t\t$totalMembers</td>\n";
+                                                                            echo "<td>\t\t$TOccurred</td>\n";                         
                                                                             echo "<td>
-                                                                                <a href=\"../basicSLGTraining_view.php?id=".$row['groupID']."\"><i class='far fa-eye' title='Training Status' style='font-size:18px;color:purple'></i></a>                                                                           
+                                                                                
                                                                                 <a href=\"jsg_add_skill_training.php?id=".$row['recID']."\" ><i class='fas fa-pen' title='Record Training' style='font-size:18px;color:green'></i></a>                                                                            
                                                                                 
                                                                             </td>\n";

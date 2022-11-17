@@ -106,12 +106,10 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
                                             <!--start here -->
                                             <div class="card border border-primary">
-                                                <div class="card-header bg-transparent border-primary">
-                                                    <h5 class="my-0 text-primary">Training Search Filter</h5>
-                                                </div>
+                                                
                                                 <div class="card-body">
                                                     <h5 class="card-title mt-0"></h5>
-                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="jsg_fin_linkage_filter3.php" method ="GET">
+                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="jsg_fin_linkage_filter3.php" method ="POST">
                                                         
                                                         <div class="col-12">
                                                             <label for="region" class="form-label">Region</label>
@@ -179,6 +177,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                                         <th>Males</th>
                                                                         <th>Females</th>
                                                                         <th>Total Members</th>
+                                                                        <th>Linked?</th>
                                                                         <th>Action</th>    
                                                                         
                                                                     </tr>
@@ -189,7 +188,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                                     <?Php
                                                                         if (isset($district))
                                                                         {
-                                                                            $query="select * from tblgroup where (DistrictID = $district)";
+                                                                            $query="select * from tbljsg where (districtID = $district)";
                                                                         
                                                                         
                                                                         //Variable $link is declared inside config.php file & used here
@@ -197,16 +196,22 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                                         if ($result_set = $link->query($query)) {
                                                                             while($row = $result_set->fetch_array(MYSQLI_ASSOC))
                                                                             { 
-                                                                                $totalMembers = $row["MembersM"]+$row["MembersF"]; 
+                                                                                $rec = $row["recID"];
+                                                                                $result = mysqli_query($link, "SELECT count(jsg_code) AS CL FROM tblcomsiv_jsg_fin_linkage 
+                                                                                where jsg_code = '$rec'"); 
+                                                                                $row2 = mysqli_fetch_assoc($result); 
+                                                                                if ($row2['CL'] > 0){$CLoccurred = "Yes";}else{$CLoccurred = "No";}
+
+                                                                                $totalMembers = $row["no_male"]+$row["no_female"];  
                                                                             echo "<tr>\n"; 
-                                                                                echo "<td>".$row["groupID"]."</td>\n";
-                                                                                echo "<td>".$row["groupname"]."</td>\n";
-                                                                                echo "<td>".$row["MembersM"]."</td>\n";
-                                                                                echo "<td>".$row["MembersF"]."</td>\n";
-                                                                                echo "<td>\t\t$totalMembers</td>\n";                          
+                                                                            echo "<td>".$row["recID"]."</td>\n";
+                                                                            echo "<td>".$row["jsg_name"]."</td>\n";
+                                                                            echo "<td>".$row["no_male"]."</td>\n";
+                                                                            echo "<td>".$row["no_female"]."</td>\n";
+                                                                            echo "<td>\t\t$totalMembers</td>\n"; 
+                                                                            echo "<td>\t\t$CLoccurred</td>\n";                          
                                                                                 echo "<td>
-                                                                                    <a href=\"basicSLGTraining_view.php?id=".$row['groupID']."\"><i class='far fa-eye' title='Training Status' style='font-size:18px;color:purple'></i></a>                                                                           
-                                                                                    <a href=\"add_basicTrainingGD.php?id=".$row['groupID']."\" ><i class='fas fa-pen' title='Record Training' style='font-size:18px;color:green'></i></a>                                                                            
+                                                                                <a href=\"jsg_fin_link.php?id=".$row['recID']."\" ><i class='fas fa-donate' title='Record Training' style='font-size:18px;color:green'></i></a>                                                                            
                                                                                     
                                                                                 </td>\n";
                                                                             echo "</tr>\n";
