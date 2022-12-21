@@ -5,7 +5,7 @@
     <title>SLG |Household Loans</title>
     <?php include 'layouts/head.php'; ?>
     <?php include 'layouts/head-style.php'; ?>
-
+    <?php include 'lib.php'; ?>
     <!-- DataTables -->
     <link href="assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
     <link href="assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
@@ -48,54 +48,6 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
           $result_set->close();
       }
 
-      function dis_name($link, $disID)
-       {
-       $dis_query = mysqli_query($link,"select DistrictName from tbldistrict where DistrictID='$disID'"); // select query
-       $dis = mysqli_fetch_array($dis_query);// fetch data
-       return $dis['DistrictName'];
-       }
-
-       function grp_name($link, $grpID)
-       {
-       $grp_query = mysqli_query($link,"select groupname from tblgroup where groupID='$grpID'"); // select query
-       $grp = mysqli_fetch_array($grp_query);// fetch data
-       return $grp['groupname'];
-       }
-
-       function prog_name($link, $progID)
-       {
-       $prog_query = mysqli_query($link,"select progName from tblspp where progID='$progID'"); // select query
-       $prog = mysqli_fetch_array($prog_query);// fetch data
-       return $prog['progName'];
-       }
-
-       function get_rname($link, $rcode)
-       {
-       $rg_query = mysqli_query($link,"select name from tblregion where regionID='$rcode'"); // select query
-       $rg = mysqli_fetch_array($rg_query);// fetch data
-       return $rg['name'];
-       }
-
-      if(isset($_POST['Submit']))
-          {    
-          $DistrictID = $_POST['district'];
-          $year = $_POST['year'];
-          $month = $_POST['month'];
-          $amount = $_POST['amount'];
-          
-          
-              $sql = "INSERT INTO tblslg_member_loans (districtID,hh_code,groupID,year,month,amount)
-              VALUES ('$districtID','$id','$groupID','$year','$month','$amount')";
-          if (mysqli_query($link, $sql)) {
-              echo '<script type="text/javascript">'; 
-              echo 'alert("SLG Loan Record has been added successfully !");'; 
-              echo 'window.location.href = "basic_livelihood_slg_mgt_check.php";';
-              echo '</script>';
-          } else {
-              echo "Error: " . $sql . ":-" . mysqli_error($link);
-          }
-          mysqli_close($link);
-          }
     ?>
 
 <!-- Begin page -->
@@ -137,7 +89,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                 
                                 <div class="card-body">
                                     
-                                    <form method="POST" action="">
+                                    <form method="POST" action="basicSLGMembersloans_update.php">
                                         <div class="row mb-1">
                                             <label for="hh_id" class="col-sm-2 col-form-label">HH Code</label>
                                             <input type="text" class="form-control" id="hh_id" name = "hh_id" value="<?php echo $id ; ?>" style="max-width:30%;" readonly >

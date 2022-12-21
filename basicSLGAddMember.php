@@ -55,8 +55,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
             if  (empty($hhcode))
             {
                 echo '<script type="text/javascript">'; 
-                echo 'alert("Please Enter Household code !");'; 
-                echo 'window.location.href = "basic_livelihood_slg_mgt_check.php";';
+                    echo 'alert("Please Enter Household code !");'; 
                 echo '</script>';
             }
             else
@@ -65,8 +64,14 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                 VALUES ('$hhcode','$spp_programme','$regionID','$DistrictID','$groupID','$cohort')";
                 if (mysqli_query($link, $sql)) {
                     echo '<script type="text/javascript">'; 
-                    echo 'alert("SLG Member Record has been added successfully !");'; 
-                    echo 'window.location.href = "basic_livelihood_slg_mgt_check.php";';
+                    echo 'if (confirm("SLG Member Record has been added successfully! Add Another SLG Member in the Same SLG?"))';
+                        echo '{';
+                            echo 'history.go(0)';
+                            echo '}';
+                        echo 'else';
+                            echo '{';
+                            echo 'window.location.href = "basic_livelihood_slg_mgt_check.php";';
+                        echo '}';
                     echo '</script>';
                 } else {
                     echo "Error: " . $sql . ":-" . mysqli_error($link);
@@ -74,7 +79,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                 mysqli_close($link);
             }
         }
-        
+
             function get_rname($link, $rcode)
             {
             $rg_query = mysqli_query($link,"select name from tblregion where regionID='$rcode'"); // select query

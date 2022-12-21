@@ -16,8 +16,15 @@ $groupID = $_POST["group_code"];
     VALUES ('$district','$hh_ID','$groupID','$year','$month','$amount')";
 if (mysqli_query($link, $sql)) {
     echo '<script type="text/javascript">'; 
-    echo 'alert("SLG Savings Record has been added successfully !");'; 
-    echo 'window.location.href = "basic_livelihood_slg_mgt_check.php";';
+        echo 'if (confirm("SLG Savings Record has been added successfully! Add another Savings Record For Household?"))';
+            echo '{';
+               echo 'history.go(-1)';
+            echo '}';
+         echo 'else';
+            echo '{';
+               //echo 'window.location.href = "basic_livelihood_slg_mgt_check.php";';
+               echo 'history.go(-2)';
+        echo '}';
     echo '</script>';
 } else {
     echo "Error: " . $sql . ":-" . mysqli_error($link);

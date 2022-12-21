@@ -32,16 +32,18 @@ if(isset($_POST['submit']))
 
         $clusterID = $x;
 
-         
-        
-
-
      $sql = "INSERT INTO tblcluster (ClusterID,ClusterName,regionID,districtID,taID,gvhID,cohort,programID,cwID,deleted)
      VALUES ('$clusterID','$clustername','$regionID','$DistrictID','$TAID','$GVHID','$cohort','$spp','$cw','0')";
      if (mysqli_query($link, $sql)) {
       echo '<script type="text/javascript">'; 
-      echo 'alert("New Cluster has been added successfully !");'; 
-      echo 'window.location.href = "basic_livelihood_slg_mgt2.php";';
+         echo 'if (confirm("Cluster Created! Add Another Cluster in the Same Area?"))';
+            echo '{';
+               echo 'history.go(-1)';
+            echo '}';
+         echo 'else';
+            echo '{';
+               echo 'window.location.href = "basic_livelihood_slg_mgt2.php";';
+            echo '}';
       echo '</script>';
      } else {
         echo "Error: " . $sql . ":-" . mysqli_error($link);

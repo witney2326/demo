@@ -13,8 +13,14 @@ if(isset($_POST['Submit']))
         VALUES ('$groupID','$DistrictID','$year','$month','$amount')";
       if (mysqli_query($link, $sql)) {
          echo '<script type="text/javascript">'; 
-         echo 'alert("SLG Savings has been added successfully !");'; 
-         echo 'window.location.href = "basic_livelihood_slg_mgt2.php";';
+            echo 'if (confirm("SLG Savings has been added successfully! Add Another record in the same area?"))';
+               echo '{';
+                  echo 'history.go(-1)';
+               echo '}';
+            echo 'else';
+               echo '{';
+                  echo 'window.location.href = "basic_livelihood_slg_mgt2.php";';
+            echo '}';
          echo '</script>';
         } else {
            echo "Error: " . $sql . ":-" . mysqli_error($link);
@@ -22,3 +28,5 @@ if(isset($_POST['Submit']))
         mysqli_close($link);
 }
 ?>
+
+         

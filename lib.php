@@ -193,6 +193,19 @@
         $cwname = mysqli_fetch_array($cw_query);// fetch data
         return $cwname['cwName'];
         }
+        function training_type($link, $trcode)
+        {
+        $cw_query = mysqli_query($link,"select training_name from tbltraining_types where trainingTypeID='$trcode'"); // select query
+        $trname = mysqli_fetch_array($cw_query);// fetch data
+        return $trname['training_name'];
+        }
+        function tr_facilitator($link, $fcode)
+        {
+        $cw_query = mysqli_query($link,"select title from tblfacilitator where facilitatorID='$fcode'"); // select query
+        $fac = mysqli_fetch_array($cw_query);// fetch data
+        return $fac['title'];
+        }
+
     ?>
     
 </div>
