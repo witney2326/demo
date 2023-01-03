@@ -103,7 +103,7 @@
 
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class='fas fa-landmark' style='font-size:18px;color:black'></i>
+                        <i class='fa-solid fa-person-walking' style='font-size:18px;color:black'></i>
                         <span key="t-layouts">Livelihood Interventions</span>
                     </a>
                         <?php  
@@ -160,6 +160,57 @@
                         </li>
                         <li>
                             <a href="javascript: void(0);" class="has-arrow" key="t-horizontal">CS-EPWP</a>
+                            <ul class="sub-menu" aria-expanded="true">
+                                <li>
+                                    <?php
+                                    if ($curPageName == "graduation.php")
+                                    {
+                                        if ($_SESSION["user_role"] == '00'){echo '<a href="javascript: void(0);" class="has-arrow" key="t-vertical">Basic Livelihood</a>' ;}else{echo '<a href="..csepwp/csepwp_basic_livelihood.php" class="has-arrow" key="t-vertical">Basic Livelihood</a>';}
+                                    } 
+                                    else if ($curPageName == "enhanced_livelihood.php")
+                                    {
+                                        if ($_SESSION["user_role"] == '00'){echo '<a href="javascript: void(0);" class="has-arrow" key="t-vertical">Basic Livelihood</a>' ;}else{echo '<a href="..csepwp/csepwp_basic_livelihood.php" class="has-arrow" key="t-vertical">Basic Livelihood</a>';}
+                                    } else
+                                    {
+                                        if ($_SESSION["user_role"] == '00'){echo '<a href="javascript: void(0);" class="has-arrow" key="t-vertical">Basic Livelihood</a>' ;}else{echo '<a href="csepwp/csepwp_basic_livelihood.php" class="has-arrow" key="t-vertical">Basic Livelihood</a>';}
+                                    }
+                                    
+                                    ?>
+                                </li>
+                                
+                                <li>
+                                    <?php
+                                        if ($curPageName == "graduation.php")
+                                        {
+                                            if ($_SESSION["user_role"] == '00'){echo '<a href="javascript: void(0);" class="has-arrow" key="t-vertical">Enhanced Livelihood</a>' ;}else{echo '<a href="../enhanced_livelihood/enhanced_livelihood.php" class="has-arrow" key="t-vertical">Enhanced Livelihood</a>';} 
+                                        } else if ($curPageName == "csepwp/csepwp_basic_livelihood.php.php")
+                                        {
+                                            if ($_SESSION["user_role"] == '00'){echo '<a href="javascript: void(0);" class="has-arrow" key="t-vertical">Enhanced Livelihood</a>' ;}else{echo '<a href="./enhanced_livelihood/enhanced_livelihood.php" class="has-arrow" key="t-vertical">Enhanced Livelihood</a>';}
+                                        } else
+                                        {
+                                            if ($_SESSION["user_role"] == '00'){echo '<a href="javascript: void(0);" class="has-arrow" key="t-vertical">Enhanced Livelihood</a>' ;}else{echo '<a href="enhanced_livelihood/enhanced_livelihood.php" class="has-arrow" key="t-vertical">Enhanced Livelihood</a>';}
+                                        }
+                                    ?>
+                                </li>
+                                <li>
+                                    <?php
+                                        
+
+                                        if ($curPageName == "enhanced_livelihood.php")
+                                        {
+                                            if ($_SESSION["user_role"] == '00'){echo '<a href="javascript: void(0);" class="has-arrow" key="t-vertical">Graduation</a>' ;}else{echo '<a href="../graduation/graduation.php" class="has-arrow" key="t-vertical">Graduation</a>';} 
+                                        } else if ($curPageName == "csepwp/csepwp_basic_livelihood.php.php")
+                                        {
+                                            if ($_SESSION["user_role"] == '00'){echo '<a href="javascript: void(0);" class="has-arrow" key="t-vertical">Graduation</a>' ;}else{echo '<a href="graduation/graduation.php" class="has-arrow" key="t-vertical">Graduation</a>';}
+                                        } else
+                                        {
+                                            if ($_SESSION["user_role"] == '00'){echo '<a href="javascript: void(0);" class="has-arrow" key="t-vertical">Graduation</a>' ;}else{echo '<a href="graduation/graduation.php" class="has-arrow" key="t-vertical">Graduation</a>';}
+                                        }
+                                    ?>
+                                    
+                                </li>
+                        
+                            </ul>
                             
                         </li>
                     </ul>

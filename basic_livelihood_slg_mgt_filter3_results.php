@@ -36,11 +36,16 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
         $district = $_SESSION["user_dis"];
         $ta = $_SESSION["user_ta"];   
     }
- else
+ else if ((($_SESSION['region']) <> '00') and (($_SESSION['district']) <> '00') and (($_SESSION['ta']) <> '0000'))
     {
-    $region = $_POST['region'];
-    $district = $_POST['district'];
-    $ta = $_POST['ta'];
+        $region = $_SESSION['region'];
+        $district = $_SESSION["district"];
+        $ta = $_SESSION["ta"];   
+    }else
+    {
+        $region = $_POST['region'];
+        $district = $_POST['district'];
+        $ta = $_POST['ta'];
     }
    
     

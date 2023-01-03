@@ -86,7 +86,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
      
                             <ul class="nav nav-pills nav-justified" role="tablist">
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link" data-bs-toggle="tab" href="#home-1" role="tab">
+                                        <a class="nav-link" data-bs-toggle="link" href="basic_livelihood_slg_mgt_check.php" role="link">
                                             <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
                                             <span class="d-none d-sm-block">SL Groups</span>
                                         </a>

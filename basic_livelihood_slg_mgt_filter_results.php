@@ -30,7 +30,24 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 include 'lib.php';
 ?>
 
-<?php if (($_SESSION["user_role"]== '03')) {$region = $_SESSION["user_reg"];  }else{$region = $_POST['region'];}?>
+<?php
+    if ((($_POST['district']) <> '00') and (($_POST['ta']) <> '0000') and ($_SESSION["user_role"] <>'03') and ($_SESSION["user_role"] <>'04') and ($_SESSION["user_role"] <>'05'))  
+    {
+        $_SESSION['region'] = $_POST['region'];
+        $_SESSION['district'] = $_POST['district'];
+        $_SESSION['ta'] = $_POST['ta'];
+        
+        header("location: basic_livelihood_slg_mgt_filter3_results.php");
+    } 
+    else if (($_SESSION["user_role"]== '03')) 
+    {
+        $region = $_SESSION["user_reg"];  
+    }
+    else
+    {
+        $region = $_POST['region'];
+    }
+?>
 
 <!-- Begin page -->
 <div id="layout-wrapper">
