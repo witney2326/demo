@@ -1,6 +1,6 @@
 
     <?php
-        include "layouts/config.php"; // Using database connection file here
+        include "../layouts/config2.php"; // Using database connection file here
 
         
         
@@ -25,15 +25,15 @@
 
 
             
-            if ((mysqli_query($link, $sql)) && (mysqli_query($link, $sql2)) && (mysqli_query($link, $sql3)) && (mysqli_query($link, $sql4)) && (mysqli_query($link, $sql5)) && (mysqli_query($link, $sql6)) && (mysqli_query($link, $sql7) &&
-            (mysqli_query($link, $sql8))) && (mysqli_query($link, $sql9)) && (mysqli_query($link, $sql10)) && (mysqli_query($link, $sql11)) && (mysqli_query($link, $sql12)) && (mysqli_query($link, $sql13)) && (mysqli_query($link, $sql14)) && (mysqli_query($link, $sql15)) ) {
+            if ((mysqli_query($link_cs, $sql)) && (mysqli_query($link_cs, $sql2)) && (mysqli_query($link_cs, $sql3)) && (mysqli_query($link_cs, $sql4)) && (mysqli_query($link_cs, $sql5)) && (mysqli_query($link_cs, $sql6)) && (mysqli_query($link_cs, $sql7) &&
+            (mysqli_query($link_cs, $sql8))) && (mysqli_query($link_cs, $sql9)) && (mysqli_query($link_cs, $sql10)) && (mysqli_query($link_cs, $sql11)) && (mysqli_query($link_cs, $sql12)) && (mysqli_query($link_cs, $sql13)) && (mysqli_query($link_cs, $sql14)) && (mysqli_query($link_cs, $sql15)) ) {
                 echo '<script type="text/javascript">'; 
                 echo 'alert("SLG Record Successfully DELETED and Corresponding Records in the Database!");'; 
-                echo 'window.location.href = "basic_livelihood_slg_mgt2.php";';
+                echo 'window.location.href = "csepwp_basic_livelihood_slg_mgt2.php";';
                 echo '</script>';
   
             } else {
-                echo "Error deleting record: " . $link->error;
+                echo "Error deleting record: " . $link_cs->error;
             }
                
     ?>

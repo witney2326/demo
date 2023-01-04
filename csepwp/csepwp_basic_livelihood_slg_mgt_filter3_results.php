@@ -5,7 +5,7 @@
     <title>SLG Management</title>
     <?php include '../layouts/head.php'; ?>
     <?php include '../layouts/head-style.php'; ?>
-    <?php include '../layouts/config.php'; ?>
+    <?php include '../layouts/config2.php'; ?>
 <!-- DataTables -->
     <link href="assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
     <link href="assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
@@ -26,7 +26,9 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
   </script>
 </head>
 
-<?php include '../layouts/body.php'; ?>
+<?php include '../layouts/body.php'; 
+      include 'lib2.php';
+?>
 
 <?php 
 
@@ -48,27 +50,6 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
         $ta = $_POST['ta'];
     }
    
-    
-    function get_rname($link, $rcode)
-        {
-        $rg_query = mysqli_query($link,"select name from tblregion where regionID='$rcode'"); // select query
-        $rg = mysqli_fetch_array($rg_query);// fetch data
-        return $rg['name'];
-        }
-    
-        function dis_name($link, $disID)
-        {
-        $dis_query = mysqli_query($link,"select DistrictName from tbldistrict where DistrictID='$disID'"); // select query
-        $dis = mysqli_fetch_array($dis_query);// fetch data
-        return $dis['DistrictName'];
-        }
-
-        function ta_name($link, $taID)
-        {
-        $ta_query = mysqli_query($link,"select TAName from tblta where TAID='$taID'"); // select query
-        $taname = mysqli_fetch_array($ta_query);// fetch data
-        return $taname['TAName'];
-        }
 ?>
 
 <!-- Begin page -->
@@ -115,19 +96,19 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                 <!-- Nav tabs -->
                                 <ul class="nav nav-pills nav-justified" role="tablist">
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link active" data-bs-toggle="tab" href="#home-1" role="tab">
+                                        <a class="nav-link active" data-bs-toggle="tab" href="javascript:void(0);" role="tab">
                                             <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
                                             <span class="d-none d-sm-block">SL Groups</span>
                                         </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="link"  href="basic_livelihood_clusters_check.php" role="link">
+                                        <a class="link"  href="csepwp_basic_livelihood_clusters.php" role="link">
                                             <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
                                             <span class="d-none d-sm-block">Clusters</span>
                                         </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link" data-bs-toggle="link" href="basic_livelihood_slg_mgt_new_cls_filter2_results.php" role="link">
+                                        <a class="nav-link" data-bs-toggle="link" href="csepwp_basic_livelihood_slg_mgt2.php#cls-1" role="link">
                                             <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
                                             <span class="d-none d-sm-block">New Cluster!</span>
                                         </a>
@@ -157,7 +138,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                             <label for="region" class="form-label">Region</label>
                                                             <div>
                                                                 <select class="form-select" name="region" id="region" value ="$region" required >
-                                                                    <option selected value = "<?php echo $region; ?>"><?php echo get_rname($link,$region);?></option> 
+                                                                    <option selected value = "<?php echo $region; ?>"><?php echo get_rname($link_cs,$region);?></option> 
                                                                 </select>
                                                             </div>
                                                         </div>
@@ -165,14 +146,14 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                         <div class="col-12">
                                                             <label for="district" class="form-label">District</label>
                                                             <select class="form-select" name="district" id="district" value ="$district" required >
-                                                                <option selected value = "<?php echo $district; ?>"><?php echo dis_name($link,$district);?></option>  
+                                                                <option selected value = "<?php echo $district; ?>"><?php echo dis_name($link_cs,$district);?></option>  
                                                             </select>
                                                         </div>
 
                                                         <div class="col-12">
                                                             <label for="ta" class="form-label">Traditional Authority</label>
                                                             <select class="form-select" name="ta" id="ta" required >
-                                                                <option selected value = "<?php echo $ta;?>"><?php echo ta_name($link,$ta);?></option>
+                                                                <option selected value = "<?php echo $ta;?>"><?php echo ta_name($link_cs,$ta);?></option>
                                                                 
                                                             </select>
                                                             <div class="invalid-feedback">
@@ -211,7 +192,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                 <div class="col-12">
                                                     <div class="card border border-primary">
                                                     <div class="card-header bg-transparent border-primary">
-                                                        <h5 class="my-0 text-default">SLGs in TA <?php echo ta_name($link,$ta);?> </h5>
+                                                        <h5 class="my-0 text-default">SLGs in TA <?php echo ta_name($link_cs,$ta);?> </h5>
                                                     </div>
                                                     <div class="card-body">
                                                     <h7 class="card-title mt-0"></h7>
@@ -224,7 +205,6 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                                         
                                                                         <th>SLG code</th>
                                                                         <th>SLG Name</th>
-                                                                        <th>cohort</th>
                                                                         <th><i class="fas fa-male" style="font-size:18px"></i></th>
                                                                         <th><i class="fas fa-female" style="font-size:18px"></i></th>
                                                                         <th><i class="fas fa-male" style="font-size:18px"></i>+<i class="fas fa-female" style="font-size:18px"></i></th>
@@ -241,11 +221,11 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
  
                                                                         //Variable $link is declared inside config.php file & used here
                                                                         
-                                                                        if ($result_set = $link->query($query)) {
+                                                                        if ($result_set = $link_cs->query($query)) {
                                                                         while($row = $result_set->fetch_array(MYSQLI_ASSOC))
                                                                         { 
                                                                             $grpID = $row["groupID"];
-                                                                            $result = mysqli_query($link, "SELECT COUNT(sppCode) AS value_count FROM tblbeneficiaries where groupID = '$grpID'"); 
+                                                                            $result = mysqli_query($link_cs, "SELECT COUNT(sppCode) AS value_count FROM tblbeneficiaries where groupID = '$grpID'"); 
                                                                             $row_0 = mysqli_fetch_assoc($result); 
                                                                             $count = $row_0['value_count'];
 
@@ -254,7 +234,6 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                                         echo "<tr>\n";                                               
                                                                             echo "<td>".$row["groupID"]."</td>\n";
                                                                             echo "<td>".$row["groupname"]."</td>\n";
-                                                                            echo "<td>".$row["cohort"]."</td>\n";
                                                                             echo "<td>".$row["MembersM"]."</td>\n";
                                                                             echo "<td>".$row["MembersF"]."</td>\n";
                                                                             echo "<td>\t\t$total</td>\n";

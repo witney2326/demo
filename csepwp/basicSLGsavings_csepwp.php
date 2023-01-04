@@ -28,12 +28,12 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
 <?php include '../layouts/body.php'; ?>
 <?php
-       include "../layouts/config.php"; // Using database connection file here
+       include "../layouts/config2.php"; // Using database connection file here
         
        $id = $_GET['id']; // get id through query string
       $query="select * from tblgroup where groupID='$id'";
        
-       if ($result_set = $link->query($query)) {
+       if ($result_set = $link_cs->query($query)) {
            while($row = $result_set->fetch_array(MYSQLI_ASSOC))
            { 
                $groupname= $row["groupname"];
@@ -57,16 +57,16 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
            
                $sql = "INSERT INTO tblgroupsavings (GroupID,DistrictID,Yr,Month,Amount)
                VALUES ('$groupID','$DistrictID','$year','$month','$amount')";
-           if (mysqli_query($link, $sql)) {
+           if (mysqli_query($link_cs, $sql)) {
                echo '<script type="text/javascript">'; 
                echo 'alert("SLG Savings Record has been added successfully !");'; 
                //echo 'window.location.href = "csepwp_basic_livelihood_slg_mgt2.php";';
                echo 'history.go(-2);';
                echo '</script>';
            } else {
-               echo "Error: " . $sql . ":-" . mysqli_error($link);
+               echo "Error: " . $sql . ":-" . mysqli_error($link_cs);
            }
-           mysqli_close($link);
+           mysqli_close($link_cs);
            }
     ?>
 

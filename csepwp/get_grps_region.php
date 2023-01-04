@@ -1,5 +1,5 @@
 <?php
-include('../layouts/config.php');
+include('../layouts/config2.php');
 if(!empty($_POST["region"])) 
 {
  $id=$_POST['region'];
@@ -8,7 +8,7 @@ if(!empty($_POST["region"]))
  $query="select * from tblgroup where ((regionID ='$id') and (deleted ='0'))";
     //Variable $link is declared inside config.php file & used here
     
-    if ($result_set = $link->query($query)) {
+    if ($result_set = $link_cs->query($query)) {
     while($row = $result_set->fetch_array(MYSQLI_ASSOC))
     { 
         $totalAdult =  $row["MembersM"]+ $row["MembersF"];

@@ -5,7 +5,7 @@
     <title>Household Verification</title>
     <?php include '../layouts/head.php'; ?>
     <?php include '../layouts/head-style.php'; ?>
-    <?php include '../layouts/config.php'; ?>
+    <?php include '../layouts/config2.php'; ?>
 <!-- DataTables -->
     <link href="assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
     <link href="assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
@@ -26,47 +26,16 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
   </script>
 </head>
 
-<?php include '../layouts/body.php'; ?>
+<?php include '../layouts/body.php'; 
+      include 'lib2.php';
+?>
 
 <?php		
         $region = $_POST["region"];
          $district = $_POST['district'];
          $cw = $_POST['cw'];
 
-         function get_rname($link, $rcode)
-         {
-         $rg_query = mysqli_query($link,"select name from tblregion where regionID='$rcode'"); // select query
-         $rg = mysqli_fetch_array($rg_query);// fetch data
-         return $rg['name'];
-         }
-     
-         function dis_name($link, $disID)
-         {
-         $dis_query = mysqli_query($link,"select DistrictName from tbldistrict where DistrictID='$disID'"); // select query
-         $dis = mysqli_fetch_array($dis_query);// fetch data
-         return $dis['DistrictName'];
-         }
- 
-         function grp_name($link, $grpID)
-         {
-         $grp_query = mysqli_query($link,"select groupname from tblgroup where groupID='$grpID'"); // select query
-         $grp = mysqli_fetch_array($grp_query);// fetch data
-         return $grp['groupname'];
-         }
- 
-         function prog_name($link, $progID)
-        {
-        $prog_query = mysqli_query($link,"select progName from tblspp where progID='$progID'"); // select query
-        $prog = mysqli_fetch_array($prog_query);// fetch data
-        return $prog['progName'];
-        }
-
-         function cw_name($link, $ID)
-         {
-         $cw_query = mysqli_query($link,"select cwName from tblcw where cwID='$ID'"); // select query
-         $prog = mysqli_fetch_array($cw_query);// fetch data
-         return $prog['cwName'];
-         }
+         
 
 ?>
 
@@ -110,7 +79,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                 <label for="region" class="form-label">Region</label>
                                 <div>
                                     <select class="form-select" name="region" id="region" required>
-                                        <option selected value = "<?php echo $region; ?>"><?php echo get_rname($link,$region);?></option>
+                                        <option selected value = "<?php echo $region; ?>"><?php echo get_rname($link_cs,$region);?></option>
                                     </select>
                                 </div>
                             </div>
@@ -118,14 +87,14 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                             <div class="col-12">
                                 <label for="district" class="form-label">District</label>
                                 <select class="form-select" name="district" id="district" required>
-                                    <option selected value = "<?php echo $district ;?>"><?php echo dis_name($link,$district);?></option>
+                                    <option selected value = "<?php echo $district ;?>"><?php echo dis_name($link_cs,$district);?></option>
                                 </select>                               
                             </div>
 
                             <div class="col-12">
                                 <label for="cw" class="form-label">Case Worker</label>
                                 <select class="form-select" name="cw" id="cw" required>
-                                    <option selected value = "<?php echo $cw; ?>"><?php echo cw_name($link,$cw);?></option>
+                                    <option selected value = "<?php echo $cw; ?>"><?php echo cw_name($link_cs,$cw);?></option>
                                 </select>
                                 
                             </div>
@@ -136,7 +105,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                     <option></option>
                                     <?php                                                           
                                             $slg_fetch_query = "SELECT groupID,groupname FROM tblgroup where cwID ='$cw'";                                                  
-                                            $result_slg_fetch = mysqli_query($link, $slg_fetch_query);                                                                       
+                                            $result_slg_fetch = mysqli_query($link_cs, $slg_fetch_query);                                                                       
                                             $i=0;
                                                 while($DB_ROW_slg = mysqli_fetch_array($result_slg_fetch)) {
                                             ?>
@@ -166,7 +135,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                     <div class="col-12">
                         <div class="card border border-primary">
                         <div class="card-header bg-transparent border-primary">
-                            <h5 class="my-0 text-default">Beneficiary Households For CW: <?php echo cw_name($link,$cw); ?></h5>
+                            <h5 class="my-0 text-default">Beneficiary Households For CW: <?php echo cw_name($link_cs,$cw); ?></h5>
                         </div>
                         <div class="card-body">
                         <h5 class="card-title mt-0"></h5>
@@ -194,13 +163,13 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
                                         //Variable $link is declared inside config.php file & used here
                                         
-                                        if ($result_set = $link->query($query)) {
+                                        if ($result_set = $link_cs->query($query)) {
                                         while($row = $result_set->fetch_array(MYSQLI_ASSOC))
                                         { 
-                                            $region = get_rname($link,$row["regionID"]);
-                                            $district = dis_name($link,$row["districtID"]);
-                                            $group = grp_name($link,$row["groupID"]);
-                                            $prog = prog_name($link, $row["spProg"]);
+                                            $region = get_rname($link_cs,$row["regionID"]);
+                                            $district = dis_name($link_cs,$row["districtID"]);
+                                            $group = grp_name($link_cs,$row["groupID"]);
+                                            $prog = prog_name($link_cs, $row["spProg"]);
 
                                             $Hstatus = $row["hhstatus"];
                                             if ($Hstatus == '1'){$hhstatus = 'Yes';}

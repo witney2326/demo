@@ -5,7 +5,7 @@
     <title>Household Verification</title>
     <?php include '../layouts/head.php'; ?>
     <?php include '../layouts/head-style.php'; ?>
-    <?php include '../layouts/config.php'; ?>
+    <?php include '../layouts/config2.php'; ?>
 <!-- DataTables -->
     <link href="assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
     <link href="assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
@@ -26,7 +26,9 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
   </script>
 </head>
 
-<?php include '../layouts/body.php'; ?>
+<?php include '../layouts/body.php'; 
+      include 'lib2.php';
+?>
 
 <?php		
     if(isset($_POST['compute_hhcode']))
@@ -39,33 +41,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
     echo '<script>alert("Household code computed")</script>';			
     }
 
-    function get_rname($link, $rcode)
-        {
-        $rg_query = mysqli_query($link,"select name from tblregion where regionID='$rcode'"); // select query
-        $rg = mysqli_fetch_array($rg_query);// fetch data
-        return $rg['name'];
-        }
     
-        function dis_name($link, $disID)
-        {
-        $dis_query = mysqli_query($link,"select DistrictName from tbldistrict where DistrictID='$disID'"); // select query
-        $dis = mysqli_fetch_array($dis_query);// fetch data
-        return $dis['DistrictName'];
-        }
-
-        function grp_name($link, $grpID)
-        {
-        $grp_query = mysqli_query($link,"select groupname from tblgroup where groupID='$grpID'"); // select query
-        $grp = mysqli_fetch_array($grp_query);// fetch data
-        return $grp['groupname'];
-        }
-
-        function prog_name($link, $progID)
-        {
-        $prog_query = mysqli_query($link,"select progName from tblspp where progID='$progID'"); // select query
-        $prog = mysqli_fetch_array($prog_query);// fetch data
-        return $prog['progName'];
-        }
 
 ?>
 <?php
@@ -126,7 +102,7 @@ if (($_SESSION["user_role"] == '03')) {
                                         <option></option>            
                                         <?php                                                           
                                                 $dis_fetch_query = "SELECT regionID, name FROM tblregion";                                                  
-                                                $result_dis_fetch = mysqli_query($link, $dis_fetch_query);                                                                       
+                                                $result_dis_fetch = mysqli_query($link_cs, $dis_fetch_query);                                                                       
                                                 $i=0;
                                                     while($DB_ROW_reg = mysqli_fetch_array($result_dis_fetch)) {
                                                 ?>
@@ -151,7 +127,7 @@ if (($_SESSION["user_role"] == '03')) {
                                     <option></option> 
                                         <?php                                                           
                                             $dis_fetch_query = "SELECT DistrictName FROM tbldistrict";                                                  
-                                            $result_dis_fetch = mysqli_query($link, $dis_fetch_query);                                                                       
+                                            $result_dis_fetch = mysqli_query($link_cs, $dis_fetch_query);                                                                       
                                             $i=0;
                                                 while($DB_ROW_Dis = mysqli_fetch_array($result_dis_fetch)) {
                                             ?>
@@ -172,7 +148,7 @@ if (($_SESSION["user_role"] == '03')) {
                                     <option></option> 
                                     <?php                                                           
                                             $cw_fetch_query = "SELECT cwID,cwName FROM tblcw";                                                  
-                                            $result_cw_fetch = mysqli_query($link, $cw_fetch_query);                                                                       
+                                            $result_cw_fetch = mysqli_query($link_cs, $cw_fetch_query);                                                                       
                                             $i=0;
                                                 while($DB_ROW_cw = mysqli_fetch_array($result_cw_fetch)) {
                                             ?>
@@ -193,7 +169,7 @@ if (($_SESSION["user_role"] == '03')) {
                                     <option></option> 
                                     <?php                                                           
                                             $slg_fetch_query = "SELECT groupID,groupname FROM tblcw";                                                  
-                                            $result_slg_fetch = mysqli_query($link, $slg_fetch_query);                                                                       
+                                            $result_slg_fetch = mysqli_query($link_cs, $slg_fetch_query);                                                                       
                                             $i=0;
                                                 while($DB_ROW_slg = mysqli_fetch_array($result_slg_fetch)) {
                                             ?>
@@ -250,13 +226,13 @@ if (($_SESSION["user_role"] == '03')) {
 
                                         //Variable $link is declared inside config.php file & used here
                                         
-                                        if ($result_set = $link->query($query)) {
+                                        if ($result_set = $link_cs->query($query)) {
                                         while($row = $result_set->fetch_array(MYSQLI_ASSOC))
                                         { 
-                                            $region = get_rname($link,$row["regionID"]);
-                                            $district = dis_name($link,$row["districtID"]);
-                                            $group = grp_name($link,$row["groupID"]);
-                                            $prog = prog_name($link, $row["spProg"]);
+                                            $region = get_rname($link_cs,$row["regionID"]);
+                                            $district = dis_name($link_cs,$row["districtID"]);
+                                            $group = grp_name($link_cs,$row["groupID"]);
+                                            $prog = prog_name($link_cs, $row["spProg"]);
 
                                             $Hstatus = $row["hhstatus"];
                                             if ($Hstatus == '1'){$hhstatus = 'Yes';}

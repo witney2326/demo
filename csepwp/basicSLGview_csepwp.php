@@ -28,12 +28,13 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
 <?php include '../layouts/body.php'; ?>
 <?php
-        include "../layouts/config.php"; // Using database connection file here
-        
+        include '../layouts/config2.php'; // Using database connection file here
+        include 'lib2.php';
+
         $id = $_GET['id']; // get id through query string
        $query="select * from tblgroup where groupID='$id'";
         
-        if ($result_set = $link->query($query)) {
+        if ($result_set = $link_cs->query($query)) {
             while($row = $result_set->fetch_array(MYSQLI_ASSOC))
             { 
                 $groupname= $row["groupname"];
@@ -45,54 +46,9 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                 $MembersM= $row["MembersM"];
                 $MembersF = $row["MembersF"];
                 $clusterID = $row["clusterID"];
-                $cohort = $row["cohort"];
-                $spProg = $row["programID"];
             }
             $result_set->close();
-        }
-
-        function dis_name($link, $disID)
-        {
-        $dis_query = mysqli_query($link,"select DistrictName from tbldistrict where DistrictID='$disID'"); // select query
-        $dis = mysqli_fetch_array($dis_query);// fetch data
-        return $dis['DistrictName'];
-        }
-
-        function r_name($link, $rcode)
-        {
-        $region_query = mysqli_query($link,"select name from tblregion where regionID='$rcode'"); // select query
-        $rg = mysqli_fetch_array($region_query);// fetch data
-        return $rg['name'];
-        }
-
-        function ta_name($link, $tacode)
-        {
-        $region_query = mysqli_query($link,"select TAName from tblta where TAID='$tacode'"); // select query
-        $ta = mysqli_fetch_array($region_query);// fetch data
-        return $ta['TAName'];
-        }
-
-        function cls_name($link, $clscode)
-        {
-        $cls_query = mysqli_query($link,"select ClusterName from tblcluster where ClusterID='$clscode'"); // select query
-        $cls = mysqli_fetch_array($cls_query);// fetch data
-        return $cls['ClusterName'];
-        }
-
-        function iga_name($link, $igaID)
-        {
-        $iga_query = mysqli_query($link,"select name from tbliga_types where ID='$igaID'"); // select query
-        $iga = mysqli_fetch_array($iga_query);// fetch data
-        return $iga['name'];
-        }
-
-        function prog_name($link, $code)
-        {
-        $prog_query = mysqli_query($link,"select progName from tblspp where progID='$code'"); // select query
-        $prog = mysqli_fetch_array($prog_query);// fetch data
-        return $prog['progName'];
-        }
-               
+        }      
     ?>
 
 <!-- Begin page -->
@@ -139,9 +95,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                             <a class="nav-link mb-2" id="v-pills-profile-tab" data-bs-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Savings</a>
                                             <a class="nav-link mb-2" id="v-pills-messages-tab" data-bs-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">IGA/Investments</a>
                                             <a class="nav-link mb-2" id="v-pills-settings-tab" data-bs-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Membership</a>
-                                            <a class="nav-link mb-2" id="v-pills-settings-tab" data-bs-toggle="pill" href="#v-pills-settings2" role="tab" aria-controls="v-pills-settings2" aria-selected="false">YCS Members</a>
-                                            <a class="nav-link mb-2" id="v-pills-settings-tab" data-bs-toggle="pill" href="#v-pills-settings3" role="tab" aria-controls="v-pills-settings3" aria-selected="false">JSG Members</a>
-                                            <a class="nav-link mb-2" id="v-pills-settings-tab" data-bs-toggle="pill" href="#v-pills-settings4" role="tab" aria-controls="v-pills-settings4" aria-selected="false">Grad Members</a>
+                                            
                                             
                                         </div>
                                     </div>
@@ -165,16 +119,16 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                                     <input type="text" class="form-control" id="date_formed" name="date_formed" value ="<?php echo $DateEstablished ; ?>" style="max-width:30%;" disabled ="True">
                                                                     
                                                                     <label for="region" class="col-sm-2 col-form-label">Region</label>
-                                                                    <input type="text" class="form-control" id="region" name="region" value ="<?php echo r_name($link,$regionID) ; ?>" style="max-width:30%;" disabled ="True">
+                                                                    <input type="text" class="form-control" id="region" name="region" value ="<?php echo r_name($link_cs,$regionID) ; ?>" style="max-width:30%;" disabled ="True">
                                                                 </div>
 
                                                                         
                                                                 <div class="row mb-1">
                                                                     <label for="district" class="col-sm-2 col-form-label">District</label>                                           
-                                                                    <input type="text" class="form-control" id="district" name="district" value ="<?php echo dis_name($link,$DistrictID) ; ?>" style="max-width:30%;" disabled ="True">
+                                                                    <input type="text" class="form-control" id="district" name="district" value ="<?php echo dis_name($link_cs,$DistrictID) ; ?>" style="max-width:30%;" disabled ="True">
                                                                     
                                                                     <label for="ta" class="col-sm-2 col-form-label">TA</label>
-                                                                    <input type="text" class="form-control" id="ta" name="ta" value ="<?php echo ta_name($link,$TAID) ; ?>" style="max-width:30%;" disabled ="True">
+                                                                    <input type="text" class="form-control" id="ta" name="ta" value ="<?php echo ta_name($link_cs,$TAID) ; ?>" style="max-width:30%;" disabled ="True">
                                                                 </div>
 
                                                                 
@@ -182,11 +136,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                                     <label for="gvh" class="col-sm-2 col-form-label">GVH</label>                   
                                                                     <input type="text" class="form-control" id="gvh" name="gvh" value ="<?php echo $gvhID ; ?>" disabled ="True" style="max-width:30%;" >                                       
 
-                                                                    <label for="spProg" class="col-sm-2 col-form-label">SP Prog</label>
-                                                                    <select class="form-select" name="spProg" id="spProg" style="max-width:30%;" required>
-                                                                        <option value = "<?php echo $spProg;?>"><?php echo prog_name($link,$spProg);?></option>
-                                                                            
-                                                                    </select>      
+                                                                          
                                                                 </div>
 
                                                                 <div class="row mb-1">
@@ -200,10 +150,9 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                                 
                                                                 <div class="row mb-1">
                                                                     <label for="cluster" class="col-sm-2 col-form-label">Cluster Name</label>                        
-                                                                    <input type="text" class="form-control" id="cluster" name="cluster" value ="<?php echo cls_name($link,$clusterID) ; ?>" style="max-width:30%;" disabled ="True">
+                                                                    <input type="text" class="form-control" id="cluster" name="cluster" value ="<?php echo cls_name($link_cs,$clusterID) ; ?>" style="max-width:30%;" disabled ="True">
                                                                     
-                                                                    <label for="cohort" class="col-sm-2 col-form-label">Cohort</label>
-                                                                    <input type="text" class="form-control" id="cohort" name="cohort" value =" <?php echo $cohort ; ?>" style="max-width:30%;" disabled ="True">
+                                                                    
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -218,11 +167,11 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                         
                                                                 <div class="card-header bg-transparent border-primary">
                                                                     <?php
-                                                                        $result = mysqli_query($link, "SELECT SUM(amount) AS value_total FROM tblslg_member_savings where groupID ='$id'"); 
+                                                                        $result = mysqli_query($link_cs, "SELECT SUM(amount) AS value_total FROM tblslg_member_savings where groupID ='$id'"); 
                                                                         $row = mysqli_fetch_assoc($result); 
                                                                         $total_savings = $row['value_total'];
 
-                                                                        $result2 = mysqli_query($link, "SELECT COUNT(savingID) AS total_ts FROM tblslg_member_savings where groupID ='$id'"); 
+                                                                        $result2 = mysqli_query($link_cs, "SELECT COUNT(savingID) AS total_ts FROM tblslg_member_savings where groupID ='$id'"); 
                                                                         $row = mysqli_fetch_assoc($result2); 
                                                                         $total_transactions = $row['total_ts'];
 
@@ -269,12 +218,12 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
                                                                                 //Variable $link is declared inside config.php file & used here
                                                                                 
-                                                                                if ($result_set = $link->query($query)) {
+                                                                                if ($result_set = $link_cs->query($query)) {
                                                                                 while($row = $result_set->fetch_array(MYSQLI_ASSOC))
                                                                                 {                                                
                                                                                     $amount = number_format($row["amount_invested"],"2");
                                     
-                                                                                    $ig_name = iga_name($link,$row["type"]);
+                                                                                    $ig_name = iga_name($link_cs,$row["type"]);
                                                                                     $households = $row["no_male"]+$row["no_female"];
                                                                             
                                                                                 echo "<tr>\n";                                           
@@ -309,7 +258,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                         <div class="card border border-primary">
                                                             <div class="card-header bg-transparent border-primary">
                                                                 <?php
-                                                                    $result = mysqli_query($link, "SELECT COUNT(sppCode) AS value_total FROM tblbeneficiaries where groupID ='$id'"); 
+                                                                    $result = mysqli_query($link_cs, "SELECT COUNT(sppCode) AS value_total FROM tblbeneficiaries where groupID ='$id'"); 
                                                                     $row = mysqli_fetch_assoc($result); 
                                                                     $total = $row['value_total'];
                                                                 ?>
@@ -340,7 +289,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
                                                                             //Variable $link is declared inside config.php file & used here
                                                                             
-                                                                            if ($result_set = $link->query($query)) {
+                                                                            if ($result_set = $link_cs->query($query)) {
                                                                             while($row = $result_set->fetch_array(MYSQLI_ASSOC))
                                                                             {                                                
                                                                                 if ($row["hhstatus"] == 1){$hh_status = "Yes";}else{$hh_status = "N/A";}
@@ -389,7 +338,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                              
                                                              <div class="card-header bg-transparent border-primary">
                                                                 <?php
-                                                                    $result = mysqli_query($link, "SELECT COUNT(sppCode) AS value_total FROM tblbeneficiaries where ((groupID ='$id') and (ycs_mapped ='1')) "); 
+                                                                    $result = mysqli_query($link_cs, "SELECT COUNT(sppCode) AS value_total FROM tblbeneficiaries where ((groupID ='$id') and (ycs_mapped ='1')) "); 
                                                                     $row = mysqli_fetch_assoc($result); 
                                                                     $total = $row['value_total'];
                                                                 ?>
@@ -418,7 +367,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
                                                                             //Variable $link is declared inside config.php file & used here
                                                                             
-                                                                            if ($result_set = $link->query($query)) {
+                                                                            if ($result_set = $link_cs->query($query)) {
                                                                             while($row = $result_set->fetch_array(MYSQLI_ASSOC))
                                                                             {                                                
                                                                                 if ($row["hhstatus"] == 1){$hh_status = "Yes";}else{$hh_status = "N/A";}
@@ -465,7 +414,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                              
                                                              <div class="card-header bg-transparent border-primary">
                                                                 <?php
-                                                                    $result = mysqli_query($link, "SELECT COUNT(sppCode) AS value_total FROM tblbeneficiaries where ((groupID ='$id') and (jsg_mapped ='1')) "); 
+                                                                    $result = mysqli_query($link_cs, "SELECT COUNT(sppCode) AS value_total FROM tblbeneficiaries where ((groupID ='$id') and (jsg_mapped ='1')) "); 
                                                                     $row = mysqli_fetch_assoc($result); 
                                                                     $total = $row['value_total'];
                                                                 ?>
@@ -494,7 +443,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
                                                                             //Variable $link is declared inside config.php file & used here
                                                                             
-                                                                            if ($result_set = $link->query($query)) {
+                                                                            if ($result_set = $link_cs->query($query)) {
                                                                             while($row = $result_set->fetch_array(MYSQLI_ASSOC))
                                                                             {                                                
                                                                                 if ($row["hhstatus"] == 1){$hh_status = "Yes";}else{$hh_status = "N/A";}
@@ -541,7 +490,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                                         
                                                              <div class="card-header bg-transparent border-primary">
                                                                 <?php
-                                                                    $result = mysqli_query($link, "SELECT COUNT(sppCode) AS value_total FROM tblbeneficiaries where ((groupID ='$id') and (grad_status ='1')) "); 
+                                                                    $result = mysqli_query($link_cs, "SELECT COUNT(sppCode) AS value_total FROM tblbeneficiaries where ((groupID ='$id') and (grad_status ='1')) "); 
                                                                     $row = mysqli_fetch_assoc($result); 
                                                                     $total = $row['value_total'];
                                                                 ?>
@@ -570,7 +519,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
                                                                             //Variable $link is declared inside config.php file & used here
                                                                             
-                                                                            if ($result_set = $link->query($query)) {
+                                                                            if ($result_set = $link_cs->query($query)) {
                                                                             while($row = $result_set->fetch_array(MYSQLI_ASSOC))
                                                                             {                                                
                                                                                 if ($row["hhstatus"] == 1){$hh_status = "Yes";}else{$hh_status = "N/A";}

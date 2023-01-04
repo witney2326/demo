@@ -28,8 +28,8 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
 <?php include '../layouts/body.php'; ?>
 <?php
-       include "../layouts/config.php"; // Using database connection file here
-       include "../lib.php";
+       include '../layouts/config2.php'; // Using database connection file here
+       include 'lib2.php';
 
        $buscat = $_GET['buscat']; // get id through query string
       $district = $_GET["district"];
@@ -37,7 +37,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
       $query="select * from tblgroup where groupID='$groupID'";
        
-       if ($result_set = $link->query($query)) {
+       if ($result_set = $link_cs->query($query)) {
            while($row = $result_set->fetch_array(MYSQLI_ASSOC))
            { 
                $districtID= $row["DistrictID"];
@@ -60,15 +60,15 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
        
                $sql = "INSERT INTO tblgroup_iga (groupID,districtID,bus_category,type,no_male,no_female,amount_invested)
                VALUES ('$groupID','$district','$buscat','$iga','$males','$females','$amount')";
-           if (mysqli_query($link, $sql)) {
+           if (mysqli_query($link_cs, $sql)) {
                echo '<script type="text/javascript">'; 
                echo 'alert("SLG IGA Record has been added successfully !");'; 
                echo 'window.location.href = "basic_livelihood_slg_mgt2.php";';
                echo '</script>';
            } else {
-               echo "Error: " . $sql . ":-" . mysqli_error($link);
+               echo "Error: " . $sql . ":-" . mysqli_error($link_cs);
            }
-           mysqli_close($link);
+           mysqli_close($link_cs);
            }
            
     ?>
@@ -119,7 +119,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                         <label for="region" class="form-label">Business Category</label>
                                         <div>
                                             <select class="form-select" name="buscat" id="buscat" value ="<?php echo $buscat?>" required>
-                                                <option selected value="<?php echo $buscat?>"><?php echo bus_cat_name($link,$buscat);?></option>
+                                                <option selected value="<?php echo $buscat?>"><?php echo bus_cat_name($link_cs,$buscat);?></option>
                                                     
                                             </select>
                                             <div class="invalid-feedback">
@@ -134,7 +134,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                             <option></option>
                                             <?php                                                           
                                                     $iga_fetch_query = "SELECT ID,name FROM tbliga_types where categoryID = '$buscat'";                                                  
-                                                    $result_iga_fetch = mysqli_query($link, $iga_fetch_query);                                                                       
+                                                    $result_iga_fetch = mysqli_query($link_cs, $iga_fetch_query);                                                                       
                                                     $i=0;
                                                         while($DB_ROW_iga = mysqli_fetch_array($result_iga_fetch)) {
                                                     ?>
@@ -162,7 +162,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                         <div class="col-lg-9">
                             <div class="card border border-success">
                                 <div class="card-header bg-transparent border-success">
-                                    <h5 class="my-0 text-success">IGA Record for -SLG- <?php echo grp_name($link,$groupID) ; ?></h5>
+                                    <h5 class="my-0 text-success">IGA Record for -SLG- <?php echo grp_name($link_cs,$groupID) ; ?></h5>
                                 </div>
                                 <div class="card-body">
                                     
@@ -180,14 +180,14 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                         <div class="row mb-1">
                                             <label for="buscat" class="col-sm-2 col-form-label">Bus Cat</label>
                                             <select class="form-select" name="buscat" id="buscat" value ="<?php echo $buscat;?>" style="max-width:30%;" required>
-                                                <option selected value="<?php echo $buscat;?>"><?php echo bus_cat_name($link,$buscat);?></option>
+                                                <option selected value="<?php echo $buscat;?>"><?php echo bus_cat_name($link_cs,$buscat);?></option>
                                             </select>
 
                                             <label for="iga" class="col-sm-2 col-form-label">IGA Type</label>
                                             <select class="form-select" name="iga" id="iga" value ="" style="max-width:30%;" required>
                                                 <?php                                                           
                                                     $iga_fetch_query = "SELECT ID,name FROM tbliga_types where categoryID = '$buscat'";                                                  
-                                                    $result_iga_fetch = mysqli_query($link, $iga_fetch_query);                                                                       
+                                                    $result_iga_fetch = mysqli_query($link_cs, $iga_fetch_query);                                                                       
                                                     $i=0;
                                                         while($DB_ROW_iga = mysqli_fetch_array($result_iga_fetch)) {
                                                     ?>
@@ -259,15 +259,15 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
                                             //Variable $link is declared inside config.php file & used here
                                             
-                                            if ($result_set = $link->query($query)) {
+                                            if ($result_set = $link_cs->query($query)) {
                                             while($row = $result_set->fetch_array(MYSQLI_ASSOC))
                                             { 
-                                                $group = grp_name($link, $groupID);
+                                                $group = grp_name($link_cs, $groupID);
                                                 $amount = number_format($row["amount_invested"],"2");
 
                                                
-                                                $district_name = dis_name($link,$row["districtID"]);
-                                                $ig_name = iga_name($link,$row["type"]);
+                                                $district_name = dis_name($link_cs,$row["districtID"]);
+                                                $ig_name = iga_name($link_cs,$row["type"]);
                                         
 
                                             echo "<tr>\n";                                           

@@ -5,7 +5,7 @@
     <title>SLG Management</title>
     <?php include '../layouts/head.php'; ?>
     <?php include '../layouts/head-style.php'; ?>
-    <?php include '../layouts/config.php'; ?>
+    <?php include '../layouts/config2.php'; ?>
 <!-- DataTables -->
     <link href="assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
     <link href="assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
@@ -135,7 +135,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                         </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="link"  href="basic_livelihood_clusters_check.php" role="link">
+                                        <a class="link"  href="csepwp_basic_livelihood_clusters.php" role="link">
                                             <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
                                             <span class="d-none d-sm-block">Clusters</span>
                                         </a>
@@ -174,7 +174,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                                     <option></option>
                                                                     <?php                                                           
                                                                             $dis_fetch_query = "SELECT regionID, name FROM tblregion";                                                  
-                                                                            $result_dis_fetch = mysqli_query($link, $dis_fetch_query);                                                                       
+                                                                            $result_dis_fetch = mysqli_query($link_cs, $dis_fetch_query);                                                                       
                                                                             $i=0;
                                                                                 while($DB_ROW_reg = mysqli_fetch_array($result_dis_fetch)) {
                                                                             ?>
@@ -271,7 +271,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                                         $query="select * from tblgroup where ((regionID ='0') and (deleted ='0'))";
                                                                         //Variable $link is declared inside config.php file & used here
                                                                         
-                                                                        if ($result_set = $link->query($query)) {
+                                                                        if ($result_set = $link_cs->query($query)) {
                                                                         while($row = $result_set->fetch_array(MYSQLI_ASSOC))
                                                                         { 
                                                                             $totalAdult =  $row["MembersM"]+ $row["MembersF"];
@@ -321,54 +321,38 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                 
                                                 <div class="card-body">
                                                     <h5 class="card-title mt-0"></h5>
-                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="basic_livelihood_slg_mgt_new_cls_filter1_results.php" method ="POST" >
+                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="csepwp_new_cls_filter1_results.php" method ="POST" >
                                                         <div class="col-12">
                                                             <label for="region" class="form-label">Region</label>
                                                             
-                                                                <select class="form-select" name="region" id="region"  required>
-                                                                    <option ></option>
-                                                                    <?php                                                           
-                                                                            $dis_fetch_query = "SELECT regionID, name FROM tblregion";                                                  
-                                                                            $result_dis_fetch = mysqli_query($link, $dis_fetch_query);                                                                       
-                                                                            $i=0;
-                                                                                while($DB_ROW_reg = mysqli_fetch_array($result_dis_fetch)) {
-                                                                            ?>
-                                                                            <option value ="<?php
-                                                                                    echo $DB_ROW_reg["regionID"];?>">
-                                                                                <?php
-                                                                                    echo $DB_ROW_reg["name"];
-                                                                                ?>
-                                                                            </option>
-                                                                            <?php
-                                                                                $i++;
-                                                                                    }
+                                                            <select class="form-select" name="region" id="region"  required>
+                                                                <option ></option>
+                                                                <?php                                                           
+                                                                    $dis_fetch_query = "SELECT regionID, name FROM tblregion";                                                  
+                                                                    $result_dis_fetch = mysqli_query($link_cs, $dis_fetch_query);                                                                       
+                                                                    $i=0;
+                                                                        while($DB_ROW_reg = mysqli_fetch_array($result_dis_fetch)) {
+                                                                    ?>
+                                                                    <option value ="<?php
+                                                                            echo $DB_ROW_reg["regionID"];?>">
+                                                                        <?php
+                                                                            echo $DB_ROW_reg["name"];
                                                                         ?>
-                                                                </select>
-                                                                <div class="invalid-feedback">
-                                                                    Please select a valid Malawi region.
-                                                                </div>
-                                                            
+                                                                    </option>
+                                                                    <?php
+                                                                        $i++;
+                                                                            }
+                                                                    ?>
+                                                            </select>
+                                                                
                                                         </div>
                                                         
                                                         <div class="col-12">
-                                                            <label for="district" class="form-label">District</label>
-                                                            <select class="form-select" name="district" id="district" value ="$district" required disabled>
-                                                                <option selected value="$district" ></option>
-                                                                    <?php                                                           
-                                                                        $dis_fetch_query = "SELECT DistrictID,DistrictName FROM tbldistrict";                                                  
-                                                                        $result_dis_fetch = mysqli_query($link, $dis_fetch_query);                                                                       
-                                                                        $i=0;
-                                                                            while($DB_ROW_Dis = mysqli_fetch_array($result_dis_fetch)) {
-                                                                        ?>
-                                                                        <option value="<?php echo $DB_ROW_Dis["DistrictID"]; ?>">
-                                                                            <?php echo $DB_ROW_Dis["DistrictName"]; ?></option><?php
-                                                                            $i++;
-                                                                                }
-                                                                    ?>
+                                                            <label for="district1" class="form-label">District</label>
+                                                            <select class="form-select" name="district1" id="district" onChange="getTa(this.value);" required>
+                                                                <option selected value="00">Select District</option>
                                                             </select>
-                                                            <div class="invalid-feedback">
-                                                                Please select a valid Malawi district.
-                                                            </div>
+                                                            
                                                         </div>
 
                                                         <div class="col-12">
@@ -377,7 +361,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                                 <option selected  value="$ta"></option>
                                                                 <?php                                                           
                                                                         $ta_fetch_query = "SELECT TAName FROM tblta";                                                  
-                                                                        $result_ta_fetch = mysqli_query($link, $ta_fetch_query);                                                                       
+                                                                        $result_ta_fetch = mysqli_query($link_cs, $ta_fetch_query);                                                                       
                                                                         $i=0;
                                                                             while($DB_ROW_ta = mysqli_fetch_array($result_ta_fetch)) {
                                                                         ?>
@@ -412,7 +396,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                 
                                                 <div class="card-body">
                                                     <h5 class="card-title mt-0"></h5>
-                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="basic_livelihood_slg_mgt_new_slg_filter1_results.php" method ="POST" >
+                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="csepwp_new_slg_filter1_results.php" method ="POST" >
                                                         <div class="col-12">
                                                             <label for="region" class="form-label">Region</label>
                                                             
@@ -420,7 +404,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                                     <option ></option>
                                                                     <?php                                                           
                                                                             $dis_fetch_query = "SELECT regionID, name FROM tblregion";                                                  
-                                                                            $result_dis_fetch = mysqli_query($link, $dis_fetch_query);                                                                       
+                                                                            $result_dis_fetch = mysqli_query($link_cs, $dis_fetch_query);                                                                       
                                                                             $i=0;
                                                                                 while($DB_ROW_reg = mysqli_fetch_array($result_dis_fetch)) {
                                                                             ?>
@@ -447,7 +431,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                                 <option selected value="$district" ></option>
                                                                     <?php                                                           
                                                                         $dis_fetch_query = "SELECT DistrictID,DistrictName FROM tbldistrict";                                                  
-                                                                        $result_dis_fetch = mysqli_query($link, $dis_fetch_query);                                                                       
+                                                                        $result_dis_fetch = mysqli_query($link_cs, $dis_fetch_query);                                                                       
                                                                         $i=0;
                                                                             while($DB_ROW_Dis = mysqli_fetch_array($result_dis_fetch)) {
                                                                         ?>
@@ -468,7 +452,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                                 <option selected  value="$ta"></option>
                                                                 <?php                                                           
                                                                         $ta_fetch_query = "SELECT TAName FROM tblta";                                                  
-                                                                        $result_ta_fetch = mysqli_query($link, $ta_fetch_query);                                                                       
+                                                                        $result_ta_fetch = mysqli_query($link_cs, $ta_fetch_query);                                                                       
                                                                         $i=0;
                                                                             while($DB_ROW_ta = mysqli_fetch_array($result_ta_fetch)) {
                                                                         ?>
@@ -512,7 +496,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                                     <option ></option>
                                                                     <?php                                                           
                                                                             $dis_fetch_query = "SELECT regionID, name FROM tblregion";                                                  
-                                                                            $result_dis_fetch = mysqli_query($link, $dis_fetch_query);                                                                       
+                                                                            $result_dis_fetch = mysqli_query($link_cs, $dis_fetch_query);                                                                       
                                                                             $i=0;
                                                                                 while($DB_ROW_reg = mysqli_fetch_array($result_dis_fetch)) {
                                                                             ?>
@@ -539,7 +523,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                                 <option selected value="$district" ></option>
                                                                     <?php                                                           
                                                                         $dis_fetch_query = "SELECT DistrictID,DistrictName FROM tbldistrict";                                                  
-                                                                        $result_dis_fetch = mysqli_query($link, $dis_fetch_query);                                                                       
+                                                                        $result_dis_fetch = mysqli_query($link_cs, $dis_fetch_query);                                                                       
                                                                         $i=0;
                                                                             while($DB_ROW_Dis = mysqli_fetch_array($result_dis_fetch)) {
                                                                         ?>
@@ -560,7 +544,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                                 <option selected  value="$ta"></option>
                                                                 <?php                                                           
                                                                         $ta_fetch_query = "SELECT TAName FROM tblta";                                                  
-                                                                        $result_ta_fetch = mysqli_query($link, $ta_fetch_query);                                                                       
+                                                                        $result_ta_fetch = mysqli_query($link_cs, $ta_fetch_query);                                                                       
                                                                         $i=0;
                                                                             while($DB_ROW_ta = mysqli_fetch_array($result_ta_fetch)) {
                                                                         ?>
@@ -614,7 +598,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
                                                                         //Variable $link is declared inside config.php file & used here
                                                                         
-                                                                        if ($result_set = $link->query($query)) {
+                                                                        if ($result_set = $link_cs->query($query)) {
                                                                         while($row = $result_set->fetch_array(MYSQLI_ASSOC))
                                                                         { 
                                                                         echo "<tr>\n";

@@ -28,13 +28,13 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
 <?php include '../layouts/body.php'; ?>
 <?php
-       include "../layouts/config.php";
-       include "../lib.php";
+       include '../layouts/config2.php';
+       include 'lib2.php';
 
        $id = $_GET['id']; // get id through query string
        $query="select * from tblgroup where groupID='$id'";
         
-        if ($result_set = $link->query($query)) {
+        if ($result_set = $link_cs->query($query)) {
             while($row = $result_set->fetch_array(MYSQLI_ASSOC))
             { 
                 $groupname= $row["groupname"];
@@ -64,7 +64,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
             {
                 $sql = "INSERT INTO tblbeneficiaries (sppCode,spProg,regionID,districtID,groupID,cohort)
                 VALUES ('$hhcode','$spp_programme','$regionID','$DistrictID','$groupID','$cohort')";
-                if (mysqli_query($link, $sql)) {
+                if (mysqli_query($link_cs, $sql)) {
                     echo '<script type="text/javascript">'; 
                     echo 'if (confirm("SLG Member Record has been added successfully! Add Another SLG Member in the Same SLG?"))';
                         echo '{';
@@ -76,9 +76,9 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                         echo '}';
                     echo '</script>';
                 } else {
-                    echo "Error: " . $sql . ":-" . mysqli_error($link);
+                    echo "Error: " . $sql . ":-" . mysqli_error($link_cs);
                 }
-                mysqli_close($link);
+                mysqli_close($link_cs);
             }
         }   
     ?>
@@ -179,7 +179,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                 <select class="form-select" id="spp_programme" name ="spp_programme" required>
                                                     <?php                                                           
                                                         $spp_fetch_query = "SELECT progID, progName FROM tblspp";                                                  
-                                                        $result_spp_fetch = mysqli_query($link, $spp_fetch_query);                                                                       
+                                                        $result_spp_fetch = mysqli_query($link_cs, $spp_fetch_query);                                                                       
                                                         $i=0;
                                                             while($DB_ROW_spp = mysqli_fetch_array($result_spp_fetch)) {
                                                         ?>

@@ -28,13 +28,13 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
 <?php include '../layouts/body.php'; ?>
 <?php
-       include "../layouts/config.php"; // Using database connection file here
-       include "../lib.php";
+       include '../layouts/config2.php'; // Using database connection file here
+       include 'lib2.php';
    
        $id = $_GET['id']; // get id through query string
       $query="select * from tblgroup where groupID='$id'";
        
-       if ($result_set = $link->query($query)) {
+       if ($result_set = $link_cs->query($query)) {
            while($row = $result_set->fetch_array(MYSQLI_ASSOC))
            { 
                $districtID= $row["DistrictID"];
@@ -58,15 +58,15 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
            
                $sql = "INSERT INTO tblgroup_iga (groupID,districtID,type,no_male,no_female,amount_invested)
                VALUES ('$groupID','$district','$iga','$males','$females','$amount')";
-           if (mysqli_query($link, $sql)) {
+           if (mysqli_query($link_cs, $sql)) {
                echo '<script type="text/javascript">'; 
                echo 'alert("SLG IGA Record has been added successfully !");'; 
                echo 'window.location.href = "basic_livelihood_slg_mgt2.php";';
                echo '</script>';
            } else {
-               echo "Error: " . $sql . ":-" . mysqli_error($link);
+               echo "Error: " . $sql . ":-" . mysqli_error($link_cs);
            }
-           mysqli_close($link);
+           mysqli_close($link_cs);
            }
            
     ?>
@@ -120,7 +120,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                 <option></option>
                                                     <?php                                                           
                                                         $cat_fetch_query = "SELECT categoryID,catname FROM tblbusines_category";                                                  
-                                                        $result_cat_fetch = mysqli_query($link, $cat_fetch_query);                                                                       
+                                                        $result_cat_fetch = mysqli_query($link_cs, $cat_fetch_query);                                                                       
                                                         $i=0;
                                                             while($DB_ROW_cat = mysqli_fetch_array($result_cat_fetch)) {
                                                         ?>
@@ -142,7 +142,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                             <option></option>
                                             <?php                                                           
                                                     $iga_fetch_query = "SELECT ID,name FROM tbliga_types";                                                  
-                                                    $result_iga_fetch = mysqli_query($link, $iga_fetch_query);                                                                       
+                                                    $result_iga_fetch = mysqli_query($link_cs, $iga_fetch_query);                                                                       
                                                     $i=0;
                                                         while($DB_ROW_iga = mysqli_fetch_array($result_iga_fetch)) {
                                                     ?>
@@ -262,15 +262,15 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
                                             //Variable $link is declared inside config.php file & used here
                                             
-                                            if ($result_set = $link->query($query)) {
+                                            if ($result_set = $link_cs->query($query)) {
                                             while($row = $result_set->fetch_array(MYSQLI_ASSOC))
                                             { 
-                                                $group = grp_name($link, $id);
+                                                $group = grp_name($link_cs, $id);
                                                 $amount = number_format($row["amount_invested"],"2");
 
                                                
-                                                $district_name = dis_name($link,$row["districtID"]);
-                                                $ig_name = iga_name($link,$row["type"]);
+                                                $district_name = dis_name($link_cs,$row["districtID"]);
+                                                $ig_name = iga_name($link_cs,$row["type"]);
                                         
 
                                             echo "<tr>\n";                                           

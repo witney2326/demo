@@ -5,7 +5,7 @@
     <title>SLG Management</title>
     <?php include 'layouts/head.php'; ?>
     <?php include 'layouts/head-style.php'; ?>
-    <?php include 'layouts/config.php'; ?>
+    <?php include 'layouts/config2.php'; ?>
 <!-- DataTables -->
     <link href="assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
     <link href="assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
@@ -26,25 +26,15 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
   </script>
 </head>
 
-<?php include 'layouts/body.php'; ?>
+<?php include 'layouts/body.php'; 
+      include 'lib2.php';
+?>
 
 <?php 
   
     $region = $_POST['region'];
     
-    function get_rname($link, $rcode)
-        {
-        $rg_query = mysqli_query($link,"select name from tblregion where regionID='$rcode'"); // select query
-        $rg = mysqli_fetch_array($rg_query);// fetch data
-        return $rg['name'];
-        }
     
-        function dis_name($link, $disID)
-        {
-        $dis_query = mysqli_query($link,"select DistrictName from tbldistrict where DistrictID='$disID'"); // select query
-        $dis = mysqli_fetch_array($dis_query);// fetch data
-        return $dis['DistrictName'];
-        }
 ?>
 
 <!-- Begin page -->
@@ -138,7 +128,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                             <label for="region" class="form-label">Region</label>
                                                             <div>
                                                                 <select class="form-select" name="region" id="region" value ="<?php echo $region;?>" required>
-                                                                    <option selected value = "<?php echo $region;?>"><?php echo get_rname($link,$region);?></option>
+                                                                    <option selected value = "<?php echo $region;?>"><?php echo get_rname($link_cs,$region);?></option>
                                                                 </select>
                                                             </div>
                                                         </div>
@@ -149,7 +139,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                                 <option></option>
                                                                     <?php                                                           
                                                                         $dis_fetch_query = "SELECT DistrictID,DistrictName FROM tbldistrict where regionID =$region";                                                  
-                                                                        $result_dis_fetch = mysqli_query($link, $dis_fetch_query);                                                                       
+                                                                        $result_dis_fetch = mysqli_query($link_cs, $dis_fetch_query);                                                                       
                                                                         $i=0;
                                                                             while($DB_ROW_Dis = mysqli_fetch_array($result_dis_fetch)) {
                                                                         ?>
@@ -209,7 +199,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                         <div class="col-12">
                                             <div class="card border border-primary">
                                             <div class="card-header bg-transparent border-primary">
-                                                <h5 class="my-0 text-default">Clusters in <?php echo get_rname($link,$region); ?> Region</h5>
+                                                <h5 class="my-0 text-default">Clusters in <?php echo get_rname($link_cs,$region); ?> Region</h5>
                                             </div>
                                             <div class="card-body">
                                             <h7 class="card-title mt-0"></h7>
@@ -234,7 +224,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
                                                                 //Variable $link is declared inside config.php file & used here
                                                                 
-                                                                if ($result_set = $link->query($query)) {
+                                                                if ($result_set = $link_cs->query($query)) {
                                                                 while($row = $result_set->fetch_array(MYSQLI_ASSOC))
                                                                 { 
                                                                     $prog = $row["programID"];

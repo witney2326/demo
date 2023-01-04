@@ -28,12 +28,12 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
 <?php include '../layouts/body.php'; ?>
 <?php
-      include "../layouts/config.php"; // Using database connection file here
+      include "../layouts/config2.php"; // Using database connection file here
         
       $id = $_GET['id']; // get id through query string
      $query="select * from tblgroup where groupID='$id'";
       
-      if ($result_set = $link->query($query)) {
+      if ($result_set = $link_cs->query($query)) {
           while($row = $result_set->fetch_array(MYSQLI_ASSOC))
           { 
               $groupname= $row["groupname"];
@@ -45,12 +45,11 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
               $MembersM= $row["MembersM"];
               $MembersF = $row["MembersF"];
               $clusterID = $row["clusterID"];
-              $cohort = $row["cohort"];
-              $spProg = $row["programID"];
+
           }
           $result_set->close();
       }
-      include "../lib.php";
+      include "lib2.php";
            
     ?>
 
@@ -111,7 +110,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
                                             <label for="region" class="col-sm-2 col-form-label">Region</label>
                                             <select class="form-select" name="region" id="region" value ="<?php echo $regionID ; ?>" style="max-width:30%;" required>
-                                                    <option selected value="$region" ><?php echo r_name($link,$regionID) ; ?></option>       
+                                                    <option selected value="$region" ><?php echo r_name($link_cs,$regionID) ; ?></option>       
                                             </select>
                                         </div>
 
@@ -119,15 +118,15 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                         <div class="row mb-1">
                                             <label for="district" class="col-sm-2 col-form-label">District</label>
                                             <select class="form-select" name="district" id="district" value ="<?php echo $DistrictID ; ?>" style="max-width:30%;" required>
-                                                <option selected value="$DistrictID" ><?php echo dis_name($link,$DistrictID) ; ?></option>      
+                                                <option selected value="$DistrictID" ><?php echo dis_name($link_cs,$DistrictID) ; ?></option>      
                                             </select>
                                               
                                             <label for="ta" class="col-sm-2 col-form-label">TA</label>
                                             <select class="form-select" name="ta" id="ta" value ="<?php echo $TAID ; ?>" style="max-width:30%;" required>
-                                                <option selected value="$TAID" ><?php echo ta_name($link,$TAID) ; ?></option>
+                                                <option selected value="$TAID" ><?php echo ta_name($link_cs,$TAID) ; ?></option>
                                                     <?php                                                           
                                                         $ta_fetch_query = "SELECT TAID,TAName FROM tblta where DistrictID ='$DistrictID'";                                                  
-                                                        $result_ta_fetch = mysqli_query($link, $ta_fetch_query);                                                                       
+                                                        $result_ta_fetch = mysqli_query($link_cs, $ta_fetch_query);                                                                       
                                                         $i=0;
                                                             while($DB_ROW_ta = mysqli_fetch_array($result_ta_fetch)) {
                                                         ?>
@@ -143,21 +142,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                             <label for="gvh" class="col-sm-2 col-form-label">GVH</label>
                                             <input type="text" class="form-control" id="gvh" name="gvh" value ="<?php echo $gvhID ; ?>" style="max-width:30%;" >
 
-                                            <label for="spProg" class="col-sm-2 col-form-label">SP Prog</label>
-                                            <select class="form-select" name="spProg" id="spProg" style="max-width:30%;" required>
-                                                <option selected value="<?php echo $spProg;?>"><?php echo prog_name($link,$spProg);?></option>
-                                                    <?php                                                           
-                                                        $ta_fetch_query = "SELECT progID,progName FROM tblspp";                                                  
-                                                        $result_ta_fetch = mysqli_query($link, $ta_fetch_query);                                                                       
-                                                        $i=0;
-                                                            while($DB_ROW_ta = mysqli_fetch_array($result_ta_fetch)) {
-                                                        ?>
-                                                        <option value="<?php echo $DB_ROW_ta["progID"]; ?>">
-                                                            <?php echo $DB_ROW_ta["progName"]; ?></option><?php
-                                                            $i++;
-                                                                }
-                                                    ?>
-                                            </select>         
+                                                   
                                         </div>
 
                                         <div class="row mb-1">
@@ -171,10 +156,10 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                         <div class="row mb-1">
                                             <label for="cluster" class="col-sm-2 col-form-label">Cluster Name</label>
                                             <select class="form-select" name="cluster" id="cluster" value ="<?php echo $clusterID ; ?>" style="max-width:30%;" required>
-                                                <option selected value="<?php echo $clusterID ; ?>" ><?php echo cls_name($link,$clusterID) ; ?></option>
+                                                <option selected value="<?php echo $clusterID ; ?>" ><?php echo cls_name($link_cs,$clusterID) ; ?></option>
                                                     <?php                                                           
                                                         $cls_fetch_query = "SELECT ClusterID,ClusterName FROM tblcluster where taID ='$TAID'";                                                  
-                                                        $result_cls_fetch = mysqli_query($link, $cls_fetch_query);                                                                       
+                                                        $result_cls_fetch = mysqli_query($link_cs, $cls_fetch_query);                                                                       
                                                         $i=0;
                                                             while($DB_ROW_cls = mysqli_fetch_array($result_cls_fetch)) {
                                                         ?>
@@ -185,8 +170,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                     ?>
                                             </select>
                                                
-                                            <label for="cohort" class="col-sm-2 col-form-label">Cohort</label>
-                                            <input type="text" class="form-control" id="cohort" name="cohort" value =" <?php echo $cohort ; ?>" style="max-width:30%;" >
+                                            
 
                                             <label for="clusterID" class="col-sm-2 col-form-label">Cluster ID</label>
                                             <input type="text" class="form-control" id="clusterID" name="clusterID" value =" <?php echo $clusterID ; ?>" style="max-width:30%;" readonly>

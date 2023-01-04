@@ -8,12 +8,12 @@
 </head>
 
 <?php include '../layouts/body.php'; ?>
-<?php include '../layouts/config.php'; ?>
-<?php include '../lib.php'; ?>
+<?php include '../layouts/config2.php'; ?>
+<?php include 'lib2.php'; ?>
 <?php
         $id = $_GET['id']; // get id through query string
         $query="select * from tblbeneficiaries where sppCode='$id'";
-         if ($result_set = $link->query($query)) {
+         if ($result_set = $link_cs->query($query)) {
              while($row = $result_set->fetch_array(MYSQLI_ASSOC))
              { 
                  $hhname= $row["hh_head_name"];;
@@ -143,16 +143,16 @@
                                                                                                         
                                                                 <div class="row mb-1">
                                                                     <label for="region" class="col-sm-2 col-form-label">Region</label>              
-                                                                    <input type="text" class="form-control" id="region" name="region" value ="<?php echo get_rname($link,$regionID) ; ?>" style="max-width:30%;" disabled ="True">
+                                                                    <input type="text" class="form-control" id="region" name="region" value ="<?php echo get_rname($link_cs,$regionID) ; ?>" style="max-width:30%;" disabled ="True">
                                                                     
                                                                     <label for="district" class="col-sm-2 col-form-label">District</label>
-                                                                    <input type="text" class="form-control" id="district" name="district" value ="<?php echo dis_name($link,$districtID) ; ?>" style="max-width:30%;" disabled ="True">
+                                                                    <input type="text" class="form-control" id="district" name="district" value ="<?php echo dis_name($link_cs,$districtID) ; ?>" style="max-width:30%;" disabled ="True">
                                                                 </div>
                                                                                                     
                                                                                                         
                                                                 <div class="row mb-1">
                                                                     <label for="group" class="col-sm-2 col-form-label">Group Name</label>              
-                                                                    <input type="text" class="form-control" id="group" name="group" value ="<?php echo grp_name($link,$groupID) ; ?>" style="max-width:30%;" disabled ="True">
+                                                                    <input type="text" class="form-control" id="group" name="group" value ="<?php echo grp_name($link_cs,$groupID) ; ?>" style="max-width:30%;" disabled ="True">
                                                                     
                                                                     <label for="cohort" class="col-sm-2 col-form-label">Cohort</label>
                                                                     <input type="text" class="form-control" id="cohort" name="cohort" value =" <?php echo $cohort ; ?>" style="max-width:30%;" disabled ="True">
@@ -160,7 +160,7 @@
                                                                 
                                                                 <div class="row mb-1">
                                                                     <label for="sppname" class="col-sm-2 col-form-label">SPP Name</label>                          
-                                                                    <input type="text" class="form-control" id="sppname" name="sppname" value =" <?php echo prog_name($link,$sppname) ; ?>" style="max-width:30%;" disabled ="True">
+                                                                    <input type="text" class="form-control" id="sppname" name="sppname" value =" <?php echo prog_name($link_cs,$sppname) ; ?>" style="max-width:30%;" disabled ="True">
 
                                                                     <label for="nat_id" class="col-sm-2 col-form-label">National ID</label>
                                                                     <input type="text" class="form-control" id="nat_id" name="nat_id" value =" <?php echo $nat_id ; ?>" style="max-width:30%;" disabled ="True">                                           
@@ -179,7 +179,7 @@
 
                                                                 <div class="card-header bg-transparent border-primary">
                                                                     <?php
-                                                                        $result = mysqli_query($link, "SELECT SUM(amount) AS value_total FROM tblslg_member_savings where hh_code ='$id'"); 
+                                                                        $result = mysqli_query($link_cs, "SELECT SUM(amount) AS value_total FROM tblslg_member_savings where hh_code ='$id'"); 
                                                                         $row = mysqli_fetch_assoc($result); 
                                                                         $total_savings = $row['value_total'];
                                                                     ?>
@@ -211,7 +211,7 @@
 
                                                                                     //Variable $link is declared inside config.php file & used here
                                                                                     
-                                                                                    if ($result_set = $link->query($query)) {
+                                                                                    if ($result_set = $link_cs->query($query)) {
                                                                                     while($row = $result_set->fetch_array(MYSQLI_ASSOC))
                                                                                     {                                                
                                                                                         $amount = number_format($row["amount"],"2");
@@ -251,7 +251,7 @@
                                                     <div class="card border border-primary">
                                                         <div class="card-header bg-transparent border-primary">
                                                             <?php
-                                                                $result = mysqli_query($link, "SELECT SUM(amount) AS value_total FROM tblslg_member_iga where hh_code ='$id'"); 
+                                                                $result = mysqli_query($link_cs, "SELECT SUM(amount) AS value_total FROM tblslg_member_iga where hh_code ='$id'"); 
                                                                 $row = mysqli_fetch_assoc($result); 
                                                                 $total_investment = $row['value_total'];
                                                             ?>
@@ -282,12 +282,12 @@
 
                                                                             //Variable $link is declared inside config.php file & used here
                                                                             
-                                                                            if ($result_set = $link->query($query)) {
+                                                                            if ($result_set = $link_cs->query($query)) {
                                                                             while($row = $result_set->fetch_array(MYSQLI_ASSOC))
                                                                             {                                                
                                                                                 $amount = number_format($row["amount_invested"],"2");
                                 
-                                                                                $ig_name = iga_name($link,$row["type"]);
+                                                                                $ig_name = iga_name($link_cs,$row["type"]);
                                                                                 
                                                                         
                                                                             echo "<tr>\n";                                           
@@ -345,13 +345,13 @@
 
                                                                         //Variable $link is declared inside config.php file & used here
                                                                         
-                                                                        if ($result_set = $link->query($query)) {
+                                                                        if ($result_set = $link_cs->query($query)) {
                                                                         while($row = $result_set->fetch_array(MYSQLI_ASSOC))
                                                                         { 
-                                                                            $group = grp_name($link, $id);
+                                                                            $group = grp_name($link_cs, $id);
                                                                             
-                                                                            $district_name = dis_name($link,$row["districtID"]);
-                                                                            $ig_name = iga_name($link,$row["voc_type"]);
+                                                                            $district_name = dis_name($link_cs,$row["districtID"]);
+                                                                            $ig_name = iga_name($link_cs,$row["voc_type"]);
                                                                     
                                                                             $dateOfBirth = $row["dob"];
                                                                             $today = date("Y-m-d");
@@ -413,12 +413,12 @@
 
                                                                         //Variable $link is declared inside config.php file & used here
                                                                         
-                                                                        if ($result_set = $link->query($query)) {
+                                                                        if ($result_set = $link_cs->query($query)) {
                                                                         while($row = $result_set->fetch_array(MYSQLI_ASSOC))
                                                                         { 
-                                                                            $group = grp_name($link, $id);
+                                                                            $group = grp_name($link_cs, $id);
                                                                             
-                                                                            $district_name = dis_name($link,$row["districtID"]);
+                                                                            $district_name = dis_name($link_cs,$row["districtID"]);
                                                                             
                                                                     
 
@@ -475,7 +475,7 @@
                                                                             $id = $_GET['id'];
                                                                             $query="select * from tblbeneficiaries_graduating_fs where sppCode ='$id';";
                                                                             
-                                                                            if ($result_set = $link->query($query)) {
+                                                                            if ($result_set = $link_cs->query($query)) {
                                                                             while($row = $result_set->fetch_array(MYSQLI_ASSOC))
                                                                             {                                                
                                                                                 $fs = $row["Months_HH_FS"]+$row["Meals_Per_Day"]+$row["access_to_farming_land"];
@@ -538,7 +538,7 @@
                                                                                 $id = $_GET['id'];
                                                                                 $query="select * from tblbeneficiaries_graduating_er where sppCode ='$id';";
                                                                                 
-                                                                                if ($result_set = $link->query($query)) {
+                                                                                if ($result_set = $link_cs->query($query)) {
                                                                                 while($row = $result_set->fetch_array(MYSQLI_ASSOC))
                                                                                 {                                                
                                                                                     
@@ -605,7 +605,7 @@
                                                                                 $id = $_GET['id'];
                                                                                 $query="select * from tblbeneficiaries_graduating_nh where sppCode ='$id';";
                                                                                 
-                                                                                if ($result_set = $link->query($query)) {
+                                                                                if ($result_set = $link_cs->query($query)) {
                                                                                 while($row = $result_set->fetch_array(MYSQLI_ASSOC))
                                                                                 {                                                
                                                                                     $nh = $row["diet_diversification"]+$row["vegitable_garden"]+$row["small_livestock"]+$row["pit_latrine"]+$row["safe_drinking_water"]+$row["Other_hygiene_behaviour"]+$row["medical_health_care"]+$row["Perceived_malnutrition"];
@@ -667,7 +667,7 @@
                                                                                 $id = $_GET['id'];
                                                                                 $query="select * from tblbeneficiaries_graduating_se where sppCode ='$id';";
                                                                                 
-                                                                                if ($result_set = $link->query($query)) {
+                                                                                if ($result_set = $link_cs->query($query)) {
                                                                                 while($row = $result_set->fetch_array(MYSQLI_ASSOC))
                                                                                 {                                                
                                                                                     

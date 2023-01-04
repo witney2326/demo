@@ -1,11 +1,11 @@
 <?php
-include('../layouts/config.php');
+include('../layouts/config2.php');
 if(!empty($_POST["disid"])) 
 {
  $id=$_POST['disid'];
  
 
- $stmt = mysqli_query($link,"SELECT TAID,TAName FROM tblta WHERE DistrictID ='$id'");
+ $stmt = mysqli_query($link_cs,"SELECT TAID,TAName FROM tblta WHERE DistrictID ='$id'");
  ?><option selected="selected">Select TA </option><?php
  while($row=mysqli_fetch_array($stmt))
  {

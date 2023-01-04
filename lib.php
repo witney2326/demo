@@ -206,6 +206,27 @@
         return $fac['title'];
         }
 
+        function issue_name($link, $icode)
+        {
+        $rg_query = mysqli_query($link,"select name from tblissues where id='$icode'"); // select query
+        $rg = mysqli_fetch_array($rg_query);// fetch data
+        return $rg['name'];
+        }
+    
+        function demo_plot_found($link, $clsID)
+        {
+        $place_query = mysqli_query($link,"select id from tblacsademoplot where cluster='$clsID'"); // select query
+        $place = mysqli_fetch_array($place_query);// fetch data
+        return $place['id'];
+        }
+
+        function lf_found($link, $clsID)
+        {
+        $place_query = mysqli_query($link,"select TrainingID from tblanimatortrainings where (clusterID='$clsID' and animatorType ='06')"); // select query
+        $lf = mysqli_fetch_array($place_query);// fetch data
+        return $lf['TrainingID'];
+        }
+
     ?>
     
 </div>

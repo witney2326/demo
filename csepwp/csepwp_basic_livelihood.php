@@ -5,7 +5,7 @@
     <title>CSEPWP Basic Livelihood</title>
     <?php include '../layouts/head.php'; ?>
     <?php include '../layouts/head-style.php'; ?>
-     <?php include '../layouts/config.php'; ?>
+     <?php include '../layouts/config2.php'; ?>
     
 
     <!-- DataTables -->
@@ -76,7 +76,7 @@
             FROM tblanimatortrainings 
             inner join tbldistrict on tbldistrict.DistrictID = tblanimatortrainings.districtID where tblanimatortrainings.animatorType = '06'
             GROUP BY tbldistrict.DistrictName";
-            $query_result = mysqli_query($link,$select_query);
+            $query_result = mysqli_query($link_cs,$select_query);
             while($row_val = mysqli_fetch_array($query_result)){
                 
             echo "['".$row_val['District']."',".$row_val['Lead_Farmers']."],";
@@ -121,7 +121,7 @@
         ['Month', 'Savings'],
         <?php 
             $select_query = "SELECT SUM(Amount) AS Savings, Month FROM tblslg_member_savings  Group BY month";
-            $query_result = mysqli_query($link,$select_query);
+            $query_result = mysqli_query($link_cs,$select_query);
             while($row_val = mysqli_fetch_array($query_result)){
                 $mon = month_name($row_val['Month']);
             echo "['".$mon."',".$row_val['Savings']."],";
@@ -331,7 +331,7 @@
                                     </li>
                                     
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link" href="csepwp_basic_livelihood_training.php" role="link">
+                                        <a class="nav-link" href="trainings/csepwp_basic_livelihood_training.php" role="link">
                                             <span class="d-block d-sm-none"><i class="fas fa-cog"></i></span>
                                             <span class="d-none d-sm-block">Capacity Building</span>
                                         </a>
@@ -339,7 +339,7 @@
                                     
                                     
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="link"  href="basic_livelihood_acsa_mgt_check.php" role="link">
+                                        <a class="link"  href="acsa/csepwp_acsa_mgt.php" role="link">
                                             <span class="d-block d-sm-none"><i class="fas fa-cog"></i></span>
                                             <span class="d-none d-sm-block">Actionable Climate Smart Agriculture</span>
                                         </a>
@@ -376,7 +376,7 @@
                                                                     
                                                                     <td>Chitipa</td>
                                                                     <?php
-                                                                            $result = mysqli_query($link, 'SELECT COUNT(sppCode) AS value_sum FROM tblbeneficiaries'); 
+                                                                            $result = mysqli_query($link_cs, 'SELECT COUNT(sppCode) AS value_sum FROM tblbeneficiaries'); 
                                                                             $row = mysqli_fetch_assoc($result); 
                                                                             $sum = $row['value_sum'];
                                                                         ?>
@@ -390,7 +390,7 @@
                                                                     
                                                                     <td>Karonga</td>
                                                                     <?php
-                                                                        $result = mysqli_query($link, 'SELECT COUNT(groupID) AS value_sum FROM tblgroup WHERE deleted = 0'); 
+                                                                        $result = mysqli_query($link_cs, 'SELECT COUNT(groupID) AS value_sum FROM tblgroup WHERE deleted = 0'); 
                                                                         $row = mysqli_fetch_assoc($result); 
                                                                         $sum = $row['value_sum'];
                                                                     ?>
@@ -404,7 +404,7 @@
                                                                     
                                                                     <td>Rumphi</td>
                                                                     <?php
-                                                                        $result = mysqli_query($link, 'SELECT count(TrainingID) AS total_grps FROM tblgrouptrainings'); 
+                                                                        $result = mysqli_query($link_cs, 'SELECT count(TrainingID) AS total_grps FROM tblgrouptrainings'); 
                                                                         $row = mysqli_fetch_assoc($result); 
                                                                         $sum = $row['total_grps'];
                                                                     ?>
@@ -418,7 +418,7 @@
                                                                     
                                                                     <td>Mzimba</td>
                                                                     <?php
-                                                                        $result = mysqli_query($link, 'SELECT sum(Males+Females) AS total_hhs_trained FROM tblgrouptrainings'); 
+                                                                        $result = mysqli_query($link_cs, 'SELECT sum(Males+Females) AS total_hhs_trained FROM tblgrouptrainings'); 
                                                                         $row = mysqli_fetch_assoc($result); 
                                                                         $sumhhs = $row['total_hhs_trained'];
                                                                     ?>
@@ -431,7 +431,7 @@
                                                                     
                                                                     <td>Nkhatabay</td>
                                                                     <?php
-                                                                        $result = mysqli_query($link, 'SELECT COUNT(ClusterID) AS value_cls FROM tblcluster WHERE deleted = 0'); 
+                                                                        $result = mysqli_query($link_cs, 'SELECT COUNT(ClusterID) AS value_cls FROM tblcluster WHERE deleted = 0'); 
                                                                         $row = mysqli_fetch_assoc($result); 
                                                                         $sumcls = $row['value_cls'];
                                                                     ?>
@@ -445,7 +445,7 @@
                                                                     
                                                                     <td>Likoma</td>
                                                                     <?php
-                                                                        $result = mysqli_query($link, 'SELECT count(TrainingID) AS total_grps FROM tblgrouptrainings'); 
+                                                                        $result = mysqli_query($link_cs, 'SELECT count(TrainingID) AS total_grps FROM tblgrouptrainings'); 
                                                                         $row = mysqli_fetch_assoc($result); 
                                                                         $sum = $row['total_grps'];
                                                                     ?>
@@ -459,11 +459,11 @@
                                                                     
                                                                     <td>Nkhotakota</td>
                                                                     <?php
-                                                                        $result = mysqli_query($link, 'SELECT count(groupID) AS total_slgs FROM tblgroup where registered_group = "1"'); 
+                                                                        $result = mysqli_query($link_cs, 'SELECT count(groupID) AS total_slgs FROM tblgroup where registered_group = "1"'); 
                                                                         $row = mysqli_fetch_assoc($result); 
                                                                         $total_slgs = $row['total_slgs'];
 
-                                                                        $resultcls2 = mysqli_query($link, 'SELECT count(ClusterID) AS total_cls2 FROM tblcluster where registered_group = "1"'); 
+                                                                        $resultcls2 = mysqli_query($link_cs, 'SELECT count(ClusterID) AS total_cls2 FROM tblcluster where registered_group = "1"'); 
                                                                         $rowcls2 = mysqli_fetch_assoc($resultcls2); 
                                                                         $total_cls2 = $rowcls2['total_cls2'];
                                                                         
@@ -478,7 +478,7 @@
                                                                     
                                                                     <td>Kasungu</td>
                                                                     <?php
-                                                                        $result = mysqli_query($link, 'SELECT COUNT(recID) AS value_total FROM tbljsg'); 
+                                                                        $result = mysqli_query($link_cs, 'SELECT COUNT(recID) AS value_total FROM tbljsg'); 
                                                                         $row = mysqli_fetch_assoc($result); 
                                                                         $total = $row['value_total'];
                                                                     ?>
@@ -493,7 +493,7 @@
                                                                     
                                                                     <td>Ntchisi</td>
                                                                     <?php
-                                                                        $result = mysqli_query($link, 'SELECT COUNT(recID) AS v_total FROM tblycs'); 
+                                                                        $result = mysqli_query($link_cs, 'SELECT COUNT(recID) AS v_total FROM tblycs'); 
                                                                         $row = mysqli_fetch_assoc($result); 
                                                                         $v_total = $row['v_total'];
                                                                     ?>
@@ -507,13 +507,7 @@
                                                                     
                                                                     <td>Dowa</td>
                                                                     <?php
-                                                                        $result = mysqli_query($link, 'SELECT COUNT(groupID) AS value_grps FROM tblgroup where grad_status="1"'); 
-                                                                        $row = mysqli_fetch_assoc($result); 
-                                                                        $sum_grps = $row['value_grps'];
-
-                                                                        $result_2 = mysqli_query($link, 'SELECT COUNT(ClusterID) AS value_clusters FROM tblcluster where grad_status="1"'); 
-                                                                        $row = mysqli_fetch_assoc($result_2); 
-                                                                        $sum_clusters = $row['value_clusters'];
+                                                                        
 
                                                                     ?>
                                                                     <td>0</td>
@@ -526,7 +520,7 @@
                                                                     
                                                                     <td>Mchinji</td>
                                                                     <?php
-                                                                        $result = mysqli_query($link, 'SELECT COUNT(sppCode) AS value_sum FROM tblbeneficiaries where grad_status ="1"'); 
+                                                                        $result = mysqli_query($link_cs, 'SELECT COUNT(sppCode) AS value_sum FROM tblbeneficiaries where grad_status ="1"'); 
                                                                         $row = mysqli_fetch_assoc($result); 
                                                                         $sum = $row['value_sum'];
                                                                     ?>
@@ -540,7 +534,7 @@
                                                                     
                                                                     <td>Salima</td>
                                                                     <?php
-                                                                        $result = mysqli_query($link, 'SELECT COUNT(sppCode) AS value_sum FROM tblbeneficiaries where grad_status ="1"'); 
+                                                                        $result = mysqli_query($link_cs, 'SELECT COUNT(sppCode) AS value_sum FROM tblbeneficiaries where grad_status ="1"'); 
                                                                         $row = mysqli_fetch_assoc($result); 
                                                                         $sum = $row['value_sum'];
                                                                     ?>
@@ -555,9 +549,7 @@
                                                                     
                                                                     <td>Lilongwe</td>
                                                                     <?php
-                                                                        $result = mysqli_query($link, 'SELECT COUNT(groupID) AS v_total FROM tblgroup where vc_status = "1"'); 
-                                                                        $row = mysqli_fetch_assoc($result); 
-                                                                        $v_total = $row['v_total'];
+                                                                        
                                                                     ?>
                                                                     <td>0</td>
                                                                     <td>0</td>
@@ -570,7 +562,7 @@
                                                                     <td>Dedza</td>
                                                                     <?php
                                                                         $select_query_esmp = "SELECT COUNT(planID) as TotalESMPs FROM tblsafeguard_group_plans";
-                                                                        $query_result_esmp = mysqli_query($link,$select_query_esmp);
+                                                                        $query_result_esmp = mysqli_query($link_cs,$select_query_esmp);
                                                                         $row_val = mysqli_fetch_array($query_result_esmp);
                                                                         $totalesmps =  $row_val['TotalESMPs'];
                                                                     ?>
@@ -584,7 +576,7 @@
                                                                     <td>Ntcheu</td>
                                                                     <?php 
                                                                         $select_query = "SELECT SUM(amount) as TotalSavings FROM tblslg_member_savings";
-                                                                        $query_result = mysqli_query($link,$select_query);
+                                                                        $query_result = mysqli_query($link_cs,$select_query);
                                                                         $row_val = mysqli_fetch_array($query_result);
                                                                         $CurSavings =  floatval($row_val['TotalSavings']);
                                                                     ?>
@@ -598,7 +590,7 @@
                                                                     <td>Balaka</td>
                                                                     <?php 
                                                                         $select_query = "SELECT SUM(amount) as TotalSavings FROM tblslg_member_savings";
-                                                                        $query_result = mysqli_query($link,$select_query);
+                                                                        $query_result = mysqli_query($link_cs,$select_query);
                                                                         $row_val = mysqli_fetch_array($query_result);
                                                                         $CurSavings =  floatval($row_val['TotalSavings']);
                                                                     ?>
@@ -612,7 +604,7 @@
                                                                     <td>Machinga</td>
                                                                     <?php 
                                                                         $select_query = "SELECT SUM(amount) as TotalSavings FROM tblslg_member_savings";
-                                                                        $query_result = mysqli_query($link,$select_query);
+                                                                        $query_result = mysqli_query($link_cs,$select_query);
                                                                         $row_val = mysqli_fetch_array($query_result);
                                                                         $CurSavings =  floatval($row_val['TotalSavings']);
                                                                     ?>
@@ -626,7 +618,7 @@
                                                                     <td>Mangochi</td>
                                                                     <?php 
                                                                         $select_query = "SELECT SUM(amount) as TotalSavings FROM tblslg_member_savings";
-                                                                        $query_result = mysqli_query($link,$select_query);
+                                                                        $query_result = mysqli_query($link_cs,$select_query);
                                                                         $row_val = mysqli_fetch_array($query_result);
                                                                         $CurSavings =  floatval($row_val['TotalSavings']);
                                                                     ?>
@@ -640,7 +632,7 @@
                                                                     <td>Zomba</td>
                                                                     <?php 
                                                                         $select_query = "SELECT SUM(amount) as TotalSavings FROM tblslg_member_savings";
-                                                                        $query_result = mysqli_query($link,$select_query);
+                                                                        $query_result = mysqli_query($link_cs,$select_query);
                                                                         $row_val = mysqli_fetch_array($query_result);
                                                                         $CurSavings =  floatval($row_val['TotalSavings']);
                                                                     ?>
@@ -654,7 +646,7 @@
                                                                     <td>Phalombe</td>
                                                                     <?php 
                                                                         $select_query = "SELECT SUM(amount) as TotalSavings FROM tblslg_member_savings";
-                                                                        $query_result = mysqli_query($link,$select_query);
+                                                                        $query_result = mysqli_query($link_cs,$select_query);
                                                                         $row_val = mysqli_fetch_array($query_result);
                                                                         $CurSavings =  floatval($row_val['TotalSavings']);
                                                                     ?>
@@ -668,7 +660,7 @@
                                                                     <td>Mulanje</td>
                                                                     <?php 
                                                                         $select_query = "SELECT SUM(amount) as TotalSavings FROM tblslg_member_savings";
-                                                                        $query_result = mysqli_query($link,$select_query);
+                                                                        $query_result = mysqli_query($link_cs,$select_query);
                                                                         $row_val = mysqli_fetch_array($query_result);
                                                                         $CurSavings =  floatval($row_val['TotalSavings']);
                                                                     ?>
@@ -682,7 +674,7 @@
                                                                     <td>Thyolo</td>
                                                                     <?php 
                                                                         $select_query = "SELECT SUM(amount) as TotalSavings FROM tblslg_member_savings";
-                                                                        $query_result = mysqli_query($link,$select_query);
+                                                                        $query_result = mysqli_query($link_cs,$select_query);
                                                                         $row_val = mysqli_fetch_array($query_result);
                                                                         $CurSavings =  floatval($row_val['TotalSavings']);
                                                                     ?>
@@ -696,7 +688,7 @@
                                                                     <td>Blantyre</td>
                                                                     <?php 
                                                                         $select_query = "SELECT SUM(amount) as TotalSavings FROM tblslg_member_savings";
-                                                                        $query_result = mysqli_query($link,$select_query);
+                                                                        $query_result = mysqli_query($link_cs,$select_query);
                                                                         $row_val = mysqli_fetch_array($query_result);
                                                                         $CurSavings =  floatval($row_val['TotalSavings']);
                                                                     ?>
@@ -710,7 +702,7 @@
                                                                     <td>Chiladzulo</td>
                                                                     <?php 
                                                                         $select_query = "SELECT SUM(amount) as TotalSavings FROM tblslg_member_savings";
-                                                                        $query_result = mysqli_query($link,$select_query);
+                                                                        $query_result = mysqli_query($link_cs,$select_query);
                                                                         $row_val = mysqli_fetch_array($query_result);
                                                                         $CurSavings =  floatval($row_val['TotalSavings']);
                                                                     ?>
@@ -724,7 +716,7 @@
                                                                     <td>Nsanje</td>
                                                                     <?php 
                                                                         $select_query = "SELECT SUM(amount) as TotalSavings FROM tblslg_member_savings";
-                                                                        $query_result = mysqli_query($link,$select_query);
+                                                                        $query_result = mysqli_query($link_cs,$select_query);
                                                                         $row_val = mysqli_fetch_array($query_result);
                                                                         $CurSavings =  floatval($row_val['TotalSavings']);
                                                                     ?>
@@ -738,7 +730,7 @@
                                                                     <td>Chikwawa</td>
                                                                     <?php 
                                                                         $select_query = "SELECT SUM(amount) as TotalSavings FROM tblslg_member_savings";
-                                                                        $query_result = mysqli_query($link,$select_query);
+                                                                        $query_result = mysqli_query($link_cs,$select_query);
                                                                         $row_val = mysqli_fetch_array($query_result);
                                                                         $CurSavings =  floatval($row_val['TotalSavings']);
                                                                     ?>
@@ -752,7 +744,7 @@
                                                                     <td>Nwanza</td>
                                                                     <?php 
                                                                         $select_query = "SELECT SUM(amount) as TotalSavings FROM tblslg_member_savings";
-                                                                        $query_result = mysqli_query($link,$select_query);
+                                                                        $query_result = mysqli_query($link_cs,$select_query);
                                                                         $row_val = mysqli_fetch_array($query_result);
                                                                         $CurSavings =  floatval($row_val['TotalSavings']);
                                                                     ?>
@@ -766,7 +758,7 @@
                                                                     <td>Neno</td>
                                                                     <?php 
                                                                         $select_query = "SELECT SUM(amount) as TotalSavings FROM tblslg_member_savings";
-                                                                        $query_result = mysqli_query($link,$select_query);
+                                                                        $query_result = mysqli_query($link_cs,$select_query);
                                                                         $row_val = mysqli_fetch_array($query_result);
                                                                         $CurSavings =  floatval($row_val['TotalSavings']);
                                                                     ?>
@@ -793,15 +785,15 @@
                                                     <div class="d-flex">
                                                         <div class="flex-grow-1">
                                                             <i class='fas fa-house-user' style='font-size:24px;color:brown'></i><i class='fas fa-house-user' style='font-size:24px;color:slategrey'></i>
-                                                            <p class="text-muted fw-medium">Enrolled HouseHolds</p>
+                                                            <p class="text-muted fw-medium">CS-EPWP HouseHolds</p>
                                                             <?php
-                                                                $result = mysqli_query($link, 'SELECT COUNT(sppCode) AS value_sum FROM tblbeneficiaries'); 
+                                                                $result = mysqli_query($link_cs, 'SELECT COUNT(sppCode) AS value_sum FROM tblbeneficiaries'); 
                                                                 $row = mysqli_fetch_assoc($result); 
                                                                 $sum = $row['value_sum'];
                                                             ?>
                                                                 <h5 class="mb-0">
                                                                     <div class="container">
-                                                                        <div class="mb-0"><?php echo "" . number_format(0);?></div>
+                                                                        <div class="mb-0"><?php echo "" . number_format($sum);?></div>
                                                                     </div> 
                                                                 </h5>
                                                         </div>
@@ -817,14 +809,14 @@
                                                         <div class="flex-grow-1">
                                                             <i class='fas fa-users' style='font-size:24px;color:chocolate'></i><i class='fas fa-users' style='font-size:24px;color:brown'></i>
 
-                                                            <p class="text-muted fw-medium">SLGs Formed</p>
+                                                            <p class="text-muted fw-medium">CS-EPWP SLGs Formed</p>
                                                             <?php
-                                                                $result = mysqli_query($link, 'SELECT COUNT(groupID) AS value_sum FROM tblgroup WHERE deleted = 0'); 
+                                                                $result = mysqli_query($link_cs, 'SELECT COUNT(groupID) AS value_sum FROM tblgroup WHERE deleted = 0'); 
                                                                 $row = mysqli_fetch_assoc($result); 
                                                                 $sum = $row['value_sum'];
                                                             ?>
                                                             <div class="container">
-                                                                <h5><div class="mb-0"><?php echo "" . number_format(0);?></div></h5>
+                                                                <h5><div class="mb-0"><?php echo "" . number_format($sum);?></div></h5>
                                                             </div>
                                                             
                                                         </div>
@@ -841,12 +833,12 @@
                                                             <i class='fas fa-users' style='font-size:24px;color:chocolate'></i><i class='fas fa-user-graduate' style='font-size:24px;color:black'></i><i class='fas fa-users' style='font-size:24px;color:brown'></i>
                                                             <p class="text-muted fw-medium">SLGs Trained</p>
                                                             <?php
-                                                                $result = mysqli_query($link, 'SELECT COUNT(groupID) AS value_sum FROM tblgrouptrainings'); 
+                                                                $result = mysqli_query($link_cs, 'SELECT COUNT(DISTINCT(groupID)) AS value_sum FROM tblgrouptrainings'); 
                                                                 $row = mysqli_fetch_assoc($result); 
                                                                 $sum = $row['value_sum'];
                                                             ?>
                                                             <div class="container">
-                                                                <h5><div class="mb-0"><?php echo "" . number_format(0);?></div></h5>
+                                                                <h5><div class="mb-0"><?php echo "" . number_format($sum);?></div></h5>
                                                             </div>
                                                             
                                                             
@@ -863,9 +855,9 @@
                                                         <div class="flex-grow-1">
                                                             <i class='fas fa-check' style='font-size:20px;color:green'></i>
                                                             
-                                                            <p class="text-muted fw-medium">SCT/PWP Verified Households</p>
+                                                            <p class="text-muted fw-medium">CS-EPWP Verified Households</p>
                                                             <?php
-                                                                $result = mysqli_query($link, 'SELECT COUNT(sppCode) AS value_sum FROM tblbeneficiaries WHERE prog_status_verified = 1'); 
+                                                                $result = mysqli_query($link_cs, 'SELECT COUNT(sppCode) AS value_sum FROM tblbeneficiaries WHERE prog_status_verified = 1'); 
                                                                 $row = mysqli_fetch_assoc($result); 
                                                                 $sum_hhs = $row['value_sum'];
                                                             ?>

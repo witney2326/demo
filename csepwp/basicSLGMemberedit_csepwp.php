@@ -28,12 +28,12 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
 <?php include 'layouts/body.php'; ?>
 <?php
-      include "layouts/config.php"; // Using database connection file here
+      include "layouts/config2.php"; // Using database connection file here
         
       $id = $_GET['id']; // get id through query string
      $query="select * from tblbeneficiaries where sppCode='$id'";
       
-      if ($result_set = $link->query($query)) {
+      if ($result_set = $link_cs->query($query)) {
           while($row = $result_set->fetch_array(MYSQLI_ASSOC))
           { 
               $hhname= $row["hh_head_name"];
@@ -53,33 +53,9 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
           $result_set->close();
       }
 
-      function dis_name($link, $disID)
-       {
-       $dis_query = mysqli_query($link,"select DistrictName from tbldistrict where DistrictID='$disID'"); // select query
-       $dis = mysqli_fetch_array($dis_query);// fetch data
-       return $dis['DistrictName'];
-       }
+    include 'lib2.php';
 
-       function grp_name($link, $grpID)
-       {
-       $grp_query = mysqli_query($link,"select groupname from tblgroup where groupID='$grpID'"); // select query
-       $grp = mysqli_fetch_array($grp_query);// fetch data
-       return $grp['groupname'];
-       }
-
-       function prog_name($link, $progID)
-       {
-       $prog_query = mysqli_query($link,"select progName from tblspp where progID='$progID'"); // select query
-       $prog = mysqli_fetch_array($prog_query);// fetch data
-       return $prog['progName'];
-       }
-
-       function get_rname($link, $rcode)
-       {
-       $rg_query = mysqli_query($link,"select name from tblregion where regionID='$rcode'"); // select query
-       $rg = mysqli_fetch_array($rg_query);// fetch data
-       return $rg['name'];
-       }
+      
     ?>
 
 <!-- Begin page -->
@@ -134,17 +110,17 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                                                 
                                         <div class="row mb-1">
                                             <label for="region" class="col-sm-2 col-form-label">Region</label>                       
-                                            <input type="text" class="form-control" id="region" name="region" value ="<?php echo get_rname($link,$regionID) ; ?>" style="max-width:30%;">
+                                            <input type="text" class="form-control" id="region" name="region" value ="<?php echo get_rname($link_cs,$regionID) ; ?>" style="max-width:30%;">
                                             
                                             <label for="district" class="col-sm-2 col-form-label">District</label>
-                                            <input type="text" class="form-control" id="district" name="district" value ="<?php echo dis_name($link,$districtID) ; ?>" style="max-width:30%;">
+                                            <input type="text" class="form-control" id="district" name="district" value ="<?php echo dis_name($link_cs,$districtID) ; ?>" style="max-width:30%;">
                                         </div>
 
                                                                              
                                         
                                         <div class="row mb-1">
                                             <label for="group" class="col-sm-2 col-form-label">SLG Name</label>               
-                                            <input type="text" class="form-control" id="group" name="group" value ="<?php echo grp_name($link,$groupID) ; ?>" style="max-width:30%;">
+                                            <input type="text" class="form-control" id="group" name="group" value ="<?php echo grp_name($link_cs,$groupID) ; ?>" style="max-width:30%;">
                                             
                                             <label for="cohort" class="col-sm-2 col-form-label">Cohort</label>
                                             <input type="text" class="form-control" id="cohort" name="cohort" value =" <?php echo $cohort ; ?>" style="max-width:30%;">
@@ -152,7 +128,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                         
                                         <div class="row mb-1">
                                             <label for="sppname" class="col-sm-2 col-form-label">SPP Name</label>                                  
-                                            <input type="text" class="form-control" id="sppname" name="sppname" value =" <?php echo prog_name($link,$sppname) ; ?>" style="max-width:30%;">
+                                            <input type="text" class="form-control" id="sppname" name="sppname" value =" <?php echo prog_name($link_cs,$sppname) ; ?>" style="max-width:30%;">
                                             
                                             <label for="hstatus" class="col-sm-2 col-form-label">HH Status</label>
                                             <input type="text" class="form-control" id="hstatus" name="hstatus" value ="<?php echo $hhstatus;?>" style="max-width:30%;">

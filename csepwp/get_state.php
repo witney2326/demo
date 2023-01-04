@@ -1,10 +1,10 @@
 <?php
-require_once("../layouts/config.php.php");
+require_once("../layouts/config2.php");
 if(!empty($_GET['region'])) {
         $coun_id = $_GET["region"];           
 	$query ="SELECT * FROM tbldistrict WHERE regionID IN ($coun_id)";
 	
-    $result = mysqli_query($this->$link,$query);
+    $result = mysqli_query($this->$link_cs,$query);
 		while($row=mysqli_fetch_assoc($result)) {
 			$resultset[] = $row;
 		}		
