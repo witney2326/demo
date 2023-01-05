@@ -309,12 +309,7 @@
                                             <span class="d-none d-sm-block">Dashboard</span>
                                         </a>
                                     </li>
-                                    <li class="nav-item waves-effect waves-light">
-                                        <a class="link"  href="csepwp_basic_livelihood_hh_mgt.php" role="link">
-                                            <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
-                                            <span class="d-none d-sm-block">Household Verification</span>
-                                        </a>
-                                    </li>
+                                    
                                                                         
                                     <li class="nav-item waves-effect waves-light">
                                         <a class="link"  href="meetings/csepwp_basic_livelihood_meetings.php" role="link">
@@ -376,116 +371,113 @@
                                                                     
                                                                     <td>Chitipa</td>
                                                                     <?php
-                                                                            $result = mysqli_query($link_cs, 'SELECT COUNT(sppCode) AS value_sum FROM tblbeneficiaries'); 
+                                                                            $result = mysqli_query($link_cs, "SELECT COUNT(groupID) AS value_sum FROM tblgroup where ((districtID = '01') and (deleted = '0'))"); 
                                                                             $row = mysqli_fetch_assoc($result); 
                                                                             $sum = $row['value_sum'];
                                                                         ?>
                                                                     <td>0</td>
                                                                     <td>0</td>
                                                                     <td>0</td>
-                                                                    <td>0</td>
+                                                                    <td><?php echo number_format($sum);?></td>
                                                                     <td><?php if ($_SESSION["user_role"] == '00'){echo '<a href="javascript: void(0);">more..</a>' ;}else{echo '<a href="javascript: void(0);">more ..</a>';}  ?></td> 
                                                                 </tr>
                                                                 <tr>
                                                                     
                                                                     <td>Karonga</td>
                                                                     <?php
-                                                                        $result = mysqli_query($link_cs, 'SELECT COUNT(groupID) AS value_sum FROM tblgroup WHERE deleted = 0'); 
+                                                                        $result = mysqli_query($link_cs, "SELECT COUNT(groupID) AS value_sum FROM tblgroup where ((districtID = '02') and (deleted = '0'))"); 
                                                                         $row = mysqli_fetch_assoc($result); 
                                                                         $sum = $row['value_sum'];
                                                                     ?>
                                                                     <td>0</td>
                                                                     <td>0</td>
                                                                     <td>0</td>
-                                                                    <td>0</td>
+                                                                    <td><?php echo number_format($sum);?></td>
                                                                     <td><?php if ($_SESSION["user_role"] == '00'){echo '<a href="javascript: void(0);">more..</a>' ;}else{echo '<a href="javascript: void(0);">more ..</a>';}  ?></td>              
                                                                 </tr>
                                                                 <tr>
                                                                     
                                                                     <td>Rumphi</td>
                                                                     <?php
-                                                                        $result = mysqli_query($link_cs, 'SELECT count(TrainingID) AS total_grps FROM tblgrouptrainings'); 
+                                                                        $result = mysqli_query($link_cs, "SELECT COUNT(groupID) AS value_sum FROM tblgroup where ((districtID = '03') and (deleted = '0'))"); 
                                                                         $row = mysqli_fetch_assoc($result); 
-                                                                        $sum = $row['total_grps'];
+                                                                        $sum = $row['value_sum'];
                                                                     ?>
                                                                     <td>0</td>
                                                                     <td>0</td>
                                                                     <td>0</td>
-                                                                    <td>0</td>
+                                                                    <td><?php echo number_format($sum);?></td>
                                                                     <td><?php if ($_SESSION["user_role"] == '00'){echo '<a href="javascript: void(0);">more..</a>' ;}else{echo '<a href="javascript: void(0);">more ..</a>';}  ?></td>                         
                                                                 </tr>
                                                                 <tr>
                                                                     
                                                                     <td>Mzimba</td>
                                                                     <?php
-                                                                        $result = mysqli_query($link_cs, 'SELECT sum(Males+Females) AS total_hhs_trained FROM tblgrouptrainings'); 
+                                                                        $result = mysqli_query($link_cs, "SELECT COUNT(groupID) AS value_sum FROM tblgroup where ((districtID = '04') and (deleted = '0'))"); 
                                                                         $row = mysqli_fetch_assoc($result); 
-                                                                        $sumhhs = $row['total_hhs_trained'];
+                                                                        $sum = $row['value_sum'];
                                                                     ?>
                                                                     <td>0</td>
                                                                     <td>0</td>
                                                                     <td>0</td>
-                                                                    <td>0</td>
+                                                                    <td><?php echo number_format($sum);?></td>
                                                                 </tr>
                                                                 <tr>
                                                                     
                                                                     <td>Nkhatabay</td>
                                                                     <?php
-                                                                        $result = mysqli_query($link_cs, 'SELECT COUNT(ClusterID) AS value_cls FROM tblcluster WHERE deleted = 0'); 
+                                                                        $result = mysqli_query($link_cs, "SELECT COUNT(groupID) AS value_sum FROM tblgroup where ((districtID = '05') and (deleted = '0'))"); 
                                                                         $row = mysqli_fetch_assoc($result); 
-                                                                        $sumcls = $row['value_cls'];
+                                                                        $sum = $row['value_sum'];
                                                                     ?>
                                                                     <td>0</td>
                                                                     <td>0</td>
                                                                     <td>0</td>
-                                                                    <td>0</td>
+                                                                    <td><?php echo number_format($sum);?></td>
                                                                     <td></td>
                                                                 </tr>
                                                                 <tr>
                                                                     
                                                                     <td>Likoma</td>
                                                                     <?php
-                                                                        $result = mysqli_query($link_cs, 'SELECT count(TrainingID) AS total_grps FROM tblgrouptrainings'); 
+                                                                        $result = mysqli_query($link_cs, "SELECT COUNT(groupID) AS value_sum FROM tblgroup where ((districtID = '28') and (deleted = '0'))"); 
                                                                         $row = mysqli_fetch_assoc($result); 
-                                                                        $sum = $row['total_grps'];
+                                                                        $sum = $row['value_sum'];
                                                                     ?>
                                                                     <td>0</td>
                                                                     <td>0</td>
                                                                     <td>0</td>
-                                                                    <td>0</td>
+                                                                    <td><?php echo number_format($sum);?></td>
                                                                     <td><?php if ($_SESSION["user_role"] == '00'){echo '<a href="javascript: void(0);">more..</a>' ;}else{echo '<a href="javascript: void(0);">more ..</a>';}  ?></td>                         
                                                                 </tr>
                                                                 <tr>
                                                                     
                                                                     <td>Nkhotakota</td>
                                                                     <?php
-                                                                        $result = mysqli_query($link_cs, 'SELECT count(groupID) AS total_slgs FROM tblgroup where registered_group = "1"'); 
+                                                                        $result = mysqli_query($link_cs, "SELECT COUNT(groupID) AS value_sum FROM tblgroup where ((districtID = '06') and (deleted = '0'))"); 
                                                                         $row = mysqli_fetch_assoc($result); 
-                                                                        $total_slgs = $row['total_slgs'];
+                                                                        $sum = $row['value_sum'];
 
-                                                                        $resultcls2 = mysqli_query($link_cs, 'SELECT count(ClusterID) AS total_cls2 FROM tblcluster where registered_group = "1"'); 
-                                                                        $rowcls2 = mysqli_fetch_assoc($resultcls2); 
-                                                                        $total_cls2 = $rowcls2['total_cls2'];
-                                                                        
+
                                                                     ?>
                                                                     <td>0</td>
                                                                     <td>0</td>
                                                                     <td>0</td>
-                                                                    <td>0</td>
+                                                                    <td><?php echo number_format($sum);?></td>
                                                                     <td><?php if ($_SESSION["user_role"] == '00'){echo '<a href="javascript: void(0);">more..</a>' ;}else{echo '<a href="javascript: void(0);">more ..</a>';}  ?></td>
                                                                 </tr>
                                                                 <tr>
                                                                     
                                                                     <td>Kasungu</td>
                                                                     <?php
-                                                                        $result = mysqli_query($link_cs, 'SELECT COUNT(recID) AS value_total FROM tbljsg'); 
+                                                                        $result = mysqli_query($link_cs, "SELECT COUNT(groupID) AS value_sum FROM tblgroup where ((districtID = '07') and (deleted = '0'))"); 
                                                                         $row = mysqli_fetch_assoc($result); 
-                                                                        $total = $row['value_total'];
+                                                                        $sum = $row['value_sum'];
                                                                     ?>
                                                                     <td>0</td>
                                                                     <td>0</td>
                                                                     <td>0</td>
-                                                                    <td>0</td>
+                                                                    <td><?php echo number_format($sum);?></td>
                                                                     <td><?php if ($_SESSION["user_role"] == '00'){echo '<a href="javascript: void(0);">more..</a>' ;}else{echo '<a href="javascript: void(0);">more ..</a>';}  ?></td>                         
                                                                 </tr>
                                                                 
@@ -493,55 +485,57 @@
                                                                     
                                                                     <td>Ntchisi</td>
                                                                     <?php
-                                                                        $result = mysqli_query($link_cs, 'SELECT COUNT(recID) AS v_total FROM tblycs'); 
+                                                                        $result = mysqli_query($link_cs, "SELECT COUNT(groupID) AS value_sum FROM tblgroup where ((districtID = '08') and (deleted = '0'))"); 
                                                                         $row = mysqli_fetch_assoc($result); 
-                                                                        $v_total = $row['v_total'];
+                                                                        $sum = $row['value_sum'];
                                                                     ?>
                                                                     <td>0</td>
                                                                     <td>0</td>
                                                                     <td>0</td>
-                                                                    <td>0</td>
+                                                                    <td><?php echo number_format($sum);?></td>
                                                                     <td><?php if ($_SESSION["user_role"] == '00'){echo '<a href="javascript: void(0);">more..</a>' ;}else{echo '<a href="javascript: void(0);">more ..</a>';}  ?></td>                         
                                                                 </tr>
                                                                 <tr>
                                                                     
                                                                     <td>Dowa</td>
                                                                     <?php
-                                                                        
+                                                                       $result = mysqli_query($link_cs, "SELECT COUNT(groupID) AS value_sum FROM tblgroup where ((districtID = '09') and (deleted = '0'))"); 
+                                                                       $row = mysqli_fetch_assoc($result); 
+                                                                       $total_grps = $row['value_sum']; 
 
                                                                     ?>
                                                                     <td>0</td>
                                                                     <td>0</td>
                                                                     <td>0</td>
-                                                                    <td>0</td>
+                                                                    <td><?php echo number_format($total_grps);?></td>
                                                                     <td><?php if ($_SESSION["user_role"] == '00'){echo '<a href="javascript: void(0);">more..</a>' ;}else{echo '<a href="javascript: void(0);">more..</a>';}  ?></td>
                                                                 </tr>
                                                                 <tr>
                                                                     
                                                                     <td>Mchinji</td>
                                                                     <?php
-                                                                        $result = mysqli_query($link_cs, 'SELECT COUNT(sppCode) AS value_sum FROM tblbeneficiaries where grad_status ="1"'); 
+                                                                        $result = mysqli_query($link_cs, "SELECT COUNT(groupID) AS value_sum FROM tblgroup where ((districtID = '12') and (deleted = '0'))"); 
                                                                         $row = mysqli_fetch_assoc($result); 
-                                                                        $sum = $row['value_sum'];
+                                                                        $total_grps = $row['value_sum'];
                                                                     ?>
                                                                     <td>0</td>
                                                                     <td>0</td>
                                                                     <td>0</td>
-                                                                    <td>0</td>
+                                                                    <td><?php echo number_format($total_grps);?></td>
                                                                     <td><?php if ($_SESSION["user_role"] == '00'){echo '<a href="javascript: void(0);">more..</a>' ;}else{echo '<a href="javascript: void(0);">more..</a>';}  ?></td>
                                                                 </tr>
                                                                 <tr>
                                                                     
                                                                     <td>Salima</td>
                                                                     <?php
-                                                                        $result = mysqli_query($link_cs, 'SELECT COUNT(sppCode) AS value_sum FROM tblbeneficiaries where grad_status ="1"'); 
+                                                                        $result = mysqli_query($link_cs, "SELECT COUNT(groupID) AS value_sum FROM tblgroup where ((districtID = '10') and (deleted = '0'))"); 
                                                                         $row = mysqli_fetch_assoc($result); 
-                                                                        $sum = $row['value_sum'];
+                                                                        $total_grps = $row['value_sum'];
                                                                     ?>
                                                                    <td>0</td>
                                                                     <td>0</td>
                                                                     <td>0</td>
-                                                                    <td>0</td>
+                                                                    <td><?php echo number_format($total_grps);?></td>
                                                                     <td></td>
                                                                 </tr>
 
@@ -549,223 +543,210 @@
                                                                     
                                                                     <td>Lilongwe</td>
                                                                     <?php
-                                                                        
+                                                                        $result = mysqli_query($link_cs, "SELECT COUNT(groupID) AS value_sum FROM tblgroup where ((districtID = '11') and (deleted = '0'))"); 
+                                                                        $row = mysqli_fetch_assoc($result); 
+                                                                        $total_grps = $row['value_sum'];
                                                                     ?>
                                                                     <td>0</td>
                                                                     <td>0</td>
                                                                     <td>0</td>
-                                                                    <td>0</td>
+                                                                    <td><?php echo number_format($total_grps);?></td>
                                                                     <td></td>
                                                                 </tr>
                                                                 <tr>
                                                                     
                                                                     <td>Dedza</td>
                                                                     <?php
-                                                                        $select_query_esmp = "SELECT COUNT(planID) as TotalESMPs FROM tblsafeguard_group_plans";
-                                                                        $query_result_esmp = mysqli_query($link_cs,$select_query_esmp);
-                                                                        $row_val = mysqli_fetch_array($query_result_esmp);
-                                                                        $totalesmps =  $row_val['TotalESMPs'];
+                                                                        $result = mysqli_query($link_cs, "SELECT COUNT(groupID) AS value_sum FROM tblgroup where ((districtID = '13') and (deleted = '0'))"); 
+                                                                        $row = mysqli_fetch_assoc($result); 
+                                                                        $total_grps = $row['value_sum'];
                                                                     ?>
                                                                     <td>0</td>
                                                                     <td>0</td>
                                                                     <td>0</td>
-                                                                    <td>0</td>
+                                                                    <td><?php echo number_format($total_grps);?></td>
                                                                     <td></td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td>Ntcheu</td>
                                                                     <?php 
-                                                                        $select_query = "SELECT SUM(amount) as TotalSavings FROM tblslg_member_savings";
-                                                                        $query_result = mysqli_query($link_cs,$select_query);
-                                                                        $row_val = mysqli_fetch_array($query_result);
-                                                                        $CurSavings =  floatval($row_val['TotalSavings']);
+                                                                        $result = mysqli_query($link_cs, "SELECT COUNT(groupID) AS value_sum FROM tblgroup where ((districtID = '14') and (deleted = '0'))"); 
+                                                                        $row = mysqli_fetch_assoc($result); 
+                                                                        $total_grps = $row['value_sum'];
                                                                     ?>
                                                                     <td>0</td>
                                                                     <td>0</td>
                                                                     <td>0</td>
-                                                                    <td>0</td>
+                                                                    <td><?php echo number_format($total_grps);?></td>
                                                                     <td><?php if ($_SESSION["user_role"] == '00'){echo '<a href="javascript: void(0);">more..</a>' ;}else{echo '<a href="javascript: void(0);">more ..</a>';}  ?></td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td>Balaka</td>
                                                                     <?php 
-                                                                        $select_query = "SELECT SUM(amount) as TotalSavings FROM tblslg_member_savings";
-                                                                        $query_result = mysqli_query($link_cs,$select_query);
-                                                                        $row_val = mysqli_fetch_array($query_result);
-                                                                        $CurSavings =  floatval($row_val['TotalSavings']);
+                                                                        $result = mysqli_query($link_cs, "SELECT COUNT(groupID) AS value_sum FROM tblgroup where ((districtID = '15') and (deleted = '0'))"); 
+                                                                        $row = mysqli_fetch_assoc($result); 
+                                                                        $total_grps = $row['value_sum'];
                                                                     ?>
                                                                     <td>0</td>
                                                                     <td>0</td>
                                                                     <td>0</td>
-                                                                    <td>0</td>
+                                                                    <td><?php echo number_format($total_grps);?></td>
                                                                     <td><?php if ($_SESSION["user_role"] == '00'){echo '<a href="javascript: void(0);">more..</a>' ;}else{echo '<a href="javascript: void(0);">more ..</a>';}  ?></td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td>Machinga</td>
                                                                     <?php 
-                                                                        $select_query = "SELECT SUM(amount) as TotalSavings FROM tblslg_member_savings";
-                                                                        $query_result = mysqli_query($link_cs,$select_query);
-                                                                        $row_val = mysqli_fetch_array($query_result);
-                                                                        $CurSavings =  floatval($row_val['TotalSavings']);
+                                                                        $result = mysqli_query($link_cs, "SELECT COUNT(groupID) AS value_sum FROM tblgroup where ((districtID = '16') and (deleted = '0'))"); 
+                                                                        $row = mysqli_fetch_assoc($result); 
+                                                                        $total_grps = $row['value_sum'];
                                                                     ?>
                                                                     <td>0</td>
                                                                     <td>0</td>
                                                                     <td>0</td>
-                                                                    <td>0</td>
+                                                                    <td><?php echo number_format($total_grps);?></td>
                                                                     <td><?php if ($_SESSION["user_role"] == '00'){echo '<a href="javascript: void(0);">more..</a>' ;}else{echo '<a href="javascript: void(0);">more ..</a>';}  ?></td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td>Mangochi</td>
                                                                     <?php 
-                                                                        $select_query = "SELECT SUM(amount) as TotalSavings FROM tblslg_member_savings";
-                                                                        $query_result = mysqli_query($link_cs,$select_query);
-                                                                        $row_val = mysqli_fetch_array($query_result);
-                                                                        $CurSavings =  floatval($row_val['TotalSavings']);
+                                                                        $result = mysqli_query($link_cs, "SELECT COUNT(groupID) AS value_sum FROM tblgroup where ((districtID = '27') and (deleted = '0'))"); 
+                                                                        $row = mysqli_fetch_assoc($result); 
+                                                                        $total_grps = $row['value_sum'];
                                                                     ?>
                                                                     <td>0</td>
                                                                     <td>0</td>
                                                                     <td>0</td>
-                                                                    <td>0</td>
+                                                                    <td><?php echo number_format($total_grps);?></td>
                                                                     <td><?php if ($_SESSION["user_role"] == '00'){echo '<a href="javascript: void(0);">more..</a>' ;}else{echo '<a href="javascript: void(0);">more ..</a>';}  ?></td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td>Zomba</td>
                                                                     <?php 
-                                                                        $select_query = "SELECT SUM(amount) as TotalSavings FROM tblslg_member_savings";
-                                                                        $query_result = mysqli_query($link_cs,$select_query);
-                                                                        $row_val = mysqli_fetch_array($query_result);
-                                                                        $CurSavings =  floatval($row_val['TotalSavings']);
+                                                                        $result = mysqli_query($link_cs, "SELECT COUNT(groupID) AS value_sum FROM tblgroup where ((districtID = '18') and (deleted = '0'))"); 
+                                                                        $row = mysqli_fetch_assoc($result); 
+                                                                        $total_grps = $row['value_sum'];
                                                                     ?>
                                                                     <td>0</td>
                                                                     <td>0</td>
                                                                     <td>0</td>
-                                                                    <td>0</td>
+                                                                    <td><?php echo number_format($total_grps);?></td>
                                                                     <td><?php if ($_SESSION["user_role"] == '00'){echo '<a href="javascript: void(0);">more..</a>' ;}else{echo '<a href="javascript: void(0);">more ..</a>';}  ?></td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td>Phalombe</td>
                                                                     <?php 
-                                                                        $select_query = "SELECT SUM(amount) as TotalSavings FROM tblslg_member_savings";
-                                                                        $query_result = mysqli_query($link_cs,$select_query);
-                                                                        $row_val = mysqli_fetch_array($query_result);
-                                                                        $CurSavings =  floatval($row_val['TotalSavings']);
+                                                                        $result = mysqli_query($link_cs, "SELECT COUNT(groupID) AS value_sum FROM tblgroup where ((districtID = '23') and (deleted = '0'))"); 
+                                                                        $row = mysqli_fetch_assoc($result); 
+                                                                        $total_grps = $row['value_sum'];
                                                                     ?>
                                                                     <td>0</td>
                                                                     <td>0</td>
                                                                     <td>0</td>
-                                                                    <td>0</td>
+                                                                    <td><?php echo number_format($total_grps);?></td>
                                                                     <td><?php if ($_SESSION["user_role"] == '00'){echo '<a href="javascript: void(0);">more..</a>' ;}else{echo '<a href="javascript: void(0);">more ..</a>';}  ?></td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td>Mulanje</td>
                                                                     <?php 
-                                                                        $select_query = "SELECT SUM(amount) as TotalSavings FROM tblslg_member_savings";
-                                                                        $query_result = mysqli_query($link_cs,$select_query);
-                                                                        $row_val = mysqli_fetch_array($query_result);
-                                                                        $CurSavings =  floatval($row_val['TotalSavings']);
+                                                                        $result = mysqli_query($link_cs, "SELECT COUNT(groupID) AS value_sum FROM tblgroup where ((districtID = '22') and (deleted = '0'))"); 
+                                                                        $row = mysqli_fetch_assoc($result); 
+                                                                        $total_grps = $row['value_sum'];
                                                                     ?>
                                                                     <td>0</td>
                                                                     <td>0</td>
                                                                     <td>0</td>
-                                                                    <td>0</td>
+                                                                    <td><?php echo number_format($total_grps);?></td>
                                                                     <td><?php if ($_SESSION["user_role"] == '00'){echo '<a href="javascript: void(0);">more..</a>' ;}else{echo '<a href="javascript: void(0);">more ..</a>';}  ?></td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td>Thyolo</td>
                                                                     <?php 
-                                                                        $select_query = "SELECT SUM(amount) as TotalSavings FROM tblslg_member_savings";
-                                                                        $query_result = mysqli_query($link_cs,$select_query);
-                                                                        $row_val = mysqli_fetch_array($query_result);
-                                                                        $CurSavings =  floatval($row_val['TotalSavings']);
+                                                                        $result = mysqli_query($link_cs, "SELECT COUNT(groupID) AS value_sum FROM tblgroup where ((districtID = '21') and (deleted = '0'))"); 
+                                                                        $row = mysqli_fetch_assoc($result); 
+                                                                        $total_grps = $row['value_sum'];
                                                                     ?>
                                                                     <td>0</td>
                                                                     <td>0</td>
                                                                     <td>0</td>
-                                                                    <td>0</td>
+                                                                    <td><?php echo number_format($total_grps);?></td>
                                                                     <td><?php if ($_SESSION["user_role"] == '00'){echo '<a href="javascript: void(0);">more..</a>' ;}else{echo '<a href="javascript: void(0);">more ..</a>';}  ?></td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td>Blantyre</td>
                                                                     <?php 
-                                                                        $select_query = "SELECT SUM(amount) as TotalSavings FROM tblslg_member_savings";
-                                                                        $query_result = mysqli_query($link_cs,$select_query);
-                                                                        $row_val = mysqli_fetch_array($query_result);
-                                                                        $CurSavings =  floatval($row_val['TotalSavings']);
+                                                                        $result = mysqli_query($link_cs, "SELECT COUNT(groupID) AS value_sum FROM tblgroup where ((districtID = '20') and (deleted = '0'))"); 
+                                                                        $row = mysqli_fetch_assoc($result); 
+                                                                        $total_grps = $row['value_sum'];
                                                                     ?>
                                                                     <td>0</td>
                                                                     <td>0</td>
                                                                     <td>0</td>
-                                                                    <td>0</td>
+                                                                    <td><?php echo number_format($total_grps);?></td>
                                                                     <td><?php if ($_SESSION["user_role"] == '00'){echo '<a href="javascript: void(0);">more..</a>' ;}else{echo '<a href="javascript: void(0);">more ..</a>';}  ?></td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td>Chiladzulo</td>
                                                                     <?php 
-                                                                        $select_query = "SELECT SUM(amount) as TotalSavings FROM tblslg_member_savings";
-                                                                        $query_result = mysqli_query($link_cs,$select_query);
-                                                                        $row_val = mysqli_fetch_array($query_result);
-                                                                        $CurSavings =  floatval($row_val['TotalSavings']);
+                                                                        $result = mysqli_query($link_cs, "SELECT COUNT(groupID) AS value_sum FROM tblgroup where ((districtID = '19') and (deleted = '0'))"); 
+                                                                        $row = mysqli_fetch_assoc($result); 
+                                                                        $total_grps = $row['value_sum'];
                                                                     ?>
                                                                     <td>0</td>
                                                                     <td>0</td>
                                                                     <td>0</td>
-                                                                    <td>0</td>
+                                                                    <td><?php echo number_format($total_grps);?></td>
                                                                     <td><?php if ($_SESSION["user_role"] == '00'){echo '<a href="javascript: void(0);">more..</a>' ;}else{echo '<a href="javascript: void(0);">more ..</a>';}  ?></td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td>Nsanje</td>
                                                                     <?php 
-                                                                        $select_query = "SELECT SUM(amount) as TotalSavings FROM tblslg_member_savings";
-                                                                        $query_result = mysqli_query($link_cs,$select_query);
-                                                                        $row_val = mysqli_fetch_array($query_result);
-                                                                        $CurSavings =  floatval($row_val['TotalSavings']);
+                                                                        $result = mysqli_query($link_cs, "SELECT COUNT(groupID) AS value_sum FROM tblgroup where ((districtID = '25') and (deleted = '0'))"); 
+                                                                        $row = mysqli_fetch_assoc($result); 
+                                                                        $total_grps = $row['value_sum'];
                                                                     ?>
                                                                     <td>0</td>
                                                                     <td>0</td>
                                                                     <td>0</td>
-                                                                    <td>0</td>
+                                                                    <td><?php echo number_format($total_grps);?></td>
                                                                     <td><?php if ($_SESSION["user_role"] == '00'){echo '<a href="javascript: void(0);">more..</a>' ;}else{echo '<a href="javascript: void(0);">more ..</a>';}  ?></td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td>Chikwawa</td>
                                                                     <?php 
-                                                                        $select_query = "SELECT SUM(amount) as TotalSavings FROM tblslg_member_savings";
-                                                                        $query_result = mysqli_query($link_cs,$select_query);
-                                                                        $row_val = mysqli_fetch_array($query_result);
-                                                                        $CurSavings =  floatval($row_val['TotalSavings']);
+                                                                        $result = mysqli_query($link_cs, "SELECT COUNT(groupID) AS value_sum FROM tblgroup where ((districtID = '24') and (deleted = '0'))"); 
+                                                                        $row = mysqli_fetch_assoc($result); 
+                                                                        $total_grps = $row['value_sum'];
                                                                     ?>
                                                                     <td>0</td>
                                                                     <td>0</td>
                                                                     <td>0</td>
-                                                                    <td>0</td>
+                                                                    <td><?php echo number_format($total_grps);?></td>
                                                                     <td><?php if ($_SESSION["user_role"] == '00'){echo '<a href="javascript: void(0);">more..</a>' ;}else{echo '<a href="javascript: void(0);">more ..</a>';}  ?></td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td>Nwanza</td>
                                                                     <?php 
-                                                                        $select_query = "SELECT SUM(amount) as TotalSavings FROM tblslg_member_savings";
-                                                                        $query_result = mysqli_query($link_cs,$select_query);
-                                                                        $row_val = mysqli_fetch_array($query_result);
-                                                                        $CurSavings =  floatval($row_val['TotalSavings']);
+                                                                        $result = mysqli_query($link_cs, "SELECT COUNT(groupID) AS value_sum FROM tblgroup where ((districtID = '17') and (deleted = '0'))"); 
+                                                                        $row = mysqli_fetch_assoc($result); 
+                                                                        $total_grps = $row['value_sum'];
                                                                     ?>
                                                                     <td>0</td>
                                                                     <td>0</td>
                                                                     <td>0</td>
-                                                                    <td>0</td>
+                                                                    <td><?php echo number_format($total_grps);?></td>
                                                                     <td><?php if ($_SESSION["user_role"] == '00'){echo '<a href="javascript: void(0);">more..</a>' ;}else{echo '<a href="javascript: void(0);">more ..</a>';}  ?></td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td>Neno</td>
                                                                     <?php 
-                                                                        $select_query = "SELECT SUM(amount) as TotalSavings FROM tblslg_member_savings";
-                                                                        $query_result = mysqli_query($link_cs,$select_query);
-                                                                        $row_val = mysqli_fetch_array($query_result);
-                                                                        $CurSavings =  floatval($row_val['TotalSavings']);
+                                                                        $result = mysqli_query($link_cs, "SELECT COUNT(groupID) AS value_sum FROM tblgroup where ((districtID = '26') and (deleted = '0'))"); 
+                                                                        $row = mysqli_fetch_assoc($result); 
+                                                                        $total_grps = $row['value_sum'];
                                                                     ?>
                                                                    <td>0</td>
                                                                     <td>0</td>
                                                                     <td>0</td>
-                                                                    <td>0</td>
+                                                                    <td><?php echo number_format($total_grps);?></td>
                                                                     <td><?php if ($_SESSION["user_role"] == '00'){echo '<a href="javascript: void(0);">more..</a>' ;}else{echo '<a href="javascript: void(0);">more ..</a>';}  ?></td>
                                                                 </tr>
                                                             </tbody>

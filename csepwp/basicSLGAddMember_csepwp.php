@@ -42,7 +42,6 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                 $DistrictID= $row["DistrictID"];
                 $TAID= $row["TAID"];
                 $gvhID= $row["gvhID"];
-                $cohort = $row["cohort"];
             }
             $result_set->close();
         }
@@ -51,7 +50,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
         {    
             $groupID = $_POST['group_id'];
             $DistrictID = $_POST['district'];
-            $spp_programme = $_POST['spp_programme'];
+
             $hhcode = $_POST['hhcode'];
 
             if  (empty($hhcode))
@@ -62,13 +61,13 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
             }
             else
             {
-                $sql = "INSERT INTO tblbeneficiaries (sppCode,spProg,regionID,districtID,groupID,cohort)
-                VALUES ('$hhcode','$spp_programme','$regionID','$DistrictID','$groupID','$cohort')";
+                $sql = "INSERT INTO tblbeneficiaries (sppCode,regionID,districtID,groupID)
+                VALUES ('$hhcode','$regionID','$DistrictID','$groupID')";
                 if (mysqli_query($link_cs, $sql)) {
                     echo '<script type="text/javascript">'; 
                     echo 'if (confirm("SLG Member Record has been added successfully! Add Another SLG Member in the Same SLG?"))';
                         echo '{';
-                            echo 'history.go(-1)';
+                           echo 'history.go(-1)';
                             echo '}';
                         echo 'else';
                             echo '{';
@@ -167,30 +166,8 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                     </div>
                                     
                                     <div class="row">
-                                        <div class="col-md-4">
-                                            <div class="mb-3">
-                                                <label for="cohort" class="form-label">Cohort</label>
-                                                <input type="text" class="form-control" id="cohort" name = "cohort" value="<?php echo $cohort ; ?>"readonly>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="mb-3">
-                                                <label for="spp_programme" class="form-label">SP Programme</label>
-                                                <select class="form-select" id="spp_programme" name ="spp_programme" required>
-                                                    <?php                                                           
-                                                        $spp_fetch_query = "SELECT progID, progName FROM tblspp";                                                  
-                                                        $result_spp_fetch = mysqli_query($link_cs, $spp_fetch_query);                                                                       
-                                                        $i=0;
-                                                            while($DB_ROW_spp = mysqli_fetch_array($result_spp_fetch)) {
-                                                        ?>
-                                                        <option value ="<?php echo $DB_ROW_spp["progID"]; ?>">
-                                                            <?php echo $DB_ROW_spp["progName"]; ?></option><?php
-                                                            $i++;
-                                                                }
-                                                    ?>
-                                                </select>
-                                            </div>
-                                        </div>
+                                        
+                                        
                                         <div class="col-md-4">
                                             <div class="mb-3">
                                                 <label for="hhcode" class="form-label">Household Code</label>

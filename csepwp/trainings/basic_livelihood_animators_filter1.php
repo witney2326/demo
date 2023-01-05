@@ -1,11 +1,11 @@
-<?php include '../layouts/session.php'; ?>
-<?php include '../layouts/head-main.php'; ?>
+<?php include '././../../layouts/session.php'; ?>
+<?php include '././../../layouts/head-main.php'; ?>
 
 <head>
-    <title>SLG Management</title>
-    <?php include '../layouts/head.php'; ?>
-    <?php include '../layouts/head-style.php'; ?>
-    <?php include '../layouts/config2.php'; ?>
+    <title>Training Management</title>
+    <?php include '././../../layouts/head.php'; ?>
+    <?php include '././../../layouts/head-style.php'; ?>
+    <?php include '././../../layouts/config2.php'; ?>
 <!-- DataTables -->
     <link href="assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
     <link href="assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
@@ -26,20 +26,19 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
   </script>
 </head>
 
-<?php include '../layouts/body.php'; 
-      include 'lib2.php';
+<?php include '././../../layouts/body.php'; 
+      include '../lib2.php';
 ?>
 
-<?php 
-   if (($_SESSION["user_role"]== '04')) 
-   {
-       $region = $_SESSION["user_reg"];
-       $district = $_SESSION["user_dis"];   
-   }
+<?php
+    
+    if (($_SESSION["user_role"]== '03')) 
+    {
+        $region = $_SESSION["user_reg"];   
+    }
     else
     {
-    $region = $_POST['region'];
-    $district = $_POST['district'];   
+        $region = $_POST['region'];
     }
  
 ?>
@@ -47,7 +46,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 <!-- Begin page -->
 <div id="layout-wrapper">
 
-    <?php include '../layouts/vertical-menu.php'; ?>
+    <?php include '././../../layouts/vertical-menu.php'; ?>
 
     <!-- ============================================================== -->
     <!-- Start right Content here -->
@@ -61,12 +60,12 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                 <div class="row">
                     <div class="col-12">
                         <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                            <h4 class="mb-sm-0 font-size-18">CS-EPWP SLG Management</h4>
+                            <h4 class="mb-sm-0 font-size-18">CS-EPWP Animators</h4>
 
                             <div class="page-title-right">
                                 <ol class="breadcrumb m-0">
-                                    <li class="breadcrumb-item"><a href="csepwp_basic_livelihood_slg_mgt2.php">SLG Management</a></li>
-                                    <li class="breadcrumb-item active">SLG Management</li>
+                                    <li class="breadcrumb-item"><a href="../csepwp_basic_livelihood.php">Basic Livelihood</a></li>
+                                    <li class="breadcrumb-item active">Animators</li>
                                 </ol>
                             </div>
 
@@ -84,111 +83,103 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                         <div class="card">
                             <div class="card-body">
 
-                                
-                                <!-- Nav tabs -->
                                 <ul class="nav nav-pills nav-justified" role="tablist">
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link active" data-bs-toggle="tab" href="javascript:void(0);" role="tab">
+                                        <a class="nav-link" data-bs-toggle="link" href="csepwp_basic_livelihood_training.php" role="link">
                                             <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
-                                            <span class="d-none d-sm-block">SL Groups</span>
+                                            <span class="d-none d-sm-block">Group Training</span> 
                                         </a>
                                     </li>
+
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="link"  href="csepwp_basic_livelihood_clusters.php" role="link">
+                                        <a class="link"  href="csepwp_basic_livelihood_cluster_training.php" role="link">
                                             <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
-                                            <span class="d-none d-sm-block">Clusters</span>
+                                            <span class="d-none d-sm-block">Cluster Training</span>
                                         </a>
                                     </li>
+
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link" data-bs-toggle="link" href="csepwp_basic_livelihood_slg_mgt2.php#cls-1" role="link">
+                                        <a class="link"  href="basic_livelihood_training_trained_groups.php" role="link">
                                             <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
-                                            <span class="d-none d-sm-block">New Cluster!</span>
+                                            <span class="d-none d-sm-block">Trained Groups/Clusters</span>
                                         </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link" data-bs-toggle="tab" href="#slg-1" role="tab">
-                                            <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
-                                            <span class="d-none d-sm-block">New SLG!</span>
+                                        <a class="nav-link active"  href="javascript:void(0);" role="tab">
+                                            <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
+                                            <span class="d-none d-sm-block">Animator Training</span>
                                         </a>
                                     </li>
-                                    
-                                    
                                 </ul>
-                                <!-- Tab panes -->
+
                                 <div class="tab-content p-3 text-muted">
                                     <div class="tab-pane active" id="home-1" role="tabpanel">
                                         <p class="mb-0">
-                                            
-
                                             <!--start here -->
                                             <div class="card border border-primary">
                                                 
-                                                <div class="card-body ">
+                                                <div class="card-body">
                                                     <h5 class="card-title mt-0"></h5>
-                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="csepwp_basic_livelihood_slg_mgt_filter3_results.php" method ="POST">
+                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="basic_livelihood_animators_filter2.php" method ="POST" >
                                                         <div class="col-12">
                                                             <label for="region" class="form-label">Region</label>
                                                             <div>
-                                                                <select class="form-select" name="region" id="region" value ="<?php echo $region; ?>" required>
-                                                                    <option selected value = "<?php echo $region; ?>"><?php echo get_rname($link_cs,$region);?></option>
+                                                                <select class="form-select" name="region" id="region" value ="<?php echo $region;?>" required>
+                                                                    <option selected value = "<?php echo $region;?>"><?php echo get_rname($link_cs,$region);?></option>
                                                                 </select>
+                                                                
                                                             </div>
                                                         </div>
                                                         
                                                         <div class="col-12">
                                                             <label for="district" class="form-label">District</label>
-                                                            <select class="form-select" name="district" id="district" value ="<?php echo $district; ?>" required>
-                                                                <option selected value = "<?php echo $district; ?>"><?php echo dis_name($link_cs,$district);?></option>
+                                                            <select class="form-select" name="district" id="district" required >
+                                                                <option></option>
+                                                                    <?php                                                           
+                                                                        $dis_fetch_query = "SELECT DistrictID,DistrictName FROM tbldistrict where regionID = '$region'";                                                  
+                                                                        $result_dis_fetch = mysqli_query($link_cs, $dis_fetch_query);                                                                       
+                                                                        $i=0;
+                                                                            while($DB_ROW_Dis = mysqli_fetch_array($result_dis_fetch)) {
+                                                                        ?>
+                                                                        <option value="<?php echo $DB_ROW_Dis["DistrictID"]; ?>">
+                                                                            <?php echo $DB_ROW_Dis["DistrictName"]; ?></option><?php
+                                                                            $i++;
+                                                                                }
+                                                                    ?>
                                                             </select>
+                                                            <div class="invalid-feedback">
+                                                                Please select a valid Malawi district.
+                                                            </div>
                                                         </div>
 
                                                         <div class="col-12">
                                                             <label for="ta" class="form-label">Traditional Authority</label>
-                                                            <select class="form-select" name="ta" id="ta" required >
-                                                                <option></option>
+                                                            <select class="form-select" name="ta" id="ta" required disabled>
+                                                                <option selected  value="$ta"></option>
                                                                 <?php                                                           
-                                                                        $ta_fetch_query = "SELECT TAID,TAName FROM tblta where DistrictID = '$district'";                                                  
+                                                                        $ta_fetch_query = "SELECT TAName FROM tblta";                                                  
                                                                         $result_ta_fetch = mysqli_query($link_cs, $ta_fetch_query);                                                                       
                                                                         $i=0;
                                                                             while($DB_ROW_ta = mysqli_fetch_array($result_ta_fetch)) {
                                                                         ?>
-                                                                        <option value ="<?php echo $DB_ROW_ta["TAID"]; ?>">
+                                                                        <option>
                                                                             <?php echo $DB_ROW_ta["TAName"]; ?></option><?php
                                                                             $i++;
                                                                                 }
                                                                     ?>
-                                                                
                                                             </select>
                                                             <div class="invalid-feedback">
                                                                 Please select a valid TA.
                                                             </div>
                                                         </div>
+
+                                                        
                                                         <div class="col-12">
                                                             <button type="submit" class="btn btn-btn btn-outline-primary w-md" name="Submit" value="Submit">Submit</button>
                                                             <INPUT TYPE="button" class="btn btn-btn btn-outline-secondary w-md" VALUE="Back" onClick="history.go(-1);">
-                                                            
                                                         </div>
                                                     </form>                                             
                                                     <!-- End Here -->
-                                                </div>
-                                            </div>
-
-                                            <div class="row mb-1">
-                                                <div class="col-md-6">
-                                                    <div class="input-group" display="inline">
-                                                        <form action="phpSearch.php" method="post">
-                                                            Group Name <input type="text" name="search">
-                                                            <input type ="submit" name='Search_Group_Name' value='Search_Name'> 
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="input-group" display="inline">
-                                                        <form action="phpSearchgc.php" method="post">
-                                                            Group Code <input type="text" name="search">
-                                                            <input type ="submit" name='Search_Group_Code' value='Search_Code'> 
-                                                        </form>
-                                                    </div>
                                                 </div>
                                             </div>
 
@@ -196,7 +187,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                 <div class="col-12">
                                                     <div class="card border border-primary">
                                                     <div class="card-header bg-transparent border-primary">
-                                                        <h5 class="my-0 text-default">SLGs in <?php echo dis_name($link_cs,$district);?> District</h5>
+                                                        <h5 class="my-0 text-primary">Animators</h5>
                                                     </div>
                                                     <div class="card-body">
                                                     <h7 class="card-title mt-0"></h7>
@@ -207,13 +198,10 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                                     <tr>
                                                                         
                                                                         
-                                                                        <th>SLG code</th>
-                                                                        <th>SLG Name</th>
-                                                                        <th><i class="fas fa-male" style="font-size:18px"></i></th>
-                                                                        <th><i class="fas fa-female" style="font-size:18px"></i></th>
-                                                                        <th><i class="fas fa-male" style="font-size:18px"></i>+<i class="fas fa-female" style="font-size:18px"></i></th>
-                                                                        <th>Total-DB</th>
-                                                                        <th>Action On SLG</th>
+                                                                        <th>Cluster ID</th>
+                                                                        <th>Cluster Name</th>
+                                                                        <th>District</th>
+                                                                        <th>Action</th>
                                                                         
                                                                     </tr>
                                                                 </thead>
@@ -221,39 +209,25 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
                                                                 <tbody>
                                                                     <?Php
-                                                                        $query="select * from tblgroup where ((DistrictID = '$district') and (deleted = '0'))";
+                                                                        $query="select * from tblcluster where regionID ='$region'";
  
                                                                         //Variable $link is declared inside config.php file & used here
-                                                                        
+                                                                         
                                                                         if ($result_set = $link_cs->query($query)) {
                                                                         while($row = $result_set->fetch_array(MYSQLI_ASSOC))
                                                                         { 
-                                                                            $grpID = $row["groupID"];
-                                                                            $result = mysqli_query($link_cs, "SELECT COUNT(sppCode) AS value_count FROM tblbeneficiaries where groupID = '$grpID'"); 
-                                                                            $row_0 = mysqli_fetch_assoc($result); 
-                                                                            $count = $row_0['value_count'];
-
-                                                                            $total = $row["MembersM"] + $row["MembersF"];
+                                                                          $dis = dis_name($link_cs,$row["districtID"]);  
                                                                         echo "<tr>\n";
                                                                             
                                                                         
-                                                                            echo "<td>".$row["groupID"]."</td>\n";
-                                                                            echo "<td>".$row["groupname"]."</td>\n";
-                                                                            echo "<td>".$row["MembersM"]."</td>\n";
-                                                                            echo "<td>".$row["MembersF"]."</td>\n";
-                                                                            echo "<td>\t\t$total</td>\n";
-                                                                            echo "<td>\t\t$count</td>\n";
-                                                                            
+                                                                            echo "<td>".$row["ClusterID"]."</td>\n";
+                                                                            echo "<td>".$row["ClusterName"]."</td>\n";
+                                                                            echo "\t\t<td>$dis</td>\n";
                                                                             echo "<td>
-                                                                            <a href=\"basicSLGview_csepwp.php?id=".$row['groupID']."\"><i class='far fa-eye' title='View SLG' style='font-size:18px;color:purple'></i></a>
-                                                                            <a href=\"basicSLGedit_csepwp.php?id=".$row['groupID']."\"><i class='far fa-edit' title='Edit SLG Details' style='font-size:18px;color:orange'></i></a>
-                                                                            <a href=\"basicSLGsavings_csepwp.php?id=".$row['groupID']."\"><i class='fas fa-hand-holding-usd' title='Add SLG Savings' style='font-size:18px;color:brown'></i></a>
-                                                                            <a href=\"basicSLGloans_csepwp.php?id=".$row['groupID']."\"><i class='fas fa-book' title='Add SLG Loans' style='font-size:18px;color:green'></i></a> 
-                                                                            <a href=\"basicSLG_iga_csepwp.php?id=".$row['groupID']."\"><i class='fas fa-balance-scale' title='Add SLG IGAs' style='font-size:18px;color:cadetgreen'></i></a> 
-                                                                            <a href=\"basicSLGAddMember_csepwp.php?id=".$row['groupID']."\"><i class='fas fa-user-alt' title='Add Beneficiary to SLG' style='font-size:18px;color:brown'></i></a> 
-                                                                            <a onClick=\"javascript: return confirm('Are You Sure You want To Delete This SLG - You Must Be a Supervisor');\" href=\"basicSLGdelete_csepwp.php?id=".$row['groupID']."\"><i class='far fa-trash-alt' title='Delete SLG' style='font-size:18px;color:Red'></i></a>
+                                                                                <a href=\"basicAnimatorTraining_view.php?id=".$row['ClusterID']."\"><i class='far fa-eye' title='Training Status' style='font-size:18px;color:purple'></i></a>                                                                   
+                                                                                <a href=\"add_basicAnimatorTraining.php?id=".$row['ClusterID']."\" ><i class='fas fa-pen' title='Record Training' style='font-size:18px;color:green'></i></a>                                                                             
+                                                                                
                                                                             </td>\n";
-
                                                                         echo "</tr>\n";
                                                                         }
                                                                         $result_set->close();
@@ -269,19 +243,18 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                             </div>  
                                         </p>
                                     </div>
-                                    <!-- Here -->
-        
                                 </div>
 
                             </div>
                         </div>
                     </div>
                 </div>
+
             </div> <!-- container-fluid -->
         </div>
         <!-- End Page-content -->
 
-        <?php include '../layouts/footer.php'; ?>
+        <?php include '././../../layouts/footer.php'; ?>
     </div>
     <!-- end main content-->
 
@@ -289,11 +262,11 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 <!-- END layout-wrapper -->
 
 <!-- Right Sidebar -->
-<?php include '../layouts/right-sidebar.php'; ?>
+<?php include '././../../layouts/right-sidebar.php'; ?>
 <!-- Right-bar -->
 
 <!-- JAVASCRIPT -->
-<?php include '../layouts/vendor-scripts.php'; ?>
+<?php include '././../../layouts/vendor-scripts.php'; ?>
 
 <!-- App js -->
 <script src="assets/js/app.js"></script>

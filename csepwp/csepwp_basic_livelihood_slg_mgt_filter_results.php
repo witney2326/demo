@@ -254,7 +254,7 @@ include '../lib.php';
                                                                             <a href=\"basicSLGsavings_csepwp.php?id=".$row['groupID']."\"><i class='fas fa-hand-holding-usd' title='Add SLG Savings' style='font-size:18px;color:brown'></i></a>
                                                                             <a href=\"basicSLGloans_csepwp.php?id=".$row['groupID']."\"><i class='fas fa-book' title='Add SLG Loans' style='font-size:18px;color:green'></i></a> 
                                                                             <a href=\"basicSLG_iga_csepwp.php?id=".$row['groupID']."\"><i class='fas fa-balance-scale' title='Add SLG IGAs' style='font-size:18px;color:cadetgreen'></i></a> 
-                                                                            <a href=\"basicSLGAddMember.php?id=".$row['groupID']."\"><i class='fas fa-user-alt' title='Add Beneficiary to SLG' style='font-size:18px;color:brown'></i></a> 
+                                                                            <a href=\"basicSLGAddMember_csepwp.php?id=".$row['groupID']."\"><i class='fas fa-user-alt' title='Add Beneficiary to SLG' style='font-size:18px;color:brown'></i></a> 
                                                                             <a onClick=\"javascript: return confirm('Are You Sure You want To Delete This SLG - You Must Be a Supervisor');\" href=\"basicSLGdelete_csepwp.php?id=".$row['groupID']."\"><i class='far fa-trash-alt' title='Delete SLG' style='font-size:18px;color:Red'></i></a>
                                                                             </td>\n";
 
