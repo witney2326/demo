@@ -142,15 +142,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 <form class="form-horizontal" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
 
                                     <div class="row mb-1 <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
-                                        <label for="username" class="col-sm-4 col-form-label">Username</label>
-                                        <input type="password" class="form-control" id="username" value="guest3" name="username" style="max-width:40%;" readonly>
+                                        <label  for="username" hidden class="col-sm-4 col-form-label">Username</label>
+                                        <input type="password" hidden class="form-control" id="username" value="guest3" name="username" style="max-width:40%;" readonly>
                                         <span class="text-danger"><?php echo $username_err; ?></span>
                                     </div>
 
                                     <div class="row mb-4 <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
                                         
-                                        <label class="col-sm-4 col-form-label"> Password</label>
-                                        <input type="password" name="password" class="form-control" value="wkabango" aria-label="Password" aria-describedby="password-addon" style="max-width:40%;" readonly>
+                                        <label hidden class="col-sm-4 col-form-label"> Password</label>
+                                        <input type="password" hidden name="password" class="form-control" value="wkabango" aria-label="Password" aria-describedby="password-addon" style="max-width:40%;" readonly>
                                         
                                         
                                         <span class="text-danger"><?php echo $password_err; ?></span>

@@ -226,7 +226,13 @@
         $lf = mysqli_fetch_array($place_query);// fetch data
         return $lf['TrainingID'];
         }
-
+        
+        function s_name($link_cs, $scode)
+        {
+        $sector_query = mysqli_query($link_cs,"select name from tblsector where id='$scode'"); // select query
+        $dis = mysqli_fetch_array($sector_query);// fetch data
+        return $dis['name'];
+    }
     ?>
     
 </div>

@@ -122,21 +122,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         </div>
                         <div class="card-body pt-0">
                             <div class="auth-logo">
-                                <a href="" class="auth-logo-light">
+                                <div class="auth-logo-light">
                                     <div class="avatar-md profile-user-wid mb-4">
                                         <span class="avatar-title rounded-circle bg-light">
                                             <img src="assets/images/logo-light.svg" alt="" class="rounded-circle" height="64">
                                         </span>
                                     </div>
-                                </a>
+                                </div>
 
-                                <a href="" class="auth-logo-dark">
+                                <div class="auth-logo-dark">
                                     <div class="avatar-md profile-user-wid mb-4">
                                         <span class="avatar-title rounded-circle bg-light">
                                             <img src="assets/images/logo.svg" alt="" class="rounded-circle" height="64">
                                         </span>
                                     </div>
-                                </a>
+                                </div>
                             </div>
                             <div class="p-2">
                                 <form class="form-horizontal" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
