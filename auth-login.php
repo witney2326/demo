@@ -2,6 +2,8 @@
 // Initialize the session
 session_start();
 
+
+
 // Check if the user is already logged in, if yes then redirect him to index page
 if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
     header("location: index_check.php");
@@ -44,6 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             // Set parameters
             $param_username = $username;
+            
             
             
             // Attempt to execute the prepared statement
@@ -99,6 +102,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <title>Login | Comsip Intergrated MIS</title>
     <?php include 'layouts/head.php'; ?>
     <?php include 'layouts/head-style.php'; ?>
+
+    <script src="https://www.google.com/recaptcha/api.js"></script>
 </head>
 
 <body>
@@ -155,6 +160,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                         
                                         <span class="text-danger"><?php echo $password_err; ?></span>
                                     </div>
+
+                                    <div class="g-recaptcha brochure__form__captcha" data-sitekey="YOUR SITE KEY"></div>
 
                                     <div class="row mb-1">
                                         <div class="text-center">

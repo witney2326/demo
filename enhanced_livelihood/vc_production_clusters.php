@@ -89,7 +89,7 @@
                                 <!-- Nav tabs -->
                                 <ul class="nav nav-pills nav-justified" role="tablist">
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link active" data-bs-toggle="tab" href="#home1" role="tab">
+                                        <a class="nav-link active" data-bs-toggle="tab" href="javascript:void(0);" role="tab">
                                             <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
                                             <span class="d-none d-sm-block">Home</span>
                                         </a>
@@ -140,13 +140,11 @@
                             <div class="card-body">
      
                                 <div class="card border border-primary">
-                                    <div class="card-header bg-transparent border-primary">
-                                        <h5 class="my-0 text-primary"></i>Cluster Search Filter</h5>
-                                    </div>
+                                    
 
                                     <div class="card-body">
                                         <h5 class="card-title mt-0"></h5>
-                                        <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="vc_production_clusters_filter1.php" method ="GET" >
+                                        <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="vc_production_clusters1.php" method ="POST" >
                                             <div class="col-12">
                                                 <label for="region" class="form-label">Region</label>
                                                 
@@ -249,7 +247,7 @@
                                                     </thead>
                                                     <tbody>
                                                         <?Php
-                                                            $query="select * from tblcluster where regionID = '0'";
+                                                            $query="select * from tblcluster";
 
                                                             //Variable $link is declared inside config.php file & used here
                                                             
@@ -269,8 +267,8 @@
                                                                 echo "<td>\t\t$mapped</td>\n";
                                                                 
                                                                 echo "<td>
-                                                                    <a onClick=\"javascript: return confirm('Are You Sure You want To Map This Cluster For VC Production Interventions? ');\" href=\"vc_cls_map.php?id=".$row['ClusterID']."\"><i class='fas fa-map' title='Map Cluster For VC Production Intervention' style='font-size:18px'></i></a>\n;
-                                                                    echo 
+                                                                    <a onClick=\"javascript: return confirm('Are You Sure You want To Map This Cluster For VC Production Interventions? ');\" href=\"vc_cls_map.php?id=".$row['ClusterID']."\"><i class='fas fa-map' title='Map Cluster For VC Production Intervention' style='font-size:18px'></i></a>\n
+                                                                     
                                                                     </td>\n";
 
                                                             echo "</tr>\n";
