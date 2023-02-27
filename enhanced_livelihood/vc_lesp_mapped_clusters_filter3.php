@@ -1,5 +1,8 @@
 <?php include '../layouts/session.php'; ?>
 <?php include '../layouts/head-main.php'; ?>
+<?php 
+header("Cache-Control: max-age=300, must-revalidate"); 
+?>
 
 <head>
     <title>LESP Mapped Clusters</title>
@@ -206,7 +209,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
                                                                     $cls = mysqli_query($link, "SELECT *  FROM tblvc_lesp where ClusterID = '$grpID'"); 
                                                                     $clss = mysqli_fetch_assoc($cls); 
-                                                                    $crop = $clss['crop'];$cost = $clss['cost'];$acreage = $clss['acreage'];$contribution = $clss['contribution'];
+                                                                    $crop = cropname($link,$clss['crop']);$cost = $clss['cost'];$acreage = $clss['acreage'];$contribution = $clss['contribution'];
 
                                                                     if ($row["lesp_status"] == 1){$lesp_status = "On LESP";}else{$lesp_status = "N/A";}
     
@@ -221,7 +224,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                                     echo "<td>\t\t$contribution</td>\n";
                                                                     echo "\t\t<td>$lesp_status</td>\n";
                                                                     echo "<td> <a href=\"../basicCLSview.php?id=".$row['ClusterID']."\"><i class='far fa-eye' title='View SLG' style='font-size:18px;color:purple'></i></a>\n";
-                                                                    echo "<a onClick=\"javascript: return confirm('Are You Sure You want To PUT This Cluster On LESP');\" href=\"vc_lesp_clsMapping.php?id=".$row['ClusterID']."\"\><i class='fa fa-leaf' title='Update LESP Cluster Details' style='font-size:18px;color:green'></i></a>\n";
+                                                                    echo "<a href=\"vc_lesp_cluster_lesp.php?id=".$row['ClusterID']."\"\><i class='fa fa-leaf' title='Update LESP Cluster Details' style='font-size:18px;color:green'></i></a>\n";
                                                                 echo "</tr>\n";
                                                             }
                                                         $result_set->close();

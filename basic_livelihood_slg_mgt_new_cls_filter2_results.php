@@ -54,7 +54,7 @@
 
                             <div class="page-title-right">
                                 <ol class="breadcrumb m-0">
-                                    <li class="breadcrumb-item"><a href="basic_livelihood_slg_mgt2.php">SLG Management</a></li>
+                                    <li class="breadcrumb-item"><a href="basic_livelihood_slg_mgt_check.php">SLG Management</a></li>
                                     <li class="breadcrumb-item active">New Cluster</li>
                                 </ol>
                             </div>
@@ -95,17 +95,12 @@
                                         </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link" data-bs-toggle="tab" href="#slg-1" role="tab">
+                                        <a class="nav-link" data-bs-toggle="link" href="basic_livelihood_slg_mgt_new_slg_filter3_results.php" role="link">
                                             <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
                                             <span class="d-none d-sm-block">New SLG!</span>
                                         </a>
                                     </li>
-                                    <li class="nav-item waves-effect waves-light">
-                                        <a class="link" href="basicReports.php" role="link">
-                                            <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
-                                            <span class="d-none d-sm-block">SLG Reports</span>
-                                        </a>
-                                    </li>
+                                    
                                     
                                 </ul>
                                 <!-- Tab panes -->
@@ -144,32 +139,16 @@
                                                                 <div class="mb-2">
                                                                     <label for="district" class="form-label">District</label>
                                                                     <select class="form-select" name="district" id="district"  required>
-                                                                        <option  value= <?php echo $district; ?> ><?php echo dis_name($link,$district); ?></option>
-                                                                            
+                                                                        <option  value= <?php echo $district; ?> ><?php echo dis_name($link,$district); ?></option> 
                                                                     </select>
-                                                                    
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-2">
                                                                 <div class="mb-2">
                                                                     <label for="ta" class="form-label">TA</label>
                                                                     <select class="form-select" name="ta" id="ta" required>
-                                                                        <option></option>
-                                                                        <?php                                                           
-                                                                                $ta_fetch_query = "SELECT TAID,TAName FROM tblta where DistrictID = $district";                                                  
-                                                                                $result_ta_fetch = mysqli_query($link, $ta_fetch_query);                                                                       
-                                                                                $i=0;
-                                                                                    while($DB_ROW_ta = mysqli_fetch_array($result_ta_fetch)) {
-                                                                                ?>
-                                                                                <option value ="<?php echo $DB_ROW_ta["TAID"]; ?>">
-                                                                                    <?php echo $DB_ROW_ta["TAName"]; ?></option><?php
-                                                                                    $i++;
-                                                                                        }
-                                                                            ?>
+                                                                        <option value= <?php echo $ta; ?> ><?php echo ta_name($link,$ta); ?></option>
                                                                     </select>
-                                                                    <div class="invalid-feedback">
-                                                                        Please select a valid TA.
-                                                                    </div>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-2">

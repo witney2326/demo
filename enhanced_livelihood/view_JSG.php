@@ -108,7 +108,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                     <div class="col-12">
                         <div class="card border border-primary">
                         <div class="card-header bg-transparent border-primary">
-                            <h5 class="my-0 text-primary">JSG Record for: <?php echo $groupname;?> </h5>
+                            <h5 class="my-0 text-primary">JSG Record for: <?php if (isset($groupname)){echo $groupname;}else{echo "No JSG";}?> </h5>
                         </div>
                         <div class="card-body">
                             <h5 class="card-title mt-0"></h5>

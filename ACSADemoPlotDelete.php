@@ -9,7 +9,7 @@ if ($link->query($sql) === TRUE) {
 
     echo '<script type="text/javascript">'; 
     echo 'alert("Demo Plot record deleted successfully !");'; 
-    echo 'window.location.href = "basic_livelihood_acsa_mgt.php";';
+    echo 'history.go(-1)';
     echo '</script>';
 
 } else {

@@ -32,13 +32,13 @@ include '../lib2.php';
 
 <?php 
 
-if (($_SESSION["user_role"])== '03') 
+if (($_POST['district'] <> '00') and ($_POST['ta'] = '0000'))
     {
-        $region = $_SESSION["user_reg"];
+        header("location: basic_livelihood_hh_mgt_filter1.php");  
     }
-else
+else if (($_POST['district'] <> '00') and ($_POST['ta'] <> '0000'))
     {
-        $region = $_POST['region'];
+        header("location: basic_livelihood_hh_mgt_filter1.php");  
     }
 
     

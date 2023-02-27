@@ -1,16 +1,3 @@
-<?php include 'layouts/session.php'; ?>
-<?php include 'layouts/head-main.php'; ?>
-
-<head>
-    <title>ACSA |Add Demo Plot</title>
-    <?php include 'layouts/head.php'; ?>
-    <?php include 'layouts/head-style.php'; ?>
-
-</head>
-
-<div id="layout-wrapper">
-
-    <?php include 'layouts/menu.php'; ?>
 
     <?php
         include "layouts/config.php"; // Using database connection file here
@@ -33,7 +20,7 @@
                     {
                         echo '<script type="text/javascript">'; 
                         echo 'alert("ACSA Demo Plot Record has been added successfully !");'; 
-                        echo 'window.location.href = "basic_livelihood_acsa_mgt.php";';
+                        echo 'history.go(-2)';
                         echo '</script>';
                     } 
                     else 
@@ -43,7 +30,7 @@
                 {
                     echo '<script type="text/javascript">'; 
                     echo 'alert("Please Fill in Demo Plot name or Plot Size !");'; 
-                    echo 'window.location.href = "basic_livelihood_acsa_mgt.php";';
+                    echo 'history.go(-1)';
                     echo '</script>'; 
                 }
             mysqli_close($link);
@@ -101,9 +88,3 @@
         }
 
     ?>
-
-    <!-- ============================================================== -->
-    <!-- Start right Content here -->
-    <!-- ============================================================== -->
-    
-</div>

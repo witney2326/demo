@@ -262,6 +262,16 @@
 
 <?php
     $user = $_SESSION["user_role"];
+    if ($user == '05')
+    {
+        $taid = $_SESSION["user_ta"]; 
+    } else if ($user == '04')
+    {
+        $dis = $_SESSION["user_dis"]; 
+    }else if ($user == '03')
+    {
+        $reg = $_SESSION["user_reg"];
+    }
 ?>
     
 
@@ -297,206 +307,248 @@
                 <!-- end page title -->
 
                 <div class="row">
-
                     <div class="col-xl-12">
                         <div class="card">
-                            <div class="card-body">
-                                <!-- Nav tabs -->
-                                <ul class="nav nav-pills nav-justified" role="tablist">
-                                    <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link active" data-bs-toggle="tab" href="#home" role="tab">
-                                            <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
-                                            <span class="d-none d-sm-block">Dashboard</span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item waves-effect waves-light">
-                                        <a class="link"  href="basic_livelihood_hh_mgt_check.php" role="link">
-                                            <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
-                                            <span class="d-none d-sm-block">Household Verification</span>
-                                        </a>
-                                    </li>
-                                                                        
-                                    <li class="nav-item waves-effect waves-light">
-                                        <a class="link"  href="basic_livelihood_meetings_check.php" role="link">
-                                            <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
-                                            <span class="d-none d-sm-block">Awareness & Sensitization Meetings</span>
-                                        </a>
-                                    </li>
-                                    
-                                    <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link" href="basic_livelihood_slg_mgt_check.php" role="link">
-                                            <span class="d-block d-sm-none"><i class="fas fa-cog"></i></span>
-                                            <span class="d-none d-sm-block">Savings & Loan Group Mgt</span>
-                                        </a>
-                                    </li>
-                                    
-                                    <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link" href="basic_livelihood_training_check.php" role="link">
-                                            <span class="d-block d-sm-none"><i class="fas fa-cog"></i></span>
-                                            <span class="d-none d-sm-block">Capacity Building</span>
-                                        </a>
-                                    </li>
-                                    
-                                    
-                                    <li class="nav-item waves-effect waves-light">
-                                        <a class="link"  href="basic_livelihood_acsa_mgt_check.php" role="link">
-                                            <span class="d-block d-sm-none"><i class="fas fa-cog"></i></span>
-                                            <span class="d-none d-sm-block">Actionable Climate Smart Agriculture</span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link"  href="basic_livelihood_safeguards_mgt_check.php" role="link">
-                                            <span class="d-block d-sm-none"><i class="fas fa-cog"></i></span>
-                                            <span class="d-none d-sm-block">Environmental & Social Safeguard Mgt</span>
-                                        </a>
-                                    </li>
-                                    
-                                </ul>
+                            <ul class="nav nav-pills nav-justified" role="tablist">
+                                <li class="nav-item waves-effect waves-light">
+                                    <a class="nav-link active" data-bs-toggle="tab" href="#home" role="tab">
+                                        <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
+                                        <span class="d-none d-sm-block">Dashboard</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item waves-effect waves-light">
+                                    <a class="link"  href="basic_livelihood_hh_mgt_check.php" role="link">
+                                        <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
+                                        <span class="d-none d-sm-block">Household Verification</span>
+                                    </a>
+                                </li>                                
+                                <li class="nav-item waves-effect waves-light">
+                                    <a class="link"  href="basic_livelihood_meetings_check.php" role="link">
+                                        <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
+                                        <span class="d-none d-sm-block">Awareness & Sensitization Meetings</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item waves-effect waves-light">
+                                    <a class="nav-link" href="basic_livelihood_slg_mgt_check.php" role="link">
+                                        <span class="d-block d-sm-none"><i class="fas fa-cog"></i></span>
+                                        <span class="d-none d-sm-block">Savings & Loan Group Mgt</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item waves-effect waves-light">
+                                    <a class="nav-link" href="basic_livelihood_training_check.php" role="link">
+                                        <span class="d-block d-sm-none"><i class="fas fa-cog"></i></span>
+                                        <span class="d-none d-sm-block">Capacity Building</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item waves-effect waves-light">
+                                    <a class="link"  href="basic_livelihood_acsa_mgt_check.php" role="link">
+                                        <span class="d-block d-sm-none"><i class="fas fa-cog"></i></span>
+                                        <span class="d-none d-sm-block">Actionable Climate Smart Agriculture</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item waves-effect waves-light">
+                                    <a class="nav-link"  href="basic_livelihood_safeguards_mgt_check.php" role="link">
+                                        <span class="d-block d-sm-none"><i class="fas fa-cog"></i></span>
+                                        <span class="d-none d-sm-block">Environmental & Social Safeguard Mgt</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
 
-                                <!-- Tab panes -->
-                                
-                                <!-- end -->
-                                <div class="tab-content p-3 text-muted">
-                                    <div class="tab-pane active" id="home" role="tabpanel">
-                                        <p class="mb-0">
-                                            
-                                            <!-- start here -->
-                                            <div class="row">
-                        
-                                                <div class="card-header bg-transparent border-primary">
-                                                    <div class="card-group">
-                                                        <div class="card border">
-                                                            <img src="..." class="card-img-top" alt="">
-                                                            <div class="card-body">
-                                                                
-                                                                        <div class="card-body">
-                                                                            <div class="d-flex">
-                                                                                <div class="flex-grow-1">
-                                                                                    <i class='fas fa-house-user' style='font-size:24px;color:brown'></i><i class='fas fa-house-user' style='font-size:24px;color:slategrey'></i>
-                                                                                    <p class="text-muted fw-medium">Enrolled HouseHolds</p>
-                                                                                    <?php
-                                                                                        $result = mysqli_query($link, 'SELECT COUNT(sppCode) AS value_sum FROM tblbeneficiaries'); 
-                                                                                        $row = mysqli_fetch_assoc($result); 
-                                                                                        $sum = $row['value_sum'];
-                                                                                    ?>
-                                                                                        <h5 class="mb-0">
-                                                                                            <div class="container">
-                                                                                                <div class="mb-0"><?php echo "" . number_format($sum);?></div>
-                                                                                            </div> 
-                                                                                        </h5>
-                                                                                </div>
-                                                                                
-                                                                            </div>
-                                                                        </div>
-                                                                
-                                                            <!-- -->
-                                                            </div>
-                                                        </div>
-                                                        <div class="card border">
-                                                            <img src="..." class="card-img-top" alt="">
-                                                            <div class="card-body">
-                                                                <div class="card-body">
-                                                                    <div class="d-flex">
-                                                                        <div class="flex-grow-1">
-                                                                            <i class='fas fa-users' style='font-size:24px;color:chocolate'></i><i class='fas fa-users' style='font-size:24px;color:brown'></i>
+                <div class="row">
+                
+                    <?php
+                        if ($_SESSION["user_role"] == '05'){echo '<div class="alert alert-warning" role="alert"> For Case Worker!</a></div>';}
+                        if ($_SESSION["user_role"] == '04'){echo '<div class="alert alert-warning" role="alert"> For District Coordinator!</a></div>';}
+                        if ($_SESSION["user_role"] == '03'){echo '<div class="alert alert-warning" role="alert"> For Regional Coordinator (PC)!</a></div>';}
+                    ?>
+                    <div class ="col-x1-12">
+                        <div class ="card">
 
-                                                                            <p class="text-muted fw-medium">SLGs Formed</p>
-                                                                            <?php
-                                                                                $result = mysqli_query($link, 'SELECT COUNT(groupID) AS value_sum FROM tblgroup WHERE deleted = 0'); 
-                                                                                $row = mysqli_fetch_assoc($result); 
-                                                                                $sum = $row['value_sum'];
-                                                                            ?>
-                                                                            <div class="container">
-                                                                                <h5><div class="mb-0"><?php echo "" . number_format($sum);?></div></h5>
-                                                                            </div>
-                                                                            
-                                                                        </div>
-                                                                        
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                        </div>
-                                                        <div class="card border">
-                                                            <img src="..." class="card-img-top" alt="">
-                                                            <div class="card-body">
-                                                                <div class="card-body">
-                                                                    <div class="d-flex">
-                                                                        <div class="flex-grow-1">
-                                                                            <i class='fas fa-users' style='font-size:24px;color:chocolate'></i><i class='fas fa-user-graduate' style='font-size:24px;color:black'></i><i class='fas fa-users' style='font-size:24px;color:brown'></i>
-                                                                            <p class="text-muted fw-medium">SLGs Trained</p>
-                                                                            <?php
-                                                                                $result = mysqli_query($link, 'SELECT COUNT(groupID) AS value_sum FROM tblgrouptrainings'); 
-                                                                                $row = mysqli_fetch_assoc($result); 
-                                                                                $sum = $row['value_sum'];
-                                                                            ?>
-                                                                            <div class="container">
-                                                                                <h5><div class="mb-0"><?php echo "" . number_format($sum);?></div></h5>
-                                                                            </div>
-                                                                            
-                                                                           
-                                                                        </div>
-                                                                        
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="card border">
-                                                            <img src="..." class="card-img-top" alt="">
-                                                            <div class="card-body">
-                                                                <div class="card-body">
-                                                                    <div class="d-flex">
-                                                                        <div class="flex-grow-1">
-                                                                            <i class='fas fa-check' style='font-size:20px;color:green'></i>
-                                                                            
-                                                                            <p class="text-muted fw-medium">SCT/PWP Verified Households</p>
-                                                                            <?php
-                                                                                $result = mysqli_query($link, 'SELECT COUNT(sppCode) AS value_sum FROM tblbeneficiaries WHERE prog_status_verified = 1'); 
-                                                                                $row = mysqli_fetch_assoc($result); 
-                                                                                $sum_hhs = $row['value_sum'];
-                                                                            ?>
-                                                                            <h5 class="mb-0"><?php echo "" . number_format($sum_hhs);?></h5>
-                                                                        </div>
-                                                                        
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div> 
-                                            <!-- end here -->
-                                             
-                                            <!-- end here row1 -->
-
-                                            <!-- pie chart -->
-                                            <div class = "row">
+                                <div class="card-header bg-transparent border-primary">
+                                    <div class="card-group">
+                                        <div class="card border">
+                                            <img src="..." class="card-img-top" alt="">
+                                            <div class="card-body">
                                                 
-                                                <div class = "col-lg-5">
-                                                    <div class="card border border-success">
-                                                        <div class="card-header bg-transparent border-primary">
-                                                            <h5 class="my-0 text-secondary"></h5>
+                                                        <div class="card-body">
+                                                            <div class="d-flex">
+                                                                <div class="flex-grow-1">
+                                                                    <i class='fas fa-house-user' style='font-size:24px;color:brown'></i><i class='fas fa-house-user' style='font-size:24px;color:slategrey'></i>
+                                                                    <p class="text-muted fw-medium">Enrolled HouseHolds</p>
+                                                                    <?php
+                                                                        
+                                                                        if ($user == '03')
+                                                                        {
+                                                                            $result4 = mysqli_query($link, "SELECT COUNT(sppCode) AS value_sum FROM tblbeneficiaries where regionID = '$reg'"); 
+                                                                            $row4 = mysqli_fetch_assoc($result4); 
+                                                                            $sum = $row4['value_sum'];
+                                                                        }
+                                                                        else if ($user == '04')
+                                                                        {
+                                                                            $result2 = mysqli_query($link, "SELECT COUNT(sppCode) AS value_sum FROM tblbeneficiaries where districtID = '$dis'"); 
+                                                                            $row2 = mysqli_fetch_assoc($result2); 
+                                                                            $sum = $row2['value_sum'];
+                                                                        }
+
+                                                                        else if ($user == '05')
+                                                                        {
+                                                                            $result3 = mysqli_query($link, "SELECT COUNT(sppCode) AS value_sum FROM tblbeneficiaries inner join tblgroup on
+                                                                            tblgroup.groupID = tblbeneficiaries.groupID where tblgroup.TAID = '$taid'"); 
+                                                                            $row3 = mysqli_fetch_assoc($result3); 
+                                                                            $sum = $row3['value_sum'];
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            $result = mysqli_query($link, 'SELECT COUNT(sppCode) AS value_sum FROM tblbeneficiaries'); 
+                                                                            $row = mysqli_fetch_assoc($result); 
+                                                                            $sum = $row['value_sum'];
+                                                                        }
+                                                                    ?>
+                                                                        <h5 class="mb-0">
+                                                                            <div class="container">
+                                                                                <div class="mb-0"><?php echo "" . number_format($sum);?></div>
+                                                                            </div> 
+                                                                        </h5>
+                                                                </div>
+                                                                
+                                                            </div>
                                                         </div>
-                                                        <div id="AdoptedPlaces"></div> 
+                                                
+                                            <!-- -->
+                                            </div>
+                                        </div>
+                                        <div class="card border">
+                                            <img src="..." class="card-img-top" alt="">
+                                            <div class="card-body">
+                                                <div class="card-body">
+                                                    <div class="d-flex">
+                                                        <div class="flex-grow-1">
+                                                            <i class='fas fa-users' style='font-size:24px;color:chocolate'></i><i class='fas fa-users' style='font-size:24px;color:brown'></i>
+
+                                                            <p class="text-muted fw-medium">SLGs Formed</p>
+                                                            <?php
+                                                                if ($user == '03')
+                                                                {
+                                                                    $result = mysqli_query($link, "SELECT COUNT(groupID) AS value_sum FROM tblgroup WHERE ((deleted = 0) and (regionID = '$reg'))"); 
+                                                                    $row = mysqli_fetch_assoc($result); 
+                                                                    $sum = $row['value_sum'];
+                                                                } else if ($user == '04')
+                                                                {
+                                                                    $result2 = mysqli_query($link, "SELECT COUNT(groupID) AS value_sum FROM tblgroup WHERE ((deleted = 0) and (DistrictID = '$dis'))"); 
+                                                                    $row2 = mysqli_fetch_assoc($result2); 
+                                                                    $sum = $row2['value_sum'];
+                                                                } else if ($user == '05')
+                                                                {
+                                                                    $result3 = mysqli_query($link, "SELECT COUNT(groupID) AS value_sum FROM tblgroup WHERE ((deleted = 0) and (TAID = '$taid'))"); 
+                                                                    $row3 = mysqli_fetch_assoc($result3); 
+                                                                    $sum = $row3['value_sum'];
+                                                                } else
+                                                                {
+                                                                    $result4 = mysqli_query($link, "SELECT COUNT(groupID) AS value_sum FROM tblgroup WHERE ((deleted = 0))"); 
+                                                                    $row4 = mysqli_fetch_assoc($result4); 
+                                                                    $sum = $row4['value_sum'];
+                                                                }
+
+                                                            ?>
+                                                            <div class="container">
+                                                                <h5><div class="mb-0"><?php echo "" . number_format($sum);?></div></h5>
+                                                            </div>
+                                                            
+                                                        </div>
+                                                        
                                                     </div>
                                                 </div>
-                                                <div class = "col-lg-7">
-                                                    <div class="card border border-success">
-                                                        <div class="card-header bg-transparent border-primary">
-                                                            <h5 class="my-0 text-primary"></h5>
+                                            </div>
+
+                                        </div>
+                                        <div class="card border">
+                                            <img src="..." class="card-img-top" alt="">
+                                            <div class="card-body">
+                                                <div class="card-body">
+                                                    <div class="d-flex">
+                                                        <div class="flex-grow-1">
+                                                            <i class='fas fa-users' style='font-size:24px;color:chocolate'></i><i class='fas fa-user-graduate' style='font-size:24px;color:black'></i><i class='fas fa-users' style='font-size:24px;color:brown'></i>
+                                                            <p class="text-muted fw-medium">SLGs Trained</p>
+                                                            <?php
+                                                                if ($user == '03')
+                                                                {
+                                                                    $result = mysqli_query($link, "SELECT COUNT(groupID) AS value_sum FROM tblgrouptrainings where regionID = '$reg'"); 
+                                                                    $row = mysqli_fetch_assoc($result); 
+                                                                    $sum = $row['value_sum'];
+                                                                } else if ($user == '04')
+                                                                {
+                                                                    $result = mysqli_query($link, "SELECT COUNT(groupID) AS value_sum FROM tblgrouptrainings where districtID = '$dis'"); 
+                                                                    $row = mysqli_fetch_assoc($result); 
+                                                                    $sum = $row['value_sum'];
+                                                                } else if ($user == '05')
+                                                                {
+                                                                    $result = mysqli_query($link, "SELECT COUNT(tblgrouptrainings.groupID) AS value_sum FROM tblgrouptrainings inner join tblgroup on 
+                                                                    tblgroup.groupID = tblgrouptrainings.groupID where tblgroup.TAID = '$taid'"); 
+                                                                    $row = mysqli_fetch_assoc($result); 
+                                                                    $sum = $row['value_sum'];
+                                                                }else
+                                                                {
+                                                                    $result = mysqli_query($link, "SELECT COUNT(groupID) AS value_sum FROM tblgrouptrainings"); 
+                                                                    $row = mysqli_fetch_assoc($result); 
+                                                                    $sum = $row['value_sum'];
+                                                                }
+                                                            ?>
+                                                            <div class="container">
+                                                                <h5><div class="mb-0"><?php echo "" . number_format($sum);?></div></h5>
+                                                            </div>
+                                                            
+                                                            
                                                         </div>
-                                                        <div id="barchart"></div> 
+                                                        
                                                     </div>
-                                                </div>   
-                                            </div>                                 
-                                                                                   
-                                        </p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="card border">
+                                            <img src="..." class="card-img-top" alt="">
+                                            <div class="card-body">
+                                                <div class="card-body">
+                                                    <div class="d-flex">
+                                                        <div class="flex-grow-1">
+                                                            <i class='fas fa-network-wired' style='font-size:20px;color:black'></i> 
+                                                            
+                                                            <p class="text-muted fw-medium">Clusters Formed</p>
+                                                            <?php
+                                                            if ($user == '03')
+                                                                {
+                                                                    $result = mysqli_query($link, "SELECT COUNT(ClusterID) AS value_cls FROM tblcluster WHERE ((deleted = '0') and (regionID = '$reg'))"); 
+                                                                    $row = mysqli_fetch_assoc($result); 
+                                                                    $value_cls = $row['value_cls'];
+                                                                } else if ($user == '04')
+                                                                {
+                                                                    $result = mysqli_query($link, "SELECT COUNT(ClusterID) AS value_cls FROM tblcluster WHERE ((deleted = '0') and (districtID = '$dis'))"); 
+                                                                    $row = mysqli_fetch_assoc($result); 
+                                                                    $value_cls = $row['value_cls'];
+                                                                } else if ($user == '05')
+                                                                {
+                                                                    $result = mysqli_query($link, "SELECT COUNT(ClusterID) AS value_cls FROM tblcluster WHERE ((deleted = '0') and (taID = '$taid'))"); 
+                                                                    $row = mysqli_fetch_assoc($result); 
+                                                                    $value_cls = $row['value_cls'];
+                                                                }else
+                                                                {
+                                                                    $result = mysqli_query($link, "SELECT COUNT(ClusterID) AS value_cls FROM tblcluster WHERE deleted = '0'"); 
+                                                                    $row = mysqli_fetch_assoc($result); 
+                                                                    $value_cls = $row['value_cls'];
+                                                                }
+                                                            ?>
+                                                            <h5 class="mb-0"><?php echo "" . number_format($value_cls);?></h5>
+                                                        </div>
+                                                        
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-
                                 </div>
-
-                            </div>
                         </div>
                     </div>
                 </div>

@@ -29,19 +29,18 @@
 <?php include '../layouts/body.php'; ?>
 
 <?php 
-
-    if (($_SESSION["user_role"]== '05')) 
-    {
-        $region = $_SESSION["user_reg"];
-        $district = $_SESSION["user_dis"];
-        $ta = $_SESSION["user_ta"];   
-    }
- else
-    {
-    $region = $_POST['region'];
-    $district =$_POST['district'];
-    $ta =$_POST['ta'];
-    }
+ if (($_POST['region'] == "") or ($_POST['district'] == "") or ($_POST['ta'] == ""))
+ {
+     echo '<script type="text/javascript">'; 
+     echo 'alert("Fill In Region OR District or TA!");'; 
+     echo 'history.go(-1)';
+   echo '</script>';
+ }  else if (($_POST['region']<>"") and ($_POST['district']<>"00") and ($_POST['ta']<> "0000") )
+ {
+     $region = $_POST['region'];
+     $district = $_POST['district'];
+     $ta = $_POST['ta'];
+ }
 ?>
 
 <!-- Begin page -->
@@ -120,12 +119,12 @@
 
                                             <!--start here -->
                                             <p align="right">
-                                                <INPUT TYPE="button" class="btn btn-btn btn-outline-secondary w-md" VALUE="Back" onClick="history.go(-1);">
+                                                <INPUT TYPE="button" class="btn btn-btn btn-outline-primary w-md" VALUE="Back" onClick="history.go(-1);">
                                             </p>
 
                                             <div class="row">
                                                 <div class="col-12">
-                                                    <div class="card border border-primary">
+                                                    <div class="card border border-success">
                                                     <!-- here -->
                                                     <div class="card-body">
                                                     
@@ -133,8 +132,8 @@
                                                     <form action="insertSLG_csepwp.php" method="POST">
                                                         <!-- start here -->
                                                         <div class="row">
-                                                            <div class="col-md-2">
-                                                                <div class="mb-2">
+                                                            <div class="col-md-3">
+                                                                <div class="mb-3">
                                                                     <label for="region" class="form-label">Region</label>
                                                                     <select class="form-select" name="region" id="region" required>
                                                                         <option selected value="<?php echo $region;?>"><?php echo get_rname($link_cs,$region);?></option>                               
@@ -144,8 +143,8 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div class="col-md-2">
-                                                                <div class="mb-2">
+                                                            <div class="col-md-3">
+                                                                <div class="mb-3">
                                                                     <label for="district" class="form-label">District</label>
                                                                     <select class="form-select" name="district" id="district"  required>
                                                                         <option  value= <?php echo $district; ?> ><?php echo dis_name($link_cs,$district); ?></option>
@@ -154,8 +153,8 @@
                                                                     
                                                                 </div>
                                                             </div>
-                                                            <div class="col-md-2">
-                                                                <div class="mb-2">
+                                                            <div class="col-md-3">
+                                                                <div class="mb-3">
                                                                     <label for="ta" class="form-label">TA</label>
                                                                     <select class="form-select" name="ta" id="ta" required>
                                                                         <option  value= <?php echo $ta; ?> ><?php echo tname($link_cs,$ta); ?></option>
@@ -165,8 +164,17 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div class="col-md-2">
-                                                                <div class="mb-2">
+                                                            <div class="col-md-3">
+                                                                <div class="mb-3">
+                                                                    <label for="catchment" class="form-label">Catchment</label>
+                                                                    <input type="text" name="catchment" placeholder="Enter Catchment" class="form-control" required>
+                                                                    
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">  
+                                                            <div class="col-md-3">
+                                                                <div class="mb-3">
                                                                     <label for="gvh" class="form-label">GVH</label>
                                                                     <input type="text" name="GVHID" placeholder="Enter GVH" class="form-control" required>              
                                                                     <div class="invalid-feedback">
@@ -174,7 +182,7 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div class="col-md-2">
+                                                            <div class="col-md-3">
                                                                 <div class="mb-3">
                                                                     <label for="village" class="form-label">Village</label>
                                                                     <input type="text" name="village" placeholder="Enter Village" class="form-control" required>                                                  
@@ -183,36 +191,35 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            
-                                                        </div>
-                                                        <!-- End here -->
-                                                        <div class="row">
-                                                            <div class="col-md-2">
-                                                                <div class="mb-2">
+                                                        
+                                                            <div class="col-md-3">
+                                                                <div class="mb-3">
                                                                     <div class="form-group">
                                                                         <label for="groupID" class="form-label">Group ID</label>
                                                                         <input type="text" name="groupID" class="form-control" disabled ="True">
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div class="col-md-2">
-                                                                <div class="mb-2">
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-3">
+                                                                <div class="mb-3">
                                                                     <div class="form-group">
                                                                         <label for="groupname" class="form-label">Group Name</label>
                                                                         <input type="text" name="groupname" placeholder="Enter Group Name" class="form-control" required>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div class="col-md-2">
-                                                                <div class="mb-2">
+                                                            <div class="col-md-3">
+                                                                <div class="mb-3">
                                                                     <div class="form-group">
                                                                         <label>Date Established</label>
                                                                         <input type="date" name="DateEstablished" class="form-control">
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div class="col-md-2">
-                                                                <div class="mb-2">
+                                                            <div class="col-md-3">
+                                                                <div class="mb-3">
                                                                     <label for="cluster" class="form-label">Cluster Name</label>
                                                                     <select class="form-select" name="clusterID"  id="clusterID" required>
                                                                         <?php                                                           
@@ -235,16 +242,16 @@
                                                             
                                                         </div>
                                                         <div class="row">
-                                                            <div class="col-md-2">
-                                                                <div class="mb-2">
+                                                            <div class="col-md-3">
+                                                                <div class="mb-3">
                                                                     <div class="form-group">
                                                                         <label>No Males</label>
                                                                         <input type="text" name="membersM" placeholder="0" class="form-control">
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div class="col-md-2">
-                                                                <div class="mb-2">
+                                                            <div class="col-md-3">
+                                                                <div class="mb-3">
                                                                     <div class="form-group">
                                                                     <label>No Females</label>
                                                                         <input type="text" name="membersF" placeholder="0"class="form-control">
@@ -252,12 +259,12 @@
                                                                 </div>
                                                             </div>
                                                             
-                                                            <div class="col-md-2">
-                                                                <div class="mb-2">
+                                                            <div class="col-md-3">
+                                                                <div class="mb-3">
                                                                     <label for="cw" class="form-label">Case Worker</label>
                                                                     <select class="form-select" name="cw" id="cw" required>
                                                                         <?php                                                           
-                                                                                $cw_fetch_query = "SELECT cwID,cwName FROM tblcw where districtID = $district";                                                  
+                                                                                $cw_fetch_query = "SELECT cwID,cwName FROM tblcw where ((districtID = '$district') and (ta = '$ta'))";                                                  
                                                                                 $result_cw_fetch = mysqli_query($link_cs, $cw_fetch_query);                                                                       
                                                                                 $i=0;
                                                                                     while($DB_ROW_cw = mysqli_fetch_array($result_cw_fetch)) {
@@ -274,7 +281,7 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <input type="submit" class="btn btn-primary" name="submit" value="Submit New SLG">
+                                                        <input type="submit" class="btn btn-success" name="submit" value="Submit New SLG">
                                                     </form>
                                                 </div>
                                                     <!-- here  -->

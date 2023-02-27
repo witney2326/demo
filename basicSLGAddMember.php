@@ -66,11 +66,11 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                     echo '<script type="text/javascript">'; 
                     echo 'if (confirm("SLG Member Record has been added successfully! Add Another SLG Member in the Same SLG?"))';
                         echo '{';
-                            echo 'history.go(0)';
+                            echo 'history.go(-1)';
                             echo '}';
                         echo 'else';
                             echo '{';
-                            echo 'window.location.href = "basic_livelihood_slg_mgt_check.php";';
+                            echo 'history.go(-2)';
                         echo '}';
                     echo '</script>';
                 } else {

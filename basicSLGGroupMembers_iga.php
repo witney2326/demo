@@ -214,7 +214,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                 </div>
 
                 <div class="row">
-                    <div class="col-12">
+                    <div class="col-9">
                         <div class="card border border-primary">
                         <div class="card-header bg-transparent border-primary">
                             <h5 class="my-0 text-primary">IGA Record</h5>
@@ -230,8 +230,6 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                             
                                             <th>IGA ID</th>   
                                             <th>HH Code</th>
-                                            <th>SLG</th>
-                                            <th>District</th>
                                             <th>IGA Type</th>
                                             <th>Amount Invested</th>
                                             <th>Action</th>
@@ -260,8 +258,6 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                             echo "<tr>\n";                                           
                                                 echo "<td>".$row["recID"]."</td>\n";
                                                 echo "\t\t<td>$id</td>\n";  
-                                                echo "\t\t<td>$group</td>\n";
-                                                echo "\t\t<td>$district_name</td>\n";
                                                 echo "\t\t<td>$ig_name</td>\n";
                                                 
                                                 echo "\t\t<td>$amount</td>\n";

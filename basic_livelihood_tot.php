@@ -73,7 +73,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
                             <div class="page-title-right">
                                 <ol class="breadcrumb m-0">
-                                    <li class="breadcrumb-item"><a href="basic_livelihood_training.php">Training Management</a></li>
+                                    <li class="breadcrumb-item"><a href="basic_livelihood_training_check.php">Training Management</a></li>
                                     <li class="breadcrumb-item active">Trainer Of Trainers</li>
                                 </ol>
                             </div>
@@ -91,6 +91,43 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                     <div class="col-xl-12">
                         <div class="card">
                             <div class="card-body">
+
+                            <ul class="nav nav-pills nav-justified" role="tablist">
+                                    <li class="nav-item waves-effect waves-light">
+                                        <a class="nav-link" data-bs-toggle="link" href="basic_livelihood_training_check.php" role="link">
+                                            <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
+                                            <span class="d-none d-sm-block">Group Training</span> 
+                                        </a>
+                                    </li>
+
+                                    <li class="nav-item waves-effect waves-light">
+                                        <a class="nav-link"  href="basic_livelihood_cluster_training_check.php" role="link">
+                                            <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
+                                            <span class="d-none d-sm-block">Cluster Training</span>
+                                        </a>
+                                    </li>
+
+                                    <li class="nav-item waves-effect waves-light">
+                                        <a class="nav-link"  href="basic_livelihood_training_trained_groups_check.php" role="link">
+                                            <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
+                                            <span class="d-none d-sm-block">Trained Groups/Clusters</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item waves-effect waves-light">
+                                        <a class="nav-link"  href="basic_livelihood_animators_check.php" role="link">
+                                            <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
+                                            <span class="d-none d-sm-block">Animator Training</span>
+                                        </a>
+                                    </li>
+                                    
+                                    <li class="nav-item waves-effect waves-light">
+                                        <a class="nav-link active"  href="javascript:void(0);" role="tab">
+                                            <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
+                                            <span class="d-none d-sm-block">Trainer-o-Trainers</span>
+                                        </a>
+                                    </li>
+                                </ul>
+
 
                                 <div class="tab-content p-3 text-muted">
                                     <div class="tab-pane active" id="home-1" role="tabpanel">

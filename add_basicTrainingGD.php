@@ -6,6 +6,7 @@
     <?php include 'layouts/head.php'; ?>
     <?php include 'layouts/head-style.php'; ?>
     <?php include 'layouts/config.php'; ?>
+    <?php include 'lib.php'; ?>
 <!-- DataTables -->
     <link href="assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
     <link href="assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
@@ -105,7 +106,7 @@ if(isset($_POST['Submit']))
     if (mysqli_query($link, $sql)) {
         echo '<script type="text/javascript">'; 
         echo 'alert("SLG Training Record has been added successfully !");'; 
-        echo 'window.location.href = "basic_livelihood_training.php";';
+        echo 'history.go(-2)';
         echo '</script>';
     } else {
         echo "Error: " . $sql . ":-" . mysqli_error($link);
@@ -113,31 +114,8 @@ if(isset($_POST['Submit']))
     mysqli_close($link);
     }
         
-    function get_rname($link, $rcode)
-    {
-    $rg_query = mysqli_query($link,"select name from tblregion where regionID='$rcode'"); // select query
-    while($rg = mysqli_fetch_array($rg_query)){
-        return $rg['name'];
-    };// fetch data
-    
-    }
-
-    function dis_name($link, $disID)
-    {
-    $dis_query = mysqli_query($link,"select DistrictName from tbldistrict where DistrictID='$disID'"); // select query
-    while($dis = mysqli_fetch_array($dis_query)){
-        return $dis['DistrictName'];
-    };// fetch data
     
     
-    }
-
-    function ta_name($link, $taID)
-    {
-    $dis_query = mysqli_query($link,"select TAName from tblta where TAID='$taID'"); // select query
-    $tame = mysqli_fetch_array($dis_query);// fetch data
-    return $tame['TAName'];
-    }
 ?>
 
 <!-- Begin page -->
@@ -172,18 +150,11 @@ if(isset($_POST['Submit']))
                 <!-- end page title -->
 
                 <div class="row">
-                    
-                        </div>
-                    </div>
 
                     <div class="col-xl-12">
                         <div class="card">
                             <div class="card-body">
 
-                                <!-- Nav tabs -->
-                                
-                                <!-- Tab panes -->
-                                
                                 <div class="col-lg-9">
                                     <div class="card border border-success">
                                         <div class="card-header bg-transparent border-success">
@@ -289,29 +260,62 @@ if(isset($_POST['Submit']))
                                             
                                         </div>
                                     </div>
+
+                                    <div class="card border border-success">
+                                        <div class="card-header bg-transparent border-success">
+                                            <h5 class="my-0 text-default">Training Record For <?php echo $groupname ; ?></h5>
+                                        </div>
+                                        <div class="card-body">
+
+                                            <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
+                                                            
+                                                <thead>
+                                                    <tr>
+                                                        <th>Training code</th>
+                                                        <th>Training Type</th>
+                                                        <th>Males</th>
+                                                        <th>Females</th>
+                                                        <th>SDate</th>
+                                                        <th>FDate</th>
+                                                    </tr>
+                                                </thead>
+
+
+                                                <tbody>
+                                                    <?Php
+                                                        $query="select * from tblgrouptrainings where (groupID ='$id ')";
+                                                        
+                                                        if ($result_set = $link->query($query)) {
+                                                        while($row = $result_set->fetch_array(MYSQLI_ASSOC))
+                                                        { 
+                                                          
+                                                        echo "<tr>\n";
+                                                            echo "<td>".$row["TrainingID"]."</td>\n";
+                                                            echo "<td>".training_type($link,$row["TrainingTypeID"])."</td>\n";
+                                                            echo "<td>".$row["Males"]."</td>\n";
+                                                            echo "<td>".$row["Females"]."</td>\n";
+                                                            echo "<td>".$row["StartDate"]."</td>\n";
+                                                            echo "<td>".$row["FinishDate"]."</td>\n";
+
+                                                        echo "</tr>\n";
+                                                        }
+                                                        $result_set->close();
+                                                        }  
+                                                                            
+                                                    ?>
+                                                </tbody>
+                                            </table>
+
+                                        </div>
+                                    </div>
+
                                 </div>
+
 
                             </div>
                         </div>
                     </div>
                 </div>
-
-
-                
-
-                    
-
-               
-
-
-                <!-- Collapse -->
-                
-
-                
-                <!-- end row -->
-
-                
-                <!-- end row -->
 
             </div> <!-- container-fluid -->
         </div>

@@ -1,18 +1,3 @@
-<?php include 'layouts/session.php'; ?>
-<?php include 'layouts/head-main.php'; ?>
-
-<head>
-    <title>ACSA |Edit Demo Plot</title>
-    <?php include 'layouts/head.php'; ?>
-    <?php include 'layouts/head-style.php'; ?>
-
-}
-    
-</head>
-
-<div id="layout-wrapper">
-
-    <?php include 'layouts/menu.php'; ?>
 
     <?php
         include "layouts/config.php"; // Using database connection file here     
@@ -27,7 +12,7 @@
             {
                 echo '<script type="text/javascript">'; 
                     echo 'alert("No Demo Plot, Please Set Plot First");'; 
-                    echo 'window.location.href = "basic_livelihood_acsa_mgt.php";';
+                    echo 'history.go(-2)';
                     echo '</script>';
             } else
             {        
@@ -40,7 +25,7 @@
                         {
                             echo '<script type="text/javascript">'; 
                             echo 'alert("Demo Plot Record has been EDITED successfully !");'; 
-                            echo 'window.location.href = "basic_livelihood_acsa_mgt.php";';
+                            echo 'history.go(-2)';
                             echo '</script>';
                         } 
                     else 
@@ -52,7 +37,7 @@
                 {
                     echo '<script type="text/javascript">'; 
                     echo 'alert("Acreage cannot be ZERO OR Plot is unset!");'; 
-                    echo 'window.location.href = "basic_livelihood_acsa_mgt.php";';
+                    echo 'history.go(-2)';
                     echo '</script>';
                 }
                 mysqli_close($link);
@@ -61,4 +46,3 @@
                
     ?>
     
-</div>

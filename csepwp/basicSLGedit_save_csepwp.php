@@ -11,9 +11,10 @@
             $males = $_POST['no_males'];
             $females = $_POST['no_females'];
             $cluster = $_POST['cluster'];
+            $catchment = $_POST["catchment"]; 
 
             
-            $sql = "UPDATE tblgroup SET groupname ='$groupname',DateEstablished = '$DateEstablished', gvhID = '$gvh', MembersM ='$males', MembersF = '$females', clusterID = '$cluster',
+            $sql = "UPDATE tblgroup SET groupname ='$groupname',DateEstablished = '$DateEstablished', gvhID = '$gvh', MembersM ='$males', MembersF = '$females', clusterID = '$cluster', catchment ='$catchment',
             deleted = '0' WHERE groupID = '$id'";
             
             if (mysqli_query($link_cs, $sql)) {

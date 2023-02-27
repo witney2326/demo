@@ -1,3 +1,4 @@
+
 <?php
     include "../layouts/config.php"; // Using database connection file here
 

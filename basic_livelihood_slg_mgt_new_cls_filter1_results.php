@@ -56,7 +56,7 @@
 
                             <div class="page-title-right">
                                 <ol class="breadcrumb m-0">
-                                    <li class="breadcrumb-item"><a href="basic_livelihood_slg_mgt2.php">SLG Management</a></li>
+                                    <li class="breadcrumb-item"><a href="basic_livelihood_slg_mgt_check.php">SLG Management</a></li>
                                     <li class="breadcrumb-item active">New Cluster</li>
                                 </ol>
                             </div>
@@ -102,12 +102,7 @@
                                             <span class="d-none d-sm-block">New SLG!</span>
                                         </a>
                                     </li>
-                                    <li class="nav-item waves-effect waves-light">
-                                        <a class="link" href="basicReports.php" role="link">
-                                            <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
-                                            <span class="d-none d-sm-block">SLG Reports</span>
-                                        </a>
-                                    </li>
+                                    
                                     
                                 </ul>
                                 <!-- Tab panes -->

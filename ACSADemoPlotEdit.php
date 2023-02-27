@@ -55,7 +55,7 @@ $id = $_GET['id']; // get id through query string
                 $regionID = $row["region"];
                 $districtID= $row["districtID"];
                 $ta = $row["ta"];
-                
+                $PlaceNo = $row['id'];
                 $plot = $row["plot"];
                 $acreage = $row["acreage"];
                 

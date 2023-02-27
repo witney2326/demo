@@ -55,7 +55,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 </head>
 
 <?php include '../layouts/body.php'; ?>
-<?php include '../lib.php'; ?>
+<?php include 'lib2.php'; ?>
 
 <?php
     if (($_SESSION["user_role"] == '05')) {
@@ -141,13 +141,13 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                         </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link" data-bs-toggle="tab" href="#cls-1" role="tab">
+                                        <a class="nav-link" data-bs-toggle="link" href="csepwp_basic_livelihood_new_cluster.php" role="link">
                                             <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
                                             <span class="d-none d-sm-block">New Cluster!</span>
                                         </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link" data-bs-toggle="tab" href="#slg-1" role="tab">
+                                        <a class="nav-link" data-bs-toggle="link" href="csepwp_basic_livelihood_new_slg.php" role="link">
                                             <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
                                             <span class="d-none d-sm-block">New SLG!</span>
                                         </a>
@@ -255,7 +255,8 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                                         
                                                                         <th>SLG code</th>
                                                                         <th>SLG Name</th>
-                                                                        <th>cohort</th>
+                                                                        <th>District</th>
+                                                                        <th>Catchment</th>
                                                                         <th><i class="fas fa-male" style="font-size:18px"></i></th>
                                                                         <th><i class="fas fa-female" style="font-size:18px"></i></th>
                                                                         <th><i class="fas fa-male" style="font-size:18px"></i>+<i class="fas fa-female" style="font-size:18px"></i></th>
@@ -268,7 +269,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
                                                                 <tbody>
                                                                     <?Php
-                                                                        $query="select * from tblgroup where ((regionID ='0') and (deleted ='0'))";
+                                                                        $query="select * from tblgroup where (deleted ='0')";
                                                                         //Variable $link is declared inside config.php file & used here
                                                                         
                                                                         if ($result_set = $link_cs->query($query)) {
@@ -280,8 +281,8 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                                         
                                                                             echo "<td>".$row["groupID"]."</td>\n";
                                                                             echo "<td>".$row["groupname"]."</td>\n";
-                                                                            echo "<td>".$row["cohort"]."</td>\n";
-                                                                            
+                                                                            echo "<td>".dis_name($link_cs,$row["DistrictID"])."</td>\n";
+                                                                            echo "<td>".$row["catchment"]."</td>\n";
                                                                             
                                                                             echo "<td>".$row["MembersM"]."</td>\n";
                                                                             echo "<td>".$row["MembersF"]."</td>\n";
@@ -289,13 +290,13 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
                                                                             
                                                                             echo "<td>
-                                                                                <a href=\"basicSLGview.php?id=".$row['groupID']."\"><i class='far fa-eye' title='View SLG' style='font-size:18px'></i></a>
-                                                                                <a href=\"basicSLGedit.php?id=".$row['groupID']."\"><i class='far fa-edit' title='Edit SLG Details' style='font-size:18px'></i></a>
-                                                                                <a href=\"basicSLGsavings.php?id=".$row['groupID']."\"><i class='fas fa-hand-holding-usd' title='Add SLG Savings' style='font-size:18px'></i></a>
-                                                                                <a href=\"basicSLGloans.php?id=".$row['groupID']."\"><i class='fas fa-book' title='Add SLG Loans' style='font-size:18px'></i></a> 
-                                                                                <a href=\"basicSLG_iga.php?id=".$row['groupID']."\"><i class='fas fa-balance-scale' title='Add SLG IGAs' style='font-size:18px'></i></a> 
-                                                                                <a href=\"basicSLGAddMember.php?id=".$row['groupID']."\"><i class='fas fa-user-alt' title='Add Beneficiary to SLG' style='font-size:18px'></i></a>     
-                                                                                <a onClick=\"javascript: return confirm('Are You Sure You want To Delete This SLG - You Must Be a Supervisor');\" href=\"basicSLGdelete.php?id=".$row['groupID']."\"><i class='far fa-trash-alt' title='Delete SLG' style='font-size:18px;color:Red'></i></a>
+                                                                            <a href=\"basicSLGview_csepwp.php?id=".$row['groupID']."\"><i class='far fa-eye' title='View SLG' style='font-size:18px;color:purple'></i></a>
+                                                                            <a href=\"basicSLGedit_csepwp.php?id=".$row['groupID']."\"><i class='far fa-edit' title='Edit SLG Details' style='font-size:18px;color:orange'></i></a>
+                                                                            <a href=\"basicSLGsavings_csepwp.php?id=".$row['groupID']."\"><i class='fas fa-hand-holding-usd' title='Add SLG Savings' style='font-size:18px;color:brown'></i></a>
+                                                                            
+                                                                            <a href=\"basicSLG_iga_csepwp.php?id=".$row['groupID']."\"><i class='fas fa-balance-scale' title='Add SLG IGAs' style='font-size:18px;color:cadetgreen'></i></a> 
+                                                                            <a href=\"basicSLGAddMember_csepwp.php?id=".$row['groupID']."\"><i class='fas fa-user-alt' title='Add Beneficiary to SLG' style='font-size:18px;color:brown'></i></a> 
+                                                                            <a onClick=\"javascript: return confirm('Are You Sure You want To Delete This SLG - You Must Be a Supervisor');\" href=\"basicSLGdelete_csepwp.php?id=".$row['groupID']."\"><i class='far fa-trash-alt' title='Delete SLG' style='font-size:18px;color:Red'></i></a>
                                                                             </td>\n";
 
                                                                         echo "</tr>\n";

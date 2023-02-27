@@ -232,7 +232,14 @@
         $sector_query = mysqli_query($link_cs,"select name from tblsector where id='$scode'"); // select query
         $dis = mysqli_fetch_array($sector_query);// fetch data
         return $dis['name'];
-    }
+        }
+        
+        function cropname($link, $ccode)
+        {
+        $crp_query = mysqli_query($link,"select crop from tbllesp_crop_types where typeID='$ccode'"); // select query
+        $crp = mysqli_fetch_array($crp_query);// fetch data
+        return $crp['crop'];
+        }
     ?>
     
 </div>

@@ -1,11 +1,11 @@
 <?php include 'layouts/session.php'; ?>
 <?php include 'layouts/head-main.php'; ?>
-
+<?php header("Cache-Control: max-age=300, must-revalidate"); ?>
 <head>
     <title>SLG Management</title>
-    <?php include 'layouts/head.php'; ?>
-    <?php include 'layouts/head-style.php'; ?>
-    <?php include 'layouts/config.php'; ?>
+    <?php include 'layouts/head.php';?>
+    <?php include 'layouts/head-style.php';?>
+    <?php include 'layouts/config.php';?>
 <!-- DataTables -->
     <link href="assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
     <link href="assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
@@ -38,7 +38,6 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                     }
                 });
         }
-
         function getTa(val) 
             {
                 $.ajax({
@@ -152,12 +151,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                             <span class="d-none d-sm-block">New SLG!</span>
                                         </a>
                                     </li>
-                                    <li class="nav-item waves-effect waves-light">
-                                        <a class="link" href="basicReports.php" role="link">
-                                            <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
-                                            <span class="d-none d-sm-block">SLG Reports</span>
-                                        </a>
-                                    </li>
+                                    
                                     
                                 </ul>
 
@@ -175,7 +169,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                         <div class="col-12">
                                                             <label for="region" class="form-label">Region</label>
                                                             <div>
-                                                                <select class="form-select" name="region" id="region" value ="<?php if(isset($_GET['region'])) {echo $_GET['region'];} ?>" onChange="getDistrict(this.value);" required>
+                                                                <select class="form-select" name="region" id="region"  onChange="getDistrict(this.value);" required>
                                                                     <option></option>
                                                                     <?php                                                           
                                                                             $dis_fetch_query = "SELECT regionID, name FROM tblregion";                                                  

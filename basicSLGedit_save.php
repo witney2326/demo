@@ -14,13 +14,13 @@
             $cohort = $_POST['cohort'];
             $spProg = $_POST['spProg'];
             
-            $sql = "UPDATE tblgroup SET groupname ='$groupname',DateEstablished = '$DateEstablished', gvhID = '$gvh', MembersM ='$males', MembersF = '$females', clusterID = '$cluster', cohort = $cohort,
-            deleted = '0', programID = '$spProg' WHERE groupID = '$id'";
+            $sql = "UPDATE tblgroup SET groupname ='$groupname',DateEstablished = '$DateEstablished', gvhID = '$gvh', MembersM ='$males', MembersF = '$females', clusterID = '$cluster', cohort = $cohort
+            WHERE groupID = '$id'";
             
             if (mysqli_query($link, $sql)) {
                 echo '<script type="text/javascript">'; 
                 echo 'alert("SLG Record has been successfully edited!");'; 
-                echo 'window.location.href = "basic_livelihood_slg_mgt2.php";';
+                echo 'history.go(-2)';
                 echo '</script>';
   
             } else {

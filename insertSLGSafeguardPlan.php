@@ -27,7 +27,7 @@ if(isset($_POST['Submit']))
     if (mysqli_query($link, $sql)) {
         echo '<script type="text/javascript">'; 
         echo 'alert("SLG Safeguard Record has been added successfully !");'; 
-        echo 'window.location.href = "basic_livelihood_safeguards_mgt_check.php";';
+        echo 'history.go(-2)';
         echo '</script>';
     } else {
         echo "Error: " . $sql . ":-" . mysqli_error($link);

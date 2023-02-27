@@ -64,9 +64,35 @@
                 </button>
 
                 <div class="d-inline-block">
-                    <form method="post" action="logout.php">
-                        <button type ="submit" class="btn btn-btn btn-outline-danger w-md">Logout</button>
-                    </form>
+                    <?php  
+                        $curPageName = substr($_SERVER["SCRIPT_NAME"],strrpos($_SERVER["SCRIPT_NAME"],"/")+1);  
+                        if ($curPageName == "graduation.php")
+                        {
+                            echo '<form method="post" action="../logout.php">';
+                            echo '<button type ="submit" class="btn btn-btn btn-outline-danger w-md">Logout</button>';
+                            echo '</form>';
+                        }
+                        if ($curPageName == "enhanced_livelihood.php")
+                        {
+                            echo '<form method="post" action="../logout.php">';
+                            echo '<button type ="submit" class="btn btn-btn btn-outline-danger w-md">Logout</button>';
+                            echo '</form>';
+                        }
+                        if (($curPageName == "basic_livelihood.php") or ($curPageName == "index.php") or ($curPageName == "indexbl.php") or ($curPageName == "indexcs.php") or ($curPageName == "indexel.php") or ($curPageName == "indexg.php") or ($curPageName == "index_pc.php") or ($curPageName == "index_dc.php") or ($curPageName == "index_cw.php") )
+                        {
+                            echo '<form method="post" action="logout.php">';
+                            echo '<button type ="submit" class="btn btn-btn btn-outline-danger w-md">Logout</button>';
+                            echo '</form>';
+                        }else
+                        {
+                            echo '<form method="post" action="logout.php">';
+                            echo '<button type ="submit" class="btn btn-btn btn-outline-danger w-md">Logout</button>';
+                            echo '</form>';
+                        }
+
+                    ?> 
+
+                    
                 </div>
                 
                 <div class="dropdown d-inline-block">
@@ -112,7 +138,7 @@
                             <?php if ($_SESSION["user_role"] == '00'){echo '<a href="javascript: void(0);" class="has-arrow" key="t-horizontal">Graduation</a>' ;}else{echo '<a href="indexg.php" class="has-arrow" key="t-horizontal">Graduation</a>';}  ?>
                         </li>
                         <li>
-                            <a href="javascript: void(0);" class="has-arrow" key="t-horizontal">CS-EPWP</a>
+                        <?php if ($_SESSION["user_role"] == '00'){echo '<a href="javascript: void(0);" class="has-arrow" key="t-horizontal">CS-EPWP</a>' ;}else{echo '<a href="indexcs.php" class="has-arrow" key="t-horizontal">CS-EPWP</a>';}  ?>
                         </li>
                     </ul>
                 </li>
@@ -288,10 +314,11 @@
                         
                     </a>
                     <ul class="sub-menu" aria-expanded="true">
-                    
+
                         <li>
-                            <?php if ($_SESSION["user_role"] == '01'){echo '<a href="sysadmin1.php" class="has-arrow waves-effect" key="t-vertical">Admin</a>' ;}else{echo '<a href="javascript: void(0);" class="has-arrow waves-effect" key="t-vertical">Admin</a>';}  ?>
+                            <?php if (($_SESSION["user_role"] == '01') and ($curPageName == "index.php")){echo '<a href="sysadmin1.php" class="has-arrow waves-effect" key="t-vertical">Admin</a>' ;}else{echo '<a href="javascript: void(0);" class="has-arrow waves-effect" key="t-vertical">Admin</a>';}  ?>
                         </li>
+                        
                     </ul>
                 </li>
 

@@ -35,7 +35,20 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
     $district = $_POST['district'];
     $ta = $_POST['ta'];
     
-        
+    if (($region == "") or ($district == "00")) 
+    {
+        echo '<script type="text/javascript">'; 
+        echo 'alert("Please Select Region, District and TA!");'; 
+        echo 'history.go(-1);';
+        echo '</script>';
+    } 
+    if (($ta == "0000")) 
+    {
+        echo '<script type="text/javascript">'; 
+        echo 'alert("Please Select Region, District and TA!");'; 
+        echo 'history.go(-1);';
+        echo '</script>';
+    }  
     
 ?>
 
@@ -110,7 +123,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                     <div class="card">
                                                         <div class="card-body">
                                     
-                                                            <div class="card border border-primary">
+                                                            <div class="card border border-success">
                                                                 
 
                                                                 <div class="card-body">
@@ -150,7 +163,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                                         <!-- start here -->
                                                             <div class="row">
                                                                 <div class="col-12">
-                                                                    <div class="card border border-primary">
+                                                                    <div class="card border border-success">
                                                                     <div class="card-header bg-transparent border-primary">
                                                                         
                                                                     </div>

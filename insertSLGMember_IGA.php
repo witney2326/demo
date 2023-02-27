@@ -12,7 +12,7 @@ if(isset($_POST['Submit']))
     if(empty($hhcode) or empty($groupID) or empty($district) or empty($buscat) or empty($iga)){
         echo '<script type="text/javascript">'; 
         echo 'alert("Missing Value! Make sure all values are entered!");'; 
-        echo 'window.location.href = "basic_livelihood_slg_mgt2.php";';
+        echo 'history.go(-1)';
         echo '</script>';
     }
     else
@@ -23,7 +23,7 @@ if(isset($_POST['Submit']))
         if (mysqli_query($link, $sql)) {
             echo '<script type="text/javascript">'; 
             echo 'alert("Household IGA Record has been added successfully !");'; 
-            echo 'window.location.href = "basic_livelihood_slg_mgt2.php";';
+            echo 'history.go(-2)';
             echo '</script>';
         } else {
             echo "Error: " . $sql . ":-" . mysqli_error($link);

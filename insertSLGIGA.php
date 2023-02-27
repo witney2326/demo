@@ -16,7 +16,7 @@ if(isset($_POST['Submit']))
     if (mysqli_query($link, $sql)) {
         echo '<script type="text/javascript">'; 
         echo 'alert("SLG IGA Record has been added successfully !");'; 
-        echo 'window.location.href = "basic_livelihood_slg_mgt2.php";';
+        echo 'history.go(-1)';
         echo '</script>';
     } else {
         echo "Error: " . $sql . ":-" . mysqli_error($link);

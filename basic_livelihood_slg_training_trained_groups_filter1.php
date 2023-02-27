@@ -87,7 +87,7 @@ else
 
                             <div class="page-title-right">
                                 <ol class="breadcrumb m-0">
-                                    <li class="breadcrumb-item"><a href="basic_livelihood_training.php">Training Management</a></li>
+                                    <li class="breadcrumb-item"><a href="basic_livelihood_training_check.php">Training Management</a></li>
                                     <li class="breadcrumb-item active">Trained SLGs</li>
                                 </ol>
                             </div>
@@ -96,6 +96,43 @@ else
                     </div>
                 </div>
                 <!-- end page title -->
+
+                <ul class="nav nav-pills nav-justified" role="tablist">
+                                    <li class="nav-item waves-effect waves-light">
+                                        <a class="nav-link" data-bs-toggle="link" href="basic_livelihood_training_check.php" role="link">
+                                            <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
+                                            <span class="d-none d-sm-block">Group Training</span> 
+                                        </a>
+                                    </li>
+
+                                    <li class="nav-item waves-effect waves-light">
+                                        <a class="nav-link"  href="basic_livelihood_cluster_training_check.php" role="link">
+                                            <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
+                                            <span class="d-none d-sm-block">Cluster Training</span>
+                                        </a>
+                                    </li>
+
+                                    <li class="nav-item waves-effect waves-light">
+                                        <a class="nav-link active"  href="javascript:void(0);" role="tab">
+                                            <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
+                                            <span class="d-none d-sm-block">Trained Groups/Clusters</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item waves-effect waves-light">
+                                        <a class="link"  href="basic_livelihood_animators_check.php" role="link">
+                                            <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
+                                            <span class="d-none d-sm-block">Animator Training</span>
+                                        </a>
+                                    </li>
+                                    
+                                    <li class="nav-item waves-effect waves-light">
+                                        <a class="link"  href="basic_livelihood_tot.php" role="link">
+                                            <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
+                                            <span class="d-none d-sm-block">Trainer-o-Trainers</span>
+                                        </a>
+                                    </li>
+                                </ul>
+
 
                 <div class="col-xl-9">
                     <div class="card border border-primary">

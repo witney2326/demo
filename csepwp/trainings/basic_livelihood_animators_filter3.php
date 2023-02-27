@@ -31,19 +31,25 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 ?>
 
 <?php 
-     if (($_SESSION["user_role"]== '05')) 
-     {
-        $region = $_SESSION["user_reg"];
-        $district = $_SESSION["user_dis"];
-        $ta = $_SESSION["user_ta"];   
-     }
-     else
-     {
+  
         $region = $_POST['region'];
         $district = $_POST['district'];
         $ta = $_POST['ta'];
-     }
-    
+     
+        if (($region == "") or ($district == "00")) 
+        {
+            echo '<script type="text/javascript">'; 
+            echo 'alert("Please Select Region, District and TA!");'; 
+            echo 'history.go(-1);';
+            echo '</script>';
+        } 
+        if (($ta == "0000")) 
+        {
+            echo '<script type="text/javascript">'; 
+            echo 'alert("Please Select Region, District and TA!");'; 
+            echo 'history.go(-1);';
+            echo '</script>';
+        } 
     
 ?>
 
@@ -178,7 +184,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                                         
                                                                         <th>Cluster ID</th>
                                                                         <th>Cluster Name</th>
-                                                                        <th>District</th>
+                                                                        <th>TA</th>
                                                                         <th>Action</th>
                                                                         
                                                                     </tr>
@@ -194,7 +200,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                                         if ($result_set = $link_cs->query($query)) {
                                                                         while($row = $result_set->fetch_array(MYSQLI_ASSOC))
                                                                         { 
-                                                                          $dis = dis_name($link_cs,$row["districtID"]);  
+                                                                          $dis = ta_name($link_cs,$row["taID"]);  
                                                                         echo "<tr>\n";
                                                                             
                                                                         

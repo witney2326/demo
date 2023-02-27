@@ -10,6 +10,33 @@ require_once 'layouts/config.php';
     <link rel="stylesheet" href="assets/libs/owl.carousel/assets/owl.theme.default.min.css">
 
     <?php include 'layouts/head-style.php'; ?>
+
+    <script>
+      function getDistrict(val) 
+        {
+            $.ajax({
+            type: "POST",
+            url: "get_district.php",
+            data:'regID='+val,
+            success: function(data)
+                    {
+                    $("#district").html(data);
+                    }
+                });
+        }
+        function getTa(val) 
+            {
+                $.ajax({
+                type: "POST",
+                url: "get_ta.php",
+                data:'disid='+val,
+                success: function(data){
+                $("#ta").html(data);
+                }
+                });
+            }
+
+    </script>
 </head>
 
 <body class="auth-body-bg">
@@ -87,51 +114,39 @@ require_once 'layouts/config.php';
                                     </div>
 
                                     <div class="mt-4">
-                                        <form class="needs-validation"  action="auth-register-2d.php" method="POST">
+                                        <form class="needs-validation"  action="auth-register-2location.php" method="POST">
 
                                             <div class="mb-1">
-                                            <label for="region" class="form-label">Region</label>
-                                                                            
-                                                <select class="form-select" name="region" id="region"  required>
-                                                    <option></option>
-                                                    <option value="00">NA</option>
-                                                    <?php                                                           
-                                                            $dis_fetch_query = "SELECT regionID, name FROM tblregion";                                                  
-                                                            $result_dis_fetch = mysqli_query($link, $dis_fetch_query);                                                                       
-                                                            $i=0;
-                                                                while($DB_ROW_reg = mysqli_fetch_array($result_dis_fetch)) {
-                                                            ?>
-                                                            <option value ="<?php
-                                                                    echo $DB_ROW_reg["regionID"];?>">
-                                                                <?php
-                                                                    echo $DB_ROW_reg["name"];
+                                                <label for="region" class="form-label">Region</label>
+                                                <div>
+                                                    <select class="form-select" name="region" id="region"  onChange="getDistrict(this.value);" required>
+                                                        <option selected value="00">NA</option>
+                                                        <?php                                                           
+                                                                $dis_fetch_query = "SELECT regionID, name FROM tblregion";                                                  
+                                                                $result_dis_fetch = mysqli_query($link, $dis_fetch_query);                                                                       
+                                                                $i=0;
+                                                                    while($DB_ROW_reg = mysqli_fetch_array($result_dis_fetch)) {
                                                                 ?>
-                                                            </option>
-                                                            <?php
-                                                                $i++;
-                                                                    }
-                                                        ?>
-                                                </select>
+                                                                <option value ="<?php
+                                                                        echo $DB_ROW_reg["regionID"];?>">
+                                                                    <?php
+                                                                        echo $DB_ROW_reg["name"];
+                                                                    ?>
+                                                                </option>
+                                                                <?php
+                                                                    $i++;
+                                                                        }
+                                                            ?>
+                                                    </select>
                                                 <div class="invalid-feedback">
                                                     Please select a valid Malawi region.
                                                 </div>
                                             </div>
 
                                             <div class="mb-1">
-                                            <label for="district" class="form-label">District</label>
-                                                <select class="form-select" name="district" id="district"  required disabled>
-                                                    <option  ></option>
-                                                        <?php                                                           
-                                                            $dis_fetch_query = "SELECT DistrictID,DistrictName FROM tbldistrict";                                                  
-                                                            $result_dis_fetch = mysqli_query($link, $dis_fetch_query);                                                                       
-                                                            $i=0;
-                                                                while($DB_ROW_Dis = mysqli_fetch_array($result_dis_fetch)) {
-                                                            ?>
-                                                            <option value="<?php echo $DB_ROW_Dis["DistrictID"]; ?>">
-                                                                <?php echo $DB_ROW_Dis["DistrictName"]; ?></option><?php
-                                                                $i++;
-                                                                    }
-                                                        ?>
+                                                <label for="district" class="form-label">District</label>
+                                                <select class="form-select" name="district" id="district" onChange="getTa(this.value);" required>
+                                                    <option selected value="00">Select District</option>
                                                 </select>
                                                 <div class="invalid-feedback">
                                                     Please select a valid Malawi district.
@@ -139,20 +154,9 @@ require_once 'layouts/config.php';
                                             </div>
 
                                             <div class="mb-1">
-                                            <label for="ta" class="form-label">Traditional Authority</label>
-                                                <select class="form-select" name="ta" id="ta" required disabled>
-                                                    <option ></option>
-                                                    <?php                                                           
-                                                            $ta_fetch_query = "SELECT TAName FROM tblta";                                                  
-                                                            $result_ta_fetch = mysqli_query($link, $ta_fetch_query);                                                                       
-                                                            $i=0;
-                                                                while($DB_ROW_ta = mysqli_fetch_array($result_ta_fetch)) {
-                                                            ?>
-                                                            <option>
-                                                                <?php echo $DB_ROW_ta["TAName"]; ?></option><?php
-                                                                $i++;
-                                                                    }
-                                                        ?>
+                                                <label for="ta" class="form-label">Traditional Authority</label>
+                                                <select class="form-select" name="ta" id="ta" required >
+                                                    <option selected value="0000">Select TA</option>
                                                 </select>
                                                 <div class="invalid-feedback">
                                                     Please select a valid TA.
@@ -162,7 +166,7 @@ require_once 'layouts/config.php';
                                             
 
                                             <div class="mt-4 d-grid">
-                                                <button class="btn btn-primary waves-effect waves-light" type="submit">Submit Region</button>
+                                                <button class="btn btn-primary waves-effect waves-light" type="submit">Submit Your Selection</button>
                                             </div>
 
                                             <div class="mt-4 text-center">

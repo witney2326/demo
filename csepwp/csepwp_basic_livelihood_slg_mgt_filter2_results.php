@@ -209,6 +209,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                                         
                                                                         <th>SLG code</th>
                                                                         <th>SLG Name</th>
+                                                                        <th>Catchment</th>
                                                                         <th><i class="fas fa-male" style="font-size:18px"></i></th>
                                                                         <th><i class="fas fa-female" style="font-size:18px"></i></th>
                                                                         <th><i class="fas fa-male" style="font-size:18px"></i>+<i class="fas fa-female" style="font-size:18px"></i></th>
@@ -239,6 +240,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                                         
                                                                             echo "<td>".$row["groupID"]."</td>\n";
                                                                             echo "<td>".$row["groupname"]."</td>\n";
+                                                                            echo "<td>".$row["catchment"]."</td>\n";
                                                                             echo "<td>".$row["MembersM"]."</td>\n";
                                                                             echo "<td>".$row["MembersF"]."</td>\n";
                                                                             echo "<td>\t\t$total</td>\n";
@@ -248,7 +250,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                                             <a href=\"basicSLGview_csepwp.php?id=".$row['groupID']."\"><i class='far fa-eye' title='View SLG' style='font-size:18px;color:purple'></i></a>
                                                                             <a href=\"basicSLGedit_csepwp.php?id=".$row['groupID']."\"><i class='far fa-edit' title='Edit SLG Details' style='font-size:18px;color:orange'></i></a>
                                                                             <a href=\"basicSLGsavings_csepwp.php?id=".$row['groupID']."\"><i class='fas fa-hand-holding-usd' title='Add SLG Savings' style='font-size:18px;color:brown'></i></a>
-                                                                            <a href=\"basicSLGloans_csepwp.php?id=".$row['groupID']."\"><i class='fas fa-book' title='Add SLG Loans' style='font-size:18px;color:green'></i></a> 
+                                                                            
                                                                             <a href=\"basicSLG_iga_csepwp.php?id=".$row['groupID']."\"><i class='fas fa-balance-scale' title='Add SLG IGAs' style='font-size:18px;color:cadetgreen'></i></a> 
                                                                             <a href=\"basicSLGAddMember_csepwp.php?id=".$row['groupID']."\"><i class='fas fa-user-alt' title='Add Beneficiary to SLG' style='font-size:18px;color:brown'></i></a> 
                                                                             <a onClick=\"javascript: return confirm('Are You Sure You want To Delete This SLG - You Must Be a Supervisor');\" href=\"basicSLGdelete_csepwp.php?id=".$row['groupID']."\"><i class='far fa-trash-alt' title='Delete SLG' style='font-size:18px;color:Red'></i></a>

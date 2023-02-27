@@ -41,7 +41,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                $DistrictID= $row["DistrictID"];
                $TAID= $row["TAID"];
                $gvhID= $row["gvhID"];
-               $cohort = $row["cohort"];
+
            }
            $result_set->close();
        }
@@ -52,11 +52,11 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
            $DistrictID = $_POST['district'];
            $year = $_POST['year'];
            $month = $_POST['month'];
-           $amount = $_POST['amount'];
+           $amount = $_POST['amount']; 
+           $tsaving = $_POST['tsaving'];
            
-           
-               $sql = "INSERT INTO tblgroupsavings (GroupID,DistrictID,Yr,Month,Amount)
-               VALUES ('$groupID','$DistrictID','$year','$month','$amount')";
+               $sql = "INSERT INTO tblgroupsavings (GroupID,DistrictID,Yr,Month,Amount,sType)
+               VALUES ('$groupID','$DistrictID','$year','$month','$amount','$tsaving')";
            if (mysqli_query($link_cs, $sql)) {
                echo '<script type="text/javascript">'; 
                echo 'alert("SLG Savings Record has been added successfully !");'; 
@@ -138,8 +138,22 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                         
                                         
                                         <div class="row mb-1">
-                                            <label for="cohort" class="col-sm-2 col-form-label">Cohort</label>
-                                            <input type="text" class="form-control" id="cohort" name="cohort" value ="<?php echo $cohort ; ?> " style="max-width:30%;" readonly >
+                                            <label for="tsaving" class="col-sm-2 col-form-label">Savings Type</label>
+                                            <select class="form-select" name="tsaving" id="tsaving" style="max-width:30%;" required>
+                                                <option ></option>
+                                                    <?php 
+                                                                                                            
+                                                        $dis_fetch_query = "SELECT ID,stype FROM tblsavings_types ";                                                  
+                                                        $result_dis_fetch = mysqli_query($link_cs, $dis_fetch_query);                                                                       
+                                                        $i=0;
+                                                            while($DB_ROW_Dis = mysqli_fetch_array($result_dis_fetch)) {
+                                                        ?>
+                                                        <option value="<?php echo $DB_ROW_Dis["ID"]; ?>">
+                                                            <?php echo $DB_ROW_Dis["stype"]; ?></option><?php
+                                                            $i++;
+                                                                }
+                                                    ?>
+                                            </select>
                                             
                                         </div>
 

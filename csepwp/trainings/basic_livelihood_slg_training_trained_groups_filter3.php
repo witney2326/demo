@@ -36,6 +36,20 @@ include '../lib2.php';
     $district =$_POST['district'];
     $ta =$_POST['ta'];
 
+    if (($region == "") or ($district == "00")) 
+    {
+        echo '<script type="text/javascript">'; 
+        echo 'alert("Please Select Region, District and TA!");'; 
+        echo 'history.go(-1);';
+        echo '</script>';
+    } 
+    if (($ta == "0000")) 
+    {
+        echo '<script type="text/javascript">'; 
+        echo 'alert("Please Select Region, District and TA!");'; 
+        echo 'history.go(-1);';
+        echo '</script>';
+    } 
 ?>
 
 <!-- Begin page -->

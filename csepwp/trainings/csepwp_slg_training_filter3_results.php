@@ -31,17 +31,27 @@ include '../lib2.php';
 ?>
 <?php
 
-// do check
-if (($_SESSION["user_role"]== '05')) {
-    $region = $_SESSION["user_reg"];
-    $district = $_SESSION["user_dis"];
-    $ta = $_SESSION["user_ta"]; 
-} else
-{
-    $region = $_POST['region'];
-    $district = $_POST['district'];
-    $ta = $_POST['ta'];
-}
+    $region = trim($_POST['region']);
+    $district = trim($_POST['district']);
+    $ta = trim($_POST['ta']);
+
+if (($region == "") or ($district == "00")) 
+    {
+        echo '<script type="text/javascript">'; 
+        echo 'alert("Please Select Region, District and TA!");'; 
+        echo 'history.go(-1);';
+        echo '</script>';
+    } 
+    if (($ta == "0000")) 
+    {
+        echo '<script type="text/javascript">'; 
+        echo 'alert("Please Select Region, District and TA!");'; 
+        echo 'history.go(-1);';
+        echo '</script>';
+    } 
+
+
+
 ?>
 <?php   
 

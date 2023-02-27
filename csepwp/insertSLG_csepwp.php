@@ -16,6 +16,7 @@ if(isset($_POST['submit']))
    $regionID = $_POST['region'];
    $DistrictID = $_POST['district']; 
    $TAID = $_POST['ta'];
+   $catchment = $_POST['catchment'];
 
    
    
@@ -43,8 +44,8 @@ if(isset($_POST['submit']))
 
    
    
-   $sql = "INSERT INTO tblgroup (groupid,groupname,DateEstablished,clusterID,DistrictID,TAID,gvhID,MembersM,MembersF,regionID,cwID,deleted)
-   VALUES ('$groupID','$groupname','$DateEstablished','$clusterID','$DistrictID','$TAID','$GVHID','$membersM','$membersF','$regionID','$cw','0')";
+   $sql = "INSERT INTO tblgroup (groupid,groupname,DateEstablished,clusterID,DistrictID,TAID,gvhID,MembersM,MembersF,regionID,cwID,catchment,deleted)
+   VALUES ('$groupID','$groupname','$DateEstablished','$clusterID','$DistrictID','$TAID','$GVHID','$membersM','$membersF','$regionID','$cw','$catchment','0')";
    if (mysqli_query($link_cs, $sql)) 
    {
       echo '<script type="text/javascript">'; 
@@ -54,7 +55,7 @@ if(isset($_POST['submit']))
             echo '}';
          echo 'else';
             echo '{';
-               echo 'window.location.href = "csepwp_basic_livelihood_slg_mgt2.php";';
+               echo 'history.go(-2)';
             echo '}';
       echo '</script>';
    } 

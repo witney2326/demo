@@ -1,6 +1,6 @@
-
-
-    
+<?php 
+header("Cache-Control: max-age=300, must-revalidate"); 
+?>
 
     <?php
         include "../layouts/config.php"; // Using database connection file here

@@ -88,7 +88,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
                             <div class="page-title-right">
                                 <ol class="breadcrumb m-0">
-                                    <li class="breadcrumb-item"><a href="basic_livelihood_training.php">SLG Training Management</a></li>
+                                    <li class="breadcrumb-item"><a href="basic_livelihood_training_check.php">SLG Training Management</a></li>
                                     <li class="breadcrumb-item active">SLG Training</li>
                                 </ol>
                             </div>
@@ -111,7 +111,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                 <!-- Nav tabs -->
                                 <ul class="nav nav-pills nav-justified" role="tablist">
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link" data-bs-toggle="tab" href="#home-1" role="tab">
+                                        <a class="nav-link" data-bs-toggle="link" href="basic_livelihood_training_check.php" role="link">
                                             <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
                                             <span class="d-none d-sm-block">Group Training</span> 
                                         </a>
@@ -143,14 +143,6 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                             <span class="d-none d-sm-block">Trainer-o-Trainers</span>
                                         </a>
                                     </li>
-                                    
-                                    <li class="nav-item waves-effect waves-light">
-                                        <a class="link"  href="basicReports.php" role="link">
-                                            <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
-                                            <span class="d-none d-sm-block">Training Reports</span>
-                                        </a>
-                                    </li>
-                                    
                                 </ul>
                                 <!-- Tab panes -->
                                 <div class="tab-content p-3 text-muted">
@@ -159,10 +151,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                             
 
                                             <!--start here -->
-                                            <div class="card border">
-                                                <div class="card-header">
-                                                    <h5 class="my-0 text-default">Cluster Filter</h5>
-                                                </div>
+                                            <div class="card border border-success">
                                                 <div class="card-body">
                                                     <h5 class="card-title mt-0"></h5>
                                                     <form class="row row-cols-lg-auto g-3 align-items-center">
@@ -189,9 +178,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                                 <option selected  value="<?php echo $ta;?>"><?php echo ta_name($link,$ta); ?></option>
                                                                                                                                 
                                                             </select>
-                                                            <div class="invalid-feedback">
-                                                                Please select a valid TA.
-                                                            </div>
+                                                            
                                                         </div>
                                                        
                                                         <div class="col-12">
@@ -207,7 +194,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
                                             <div class="row">
                                                 <div class="col-12">
-                                                    <div class="card border border-primary">
+                                                    <div class="card border border-success">
                                                         <h5 class="my-0 text-default">SL Clusters in TA: <?php echo ta_name($link,$ta);?></h5>
                                                     <div class="card-body">
                                                     

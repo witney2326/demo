@@ -422,7 +422,7 @@ chart.draw(data, options);
             <div class="container-fluid">                                     
                 <div class ="row">
                     <?php
-                        if ($_SESSION["user_role"] == '00'){echo '<div class="alert alert-warning" role="alert">You are Logged in as a CIMIS Guest Please Get Registered! <a href="auth-register-2.php">here ..</a></div>';}
+                        echo '<h3><div class="alert alert-danger" role="alert">Basic Livelihood</div></h3>';
                     ?>
                     <div class="col-xl-6">
                         <div class="card">
@@ -430,205 +430,278 @@ chart.draw(data, options);
                                 <div class="card-body">
                                     <div class="table-responsive">
                                         <table class="table table-striped mb-0">
-                                            <th></th>
-                                            <th>Track Unit</th>
-                                            <th>Achieved</th>
-                                            <th>Target</th>
-                                            <th></th>
+                                            
+                                            <th>District</th>
+                                            <th>HH Reached</th>
+                                            <th>SLGs Formed</th>
+                                            <th> SLGs Trained</th>
+                                            <th> HHs Trained</th>
                                             <tbody>
                                                 <tr>
-                                                    <th scope="row"><i class='fas fa-house-user' style='font-size:18px'></i></th>
-                                                    <td>HHs Reached</td>
+                                                    <td><b>Karonga</b></td>
                                                     <?php
-                                                            $result = mysqli_query($link, 'SELECT COUNT(sppCode) AS value_sum FROM tblbeneficiaries'); 
-                                                            $row = mysqli_fetch_assoc($result); 
-                                                            $sum = $row['value_sum'];
-                                                        ?>
-                                                    <td><?php echo "" . number_format($sum);?>  </td>
-                                                    <td><?php echo number_format(70000);?></td>
-                                                    <td><?php if ($_SESSION["user_role"] == '00'){echo '<a href="javascript: void(0);">more..</a>' ;}else{echo '<a href="basic_livelihood_hh_mgt.php">more ..</a>';}  ?></td> 
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row"><i class='fas fa-users' style='font-size:18px'></i></th>
-                                                    <td>SLGs Formed</td>
-                                                    <?php
-                                                        $result = mysqli_query($link, 'SELECT COUNT(groupID) AS value_sum FROM tblgroup WHERE deleted = 0'); 
+                                                        $result = mysqli_query($link, 'SELECT COUNT(sppCode) AS hhs_ka FROM tblbeneficiaries where districtID = "02"'); 
                                                         $row = mysqli_fetch_assoc($result); 
-                                                        $sum = $row['value_sum'];
-                                                    ?>
-                                                    <td><?php echo "" . number_format($sum);?></td>
-                                                    <td><?php echo number_format(0);?></td>
-                                                    <td><?php if ($_SESSION["user_role"] == '00'){echo '<a href="javascript: void(0);">more..</a>' ;}else{echo '<a href="basic_livelihood_HH_Nat_reports.php">more ..</a>';}  ?></td>              
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row"><i class='fas fa-book-reader' style='font-size:18px'></i></th>
-                                                    <td>SLGs Trained</td>
-                                                    <?php
-                                                        $result = mysqli_query($link, 'SELECT count(TrainingID) AS total_grps FROM tblgrouptrainings'); 
-                                                        $row = mysqli_fetch_assoc($result); 
-                                                        $sum = $row['total_grps'];
-                                                    ?>
-                                                    <td><?php echo "" . number_format($sum);?></td>
-                                                    <td><?php echo number_format(0);?></td>
-                                                    <td><?php if ($_SESSION["user_role"] == '00'){echo '<a href="javascript: void(0);">more..</a>' ;}else{echo '<a href="basic_livelihood_training_trained_groups.php">more ..</a>';}  ?></td>                         
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row"><i class='fas fa-house-user' style='font-size:18px'></i></th>
-                                                    <td>HHs Trained</td>
-                                                    <?php
-                                                        $result = mysqli_query($link, 'SELECT sum(Males+Females) AS total_hhs_trained FROM tblgrouptrainings'); 
-                                                        $row = mysqli_fetch_assoc($result); 
-                                                        $sumhhs = $row['total_hhs_trained'];
-                                                    ?>
-                                                    <td><?php echo "" . number_format($sumhhs);?></td>
-                                                    <td><?php echo number_format(70000);?></td>
-                                                    <td></td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row"><i class='fas fa-users' style='font-size:18px'></i></th>
-                                                    <td>Clusters Formed</td>
-                                                    <?php
-                                                        $result = mysqli_query($link, 'SELECT COUNT(ClusterID) AS value_cls FROM tblcluster WHERE deleted = 0'); 
-                                                        $row = mysqli_fetch_assoc($result); 
-                                                        $sumcls = $row['value_cls'];
-                                                    ?>
-                                                    <td><?php echo "" . number_format($sumcls);?></td>
-                                                    <td><?php echo number_format(0);?></td>
-                                                    <td></td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row"><i class='fas fa-layer-group' style='font-size:18px;color:darkgoldenrod'></i></th>
-                                                    <td>Clusters Trained</td>
-                                                    <?php
-                                                        $result = mysqli_query($link, 'SELECT count(TrainingID) AS total_grps FROM tblgrouptrainings'); 
-                                                        $row = mysqli_fetch_assoc($result); 
-                                                        $sum = $row['total_grps'];
-                                                    ?>
-                                                    <td><?php echo "" . number_format($sum);?></td>
-                                                    <td><?php echo number_format(0);?></td>
-                                                    <td><?php if ($_SESSION["user_role"] == '00'){echo '<a href="javascript: void(0);">more..</a>' ;}else{echo '<a href="basic_livelihood_training_trained_groups.php">more ..</a>';}  ?></td>                         
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row"><i class='fas fa-layer-group' style='font-size:18px;color:darkgoldenrod'></i></th>
-                                                    <td>Coops Formed</td>
-                                                    <?php
-                                                        $result = mysqli_query($link, 'SELECT count(groupID) AS total_slgs FROM tblgroup where registered_group = "1"'); 
-                                                        $row = mysqli_fetch_assoc($result); 
-                                                        $total_slgs = $row['total_slgs'];
+                                                        $hhs_ka = $row['hhs_ka'];
 
-                                                        $resultcls2 = mysqli_query($link, 'SELECT count(ClusterID) AS total_cls2 FROM tblcluster where registered_group = "1"'); 
-                                                        $rowcls2 = mysqli_fetch_assoc($resultcls2); 
-                                                        $total_cls2 = $rowcls2['total_cls2'];
-                                                        
+                                                        $result1 = mysqli_query($link, 'SELECT COUNT(groupID) AS grps_ka FROM tblgroup WHERE ((deleted = 0) and (DistrictID = "02"))'); 
+                                                        $row1 = mysqli_fetch_assoc($result1); 
+                                                        $grps_ka = $row1['grps_ka'];
+
+                                                        $result2 = mysqli_query($link, 'SELECT count(TrainingID) AS total_tr_grps FROM tblgrouptrainings where districtID = "02"'); 
+                                                        $row2 = mysqli_fetch_assoc($result2); 
+                                                        $total_tr_grps = $row2['total_tr_grps'];
+
+                                                        $result3 = mysqli_query($link, 'SELECT count(sppCode) AS total_tr_members FROM tblmembertrainings where districtID = "02"'); 
+                                                        $row3 = mysqli_fetch_assoc($result3); 
+                                                        $total_tr_members = $row3['total_tr_members'];
                                                     ?>
-                                                    <td><?php echo "" . number_format($total_slgs+$total_cls2);?></td>
-                                                    <td><?php echo number_format(0);?></td>
-                                                    <td><?php if ($_SESSION["user_role"] == '00'){echo '<a href="javascript: void(0);">more..</a>' ;}else{echo '<a href="slg_coop_formation_reports.php">more ..</a>';}  ?></td>
+                                                    <td><?php echo "" . number_format($hhs_ka);?></td>
+                                                    <td><?php echo "" . number_format($grps_ka);?></td>
+                                                    <td><?php echo "" . number_format($total_tr_grps);?></td>
+                                                    <td><?php echo "" . number_format($total_tr_members);?></td>
                                                 </tr>
                                                 <tr>
-                                                    <th scope="row"><i class='fas fa-layer-group' style='font-size:18px;color:darkgoldenrod'></i></th>
-                                                    <td>JSGs Formed</td>
+                                                    <td><b>Rumphi</b></td>
                                                     <?php
-                                                        $result = mysqli_query($link, 'SELECT COUNT(recID) AS value_total FROM tbljsg'); 
+                                                        $result = mysqli_query($link, 'SELECT COUNT(sppCode) AS hhs_ka FROM tblbeneficiaries where districtID = "03"'); 
                                                         $row = mysqli_fetch_assoc($result); 
-                                                        $total = $row['value_total'];
+                                                        $hhs_ka = $row['hhs_ka'];
+
+                                                        $result1 = mysqli_query($link, 'SELECT COUNT(groupID) AS grps_ka FROM tblgroup WHERE ((deleted = 0) and (DistrictID = "03"))'); 
+                                                        $row1 = mysqli_fetch_assoc($result1); 
+                                                        $grps_ka = $row1['grps_ka'];
+
+                                                        $result2 = mysqli_query($link, 'SELECT count(TrainingID) AS total_tr_grps FROM tblgrouptrainings where districtID = "03"'); 
+                                                        $row2 = mysqli_fetch_assoc($result2); 
+                                                        $total_tr_grps = $row2['total_tr_grps'];
+
+                                                        $result3 = mysqli_query($link, 'SELECT count(sppCode) AS total_tr_members FROM tblmembertrainings where districtID = "03"'); 
+                                                        $row3 = mysqli_fetch_assoc($result3); 
+                                                        $total_tr_members = $row3['total_tr_members'];
                                                     ?>
-                                                    <td><?php echo "" . number_format($total);?></td>
-                                                    <td><?php echo number_format(0);?></td>
-                                                    <td><?php if ($_SESSION["user_role"] == '00'){echo '<a href="javascript: void(0);">more..</a>' ;}else{echo '<a href="slg_jsg_reports.php">more ..</a>';}  ?></td>                         
+                                                    <td><?php echo "" . number_format($hhs_ka);?></td>
+                                                    <td><?php echo "" . number_format($grps_ka);?></td>
+                                                    <td><?php echo "" . number_format($total_tr_grps);?></td>
+                                                    <td><?php echo "" . number_format($total_tr_members);?></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><b>Nkhatabay</b></td>
+                                                    <?php
+                                                        $result = mysqli_query($link, 'SELECT COUNT(sppCode) AS hhs_ka FROM tblbeneficiaries where districtID = "05"'); 
+                                                        $row = mysqli_fetch_assoc($result); 
+                                                        $hhs_ka = $row['hhs_ka'];
+
+                                                        $result1 = mysqli_query($link, 'SELECT COUNT(groupID) AS grps_ka FROM tblgroup WHERE ((deleted = 0) and (DistrictID = "05"))'); 
+                                                        $row1 = mysqli_fetch_assoc($result1); 
+                                                        $grps_ka = $row1['grps_ka'];
+
+                                                        $result2 = mysqli_query($link, 'SELECT count(TrainingID) AS total_tr_grps FROM tblgrouptrainings where districtID = "05"'); 
+                                                        $row2 = mysqli_fetch_assoc($result2); 
+                                                        $total_tr_grps = $row2['total_tr_grps'];
+
+                                                        $result3 = mysqli_query($link, 'SELECT count(sppCode) AS total_tr_members FROM tblmembertrainings where districtID = "05"'); 
+                                                        $row3 = mysqli_fetch_assoc($result3); 
+                                                        $total_tr_members = $row3['total_tr_members'];
+                                                    ?>
+                                                    <td><?php echo "" . number_format($hhs_ka);?></td>
+                                                    <td><?php echo "" . number_format($grps_ka);?></td>
+                                                    <td><?php echo "" . number_format($total_tr_grps);?></td>
+                                                    <td><?php echo "" . number_format($total_tr_members);?></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><b>Nkhotakota</b></td>
+                                                    <?php
+                                                        $result = mysqli_query($link, 'SELECT COUNT(sppCode) AS hhs_ka FROM tblbeneficiaries where districtID = "06"'); 
+                                                        $row = mysqli_fetch_assoc($result); 
+                                                        $hhs_ka = $row['hhs_ka'];
+
+                                                        $result1 = mysqli_query($link, 'SELECT COUNT(groupID) AS grps_ka FROM tblgroup WHERE ((deleted = 0) and (DistrictID = "06"))'); 
+                                                        $row1 = mysqli_fetch_assoc($result1); 
+                                                        $grps_ka = $row1['grps_ka'];
+
+                                                        $result2 = mysqli_query($link, 'SELECT count(TrainingID) AS total_tr_grps FROM tblgrouptrainings where districtID = "06"'); 
+                                                        $row2 = mysqli_fetch_assoc($result2); 
+                                                        $total_tr_grps = $row2['total_tr_grps'];
+
+                                                        $result3 = mysqli_query($link, 'SELECT count(sppCode) AS total_tr_members FROM tblmembertrainings where districtID = "06"'); 
+                                                        $row3 = mysqli_fetch_assoc($result3); 
+                                                        $total_tr_members = $row3['total_tr_members'];
+                                                    ?>
+                                                    <td><?php echo "" . number_format($hhs_ka);?></td>
+                                                    <td><?php echo "" . number_format($grps_ka);?></td>
+                                                    <td><?php echo "" . number_format($total_tr_grps);?></td>
+                                                    <td><?php echo "" . number_format($total_tr_members);?></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><b>Kasungu</b></td>
+                                                    <?php
+                                                        $result = mysqli_query($link, 'SELECT COUNT(sppCode) AS hhs_ka FROM tblbeneficiaries where districtID = "07"'); 
+                                                        $row = mysqli_fetch_assoc($result); 
+                                                        $hhs_ka = $row['hhs_ka'];
+
+                                                        $result1 = mysqli_query($link, 'SELECT COUNT(groupID) AS grps_ka FROM tblgroup WHERE ((deleted = 0) and (DistrictID = "07"))'); 
+                                                        $row1 = mysqli_fetch_assoc($result1); 
+                                                        $grps_ka = $row1['grps_ka'];
+
+                                                        $result2 = mysqli_query($link, 'SELECT count(TrainingID) AS total_tr_grps FROM tblgrouptrainings where districtID = "07"'); 
+                                                        $row2 = mysqli_fetch_assoc($result2); 
+                                                        $total_tr_grps = $row2['total_tr_grps'];
+
+                                                        $result3 = mysqli_query($link, 'SELECT count(sppCode) AS total_tr_members FROM tblmembertrainings where districtID = "07"'); 
+                                                        $row3 = mysqli_fetch_assoc($result3); 
+                                                        $total_tr_members = $row3['total_tr_members'];
+                                                    ?>
+                                                    <td><?php echo "" . number_format($hhs_ka);?></td>
+                                                    <td><?php echo "" . number_format($grps_ka);?></td>
+                                                    <td><?php echo "" . number_format($total_tr_grps);?></td>
+                                                    <td><?php echo "" . number_format($total_tr_members);?></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><b>Dowa</b></td>
+                                                    <?php
+                                                        $result = mysqli_query($link, 'SELECT COUNT(sppCode) AS hhs_ka FROM tblbeneficiaries where districtID = "09"'); 
+                                                        $row = mysqli_fetch_assoc($result); 
+                                                        $hhs_ka = $row['hhs_ka'];
+
+                                                        $result1 = mysqli_query($link, 'SELECT COUNT(groupID) AS grps_ka FROM tblgroup WHERE ((deleted = 0) and (DistrictID = "09"))'); 
+                                                        $row1 = mysqli_fetch_assoc($result1); 
+                                                        $grps_ka = $row1['grps_ka'];
+
+                                                        $result2 = mysqli_query($link, 'SELECT count(TrainingID) AS total_tr_grps FROM tblgrouptrainings where districtID = "09"'); 
+                                                        $row2 = mysqli_fetch_assoc($result2); 
+                                                        $total_tr_grps = $row2['total_tr_grps'];
+
+                                                        $result3 = mysqli_query($link, 'SELECT count(sppCode) AS total_tr_members FROM tblmembertrainings where districtID = "09"'); 
+                                                        $row3 = mysqli_fetch_assoc($result3); 
+                                                        $total_tr_members = $row3['total_tr_members'];
+                                                    ?>
+                                                    <td><?php echo "" . number_format($hhs_ka);?></td>
+                                                    <td><?php echo "" . number_format($grps_ka);?></td>
+                                                    <td><?php echo "" . number_format($total_tr_grps);?></td>
+                                                    <td><?php echo "" . number_format($total_tr_members);?></td>
                                                 </tr>
                                                 
                                                 <tr>
-                                                    <th scope="row"><i class='fas fa-hiking' style='font-size:18px; color:chocolate'></i></th>
-                                                    <td>Youths Linked</td>
+                                                    <td><b>Ntchisi</b></td>
                                                     <?php
-                                                        $result = mysqli_query($link, 'SELECT COUNT(recID) AS v_total FROM tblycs'); 
+                                                        $result = mysqli_query($link, 'SELECT COUNT(sppCode) AS hhs_ka FROM tblbeneficiaries where districtID = "08"'); 
                                                         $row = mysqli_fetch_assoc($result); 
-                                                        $v_total = $row['v_total'];
-                                                    ?>
-                                                    <td><?php echo "" . number_format($v_total);?></td>
-                                                    <td><?php echo number_format(0);?></td>
-                                                    <td><?php if ($_SESSION["user_role"] == '00'){echo '<a href="javascript: void(0);">more..</a>' ;}else{echo '<a href="slg_ycs_reports.php">more ..</a>';}  ?></td>                         
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row"><i class='fas fa-school' style='font-size:18px;color:cadetblue'></i></th>
-                                                    <td>SLGs on Graduation</td>
-                                                    <?php
-                                                        $result = mysqli_query($link, 'SELECT COUNT(groupID) AS value_grps FROM tblgroup where grad_status="1"'); 
-                                                        $row = mysqli_fetch_assoc($result); 
-                                                        $sum_grps = $row['value_grps'];
+                                                        $hhs_ka = $row['hhs_ka'];
 
-                                                        $result_2 = mysqli_query($link, 'SELECT COUNT(ClusterID) AS value_clusters FROM tblcluster where grad_status="1"'); 
-                                                        $row = mysqli_fetch_assoc($result_2); 
-                                                        $sum_clusters = $row['value_clusters'];
+                                                        $result1 = mysqli_query($link, 'SELECT COUNT(groupID) AS grps_ka FROM tblgroup WHERE ((deleted = 0) and (DistrictID = "08"))'); 
+                                                        $row1 = mysqli_fetch_assoc($result1); 
+                                                        $grps_ka = $row1['grps_ka'];
 
-                                                    ?>
-                                                    <td><?php echo "" . number_format($sum_clusters+$sum_grps);?></td>
-                                                    <td><?php echo number_format(0);?></td>
-                                                    <td><?php if ($_SESSION["user_role"] == '00'){echo '<a href="javascript: void(0);">more..</a>' ;}else{echo '<a href="graduation/graduation.php">more..</a>';}  ?></td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row"><i class='fas fa-graduation-cap' style='font-size:18px;color:cadetblue'></i></th>
-                                                    <td>HHs on Graduation</td>
-                                                    <?php
-                                                        $result = mysqli_query($link, 'SELECT COUNT(sppCode) AS value_sum FROM tblbeneficiaries where grad_status ="1"'); 
-                                                        $row = mysqli_fetch_assoc($result); 
-                                                        $sum = $row['value_sum'];
-                                                    ?>
-                                                    <td><?php echo "" . number_format($sum);?></td>
-                                                    <td><?php echo number_format(8400);?></td>
-                                                    <td><?php if ($_SESSION["user_role"] == '00'){echo '<a href="javascript: void(0);">more..</a>' ;}else{echo '<a href="graduation/Rp_Selected_Ben_reports.php">more..</a>';}  ?></td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row"><i class='fas fa-graduation-cap' style='font-size:18px'></i></th>
-                                                    <td>Graduated HHs</td>
-                                                    <?php
-                                                        $result = mysqli_query($link, 'SELECT COUNT(sppCode) AS value_sum FROM tblbeneficiaries where grad_status ="1"'); 
-                                                        $row = mysqli_fetch_assoc($result); 
-                                                        $sum = $row['value_sum'];
-                                                    ?>
-                                                    <td>0</td>
-                                                    <td><?php echo number_format(8400);?></td>
-                                                    <td></td>
-                                                </tr>
+                                                        $result2 = mysqli_query($link, 'SELECT count(TrainingID) AS total_tr_grps FROM tblgrouptrainings where districtID = "08"'); 
+                                                        $row2 = mysqli_fetch_assoc($result2); 
+                                                        $total_tr_grps = $row2['total_tr_grps'];
 
-                                                <tr>
-                                                    <th scope="row"><i class='fas fa-industry' style='font-size:18px; color:crimson'></i></th>
-                                                    <td>SLGs In Prod. VC</td>
-                                                    <?php
-                                                        $result = mysqli_query($link, 'SELECT COUNT(groupID) AS v_total FROM tblgroup where vc_status = "1"'); 
-                                                        $row = mysqli_fetch_assoc($result); 
-                                                        $v_total = $row['v_total'];
+                                                        $result3 = mysqli_query($link, 'SELECT count(sppCode) AS total_tr_members FROM tblmembertrainings where districtID = "08"'); 
+                                                        $row3 = mysqli_fetch_assoc($result3); 
+                                                        $total_tr_members = $row3['total_tr_members'];
                                                     ?>
-                                                    <td><?php echo "" . number_format($v_total);?></td>
-                                                    <td><?php echo number_format(0);?></td>
-                                                    <td></td>
+                                                    <td><?php echo "" . number_format($hhs_ka);?></td>
+                                                    <td><?php echo "" . number_format($grps_ka);?></td>
+                                                    <td><?php echo "" . number_format($total_tr_grps);?></td>
+                                                    <td><?php echo "" . number_format($total_tr_members);?></td>
                                                 </tr>
+                                                
                                                 <tr>
-                                                    <th scope="row"><i class='fa fa-globe' style='font-size:18px; color:green'></i></th>
-                                                    <td>Safeguard Plans</td>
-                                                    <?php
-                                                        $select_query_esmp = "SELECT COUNT(planID) as TotalESMPs FROM tblsafeguard_group_plans";
-                                                        $query_result_esmp = mysqli_query($link,$select_query_esmp);
-                                                        $row_val = mysqli_fetch_array($query_result_esmp);
-                                                        $totalesmps =  $row_val['TotalESMPs'];
-                                                    ?>
-                                                    <td><?php echo "" . number_format($totalesmps);?></td>
-                                                    <td><?php echo number_format(0);?></td>
-                                                    <td></td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row"><i class='fas fa-dollar-sign' style='font-size:18px; color:green'></i></th>
-                                                    <td>Savings Mobilised</td>
+                                                    <td><b>Lilongwe</b></td>
                                                     <?php 
-                                                        $select_query = "SELECT SUM(amount) as TotalSavings FROM tblslg_member_savings";
-                                                        $query_result = mysqli_query($link,$select_query);
-                                                        $row_val = mysqli_fetch_array($query_result);
-                                                        $CurSavings =  floatval($row_val['TotalSavings']);
-                                                    ?>
-                                                    <td><?php echo "MK", number_format("$CurSavings",2);?></td>
-                                                    <td><?php echo number_format(0);?></td>
-                                                    <td><?php if ($_SESSION["user_role"] == '00'){echo '<a href="javascript: void(0);">more..</a>' ;}else{echo '<a href="basic_livelihood_savings_members_reports.php">more ..</a>';}  ?></td>
+                                                         $result = mysqli_query($link, 'SELECT COUNT(sppCode) AS hhs_ka FROM tblbeneficiaries where districtID = "11"'); 
+                                                         $row = mysqli_fetch_assoc($result); 
+                                                         $hhs_ka = $row['hhs_ka'];
+ 
+                                                         $result1 = mysqli_query($link, 'SELECT COUNT(groupID) AS grps_ka FROM tblgroup WHERE ((deleted = 0) and (DistrictID = "11"))'); 
+                                                         $row1 = mysqli_fetch_assoc($result1); 
+                                                         $grps_ka = $row1['grps_ka'];
+ 
+                                                         $result2 = mysqli_query($link, 'SELECT count(TrainingID) AS total_tr_grps FROM tblgrouptrainings where districtID = "11"'); 
+                                                         $row2 = mysqli_fetch_assoc($result2); 
+                                                         $total_tr_grps = $row2['total_tr_grps'];
+ 
+                                                         $result3 = mysqli_query($link, 'SELECT count(sppCode) AS total_tr_members FROM tblmembertrainings where districtID = "11"'); 
+                                                         $row3 = mysqli_fetch_assoc($result3); 
+                                                         $total_tr_members = $row3['total_tr_members'];
+                                                     ?>
+                                                     <td><?php echo "" . number_format($hhs_ka);?></td>
+                                                     <td><?php echo "" . number_format($grps_ka);?></td>
+                                                     <td><?php echo "" . number_format($total_tr_grps);?></td>
+                                                     <td><?php echo "" . number_format($total_tr_members);?></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><b>Dedza</b></td>
+                                                    <?php 
+                                                         $result = mysqli_query($link, 'SELECT COUNT(sppCode) AS hhs_ka FROM tblbeneficiaries where districtID = "13"'); 
+                                                         $row = mysqli_fetch_assoc($result); 
+                                                         $hhs_ka = $row['hhs_ka'];
+ 
+                                                         $result1 = mysqli_query($link, 'SELECT COUNT(groupID) AS grps_ka FROM tblgroup WHERE ((deleted = 0) and (DistrictID = "13"))'); 
+                                                         $row1 = mysqli_fetch_assoc($result1); 
+                                                         $grps_ka = $row1['grps_ka'];
+ 
+                                                         $result2 = mysqli_query($link, 'SELECT count(TrainingID) AS total_tr_grps FROM tblgrouptrainings where districtID = "13"'); 
+                                                         $row2 = mysqli_fetch_assoc($result2); 
+                                                         $total_tr_grps = $row2['total_tr_grps'];
+ 
+                                                         $result3 = mysqli_query($link, 'SELECT count(sppCode) AS total_tr_members FROM tblmembertrainings where districtID = "13"'); 
+                                                         $row3 = mysqli_fetch_assoc($result3); 
+                                                         $total_tr_members = $row3['total_tr_members'];
+                                                     ?>
+                                                     <td><?php echo "" . number_format($hhs_ka);?></td>
+                                                     <td><?php echo "" . number_format($grps_ka);?></td>
+                                                     <td><?php echo "" . number_format($total_tr_grps);?></td>
+                                                     <td><?php echo "" . number_format($total_tr_members);?></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><b>Blantyre</b></td>
+                                                    <?php 
+                                                         $result = mysqli_query($link, 'SELECT COUNT(sppCode) AS hhs_ka FROM tblbeneficiaries where districtID = "20"'); 
+                                                         $row = mysqli_fetch_assoc($result); 
+                                                         $hhs_ka = $row['hhs_ka'];
+ 
+                                                         $result1 = mysqli_query($link, 'SELECT COUNT(groupID) AS grps_ka FROM tblgroup WHERE ((deleted = 0) and (DistrictID = "20"))'); 
+                                                         $row1 = mysqli_fetch_assoc($result1); 
+                                                         $grps_ka = $row1['grps_ka'];
+ 
+                                                         $result2 = mysqli_query($link, 'SELECT count(TrainingID) AS total_tr_grps FROM tblgrouptrainings where districtID = "20"'); 
+                                                         $row2 = mysqli_fetch_assoc($result2); 
+                                                         $total_tr_grps = $row2['total_tr_grps'];
+ 
+                                                         $result3 = mysqli_query($link, 'SELECT count(sppCode) AS total_tr_members FROM tblmembertrainings where districtID = "20"'); 
+                                                         $row3 = mysqli_fetch_assoc($result3); 
+                                                         $total_tr_members = $row3['total_tr_members'];
+                                                     ?>
+                                                     <td><?php echo "" . number_format($hhs_ka);?></td>
+                                                     <td><?php echo "" . number_format($grps_ka);?></td>
+                                                     <td><?php echo "" . number_format($total_tr_grps);?></td>
+                                                     <td><?php echo "" . number_format($total_tr_members);?></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><b>Chiladzulo</b></td>
+                                                    <?php 
+                                                         $result = mysqli_query($link, 'SELECT COUNT(sppCode) AS hhs_ka FROM tblbeneficiaries where districtID = "19"'); 
+                                                         $row = mysqli_fetch_assoc($result); 
+                                                         $hhs_ka = $row['hhs_ka'];
+ 
+                                                         $result1 = mysqli_query($link, 'SELECT COUNT(groupID) AS grps_ka FROM tblgroup WHERE ((deleted = 0) and (DistrictID = "19"))'); 
+                                                         $row1 = mysqli_fetch_assoc($result1); 
+                                                         $grps_ka = $row1['grps_ka'];
+ 
+                                                         $result2 = mysqli_query($link, 'SELECT count(TrainingID) AS total_tr_grps FROM tblgrouptrainings where districtID = "19"'); 
+                                                         $row2 = mysqli_fetch_assoc($result2); 
+                                                         $total_tr_grps = $row2['total_tr_grps'];
+ 
+                                                         $result3 = mysqli_query($link, 'SELECT count(sppCode) AS total_tr_members FROM tblmembertrainings where districtID = "19"'); 
+                                                         $row3 = mysqli_fetch_assoc($result3); 
+                                                         $total_tr_members = $row3['total_tr_members'];
+                                                     ?>
+                                                     <td><?php echo "" . number_format($hhs_ka);?></td>
+                                                     <td><?php echo "" . number_format($grps_ka);?></td>
+                                                     <td><?php echo "" . number_format($total_tr_grps);?></td>
+                                                     <td><?php echo "" . number_format($total_tr_members);?></td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -660,11 +733,7 @@ chart.draw(data, options);
                                 <div id="actual_hhs"></div> 
                             </div>
                         </div>
-                        <div class ="row">
-                            <div class="card border border-success">                               
-                                <div id="jsgs_per_district"></div> 
-                            </div>
-                        </div>
+                        
                     </div>
                 </div>
             </div>

@@ -44,7 +44,8 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
               $gvhID= $row["gvhID"];
               $MembersM= $row["MembersM"];
               $MembersF = $row["MembersF"];
-              $clusterID = $row["clusterID"];
+              $clusterID = $row["clusterID"]; 
+              $catchment = $row["catchment"]; 
 
           }
           $result_set->close();
@@ -141,6 +142,8 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                         <div class="row mb-1">
                                             <label for="gvh" class="col-sm-2 col-form-label">GVH</label>
                                             <input type="text" class="form-control" id="gvh" name="gvh" value ="<?php echo $gvhID ; ?>" style="max-width:30%;" >
+                                            <label for="catchment" class="col-sm-2 col-form-label">Catchment</label>
+                                            <input type="text" class="form-control" id="catchment" name="catchment" value ="<?php echo $catchment ; ?>" style="max-width:30%;" >
 
                                                    
                                         </div>

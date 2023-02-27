@@ -2,7 +2,7 @@
 <?php include '../layouts/head-main.php'; ?>
 
 <head>
-    <title>SLG Management</title>
+    <title>SLG Management| New Cluster</title>
     <?php include '../layouts/head.php'; ?>
     <?php include '../layouts/head-style.php'; ?>
     <?php include '../layouts/config2.php'; ?>
@@ -12,26 +12,28 @@
     <link href="assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
     <!-- Responsive datatable examples -->
     <link href="assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
-
 </head>
-
-<?php include '../layouts/body.php'; ?>
 
 <?php 
     
-    if (($_SESSION["user_role"]== '05')) 
-    {
-        $region = $_SESSION["user_reg"];
-        $district = $_SESSION["user_dis"];
-        $ta = $_SESSION["user_ta"];   
-    }
- else
-    {
-    $region = $_POST['region'];
-    $district = $_POST['district'];
       
+    if (($_POST['region'] == "") or ($_POST['district'] == "") or ($_POST['ta'] == ""))
+    {
+        echo '<script type="text/javascript">'; 
+        echo 'alert("Fill In Region OR District or TA!");'; 
+        echo 'history.go(-1)';
+      echo '</script>';
+    }  else if (($_POST['region']<>"") and ($_POST['district']<>"00") and ($_POST['ta']<> "0000") )
+    {
+        $region = $_POST['region'];
+        $district = $_POST['district'];
+        $ta = $_POST['ta'];
     }
 ?>
+
+<?php include '../layouts/body.php'; ?>
+
+
 
 <!-- Begin page -->
 <div id="layout-wrapper">
@@ -137,18 +139,7 @@
                                                         <div class="row mb-2">
                                                             <label for="ta" class="col-sm-2 col-form-label">TA</label>
                                                             <select class="form-select" name="ta" id="ta" style="max-width:30%;" required>
-                                                                <option></option>
-                                                                <?php                                                           
-                                                                        $ta_fetch_query = "SELECT TAID,TAName FROM tblta where DistrictID = $district";                                                  
-                                                                        $result_ta_fetch = mysqli_query($link_cs, $ta_fetch_query);                                                                       
-                                                                        $i=0;
-                                                                            while($DB_ROW_ta = mysqli_fetch_array($result_ta_fetch)) {
-                                                                        ?>
-                                                                        <option value ="<?php echo $DB_ROW_ta["TAID"]; ?>">
-                                                                            <?php echo $DB_ROW_ta["TAName"]; ?></option><?php
-                                                                            $i++;
-                                                                                }
-                                                                    ?>
+                                                                <option value= <?php echo $ta; ?> ><?php echo ta_name($link_cs,$ta); ?></option>
                                                             </select>
 
                                                             <label for="GVHID" class="col-sm-2 col-form-label">GVH</label>
@@ -160,7 +151,7 @@
                                                             <select class="form-select" name="cw" id="cw" style="max-width:30%;" required>
                                                                 <option></option>
                                                                     <?php                                                           
-                                                                            $cw_fetch_query = "SELECT cwID,cwName FROM tblcw where districtID = $district";                                                  
+                                                                            $cw_fetch_query = "SELECT cwID,cwName FROM tblcw where ((districtID = '$district') and (ta = '$ta'))";                                                  
                                                                             $result_cw_fetch = mysqli_query($link_cs, $cw_fetch_query);                                                                       
                                                                             $i=0;
                                                                                 while($DB_ROW_cw = mysqli_fetch_array($result_cw_fetch)) {

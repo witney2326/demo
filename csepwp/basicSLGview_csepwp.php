@@ -46,6 +46,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                 $MembersM= $row["MembersM"];
                 $MembersF = $row["MembersF"];
                 $clusterID = $row["clusterID"];
+                $catchment = $row["catchment"];
             }
             $result_set->close();
         }      
@@ -110,7 +111,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                                     <label for="group_id" class="col-sm-2 col-form-label">Group ID</label>                   
                                                                     <input type="text" class="form-control" id="group_id" name = "group_id" value="<?php echo $id ; ?>" style="max-width:30%;" disabled ="True">
                                                                     
-                                                                    <label for="group_name" class="col-sm-2 col-form-label">Group Name</label>
+                                                                    <label for="group_name" class="col-sm-2 col-form-label">Grp Name</label>
                                                                     <input type="text" class="form-control" id="group_name" name ="group_name" value = "<?php echo $groupname ; ?>" style="max-width:30%;" disabled ="True">
                                                                 </div>
                                                                         
@@ -136,20 +137,22 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                                     <label for="gvh" class="col-sm-2 col-form-label">GVH</label>                   
                                                                     <input type="text" class="form-control" id="gvh" name="gvh" value ="<?php echo $gvhID ; ?>" disabled ="True" style="max-width:30%;" >                                       
 
+                                                                    <label for="catchment" class="col-sm-2 col-form-label">Catchmt</label>                   
+                                                                    <input type="text" class="form-control" id="catchment" name="catchment" value ="<?php echo $catchment ; ?>" disabled ="True" style="max-width:30%;" >                                       
                                                                           
                                                                 </div>
 
                                                                 <div class="row mb-1">
-                                                                    <label for="no_males" class="col-sm-2 col-form-label">No. Males</label>                         
+                                                                    <label for="no_males" class="col-sm-2 col-form-label">Males</label>                         
                                                                     <input type="text" class="form-control" id="no_males" name="no_males" value ="<?php echo $MembersM ; ?>" style="max-width:30%;" disabled ="True">
                                                                     
-                                                                    <label for="no_females" class="col-sm-2 col-form-label">No. Females</label>
+                                                                    <label for="no_females" class="col-sm-2 col-form-label">Females</label>
                                                                     <input type="text" class="form-control" id="no_females" name="no_females" value ="<?php echo $MembersF ; ?>" style="max-width:30%;" disabled ="True">
                                                                 </div>
 
                                                                 
                                                                 <div class="row mb-1">
-                                                                    <label for="cluster" class="col-sm-2 col-form-label">Cluster Name</label>                        
+                                                                    <label for="cluster" class="col-sm-2 col-form-label">Cls Name</label>                        
                                                                     <input type="text" class="form-control" id="cluster" name="cluster" value ="<?php echo cls_name($link_cs,$clusterID) ; ?>" style="max-width:30%;" disabled ="True">
                                                                     
                                                                     
@@ -272,7 +275,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                                         <tr>   
                                                                             <th>HH-Code</th>                                              
                                                                             <th>SP-Prog</th>
-                                                                            <th>Cohort</th>
+                                                                            
                                                                             <th>HH-Status</th>
                                                                             <th>JSG-Mapped?</th>
                                                                             <th>YCS-Mapped?</th>
@@ -297,12 +300,12 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                                                 if ($row["ycs_mapped"] == 1){$ycs_status = "Yes";}else{$ycs_status = "N/A";}
                                                                                 if ($row["grad_status"] == 1){$graduation_status = "Yes";}else{$graduation_status = "N/A";}
 
-                                                                                if ($row["spProg"]==1){$spProg = "SCT";}if ($row["spProg"]==2){$spProg = "EPWP";}if ($row["spProg"]==3){$spProg = "PWP";}if ($row["spProg"]==4){$spProg = "CSPWP";}if ($row["spProg"]== 5){$spProg = "Masaf 4";}
+                                                                                //if ($row["spProg"]==1){$spProg = "SCT";}if ($row["spProg"]==2){$spProg = "EPWP";}if ($row["spProg"]==3){$spProg = "PWP";}if ($row["spProg"]==4){$spProg = "CSPWP";}if ($row["spProg"]== 5){$spProg = "Masaf 4";}
 
                                                                             echo "<tr>\n";                                           
                                                                                 echo "<td>".$row["sppCode"]."</td>\n";
-                                                                                echo "<td>\t\t$spProg</td>\n";
-                                                                                echo "<td>".$row["cohort"]."</td>\n";                                               
+                                                                                echo "<td>"."</td>\n";
+                                                                                                                              
                                                                                 echo "\t\t<td>$hh_status</td>\n";
                                                                                 echo "\t\t<td>$jsg_status</td>\n";
                                                                                 echo "\t\t<td>$ycs_status</td>\n";

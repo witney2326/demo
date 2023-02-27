@@ -104,29 +104,24 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                         </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link active"  href="basic_livelihood_clusters.php" role="link">
+                                        <a class="nav-link active"  href="javascript:void(0);" role="tab">
                                             <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
                                             <span class="d-none d-sm-block">Clusters</span>
                                         </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link" data-bs-toggle="tab" href="#cls-1" role="tab">
+                                        <a class="nav-link" data-bs-toggle="link" href="csepwp_basic_livelihood_new_cluster.php" role="link">
                                             <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
                                             <span class="d-none d-sm-block">New Cluster!</span>
                                         </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link" data-bs-toggle="tab" href="#slg-1" role="tab">
+                                        <a class="nav-link" data-bs-toggle="link" href="csepwp_basic_livelihood_new_slg.php" role="link">
                                             <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
                                             <span class="d-none d-sm-block">New SLG!</span>
                                         </a>
                                     </li>
-                                    <li class="nav-item waves-effect waves-light">
-                                        <a class="link" href="basicReports.php" role="link">
-                                            <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
-                                            <span class="d-none d-sm-block">SLG Reports</span>
-                                        </a>
-                                    </li>
+                                    
                                     
                                 </ul>
 

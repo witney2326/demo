@@ -1,6 +1,6 @@
 <?php include 'layouts/session.php'; ?>
 <?php include 'layouts/head-main.php'; ?>
-
+<?php header("Cache-Control: max-age=300, must-revalidate"); ?>
 <head>
     <title>SLG Group Members</title>
     <?php include 'layouts/head.php'; ?>
@@ -91,7 +91,7 @@
                                         <thead>
                                             <tr>
                                                 <th>HH code</th>                                           
-                                                <th>SLG Name</th>
+                                                <th>HH Name</th>
                                                 <th>Cohort</th>
                                                 <th>HH Approved?</th>
                                                 <th>Nutrition  Approved?</th>
@@ -128,7 +128,7 @@
 
                                                     echo "<td>".$row["sppCode"]."</td>\n";
                                                     
-                                                    echo "\t\t<td>$groupname</td>\n";
+                                                    echo "<td>".$row["hh_head_name"]."</td>\n";
                                                     echo "<td>".$row["cohort"]."</td>\n";
                                                     echo "\t\t<td>$hhstatus</td>\n";
                                                     echo "\t\t<td>$WASHstatus</td>\n";

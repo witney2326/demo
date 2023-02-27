@@ -77,7 +77,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
                             <div class="page-title-right">
                                 <ol class="breadcrumb m-0">
-                                    <li class="breadcrumb-item"><a href="basic_livelihood_training.php">SLG Training Management</a></li>
+                                    <li class="breadcrumb-item"><a href="basic_livelihood_training_check.php">SLG Training Management</a></li>
                                     <li class="breadcrumb-item active">SLG Training</li>
                                 </ol>
                             </div>

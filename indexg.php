@@ -91,7 +91,7 @@ $test = 85;
     <?php 
         $select_query = "SELECT tbldistrict.DistrictName,COUNT(tblgroup.groupname ) as grps
         FROM tblgroup 
-        inner join tbldistrict on tblgroup.DistrictID = tbldistrict.DistrictID where tblgroup.deleted = '0'
+        inner join tbldistrict on tblgroup.DistrictID = tbldistrict.DistrictID where ((tblgroup.deleted = '0') and (tblgroup.grad_status = '1'))
         GROUP BY tbldistrict.DistrictName";
 
         $query_result = mysqli_query($link,$select_query);
@@ -103,7 +103,7 @@ $test = 85;
     ?>       
     ]);
     // Optional; add a title and set the width and height of the chart
-    var options = {'title':'Savings and Loan Group Distribution', 'width':490, 'height':250};
+    var options = {'title':'SLGs on Graduation Distribution', 'width':490, 'height':250};
     var chart = new google.visualization.LineChart(document.getElementById('grps_per_district'));
     chart.draw(data, options);
     
@@ -213,7 +213,7 @@ chart.draw(data, options);
         <?php 
             $select_query = "SELECT tbldistrict.DistrictName as District,COUNT(tblbeneficiaries.sppCode) as households
             FROM tblbeneficiaries 
-            inner join tbldistrict on tblbeneficiaries.DistrictID = tbldistrict.DistrictID
+            inner join tbldistrict on tblbeneficiaries.DistrictID = tbldistrict.DistrictID where tblbeneficiaries.grad_status = '1'
             GROUP BY tbldistrict.DistrictName";
             $query_result = mysqli_query($link,$select_query);
             while($row_val = mysqli_fetch_array($query_result)){
@@ -228,7 +228,7 @@ chart.draw(data, options);
         var options = {'title':'', 'width':370, 'height':250};
 
         var options = {
-            title: 'Actual HHs Per District',
+            title: 'HHs On Graduation Per District',
             hAxis: {title: ''},
             vAxis: {title: 'No HHs'},
             legend: 'none',
@@ -239,7 +239,7 @@ chart.draw(data, options);
 
 
         // Display the chart inside the <div> element with id="piechart"
-        var chart = new google.visualization.LineChart(document.getElementById('actual_hhs'));
+        var chart = new google.visualization.ColumnChart(document.getElementById('actual_hhs'));
         chart.draw(data, options);
         }
     </script> 
@@ -377,35 +377,33 @@ chart.draw(data, options);
     </script> 
 
 <script type="text/javascript">
-        // Load google charts
         google.charts.load('current', {'packages':['corechart']});
-        google.charts.setOnLoadCallback(drawChart);
+    google.charts.setOnLoadCallback(drawChart);
+    
+    function drawChart() {
+    var data = google.visualization.arrayToDataTable([
+    
+    ['District', 'Groups'],
+    <?php 
+        $select_query = "SELECT tbldistrict.DistrictName,COUNT(tblcluster.clustername ) as grps
+        FROM tblcluster 
+        inner join tbldistrict on tblcluster.DistrictID = tbldistrict.DistrictID where ((tblcluster.deleted = '0') and (tblcluster.grad_status = '1'))
+        GROUP BY tbldistrict.DistrictName";
 
-        // Draw the chart and set the chart values
-        function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-        ['District', 'TotalSavings'],
-        
-        <?php 
-            $select_query = "SELECT tbldistrict.DistrictName as District, SUM(tblslg_member_savings.amount) as TotalSavings
-            FROM tblslg_member_savings 
-            INNER JOIN tbldistrict on tbldistrict.DistrictID = tblslg_member_savings.districtID 
-            GROUP BY tbldistrict.DistrictName";
-            $query_result = mysqli_query($link,$select_query);
-            while($row_val = mysqli_fetch_array($query_result)){
-            echo "['".$row_val['District']."',".$row_val['TotalSavings']."],";
-            }
-        ?>
-        
-        ]);
-
-        // Optional; add a title and set the width and height of the chart
-        var options = {'title':'Savings per District', 'width':490, 'height':250};
-
-        // Display the chart inside the <div> element with id="barchart"
-        var chart = new google.visualization.ColumnChart(document.getElementById('savings_per_district'));
-        chart.draw(data, options);
+        $query_result = mysqli_query($link,$select_query);
+        while($row_val = mysqli_fetch_array($query_result)){               
+            echo "['".$row_val['DistrictName']."',".$row_val['grps']."],";
+            
         }
+        
+    ?>       
+    ]);
+    // Optional; add a title and set the width and height of the chart
+    var options = {'title':'Clusters on Graduation Distribution', 'width':490, 'height':250};
+    var chart = new google.visualization.LineChart(document.getElementById('cls_per_district'));
+    chart.draw(data, options);
+    
+    }
     </script> 
 
 
@@ -422,7 +420,7 @@ chart.draw(data, options);
             <div class="container-fluid">                                     
                 <div class ="row">
                     <?php
-                        if ($_SESSION["user_role"] == '00'){echo '<div class="alert alert-warning" role="alert">You are Logged in as a CIMIS Guest Please Get Registered! <a href="auth-register-2.php">here ..</a></div>';}
+                        echo '<h3><div class="alert alert-danger" role="alert">Pilot Graduation</div></h3>';
                     ?>
                     <div class="col-xl-6">
                         <div class="card">
@@ -436,120 +434,7 @@ chart.draw(data, options);
                                             <th>Target</th>
                                             <th></th>
                                             <tbody>
-                                                <tr>
-                                                    <th scope="row"><i class='fas fa-house-user' style='font-size:18px'></i></th>
-                                                    <td>HHs Reached</td>
-                                                    <?php
-                                                            $result = mysqli_query($link, 'SELECT COUNT(sppCode) AS value_sum FROM tblbeneficiaries'); 
-                                                            $row = mysqli_fetch_assoc($result); 
-                                                            $sum = $row['value_sum'];
-                                                        ?>
-                                                    <td><?php echo "" . number_format($sum);?>  </td>
-                                                    <td><?php echo number_format(70000);?></td>
-                                                    <td><?php if ($_SESSION["user_role"] == '00'){echo '<a href="javascript: void(0);">more..</a>' ;}else{echo '<a href="basic_livelihood_hh_mgt.php">more ..</a>';}  ?></td> 
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row"><i class='fas fa-users' style='font-size:18px'></i></th>
-                                                    <td>SLGs Formed</td>
-                                                    <?php
-                                                        $result = mysqli_query($link, 'SELECT COUNT(groupID) AS value_sum FROM tblgroup WHERE deleted = 0'); 
-                                                        $row = mysqli_fetch_assoc($result); 
-                                                        $sum = $row['value_sum'];
-                                                    ?>
-                                                    <td><?php echo "" . number_format($sum);?></td>
-                                                    <td><?php echo number_format(0);?></td>
-                                                    <td><?php if ($_SESSION["user_role"] == '00'){echo '<a href="javascript: void(0);">more..</a>' ;}else{echo '<a href="basic_livelihood_HH_Nat_reports.php">more ..</a>';}  ?></td>              
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row"><i class='fas fa-book-reader' style='font-size:18px'></i></th>
-                                                    <td>SLGs Trained</td>
-                                                    <?php
-                                                        $result = mysqli_query($link, 'SELECT count(TrainingID) AS total_grps FROM tblgrouptrainings'); 
-                                                        $row = mysqli_fetch_assoc($result); 
-                                                        $sum = $row['total_grps'];
-                                                    ?>
-                                                    <td><?php echo "" . number_format($sum);?></td>
-                                                    <td><?php echo number_format(0);?></td>
-                                                    <td><?php if ($_SESSION["user_role"] == '00'){echo '<a href="javascript: void(0);">more..</a>' ;}else{echo '<a href="basic_livelihood_training_trained_groups.php">more ..</a>';}  ?></td>                         
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row"><i class='fas fa-house-user' style='font-size:18px'></i></th>
-                                                    <td>HHs Trained</td>
-                                                    <?php
-                                                        $result = mysqli_query($link, 'SELECT sum(Males+Females) AS total_hhs_trained FROM tblgrouptrainings'); 
-                                                        $row = mysqli_fetch_assoc($result); 
-                                                        $sumhhs = $row['total_hhs_trained'];
-                                                    ?>
-                                                    <td><?php echo "" . number_format($sumhhs);?></td>
-                                                    <td><?php echo number_format(70000);?></td>
-                                                    <td></td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row"><i class='fas fa-users' style='font-size:18px'></i></th>
-                                                    <td>Clusters Formed</td>
-                                                    <?php
-                                                        $result = mysqli_query($link, 'SELECT COUNT(ClusterID) AS value_cls FROM tblcluster WHERE deleted = 0'); 
-                                                        $row = mysqli_fetch_assoc($result); 
-                                                        $sumcls = $row['value_cls'];
-                                                    ?>
-                                                    <td><?php echo "" . number_format($sumcls);?></td>
-                                                    <td><?php echo number_format(0);?></td>
-                                                    <td></td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row"><i class='fas fa-layer-group' style='font-size:18px;color:darkgoldenrod'></i></th>
-                                                    <td>Clusters Trained</td>
-                                                    <?php
-                                                        $result = mysqli_query($link, 'SELECT count(TrainingID) AS total_grps FROM tblgrouptrainings'); 
-                                                        $row = mysqli_fetch_assoc($result); 
-                                                        $sum = $row['total_grps'];
-                                                    ?>
-                                                    <td><?php echo "" . number_format($sum);?></td>
-                                                    <td><?php echo number_format(0);?></td>
-                                                    <td><?php if ($_SESSION["user_role"] == '00'){echo '<a href="javascript: void(0);">more..</a>' ;}else{echo '<a href="basic_livelihood_training_trained_groups.php">more ..</a>';}  ?></td>                         
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row"><i class='fas fa-layer-group' style='font-size:18px;color:darkgoldenrod'></i></th>
-                                                    <td>Coops Formed</td>
-                                                    <?php
-                                                        $result = mysqli_query($link, 'SELECT count(groupID) AS total_slgs FROM tblgroup where registered_group = "1"'); 
-                                                        $row = mysqli_fetch_assoc($result); 
-                                                        $total_slgs = $row['total_slgs'];
-
-                                                        $resultcls2 = mysqli_query($link, 'SELECT count(ClusterID) AS total_cls2 FROM tblcluster where registered_group = "1"'); 
-                                                        $rowcls2 = mysqli_fetch_assoc($resultcls2); 
-                                                        $total_cls2 = $rowcls2['total_cls2'];
-                                                        
-                                                    ?>
-                                                    <td><?php echo "" . number_format($total_slgs+$total_cls2);?></td>
-                                                    <td><?php echo number_format(0);?></td>
-                                                    <td><?php if ($_SESSION["user_role"] == '00'){echo '<a href="javascript: void(0);">more..</a>' ;}else{echo '<a href="slg_coop_formation_reports.php">more ..</a>';}  ?></td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row"><i class='fas fa-layer-group' style='font-size:18px;color:darkgoldenrod'></i></th>
-                                                    <td>JSGs Formed</td>
-                                                    <?php
-                                                        $result = mysqli_query($link, 'SELECT COUNT(recID) AS value_total FROM tbljsg'); 
-                                                        $row = mysqli_fetch_assoc($result); 
-                                                        $total = $row['value_total'];
-                                                    ?>
-                                                    <td><?php echo "" . number_format($total);?></td>
-                                                    <td><?php echo number_format(0);?></td>
-                                                    <td><?php if ($_SESSION["user_role"] == '00'){echo '<a href="javascript: void(0);">more..</a>' ;}else{echo '<a href="slg_jsg_reports.php">more ..</a>';}  ?></td>                         
-                                                </tr>
                                                 
-                                                <tr>
-                                                    <th scope="row"><i class='fas fa-hiking' style='font-size:18px; color:chocolate'></i></th>
-                                                    <td>Youths Linked</td>
-                                                    <?php
-                                                        $result = mysqli_query($link, 'SELECT COUNT(recID) AS v_total FROM tblycs'); 
-                                                        $row = mysqli_fetch_assoc($result); 
-                                                        $v_total = $row['v_total'];
-                                                    ?>
-                                                    <td><?php echo "" . number_format($v_total);?></td>
-                                                    <td><?php echo number_format(0);?></td>
-                                                    <td><?php if ($_SESSION["user_role"] == '00'){echo '<a href="javascript: void(0);">more..</a>' ;}else{echo '<a href="slg_ycs_reports.php">more ..</a>';}  ?></td>                         
-                                                </tr>
                                                 <tr>
                                                     <th scope="row"><i class='fas fa-school' style='font-size:18px;color:cadetblue'></i></th>
                                                     <td>SLGs on Graduation</td>
@@ -592,44 +477,7 @@ chart.draw(data, options);
                                                     <td></td>
                                                 </tr>
 
-                                                <tr>
-                                                    <th scope="row"><i class='fas fa-industry' style='font-size:18px; color:crimson'></i></th>
-                                                    <td>SLGs In Prod. VC</td>
-                                                    <?php
-                                                        $result = mysqli_query($link, 'SELECT COUNT(groupID) AS v_total FROM tblgroup where vc_status = "1"'); 
-                                                        $row = mysqli_fetch_assoc($result); 
-                                                        $v_total = $row['v_total'];
-                                                    ?>
-                                                    <td><?php echo "" . number_format($v_total);?></td>
-                                                    <td><?php echo number_format(0);?></td>
-                                                    <td></td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row"><i class='fa fa-globe' style='font-size:18px; color:green'></i></th>
-                                                    <td>Safeguard Plans</td>
-                                                    <?php
-                                                        $select_query_esmp = "SELECT COUNT(planID) as TotalESMPs FROM tblsafeguard_group_plans";
-                                                        $query_result_esmp = mysqli_query($link,$select_query_esmp);
-                                                        $row_val = mysqli_fetch_array($query_result_esmp);
-                                                        $totalesmps =  $row_val['TotalESMPs'];
-                                                    ?>
-                                                    <td><?php echo "" . number_format($totalesmps);?></td>
-                                                    <td><?php echo number_format(0);?></td>
-                                                    <td></td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row"><i class='fas fa-dollar-sign' style='font-size:18px; color:green'></i></th>
-                                                    <td>Savings Mobilised</td>
-                                                    <?php 
-                                                        $select_query = "SELECT SUM(amount) as TotalSavings FROM tblslg_member_savings";
-                                                        $query_result = mysqli_query($link,$select_query);
-                                                        $row_val = mysqli_fetch_array($query_result);
-                                                        $CurSavings =  floatval($row_val['TotalSavings']);
-                                                    ?>
-                                                    <td><?php echo "MK", number_format("$CurSavings",2);?></td>
-                                                    <td><?php echo number_format(0);?></td>
-                                                    <td><?php if ($_SESSION["user_role"] == '00'){echo '<a href="javascript: void(0);">more..</a>' ;}else{echo '<a href="basic_livelihood_savings_members_reports.php">more ..</a>';}  ?></td>
-                                                </tr>
+                                               
                                             </tbody>
                                         </table>
                                     </div>
@@ -638,8 +486,8 @@ chart.draw(data, options);
                             </div>
                         </div>
                         <div class ="row">
-                            <div class="card border border-success">                               
-                                <div id="test1"></div> 
+                            <div class="card border border-success">  
+                                <div id="actual_hhs"></div>
                             </div>
                         </div>
                     </div>
@@ -650,21 +498,14 @@ chart.draw(data, options);
                                 <div id="grps_per_district"></div> 
                             </div>
                         </div>
+                       
                         <div class ="row">
                             <div class="card border border-success">  
-                                <div id="savings_per_district"></div>
+                                
+                                <div id="cls_per_district"></div>
                             </div>
                         </div>
-                        <div class ="row">
-                            <div class="card border border-success">  
-                                <div id="actual_hhs"></div> 
-                            </div>
-                        </div>
-                        <div class ="row">
-                            <div class="card border border-success">                               
-                                <div id="jsgs_per_district"></div> 
-                            </div>
-                        </div>
+                        
                     </div>
                 </div>
             </div>

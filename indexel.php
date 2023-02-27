@@ -15,48 +15,7 @@
 <?php include 'layouts/body.php'; ?>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script> <!-- for pie chart -->
 
-<?php
-    function month_name($month)
-    {
-        if($month == 1){
-            $mname ='Jan';
-        }
-        if($month == 2){
-            $mname ='Feb';
-        }
-        if($month == 3){
-            $mname ='Mar';
-        }
-        if($month == 4){
-            $mname ='Apr';
-        }
-        if($month == 5){
-            $mname ='May';
-        }
-        if($month == 6){
-            $mname ='Jun';
-        }
-        if($month == 7){
-            $mname ='Jul';
-        }
-        if($month == 8){
-            $mname ='Aug';
-        }
-        if($month == 9){
-            $mname ='Sep';
-        }
-        if($month == 10){
-            $mname ='Oct';
-        }
-        if($month == 11){
-            $mname ='Nov';
-        }
-        if($month == 12){
-            $mname ='Dec';
-        }
-        return $mname;
-    }
-?>
+
 
 <?php 
     $query="SELECT tbldistrict.DistrictName,COUNT(tblgroup.groupname) as grps, sum(tblgroup.MembersM) as smales, sum(MembersF) as sfemales, SUM(tblgroupsavings.Amount) as sAmount
@@ -230,7 +189,7 @@ chart.draw(data, options);
         var options = {
             title: 'Coops Formed Per District',
             hAxis: {title: ''},
-            vAxis: {title: 'No HHs'},
+            vAxis: {title: 'No. Coops'},
             legend: 'none',
             series: {
             0: { color: '#002364' },
@@ -288,33 +247,7 @@ chart.draw(data, options);
         }
     </script> 
 
-<script type="text/javascript">
-        // Load google charts
-        google.charts.load('current', {'packages':['corechart']});
-        google.charts.setOnLoadCallback(drawChart);
 
-        // Draw the chart and set the chart values
-        function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-        ['Month', 'Amount'],
-        <?php 
-            $select_query = "select month as Month1, count(distinct hh_code) as Households, sum(amount) as Amount from tblslg_member_savings group by month";
-            $query_result = mysqli_query($link,$select_query);
-            while($row_val = mysqli_fetch_array($query_result)){
-                $mon = month_name($row_val['Month1']);
-            echo "['".$mon."',".$row_val['Amount']."],";
-            }
-        ?>   
-        ]);
-
-        // Optional; add a title and set the width and height of the chart
-        var options = {'title':'', 'width':740, 'height':250};
-
-        // Display the chart inside the <div> element with id="barchart"
-        var chart = new google.visualization.ColumnChart(document.getElementById('barchart_1'));
-        chart.draw(data, options);
-        }
-    </script> 
 
 <script type="text/javascript">
         // Load google charts
@@ -431,8 +364,9 @@ chart.draw(data, options);
         <div class="page-content">
             <div class="container-fluid">                                     
                 <div class ="row">
+                    
                     <?php
-                        if ($_SESSION["user_role"] == '00'){echo '<div class="alert alert-warning" role="alert">You are Logged in as a CIMIS Guest Please Get Registered! <a href="auth-register-2.php">here ..</a></div>';}
+                        echo '<h3><div class="alert alert-danger" role="alert">Enhanced Livelihood</div></h3>';
                     ?>
                     <div class="col-xl-6">
                         <div class="card">
@@ -494,9 +428,9 @@ chart.draw(data, options);
 
                                                 <tr>
                                                     <th scope="row"><i class='fas fa-industry' style='font-size:18px; color:crimson'></i></th>
-                                                    <td>SLGs In Prod. VC</td>
+                                                    <td>Clusters In Prod. VC</td>
                                                     <?php
-                                                        $result = mysqli_query($link, 'SELECT COUNT(groupID) AS v_total FROM tblgroup where vc_status = "1"'); 
+                                                        $result = mysqli_query($link, 'SELECT COUNT(ClusterID) AS v_total FROM tblcluster where vc_mapped = "1"'); 
                                                         $row = mysqli_fetch_assoc($result); 
                                                         $v_total = $row['v_total'];
                                                     ?>
@@ -507,15 +441,14 @@ chart.draw(data, options);
                                                 </tr>
                                                 <tr>
                                                     <th scope="row"><i class='fas fa-farm' style='font-size:18px; color:green'></i></th>
-                                                    <td>SLGs In Lesp Prod</td>
+                                                    <td>Clusters In Lesp Prod</td>
                                                     <?php
-                                                        $select_query_esmp = "SELECT COUNT(planID) as TotalESMPs FROM tblsafeguard_group_plans";
-                                                        $query_result_esmp = mysqli_query($link,$select_query_esmp);
-                                                        $row_val = mysqli_fetch_array($query_result_esmp);
-                                                        $totalesmps =  $row_val['TotalESMPs'];
+                                                        $query = mysqli_query($link,"SELECT COUNT(recID) as Total FROM tblvc_lesp");
+                                                        $row = mysqli_fetch_assoc($query);
+                                                        $Total =  $row['Total'];
                                                     ?>
                                                     <td><?php echo number_format(0);?></td>
-                                                    <td><?php echo "" . number_format($totalesmps);?></td>
+                                                    <td><?php echo "" . number_format($Total);?></td>
                                                     
                                                     <td></td>
                                                 </tr>
@@ -626,30 +559,48 @@ chart.draw(data, options);
 
                                                 <tr>
                                                     <th scope="row"><i class='fas fa-industry' style='font-size:18px; color:crimson'></i></th>
-                                                    <td>SLGs In Prod. VC</td>
+                                                    <td>Clusters In Production Value Chains</td>
                                                     <?php
-                                                        $result = mysqli_query($link, 'SELECT COUNT(groupID) AS v_total FROM tblgroup where vc_status = "1"'); 
+                                                        $result = mysqli_query($link, 'SELECT COUNT(ClusterID) AS v_total_nr FROM tblcluster where ((vc_mapped = "1") and (regionID = "01"))'); 
                                                         $row = mysqli_fetch_assoc($result); 
-                                                        $v_total = $row['v_total'];
+                                                        $v_total_nr = $row['v_total_nr'];
+
+                                                        $result2 = mysqli_query($link, 'SELECT COUNT(ClusterID) AS v_total_cr FROM tblcluster where ((vc_mapped = "1") and (regionID = "02"))'); 
+                                                        $row2 = mysqli_fetch_assoc($result2); 
+                                                        $v_total_cr = $row2['v_total_cr'];
+
+                                                        $result3 = mysqli_query($link, 'SELECT COUNT(ClusterID) AS v_total_sr FROM tblcluster where ((vc_mapped = "1") and (regionID = "03"))'); 
+                                                        $row3 = mysqli_fetch_assoc($result3); 
+                                                        $v_total_sr = $row3['v_total_sr'];
+
                                                     ?>
-                                                    <td><?php echo number_format(0);?></td>
-                                                    <td><?php echo "" . number_format($v_total);?></td>
-                                                    
-                                                    <td></td>
+                                                    <td><?php echo number_format($v_total_nr);?></td>
+                                                    <td><?php echo number_format($v_total_cr);?></td>
+                                                    <td><?php echo number_format($v_total_sr);?></td>
                                                 </tr>
                                                 <tr>
                                                     <th scope="row"><i class='fas fa-farm' style='font-size:18px; color:green'></i></th>
-                                                    <td>SLGs In Lesp Prod</td>
+                                                    <td>Clusters In LESP Production</td>
                                                     <?php
-                                                        $select_query_esmp = "SELECT COUNT(planID) as TotalESMPs FROM tblsafeguard_group_plans";
-                                                        $query_result_esmp = mysqli_query($link,$select_query_esmp);
-                                                        $row_val = mysqli_fetch_array($query_result_esmp);
-                                                        $totalesmps =  $row_val['TotalESMPs'];
+                                                        $query1 = mysqli_query($link,"SELECT COUNT(recID) as Total_nr FROM tblvc_lesp inner join tblcluster on
+                                                        tblvc_lesp.ClusterID = tblcluster.ClusterID where (tblcluster.regionID = '01')");
+                                                        $row1 = mysqli_fetch_assoc($query1);
+                                                        $Total_nr =  $row1['Total_nr'];
+
+                                                        $query2 = mysqli_query($link,"SELECT COUNT(recID) as Total_cr FROM tblvc_lesp inner join tblcluster on
+                                                        tblvc_lesp.ClusterID = tblcluster.ClusterID where (tblcluster.regionID = '02')");
+                                                        $row2 = mysqli_fetch_assoc($query2);
+                                                        $Total_cr =  $row2['Total_cr'];
+
+                                                        $query3 = mysqli_query($link,"SELECT COUNT(recID) as Total_sr FROM tblvc_lesp inner join tblcluster on
+                                                        tblvc_lesp.ClusterID = tblcluster.ClusterID where (tblcluster.regionID = '03')");
+                                                        $row3 = mysqli_fetch_assoc($query3);
+                                                        $Total_sr =  $row3['Total_sr'];
+
                                                     ?>
-                                                    <td><?php echo number_format(0);?></td>
-                                                    <td><?php echo "" . number_format($totalesmps);?></td>
-                                                    
-                                                    <td></td>
+                                                    <td><?php echo number_format($Total_nr );?></td>
+                                                    <td><?php echo number_format($Total_cr );?></td>
+                                                    <td><?php echo number_format($Total_sr );?></td>
                                                 </tr>
                                                 
                                             </tbody>
