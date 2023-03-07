@@ -78,17 +78,7 @@
                             echo '<button type ="submit" class="btn btn-btn btn-outline-danger w-md">Logout</button>';
                             echo '</form>';
                         }
-                        if (($curPageName == "basic_livelihood.php") or ($curPageName == "index.php") or ($curPageName == "indexbl.php") or ($curPageName == "indexcs.php") or ($curPageName == "indexel.php") or ($curPageName == "indexg.php") or ($curPageName == "index_pc.php") or ($curPageName == "index_dc.php") or ($curPageName == "index_cw.php") )
-                        {
-                            echo '<form method="post" action="logout.php">';
-                            echo '<button type ="submit" class="btn btn-btn btn-outline-danger w-md">Logout</button>';
-                            echo '</form>';
-                        }else
-                        {
-                            echo '<form method="post" action="logout.php">';
-                            echo '<button type ="submit" class="btn btn-btn btn-outline-danger w-md">Logout</button>';
-                            echo '</form>';
-                        }
+                        
 
                     ?> 
 

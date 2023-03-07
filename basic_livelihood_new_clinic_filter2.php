@@ -1,6 +1,6 @@
 <?php include 'layouts/session.php'; ?>
 <?php include 'layouts/head-main.php'; ?>
-
+<?php header("Cache-Control: max-age=300, must-revalidate"); ?>
 <head>
     <title>Psychosocial Clinics</title>
     <?php include 'layouts/head.php'; ?>
