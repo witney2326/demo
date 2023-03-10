@@ -1,6 +1,6 @@
 <?php include 'layouts/session.php'; ?>
 <?php include 'layouts/head-main.php'; ?>
-
+<?php header("Cache-Control: max-age=300, must-revalidate"); ?>
 <head>
     <title>ACSA Management</title>
     <?php include 'layouts/head.php'; ?>
@@ -24,6 +24,47 @@
   <script type="text/javascript" 
 src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
   </script>
+    <style>
+        .manure {
+        display: inline-block;
+        width: 18px; height: 18px;
+        background-image: url('icons/manure.png');
+        background-repeat: no-repeat;
+        }
+        .ico-manure { background-position: 0 0; }
+
+        .delete {
+        display: inline-block;
+        width: 18px; height: 18px;
+        background-image: url('icons/delete.png');
+        background-repeat: no-repeat;
+        }
+        .ico-delete { background-position: 0 0; }
+
+        .add {
+        display: inline-block;
+        width: 18px; height: 18px;
+        background-image: url('icons/save.png');
+        background-repeat: no-repeat;
+        }
+        .ico-add { background-position: 0 0; }
+
+        .edit {
+        display: inline-block;
+        width: 18px; height: 18px;
+        background-image: url('icons/edit.png');
+        background-repeat: no-repeat;
+        }
+        .ico-edit { background-position: 0 0; }
+
+        .view {
+        display: inline-block;
+        width: 18px; height: 18px;
+        background-image: url('icons/view.png');
+        background-repeat: no-repeat;
+        }
+        .ico-view { background-position: 0 0; }
+    </style>
 </head>
 
 
@@ -110,10 +151,8 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                             <span class="d-none d-sm-block">Clusters</span>
                                         </a>
                                     </li>
-                                  
-                                    
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link" data-bs-toggle="link" href="basicReports.php" role="link">
+                                        <a class="nav-link" data-bs-toggle="tab" href="javascript:(void);" role="tab">
                                             <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
                                             <span class="d-none d-sm-block">ACSA Reports</span>
                                         </a>
@@ -232,14 +271,14 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                                                     <tr>                                                                                                                      
                                                                                         <th>Cluster code</th>
                                                                                         <th>Cluster Name</th>
-                                                                                        <th>cohort</th>
+                                                                                        <th>Lead Farmer Trained?</th> 
                                                                                         <th>Has a Demo Plot?</th>                                                         
                                                                                         <th>Action</th>                                                            
                                                                                     </tr>
                                                                                 </thead>
                                                                                 <tbody>
                                                                                     <?Php
-                                                                                        $query="select * from tblcluster where regionID = '0'";
+                                                                                        $query="select * from tblcluster";
                                                                                         
                                                                                         if ($result_set = $link->query($query)) {
                                                                                         while($row = $result_set->fetch_array(MYSQLI_ASSOC))
@@ -258,15 +297,15 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
                                                                                         echo "<tr>\n";                                                                                          
                                                                                             echo "<td>".$row["ClusterID"]."</td>\n";
-                                                                                            echo "<td>".$row["ClusterName"]."</td>\n";
-                                                                                            echo "<td>".$row["cohort"]."</td>\n";                                                                                               
+                                                                                            echo "<td>".$row["ClusterName"]."</td>\n";                                                                                              
                                                                                             echo "<td>\t\t$check1</td>\n";
                                                                                             echo "<td>\t\t$check</td>\n";
                                                                                             echo "<td>
-                                                                                                <a href=\"ACSADemoPlotView.php?id=".$row['ClusterID']."\"><i class='far fa-eye' title ='View Status' style='font-size:18px;color:purple'></i></a>
-                                                                                                <a href=\"ACSADemoPlotEdit.php?id=".$row['ClusterID']."\"><i class='far fa-edit' title ='Edit Demo Plot' style='font-size:18px;color:cadetblue'></i></a>                                                                            
-                                                                                                <a href=\"ACSADemoPlotAdd.php?id=".$row['ClusterID']."\"><i class='fas fa-plus' title ='Add Demo Plot' style='font-size:18px;color:green'></i></a>                       
-                                                                                                <a onClick=\"javascript: return confirm('Are You Sure You want To Delete This Demo Plot Record - You Must Be a Supervisor!');\" href=\"ACSADemoPlotDelete.php?id=".$row['ClusterID']."\"><i class='far fa-trash-alt' title ='Delete Demo Plot' style='font-size:18px;color:red'></i></a>
+                                                                                                <a href=\"ACSADemoPlotView.php?id=".$row['ClusterID']."\"><i class='view ico-view' title ='View Status' style='font-size:18px;color:purple'></i></a>
+                                                                                                <a href=\"ACSADemoPlotEdit.php?id=".$row['ClusterID']."\"><i class='edit ico-edit' title ='Edit Demo Plot' style='font-size:18px;color:cadetblue'></i></a>                                                                            
+                                                                                                <a href=\"ACSADemoPlotAdd.php?id=".$row['ClusterID']."\"><i class='add ico-add' title ='Add Demo Plot' style='font-size:18px;color:green'></i></a>
+                                                                                                <a href=\"ACSADemoPlotAdd.php?id=".$row['ClusterID']."\"><i class='manure ico-manure' title ='Add Demo Plot' style='font-size:18px;color:green'></i></a>                        
+                                                                                                <a onClick=\"javascript: return confirm('Are You Sure You want To Delete This Demo Plot Record - You Must Be a Supervisor!');\" href=\"ACSADemoPlotDelete.php?id=".$row['ClusterID']."\"><i class='delete ico-delete' title ='Delete Demo Plot' style='font-size:18px;color:red'></i></a>
                                                                                             </td>\n";
                                                                                         echo "</tr>\n";
                                                                                         }
