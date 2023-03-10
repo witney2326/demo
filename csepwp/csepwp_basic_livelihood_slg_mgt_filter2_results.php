@@ -252,7 +252,8 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                                             <a href=\"basicSLGsavings_csepwp.php?id=".$row['groupID']."\"><i class='fas fa-hand-holding-usd' title='Add SLG Savings' style='font-size:18px;color:brown'></i></a>
                                                                             
                                                                             <a href=\"basicSLG_iga_csepwp.php?id=".$row['groupID']."\"><i class='fas fa-balance-scale' title='Add SLG IGAs' style='font-size:18px;color:cadetgreen'></i></a> 
-                                                                            <a href=\"basicSLGAddMember_csepwp.php?id=".$row['groupID']."\"><i class='fas fa-user-alt' title='Add Beneficiary to SLG' style='font-size:18px;color:brown'></i></a> 
+                                                                            <a href=\"basicSLGAddMember_csepwp.php?id=".$row['groupID']."\"><i class='fas fa-user-alt' title='Add Beneficiary to SLG' style='font-size:18px;color:brown'></i></a>
+                                                                            <a href=\"csepwp_basicSLG_UploadSavings.php?id=".$row['groupID']."\"><i class='fas fa-upload' title='Upload Household Savings' style='font-size:18px;color:brown'></i></a> 
                                                                             <a onClick=\"javascript: return confirm('Are You Sure You want To Delete This SLG - You Must Be a Supervisor');\" href=\"basicSLGdelete_csepwp.php?id=".$row['groupID']."\"><i class='far fa-trash-alt' title='Delete SLG' style='font-size:18px;color:Red'></i></a>
                                                                             </td>\n";
 
