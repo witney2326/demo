@@ -101,7 +101,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                             <?php while($row = $result->fetch_array(MYSQLI_ASSOC)) {
                                 // Start of score variables
                                 $amount = $row["amount"];
-                                $average = $row["average"];
+                                
                                 $members = $row["members"];
                                 $group_records = $row["group_records"];
                                 $functional_committees = $row["functional_committees"];
@@ -109,6 +109,13 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                 $esmps = $row["esmps"];
                                 $on_sanitation = $row["on_sanitation"];
                                 $on_businesses = $row["on_businesses"];
+                                try{
+                                    $average = $amount / $members;
+                                } catch(DivisionByZeroError $e){
+
+                                }
+                                
+                                
                                 // End of score variables
 
                                 // Start of score amount
