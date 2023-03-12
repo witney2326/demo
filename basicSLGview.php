@@ -1,6 +1,6 @@
 <?php include 'layouts/session.php'; ?>
 <?php include 'layouts/head-main.php'; ?>
-<?php header("Cache-Control: max-age=300, must-revalidate"); ?>
+
 <head>
     <title>View SLG</title>
     <?php include 'layouts/head.php'; ?>
@@ -125,6 +125,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                 </div>
                 <!-- end page title -->
 
+                <!-- Start setting group records -->
                 
                 <div class="row">
 
@@ -142,7 +143,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                             <a class="nav-link mb-2" id="v-pills-settings-tab" data-bs-toggle="pill" href="#v-pills-settings2" role="tab" aria-controls="v-pills-settings2" aria-selected="false">YCS Members</a>
                                             <a class="nav-link mb-2" id="v-pills-settings-tab" data-bs-toggle="pill" href="#v-pills-settings3" role="tab" aria-controls="v-pills-settings3" aria-selected="false">JSG Members</a>
                                             <a class="nav-link mb-2" id="v-pills-settings-tab" data-bs-toggle="pill" href="#v-pills-settings4" role="tab" aria-controls="v-pills-settings4" aria-selected="false">Grad Members</a>
-                                            
+                        
                                         </div>
                                     </div>
                                     <div class="col-md-9">
@@ -557,7 +558,6 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                                             <th>SP-Prog</th>
                                                                             <th>Cohort</th>
                                                                             <th>HH-Status</th>
-                                                                            
                                                                             <th>Action</th>
                                                                         </tr>
                                                                     </thead>
@@ -607,6 +607,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                     </div> 
                                                 </p>
                                             </div>
+
                                         </div>
                                     </div>
                                 </div>

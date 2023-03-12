@@ -114,11 +114,11 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                     </div>
                 </div>
                 <!-- end page title -->
-
+                <div style="margin-bottom:10px;margin-top:0px">
+                    <a href="basic_enhanced_criteria.php"><button type="button" class="btn btn-primary">Basic to Enhanced Livelihood Criteria</button></a> 
+                </div>
+                
                 <div class="row">
-                    
-                        </div>
-                    </div>
 
                     <div class="col-xl-12">
                         <div class="card">
