@@ -1,10 +1,13 @@
 <?php include 'layouts/session.php'; ?>
 <?php include 'layouts/head-main.php'; ?>
-<?php header("Cache-Control: max-age=300, must-revalidate"); ?>
+
 <head>
     <title>SLG |Household Savings</title>
     <?php include 'layouts/head.php'; ?>
-    <?php include 'layouts/head-style.php'; ?>  
+    <?php include 'layouts/head-style.php'; ?>
+
+}
+    
 
 </head>
 

@@ -1,6 +1,6 @@
 <?php include 'layouts/session.php'; ?>
 <?php include 'layouts/head-main.php'; ?>
-<?php header("Cache-Control: max-age=300, must-revalidate"); ?>
+
 <head>
     <title>ACSA Management</title>
     <?php include 'layouts/head.php'; ?>
@@ -24,48 +24,6 @@
   <script type="text/javascript" 
 src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
   </script>
-
-<style>
-        .manure {
-        display: inline-block;
-        width: 32px; height: 30px;
-        background-image: url('icons/manure.png');
-        background-repeat: no-repeat;
-        }
-        .ico-manure { background-position: 0 0; }
-
-        .delete {
-        display: inline-block;
-        width: 32px; height: 30px;
-        background-image: url('icons/delete.png');
-        background-repeat: no-repeat;
-        }
-        .ico-delete { background-position: 0 0; }
-
-        .add {
-        display: inline-block;
-        width: 32px; height: 30px;
-        background-image: url('icons/save.png');
-        background-repeat: no-repeat;
-        }
-        .ico-add { background-position: 0 0; }
-
-        .edit {
-        display: inline-block;
-        width: 32px; height: 30px;
-        background-image: url('icons/edit.png');
-        background-repeat: no-repeat;
-        }
-        .ico-edit { background-position: 0 0; }
-
-        .view {
-        display: inline-block;
-        width: 32px; height: 30px;
-        background-image: url('icons/view.png');
-        background-repeat: no-repeat;
-        }
-        .ico-view { background-position: 0 0; }
-    </style>
 </head>
 
 <?php include 'layouts/body.php'; ?>
@@ -169,12 +127,7 @@ if (($_SESSION["user_role"]== '04'))
                                             <span class="d-none d-sm-block">Clusters</span>
                                         </a>
                                     </li>
-                                    <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link" data-bs-toggle="tab" href="javascript:(void);" role="tab">
-                                            <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
-                                            <span class="d-none d-sm-block">ACSA Reports</span>
-                                        </a>
-                                    </li>
+                                  
                                    
                                     
                                 </ul>
@@ -256,6 +209,7 @@ if (($_SESSION["user_role"]== '04'))
                                                                                     <tr>                                                                                                                      
                                                                                         <th>Cluster code</th>
                                                                                         <th>Cluster Name</th>
+                                                                                        <th>cohort</th>
                                                                                         <th>Lead Farmer Trained?</th>
                                                                                         <th>Demo Plot?</th>                                                         
                                                                                         <th>Action</th>                                                                
@@ -282,7 +236,8 @@ if (($_SESSION["user_role"]== '04'))
 
                                                                                         echo "<tr>\n";                                                                                          
                                                                                             echo "<td>".$row["ClusterID"]."</td>\n";
-                                                                                            echo "<td>".$row["ClusterName"]."</td>\n";                                                                          
+                                                                                            echo "<td>".$row["ClusterName"]."</td>\n";
+                                                                                            echo "<td>".$row["cohort"]."</td>\n";                                                                            
                                                                                             echo "<td>\t\t$check1</td>\n";
                                                                                             echo "<td>\t\t$check</td>\n";
                                                                                             echo "<td>
