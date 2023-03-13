@@ -85,7 +85,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
         $iga = mysqli_fetch_array($iga_query);// fetch data
         return $iga['name'];
         }
-
+// test changes
         function prog_name($link, $code)
         {
         $prog_query = mysqli_query($link,"select progName from tblspp where progID='$code'"); // select query
