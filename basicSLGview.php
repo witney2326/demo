@@ -76,7 +76,9 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
         {
         $cls_query = mysqli_query($link,"select ClusterName from tblcluster where ClusterID='$clscode'"); // select query
         $cls = mysqli_fetch_array($cls_query);// fetch data
-        return $cls['ClusterName'];
+        if(isset($cls['ClusterName'])){
+            return $cls['ClusterName'];
+        }
         }
 
         function iga_name($link, $igaID)
@@ -85,12 +87,14 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
         $iga = mysqli_fetch_array($iga_query);// fetch data
         return $iga['name'];
         }
-
+// test changes
         function prog_name($link, $code)
         {
         $prog_query = mysqli_query($link,"select progName from tblspp where progID='$code'"); // select query
         $prog = mysqli_fetch_array($prog_query);// fetch data
-        return $prog['progName'];
+        if(isset($prog['progName'])){
+            return $prog['progName'];
+        }
         }
                
     ?>
