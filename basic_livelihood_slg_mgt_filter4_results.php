@@ -26,36 +26,63 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
   </script>
 </head>
 
-<?php include 'layouts/body.php'; 
-include 'lib.php';
-?>
+<?php include 'layouts/body.php'; ?>
 
-<?php
+<?php 
+
 // var_dump($_POST);
-// die();
-if($_POST["region"] == '' && $_POST["district"] == '00' && $_POST["ta"] == "0000" && $_POST["cw"] == "00") {
-    header("location: basic_livelihood_slg_mgt2.php");
-  } 
-  else if($_POST["region"] !== '00' && $_POST["district"] == "00" && $_POST["ta"] == "0000" && $_POST["cw"] == "00"){
-    $region = $_POST["region"];
-    $district = $_POST["district"];
-    $ta = $_POST["ta"];
-    $cw = $_POST["cw"];
-    
-  }
-  else if($_POST["region"] !== '00' && $_POST["district"] !== '00' && $_POST["ta"] == "0000" && $_POST["cw"] == "00"){
-    $_SESSION["region"] = $_POST["region"];
-    $_SESSION["district"] = $_POST["district"];
-    header("location: basic_livelihood_slg_mgt_filter2_results.php");
-  }
-  else if($_POST["region"] !== '00' && $_POST["district"] !== '00' && $_POST["ta"] !== "0000" && $_POST["cw"] == "00"){
-    header("location: basic_livelihood_slg_mgt_filter3_results.php");
-  } 
-  else if($_POST["region"] !== '00' && $_POST["district"] !== '00' && $_POST["ta"] !== "0000" && $_POST["cw"] !== "00"){
-    $_SESSION["cw"] = $_POST["cw"];
-    header("location: basic_livelihood_slg_mgt_filter4_results.php");
-  }
 
+// die();
+
+    if (($_SESSION["user_role"]== '05')) 
+    {
+        $region = $_SESSION["user_reg"];
+        $district = $_SESSION["user_dis"];
+        $ta = $_SESSION["user_ta"];  
+        $cw = $_POST['cw']; 
+    }
+ else if ((($_SESSION['region']) <> '00') and (($_SESSION['district']) <> '00') and (($_SESSION['ta']) <> '0000') and (($_SESSION['cw']) <> '00'))
+    {
+        $region = $_SESSION['region'];
+        $district = $_SESSION["district"];
+        $ta = $_SESSION["ta"];   
+        $cw = $_SESSION['cw'];
+    }else
+    {
+        $region = $_POST['region'];
+        $district = $_POST['district'];
+        $ta = $_POST['ta'];
+        $cw = $_SESSION['cw'];
+    }
+   
+    
+    function get_rname($link, $rcode)
+        {
+        $rg_query = mysqli_query($link,"select name from tblregion where regionID='$rcode'"); // select query
+        $rg = mysqli_fetch_array($rg_query);// fetch data
+        return $rg['name'];
+        }
+    
+        function dis_name($link, $disID)
+        {
+        $dis_query = mysqli_query($link,"select DistrictName from tbldistrict where DistrictID='$disID'"); // select query
+        $dis = mysqli_fetch_array($dis_query);// fetch data
+        return $dis['DistrictName'];
+        }
+
+        function ta_name($link, $taID)
+        {
+        $ta_query = mysqli_query($link,"select TAName from tblta where TAID='$taID'"); // select query
+        $taname = mysqli_fetch_array($ta_query);// fetch data
+        return $taname['TAName'];
+        }
+
+        function cw_name($link){
+            $caseworkerId = $_SESSION["cw"];
+            $cw_query = mysqli_query($link,"select cwName from tblcw where cwID='$caseworkerId'"); // select query
+            $cwname = mysqli_fetch_array($cw_query);// fetch data
+            return $cwname['cwName'];
+        }
 ?>
 
 <!-- Begin page -->
@@ -79,7 +106,7 @@ if($_POST["region"] == '' && $_POST["district"] == '00' && $_POST["ta"] == "0000
 
                             <div class="page-title-right">
                                 <ol class="breadcrumb m-0">
-                                    <li class="breadcrumb-item"><a href="basic_livelihood.php">SLG Management</a></li>
+                                    <li class="breadcrumb-item"><a href="basic_livelihood.php">Basic Livelihood</a></li>
                                     <li class="breadcrumb-item active">SLG Management</li>
                                 </ol>
                             </div>
@@ -114,13 +141,13 @@ if($_POST["region"] == '' && $_POST["district"] == '00' && $_POST["ta"] == "0000
                                         </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link" data-bs-toggle="link" href="basic_livelihood_slg_mgt_new_cls_filter2_results" role="link">
+                                        <a class="nav-link" data-bs-toggle="link" href="basic_livelihood_slg_mgt_new_cls_filter2_results.php" role="link">
                                             <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
                                             <span class="d-none d-sm-block">New Cluster!</span>
                                         </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link" data-bs-toggle="tab" href="#slg-1" role="tab">
+                                        <a class="nav-link" data-bs-toggle="link" href="basic_livelihood_slg_mgt_new_slg_filter3_results.php" role="tab">
                                             <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
                                             <span class="d-none d-sm-block">New SLG!</span>
                                         </a>
@@ -139,38 +166,27 @@ if($_POST["region"] == '' && $_POST["district"] == '00' && $_POST["ta"] == "0000
                                                 
                                                 <div class="card-body">
                                                     <h5 class="card-title mt-0"></h5>
-                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="basic_livelihood_slg_mgt_filter2_results.php" method ="POST">
+                                                    <form class="row row-cols-lg-auto g-3 align-items-center">
                                                         <div class="col-12">
                                                             <label for="region" class="form-label">Region</label>
                                                             <div>
-                                                                <select class="form-select" name="region" id="region" value ="$region" required>
-                                                                    <option selected value = "<?php echo $region; ?>"><?php echo get_rname($link,$region);?></option>
+                                                                <select class="form-select" name="region" id="region" value ="$region" required >
+                                                                    <option selected value = "<?php echo $region; ?>"><?php echo get_rname($link,$region);?></option> 
                                                                 </select>
                                                             </div>
                                                         </div>
                                                         
                                                         <div class="col-12">
                                                             <label for="district" class="form-label">District</label>
-                                                            <select class="form-select" name="district" id="district" value ="" required disabled>
-                                                                <option></option>
-                                                                    <?php                                                           
-                                                                        $dis_fetch_query = "SELECT DistrictID,DistrictName FROM tbldistrict where regionID ='$region'";                                                  
-                                                                        $result_dis_fetch = mysqli_query($link, $dis_fetch_query);                                                                       
-                                                                        $i=0;
-                                                                            while($DB_ROW_Dis = mysqli_fetch_array($result_dis_fetch)) {
-                                                                        ?>
-                                                                        <option value="<?php echo $DB_ROW_Dis["DistrictID"]; ?>">
-                                                                            <?php echo $DB_ROW_Dis["DistrictName"]; ?></option><?php
-                                                                            $i++;
-                                                                                }
-                                                                    ?>
+                                                            <select class="form-select" name="district" id="district" value ="$district" required >
+                                                                <option selected value = "<?php echo $district; ?>"><?php echo dis_name($link,$district);?></option>  
                                                             </select>
                                                         </div>
 
                                                         <div class="col-12">
                                                             <label for="ta" class="form-label">Traditional Authority</label>
-                                                            <select class="form-select" name="ta" id="ta" required disabled>
-                                                                
+                                                            <select class="form-select" name="ta" id="ta" required >
+                                                                <option selected value = "<?php echo $ta;?>"><?php echo ta_name($link,$ta);?></option>
                                                                 
                                                             </select>
                                                             <div class="invalid-feedback">
@@ -179,12 +195,12 @@ if($_POST["region"] == '' && $_POST["district"] == '00' && $_POST["ta"] == "0000
                                                         </div>
                                                         <div class="col-12">
                                                             <label for="ta" class="form-label">Case Worker</label>
-                                                            <select class="form-select" name="cw" id="cw"  required disabled>
-                                                                <option selected value="00"></option>
+                                                            <select class="form-select" name="cw" id="cw"  required>
+                                                                <option selected value="<?php echo $_SESSION["cw"]; ?>"><?php echo cw_name($link); ?></option>
                                                             </select>
                                                         </div>
                                                         <div class="col-12">
-                                                            <!-- <button type="submit" class="btn btn-btn btn-outline-primary w-md" name="Submit" value="Submit">Submit</button> -->
+                                                            
                                                             <INPUT TYPE="button" class="btn btn-btn btn-outline-secondary w-md" VALUE="Back" onClick="history.go(-1);">
                                                         </div>
                                                     </form>                                             
@@ -215,7 +231,7 @@ if($_POST["region"] == '' && $_POST["district"] == '00' && $_POST["ta"] == "0000
                                                 <div class="col-12">
                                                     <div class="card border border-primary">
                                                     <div class="card-header bg-transparent border-primary">
-                                                        <h5 class="my-0 text-primary">Savings and Loan Groups in <?php echo get_rname($link,$region);?> Region</h5>
+                                                        <h5 class="my-0 text-default">SLGs in TA <?php echo ta_name($link,$ta);?> </h5>
                                                     </div>
                                                     <div class="card-body">
                                                     <h7 class="card-title mt-0"></h7>
@@ -241,7 +257,7 @@ if($_POST["region"] == '' && $_POST["district"] == '00' && $_POST["ta"] == "0000
 
                                                                 <tbody>
                                                                     <?Php
-                                                                        $query="select * from tblgroup where ((regionID = '$region') and (deleted = '0'))";
+                                                                        $query="select * from tblgroup where ((TAID = '$ta') and (cwID = '$cw') and (deleted = '0'))";
  
                                                                         //Variable $link is declared inside config.php file & used here
                                                                         
@@ -250,13 +266,12 @@ if($_POST["region"] == '' && $_POST["district"] == '00' && $_POST["ta"] == "0000
                                                                         { 
                                                                             $grpID = $row["groupID"];
                                                                             $result = mysqli_query($link, "SELECT COUNT(sppCode) AS value_count FROM tblbeneficiaries where groupID = '$grpID'"); 
-                                                                            $row2 = mysqli_fetch_assoc($result); 
-                                                                            $count = $row2['value_count'];
+                                                                            $row_0 = mysqli_fetch_assoc($result); 
+                                                                            $count = $row_0['value_count'];
 
-                                                                            $total = $row["MembersM"]+$row["MembersF"];
-                                                                            echo "<tr>\n";
-                                                                            
-                                                                        
+                                                                            $total = $row["MembersM"] + $row["MembersF"];
+
+                                                                        echo "<tr>\n";                                               
                                                                             echo "<td>".$row["groupID"]."</td>\n";
                                                                             echo "<td>".$row["groupname"]."</td>\n";
                                                                             echo "<td>".$row["cohort"]."</td>\n";
@@ -266,7 +281,7 @@ if($_POST["region"] == '' && $_POST["district"] == '00' && $_POST["ta"] == "0000
                                                                             echo "<td>\t\t$count</td>\n";
                                                                             
                                                                             echo "<td>
-                                                                            <a href=\"basicSLGview.php?id=".$row['groupID']."\"><i class='far fa-eye' title='View SLG' style='font-size:18px; color:purple'></i></a>
+                                                                            <a href=\"basicSLGview.php?id=".$row['groupID']."\"><i class='far fa-eye' title='View SLG' style='font-size:18px;color:purple'></i></a>
                                                                             <a href=\"basicSLGedit.php?id=".$row['groupID']."\"><i class='far fa-edit' title='Edit SLG Details' style='font-size:18px;color:orange'></i></a>
                                                                             <a href=\"basicSLGsavings.php?id=".$row['groupID']."\"><i class='fas fa-hand-holding-usd' title='Add SLG Savings' style='font-size:18px;color:brown'></i></a>
                                                                             

@@ -26,6 +26,11 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
   </script>
 </head>
 
+<?php
+// var_dump($_SESSION);
+// die(); 
+?>
+
 <?php include 'layouts/body.php'; ?>
 
 <?php 
@@ -36,8 +41,8 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
    }
     else
     {
-    $region = $_POST['region'];
-    $district = $_POST['district'];   
+        $region = $_SESSION["region"];
+        $district = $_SESSION["district"];  
     }
  
     
@@ -156,7 +161,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
                                                         <div class="col-12">
                                                             <label for="ta" class="form-label">Traditional Authority</label>
-                                                            <select class="form-select" name="ta" id="ta" required >
+                                                            <select class="form-select" name="ta" id="ta" required disabled>
                                                                 <option></option>
                                                                 <?php                                                           
                                                                         $ta_fetch_query = "SELECT TAID,TAName FROM tblta where DistrictID = '$district'";                                                  
@@ -176,7 +181,13 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                             </div>
                                                         </div>
                                                         <div class="col-12">
-                                                            <button type="submit" class="btn btn-btn btn-outline-primary w-md" name="Submit" value="Submit">Submit</button>
+                                                            <label for="ta" class="form-label">Case Worker</label>
+                                                            <select class="form-select" name="cw" id="cw"  required disabled>
+                                                                <option selected value="00"></option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-12">
+                                                            <!-- <button type="submit" class="btn btn-btn btn-outline-primary w-md" name="Submit" value="Submit">Submit</button> -->
                                                             <INPUT TYPE="button" class="btn btn-btn btn-outline-secondary w-md" VALUE="Back" onClick="history.go(-1);">
                                                             
                                                         </div>

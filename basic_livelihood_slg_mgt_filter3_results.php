@@ -30,11 +30,15 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
 <?php 
 
+// var_dump($_SESSION);
+
+// die();
+
     if (($_SESSION["user_role"]== '05')) 
     {
         $region = $_SESSION["user_reg"];
         $district = $_SESSION["user_dis"];
-        $ta = $_SESSION["user_ta"];   
+        $ta = $_SESSION["user_ta"];
     }
  else if ((($_SESSION['region']) <> '00') and (($_SESSION['district']) <> '00') and (($_SESSION['ta']) <> '0000'))
     {
@@ -178,6 +182,12 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                             <div class="invalid-feedback">
                                                                 Please select a valid TA.
                                                             </div>
+                                                        </div>
+                                                        <div class="col-12">
+                                                            <label for="ta" class="form-label">Case Worker</label>
+                                                            <select class="form-select" name="cw" id="cw"  required disabled>
+                                                                <option selected value="00"></option>
+                                                            </select>
                                                         </div>
                                                         <div class="col-12">
                                                             

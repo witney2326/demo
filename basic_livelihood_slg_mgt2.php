@@ -49,6 +49,21 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                 }
                 });
             }
+        
+        function getCw(val) 
+            {
+
+                console.log("value>>>>", val);
+                $.ajax({
+                type: "POST",
+                url: "get_cw.php",
+                data:`disid=${val}`,
+                
+                success: function(data){
+                $("#cw").html(data);
+                }
+                });
+            }
 
     </script>
 </head>
@@ -81,6 +96,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
         $region = $_GET['region'];
         $district = $_GET['district'];
         $ta = $_GET['ta'];
+        $cw = $_GET['cw'];
     }
 ?>
 
@@ -104,7 +120,8 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                             <h4 class="mb-sm-0 font-size-18">SLG Management</h4>
 
                             <div class="page-title-right">
-                                <ol class="breadcrumb m-0">
+
+                            <ol class="breadcrumb m-0">
                                     <li class="breadcrumb-item"><a href="basic_livelihood.php">Basic Livelihood</a></li>
                                     <li class="breadcrumb-item active">SLG Management</li>
                                 </ol>
@@ -203,8 +220,15 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
                                                         <div class="col-12">
                                                             <label for="ta" class="form-label">Traditional Authority</label>
-                                                            <select class="form-select" name="ta" id="ta" required >
+                                                            <select class="form-select" name="ta" id="ta" onChange="getCw(this.value)" required >
                                                                 <option selected value="0000">Select TA</option>
+                                                            </select>
+                                                        </div>
+
+                                                        <div class="col-12">
+                                                            <label for="ta" class="form-label">Case Worker</label>
+                                                            <select class="form-select" name="cw" id="cw"  required >
+                                                                <option selected value="00">Select Caseworker</option>
                                                             </select>
                                                         </div>
 

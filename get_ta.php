@@ -6,7 +6,7 @@ if(!empty($_POST["disid"]))
  
 
  $stmt = mysqli_query($link,"SELECT TAID,TAName FROM tblta WHERE DistrictID ='$id'");
- ?><option selected="selected">Select TA </option><?php
+ ?><option value="0000" selected="selected">Select TA </option><?php
  while($row=mysqli_fetch_array($stmt))
  {
   ?>
