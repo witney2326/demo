@@ -29,6 +29,40 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 <?php include 'layouts/body.php'; ?>
 
 <?php 
+// var_dump($_POST["region"]);
+// var_dump($_POST["district"]);
+// var_dump($_POST["ta"]);
+// var_dump($_POST["cw"]);
+// die();
+
+ $_SESSION["region"] = $_POST["region"];
+ $_SESSION["district"] = $_POST["district"];
+ $_SESSION["ta"] = $_POST["ta"];
+ $_SESSION["cw"] = $_POST["cw"];
+ 
+ $region = $_POST["region"];
+ $district = $_POST["district"];
+ $ta = $_POST["ta"];
+ $cw = $_POST["cw"];
+
+?>
+
+<?php
+   if($region !== '00' && $district !== '00' && $ta !== "0000" && $cw == "00"){
+    header("location: basic_livelihood_slg_mgt_cls_filter3_results.php");
+  }
+  else if($region !== '00' && $district !== '00' && $ta !== "0000" && $cw !== "00"){
+    header("location: basic_livelihood_slg_mgt_cls_filter4_results.php");
+  }
+  else if($region !== '00' && $district !== '00' && $ta == "0000" && $cw == "00"){
+    header("location: basic_livelihood_slg_mgt_cls_filter2_results.php");
+  }
+  else if($region == '' && $district == '00' && $ta == "0000" && $cw == "00"){
+    header("location: basic_livelihood_clusters.php");
+  }
+?>
+
+<?php 
   
     $region = $_POST['region'];
     
@@ -46,6 +80,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
         return $dis['DistrictName'];
         }
 ?>
+
 
 <!-- Begin page -->
 <div id="layout-wrapper">
@@ -140,7 +175,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                         
                                                         <div class="col-12">
                                                             <label for="district" class="form-label">District</label>
-                                                            <select class="form-select" name="district" id="district" value ="" required>
+                                                            <select class="form-select" name="district" id="district" value ="" required disabled>
                                                                 <option></option>
                                                                     <?php                                                           
                                                                         $dis_fetch_query = "SELECT DistrictID,DistrictName FROM tbldistrict where regionID =$region";                                                  
@@ -170,7 +205,12 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                             </div>
                                                         </div>
                                                         <div class="col-12">
-                                                            <button type="submit" class="btn btn-btn btn-outline-primary w-md" name="Submit" value="Submit">Submit</button>
+                                                            <label for="ta" class="form-label">Case Worker</label>
+                                                            <select class="form-select" name="cw" id="cw"  required disabled>
+                                                                <option selected value="00"></option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-12">
                                                             <INPUT TYPE="button" class="btn btn-btn btn-outline-secondary w-md" VALUE="Back" onClick="history.go(-1);">
                                                         </div>
                                                     </form>                                             
@@ -225,7 +265,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                         </thead>
                                                         <tbody>
                                                             <?Php
-                                                                $query="select * from tblcluster where ((regionID = '0') and (deleted ='0'))";
+                                                                $query="select * from tblcluster where ((regionID = '$region') and (deleted ='0'))";
 
                                                                 //Variable $link is declared inside config.php file & used here
                                                                 

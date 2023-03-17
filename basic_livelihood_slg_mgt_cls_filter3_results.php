@@ -40,9 +40,9 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
     }
     else
     {
-    $region = $_POST['region'];
-    $district = $_POST['district'];
-    $ta = $_POST['ta'];
+    $region = $_SESSION['region'];
+    $district = $_SESSION['district'];
+    $ta = $_SESSION['ta'];
     }
     
     function get_rname($link, $rcode)
@@ -174,6 +174,12 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                                 
                                                             </select>
                                                             
+                                                        </div>
+                                                        <div class="col-12">
+                                                            <label for="ta" class="form-label">Case Worker</label>
+                                                            <select class="form-select" name="cw" id="cw"  required disabled>
+                                                                <option selected value="00"></option>
+                                                            </select>
                                                         </div>
                                                         <div class="col-12">
                                                             

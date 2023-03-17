@@ -28,6 +28,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 <script>
       function getDistrict(val) 
         {
+            console.log("value", val);
             $.ajax({
             type: "POST",
             url: "get_district.php",
@@ -53,7 +54,6 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
         function getCw(val) 
             {
 
-                console.log("value>>>>", val);
                 $.ajax({
                 type: "POST",
                 url: "get_cw.php",
@@ -61,6 +61,81 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                 
                 success: function(data){
                 $("#cw").html(data);
+                }
+                });
+            }
+
+            function getDistrict2(val) 
+        {
+            $.ajax({
+            type: "POST",
+            url: "get_district.php",
+            data:'regID='+val,
+            success: function(data)
+                    {
+                    $("#district2").html(data);
+                    }
+                });
+        }
+
+        function getTa2(val) 
+            {
+                $.ajax({
+                type: "POST",
+                url: "get_ta.php",
+                data:'disid='+val,
+                success: function(data){
+                $("#ta2").html(data);
+                }
+                });
+            }
+        
+            function getDistrict3(val) 
+        {
+            $.ajax({
+            type: "POST",
+            url: "get_district.php",
+            data:'regID='+val,
+            success: function(data)
+                    {
+                    $("#district3").html(data);
+                    }
+                });
+        }
+
+        function getTa3(val) 
+            {
+                $.ajax({
+                type: "POST",
+                url: "get_ta.php",
+                data:'disid='+val,
+                success: function(data){
+                $("#ta3").html(data);
+                }
+                });
+            }
+
+            function getDistrict4(val) 
+        {
+            $.ajax({
+            type: "POST",
+            url: "get_district.php",
+            data:'regID='+val,
+            success: function(data)
+                    {
+                    $("#district4").html(data);
+                    }
+                });
+        }
+
+        function getTa4(val) 
+            {
+                $.ajax({
+                type: "POST",
+                url: "get_ta.php",
+                data:'disid='+val,
+                success: function(data){
+                $("#ta4").html(data);
                 }
                 });
             }
@@ -344,22 +419,23 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                 
                                                 <div class="card-body">
                                                     <h5 class="card-title mt-0"></h5>
-                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="basic_livelihood_slg_mgt_new_cls_filter1_results.php" method ="POST" >
-                                                        <div class="col-12">
-                                                            <label for="region" class="form-label">Region</label>
-                                                            
-                                                                <select class="form-select" name="region" id="region"  required>
-                                                                    <option ></option>
+                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="basic_livelihood_slg_mgt_new_cls_filter2_results.php" method ="POST" >
+                                                    
+                                                    <div class="col-12">
+                                                            <label for="region2" class="form-label">Region</label>
+                                                            <div>
+                                                                <select class="form-select" name="region2" id="region2"  onChange="getDistrict2(this.value);" required>
+                                                                    <option></option>
                                                                     <?php                                                           
-                                                                            $dis_fetch_query = "SELECT regionID, name FROM tblregion";                                                  
-                                                                            $result_dis_fetch = mysqli_query($link, $dis_fetch_query);                                                                       
+                                                                            $dis_fetch_query2 = "SELECT regionID, name FROM tblregion";                                                  
+                                                                            $result_dis_fetch2 = mysqli_query($link, $dis_fetch_query2);                                                                       
                                                                             $i=0;
-                                                                                while($DB_ROW_reg = mysqli_fetch_array($result_dis_fetch)) {
+                                                                                while($DB_ROW_reg2 = mysqli_fetch_array($result_dis_fetch2)) {
                                                                             ?>
                                                                             <option value ="<?php
-                                                                                    echo $DB_ROW_reg["regionID"];?>">
+                                                                                    echo $DB_ROW_reg2["regionID"];?>">
                                                                                 <?php
-                                                                                    echo $DB_ROW_reg["name"];
+                                                                                    echo $DB_ROW_reg2["name"];
                                                                                 ?>
                                                                             </option>
                                                                             <?php
@@ -370,51 +446,22 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                                 <div class="invalid-feedback">
                                                                     Please select a valid Malawi region.
                                                                 </div>
-                                                            
+                                                            </div>
                                                         </div>
                                                         
                                                         <div class="col-12">
-                                                            <label for="district" class="form-label">District</label>
-                                                            <select class="form-select" name="district" id="district" value ="$district" required disabled>
-                                                                <option selected value="$district" ></option>
-                                                                    <?php                                                           
-                                                                        $dis_fetch_query = "SELECT DistrictID,DistrictName FROM tbldistrict";                                                  
-                                                                        $result_dis_fetch = mysqli_query($link, $dis_fetch_query);                                                                       
-                                                                        $i=0;
-                                                                            while($DB_ROW_Dis = mysqli_fetch_array($result_dis_fetch)) {
-                                                                        ?>
-                                                                        <option value="<?php echo $DB_ROW_Dis["DistrictID"]; ?>">
-                                                                            <?php echo $DB_ROW_Dis["DistrictName"]; ?></option><?php
-                                                                            $i++;
-                                                                                }
-                                                                    ?>
+                                                            <label for="district2" class="form-label">District</label>
+                                                            <select class="form-select" name="district2" id="district2" onChange="getTa2(this.value);" required>
+                                                                <option selected value="00">Select District</option>
                                                             </select>
-                                                            <div class="invalid-feedback">
-                                                                Please select a valid Malawi district.
-                                                            </div>
                                                         </div>
 
                                                         <div class="col-12">
                                                             <label for="ta" class="form-label">Traditional Authority</label>
-                                                            <select class="form-select" name="ta" id="ta" required disabled>
-                                                                <option selected  value="$ta"></option>
-                                                                <?php                                                           
-                                                                        $ta_fetch_query = "SELECT TAName FROM tblta";                                                  
-                                                                        $result_ta_fetch = mysqli_query($link, $ta_fetch_query);                                                                       
-                                                                        $i=0;
-                                                                            while($DB_ROW_ta = mysqli_fetch_array($result_ta_fetch)) {
-                                                                        ?>
-                                                                        <option>
-                                                                            <?php echo $DB_ROW_ta["TAName"]; ?></option><?php
-                                                                            $i++;
-                                                                                }
-                                                                    ?>
+                                                            <select class="form-select" name="ta2" id="ta2" onChange="getCw2(this.value)" required >
+                                                                <option selected value="0000">Select TA</option>
                                                             </select>
-                                                            <div class="invalid-feedback">
-                                                                Please select a valid TA.
-                                                            </div>
                                                         </div>
-
                                                         
                                                         <div class="col-12">
                                                             <button type="submit" class="btn btn-primary w-md" name="Submit" value="Submit">Submit</button>
@@ -435,22 +482,22 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                 
                                                 <div class="card-body">
                                                     <h5 class="card-title mt-0"></h5>
-                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="basic_livelihood_slg_mgt_new_slg_filter1_results.php" method ="POST" >
-                                                        <div class="col-12">
-                                                            <label for="region" class="form-label">Region</label>
-                                                            
-                                                                <select class="form-select" name="region" id="region"  required>
-                                                                    <option ></option>
+                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="basic_livelihood_slg_mgt_new_slg_filter3_results.php" method ="POST" >
+                                                    <div class="col-12">
+                                                            <label for="region2" class="form-label">Region</label>
+                                                            <div>
+                                                                <select class="form-select" name="region4" id="region4"  onChange="getDistrict4(this.value);" required>
+                                                                    <option></option>
                                                                     <?php                                                           
-                                                                            $dis_fetch_query = "SELECT regionID, name FROM tblregion";                                                  
-                                                                            $result_dis_fetch = mysqli_query($link, $dis_fetch_query);                                                                       
+                                                                            $dis_fetch_query2 = "SELECT regionID, name FROM tblregion";                                                  
+                                                                            $result_dis_fetch2 = mysqli_query($link, $dis_fetch_query2);                                                                       
                                                                             $i=0;
-                                                                                while($DB_ROW_reg = mysqli_fetch_array($result_dis_fetch)) {
+                                                                                while($DB_ROW_reg2 = mysqli_fetch_array($result_dis_fetch2)) {
                                                                             ?>
                                                                             <option value ="<?php
-                                                                                    echo $DB_ROW_reg["regionID"];?>">
+                                                                                    echo $DB_ROW_reg2["regionID"];?>">
                                                                                 <?php
-                                                                                    echo $DB_ROW_reg["name"];
+                                                                                    echo $DB_ROW_reg2["name"];
                                                                                 ?>
                                                                             </option>
                                                                             <?php
@@ -461,49 +508,21 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                                 <div class="invalid-feedback">
                                                                     Please select a valid Malawi region.
                                                                 </div>
-                                                            
+                                                            </div>
                                                         </div>
                                                         
                                                         <div class="col-12">
-                                                            <label for="district" class="form-label">District</label>
-                                                            <select class="form-select" name="district" id="district" value ="$district" required disabled>
-                                                                <option selected value="$district" ></option>
-                                                                    <?php                                                           
-                                                                        $dis_fetch_query = "SELECT DistrictID,DistrictName FROM tbldistrict";                                                  
-                                                                        $result_dis_fetch = mysqli_query($link, $dis_fetch_query);                                                                       
-                                                                        $i=0;
-                                                                            while($DB_ROW_Dis = mysqli_fetch_array($result_dis_fetch)) {
-                                                                        ?>
-                                                                        <option value="<?php echo $DB_ROW_Dis["DistrictID"]; ?>">
-                                                                            <?php echo $DB_ROW_Dis["DistrictName"]; ?></option><?php
-                                                                            $i++;
-                                                                                }
-                                                                    ?>
+                                                            <label for="district2" class="form-label">District</label>
+                                                            <select class="form-select" name="district4" id="district4" onChange="getTa4(this.value);" required>
+                                                                <option selected value="00">Select District</option>
                                                             </select>
-                                                            <div class="invalid-feedback">
-                                                                Please select a valid Malawi district.
-                                                            </div>
                                                         </div>
 
                                                         <div class="col-12">
                                                             <label for="ta" class="form-label">Traditional Authority</label>
-                                                            <select class="form-select" name="ta" id="ta" required disabled>
-                                                                <option selected  value="$ta"></option>
-                                                                <?php                                                           
-                                                                        $ta_fetch_query = "SELECT TAName FROM tblta";                                                  
-                                                                        $result_ta_fetch = mysqli_query($link, $ta_fetch_query);                                                                       
-                                                                        $i=0;
-                                                                            while($DB_ROW_ta = mysqli_fetch_array($result_ta_fetch)) {
-                                                                        ?>
-                                                                        <option>
-                                                                            <?php echo $DB_ROW_ta["TAName"]; ?></option><?php
-                                                                            $i++;
-                                                                                }
-                                                                    ?>
+                                                            <select class="form-select" name="ta4" id="ta4" onChange="getCw4(this.value)" required >
+                                                                <option selected value="0000">Select TA</option>
                                                             </select>
-                                                            <div class="invalid-feedback">
-                                                                Please select a valid TA.
-                                                            </div>
                                                         </div>
 
                                                         
@@ -693,14 +712,6 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                         </div>
                     </div>
                 </div>
-
-
-                
-
-                    
-
-               
-
 
                 <!-- Collapse -->
                 

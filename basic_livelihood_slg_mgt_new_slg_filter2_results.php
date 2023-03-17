@@ -17,8 +17,9 @@
 <?php include 'layouts/body.php'; ?>
 
 <?php 
-    $region = $_POST['region'];
-    $district =$_POST['district'];
+    $region4 = $_POST['region4'];
+    $district4 =$_POST['district4'];
+    $ta4 =$_POST['ta4'];
     
     function get_rname($link, $rcode)
         {
@@ -111,7 +112,7 @@
                                                 <label for="region" class="form-label">Region</label>
                                                 <div>
                                                     <select class="form-select" name="region" id="region" value ="<?php echo $region;?>" required>
-                                                        <option selected value = "<?php echo $region;?>"><?php echo get_rname($link,$region);?></option>
+                                                        <option selected value = "<?php echo $region4;?>"><?php echo get_rname($link,$region4);?></option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -120,7 +121,7 @@
                                                 <label for="district" class="form-label">District</label>
                                                 <div>
                                                     <select class="form-select" name="district" id="district" value ="$district" required>
-                                                        <option selected value = "<?php echo $district;?>"><?php echo dis_name($link,$district);?></option>
+                                                        <option selected value = "<?php echo $district4;?>"><?php echo dis_name($link,$district4);?></option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -130,7 +131,7 @@
                                                 <select class="form-select" name="ta" id="ta" required >
                                                     <option selected  value="$ta"></option>
                                                     <?php                                                           
-                                                            $ta_fetch_query = "SELECT TAID,TAName FROM tblta where DistrictID = $district";                                                  
+                                                            $ta_fetch_query = "SELECT TAID,TAName FROM tblta where DistrictID = $district4";                                                  
                                                             $result_ta_fetch = mysqli_query($link, $ta_fetch_query);                                                                       
                                                             $i=0;
                                                                 while($DB_ROW_ta = mysqli_fetch_array($result_ta_fetch)) {

@@ -28,16 +28,22 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
 <?php include 'layouts/body.php'; ?>
 
+
+
 <?php 
-    if (($_SESSION["user_role"]== '04')) 
+
+    if (($_SESSION["user_role"]== '05')) 
     {
         $region = $_SESSION["user_reg"];
-        $district = $_SESSION["user_dis"]; 
+        $district = $_SESSION["user_dis"];
+        $ta = $_SESSION["user_ta"];   
     }
     else
     {
     $region = $_SESSION['region'];
     $district = $_SESSION['district'];
+    $ta = $_SESSION['ta'];
+    $cw = $_SESSION['cw'];
     }
     
     function get_rname($link, $rcode)
@@ -52,6 +58,20 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
         $dis_query = mysqli_query($link,"select DistrictName from tbldistrict where DistrictID='$disID'"); // select query
         $dis = mysqli_fetch_array($dis_query);// fetch data
         return $dis['DistrictName'];
+        }
+
+        function ta_name($link, $tacode)
+        {
+        $ta_query = mysqli_query($link,"select TAName from tblta where TAID='$tacode'"); // select query
+        $taname = mysqli_fetch_array($ta_query);// fetch data
+        return $taname['TAName'];
+        }
+
+        function cw_name($link, $cw)
+        {
+        $cw_query = mysqli_query($link,"select cwName from tblcw where cwID='$cw'"); // select query
+        $cwname = mysqli_fetch_array($cw_query);// fetch data
+        return $cwname['cwName'];
         }
 ?>
 
@@ -105,24 +125,24 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                         </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link active"  href="javascript:void(0);" role="tab">
+                                        <a class="nav-link active"  href="javascript:void(0);" role="link">
                                             <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
                                             <span class="d-none d-sm-block">Clusters</span>
                                         </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link" data-bs-toggle="tab" href="#cls-1" role="tab">
+                                        <a class="nav-link" data-bs-toggle="link" href="basic_livelihood_slg_mgt_new_cls_filter2_results.php" role="link">
                                             <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
                                             <span class="d-none d-sm-block">New Cluster!</span>
                                         </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link" data-bs-toggle="tab" href="#slg-1" role="tab">
+                                        <a class="nav-link" data-bs-toggle="link" href="basic_livelihood_slg_mgt_new_slg_filter3_results.php" role="tab">
                                             <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
                                             <span class="d-none d-sm-block">New SLG!</span>
                                         </a>
                                     </li>
-                                    
+                                   
                                     
                                 </ul>
                                 <!-- Tab panes -->
@@ -136,7 +156,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                 
                                                 <div class="card-body">
                                                     <h5 class="card-title mt-0"></h5>
-                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="basic_livelihood_slg_mgt_cls_filter3_results.php" method ="POST">
+                                                    <form class="row row-cols-lg-auto g-3 align-items-center" >
                                                         <div class="col-12">
                                                             <label for="region" class="form-label">Region</label>
                                                             <div>
@@ -149,7 +169,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                         <div class="col-12">
                                                             <label for="district" class="form-label">District</label>
                                                             <div>
-                                                                <select class="form-select" name="district" id="district" value ="$district" required>
+                                                                <select class="form-select" name="district" id="district" value ="<?php echo $district;?>" required>
                                                                     <option selected value = "<?php echo $district;?>"><?php echo dis_name($link,$district);?></option>
                                                                 </select>
                                                             </div>
@@ -157,32 +177,20 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
                                                         <div class="col-12">
                                                             <label for="ta" class="form-label">Traditional Authority</label>
-                                                            <select class="form-select" name="ta" id="ta" required disabled>
-                                                                <option></option>
-                                                                    <?php                                                           
-                                                                        $ta_fetch_query = "SELECT TAID,TAName FROM tblta where DistrictID =$district";                                                  
-                                                                        $result_ta_fetch = mysqli_query($link, $ta_fetch_query);                                                                       
-                                                                        $i=0;
-                                                                            while($DB_ROW_ta = mysqli_fetch_array($result_ta_fetch)) {
-                                                                        ?>
-                                                                        <option value="<?php echo $DB_ROW_ta["TAID"]; ?>">
-                                                                            <?php echo $DB_ROW_ta["TAName"]; ?></option><?php
-                                                                            $i++;
-                                                                                }
-                                                                    ?>
+                                                            <select class="form-select" name="ta" id="ta" required>
+                                                                <option selected value = "<?php echo $ta;?>"><?php echo ta_name($link,$ta);?></option>
                                                                 
                                                             </select>
-                                                            <div class="invalid-feedback">
-                                                                Please select a valid TA.
-                                                            </div>
+                                                            
                                                         </div>
                                                         <div class="col-12">
                                                             <label for="ta" class="form-label">Case Worker</label>
-                                                            <select class="form-select" name="cw" id="cw"  required disabled>
-                                                                <option selected value="00"></option>
+                                                            <select class="form-select" name="cw" id="cw"  required>
+                                                                <option selected value="<?php echo $ta;?>"><?php echo cw_name($link,$cw);?></option>
                                                             </select>
                                                         </div>
                                                         <div class="col-12">
+                                                            
                                                             <INPUT TYPE="button" class="btn btn-btn btn-outline-secondary w-md" VALUE="Back" onClick="history.go(-1);">
                                                         </div>
                                                     </form>                                             
@@ -234,7 +242,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                                 </thead>
                                                                 <tbody>
                                                                     <?Php
-                                                                        $query="select * from tblcluster where ((districtID = '$district') and (deleted = '0')) order by ClusterName";
+                                                                        $query="select * from tblcluster where ((taID = '$ta') and (cwID = '$cw') and (deleted = '0'))";
  
                                                                         //Variable $link is declared inside config.php file & used here
                                                                         

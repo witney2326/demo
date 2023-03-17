@@ -27,8 +27,9 @@
     }
  else
     {
-    $region = $_POST['region'];
-    $district = $_POST['district'];
+    $region = $_SESSION['region'];
+    $district = $_SESSION['district'];
+    $ta = $_SESSION['ta'];
       
     }
 ?>
@@ -127,7 +128,7 @@
                                                                 <div class="mb-2">
                                                                     <label for="region" class="form-label">Region</label>
                                                                     <select class="form-select" name="region" id="region" required>
-                                                                        <option selected value="<?php echo $region;?>"><?php echo get_rname($link,$region);?></option>
+                                                                        <option selected value="<?php echo $_POST["region2"];?>"><?php echo get_rname($link,$_POST["region2"]);?></option>
                                                                         
                                                                     </select>
                                                                     <div class="invalid-feedback">
@@ -139,7 +140,7 @@
                                                                 <div class="mb-2">
                                                                     <label for="district" class="form-label">District</label>
                                                                     <select class="form-select" name="district" id="district"  required>
-                                                                        <option  value= <?php echo $district; ?> ><?php echo dis_name($link,$district); ?></option> 
+                                                                        <option  value= <?php echo $_POST["district2"]; ?> ><?php echo dis_name($link,$_POST["district2"]); ?></option> 
                                                                     </select>
                                                                 </div>
                                                             </div>
@@ -147,7 +148,7 @@
                                                                 <div class="mb-2">
                                                                     <label for="ta" class="form-label">TA</label>
                                                                     <select class="form-select" name="ta" id="ta" required>
-                                                                        <option value= <?php echo $ta; ?> ><?php echo ta_name($link,$ta); ?></option>
+                                                                        <option value= <?php echo $_POST["ta2"]; ?> ><?php echo ta_name($link,$_POST["ta2"]); ?></option>
                                                                     </select>
                                                                 </div>
                                                             </div>

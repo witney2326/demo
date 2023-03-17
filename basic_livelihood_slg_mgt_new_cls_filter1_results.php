@@ -18,7 +18,9 @@
 
 <?php 
    
-    $region = $_POST['region'];
+
+    // var_dump($_POST);
+    // die();
     
     function get_rname($link, $rcode)
         {
@@ -117,45 +119,46 @@
                                                 <div class="card-body">
                                                     <h5 class="card-title mt-0"></h5>
                                                     <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="basic_livelihood_slg_mgt_new_cls_filter2_results.php" method ="POST">
-                                                        <div class="col-12">
-                                                            <label for="region" class="form-label">Region</label>
+                                                    <div class="col-12">
+                                                            <label for="region2" class="form-label">Region</label>
                                                             <div>
-                                                                <select class="form-select" name="region" id="region" value ="<?php echo $region;?>" required>
-                                                                    <option selected value = "<?php echo $region;?>"><?php echo get_rname($link,$region);?></option>
+                                                                <select class="form-select" name="region2" id="region2"  onChange="getDistrict2(this.value);" required>
+                                                                    <option></option>
+                                                                    <?php                                                           
+                                                                            $dis_fetch_query2 = "SELECT regionID, name FROM tblregion";                                                  
+                                                                            $result_dis_fetch2 = mysqli_query($link, $dis_fetch_query2);                                                                       
+                                                                            $i=0;
+                                                                                while($DB_ROW_reg2 = mysqli_fetch_array($result_dis_fetch2)) {
+                                                                            ?>
+                                                                            <option value ="<?php
+                                                                                    echo $DB_ROW_reg2["regionID"];?>">
+                                                                                <?php
+                                                                                    echo $DB_ROW_reg2["name"];
+                                                                                ?>
+                                                                            </option>
+                                                                            <?php
+                                                                                $i++;
+                                                                                    }
+                                                                        ?>
                                                                 </select>
+                                                                <div class="invalid-feedback">
+                                                                    Please select a valid Malawi region.
+                                                                </div>
                                                             </div>
                                                         </div>
                                                         
                                                         <div class="col-12">
-                                                            <label for="district" class="form-label">District</label>
-                                                            <select class="form-select" name="district" id="district" value ="$district" required>
-                                                                <option selected value="$district" ></option>
-                                                                    <?php                                                           
-                                                                        $dis_fetch_query = "SELECT DistrictID,DistrictName FROM tbldistrict where regionID =$region";                                                  
-                                                                        $result_dis_fetch = mysqli_query($link, $dis_fetch_query);                                                                       
-                                                                        $i=0;
-                                                                            while($DB_ROW_Dis = mysqli_fetch_array($result_dis_fetch)) {
-                                                                        ?>
-                                                                        <option value="<?php echo $DB_ROW_Dis["DistrictID"]; ?>">
-                                                                            <?php echo $DB_ROW_Dis["DistrictName"]; ?></option><?php
-                                                                            $i++;
-                                                                                }
-                                                                    ?>
+                                                            <label for="district2" class="form-label">District</label>
+                                                            <select class="form-select" name="district2" id="district2" onChange="getTa2(this.value);" required>
+                                                                <option selected value="00">Select District</option>
                                                             </select>
-                                                            <div class="invalid-feedback">
-                                                                Please select a valid Malawi district.
-                                                            </div>
                                                         </div>
 
                                                         <div class="col-12">
                                                             <label for="ta" class="form-label">Traditional Authority</label>
-                                                            <select class="form-select" name="ta" id="ta" required disabled>
-                                                                <option ></option>
-                                                                
+                                                            <select class="form-select" name="ta2" id="ta2" onChange="getCw2(this.value)" required >
+                                                                <option selected value="0000">Select TA</option>
                                                             </select>
-                                                            <div class="invalid-feedback">
-                                                                Please select a valid TA.
-                                                            </div>
                                                         </div>
                                                         <div class="col-12">
                                                             <button type="submit" class="btn btn-btn btn-outline-primary w-md" name="Submit" value="Submit">Submit</button>
@@ -233,6 +236,32 @@
 
 <!-- Datatable init js -->
 <script src="assets/js/pages/datatables.init.js"></script>
+<script>
+       function getDistrict2(val) 
+        {
+            $.ajax({
+            type: "POST",
+            url: "get_district.php",
+            data:'regID='+val,
+            success: function(data)
+                    {
+                    $("#district2").html(data);
+                    }
+                });
+        }
+
+        function getTa2(val) 
+            {
+                $.ajax({
+                type: "POST",
+                url: "get_ta.php",
+                data:'disid='+val,
+                success: function(data){
+                $("#ta2").html(data);
+                }
+                });
+            }
+</script>
 
 </body>
 
