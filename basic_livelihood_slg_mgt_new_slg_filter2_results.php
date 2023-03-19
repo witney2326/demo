@@ -17,9 +17,8 @@
 <?php include 'layouts/body.php'; ?>
 
 <?php 
-    $region4 = $_POST['region4'];
-    $district4 =$_POST['district4'];
-    $ta4 =$_POST['ta4'];
+    $region = $_POST['region'];
+    $district =$_POST['district'];
     
     function get_rname($link, $rcode)
         {
@@ -89,13 +88,13 @@
                                         </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link" data-bs-toggle="link" href="basic_livelihood_slg_mgt2.php" role="link">
+                                        <a class="nav-link" data-bs-toggle="link" href="basic_livelihood_slg_mgt_check.php" role="link">
                                             <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
                                             <span class="d-none d-sm-block">New Cluster!</span>
                                         </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link active" data-bs-toggle="tab" href="basic_livelihood_slg_mgt2.php" role="tab">
+                                        <a class="nav-link active" data-bs-toggle="tab" href="javascript:void(0);" role="tab">
                                             <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
                                             <span class="d-none d-sm-block">New SLG!</span>
                                         </a>
@@ -112,7 +111,7 @@
                                                 <label for="region" class="form-label">Region</label>
                                                 <div>
                                                     <select class="form-select" name="region" id="region" value ="<?php echo $region;?>" required>
-                                                        <option selected value = "<?php echo $region4;?>"><?php echo get_rname($link,$region4);?></option>
+                                                        <option selected value = "<?php echo $region;?>"><?php echo get_rname($link,$region);?></option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -121,7 +120,7 @@
                                                 <label for="district" class="form-label">District</label>
                                                 <div>
                                                     <select class="form-select" name="district" id="district" value ="$district" required>
-                                                        <option selected value = "<?php echo $district4;?>"><?php echo dis_name($link,$district4);?></option>
+                                                        <option selected value = "<?php echo $district;?>"><?php echo dis_name($link,$district);?></option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -131,7 +130,7 @@
                                                 <select class="form-select" name="ta" id="ta" required >
                                                     <option selected  value="$ta"></option>
                                                     <?php                                                           
-                                                            $ta_fetch_query = "SELECT TAID,TAName FROM tblta where DistrictID = $district4";                                                  
+                                                            $ta_fetch_query = "SELECT TAID,TAName FROM tblta where DistrictID = $district";                                                  
                                                             $result_ta_fetch = mysqli_query($link, $ta_fetch_query);                                                                       
                                                             $i=0;
                                                                 while($DB_ROW_ta = mysqli_fetch_array($result_ta_fetch)) {

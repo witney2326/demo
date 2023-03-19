@@ -49,9 +49,15 @@ if($_POST["region"] == '' && $_POST["district"] == '00' && $_POST["ta"] == "0000
     header("location: basic_livelihood_slg_mgt_filter2_results.php");
   }
   else if($_POST["region"] !== '00' && $_POST["district"] !== '00' && $_POST["ta"] !== "0000" && $_POST["cw"] == "00"){
+    $_SESSION["region"] = $_POST["region"];
+    $_SESSION["district"] = $_POST["district"];
+    $_SESSION["ta"] = $_POST["ta"];
     header("location: basic_livelihood_slg_mgt_filter3_results.php");
   } 
   else if($_POST["region"] !== '00' && $_POST["district"] !== '00' && $_POST["ta"] !== "0000" && $_POST["cw"] !== "00"){
+    $_SESSION["region"] = $_POST["region"];
+    $_SESSION["district"] = $_POST["district"];
+    $_SESSION["ta"] = $_POST["ta"];
     $_SESSION["cw"] = $_POST["cw"];
     header("location: basic_livelihood_slg_mgt_filter4_results.php");
   }
@@ -108,19 +114,19 @@ if($_POST["region"] == '' && $_POST["district"] == '00' && $_POST["ta"] == "0000
                                         </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="link"  href="basic_livelihood_clusters_check.php" role="link">
+                                        <a class="link"  href="basic_livelihood_clusters.php" role="link">
                                             <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
                                             <span class="d-none d-sm-block">Clusters</span>
                                         </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link" data-bs-toggle="link" href="basic_livelihood_slg_mgt_new_cls_filter2_results" role="link">
+                                        <a class="nav-link" href="basic_livelihood_slg_mgt_new_cls_filter1_results.php" role="link">
                                             <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
                                             <span class="d-none d-sm-block">New Cluster!</span>
                                         </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link" data-bs-toggle="tab" href="#slg-1" role="tab">
+                                        <a class="nav-link" href="basic_livelihood_slg_mgt_new_slg_filter1_results.php" role="tab">
                                             <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
                                             <span class="d-none d-sm-block">New SLG!</span>
                                         </a>

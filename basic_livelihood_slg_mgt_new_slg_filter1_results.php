@@ -92,7 +92,7 @@
                                         </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link" data-bs-toggle="link" href="basic_livelihood_slg_mgt_check.php" role="link">
+                                        <a class="nav-link" data-bs-toggle="link" href="basic_livelihood_slg_mgt_new_cls_filter1_results.php" role="link">
                                             <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
                                             <span class="d-none d-sm-block">New Cluster!</span>
                                         </a>
@@ -117,22 +117,22 @@
                                                 
                                                 <div class="card-body ">
                                                     <h5 class="card-title mt-0"></h5>
-                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="basic_livelihood_slg_mgt_new_slg_filter2_results.php" method ="POST">
+                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="basic_livelihood_slg_mgt_new_slg_filter3_results.php" method ="POST">
                                                     <div class="col-12">
-                                                            <label for="region" class="form-label">Region</label>
+                                                            <label for="region2" class="form-label">Region</label>
                                                             <div>
-                                                                <select class="form-select" name="region5" id="region5"  onChange="getDistrict(this.value);" required>
+                                                                <select class="form-select" name="region5" id="region5"  onChange="getDistrict5(this.value);" required>
                                                                     <option></option>
                                                                     <?php                                                           
-                                                                            $dis_fetch_query = "SELECT regionID, name FROM tblregion";                                                  
-                                                                            $result_dis_fetch = mysqli_query($link, $dis_fetch_query);                                                                       
+                                                                            $dis_fetch_query2 = "SELECT regionID, name FROM tblregion";                                                  
+                                                                            $result_dis_fetch2 = mysqli_query($link, $dis_fetch_query2);                                                                       
                                                                             $i=0;
-                                                                                while($DB_ROW_reg = mysqli_fetch_array($result_dis_fetch)) {
+                                                                                while($DB_ROW_reg2 = mysqli_fetch_array($result_dis_fetch2)) {
                                                                             ?>
                                                                             <option value ="<?php
-                                                                                    echo $DB_ROW_reg["regionID"];?>">
+                                                                                    echo $DB_ROW_reg2["regionID"];?>">
                                                                                 <?php
-                                                                                    echo $DB_ROW_reg["name"];
+                                                                                    echo $DB_ROW_reg2["name"];
                                                                                 ?>
                                                                             </option>
                                                                             <?php
@@ -147,18 +147,19 @@
                                                         </div>
                                                         
                                                         <div class="col-12">
-                                                            <label for="district" class="form-label">District</label>
-                                                            <select class="form-select" name="district5" id="district"5 onChange="getTa(this.value);" required>
+                                                            <label for="district2" class="form-label">District</label>
+                                                            <select class="form-select" name="district5" id="district5" onChange="getTa5(this.value);" required>
                                                                 <option selected value="00">Select District</option>
                                                             </select>
                                                         </div>
 
                                                         <div class="col-12">
                                                             <label for="ta" class="form-label">Traditional Authority</label>
-                                                            <select class="form-select" name="ta5" id="ta5" onChange="getCw(this.value)" required >
+                                                            <select class="form-select" name="ta5" id="ta5" onChange="getCw5(this.value)" required >
                                                                 <option selected value="0000">Select TA</option>
                                                             </select>
                                                         </div>
+
 
                                                         <div class="col-12">
                                                             <button type="submit" class="btn btn-btn btn-outline-primary w-md" name="Submit" value="Submit">Submit</button>
