@@ -28,7 +28,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 <script>
       function getDistrict(val) 
         {
-            console.log("value", val);
+            
             $.ajax({
             type: "POST",
             url: "get_district.php",

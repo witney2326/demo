@@ -19,19 +19,9 @@
 
 <?php 
     
-    if (($_SESSION["user_role"]== '05')) 
-    {
-        $region = $_SESSION["user_reg"];
-        $district = $_SESSION["user_dis"];
-        $ta = $_SESSION["user_ta"];   
-    }
- else
-    {
-    $region = $_SESSION['region'];
-    $district = $_SESSION['district'];
-    $ta = $_SESSION['ta'];
-      
-    }
+    $_SESSION["region1-2"] = $_POST['region2'];
+    $_SESSION["district1-2"] = $_POST['district2'];
+    $_SESSION["ta1-2"] = $_POST['ta2'];
 ?>
 
 <!-- Begin page -->
@@ -166,8 +156,9 @@
                                                                     <label for="cw" class="form-label">Case Worker</label>
                                                                     <select class="form-select" name="cw" id="cw" required>
                                                                         <option></option>
-                                                                        <?php                                                           
-                                                                                $cw_fetch_query = "SELECT cwID,cwName FROM tblcw where districtID = $district";                                                  
+                                                                        <?php  
+                                                                                $this_district_id = $_POST['district2'];                                                         
+                                                                                $cw_fetch_query = "SELECT cwID,cwName FROM tblcw where districtID = '$this_district_id'";                                                  
                                                                                 $result_cw_fetch = mysqli_query($link, $cw_fetch_query);                                                                       
                                                                                 $i=0;
                                                                                     while($DB_ROW_cw = mysqli_fetch_array($result_cw_fetch)) {

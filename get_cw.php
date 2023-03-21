@@ -8,8 +8,12 @@ include('layouts/config.php');
 
  
  $id=$_POST['disid'];
+ $sql = "SELECT * FROM tblta WHERE TAID='$id'";
+ $result = $link->query($sql);
+ $fetchRow = mysqli_fetch_array($result);
+ $districtid = $fetchRow["DistrictID"];
 
- $stmt = mysqli_query($link,"SELECT * FROM cw WHERE TAID='$id'"); 
+ $stmt = mysqli_query($link,"SELECT * FROM tblcw WHERE districtID='$districtid'"); 
  ?>
  
  <option value="00" selected="selected">Select Caseworker </option><?php
