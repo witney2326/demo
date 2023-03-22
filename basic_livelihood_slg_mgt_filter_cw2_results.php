@@ -30,7 +30,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
 <?php 
 
-// var_dump($_SESSION);
+// var_dump($_POST["cw"]);
 
 // die();
 
@@ -39,8 +39,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
         $region = $_SESSION["user_reg"];
         $district = $_SESSION["user_dis"];
         $ta = $_SESSION["user_ta"];
-
-        header('Location: basic_livelihood_slg_mgt_filter_cw_results.php');
+        $cw = $_POST["cw"];
     }
  else if ((($_SESSION['region']) <> '00') and (($_SESSION['district']) <> '00') and (($_SESSION['ta']) <> '0000'))
     {
@@ -158,7 +157,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                 
                                                 <div class="card-body">
                                                     <h5 class="card-title mt-0"></h5>
-                                                    <form class="row row-cols-lg-auto g-3 align-items-center">
+                                                    <form class="row row-cols-lg-auto g-3 align-items-center" method="POST" action="basic_livelihood_slg_mgt_filter_cw2_results.php">
                                                         <div class="col-12">
                                                             <label for="region" class="form-label">Region</label>
                                                             <div>
@@ -185,14 +184,20 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                                 Please select a valid TA.
                                                             </div>
                                                         </div>
+
                                                         <div class="col-12">
-                                                            <label for="ta" class="form-label">Case Worker</label>
-                                                            <select class="form-select" name="cw" id="cw"  required disabled>
-                                                                <option selected value="00"></option>
+                                                            <label for="ta" class="form-label">Caseworker</label>
+                                                            <select class="form-select" name="cw" id="cw" required >
+                                                                <option selected value = "<?php echo $cw;?>"><?php echo $ta; ?></option>
+                                                                
                                                             </select>
+                                                            <div class="invalid-feedback">
+                                                                Please select a valid Caseworker.
+                                                            </div>
                                                         </div>
+
                                                         <div class="col-12">
-                                                            
+                                                        <button type="submit" class="btn btn-btn btn-outline-primary w-md" name="Submit" value="Submit">Submit</button>
                                                             <INPUT TYPE="button" class="btn btn-btn btn-outline-secondary w-md" VALUE="Back" onClick="history.go(-1);">
                                                         </div>
                                                     </form>                                             
@@ -249,7 +254,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
                                                                 <tbody>
                                                                     <?Php
-                                                                        $query="select * from tblgroup where ((TAID = '$ta') and (deleted = '0'))";
+                                                                        $query="select * from tblgroup where ((TAID = '$ta') and (cwID = '$cw') and (deleted = '0'))";
  
                                                                         //Variable $link is declared inside config.php file & used here
                                                                         

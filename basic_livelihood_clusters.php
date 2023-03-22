@@ -30,7 +30,10 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
 
 <?php 
-    
+    if (($_SESSION["user_role"]== '05')) 
+    {
+        header('Location: basic_livelihood_cls_mgt_filter_cw_results.php');
+    }
     
     function get_rname($link, $rcode)
         {

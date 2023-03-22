@@ -28,32 +28,22 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
 <?php include 'layouts/body.php'; ?>
 
+
+
 <?php 
-
-// var_dump($_SESSION);
-
-// die();
 
     if (($_SESSION["user_role"]== '05')) 
     {
         $region = $_SESSION["user_reg"];
         $district = $_SESSION["user_dis"];
-        $ta = $_SESSION["user_ta"];
-
-        header('Location: basic_livelihood_slg_mgt_filter_cw_results.php');
+        $ta = $_SESSION["user_ta"];   
     }
- else if ((($_SESSION['region']) <> '00') and (($_SESSION['district']) <> '00') and (($_SESSION['ta']) <> '0000'))
+    else
     {
-        $region = $_SESSION['region'];
-        $district = $_SESSION["district"];
-        $ta = $_SESSION["ta"];   
-    }else
-    {
-        $region = $_SESSION['region'];
-        $district = $_SESSION['district'];
-        $ta = $_SESSION['ta'];
+    $region = $_SESSION['region'];
+    $district = $_SESSION['district'];
+    $ta = $_SESSION['ta'];
     }
-   
     
     function get_rname($link, $rcode)
         {
@@ -69,9 +59,9 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
         return $dis['DistrictName'];
         }
 
-        function ta_name($link, $taID)
+        function ta_name($link, $tacode)
         {
-        $ta_query = mysqli_query($link,"select TAName from tblta where TAID='$taID'"); // select query
+        $ta_query = mysqli_query($link,"select TAName from tblta where TAID='$tacode'"); // select query
         $taname = mysqli_fetch_array($ta_query);// fetch data
         return $taname['TAName'];
         }
@@ -94,12 +84,12 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                 <div class="row">
                     <div class="col-12">
                         <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                            <h4 class="mb-sm-0 font-size-18">SLG Management</h4>
+                            <h4 class="mb-sm-0 font-size-18">SLG Clusters</h4>
 
                             <div class="page-title-right">
                                 <ol class="breadcrumb m-0">
-                                    <li class="breadcrumb-item"><a href="basic_livelihood.php">Basic Livelihood</a></li>
-                                    <li class="breadcrumb-item active">SLG Management</li>
+                                    <li class="breadcrumb-item"><a href="basic_livelihood_slg_mgt_check.php">SLG Management</a></li>
+                                    <li class="breadcrumb-item active">Clusters</li>
                                 </ol>
                             </div>
 
@@ -121,13 +111,13 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                 <!-- Nav tabs -->
                                 <ul class="nav nav-pills nav-justified" role="tablist">
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link active" data-bs-toggle="tab" href="#home-1" role="tab">
+                                        <a class="nav-link" data-bs-toggle="link" href="basic_livelihood_slg_mgt_check.php" role="link">
                                             <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
                                             <span class="d-none d-sm-block">SL Groups</span>
                                         </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="link"  href="basic_livelihood_clusters.php" role="link">
+                                        <a class="nav-link active"  href="basic_livelihood_clusters.php" role="link">
                                             <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
                                             <span class="d-none d-sm-block">Clusters</span>
                                         </a>
@@ -144,7 +134,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                             <span class="d-none d-sm-block">New SLG!</span>
                                         </a>
                                     </li>
-                                    
+                                   
                                     
                                 </ul>
                                 <!-- Tab panes -->
@@ -158,41 +148,64 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                 
                                                 <div class="card-body">
                                                     <h5 class="card-title mt-0"></h5>
-                                                    <form class="row row-cols-lg-auto g-3 align-items-center">
+                                                    <form class="row row-cols-lg-auto g-3 align-items-center" method="POST" action="basic_livelihood_cls_mgt_filter_cw2_results.php">
                                                         <div class="col-12">
                                                             <label for="region" class="form-label">Region</label>
                                                             <div>
-                                                                <select class="form-select" name="region" id="region" value ="$region" required >
-                                                                    <option selected value = "<?php echo $region; ?>"><?php echo get_rname($link,$region);?></option> 
+                                                                <select class="form-select" name="region" id="region" value ="<?php echo $region;?>" required>
+                                                                    <option selected value = "<?php echo $region;?>"><?php echo get_rname($link,$region);?></option>
                                                                 </select>
                                                             </div>
                                                         </div>
                                                         
                                                         <div class="col-12">
                                                             <label for="district" class="form-label">District</label>
-                                                            <select class="form-select" name="district" id="district" value ="$district" required >
-                                                                <option selected value = "<?php echo $district; ?>"><?php echo dis_name($link,$district);?></option>  
-                                                            </select>
+                                                            <div>
+                                                                <select class="form-select" name="district" id="district" value ="<?php echo $district;?>" required>
+                                                                    <option selected value = "<?php echo $district;?>"><?php echo dis_name($link,$district);?></option>
+                                                                </select>
+                                                            </div>
                                                         </div>
 
                                                         <div class="col-12">
                                                             <label for="ta" class="form-label">Traditional Authority</label>
-                                                            <select class="form-select" name="ta" id="ta" required >
+                                                            <select class="form-select" name="ta" id="ta" required>
                                                                 <option selected value = "<?php echo $ta;?>"><?php echo ta_name($link,$ta);?></option>
                                                                 
                                                             </select>
-                                                            <div class="invalid-feedback">
-                                                                Please select a valid TA.
+                                                            
+                                                        </div>
+
+                                                        <div class="col-12">
+                                                            <label for="cw" class="form-label">Select Caseworker</label>
+                                                            <div>
+                                                                <select class="form-select" name="cw" id="cw" required>
+                                                                    <option></option>
+                                                                    <?php                                                           
+                                                                            $dis_fetch_query10 = "SELECT cwName, cwID FROM tblcw WHERE districtID='$district'";                                                  
+                                                                            $result_dis_fetch10 = mysqli_query($link, $dis_fetch_query10);                                                                       
+                                                                            $i=0;
+                                                                                while($DB_ROW_reg10 = mysqli_fetch_array($result_dis_fetch10)) {
+                                                                            ?>
+                                                                            <option value ="<?php
+                                                                                    echo $DB_ROW_reg10["cwID"];?>">
+                                                                                <?php
+                                                                                    echo $DB_ROW_reg10["cwName"];
+                                                                                ?>
+                                                                            </option>
+                                                                            <?php
+                                                                                $i++;
+                                                                                    }
+                                                                        ?>
+                                                                </select>
+                                                                <div class="invalid-feedback">
+                                                                    Please select a valid caseworker.
+                                                                </div>
                                                             </div>
                                                         </div>
+
                                                         <div class="col-12">
-                                                            <label for="ta" class="form-label">Case Worker</label>
-                                                            <select class="form-select" name="cw" id="cw"  required disabled>
-                                                                <option selected value="00"></option>
-                                                            </select>
-                                                        </div>
-                                                        <div class="col-12">
-                                                            
+                                                        <button type="submit" class="btn btn-btn btn-outline-primary w-md" name="Submit" value="Submit">Submit</button>
                                                             <INPUT TYPE="button" class="btn btn-btn btn-outline-secondary w-md" VALUE="Back" onClick="history.go(-1);">
                                                         </div>
                                                     </form>                                             
@@ -203,27 +216,27 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                             <div class="row mb-1">
                                                 <div class="col-md-6">
                                                     <div class="input-group" display="inline">
-                                                        <form action="phpSearch.php" method="post">
-                                                            Group Name <input type="text" name="search">
+                                                        <form action="phpSearchClusterN.php" method="post">
+                                                            Cluster Name <input type="text" name="search">
                                                             <input type ="submit" name='Search_Group_Name' value='Search_Name'> 
                                                         </form>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="input-group" display="inline">
-                                                        <form action="phpSearchgc.php" method="post">
-                                                            Group Code <input type="text" name="search">
+                                                        <form action="phpSearchClusterC.php" method="post">
+                                                            Cluster Code <input type="text" name="search">
                                                             <input type ="submit" name='Search_Group_Code' value='Search_Code'> 
                                                         </form>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div>                        
 
                                             <div class="row">
                                                 <div class="col-12">
                                                     <div class="card border border-primary">
                                                     <div class="card-header bg-transparent border-primary">
-                                                        <h5 class="my-0 text-default">SLGs in TA <?php echo ta_name($link,$ta);?> </h5>
+                                                        <h5 class="my-0 text-default">Clusters in <?php echo dis_name($link,$district); ?></h5>
                                                     </div>
                                                     <div class="card-body">
                                                     <h7 class="card-title mt-0"></h7>
@@ -234,52 +247,57 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                                     <tr>
                                                                         
                                                                         
-                                                                        <th>SLG code</th>
-                                                                        <th>SLG Name</th>
+                                                                        <th>Cluster code</th>
+                                                                        <th>Cluster Name</th>
                                                                         <th>cohort</th>
-                                                                        <th><i class="fas fa-male" style="font-size:18px"></i></th>
-                                                                        <th><i class="fas fa-female" style="font-size:18px"></i></th>
-                                                                        <th><i class="fas fa-male" style="font-size:18px"></i>+<i class="fas fa-female" style="font-size:18px"></i></th>
-                                                                        <th>Total-DB</th>
-                                                                        <th>Action On SLG</th>
-                                                                        
+                                                                        <th>GVH</th>
+                                                                        <th>SP Programme</th>
+                                                                        <th>Action</th>
                                                                     </tr>
                                                                 </thead>
-
-
                                                                 <tbody>
                                                                     <?Php
-                                                                        $query="select * from tblgroup where ((TAID = '$ta') and (deleted = '0'))";
+                                                                        $query="select * from tblcluster where ((taID = '$ta') and (deleted = '0'))";
  
                                                                         //Variable $link is declared inside config.php file & used here
                                                                         
                                                                         if ($result_set = $link->query($query)) {
                                                                         while($row = $result_set->fetch_array(MYSQLI_ASSOC))
                                                                         { 
-                                                                            $grpID = $row["groupID"];
-                                                                            $result = mysqli_query($link, "SELECT COUNT(sppCode) AS value_count FROM tblbeneficiaries where groupID = '$grpID'"); 
-                                                                            $row_0 = mysqli_fetch_assoc($result); 
-                                                                            $count = $row_0['value_count'];
-
-                                                                            $total = $row["MembersM"] + $row["MembersF"];
-
-                                                                        echo "<tr>\n";                                               
-                                                                            echo "<td>".$row["groupID"]."</td>\n";
-                                                                            echo "<td>".$row["groupname"]."</td>\n";
-                                                                            echo "<td>".$row["cohort"]."</td>\n";
-                                                                            echo "<td>".$row["MembersM"]."</td>\n";
-                                                                            echo "<td>".$row["MembersF"]."</td>\n";
-                                                                            echo "<td>\t\t$total</td>\n";
-                                                                            echo "<td>\t\t$count</td>\n";
+                                                                            $prog = $row["programID"];
+                                                                            switch ($prog) 
+                                                                                {
+                                                                                    case "01":
+                                                                                        $prgname = "SCT";
+                                                                                    break;
+                                                                                    case "02":
+                                                                                        $prgname = "EPWP";
+                                                                                    break;
+                                                                                    case "03":
+                                                                                        $prgname = "PWP";
+                                                                                    break;
+                                                                                    case "04":
+                                                                                        $prgname = "CSPWP";
+                                                                                    break;
+                                                                                    case "05":
+                                                                                        $prgname = "Masaf4";
+                                                                                    break;
+                                                                                }
+                                                                        echo "<tr>\n";
+                                                                            
+                                                                        
+                                                                            echo "<td>".$row["ClusterID"]."</td>\n";
+                                                                            echo "<td>".$row["ClusterName"]."</td>\n";
+                                                                            echo "<td>".$row["cohort"]."</td>\n";                                                                            
+                                                                            echo "<td>".$row["gvhID"]."</td>\n";
+                                                                            echo "<td>\t\t$prgname</td>\n";
                                                                             
                                                                             echo "<td>
-                                                                            <a href=\"basicSLGview.php?id=".$row['groupID']."\"><i class='far fa-eye' title='View SLG' style='font-size:18px;color:purple'></i></a>
-                                                                            <a href=\"basicSLGedit.php?id=".$row['groupID']."\"><i class='far fa-edit' title='Edit SLG Details' style='font-size:18px;color:orange'></i></a>
-                                                                            <a href=\"basicSLGsavings.php?id=".$row['groupID']."\"><i class='fas fa-hand-holding-usd' title='Add SLG Savings' style='font-size:18px;color:brown'></i></a>
-                                                                            
-                                                                            <a href=\"basicSLG_iga.php?id=".$row['groupID']."\"><i class='fas fa-balance-scale' title='Add SLG IGAs' style='font-size:18px;color:cadetgreen'></i></a> 
-                                                                            <a href=\"basicSLGAddMember.php?id=".$row['groupID']."\"><i class='fas fa-user-alt' title='Add Beneficiary to SLG' style='font-size:18px;color:brown'></i></a> 
-                                                                            <a onClick=\"javascript: return confirm('Are You Sure You want To Delete This SLG - You Must Be a Supervisor');\" href=\"basicSLGdelete.php?id=".$row['groupID']."\"><i class='far fa-trash-alt' title='Delete SLG' style='font-size:18px;color:Red'></i></a>
+                                                                            <a href=\"basicCLSview.php?id=".$row['ClusterID']."\"><i class='far fa-eye' title='View Cluster' style='font-size:18px;color:purple'></i></a>\n";
+                                                                    echo
+                                                                        "<a href=\"basicCLSedit.php?id=".$row['ClusterID']."\"><i class='far fa-edit' title='Edit Cluster Details' style='font-size:18px;color:green'></i></a>\n";
+                                                                    echo 
+                                                                    "<a onClick=\"javascript: return confirm('Are You Sure You want To Delete This Cluster - You Must Be a Supervisor');\" href=\"basicCLSdelete.php?id=".$row['ClusterID']."\"><i class='far fa-trash-alt' title='Delete Cluster' style='font-size:18px;color:Red'></i></a>
                                                                             </td>\n";
 
                                                                         echo "</tr>\n";
@@ -294,11 +312,13 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                         </div>
                                                     </div>     
                                                 </div>            
-                                            </div>  
-                                        </p>
-                                    </div>
+                                            </div> 
+                                </div>
                                     <!-- Here -->
-        
+                                    
+                                    <!-- end here -->
+                                    
+                                   
                                 </div>
 
                             </div>
