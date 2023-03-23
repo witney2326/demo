@@ -33,33 +33,40 @@ include 'lib.php';
 <?php
 // var_dump($_POST);
 // die();
-if($_POST["region"] == '' && $_POST["district"] == '00' && $_POST["ta"] == "0000" && $_POST["cw"] == "00") {
-    header("location: basic_livelihood_slg_mgt2.php");
-  } 
-  else if($_POST["region"] !== '00' && $_POST["district"] == "00" && $_POST["ta"] == "0000" && $_POST["cw"] == "00"){
-    $region = $_POST["region"];
-    $district = $_POST["district"];
-    $ta = $_POST["ta"];
-    $cw = $_POST["cw"];
-    
-  }
-  else if($_POST["region"] !== '00' && $_POST["district"] !== '00' && $_POST["ta"] == "0000" && $_POST["cw"] == "00"){
-    $_SESSION["region"] = $_POST["region"];
-    $_SESSION["district"] = $_POST["district"];
-    header("location: basic_livelihood_slg_mgt_filter2_results.php");
-  }
-  else if($_POST["region"] !== '00' && $_POST["district"] !== '00' && $_POST["ta"] !== "0000" && $_POST["cw"] == "00"){
-    $_SESSION["region"] = $_POST["region"];
-    $_SESSION["district"] = $_POST["district"];
-    $_SESSION["ta"] = $_POST["ta"];
-    header("location: basic_livelihood_slg_mgt_filter3_results.php");
-  } 
-  else if($_POST["region"] !== '00' && $_POST["district"] !== '00' && $_POST["ta"] !== "0000" && $_POST["cw"] !== "00"){
-    $_SESSION["region"] = $_POST["region"];
-    $_SESSION["district"] = $_POST["district"];
-    $_SESSION["ta"] = $_POST["ta"];
-    $_SESSION["cw"] = $_POST["cw"];
-    header("location: basic_livelihood_slg_mgt_filter4_results.php");
+if(!$_SESSION["user_role"] == "03" || !$_SESSION["user_role"] == "04"){
+    if($_POST["region"] == '' && $_POST["district"] == '00' && $_POST["ta"] == "0000" && $_POST["cw"] == "00") {
+        header("location: basic_livelihood_slg_mgt2.php");
+      } 
+      else if($_POST["region"] !== '00' && $_POST["district"] == "00" && $_POST["ta"] == "0000" && $_POST["cw"] == "00"){
+        $region = $_POST["region"];
+        $district = $_POST["district"];
+        $ta = $_POST["ta"];
+        $cw = $_POST["cw"];
+        
+      }
+      else if($_POST["region"] !== '00' && $_POST["district"] !== '00' && $_POST["ta"] == "0000" && $_POST["cw"] == "00"){
+        $_SESSION["region"] = $_POST["region"];
+        $_SESSION["district"] = $_POST["district"];
+        header("location: basic_livelihood_slg_mgt_filter2_results.php");
+      }
+      else if($_POST["region"] !== '00' && $_POST["district"] !== '00' && $_POST["ta"] !== "0000" && $_POST["cw"] == "00"){
+        $_SESSION["region"] = $_POST["region"];
+        $_SESSION["district"] = $_POST["district"];
+        $_SESSION["ta"] = $_POST["ta"];
+        header("location: basic_livelihood_slg_mgt_filter3_results.php");
+      } 
+      else if($_POST["region"] !== '00' && $_POST["district"] !== '00' && $_POST["ta"] !== "0000" && $_POST["cw"] !== "00"){
+        $_SESSION["region"] = $_POST["region"];
+        $_SESSION["district"] = $_POST["district"];
+        $_SESSION["ta"] = $_POST["ta"];
+        $_SESSION["cw"] = $_POST["cw"];
+        header("location: basic_livelihood_slg_mgt_filter4_results.php");
+      }   
+  } else if($_SESSION["user_role"] == "03"){
+       header("location: basic_livelihood_slg_mgt_cood_filter1_results.php");
+  } else {
+     $region = $_SESSION["user_reg"];
+     
   }
 
 ?>

@@ -180,7 +180,12 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                         <div class="col-12">
                                                             <label for="ta" class="form-label">Caseworker</label>
                                                             <select class="form-select" name="cw" id="cw" required >
-                                                                <option selected value = "<?php echo $cw;?>"><?php echo $ta; ?></option>
+                                                                <?php 
+                                                                  $sqlcw = "SELECT * FROM tblcw WHERE cwID = '$cw'";
+                                                                  $sqlcw_result = $link->query($sqlcw);
+                                                                  $sqlcw_result_row = mysqli_fetch_array($sqlcw_result);
+                                                                ?>
+                                                                <option selected value = "<?php echo $cw;?>"><?php echo $sqlcw_result_row["cwName"]; ?></option>
                                                                 
                                                             </select>
                                                             <div class="invalid-feedback">

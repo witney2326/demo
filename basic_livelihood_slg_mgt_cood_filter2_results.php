@@ -26,54 +26,49 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
   </script>
 </head>
 
-<?php include 'layouts/body.php'; ?>
+<?php include 'layouts/body.php'; 
+include 'lib.php';
+?>
 
-<?php 
-
-// var_dump($_POST["cw"]);
-
+<?php
+// var_dump($_POST);
 // die();
-
-    if (($_SESSION["user_role"]== '05')) 
-    {
-        $region = $_SESSION["user_reg"];
-        $district = $_SESSION["user_dis"];
-        $ta = $_SESSION["user_ta"];
+if(!$_SESSION["user_role"] == "03" || !$_SESSION["user_role"] == "04"){
+    if($_POST["region"] == '' && $_POST["district"] == '00' && $_POST["ta"] == "0000" && $_POST["cw"] == "00") {
+        header("location: basic_livelihood_slg_mgt2.php");
+      } 
+      else if($_POST["region"] !== '00' && $_POST["district"] == "00" && $_POST["ta"] == "0000" && $_POST["cw"] == "00"){
+        $region = $_POST["region"];
+        $district = $_POST["district"];
+        $ta = $_POST["ta"];
         $cw = $_POST["cw"];
-    }
- else if ((($_SESSION['region']) <> '00') and (($_SESSION['district']) <> '00') and (($_SESSION['ta']) <> '0000'))
-    {
-        $region = $_SESSION['region'];
-        $district = $_SESSION["district"];
-        $ta = $_SESSION["ta"];   
-    }else
-    {
-        $region = $_SESSION['region'];
-        $district = $_SESSION['district'];
-        $ta = $_SESSION['ta'];
-    }
-   
-    
-    function get_rname($link, $rcode)
-        {
-        $rg_query = mysqli_query($link,"select name from tblregion where regionID='$rcode'"); // select query
-        $rg = mysqli_fetch_array($rg_query);// fetch data
-        return $rg['name'];
-        }
-    
-        function dis_name($link, $disID)
-        {
-        $dis_query = mysqli_query($link,"select DistrictName from tbldistrict where DistrictID='$disID'"); // select query
-        $dis = mysqli_fetch_array($dis_query);// fetch data
-        return $dis['DistrictName'];
-        }
+        
+      }
+      else if($_POST["region"] !== '00' && $_POST["district"] !== '00' && $_POST["ta"] == "0000" && $_POST["cw"] == "00"){
+        $_SESSION["region"] = $_POST["region"];
+        $_SESSION["district"] = $_POST["district"];
+        header("location: basic_livelihood_slg_mgt_filter2_results.php");
+      }
+      else if($_POST["region"] !== '00' && $_POST["district"] !== '00' && $_POST["ta"] !== "0000" && $_POST["cw"] == "00"){
+        $_SESSION["region"] = $_POST["region"];
+        $_SESSION["district"] = $_POST["district"];
+        $_SESSION["ta"] = $_POST["ta"];
+        header("location: basic_livelihood_slg_mgt_filter3_results.php");
+      } 
+      else if($_POST["region"] !== '00' && $_POST["district"] !== '00' && $_POST["ta"] !== "0000" && $_POST["cw"] !== "00"){
+        $_SESSION["region"] = $_POST["region"];
+        $_SESSION["district"] = $_POST["district"];
+        $_SESSION["ta"] = $_POST["ta"];
+        $_SESSION["cw"] = $_POST["cw"];
+        header("location: basic_livelihood_slg_mgt_filter4_results.php");
+      }   
+  } else {
+     $region = $_SESSION["user_reg"];
+     $district = $_SESSION["user_dis"];
+     $ta = $_SESSION["user_ta"];
+     $cw = $_POST["cw"];
+  }
 
-        function ta_name($link, $taID)
-        {
-        $ta_query = mysqli_query($link,"select TAName from tblta where TAID='$taID'"); // select query
-        $taname = mysqli_fetch_array($ta_query);// fetch data
-        return $taname['TAName'];
-        }
 ?>
 
 <!-- Begin page -->
@@ -97,7 +92,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
                             <div class="page-title-right">
                                 <ol class="breadcrumb m-0">
-                                    <li class="breadcrumb-item"><a href="basic_livelihood.php">Basic Livelihood</a></li>
+                                    <li class="breadcrumb-item"><a href="basic_livelihood.php">SLG Management</a></li>
                                     <li class="breadcrumb-item active">SLG Management</li>
                                 </ol>
                             </div>
@@ -157,43 +152,43 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                 
                                                 <div class="card-body">
                                                     <h5 class="card-title mt-0"></h5>
-                                                    <form class="row row-cols-lg-auto g-3 align-items-center" method="POST" action="basic_livelihood_slg_mgt_filter_cw2_results.php">
-                                                        <div class="col-12">
+                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="basic_livelihood_slg_mgt_filter2_results.php" method ="POST">
+                                                    <div class="col-12">
                                                             <label for="region" class="form-label">Region</label>
                                                             <div>
-                                                                <select class="form-select" name="region" id="region" value ="$region" required >
-                                                                    <option selected value = "<?php echo $region; ?>"><?php echo get_rname($link,$region);?></option> 
+                                                                <select class="form-select" name="region" id="region" value ="<?php echo $region;?>" required>
+                                                                    <option selected value = "<?php echo $region;?>"><?php echo get_rname($link,$region);?></option>
                                                                 </select>
                                                             </div>
                                                         </div>
                                                         
                                                         <div class="col-12">
                                                             <label for="district" class="form-label">District</label>
-                                                            <select class="form-select" name="district" id="district" value ="$district" required >
-                                                                <option selected value = "<?php echo $district; ?>"><?php echo dis_name($link,$district);?></option>  
-                                                            </select>
+                                                            <div>
+                                                                <select class="form-select" name="district" id="district" value ="<?php echo $district;?>" required>
+                                                                    <option selected value = "<?php echo $district;?>"><?php echo dis_name($link,$district);?></option>
+                                                                </select>
+                                                            </div>
                                                         </div>
 
                                                         <div class="col-12">
                                                             <label for="ta" class="form-label">Traditional Authority</label>
-                                                            <select class="form-select" name="ta" id="ta" required >
+                                                            <select class="form-select" name="ta" id="ta" required>
                                                                 <option selected value = "<?php echo $ta;?>"><?php echo ta_name($link,$ta);?></option>
                                                                 
                                                             </select>
-                                                            <div class="invalid-feedback">
-                                                                Please select a valid TA.
-                                                            </div>
+                                                            
                                                         </div>
 
                                                         <div class="col-12">
                                                             <label for="ta" class="form-label">Caseworker</label>
                                                             <select class="form-select" name="cw" id="cw" required >
                                                                 <?php 
-                                                                  $sqlcw = "SELECT * FROM tblcw WHERE cwID = '$cw'";
-                                                                  $sqlcw_result = $link->query($sqlcw);
-                                                                  $sqlcw_result_row = mysqli_fetch_array($sqlcw_result);
+                                                                  $mysql = "SELECT * FROM tblcw WHERE cwID='$cw'";
+                                                                  $mysql_result = $link->query($mysql);
+                                                                  $mysql_result_row = mysqli_fetch_array($mysql_result);
                                                                 ?>
-                                                                <option selected value = "<?php echo $cw;?>"><?php echo $sqlcw_result_row["cwName"]; ?></option>
+                                                                <option selected value = "<?php echo $cw;?>"><?php echo $mysql_result_row["cwName"]; ?></option>
                                                                 
                                                             </select>
                                                             <div class="invalid-feedback">
@@ -202,7 +197,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                         </div>
 
                                                         <div class="col-12">
-                                                        <button type="submit" class="btn btn-btn btn-outline-primary w-md" name="Submit" value="Submit">Submit</button>
+                                                            <!-- <button type="submit" class="btn btn-btn btn-outline-primary w-md" name="Submit" value="Submit">Submit</button> -->
                                                             <INPUT TYPE="button" class="btn btn-btn btn-outline-secondary w-md" VALUE="Back" onClick="history.go(-1);">
                                                         </div>
                                                     </form>                                             
@@ -233,7 +228,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                 <div class="col-12">
                                                     <div class="card border border-primary">
                                                     <div class="card-header bg-transparent border-primary">
-                                                        <h5 class="my-0 text-default">SLGs in TA <?php echo ta_name($link,$ta);?> </h5>
+                                                        <h5 class="my-0 text-primary">Savings and Loan Groups in <?php echo get_rname($link,$region);?> Region</h5>
                                                     </div>
                                                     <div class="card-body">
                                                     <h7 class="card-title mt-0"></h7>
@@ -268,12 +263,13 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                                         { 
                                                                             $grpID = $row["groupID"];
                                                                             $result = mysqli_query($link, "SELECT COUNT(sppCode) AS value_count FROM tblbeneficiaries where groupID = '$grpID'"); 
-                                                                            $row_0 = mysqli_fetch_assoc($result); 
-                                                                            $count = $row_0['value_count'];
+                                                                            $row2 = mysqli_fetch_assoc($result); 
+                                                                            $count = $row2['value_count'];
 
-                                                                            $total = $row["MembersM"] + $row["MembersF"];
-
-                                                                        echo "<tr>\n";                                               
+                                                                            $total = $row["MembersM"]+$row["MembersF"];
+                                                                            echo "<tr>\n";
+                                                                            
+                                                                        
                                                                             echo "<td>".$row["groupID"]."</td>\n";
                                                                             echo "<td>".$row["groupname"]."</td>\n";
                                                                             echo "<td>".$row["cohort"]."</td>\n";
@@ -283,7 +279,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                                             echo "<td>\t\t$count</td>\n";
                                                                             
                                                                             echo "<td>
-                                                                            <a href=\"basicSLGview.php?id=".$row['groupID']."\"><i class='far fa-eye' title='View SLG' style='font-size:18px;color:purple'></i></a>
+                                                                            <a href=\"basicSLGview.php?id=".$row['groupID']."\"><i class='far fa-eye' title='View SLG' style='font-size:18px; color:purple'></i></a>
                                                                             <a href=\"basicSLGedit.php?id=".$row['groupID']."\"><i class='far fa-edit' title='Edit SLG Details' style='font-size:18px;color:orange'></i></a>
                                                                             <a href=\"basicSLGsavings.php?id=".$row['groupID']."\"><i class='fas fa-hand-holding-usd' title='Add SLG Savings' style='font-size:18px;color:brown'></i></a>
                                                                             
