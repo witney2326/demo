@@ -33,7 +33,7 @@ include 'lib.php';
 <?php
 // var_dump($_POST);
 // die();
-if(!$_SESSION["user_role"] == "03" || !$_SESSION["user_role"] == "04"){
+if($_SESSION["user_role"] == "01" || $_SESSION["user_role"] == "02"){
     if($_POST["region"] == '' && $_POST["district"] == '00' && $_POST["ta"] == "0000" && $_POST["cw"] == "00") {
         header("location: basic_livelihood_slg_mgt2.php");
       } 
