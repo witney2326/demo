@@ -72,10 +72,27 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                     </div>
                 </div>
                 <!-- end page title -->
-                
-                <div style="margin-bottom:20px">
-                  <a href="basic_livelihood_slg_mgt2.php"><button type="button" class="btn btn-primary">Back</button></a>
+                <div style="display:flex">
+                    <div class="container">
+                            <form method="post" action="excel.php">
+                                <div style="display:flex;gap:10px">
+                                    <div class="form-group">
+                                        <select class="form-control" id="sel1" name="export_file_type" style="width:100px">
+                                            <option value="xlsx">Xlsx</option>
+                                            <option value="xls">Xls</option>
+                                            <option value="csv">Csv</option>
+                                        </select>
+                                    </div>
+                                    <button type="submit" name="export_excel_btn" class="btn btn-primary">Excel</button>
+                                </div>
+                            </form>
+                    </div>
+                    
+                    <div style="margin-bottom:20px">
+                    <a href="basic_livelihood_slg_mgt2.php"><button type="button" class="btn btn-primary">Back</button></a>
+                    </div>
                 </div>
+                
                 
                 <div class="row">
                     <div class="col-xl-12">

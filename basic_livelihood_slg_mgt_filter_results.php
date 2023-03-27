@@ -31,22 +31,44 @@ include 'lib.php';
 ?>
 
 <?php
-    if ((($_POST['district']) <> '00') and (($_POST['ta']) <> '0000') and ($_SESSION["user_role"] <>'03') and ($_SESSION["user_role"] <>'04') and ($_SESSION["user_role"] <>'05'))  
-    {
-        $_SESSION['region'] = $_POST['region'];
-        $_SESSION['district'] = $_POST['district'];
-        $_SESSION['ta'] = $_POST['ta'];
+// var_dump($_POST);
+// die();
+if($_SESSION["user_role"] == "01" || $_SESSION["user_role"] == "02"){
+    if($_POST["region"] == '' && $_POST["district"] == '00' && $_POST["ta"] == "0000" && $_POST["cw"] == "00") {
+        header("location: basic_livelihood_slg_mgt2.php");
+      } 
+      else if($_POST["region"] !== '00' && $_POST["district"] == "00" && $_POST["ta"] == "0000" && $_POST["cw"] == "00"){
+        $region = $_POST["region"];
+        $district = $_POST["district"];
+        $ta = $_POST["ta"];
+        $cw = $_POST["cw"];
         
+      }
+      else if($_POST["region"] !== '00' && $_POST["district"] !== '00' && $_POST["ta"] == "0000" && $_POST["cw"] == "00"){
+        $_SESSION["region"] = $_POST["region"];
+        $_SESSION["district"] = $_POST["district"];
+        header("location: basic_livelihood_slg_mgt_filter2_results.php");
+      }
+      else if($_POST["region"] !== '00' && $_POST["district"] !== '00' && $_POST["ta"] !== "0000" && $_POST["cw"] == "00"){
+        $_SESSION["region"] = $_POST["region"];
+        $_SESSION["district"] = $_POST["district"];
+        $_SESSION["ta"] = $_POST["ta"];
         header("location: basic_livelihood_slg_mgt_filter3_results.php");
-    } 
-    else if (($_SESSION["user_role"]== '03')) 
-    {
-        $region = $_SESSION["user_reg"];  
-    }
-    else
-    {
-        $region = $_POST['region'];
-    }
+      } 
+      else if($_POST["region"] !== '00' && $_POST["district"] !== '00' && $_POST["ta"] !== "0000" && $_POST["cw"] !== "00"){
+        $_SESSION["region"] = $_POST["region"];
+        $_SESSION["district"] = $_POST["district"];
+        $_SESSION["ta"] = $_POST["ta"];
+        $_SESSION["cw"] = $_POST["cw"];
+        header("location: basic_livelihood_slg_mgt_filter4_results.php");
+      }   
+  } else if($_SESSION["user_role"] == "03"){
+       header("location: basic_livelihood_slg_mgt_cood_filter1_results.php");
+  } else {
+     $region = $_SESSION["user_reg"];
+     
+  }
+
 ?>
 
 <!-- Begin page -->
@@ -99,19 +121,19 @@ include 'lib.php';
                                         </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="link"  href="basic_livelihood_clusters_check.php" role="link">
+                                        <a class="link"  href="basic_livelihood_clusters.php" role="link">
                                             <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
                                             <span class="d-none d-sm-block">Clusters</span>
                                         </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link" data-bs-toggle="link" href="basic_livelihood_slg_mgt_new_cls_filter2_results" role="link">
+                                        <a class="nav-link" href="basic_livelihood_slg_mgt_new_cls_filter1_results.php" role="link">
                                             <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
                                             <span class="d-none d-sm-block">New Cluster!</span>
                                         </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link" data-bs-toggle="tab" href="#slg-1" role="tab">
+                                        <a class="nav-link" href="basic_livelihood_slg_mgt_new_slg_filter1_results.php" role="tab">
                                             <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
                                             <span class="d-none d-sm-block">New SLG!</span>
                                         </a>
@@ -142,7 +164,7 @@ include 'lib.php';
                                                         
                                                         <div class="col-12">
                                                             <label for="district" class="form-label">District</label>
-                                                            <select class="form-select" name="district" id="district" value ="" required>
+                                                            <select class="form-select" name="district" id="district" value ="" required disabled>
                                                                 <option></option>
                                                                     <?php                                                           
                                                                         $dis_fetch_query = "SELECT DistrictID,DistrictName FROM tbldistrict where regionID ='$region'";                                                  
@@ -169,7 +191,13 @@ include 'lib.php';
                                                             </div>
                                                         </div>
                                                         <div class="col-12">
-                                                            <button type="submit" class="btn btn-btn btn-outline-primary w-md" name="Submit" value="Submit">Submit</button>
+                                                            <label for="ta" class="form-label">Case Worker</label>
+                                                            <select class="form-select" name="cw" id="cw"  required disabled>
+                                                                <option selected value="00"></option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-12">
+                                                            <!-- <button type="submit" class="btn btn-btn btn-outline-primary w-md" name="Submit" value="Submit">Submit</button> -->
                                                             <INPUT TYPE="button" class="btn btn-btn btn-outline-secondary w-md" VALUE="Back" onClick="history.go(-1);">
                                                         </div>
                                                     </form>                                             
@@ -239,7 +267,7 @@ include 'lib.php';
                                                                             $count = $row2['value_count'];
 
                                                                             $total = $row["MembersM"]+$row["MembersF"];
-                                                                        echo "<tr>\n";
+                                                                            echo "<tr>\n";
                                                                             
                                                                         
                                                                             echo "<td>".$row["groupID"]."</td>\n";
