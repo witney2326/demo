@@ -5,7 +5,7 @@
     echo '</head>';
 
 
-    include 'layouts/config2.php'; // Using database connection file here     
+    include '../layouts/config2.php'; // Using database connection file here     
 
     $id = $_GET['id'];
 

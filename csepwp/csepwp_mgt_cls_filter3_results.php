@@ -57,7 +57,7 @@ else if ((($_SESSION['region']) <> '00') and (($_SESSION['district']) <> '00') a
 <!-- Begin page -->
 <div id="layout-wrapper">
 
-    <?php include '../layouts/vertical-menu.php'; ?>
+    <?php include 'layouts/vertical-menu.php'; ?>
 
     <!-- ============================================================== -->
     <!-- Start right Content here -->
