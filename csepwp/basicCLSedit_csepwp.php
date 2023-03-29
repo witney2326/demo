@@ -50,7 +50,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 <!-- Begin page -->
 <div id="layout-wrapper">
 
-    <?php include '../layouts/vertical-menu.php'; ?>
+    <?php include 'layouts/vertical-menu.php'; ?>
 
     <!-- ============================================================== -->
     <!-- Start right Content here -->
@@ -103,12 +103,12 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                             <label for="region" class="col-sm-2 col-form-label">Region</label>
                                             
                                             <select class="form-select" name="region" id="region" value ="<?php echo $regionID ; ?>" style="max-width:30%;" required>
-                                                <option selected value="<?php echo $regionID; ?>" ><?php echo r_name($link,$regionID) ; ?></option>
+                                                <option selected value="<?php echo $regionID; ?>" ><?php echo r_name($link_cs,$regionID) ; ?></option>
                                             </select>
                                             
                                             <label for="district" class="col-sm-2 col-form-label">District</label>
                                             <select class="form-select" name="district" id="district" value ="<?php echo $districtID ; ?>" style="max-width:30%;" required>
-                                                <option selected value="<?php echo $districtID; ?>" ><?php echo dis_name($link,$districtID) ; ?></option>                   
+                                                <option selected value="<?php echo $districtID; ?>" ><?php echo dis_name($link_cs,$districtID) ; ?></option>                   
                                             </select>
                                         </div>
 
@@ -117,10 +117,10 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                             <label for="ta" class="col-sm-2 col-form-label">TA</label>
                                             
                                             <select class="form-select" name="ta" id="ta" value ="<?php echo $taID ; ?>" style="max-width:30%;" required>
-                                                <option selected value="$taID" ><?php echo ta_name($link,$taID) ; ?></option>
+                                                <option selected value="$taID" ><?php echo ta_name($link_cs,$taID) ; ?></option>
                                                     <?php                                                           
                                                         $ta_fetch_query = "SELECT TAID,TAName FROM tblta where DistrictID ='$DistrictID'";                                                  
-                                                        $result_ta_fetch = mysqli_query($link, $ta_fetch_query);                                                                       
+                                                        $result_ta_fetch = mysqli_query($link_cs, $ta_fetch_query);                                                                       
                                                         $i=0;
                                                             while($DB_ROW_ta = mysqli_fetch_array($result_ta_fetch)) {
                                                         ?>
