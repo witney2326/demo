@@ -1,17 +1,17 @@
-<?php include '../layouts/session.php'; ?>
-<?php include '../layouts/head-main.php'; ?>
+<?php include '././../../layouts/session.php'; ?>
+<?php include '././../../layouts/head-main.php'; ?>
 
 <head>
     <title>Beneficiary Household Assesment|Approval</title>
-    <?php include '../layouts/head.php'; ?>
-    <?php include '../layouts/head-style.php'; ?>
+    <?php include '././../../layouts/head.php'; ?>
+    <?php include '././../../layouts/head-style.php'; ?>
     
 </head>
 
 <div id="layout-wrapper">
 
     <?php
-        include "../layouts/config.php";     
+        include "././../../layouts/config.php";     
         
         $Rec_ID = $_GET['id']; 
 
