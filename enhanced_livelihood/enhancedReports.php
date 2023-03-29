@@ -15,7 +15,7 @@ header("Cache-Control: max-age=300, must-revalidate");
 <!-- Begin page -->
 <div id="layout-wrapper">
 
-    <?php   include '../layouts/vertical-menu.php'; 
+    <?php   include 'layouts/vertical-menu.php'; 
             include '../layouts/config.php';
 
         $result = mysqli_query($link, 'SELECT COUNT(recID) AS t_jsgs FROM tbljsg where deleted = 0'); 
