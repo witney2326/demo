@@ -60,7 +60,7 @@ if (($region == "") or ($district == "00"))
 <!-- Begin page -->
 <div id="layout-wrapper">
 
-    <?php include '././../../layouts/vertical-menu.php'; ?>
+    <?php include 'layouts/vertical-menu.php'; ?>
 
     <!-- ============================================================== -->
     <!-- Start right Content here -->
