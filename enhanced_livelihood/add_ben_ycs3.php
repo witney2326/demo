@@ -78,7 +78,7 @@ header("Cache-Control: max-age=300, must-revalidate");
 <!-- Begin page -->
 <div id="layout-wrapper">
 
-    <?php include '../layouts/menu.php'; ?>
+    <?php include 'layouts/menu.php'; ?>
 
     <!-- ============================================================== -->
     <!-- Start right Content here -->
