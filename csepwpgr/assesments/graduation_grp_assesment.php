@@ -62,7 +62,7 @@ include '././../../lib.php';
 <!-- Begin page -->
 <div id="layout-wrapper">
 
-    <?php include '././../../layouts/vertical-menu.php'; ?>
+    <?php include 'layouts/vertical-menu.php'; ?>
 
     <!-- ============================================================== -->
     <!-- Start right Content here -->
