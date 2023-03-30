@@ -90,19 +90,26 @@
                                     <?php 
                                        if (($_SESSION["user_role"]== '05')){ ?>
                                          <li class="nav-item waves-effect waves-light">
-                                        <a class="link"  href="basic_livelihood_cls_mgt_filter_cw_results.php" role="link">
-                                            <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
-                                            <span class="d-none d-sm-block">Clusters</span>
-                                        </a>
-                                    </li>
+                                            <a class="link"  href="basic_livelihood_cls_mgt_filter_cw_results.php" role="link">
+                                                <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
+                                                <span class="d-none d-sm-block">Clusters</span>
+                                            </a>
+                                         </li>
                                        
+                                    <?php } else if(($_SESSION["user_role"]== '04')) { ?>
+                                        <li class="nav-item waves-effect waves-light">
+                                            <a class="link"  href="basic_livelihood_cls_mgt_cood_filter1_results.php" role="link">
+                                                <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
+                                                <span class="d-none d-sm-block">Clusters</span>
+                                            </a>
+                                         </li>
                                     <?php } else { ?>
                                         <li class="nav-item waves-effect waves-light">
-                                        <a class="link"  href="basic_livelihood_clusters_check.php" role="link">
-                                            <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
-                                            <span class="d-none d-sm-block">Clusters</span>
-                                        </a>
-                                    </li>
+                                            <a class="link"  href="basic_livelihood_clusters_check.php" role="link">
+                                                <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
+                                                <span class="d-none d-sm-block">Clusters</span>
+                                            </a>
+                                        </li>
 
                                     <?php } ?>
                                     

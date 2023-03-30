@@ -62,7 +62,7 @@ if($_SESSION["user_role"] == "01" || $_SESSION["user_role"] == "02"){
         $_SESSION["cw"] = $_POST["cw"];
         header("location: basic_livelihood_slg_mgt_filter4_results.php");
       }   
-  } else if($_SESSION["user_role"] == "03"){
+  } else if($_SESSION["user_role"] == "04"){
        header("location: basic_livelihood_slg_mgt_cood_filter1_results.php");
   } else {
      $region = $_SESSION["user_reg"];

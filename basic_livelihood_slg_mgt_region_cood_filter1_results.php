@@ -276,7 +276,7 @@ if(!$_SESSION["user_role"] == "03" || !$_SESSION["user_role"] == "04"){
 
                                                                 <tbody>
                                                                     <?Php
-                                                                        $query="select * from tblgroup where ((TAID = '$ta') and (deleted = '0'))";
+                                                                        $query="select * from tblgroup where ((regionID = '$region') and (deleted = '0'))";
  
                                                                         //Variable $link is declared inside config.php file & used here
                                                                         

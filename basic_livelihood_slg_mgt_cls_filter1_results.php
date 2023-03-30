@@ -32,7 +32,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 // var_dump($_POST["region"]);
 // var_dump($_POST["district"]);
 // var_dump($_POST["ta"]);
-// var_dump($_POST["cw"]);
+// var_dump($_SESSION);
 // die();
 
  $_SESSION["region"] = $_POST["region"];
