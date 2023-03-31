@@ -31,8 +31,14 @@ include 'lib.php';
 ?>
 
 <?php
-// var_dump($_POST);
-// die();
+/*
+var_dump($_POST);
+die();
+
+?>
+
+<?php
+/*
 if(!$_SESSION["user_role"] == "03" || !$_SESSION["user_role"] == "04"){
     if($_POST["region"] == '' && $_POST["district"] == '00' && $_POST["ta"] == "0000" && $_POST["cw"] == "00") {
         header("location: basic_livelihood_slg_mgt2.php");
@@ -67,7 +73,7 @@ if(!$_SESSION["user_role"] == "03" || !$_SESSION["user_role"] == "04"){
      $district = $_SESSION["user_dis"];
      $ta = $_SESSION["user_ta"];
   }
-
+*/
 ?>
 
 <!-- Begin page -->
@@ -162,79 +168,43 @@ if(!$_SESSION["user_role"] == "03" || !$_SESSION["user_role"] == "04"){
                                                 
                                                 <div class="card-body">
                                                     <h5 class="card-title mt-0"></h5>
-                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="basic_livelihood_slg_mgt_region_cood_filter_check_results.php" method ="POST">
+                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="basic_livelihood_slg_mgt_cood_filter2_results.php" method ="POST">
                                                         
-                                                        <!-- c -->
-
-                                                        <div class="col-12">
+                                                    <div class="col-12">
                                                             <label for="region" class="form-label">Region</label>
                                                             <div>
-                                                                <select class="form-select" name="region" id="region"  onChange="getDistrict(this.value);" required>
-                                                                    <option></option>
-                                                                    <?php    
-                                                                            $regionId = $_SESSION["region-9-10"];                                                       
-                                                                            $dis_fetch_query2 = "SELECT regionID, name FROM tblregion WHERE regionID='$regionId'";                                                  
-                                                                            $result_dis_fetch2 = mysqli_query($link, $dis_fetch_query2);                                                                       
-                                                                            $i=0;
-                                                                                while($DB_ROW_reg2 = mysqli_fetch_array($result_dis_fetch2)) {
-                                                                            ?>
-                                                                            <option value ="<?php
-                                                                                    echo $DB_ROW_reg2["regionID"];?>">
-                                                                                <?php
-                                                                                    echo $DB_ROW_reg2["name"];
-                                                                                ?>
-                                                                            </option>
-                                                                            <?php
-                                                                                $i++;
-                                                                                    }
-                                                                        ?>
+                                                                <select class="form-select" name="region" id="region" value ="" onChange="getDistrict5(this.value);" required>
+                                                                    <option selected value = "<?php echo $_SESSION["user_reg"];?>"><?php echo get_rname($link,$_SESSION["user_reg"]);?></option>
                                                                 </select>
-                                                                <div class="invalid-feedback">
-                                                                    Please select a valid Malawi region.
-                                                                </div>
                                                             </div>
                                                         </div>
                                                         
                                                         <div class="col-12">
                                                             <label for="district" class="form-label">District</label>
                                                             <select class="form-select" name="district" id="district" onChange="getTa(this.value);" required>
-                                                                <option selected value="00">Select District</option>
+                                                                <option selected value="<?php echo $_SESSION["district-9-10"];?>">"><?php echo dis_name($link,$_SESSION["district-9-10"]);?></option>
                                                             </select>
                                                         </div>
 
                                                         <div class="col-12">
                                                             <label for="ta" class="form-label">Traditional Authority</label>
                                                             <select class="form-select" name="ta" id="ta" onChange="getCw(this.value)" required >
-                                                                <option selected value="0000">Select TA</option>
+                                                                <option selected value="<?php echo $_SESSION["ta-9-10"];?>"><?php echo tname($link,$_SESSION["ta-9-10"]);?></option>
                                                             </select>
                                                         </div>
 
                                                         <div class="col-12">
-                                                            <label for="cw" class="form-label">Select Caseworker</label>
-                                                            <div>
-                                                                <select class="form-select" name="cw" id="cw" required>
-                                                                    <option></option>
-                                                                    <?php                                                           
-                                                                            $dis_fetch_query10 = "SELECT cwName, cwID FROM tblcw WHERE districtID='$district'";                                                  
-                                                                            $result_dis_fetch10 = mysqli_query($link, $dis_fetch_query10);                                                                       
-                                                                            $i=0;
-                                                                                while($DB_ROW_reg10 = mysqli_fetch_array($result_dis_fetch10)) {
-                                                                            ?>
-                                                                            <option value ="<?php
-                                                                                    echo $DB_ROW_reg10["cwID"];?>">
-                                                                                <?php
-                                                                                    echo $DB_ROW_reg10["cwName"];
-                                                                                ?>
-                                                                            </option>
-                                                                            <?php
-                                                                                $i++;
-                                                                                    }
-                                                                        ?>
-                                                                </select>
-                                                                <div class="invalid-feedback">
-                                                                    Please select a valid caseworker.
-                                                                </div>
-                                                            </div>
+                                                            <?php 
+                                                              $cwID = $_SESSION["cw-9-10"];
+                                                              $sqlCw = "SELECT * FROM tblcw WHERE cwID='$cwID'";
+                                                              $sqlCwResult = $link->query($sqlCw);
+                                                              $sqlCwResultRow = mysqli_fetch_array($sqlCwResult);
+                                                              
+                                                            ?>
+                                                            <label for="cw" class="form-label">Caseworker</label>
+                                                            <select class="form-select" name="cw" id="cw" required >
+                                                                <option selected value="<?php echo $_SESSION["cw-9-10"];?>"><?php echo $sqlCwResultRow["cwName"];?></option>
+                                                            </select>
                                                         </div>
 
                                                         <div class="col-12">
@@ -263,13 +233,13 @@ if(!$_SESSION["user_role"] == "03" || !$_SESSION["user_role"] == "04"){
                                                         </form>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div>  
 
                                             <div class="row">
                                                 <div class="col-12">
                                                     <div class="card border border-primary">
                                                     <div class="card-header bg-transparent border-primary">
-                                                        <h5 class="my-0 text-primary">Savings and Loan Groups in <?php echo get_rname($link,$region);?> Region</h5>
+                                                        <h5 class="my-0 text-primary">Savings and Loan Groups in <?php echo get_rname($link,$_SESSION["user_role"]);?> Region</h5>
                                                     </div>
                                                     <div class="card-body">
                                                     <h7 class="card-title mt-0"></h7>
@@ -295,7 +265,8 @@ if(!$_SESSION["user_role"] == "03" || !$_SESSION["user_role"] == "04"){
 
                                                                 <tbody>
                                                                     <?Php
-                                                                        $query="select * from tblgroup where ((regionID = '00') and (deleted = '0'))";
+                                                                        $cw = $_SESSION["cw-9-10"];
+                                                                        $query="select * from tblgroup where ((cwID = '$cw') and (deleted = '0'))";
  
                                                                         //Variable $link is declared inside config.php file & used here
                                                                         
@@ -415,19 +386,6 @@ if(!$_SESSION["user_role"] == "03" || !$_SESSION["user_role"] == "04"){
             $.ajax({
             type: "POST",
             url: "get_district.php",
-            data:'regID='+val,
-            success: function(data)
-                    {
-                    $("#district").html(data);
-                    }
-                });
-        }
-
-        function getCDistrict(val) 
-        {
-            $.ajax({
-            type: "POST",
-            url: "get_cdistrict.php",
             data:'regID='+val,
             success: function(data)
                     {
