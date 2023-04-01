@@ -1,12 +1,6 @@
 <?php
 include('layouts/config.php');
 
-
-
-
-
-
- 
  $id=$_POST['disid'];
  $sql = "SELECT * FROM tblta WHERE TAID='$id'";
  $result = $link->query($sql);

@@ -119,7 +119,7 @@ if(!$_SESSION["user_role"] == "03" || !$_SESSION["user_role"] == "04"){
                                 
                                 <!-- Nav tabs -->
                                 <ul class="nav nav-pills nav-justified" role="tablist">
-                                    <?php
+                                <?php
                                        if($_SESSION["user_role"] == '04'){ ?>
                                           <li class="nav-item waves-effect waves-light">
                                             <a class="nav-link active" href="basic_livelihood_slg_mgt_region_cood_filter_results.php" role="tab">
@@ -135,7 +135,6 @@ if(!$_SESSION["user_role"] == "03" || !$_SESSION["user_role"] == "04"){
                                             </a>
                                          </li>
                                        <?php } ?>
-                                    
                                     <?php 
                                       if($_SESSION["user_role"] == '04'){ ?>
                                           <li class="nav-item waves-effect waves-light">
@@ -199,31 +198,24 @@ if(!$_SESSION["user_role"] == "03" || !$_SESSION["user_role"] == "04"){
 
                                                         <div class="col-12">
                                                             <label for="ta" class="form-label">Traditional Authority</label>
-                                                            <select class="form-select" name="ta" id="ta" onChange="getCw(this.value)" required >
-                                                                <option selected value="<?php echo $_SESSION["ta-9-10"];?>"><?php echo tname($link,$_SESSION["ta-9-10"]);?></option>
+                                                            <select class="form-select" name="ta" id="ta" required disabled>
+                                                                <option selected value=""></option>
                                                             </select>
                                                         </div>
 
                                                         <div class="col-12">
-                                                            <?php 
-                                                              $cwID = $_SESSION["cw-9-10"];
-                                                              $sqlCw = "SELECT * FROM tblcw WHERE cwID='$cwID'";
-                                                              $sqlCwResult = $link->query($sqlCw);
-                                                              $sqlCwResultRow = mysqli_fetch_array($sqlCwResult);
-                                                              
-                                                            ?>
                                                             <label for="cw" class="form-label">Caseworker</label>
-                                                            <select class="form-select" name="cw" id="cw" required >
-                                                                <option selected value="<?php echo $_SESSION["cw-9-10"];?>"><?php echo $sqlCwResultRow["cwName"];?></option>
+                                                            <select class="form-select" name="cw" id="cw" required disabled>
+                                                                <option selected value=""></option>
                                                             </select>
                                                         </div>
 
                                                         <div class="col-12">
                                                             <!-- <button type="submit" class="btn btn-btn btn-outline-primary w-md" name="Submit" value="Submit">Submit</button> -->
-                                                            <!-- <INPUT TYPE="button" class="btn btn-btn btn-outline-secondary w-md" VALUE="Back" onClick="history.go(-1);"> -->
                                                             <a href="basic_livelihood_slg_mgt_region_cood_filter_results.php">
-                                                                <INPUT TYPE="button" class="btn btn-btn btn-outline-secondary w-md" VALUE="Back">
+                                                            <INPUT TYPE="button" class="btn btn-btn btn-outline-secondary w-md" VALUE="Back">
                                                             </a>
+                                                            
                                                         </div>
                                                     </form>                                             
                                                     <!-- End Here -->
@@ -279,8 +271,8 @@ if(!$_SESSION["user_role"] == "03" || !$_SESSION["user_role"] == "04"){
 
                                                                 <tbody>
                                                                     <?Php
-                                                                        $cw = $_SESSION["cw-9-10"];
-                                                                        $query="select * from tblgroup where ((cwID = '$cw') and (deleted = '0'))";
+                                                                        $district = $_SESSION["district-9-10"];
+                                                                        $query="select * from tblgroup where ((DistrictID = '$district') and (deleted = '0'))";
  
                                                                         //Variable $link is declared inside config.php file & used here
                                                                         

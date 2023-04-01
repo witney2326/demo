@@ -14,18 +14,18 @@
   $_SESSION["cw-9-10"] = $_POST["cw"];
 
   if(($_SESSION["region-9-10"] !== "00") && ($_SESSION["district-9-10"] !== "00") && ($_SESSION["ta-9-10"] !== "0000") && ($_SESSION["cw-9-10"] !== "00")){
-    header("location: basic_livelihood_slg_mgt_region_cood_filter4_results.php");
+    header("location: basic_livelihood_cls_mgt_region_cood_filter4_results.php");
   }
   else if(($_SESSION["region-9-10"] !== "00") && ($_SESSION["district-9-10"] !== "00") && ($_SESSION["ta-9-10"] !== "0000") && ($_SESSION["cw-9-10"] == "00")){
-    header("location: basic_livelihood_slg_mgt_region_cood_filter3_results.php");
+    header("location: basic_livelihood_cls_mgt_region_cood_filter3_results.php");
   }
-  else if(($_SESSION["region-9-10"] !== "00") && ($_SESSION["district-9-10"] !== "00") && ($_SESSION["ta-9-10"] == "0000") && ($_SESSION["cw-9-10"] == "")){
-    header("location: basic_livelihood_slg_mgt_region_cood_filter2_results.php");
+  else if(($_SESSION["region-9-10"] !== "00") && ($_SESSION["district-9-10"] !== "00") && ($_SESSION["ta-9-10"] == "0000") && ($_SESSION["cw-9-10"] == "00")){
+    header("location: basic_livelihood_cls_mgt_region_cood_filter2_results.php");
   }
-  else if(($_SESSION["region-9-10"] !== "00") && ($_SESSION["district-9-10"] == "00") && ($_SESSION["ta-9-10"] == "0000") && ($_SESSION["cw-9-10"] == "")){
-    header("location: basic_livelihood_slg_mgt_region_cood_filter1_results.php");
+  else if(($_SESSION["region-9-10"] !== "00") && ($_SESSION["district-9-10"] == "00") && ($_SESSION["ta-9-10"] == "0000") && ($_SESSION["cw-9-10"] == "00")){
+    header("location: basic_livelihood_cls_mgt_region_cood_filter1_results.php");
   }
   else if(($_SESSION["region-9-10"] == "00") && ($_SESSION["district-9-10"] == "00") && ($_SESSION["ta-9-10"] == "0000") && ($_SESSION["cw-9-10"] == "")){
-    header("location: basic_livelihood_slg_mgt_region_cood_filter_results.php");
+    header("location: basic_livelihood_cls_mgt_region_cood_filter_results.php");
   } 
 ?>

@@ -113,16 +113,26 @@ if(!$_SESSION["user_role"] == "03" || !$_SESSION["user_role"] == "04"){
                                 
                                 <!-- Nav tabs -->
                                 <ul class="nav nav-pills nav-justified" role="tablist">
-                                    <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link active" data-bs-toggle="tab" href="#home-1" role="tab">
-                                            <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
-                                            <span class="d-none d-sm-block">SL Groups</span>
-                                        </a>
-                                    </li>
+                                <?php
+                                       if($_SESSION["user_role"] == '04'){ ?>
+                                          <li class="nav-item waves-effect waves-light">
+                                            <a class="nav-link active" href="basic_livelihood_slg_mgt_region_cood_filter_results.php" role="tab">
+                                                <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
+                                                <span class="d-none d-sm-block">SL Groups</span>
+                                            </a>
+                                         </li>
+                                       <?php } else { ?>
+                                        <li class="nav-item waves-effect waves-light">
+                                            <a class="nav-link active" data-bs-toggle="tab" href="#home-1" role="tab">
+                                                <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
+                                                <span class="d-none d-sm-block">SL Groups</span>
+                                            </a>
+                                         </li>
+                                       <?php } ?>
                                     <?php 
                                       if($_SESSION["user_role"] == '04'){ ?>
                                           <li class="nav-item waves-effect waves-light">
-                                        <a class="link"  href="basic_livelihood_cls_mgt_cood_filter1_results.php" role="link">
+                                        <a class="link"  href="basic_livelihood_cls_mgt_region_cood_filter_results.php" role="link">
                                             <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
                                             <span class="d-none d-sm-block">Clusters</span>
                                         </a>
@@ -179,7 +189,7 @@ if(!$_SESSION["user_role"] == "03" || !$_SESSION["user_role"] == "04"){
                                                                                 while($DB_ROW_reg2 = mysqli_fetch_array($result_dis_fetch2)) {
                                                                             ?>
                                                                             <option value ="<?php
-                                                                                    echo $DB_ROW_reg2["regionID"];?>">
+                                                                                    echo $DB_ROW_reg2["regionID"];?>" selected>
                                                                                 <?php
                                                                                     echo $DB_ROW_reg2["name"];
                                                                                 ?>
@@ -197,22 +207,22 @@ if(!$_SESSION["user_role"] == "03" || !$_SESSION["user_role"] == "04"){
                                                         
                                                         <div class="col-12">
                                                             <label for="district" class="form-label">District</label>
-                                                            <select class="form-select" name="district" id="district" onChange="getTa(this.value);" required>
-                                                                <option selected value="00">Select District</option>
+                                                            <select class="form-select" name="district" id="district" onChange="getTa(this.value);" required disabled>
+                                                                <option selected value="00"></option>
                                                             </select>
                                                         </div>
 
                                                         <div class="col-12">
                                                             <label for="ta" class="form-label">Traditional Authority</label>
-                                                            <select class="form-select" name="ta" id="ta" onChange="getCw(this.value)" required >
-                                                                <option selected value="0000">Select TA</option>
+                                                            <select class="form-select" name="ta" id="ta" onChange="getCw(this.value)" required disabled>
+                                                                <option selected value="0000"></option>
                                                             </select>
                                                         </div>
 
                                                         <div class="col-12">
                                                             <label for="cw" class="form-label">Select Caseworker</label>
                                                             <div>
-                                                                <select class="form-select" name="cw" id="cw" required>
+                                                                <select class="form-select" name="cw" id="cw" required disabled>
                                                                     <option></option>
                                                                     <?php                                                           
                                                                             $dis_fetch_query10 = "SELECT cwName, cwID FROM tblcw WHERE districtID='$district'";                                                  
@@ -232,14 +242,17 @@ if(!$_SESSION["user_role"] == "03" || !$_SESSION["user_role"] == "04"){
                                                                         ?>
                                                                 </select>
                                                                 <div class="invalid-feedback">
-                                                                    Please select a valid caseworker.
+                                                                    <!-- Please select a valid caseworker. -->
                                                                 </div>
                                                             </div>
                                                         </div>
 
                                                         <div class="col-12">
-                                                            <button type="submit" class="btn btn-btn btn-outline-primary w-md" name="Submit" value="Submit">Submit</button>
-                                                            <INPUT TYPE="button" class="btn btn-btn btn-outline-secondary w-md" VALUE="Back" onClick="history.go(-1);">
+                                                            <!-- <button type="submit" class="btn btn-btn btn-outline-primary w-md" name="Submit" value="Submit">Submit</button>
+                                                            <INPUT TYPE="button" class="btn btn-btn btn-outline-secondary w-md" VALUE="Back" onClick="history.go(-1);"> -->
+                                                            <a href="basic_livelihood_slg_mgt_region_cood_filter_results.php">
+                                                            <INPUT TYPE="button" class="btn btn-btn btn-outline-secondary w-md" VALUE="Back">
+                                                            </a>
                                                         </div>
                                                     </form>                                             
                                                     <!-- End Here -->
@@ -295,7 +308,8 @@ if(!$_SESSION["user_role"] == "03" || !$_SESSION["user_role"] == "04"){
 
                                                                 <tbody>
                                                                     <?Php
-                                                                        $query="select * from tblgroup where ((regionID = '00') and (deleted = '0'))";
+                                                                        $region = $_SESSION["region-9-10"];
+                                                                        $query="select * from tblgroup where ((regionID = '$region') and (deleted = '0'))";
  
                                                                         //Variable $link is declared inside config.php file & used here
                                                                         
