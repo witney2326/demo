@@ -131,12 +131,31 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                             <span class="d-none d-sm-block">SL Groups</span>
                                         </a>
                                     </li>
-                                    <li class="nav-item waves-effect waves-light">
+                                    <?php
+                                      if(($_SESSION["user_role"]== '03')){ ?>
+                                         <li class="nav-item waves-effect waves-light">
+                                        <a class="nav-link active"  href="basic_livelihood_cls_mgt_district_cood_filter_results.php" role="tab">
+                                            <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
+                                            <span class="d-none d-sm-block">Clusters</span>
+                                        </a>
+                                    </li>
+                                      <?php } else if(($_SESSION["user_role"]== '04')){ ?>
+                                        <li class="nav-item waves-effect waves-light">
+                                        <a class="nav-link active"  href="basic_livelihood_cls_mgt_region_cood_filter_results.php" role="tab">
+                                            <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
+                                            <span class="d-none d-sm-block">Clusters</span>
+                                        </a>
+                                    </li>
+                                      <?php }
+                                       else { ?>
+                                        <li class="nav-item waves-effect waves-light">
                                         <a class="nav-link active"  href="basic_livelihood_clusters.php" role="tab">
                                             <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
                                             <span class="d-none d-sm-block">Clusters</span>
                                         </a>
                                     </li>
+                                      <?php } ?>
+                                    
                                     <li class="nav-item waves-effect waves-light">
                                         <a class="nav-link" href="basic_livelihood_slg_mgt_new_cls_filter1_results.php" role="tab">
                                             <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>

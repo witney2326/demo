@@ -26,54 +26,54 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
   </script>
 </head>
 
-<?php include 'layouts/body.php'; 
-include 'lib.php';
-?>
+<?php include 'layouts/body.php'; ?>
 
-<?php
-/*
-var_dump($_POST);
-die();
 
-?>
 
-<?php
-/*
-if(!$_SESSION["user_role"] == "03" || !$_SESSION["user_role"] == "04"){
-    if($_POST["region"] == '' && $_POST["district"] == '00' && $_POST["ta"] == "0000" && $_POST["cw"] == "00") {
-        header("location: basic_livelihood_slg_mgt2.php");
-      } 
-      else if($_POST["region"] !== '00' && $_POST["district"] == "00" && $_POST["ta"] == "0000" && $_POST["cw"] == "00"){
-        $region = $_POST["region"];
-        $district = $_POST["district"];
-        $ta = $_POST["ta"];
-        $cw = $_POST["cw"];
-        
-      }
-      else if($_POST["region"] !== '00' && $_POST["district"] !== '00' && $_POST["ta"] == "0000" && $_POST["cw"] == "00"){
-        $_SESSION["region"] = $_POST["region"];
-        $_SESSION["district"] = $_POST["district"];
-        header("location: basic_livelihood_slg_mgt_filter2_results.php");
-      }
-      else if($_POST["region"] !== '00' && $_POST["district"] !== '00' && $_POST["ta"] !== "0000" && $_POST["cw"] == "00"){
-        $_SESSION["region"] = $_POST["region"];
-        $_SESSION["district"] = $_POST["district"];
-        $_SESSION["ta"] = $_POST["ta"];
-        header("location: basic_livelihood_slg_mgt_filter3_results.php");
-      } 
-      else if($_POST["region"] !== '00' && $_POST["district"] !== '00' && $_POST["ta"] !== "0000" && $_POST["cw"] !== "00"){
-        $_SESSION["region"] = $_POST["region"];
-        $_SESSION["district"] = $_POST["district"];
-        $_SESSION["ta"] = $_POST["ta"];
-        $_SESSION["cw"] = $_POST["cw"];
-        header("location: basic_livelihood_slg_mgt_filter4_results.php");
-      }   
-  } else {
-     $region = $_SESSION["user_reg"];
-     $district = $_SESSION["user_dis"];
-     $ta = $_SESSION["user_ta"];
-  }
-*/
+<?php 
+   /*
+    if (($_SESSION["user_role"]== '05')) 
+    {
+        $region = $_SESSION["user_reg"];
+        $district = $_SESSION["user_dis"];
+        $ta = $_SESSION["user_ta"];   
+    }
+    else
+    {
+    $region = $_SESSION['region'];
+    $district = $_SESSION['district'];
+    $ta = $_SESSION['ta'];
+    $cw = $_SESSION['cw'];
+    }
+    */
+    
+    function get_rname($link, $rcode)
+        {
+        $rg_query = mysqli_query($link,"select name from tblregion where regionID='$rcode'"); // select query
+        $rg = mysqli_fetch_array($rg_query);// fetch data
+        return $rg['name'];
+        }
+    
+        function dis_name($link, $disID)
+        {
+        $dis_query = mysqli_query($link,"select DistrictName from tbldistrict where DistrictID='$disID'"); // select query
+        $dis = mysqli_fetch_array($dis_query);// fetch data
+        return $dis['DistrictName'];
+        }
+
+        function ta_name($link, $tacode)
+        {
+        $ta_query = mysqli_query($link,"select TAName from tblta where TAID='$tacode'"); // select query
+        $taname = mysqli_fetch_array($ta_query);// fetch data
+        return $taname['TAName'];
+        }
+
+        function cw_name($link, $cw)
+        {
+        $cw_query = mysqli_query($link,"select cwName from tblcw where cwID='$cw'"); // select query
+        $cwname = mysqli_fetch_array($cw_query);// fetch data
+        return $cwname['cwName'];
+        }
 ?>
 
 <!-- Begin page -->
@@ -93,12 +93,12 @@ if(!$_SESSION["user_role"] == "03" || !$_SESSION["user_role"] == "04"){
                 <div class="row">
                     <div class="col-12">
                         <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                            <h4 class="mb-sm-0 font-size-18">SLG Management</h4>
+                            <h4 class="mb-sm-0 font-size-18">SLG Clusters</h4>
 
                             <div class="page-title-right">
                                 <ol class="breadcrumb m-0">
-                                    <li class="breadcrumb-item"><a href="basic_livelihood.php">SLG Management</a></li>
-                                    <li class="breadcrumb-item active">SLG Management</li>
+                                    <li class="breadcrumb-item"><a href="basic_livelihood_slg_mgt_check.php">SLG Management</a></li>
+                                    <li class="breadcrumb-item active">Clusters</li>
                                 </ol>
                             </div>
 
@@ -119,26 +119,27 @@ if(!$_SESSION["user_role"] == "03" || !$_SESSION["user_role"] == "04"){
                                 
                                 <!-- Nav tabs -->
                                 <ul class="nav nav-pills nav-justified" role="tablist">
-                                <?php
-                                       if($_SESSION["user_role"] == '03'){ ?>
-                                          <li class="nav-item waves-effect waves-light">
-                                            <a class="nav-link active" href="basic_livelihood_slg_mgt_region_cood_filter_results.php" role="tab">
-                                                <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
-                                                <span class="d-none d-sm-block">SL Groups</span>
-                                            </a>
-                                         </li>
-                                       <?php } else { ?>
-                                        <li class="nav-item waves-effect waves-light">
-                                            <a class="nav-link active" data-bs-toggle="tab" href="#home-1" role="tab">
-                                                <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
-                                                <span class="d-none d-sm-block">SL Groups</span>
-                                            </a>
-                                         </li>
-                                       <?php } ?>
+                                    
                                     <?php 
-                                      if($_SESSION["user_role"] == '03'){ ?>
+                                      if($_SESSION["user_role"] == '04'){ ?>
                                           <li class="nav-item waves-effect waves-light">
-                                        <a class="link"  href="basic_livelihood_cls_mgt_region_cood_filter_results.php" role="link">
+                                        <a class="nav-link" data-bs-toggle="link" href="basic_livelihood_slg_mgt_district_cood_filter_results.php" role="link">
+                                            <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
+                                            <span class="d-none d-sm-block">SL Groups</span>
+                                        </a>
+                                    </li>
+                                      <?php } else { ?>
+                                        <li class="nav-item waves-effect waves-light">
+                                        <a class="nav-link" data-bs-toggle="link" href="basic_livelihood_slg_mgt_check.php" role="link">
+                                            <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
+                                            <span class="d-none d-sm-block">SL Groups</span>
+                                        </a>
+                                    </li>
+                                      <?php }?>
+                                    <?php 
+                                      if($_SESSION["user_role"] == '04'){ ?>
+                                          <li class="nav-item waves-effect waves-light">
+                                        <a class="nav-link active"  href="basic_livelihood_cls_mgt_district_cood_filter_results.php" role="link">
                                             <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
                                             <span class="d-none d-sm-block">Clusters</span>
                                         </a>
@@ -151,7 +152,6 @@ if(!$_SESSION["user_role"] == "03" || !$_SESSION["user_role"] == "04"){
                                             </a>
                                        </li>
                                       <?php }?>
-                                    
                                     <li class="nav-item waves-effect waves-light">
                                         <a class="nav-link" href="basic_livelihood_slg_mgt_new_cls_filter1_results.php" role="link">
                                             <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
@@ -164,7 +164,7 @@ if(!$_SESSION["user_role"] == "03" || !$_SESSION["user_role"] == "04"){
                                             <span class="d-none d-sm-block">New SLG!</span>
                                         </a>
                                     </li>
-                                    
+                                   
                                     
                                 </ul>
                                 <!-- Tab panes -->
@@ -178,44 +178,45 @@ if(!$_SESSION["user_role"] == "03" || !$_SESSION["user_role"] == "04"){
                                                 
                                                 <div class="card-body">
                                                     <h5 class="card-title mt-0"></h5>
-                                                    <form class="row row-cols-lg-auto g-3 align-items-center" novalidate action="basic_livelihood_slg_mgt_cood_filter2_results.php" method ="POST">
-                                                        
-                                                    <div class="col-12">
+                                                    <form class="row row-cols-lg-auto g-3 align-items-center" >
+                                                        <div class="col-12">
                                                             <label for="region" class="form-label">Region</label>
                                                             <div>
-                                                                <select class="form-select" name="region" id="region" value ="" onChange="getDistrict5(this.value);" required>
-                                                                    <option selected value = "<?php echo $_SESSION["user_reg"];?>"><?php echo get_rname($link,$_SESSION["user_reg"]);?></option>
+                                                                <select class="form-select" name="region" id="region" value ="<?php echo $_SESSION["region-9-10"];?>" required>
+                                                                    <option selected value = "<?php echo $_SESSION["region-9-10"];?>"><?php echo get_rname($link,$_SESSION["region-9-10"]);?></option>
                                                                 </select>
                                                             </div>
                                                         </div>
                                                         
                                                         <div class="col-12">
                                                             <label for="district" class="form-label">District</label>
-                                                            <select class="form-select" name="district" id="district" onChange="getTa(this.value);" required>
-                                                                <option selected value="<?php echo $_SESSION["district-9-10"];?>"><?php echo dis_name($link,$_SESSION["district-9-10"]);?></option>
-                                                            </select>
+                                                            <div>
+                                                                <select class="form-select" name="district" id="district" value ="<?php echo $_SESSION["district-9-10"];?>" required>
+                                                                    <option selected value = "<?php echo $_SESSION["district-9-10"];?>"><?php echo dis_name($link,$_SESSION["district-9-10"]);?></option>
+                                                                </select>
+                                                            </div>
                                                         </div>
 
                                                         <div class="col-12">
                                                             <label for="ta" class="form-label">Traditional Authority</label>
-                                                            <select class="form-select" name="ta" id="ta" required disabled>
+                                                            <select class="form-select" name="ta" id="ta" required>
+                                                                <option selected value = "<?php echo $_SESSION["ta-9-10"];?>"><?php echo ta_name($link,$_SESSION["ta-9-10"]);?></option>
+                                                                
+                                                            </select>
+                                                            
+                                                        </div>
+                                                        <div class="col-12">
+                                                            <label for="ta" class="form-label">Case Worker</label>
+                                                            <select class="form-select" name="cw" id="cw"  required disabled>
                                                                 <option selected value=""></option>
                                                             </select>
                                                         </div>
-
                                                         <div class="col-12">
-                                                            <label for="cw" class="form-label">Caseworker</label>
-                                                            <select class="form-select" name="cw" id="cw" required disabled>
-                                                                <option selected value=""></option>
-                                                            </select>
-                                                        </div>
-
-                                                        <div class="col-12">
-                                                            <!-- <button type="submit" class="btn btn-btn btn-outline-primary w-md" name="Submit" value="Submit">Submit</button> -->
-                                                            <a href="basic_livelihood_slg_mgt_region_cood_filter_results.php">
+                                                            
+                                                            <!-- <INPUT TYPE="button" class="btn btn-btn btn-outline-secondary w-md" VALUE="Back" onClick="history.go(-1);"> -->
+                                                            <a href="basic_livelihood_cls_mgt_district_cood_filter_results.php">
                                                             <INPUT TYPE="button" class="btn btn-btn btn-outline-secondary w-md" VALUE="Back">
                                                             </a>
-                                                            
                                                         </div>
                                                     </form>                                             
                                                     <!-- End Here -->
@@ -225,27 +226,27 @@ if(!$_SESSION["user_role"] == "03" || !$_SESSION["user_role"] == "04"){
                                             <div class="row mb-1">
                                                 <div class="col-md-6">
                                                     <div class="input-group" display="inline">
-                                                        <form action="phpSearch.php" method="post">
-                                                            Group Name <input type="text" name="search">
+                                                        <form action="phpSearchClusterN.php" method="post">
+                                                            Cluster Name <input type="text" name="search">
                                                             <input type ="submit" name='Search_Group_Name' value='Search_Name'> 
                                                         </form>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="input-group" display="inline">
-                                                        <form action="phpSearchgc.php" method="post">
-                                                            Group Code <input type="text" name="search">
+                                                        <form action="phpSearchClusterC.php" method="post">
+                                                            Cluster Code <input type="text" name="search">
                                                             <input type ="submit" name='Search_Group_Code' value='Search_Code'> 
                                                         </form>
                                                     </div>
                                                 </div>
-                                            </div>  
+                                            </div>                        
 
                                             <div class="row">
                                                 <div class="col-12">
                                                     <div class="card border border-primary">
                                                     <div class="card-header bg-transparent border-primary">
-                                                        <h5 class="my-0 text-primary">Savings and Loan Groups in <?php echo get_rname($link,$_SESSION["user_role"]);?> Region</h5>
+                                                        <h5 class="my-0 text-default">Clusters in <?php echo dis_name($link,$_SESSION["district-9-10"]); ?></h5>
                                                     </div>
                                                     <div class="card-body">
                                                     <h7 class="card-title mt-0"></h7>
@@ -256,54 +257,59 @@ if(!$_SESSION["user_role"] == "03" || !$_SESSION["user_role"] == "04"){
                                                                     <tr>
                                                                         
                                                                         
-                                                                        <th>SLG code</th>
-                                                                        <th>SLG Name</th>
+                                                                        <th>Cluster code</th>
+                                                                        <th>Cluster Name</th>
                                                                         <th>cohort</th>
-                                                                        <th><i class="fas fa-male" style="font-size:18px"></i></th>
-                                                                        <th><i class="fas fa-female" style="font-size:18px"></i></th>
-                                                                        <th><i class="fas fa-male" style="font-size:18px"></i>+<i class="fas fa-female" style="font-size:18px"></i></th>
-                                                                        <th>Total-DB</th>
-                                                                        <th>Action On SLG</th>
-                                                                        
+                                                                        <th>GVH</th>
+                                                                        <th>SP Programme</th>
+                                                                        <th>Action</th>
                                                                     </tr>
                                                                 </thead>
-
-
                                                                 <tbody>
                                                                     <?Php
-                                                                        $district = $_SESSION["district-9-10"];
-                                                                        $query="select * from tblgroup where ((DistrictID = '$district') and (deleted = '0'))";
+                                                                        
+                                                                        $ta = $_SESSION["ta-9-10"];
+                                                                        $query="select * from tblcluster where ((taID = '$ta') and (deleted = '0'))";
  
                                                                         //Variable $link is declared inside config.php file & used here
                                                                         
                                                                         if ($result_set = $link->query($query)) {
                                                                         while($row = $result_set->fetch_array(MYSQLI_ASSOC))
                                                                         { 
-                                                                            $grpID = $row["groupID"];
-                                                                            $result = mysqli_query($link, "SELECT COUNT(sppCode) AS value_count FROM tblbeneficiaries where groupID = '$grpID'"); 
-                                                                            $row2 = mysqli_fetch_assoc($result); 
-                                                                            $count = $row2['value_count'];
-
-                                                                            $total = $row["MembersM"]+$row["MembersF"];
-                                                                            echo "<tr>\n";
+                                                                            $prog = $row["programID"];
+                                                                            switch ($prog) 
+                                                                                {
+                                                                                    case "01":
+                                                                                        $prgname = "SCT";
+                                                                                    break;
+                                                                                    case "02":
+                                                                                        $prgname = "EPWP";
+                                                                                    break;
+                                                                                    case "03":
+                                                                                        $prgname = "PWP";
+                                                                                    break;
+                                                                                    case "04":
+                                                                                        $prgname = "CSPWP";
+                                                                                    break;
+                                                                                    case "05":
+                                                                                        $prgname = "Masaf4";
+                                                                                    break;
+                                                                                }
+                                                                        echo "<tr>\n";
                                                                             
                                                                         
-                                                                            echo "<td>".$row["groupID"]."</td>\n";
-                                                                            echo "<td>".$row["groupname"]."</td>\n";
-                                                                            echo "<td>".$row["cohort"]."</td>\n";
-                                                                            echo "<td>".$row["MembersM"]."</td>\n";
-                                                                            echo "<td>".$row["MembersF"]."</td>\n";
-                                                                            echo "<td>\t\t$total</td>\n";
-                                                                            echo "<td>\t\t$count</td>\n";
+                                                                            echo "<td>".$row["ClusterID"]."</td>\n";
+                                                                            echo "<td>".$row["ClusterName"]."</td>\n";
+                                                                            echo "<td>".$row["cohort"]."</td>\n";                                                                            
+                                                                            echo "<td>".$row["gvhID"]."</td>\n";
+                                                                            echo "<td>\t\t$prgname</td>\n";
                                                                             
                                                                             echo "<td>
-                                                                            <a href=\"basicSLGview.php?id=".$row['groupID']."\"><i class='far fa-eye' title='View SLG' style='font-size:18px; color:purple'></i></a>
-                                                                            <a href=\"basicSLGedit.php?id=".$row['groupID']."\"><i class='far fa-edit' title='Edit SLG Details' style='font-size:18px;color:orange'></i></a>
-                                                                            <a href=\"basicSLGsavings.php?id=".$row['groupID']."\"><i class='fas fa-hand-holding-usd' title='Add SLG Savings' style='font-size:18px;color:brown'></i></a>
-                                                                            
-                                                                            <a href=\"basicSLG_iga.php?id=".$row['groupID']."\"><i class='fas fa-balance-scale' title='Add SLG IGAs' style='font-size:18px;color:cadetgreen'></i></a> 
-                                                                            <a href=\"basicSLGAddMember.php?id=".$row['groupID']."\"><i class='fas fa-user-alt' title='Add Beneficiary to SLG' style='font-size:18px;color:brown'></i></a> 
-                                                                            <a onClick=\"javascript: return confirm('Are You Sure You want To Delete This SLG - You Must Be a Supervisor');\" href=\"basicSLGdelete.php?id=".$row['groupID']."\"><i class='far fa-trash-alt' title='Delete SLG' style='font-size:18px;color:Red'></i></a>
+                                                                            <a href=\"basicCLSview.php?id=".$row['ClusterID']."\"><i class='far fa-eye' title='View Cluster' style='font-size:18px;color:purple'></i></a>\n";
+                                                                    echo
+                                                                        "<a href=\"basicCLSedit.php?id=".$row['ClusterID']."\"><i class='far fa-edit' title='Edit Cluster Details' style='font-size:18px;color:green'></i></a>\n";
+                                                                    echo 
+                                                                    "<a onClick=\"javascript: return confirm('Are You Sure You want To Delete This Cluster - You Must Be a Supervisor');\" href=\"basicCLSdelete.php?id=".$row['ClusterID']."\"><i class='far fa-trash-alt' title='Delete Cluster' style='font-size:18px;color:Red'></i></a>
                                                                             </td>\n";
 
                                                                         echo "</tr>\n";
@@ -318,11 +324,13 @@ if(!$_SESSION["user_role"] == "03" || !$_SESSION["user_role"] == "04"){
                                                         </div>
                                                     </div>     
                                                 </div>            
-                                            </div>  
-                                        </p>
-                                    </div>
+                                            </div> 
+                                </div>
                                     <!-- Here -->
-        
+                                    
+                                    <!-- end here -->
+                                    
+                                   
                                 </div>
 
                             </div>
@@ -386,45 +394,6 @@ if(!$_SESSION["user_role"] == "03" || !$_SESSION["user_role"] == "04"){
 
 <!-- Datatable init js -->
 <script src="assets/js/pages/datatables.init.js"></script>
-<script>
-      function getDistrict(val) 
-        {
-            $.ajax({
-            type: "POST",
-            url: "get_district.php",
-            data:'regID='+val,
-            success: function(data)
-                    {
-                    $("#district").html(data);
-                    }
-                });
-        }
-
-        function getTa(val) 
-            {
-                $.ajax({
-                type: "POST",
-                url: "get_ta.php",
-                data:'disid='+val,
-                success: function(data){
-                $("#ta").html(data);
-                }
-                });
-            }
-        
-            function getCw(val) 
-            {
-                $.ajax({
-                type: "POST",
-                url: "get_cw.php",
-                data:'disid='+val,
-                success: function(data){
-                $("#cw").html(data);
-                }
-                });
-            }
-
-    </script>
 
 </body>
 

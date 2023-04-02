@@ -120,7 +120,7 @@ if(!$_SESSION["user_role"] == "03" || !$_SESSION["user_role"] == "04"){
                                 <!-- Nav tabs -->
                                 <ul class="nav nav-pills nav-justified" role="tablist">
                                     <?php
-                                       if($_SESSION["user_role"] == '04'){ ?>
+                                       if($_SESSION["user_role"] == '03'){ ?>
                                           <li class="nav-item waves-effect waves-light">
                                             <a class="nav-link active" href="basic_livelihood_slg_mgt_region_cood_filter_results.php" role="tab">
                                                 <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
@@ -137,9 +137,9 @@ if(!$_SESSION["user_role"] == "03" || !$_SESSION["user_role"] == "04"){
                                        <?php } ?>
                                     
                                     <?php 
-                                      if($_SESSION["user_role"] == '04'){ ?>
+                                      if($_SESSION["user_role"] == '03'){ ?>
                                           <li class="nav-item waves-effect waves-light">
-                                        <a class="link"  href="basic_livelihood_cls_mgt_region_cood_filter1_results.php" role="link">
+                                        <a class="link"  href="basic_livelihood_cls_mgt_region_cood_filter_results.php" role="link">
                                             <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
                                             <span class="d-none d-sm-block">Clusters</span>
                                         </a>
@@ -279,8 +279,9 @@ if(!$_SESSION["user_role"] == "03" || !$_SESSION["user_role"] == "04"){
 
                                                                 <tbody>
                                                                     <?Php
+                                                                        $ta = $_SESSION["ta-9-10"];
                                                                         $cw = $_SESSION["cw-9-10"];
-                                                                        $query="select * from tblgroup where ((cwID = '$cw') and (deleted = '0'))";
+                                                                        $query="select * from tblgroup where ((TAID = '$ta') and (cwID = '$cw') and (deleted = '0'))";
  
                                                                         //Variable $link is declared inside config.php file & used here
                                                                         

@@ -114,7 +114,7 @@ if(!$_SESSION["user_role"] == "03" || !$_SESSION["user_role"] == "04"){
                                 <!-- Nav tabs -->
                                 <ul class="nav nav-pills nav-justified" role="tablist">
                                 <?php
-                                       if($_SESSION["user_role"] == '04'){ ?>
+                                       if($_SESSION["user_role"] == '03'){ ?>
                                           <li class="nav-item waves-effect waves-light">
                                             <a class="nav-link active" href="basic_livelihood_slg_mgt_region_cood_filter_results.php" role="tab">
                                                 <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
@@ -130,7 +130,7 @@ if(!$_SESSION["user_role"] == "03" || !$_SESSION["user_role"] == "04"){
                                          </li>
                                        <?php } ?>
                                     <?php 
-                                      if($_SESSION["user_role"] == '04'){ ?>
+                                      if($_SESSION["user_role"] == '03'){ ?>
                                           <li class="nav-item waves-effect waves-light">
                                         <a class="link"  href="basic_livelihood_cls_mgt_region_cood_filter_results.php" role="link">
                                             <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
