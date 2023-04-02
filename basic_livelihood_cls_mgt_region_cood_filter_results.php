@@ -128,18 +128,38 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                       <?php }
                                         */
                                       ?>
-                                    <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link" data-bs-toggle="link" href="basic_livelihood_slg_mgt_check.php" role="link">
-                                            <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
-                                            <span class="d-none d-sm-block">SL Groups</span>
+                                    <?php
+                                       if($_SESSION["user_role"] == '04'){ ?>
+                                          <li class="nav-item waves-effect waves-light">
+                                            <a class="link" href="basic_livelihood_slg_mgt_region_cood_filter_results.php" role="tab">
+                                                <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
+                                                <span class="d-none d-sm-block">SL Groups</span>
+                                            </a>
+                                         </li>
+                                       <?php } else { ?>
+                                        <li class="nav-item waves-effect waves-light">
+                                            <a class="nav-link active" data-bs-toggle="tab" href="#home-1" role="tab">
+                                                <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
+                                                <span class="d-none d-sm-block">SL Groups</span>
+                                            </a>
+                                         </li>
+                                       <?php } ?>
+                                    <?php 
+                                      if($_SESSION["user_role"] == '04'){ ?>
+                                          <li class="nav-item waves-effect waves-light">
+                                        <a class="nav-link active"  href="basic_livelihood_cls_mgt_region_cood_filter_results.php" role="link">
+                                            <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
+                                            <span class="d-none d-sm-block">Clusters</span>
                                         </a>
                                     </li>
-                                    <li class="nav-item waves-effect waves-light">
-                                            <a class="link"  href="basic_livelihood_cls_mgt_check.php" role="link">
+                                      <?php } else { ?>
+                                        <li class="nav-item waves-effect waves-light">
+                                            <a class="link"  href="basic_livelihood_clusters.php" role="link">
                                                 <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
                                                 <span class="d-none d-sm-block">Clusters</span>
                                             </a>
                                        </li>
+                                      <?php }?>
                                     <li class="nav-item waves-effect waves-light">
                                         <a class="nav-link" href="basic_livelihood_slg_mgt_new_cls_filter1_results.php" role="tab">
                                             <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>

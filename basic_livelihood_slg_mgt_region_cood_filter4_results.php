@@ -144,8 +144,8 @@ if(!$_SESSION["user_role"] == "03" || !$_SESSION["user_role"] == "04"){
                                             <span class="d-none d-sm-block">Clusters</span>
                                         </a>
                                     </li>
-                                      <?php } else { ?>
-                                        <li class="nav-item waves-effect waves-light">
+                                        <?php } else { ?>
+                                            <li class="nav-item waves-effect waves-light">
                                             <a class="link"  href="basic_livelihood_clusters.php" role="link">
                                                 <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
                                                 <span class="d-none d-sm-block">Clusters</span>
