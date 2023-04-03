@@ -198,7 +198,9 @@ if($_SESSION["user_role"] == "01" || $_SESSION["user_role"] == "02"){
                                                         </div>
                                                         <div class="col-12">
                                                             <!-- <button type="submit" class="btn btn-btn btn-outline-primary w-md" name="Submit" value="Submit">Submit</button> -->
-                                                            <INPUT TYPE="button" class="btn btn-btn btn-outline-secondary w-md" VALUE="Back" onClick="history.go(-1);">
+                                                            <a href="basic_livelihood_slg_mgt2.php">
+                                                              <INPUT TYPE="button" class="btn btn-btn btn-outline-secondary w-md" VALUE="Back">
+                                                            </a>
                                                         </div>
                                                     </form>                                             
                                                     <!-- End Here -->

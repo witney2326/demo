@@ -33,7 +33,7 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 <?php 
 
     if (($_SESSION["user_role"]== '05')) 
-    {
+    {   
         $region = $_SESSION["user_reg"];
         $district = $_SESSION["user_dis"];
         $ta = $_SESSION["user_ta"];   
@@ -190,8 +190,10 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                             </select>
                                                         </div>
                                                         <div class="col-12">
+                                                            <a href="basic_livelihood_clusters.php">
+                                                               <INPUT TYPE="button" class="btn btn-btn btn-outline-secondary w-md" VALUE="Back">
+                                                            </a>
                                                             
-                                                            <INPUT TYPE="button" class="btn btn-btn btn-outline-secondary w-md" VALUE="Back" onClick="history.go(-1);">
                                                         </div>
                                                     </form>                                             
                                                     <!-- End Here -->

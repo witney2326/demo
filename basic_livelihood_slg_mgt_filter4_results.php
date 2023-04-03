@@ -200,8 +200,10 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                             </select>
                                                         </div>
                                                         <div class="col-12">
+                                                            <a href="basic_livelihood_slg_mgt2.php">
+                                                              <INPUT TYPE="button" class="btn btn-btn btn-outline-secondary w-md" VALUE="Back">
+                                                            </a>
                                                             
-                                                            <INPUT TYPE="button" class="btn btn-btn btn-outline-secondary w-md" VALUE="Back" onClick="history.go(-1);">
                                                         </div>
                                                     </form>                                             
                                                     <!-- End Here -->
