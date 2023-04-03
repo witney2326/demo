@@ -101,6 +101,9 @@ if(!$_SESSION["user_role"] == "03" || !$_SESSION["user_role"] == "04"){
                     </div>
                 </div>
                 <!-- end page title -->
+                <div style="margin-bottom:10px;margin-top:0px">
+                    <a href="basic_enhanced_criteria.php"><button type="button" class="btn btn-primary">Basic to Enhanced Livelihood Criteria</button></a> 
+                </div>
 
                 <div class="row">
                     

@@ -87,10 +87,27 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                 </div>
                             </form>
                     </div>
+                     
+                    <?php 
+                       if($_SESSION["user_role"] == "03"){ ?>
+                          <div style="margin-bottom:20px">
+                             <a href="basic_livelihood_slg_mgt_region_cood_filter_results.php"><button type="button" class="btn btn-primary">Back</button></a>
+                          </div>
+                       <?php } else if($_SESSION["user_role"] == "04"){ ?>
+                        <div style="margin-bottom:20px">
+                             <a href="basic_livelihood_slg_mgt_district_cood_filter_results.php"><button type="button" class="btn btn-primary">Back</button></a>
+                          </div>
+                       <?php } else if($_SESSION["user_role"] == "05"){ ?>
+                        <div style="margin-bottom:20px">
+                             <a href="basic_livelihood_slg_mgt_filter_cw_results.php"><button type="button" class="btn btn-primary">Back</button></a>
+                          </div>
+                       <?php }
+                        else { ?>
+                          <div style="margin-bottom:20px">
+                             <a href="basic_livelihood_slg_mgt2.php"><button type="button" class="btn btn-primary">Back</button></a>
+                          </div>
+                       <?php } ?>
                     
-                    <div style="margin-bottom:20px">
-                    <a href="basic_livelihood_slg_mgt2.php"><button type="button" class="btn btn-primary">Back</button></a>
-                    </div>
                 </div>
                 
                 
