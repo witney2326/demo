@@ -29,10 +29,10 @@
                         $activeWorksheet->setCellValue('I1', 'COHORT');
                         $activeWorksheet->setCellValue('J1', 'MALES');
                         $activeWorksheet->setCellValue('K1', 'FEMALES');
-                        $activeWorksheet->setCellValue('L1', 'MEMBERS');
-
+                        $activeWorksheet->setCellValue('L1', 'MALES AND FEMALES');
                         $activeWorksheet->setCellValue('M1', 'TOTAL SAVINGS');
-                        $activeWorksheet->setCellValue('O1', 'TOTAL MEMBERS');
+                        $activeWorksheet->setCellValue('N1', 'AVERAGE SAVINGS');
+                        $activeWorksheet->setCellValue('O1', 'TOTAL GROUP MEMBERS');
                         $activeWorksheet->setCellValue('P1', 'GROUP RECORDS');
                         $activeWorksheet->setCellValue('Q1', 'FUNCTIONAL COMMITTEES');
                         $activeWorksheet->setCellValue('R1', 'CONSTITUTION');
@@ -47,16 +47,20 @@
                            $sheet->setCellValue('C'.$rowCount, $data["regionName"]);
                            $sheet->setCellValue('D'.$rowCount, $data["DistrictName"]);
                            $sheet->setCellValue('E'.$rowCount, $data["TAName"]);
-                           $sheet->setCellValue('F'.$rowCount, $data["gvhID"]);
-                           
+                           $sheet->setCellValue('F'.$rowCount, $data["gvhID"]);        
                            $sheet->setCellValue('G'.$rowCount, $data["clusterID"]);
                            $sheet->setCellValue('H'.$rowCount, $data["DateEstablished"]);
                            $sheet->setCellValue('I'.$rowCount, $data["cohort"]);
                            $sheet->setCellValue('J'.$rowCount, $data["MembersM"]);
                            $sheet->setCellValue('K'.$rowCount, $data["MembersF"]);
                            $sheet->setCellValue('L'.$rowCount, $data["MembersM"]+$data["MembersF"]);
-
                            $sheet->setCellValue('M'.$rowCount, $data["amount"]);
+                           if($data["members"] > 0){
+                            $sheet->setCellValue('N'.$rowCount, $data["amount"] / $data["members"]);
+                           } else {
+                            $sheet->setCellValue('N'.$rowCount, "");
+                           }
+                           
                            $sheet->setCellValue('O'.$rowCount, $data["members"]);
                            $sheet->setCellValue('P'.$rowCount, $data["group_records"]);
                            $sheet->setCellValue('Q'.$rowCount, $data["functional_committees"]);

@@ -143,11 +143,19 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                 $esmps = $row["esmps"];
                                 $on_sanitation = $row["on_sanitation"];
                                 $on_businesses = $row["on_businesses"];
+                                
+                                if($members > 0){
+                                    $average = $amount / $members;
+                                } else {
+                                    $average = "";
+                                }
+                                /*
                                 try{
                                     $average = $amount / $members;
                                 } catch(DivisionByZeroError $e){
 
                                 }
+                                */
                                 
                                 
                                 // End of score variables

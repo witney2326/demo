@@ -138,7 +138,8 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                     $sql40 = "SELECT * FROM bl_el_criteria WHERE groupID='$id'";
                                     $result40 = $link->query($sql40);
                                     while($row40 = $result40->fetch_array(MYSQLI_ASSOC)){ ?>
-                                        <div style="display:grid;grid-template-columns: 1fr 1fr 1fr 1fr">
+                                       <div id="section1" style="display: block">
+                                       <div style="display:grid;grid-template-columns: 1fr 1fr 1fr 1fr">
                                         <div>
                                             <h4>Region</h4>
                                             <hr style="height:3px;background:green">
@@ -214,6 +215,72 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                             <p><?php echo $row40["MembersM"] + $row40["MembersF"] ?></p>
                                         </div>
                                     </div>
+                                       </div>
+
+                                       <div id="section2" style="display: none">
+                                       <div style="display:grid;grid-template-columns: 1fr 1fr 1fr 1fr">
+                                        <div>
+                                            <h4>Total Savings</h4>
+                                            <hr style="height:3px;background:green">
+                                            <p><?php echo $row40["amount"] ?></p>
+                                        </div>
+                                        <div>
+                                            <h4>Average Savings</h4>
+                                            <hr style="height:3px;background:green">
+                                            <?php 
+                                              if($row40["members"] > 0){
+                                                $aSavings = $row40["amount"] / $row40["members"];
+                                              } else {
+                                                $aSavings = "";
+                                              }
+                                              
+                                            ?>
+                                            <p><?php echo $aSavings; ?></p>
+                                        </div>
+                                        <div>
+                                            <h4>Group Members</h4>
+                                            <hr style="height:3px;background:green">
+                                            <p><?php echo $row40["members"] ?></p>
+                                        </div>
+                                        <div>
+                                            <h4>Group Records </h4>
+                                            <hr style="height:3px;background:green">
+                                            <p><?php echo $row40["group_records"] ?></p>
+                                        </div>
+                                        <div>
+                                            <h4>Funct. Commit.</h4>
+                                            <hr style="height:3px;background:green">
+                                            <p><?php echo $row40["functional_committees"] ?></p>
+                                        </div>
+                                        
+                                        <div>
+                                            <h4>Constitution</h4>
+                                            <hr style="height:3px;background:green">
+                                            <p><?php echo $row40["constitution"] ?></p>
+                                        </div>
+                                        <div>
+                                            <h4>Esmps</h4>
+                                            <hr style="height:3px;background:green">
+                                            <p><?php echo $row40["esmps"] ?></p>
+                                        </div>
+                                        
+                                        <div>
+                                            <h4>On Business </h4>
+                                            <hr style="height:3px;background:green">
+                                            <p><?php echo $row40["on_businesses"] ?></p>
+                                        </div>
+                                        <div>
+                                            <h4>On Sanitation </h4>
+                                            <hr style="height:3px;background:green">
+                                            <p><?php echo $row40["on_sanitation"] ?></p>
+                                        </div>
+                                    </div>
+                                       </div>
+
+                                        <div stylw="display:flex;">
+                                            <button onclick="previous()" style="margin-left:20px;background:#2196F3;color:white;border:none;">Prev</button>
+                                            <button onclick="next()" style="margin-left:20px;background:#4CAF50;color:white;border:none;">Next</button>
+                                        </div>
                                     <?php }
                                     ?>
                                 </div>
@@ -271,6 +338,18 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
     $(document).ready( function () {
     $('#myTable').DataTable();
 } );
+</script>
+
+<script>
+    function next(){
+        document.getElementById("section2").style="display: block";
+        document.getElementById("section1").style="display: none";
+    }
+
+    function previous(){
+        document.getElementById("section1").style="display: block";
+        document.getElementById("section2").style="display: none";
+    }           
 </script>
 
 </body>
