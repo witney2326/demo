@@ -103,11 +103,28 @@ $id = $_GET['id']; // get id through query string
         return $cls['ClusterName'];
         }
 ?>
+<?php
+                 
+                 function tt_name($link, $trainingID)   {     
+                    $tt_fetch_query = mysqli_query ($link, "select training_name from tbltraining_types where trainingTypeID='$trainingID'");  //select query                                                 
+                    $result_tt_fetch = mysqli_fetch_array($tt_fetch_query); 
+                    return $result_tt_fetch['training_name'];
+                   }
+                
+
+
+                   function ff_name($link, $facilitatorID)   {     
+                    $ff_fetch_query = mysqli_query ($link, "select title from tblfacilitator where facilitatorID='$facilitatorID'");  //select query                                                 
+                    $result_ff_fetch = mysqli_fetch_array($ff_fetch_query); 
+                    return $result_ff_fetch['title'];
+                   }
+
+?>
 
 <!-- Begin page -->
 <div id="layout-wrapper">
 
-    <?php include '././../../layouts/vertical-menu.php'; ?>
+    <?php include 'layouts/vertical-menu.php'; ?>
 
     <!-- ============================================================== -->
     <!-- Start right Content here -->
@@ -388,13 +405,83 @@ $id = $_GET['id']; // get id through query string
                                             </form>
                                             
                                         </div>
+                                        
+                                    </div>
+                                    <div class="card border border-success">
+                                        <div class="card-header bg-transparent border-success">
+                                            <h5 class="my-0 text-default">Training Record For <?php echo $groupname ; ?></h5>
+                                        </div>
+                                        <div class="card-body">
+
+                                            <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
+                                                            
+                                                <thead>
+                                                    <tr>
+                                                        <th>Training code</th>
+                                                        <th>Training Type</th>
+                                                        <th>Facilitator</th>
+                                                        <th>Males</th>
+                                                        <th>Females</th>
+                                                        <th>SDate</th>
+                                                        <th>FDate</th>
+                                                        <th>Action</th>
+                                                    </tr>
+                                                </thead>
+
+
+                                                <tbody>
+                                                    <?Php
+                                                        $query="select * from tblgrouptrainings where (groupID ='$id ')";
+                                                        
+                                                        if ($result_set = $link_cs->query($query)) {
+                                                        while($row = $result_set->fetch_array(MYSQLI_ASSOC))
+                                                        {
+                                                            
+                                                        echo "<tr>\n";
+                                                            echo "<td>".$row["TrainingID"]."</td>\n";
+                                                            echo "<td>".tt_name($link_cs,$row["TrainingTypeID"])."</td>\n";
+                                                            echo "<td>".ff_name($link_cs,$row["trainedBy"])."</td>\n";
+                                                            echo "<td>".$row["Males"]."</td>\n";
+                                                            echo "<td>".$row["Females"]."</td>\n";
+                                                            echo "<td>".$row["StartDate"]."</td>\n";
+                                                            echo "<td>".$row["FinishDate"]."</td>\n";
+                                                            echo "<td>
+                                                                  <a href=\"basicSLGTraining_edit.php?id=".$row['TrainingID']."\"><i class='far fa-edit' title='Edit Training Details' style='font-size:18px;color:green'></i></a>
+                                                                  <a onClick=\"javascript: return confirm('Are You Sure You want To Delete This SLG - You Must Be a Supervisor');\" href=\"basicSLGTraining_delete.php?id=".$row['TrainingID']."\"><i class='far fa-trash-alt' title='Delete SLG' style='font-size:18px;color:Red'></i></a>
+                                                              </td>\n";
+                                                        echo "</tr>\n";
+                                                            }
+                                                        
+                                                        $result_set->close();
+                                                        }  
+                                                                    
+                                                    ?>
+                                                </tbody>
+                                            </table>
+
+                                        </div>
                                     </div>
                                 </div>
 
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> 
+
+                    
+
+               
+
+
+                <!-- Collapse -->
+                
+
+                
+                <!-- end row -->
+
+                
+                <!-- end row -->
+
             </div> <!-- container-fluid -->
         </div>
         <!-- End Page-content -->

@@ -1,6 +1,6 @@
 
 <?php
- include '../layouts/session.php';
+ include '././../../layouts/session.php';
  
     if (($_SESSION["user_role"]== '05')) {
         header("location: jsgs_clusters_filter3.php");   

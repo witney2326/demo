@@ -1,6 +1,6 @@
 <?php include 'layouts/session.php'; ?>
 <?php include 'layouts/head-main.php'; ?>
-<?php header("Cache-Control: max-age=300, must-revalidate"); ?>
+
 <head>
     <title>SLG Management</title>
     <?php include 'layouts/head.php'; ?>
@@ -111,7 +111,7 @@ $id = $_GET['id']; // get id through query string
                 
             }
         }
-
+    
         function dis_name($link, $disID)
         {
         $dis_query = mysqli_query($link,"select DistrictName from tbldistrict where DistrictID='$disID'"); // select query
@@ -125,6 +125,25 @@ $id = $_GET['id']; // get id through query string
         $cls = mysqli_fetch_array($cls_query);// fetch data
         return $cls['ClusterName'];
         }
+                                                       
+                                                        
+?>
+<?php
+                 
+                 function tt_name($link, $trainingID)   {     
+                    $tt_fetch_query = mysqli_query ($link, "select training_name from tbltraining_types where trainingTypeID='$trainingID'");  //select query                                                 
+                    $result_tt_fetch = mysqli_fetch_array($tt_fetch_query); 
+                    return $result_tt_fetch['training_name'];
+                   }
+                
+
+
+                   function ff_name($link, $facilitatorID)   {     
+                    $ff_fetch_query = mysqli_query ($link, "select title from tblfacilitator where facilitatorID='$facilitatorID'");  //select query                                                 
+                    $result_ff_fetch = mysqli_fetch_array($ff_fetch_query); 
+                    return $result_ff_fetch['title'];
+                   }
+
 ?>
 
 <!-- Begin page -->
@@ -412,16 +431,68 @@ $id = $_GET['id']; // get id through query string
                                             </form>
                                             
                                         </div>
+                                        
+                                    </div>
+                                    <div class="card border border-success">
+                                        <div class="card-header bg-transparent border-success">
+                                            <h5 class="my-0 text-default">Training Record For <?php echo $groupname ; ?></h5>
+                                        </div>
+                                        <div class="card-body">
+
+                                            <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
+                                                            
+                                                <thead>
+                                                    <tr>
+                                                        <th>Training code</th>
+                                                        <th>Training Type</th>
+                                                        <th>Facilitator</th>
+                                                        <th>Males</th>
+                                                        <th>Females</th>
+                                                        <th>SDate</th>
+                                                        <th>FDate</th>
+                                                        <th>Action</th>
+                                                    </tr>
+                                                </thead>
+
+
+                                                <tbody>
+                                                    <?Php
+                                                        $query="select * from tblgrouptrainings where (groupID ='$id ')";
+                                                        
+                                                        if ($result_set = $link->query($query)) {
+                                                        while($row = $result_set->fetch_array(MYSQLI_ASSOC))
+                                                        {
+                                                            
+                                                        echo "<tr>\n";
+                                                            echo "<td>".$row["TrainingID"]."</td>\n";
+                                                            echo "<td>".tt_name($link,$row["TrainingTypeID"])."</td>\n";
+                                                            echo "<td>".ff_name($link,$row["trainedBy"])."</td>\n";
+                                                            echo "<td>".$row["Males"]."</td>\n";
+                                                            echo "<td>".$row["Females"]."</td>\n";
+                                                            echo "<td>".$row["StartDate"]."</td>\n";
+                                                            echo "<td>".$row["FinishDate"]."</td>\n";
+                                                            echo "<td>
+                                                                  <a href=\"basicSLGTraining_edit.php?id=".$row['TrainingID']."\"><i class='far fa-edit' title='Edit Training Details' style='font-size:18px;color:green'></i></a>
+                                                                  <a onClick=\"javascript: return confirm('Are You Sure You want To Delete This SLG - You Must Be a Supervisor');\" href=\"basicSLGTraining_delete.php?id=".$row['TrainingID']."\"><i class='far fa-trash-alt' title='Delete SLG' style='font-size:18px;color:Red'></i></a>
+                                                              </td>\n";
+                                                        echo "</tr>\n";
+                                                            }
+                                                        
+                                                        $result_set->close();
+                                                        }  
+                                                                    
+                                                    ?>
+                                                </tbody>
+                                            </table>
+
+                                        </div>
                                     </div>
                                 </div>
 
                             </div>
                         </div>
                     </div>
-                </div>
-
-
-                
+                </div> 
 
                     
 

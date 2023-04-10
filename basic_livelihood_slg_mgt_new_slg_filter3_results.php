@@ -1,6 +1,6 @@
 <?php include 'layouts/session.php'; ?>
 <?php include 'layouts/head-main.php'; ?>
-<?php header("Cache-Control: max-age=300, must-revalidate"); ?>
+
 <head>
     <title>SLG Management</title>
     <?php include 'layouts/head.php'; ?>
@@ -29,18 +29,19 @@
 <?php include 'layouts/body.php'; ?>
 
 <?php 
+    // var_dump($_POST);
+    // die();
 
-    if (($_SESSION["user_role"]== '05')) 
-    {
-        $region = $_SESSION["user_reg"];
-        $district = $_SESSION["user_dis"];
-        $ta = $_SESSION["user_ta"];   
-    }
- else
-    {
-    $region = $_POST['region'];
-    $district =$_POST['district'];
-    $ta =$_POST['ta'];
+    if(isset($_POST['region4']) && isset($_POST['district4']) && isset($_POST["ta4"])){
+        $_SESSION["region4-5"] = $_POST['region4'];
+        $_SESSION["district4-5"] = $_POST['district4'];
+        $_SESSION["ta4-5"] = $_POST['ta4'];
+
+    } else if(isset($_POST['region5']) && isset($_POST['district5']) && isset($_POST["ta5"])){
+        $_SESSION["region4-5"] = $_POST['region5'];
+        $_SESSION["district4-5"] = $_POST['district5'];
+        $_SESSION["ta4-5"] = $_POST['ta5'];
+
     }
 ?>
 
@@ -93,20 +94,47 @@
                                             <span class="d-none d-sm-block">SL Groups</span>
                                         </a>
                                     </li>
-                                    <li class="nav-item waves-effect waves-light">
-                                        <a class="link"  href="basic_livelihood_clusters_check.php" role="link">
+                                    
+                                    <?php
+                                        if (($_SESSION["user_role"]== '05')){ ?>
+                                          <li class="nav-item waves-effect waves-light">
+                                            <a class="link"  href="basic_livelihood_cls_mgt_filter_cw_results.php" role="link">
                                             <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
                                             <span class="d-none d-sm-block">Clusters</span>
-                                        </a>
-                                    </li>
+                                           </a>
+                                         </li>
+                                    <?php } else if(($_SESSION["user_role"]== '04')){ ?>
+                                        <li class="nav-item waves-effect waves-light">
+                                            <a class="link"  href="basic_livelihood_cls_mgt_district_cood_filter_results.php" role="link">
+                                            <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
+                                            <span class="d-none d-sm-block">Clusters</span>
+                                           </a>
+                                         </li>
+                                    <?php } else if(($_SESSION["user_role"]== '03')){ ?>
+                                        <li class="nav-item waves-effect waves-light">
+                                            <a class="link"  href="basic_livelihood_cls_mgt_region_cood_filter_results.php" role="link">
+                                            <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
+                                            <span class="d-none d-sm-block">Clusters</span>
+                                           </a>
+                                         </li>
+                                    <?php }
+                                     else { ?>
+                                        <li class="nav-item waves-effect waves-light">
+                                            <a class="link"  href="basic_livelihood_clusters_check.php" role="link">
+                                            <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
+                                            <span class="d-none d-sm-block">Clusters</span>
+                                           </a>
+                                         </li>
+                                    <?php } ?>
+                                    
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link" data-bs-toggle="link" href="basic_livelihood_slg_mgt_new_cls_filter2_results.php" role="link">
+                                        <a class="nav-link" data-bs-toggle="link" href="basic_livelihood_slg_mgt_new_cls_filter1_results.php" role="link">
                                             <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
                                             <span class="d-none d-sm-block">New Cluster!</span>
                                         </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link active" data-bs-toggle="tab" href="javascript:void(0);" role="tab">
+                                        <a class="nav-link active" data-bs-toggle="tab" href="basic_livelihood_slg_mgt2.php" role="tab">
                                             <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
                                             <span class="d-none d-sm-block">New SLG!</span>
                                         </a>
@@ -139,7 +167,7 @@
                                                                 <div class="mb-2">
                                                                     <label for="region" class="form-label">Region</label>
                                                                     <select class="form-select" name="region" id="region" required>
-                                                                        <option selected value="<?php echo $region;?>"><?php echo get_rname($link,$region);?></option>                               
+                                                                        <option selected value="<?php echo $_SESSION["region4-5"];?>"><?php echo get_rname($link,$_SESSION["region4-5"]);?></option>                               
                                                                     </select>
                                                                     <div class="invalid-feedback">
                                                                         Please select a valid Malawi region.
@@ -150,7 +178,7 @@
                                                                 <div class="mb-2">
                                                                     <label for="district" class="form-label">District</label>
                                                                     <select class="form-select" name="district" id="district"  required>
-                                                                        <option  value= <?php echo $district; ?> ><?php echo dis_name($link,$district); ?></option>
+                                                                        <option  value= <?php echo $_SESSION["district4-5"]; ?> ><?php echo dis_name($link,$_SESSION["district4-5"]); ?></option>
                                                                             
                                                                     </select>
                                                                     
@@ -160,7 +188,7 @@
                                                                 <div class="mb-2">
                                                                     <label for="ta" class="form-label">TA</label>
                                                                     <select class="form-select" name="ta" id="ta" required>
-                                                                        <option  value= <?php echo $ta; ?> ><?php echo tname($link,$ta); ?></option>
+                                                                        <option  value= <?php echo $_SESSION["ta4-5"]; ?> ><?php echo tname($link,$_SESSION["ta4-5"]); ?></option>
                                                                     </select>
                                                                     <div class="invalid-feedback">
                                                                         Please select a valid TA.
@@ -217,8 +245,9 @@
                                                                 <div class="mb-2">
                                                                     <label for="cluster" class="form-label">Cluster Name</label>
                                                                     <select class="form-select" name="clusterID"  id="clusterID" required>
-                                                                        <?php                                                           
-                                                                                $cls_fetch_query = "SELECT ClusterID,ClusterName FROM tblcluster where taID=$ta";                                                  
+                                                                        <?php   
+                                                                                $taID = $_SESSION["ta4-5"];                                                        
+                                                                                $cls_fetch_query = "SELECT ClusterID,ClusterName FROM tblcluster where taID=$taID";                                                  
                                                                                 $result_cls_fetch = mysqli_query($link, $cls_fetch_query);                                                                       
                                                                                 $i=0;
                                                                                     while($DB_ROW_cls = mysqli_fetch_array($result_cls_fetch)) {
@@ -291,8 +320,9 @@
                                                                 <div class="mb-2">
                                                                     <label for="cw" class="form-label">Case Worker</label>
                                                                     <select class="form-select" name="cw" id="cw" required>
-                                                                        <?php                                                           
-                                                                                $cw_fetch_query = "SELECT cwID,cwName FROM tblcw where districtID = $district";                                                  
+                                                                        <?php   
+                                                                                $districtID = $_SESSION["district4-5"];                                                        
+                                                                                $cw_fetch_query = "SELECT cwID,cwName FROM tblcw where districtID = $districtID";                                                  
                                                                                 $result_cw_fetch = mysqli_query($link, $cw_fetch_query);                                                                       
                                                                                 $i=0;
                                                                                     while($DB_ROW_cw = mysqli_fetch_array($result_cw_fetch)) {

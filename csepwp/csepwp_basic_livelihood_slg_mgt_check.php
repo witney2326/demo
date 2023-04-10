@@ -1,5 +1,5 @@
 <?php
-    include 'layouts/session.php';
+    include '../layouts/session.php';
 
     if (($_SESSION["user_role"] == '05')) {
         header("location: basic_livelihood_slg_mgt_filter3_results.php");   

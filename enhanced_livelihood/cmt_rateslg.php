@@ -15,7 +15,7 @@ header("Cache-Control: max-age=300, must-revalidate");
 
 <div id="layout-wrapper">
 
-    <?php include '../layouts/menu.php'; ?>
+    <?php include 'layouts/menu.php'; ?>
 
     <?php
         include "../layouts/config.php"; // Using database connection file here     

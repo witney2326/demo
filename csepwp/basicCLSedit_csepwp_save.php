@@ -6,11 +6,10 @@
         {
             $id = $_POST['cluster_id'];
             $cluster_name = $_POST['cluster_name'];          
-            $gvh = $_POST['gvh'];           
-            $cohort = $_POST['cohort'];
+            $gvh = $_POST['gvh'];
           
             
-            $sql = "UPDATE tblcluster SET ClusterName ='$cluster_name',gvhID = '$gvh', cohort = $cohort
+            $sql = "UPDATE tblcluster SET ClusterName ='$cluster_name',gvhID = '$gvh'
             WHERE ClusterID = '$id'";
             
             if (mysqli_query($link_cs, $sql)) {

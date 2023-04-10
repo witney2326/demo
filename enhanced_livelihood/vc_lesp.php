@@ -13,7 +13,7 @@
 <!-- Begin page -->
 <div id="layout-wrapper">
 
-    <?php include '../layouts/vertical-menu.php'; 
+    <?php include 'layouts/vertical-menu.php'; 
     include '../layouts/config.php';
     ?>
 

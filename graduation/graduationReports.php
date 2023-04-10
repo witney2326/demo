@@ -13,7 +13,7 @@
 <!-- Begin page -->
 <div id="layout-wrapper">
 
-    <?php   include '../layouts/vertical-menu.php'; 
+    <?php   include 'layouts/vertical-menu.php'; 
            
 
         $result = mysqli_query($link, 'SELECT COUNT(recID) AS t_jsgs FROM tbljsg where deleted = 0'); 

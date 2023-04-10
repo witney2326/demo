@@ -1,6 +1,6 @@
 <?php include 'layouts/session.php'; ?>
 <?php include 'layouts/head-main.php'; ?>
-<?php header("Cache-Control: max-age=300, must-revalidate"); ?>
+
 <head>
     <title>SLG Management</title>
     <?php include 'layouts/head.php'; ?>
@@ -30,11 +30,17 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
 <?php 
 
+// var_dump($_SESSION);
+
+// die();
+
     if (($_SESSION["user_role"]== '05')) 
     {
         $region = $_SESSION["user_reg"];
         $district = $_SESSION["user_dis"];
-        $ta = $_SESSION["user_ta"];   
+        $ta = $_SESSION["user_ta"];
+
+        header('Location: basic_livelihood_slg_mgt_filter_cw_results.php');
     }
  else if ((($_SESSION['region']) <> '00') and (($_SESSION['district']) <> '00') and (($_SESSION['ta']) <> '0000'))
     {
@@ -43,9 +49,9 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
         $ta = $_SESSION["ta"];   
     }else
     {
-        $region = $_POST['region'];
-        $district = $_POST['district'];
-        $ta = $_POST['ta'];
+        $region = $_SESSION['region'];
+        $district = $_SESSION['district'];
+        $ta = $_SESSION['ta'];
     }
    
     
@@ -121,19 +127,19 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                         </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="link"  href="basic_livelihood_clusters_check.php" role="link">
+                                        <a class="link"  href="basic_livelihood_clusters.php" role="link">
                                             <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
                                             <span class="d-none d-sm-block">Clusters</span>
                                         </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link" data-bs-toggle="link" href="basic_livelihood_slg_mgt_new_cls_filter2_results.php" role="link">
+                                        <a class="nav-link" href="basic_livelihood_slg_mgt_new_cls_filter1_results.php" role="link">
                                             <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
                                             <span class="d-none d-sm-block">New Cluster!</span>
                                         </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link" data-bs-toggle="link" href="basic_livelihood_slg_mgt_new_slg_filter3_results.php" role="tab">
+                                        <a class="nav-link" href="basic_livelihood_slg_mgt_new_slg_filter1_results.php" role="tab">
                                             <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
                                             <span class="d-none d-sm-block">New SLG!</span>
                                         </a>
@@ -180,8 +186,16 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
                                                             </div>
                                                         </div>
                                                         <div class="col-12">
+                                                            <label for="ta" class="form-label">Case Worker</label>
+                                                            <select class="form-select" name="cw" id="cw"  required disabled>
+                                                                <option selected value="00"></option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-12">
                                                             
-                                                            <INPUT TYPE="button" class="btn btn-btn btn-outline-secondary w-md" VALUE="Back" onClick="history.go(-1);">
+                                                            <a href="basic_livelihood_slg_mgt2.php">
+                                                              <INPUT TYPE="button" class="btn btn-btn btn-outline-secondary w-md" VALUE="Back">
+                                                            </a>
                                                         </div>
                                                     </form>                                             
                                                     <!-- End Here -->
@@ -251,24 +265,88 @@ src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
                                                                             $total = $row["MembersM"] + $row["MembersF"];
 
-                                                                        echo "<tr>\n";                                               
-                                                                            echo "<td>".$row["groupID"]."</td>\n";
-                                                                            echo "<td>".$row["groupname"]."</td>\n";
-                                                                            echo "<td>".$row["cohort"]."</td>\n";
-                                                                            echo "<td>".$row["MembersM"]."</td>\n";
-                                                                            echo "<td>".$row["MembersF"]."</td>\n";
-                                                                            echo "<td>\t\t$total</td>\n";
-                                                                            echo "<td>\t\t$count</td>\n";
+                                                                            if (($_SESSION["user_role"]== '05')) 
+                                                                            {
+                                                                                echo "<tr>\n";                                               
+                                                                                echo "<td>".$row["groupID"]."</td>\n";
+                                                                                echo "<td>".$row["groupname"]."</td>\n";
+                                                                                echo "<td>".$row["cohort"]."</td>\n";
+                                                                                echo "<td>".$row["MembersM"]."</td>\n";
+                                                                                echo "<td>".$row["MembersF"]."</td>\n";
+                                                                                echo "<td>\t\t$total</td>\n";
+                                                                                echo "<td>\t\t$count</td>\n";
+                                                                                
+                                                                                echo "<td>
+                                                                                <a href=\"basicSLGview.php?id=".$row['groupID']."\"><i class='far fa-eye' title='View SLG' style='font-size:18px;color:purple'></i></a>
+                                                                                <a href=\"basicSLGedit.php?id=".$row['groupID']."\"><i class='far fa-edit' title='Edit SLG Details' style='font-size:18px;color:orange'></i></a>
+                                                                                <a href=\"basicSLGsavings.php?id=".$row['groupID']."\"><i class='fas fa-hand-holding-usd' title='Add SLG Savings' style='font-size:18px;color:brown'></i></a>
+                                                                                
+                                                                                <a href=\"basicSLG_iga.php?id=".$row['groupID']."\"><i class='fas fa-balance-scale' title='Add SLG IGAs' style='font-size:18px;color:cadetgreen'></i></a> 
+                                                                                <a href=\"basicSLGAddMember.php?id=".$row['groupID']."\"><i class='fas fa-user-alt' title='Add Beneficiary to SLG' style='font-size:18px;color:brown'></i></a>
+                                                                                
+                                                                                <a href=\"basic_hhList.php?id=".$row['groupID']."\"><i class='fa fa-download' aria-hidden='true' title='Download Household List' style='font-size:18px;color:brown'></i></a> 
+                                                                                <a onClick=\"javascript: return confirm('Are You Sure You want To Delete This SLG - You Must Be a Supervisor');\" href=\"basicSLGdelete.php?id=".$row['groupID']."\"><i class='far fa-trash-alt' title='Delete SLG' style='font-size:18px;color:Red'></i></a>
+                                                                                </td>
+                                                                                \n";
+    
+                                                                            echo "</tr>\n";  
+                                                                            }
+
+                                                                            else if (($_SESSION["user_role"]== '02')) 
+                                                                            {
+                                                                                echo "<tr>\n";                                               
+                                                                                echo "<td>".$row["groupID"]."</td>\n";
+                                                                                echo "<td>".$row["groupname"]."</td>\n";
+                                                                                echo "<td>".$row["cohort"]."</td>\n";
+                                                                                echo "<td>".$row["MembersM"]."</td>\n";
+                                                                                echo "<td>".$row["MembersF"]."</td>\n";
+                                                                                echo "<td>\t\t$total</td>\n";
+                                                                                echo "<td>\t\t$count</td>\n";
+                                                                                
+                                                                                echo "<td>
+                                                                                <a href=\"basicSLGview.php?id=".$row['groupID']."\"><i class='far fa-eye' title='View SLG' style='font-size:18px;color:purple'></i></a>
+                                                                                <a href=\"basicSLGedit.php?id=".$row['groupID']."\"><i class='far fa-edit' title='Edit SLG Details' style='font-size:18px;color:orange'></i></a>
+                                                                                <a href=\"basicSLGsavings.php?id=".$row['groupID']."\"><i class='fas fa-hand-holding-usd' title='Add SLG Savings' style='font-size:18px;color:brown'></i></a>
+                                                                                
+                                                                                <a href=\"basicSLG_iga.php?id=".$row['groupID']."\"><i class='fas fa-balance-scale' title='Add SLG IGAs' style='font-size:18px;color:cadetgreen'></i></a> 
+                                                                                <a href=\"basicSLGAddMember.php?id=".$row['groupID']."\"><i class='fas fa-user-alt' title='Add Beneficiary to SLG' style='font-size:18px;color:brown'></i></a>
+                                                                                <a href=\"basicSLG_UploadSavings.php?id=".$row['groupID']."\"><i class='fas fa-upload' title='Upload Household Savings' style='font-size:18px;color:brown'></i></a>
+                                                                                
+                                                                                <a onClick=\"javascript: return confirm('Are You Sure You want To Delete This SLG - You Must Be a Supervisor');\" href=\"basicSLGdelete.php?id=".$row['groupID']."\"><i class='far fa-trash-alt' title='Delete SLG' style='font-size:18px;color:Red'></i></a>
+                                                                                </td>
+                                                                                \n";
+    
+                                                                            echo "</tr>\n";
+                                                                            }
+
+                                                                            else 
+                                                                            {
+                                                                                echo "<tr>\n";                                               
+                                                                                echo "<td>".$row["groupID"]."</td>\n";
+                                                                                echo "<td>".$row["groupname"]."</td>\n";
+                                                                                echo "<td>".$row["cohort"]."</td>\n";
+                                                                                echo "<td>".$row["MembersM"]."</td>\n";
+                                                                                echo "<td>".$row["MembersF"]."</td>\n";
+                                                                                echo "<td>\t\t$total</td>\n";
+                                                                                echo "<td>\t\t$count</td>\n";
+                                                                                
+                                                                                echo "<td>
+                                                                                <a href=\"basicSLGview.php?id=".$row['groupID']."\"><i class='far fa-eye' title='View SLG' style='font-size:18px;color:purple'></i></a>
+                                                                                <a href=\"basicSLGedit.php?id=".$row['groupID']."\"><i class='far fa-edit' title='Edit SLG Details' style='font-size:18px;color:orange'></i></a>
+                                                                                <a href=\"basicSLGsavings.php?id=".$row['groupID']."\"><i class='fas fa-hand-holding-usd' title='Add SLG Savings' style='font-size:18px;color:brown'></i></a>
+                                                                                
+                                                                                <a href=\"basicSLG_iga.php?id=".$row['groupID']."\"><i class='fas fa-balance-scale' title='Add SLG IGAs' style='font-size:18px;color:cadetgreen'></i></a> 
+                                                                                <a href=\"basicSLGAddMember.php?id=".$row['groupID']."\"><i class='fas fa-user-alt' title='Add Beneficiary to SLG' style='font-size:18px;color:brown'></i></a>
+                                                                                <a href=\"basicSLG_UploadSavings.php?id=".$row['groupID']."\"><i class='fas fa-upload' title='Upload Household Savings' style='font-size:18px;color:brown'></i></a>
+                                                                                <a href=\"basic_hhList.php?id=".$row['groupID']."\"><i class='fa fa-download' aria-hidden='true' title='Download Household List' style='font-size:18px;color:brown'></i></a> 
+                                                                                <a onClick=\"javascript: return confirm('Are You Sure You want To Delete This SLG - You Must Be a Supervisor');\" href=\"basicSLGdelete.php?id=".$row['groupID']."\"><i class='far fa-trash-alt' title='Delete SLG' style='font-size:18px;color:Red'></i></a>
+                                                                                </td>
+                                                                                \n";
+    
+                                                                            echo "</tr>\n";
+                                                                            }
+
                                                                             
-                                                                            echo "<td>
-                                                                            <a href=\"basicSLGview.php?id=".$row['groupID']."\"><i class='far fa-eye' title='View SLG' style='font-size:18px;color:purple'></i></a>
-                                                                            <a href=\"basicSLGedit.php?id=".$row['groupID']."\"><i class='far fa-edit' title='Edit SLG Details' style='font-size:18px;color:orange'></i></a>
-                                                                            <a href=\"basicSLGsavings.php?id=".$row['groupID']."\"><i class='fas fa-hand-holding-usd' title='Add SLG Savings' style='font-size:18px;color:brown'></i></a>
-                                                                            
-                                                                            <a href=\"basicSLG_iga.php?id=".$row['groupID']."\"><i class='fas fa-balance-scale' title='Add SLG IGAs' style='font-size:18px;color:cadetgreen'></i></a> 
-                                                                            <a href=\"basicSLGAddMember.php?id=".$row['groupID']."\"><i class='fas fa-user-alt' title='Add Beneficiary to SLG' style='font-size:18px;color:brown'></i></a> 
-                                                                            <a onClick=\"javascript: return confirm('Are You Sure You want To Delete This SLG - You Must Be a Supervisor');\" href=\"basicSLGdelete.php?id=".$row['groupID']."\"><i class='far fa-trash-alt' title='Delete SLG' style='font-size:18px;color:Red'></i></a>
-                                                                            </td>\n";
 
                                                                         echo "</tr>\n";
                                                                         }

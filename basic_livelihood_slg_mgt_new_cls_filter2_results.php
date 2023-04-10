@@ -1,6 +1,6 @@
 <?php include 'layouts/session.php'; ?>
 <?php include 'layouts/head-main.php'; ?>
-<?php header("Cache-Control: max-age=300, must-revalidate"); ?>
+
 <head>
     <title>SLG Management</title>
     <?php include 'layouts/head.php'; ?>
@@ -19,18 +19,9 @@
 
 <?php 
     
-    if (($_SESSION["user_role"]== '05')) 
-    {
-        $region = $_SESSION["user_reg"];
-        $district = $_SESSION["user_dis"];
-        $ta = $_SESSION["user_ta"];   
-    }
- else
-    {
-    $region = $_POST['region'];
-    $district = $_POST['district'];
-      
-    }
+    $_SESSION["region1-2"] = $_POST['region2'];
+    $_SESSION["district1-2"] = $_POST['district2'];
+    $_SESSION["ta1-2"] = $_POST['ta2'];
 ?>
 
 <!-- Begin page -->
@@ -82,20 +73,47 @@
                                             <span class="d-none d-sm-block">SL Groups</span>
                                         </a>
                                     </li>
-                                    <li class="nav-item waves-effect waves-light">
+
+                                    <?php
+                                      if (($_SESSION["user_role"]== '05')){ ?>
+                                          <li class="nav-item waves-effect waves-light">
+                                            <a class="link"  href="basic_livelihood_cls_mgt_filter_cw_results.php" role="link">
+                                                <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
+                                                <span class="d-none d-sm-block">Clusters</span>
+                                            </a>
+                                          </li>
+                                    <?php } else if(($_SESSION["user_role"]== '04')){ ?>
+                                        <li class="nav-item waves-effect waves-light">
+                                            <a class="link"  href="basic_livelihood_cls_mgt_district_cood_filter_results.php" role="link">
+                                                <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
+                                                <span class="d-none d-sm-block">Clusters</span>
+                                            </a>
+                                          </li>
+                                    <?php } else if(($_SESSION["user_role"]== '03')){ ?>
+                                        <li class="nav-item waves-effect waves-light">
+                                            <a class="link"  href="basic_livelihood_cls_mgt_region_cood_filter_results.php" role="link">
+                                                <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
+                                                <span class="d-none d-sm-block">Clusters</span>
+                                            </a>
+                                          </li>
+                                    <?php }
+                                     else { ?>
+                                        <li class="nav-item waves-effect waves-light">
                                         <a class="link"  href="basic_livelihood_clusters_check.php" role="link">
                                             <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
                                             <span class="d-none d-sm-block">Clusters</span>
                                         </a>
                                     </li>
+                                    <?php } ?>
+                                    
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link active" data-bs-toggle="tab" href="javascript:void(0);" role="tab">
+                                        <a class="nav-link active" href="basic_livelihood_slg_mgt_new_cls_filter1_results.php" role="tab">
                                             <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
                                             <span class="d-none d-sm-block">New Cluster!</span>
                                         </a>
                                     </li>
                                     <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link" data-bs-toggle="link" href="basic_livelihood_slg_mgt_new_slg_filter3_results.php" role="link">
+                                        <a class="nav-link" href="basic_livelihood_slg_mgt_new_slg_filter1_results.php" role="link">
                                             <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
                                             <span class="d-none d-sm-block">New SLG!</span>
                                         </a>
@@ -127,7 +145,7 @@
                                                                 <div class="mb-2">
                                                                     <label for="region" class="form-label">Region</label>
                                                                     <select class="form-select" name="region" id="region" required>
-                                                                        <option selected value="<?php echo $region;?>"><?php echo get_rname($link,$region);?></option>
+                                                                        <option selected value="<?php echo $_POST["region2"];?>"><?php echo get_rname($link,$_POST["region2"]);?></option>
                                                                         
                                                                     </select>
                                                                     <div class="invalid-feedback">
@@ -139,7 +157,7 @@
                                                                 <div class="mb-2">
                                                                     <label for="district" class="form-label">District</label>
                                                                     <select class="form-select" name="district" id="district"  required>
-                                                                        <option  value= <?php echo $district; ?> ><?php echo dis_name($link,$district); ?></option> 
+                                                                        <option  value= <?php echo $_POST["district2"]; ?> ><?php echo dis_name($link,$_POST["district2"]); ?></option> 
                                                                     </select>
                                                                 </div>
                                                             </div>
@@ -147,7 +165,7 @@
                                                                 <div class="mb-2">
                                                                     <label for="ta" class="form-label">TA</label>
                                                                     <select class="form-select" name="ta" id="ta" required>
-                                                                        <option value= <?php echo $ta; ?> ><?php echo ta_name($link,$ta); ?></option>
+                                                                        <option value= <?php echo $_POST["ta2"]; ?> ><?php echo ta_name($link,$_POST["ta2"]); ?></option>
                                                                     </select>
                                                                 </div>
                                                             </div>
@@ -165,8 +183,9 @@
                                                                     <label for="cw" class="form-label">Case Worker</label>
                                                                     <select class="form-select" name="cw" id="cw" required>
                                                                         <option></option>
-                                                                        <?php                                                           
-                                                                                $cw_fetch_query = "SELECT cwID,cwName FROM tblcw where districtID = $district";                                                  
+                                                                        <?php  
+                                                                                $this_district_id = $_POST['district2'];                                                         
+                                                                                $cw_fetch_query = "SELECT cwID,cwName FROM tblcw where districtID = '$this_district_id'";                                                  
                                                                                 $result_cw_fetch = mysqli_query($link, $cw_fetch_query);                                                                       
                                                                                 $i=0;
                                                                                     while($DB_ROW_cw = mysqli_fetch_array($result_cw_fetch)) {

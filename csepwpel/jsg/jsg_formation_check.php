@@ -1,5 +1,5 @@
 <?php
- include '../layouts/session.php';
+ include '././../../layouts/session.php';
  
     if (($_SESSION["user_role"]== '05')) {
         header("location: jsg_mgt_filter3.php");   

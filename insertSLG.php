@@ -54,6 +54,8 @@ if(isset($_POST['submit']))
    }
 
    $dbgrpcount= sprintf("%06d", get_grp_count($link)+1);
+   // var_dump($dbgrpcount);
+   // die();
 
    $x=date("Y");		
    $x.="/SLG/";				
